@@ -1,0 +1,118 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"hooks.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	vApplicationIdleHook
+  18              		.thumb
+  19              		.thumb_func
+  21              	vApplicationIdleHook:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25              	@ 1196 "../L0_LowLevel/core_cm3.h" 1
+  26 0000 30BF     		wfi
+  27              	@ 0 "" 2
+  28              		.thumb
+  29 0002 7047     		bx	lr
+  31              		.align	1
+  32              		.global	vApplicationStackOverflowHook
+  33              		.thumb
+  34              		.thumb_func
+  36              	vApplicationStackOverflowHook:
+  37              		@ Volatile: function does not return.
+  38              		@ args = 0, pretend = 0, frame = 0
+  39              		@ frame_needed = 0, uses_anonymous_args = 0
+  40 0004 08B5     		push	{r3, lr}
+  41 0006 0C46     		mov	r4, r1
+  42 0008 0948     		ldr	r0, .L4
+  43 000a FFF7FEFF 		bl	u0_dbg_put
+  44 000e 2046     		mov	r0, r4
+  45 0010 FFF7FEFF 		bl	u0_dbg_put
+  46 0014 0748     		ldr	r0, .L4+4
+  47 0016 FFF7FEFF 		bl	u0_dbg_put
+  48 001a 0748     		ldr	r0, .L4+8
+  49 001c FFF7FEFF 		bl	delay_us
+  50 0020 4FF08043 		mov	r3, #1073741824
+  51 0024 AA22     		movs	r2, #170
+  52 0026 1A72     		strb	r2, [r3, #8]
+  53 0028 0022     		movs	r2, #0
+  54 002a 1A70     		strb	r2, [r3, #0]
+  55              	.L3:
+  56 002c FEE7     		b	.L3
+  57              	.L5:
+  58 002e 00BF     		.align	2
+  59              	.L4:
+  60 0030 00000000 		.word	.LC0
+  61 0034 29000000 		.word	.LC1
+  62 0038 C0C62D00 		.word	3000000
+  64              		.align	1
+  65              		.global	vApplicationMallocFailedHook
+  66              		.thumb
+  67              		.thumb_func
+  69              	vApplicationMallocFailedHook:
+  70              		@ Volatile: function does not return.
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73 003c 08B5     		push	{r3, lr}
+  74 003e 0648     		ldr	r0, .L8
+  75 0040 FFF7FEFF 		bl	u0_dbg_put
+  76 0044 0548     		ldr	r0, .L8+4
+  77 0046 FFF7FEFF 		bl	delay_us
+  78 004a 4FF08043 		mov	r3, #1073741824
+  79 004e AA22     		movs	r2, #170
+  80 0050 1A72     		strb	r2, [r3, #8]
+  81 0052 0022     		movs	r2, #0
+  82 0054 1A70     		strb	r2, [r3, #0]
+  83              	.L7:
+  84 0056 FEE7     		b	.L7
+  85              	.L9:
+  86              		.align	2
+  87              	.L8:
+  88 0058 55000000 		.word	.LC2
+  89 005c C0C62D00 		.word	3000000
+  91              		.section	.rodata.str1.1,"aMS",%progbits,1
+  92              	.LC0:
+  93 0000 48414C54 		.ascii	"HALTING SYSTEM: Stack overflow by task: \000"
+  93      494E4720 
+  93      53595354 
+  93      454D3A20 
+  93      53746163 
+  94              	.LC1:
+  95 0029 0A547279 		.ascii	"\012Try increasing stack memory of this task.\012\000"
+  95      20696E63 
+  95      72656173 
+  95      696E6720 
+  95      73746163 
+  96              	.LC2:
+  97 0055 48414C54 		.ascii	"HALTING SYSTEM: Your system ran out of memory (RAM)"
+  97      494E4720 
+  97      53595354 
+  97      454D3A20 
+  97      596F7572 
+  98 0088 210A00   		.ascii	"!\012\000"
+  99              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 hooks.c
+     /tmp/ccpYQx35.s:16     .text:00000000 $t
+     /tmp/ccpYQx35.s:21     .text:00000000 vApplicationIdleHook
+     /tmp/ccpYQx35.s:36     .text:00000004 vApplicationStackOverflowHook
+     /tmp/ccpYQx35.s:60     .text:00000030 $d
+     /tmp/ccpYQx35.s:64     .text:0000003c $t
+     /tmp/ccpYQx35.s:69     .text:0000003c vApplicationMallocFailedHook
+     /tmp/ccpYQx35.s:88     .text:00000058 $d
+
+UNDEFINED SYMBOLS
+u0_dbg_put
+delay_us

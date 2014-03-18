@@ -1,0 +1,123 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"uart3.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.global	_ZN5Uart34initEjii
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN5Uart34initEjii:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  25 0002 1F46     		mov	r7, r3
+  26 0004 114B     		ldr	r3, .L2
+  27 0006 1446     		mov	r4, r2
+  28 0008 5A6A     		ldr	r2, [r3, #36]
+  29 000a 0D46     		mov	r5, r1
+  30 000c 22F07062 		bic	r2, r2, #251658240
+  31 0010 5A62     		str	r2, [r3, #36]
+  32 0012 5A6A     		ldr	r2, [r3, #36]
+  33 0014 0646     		mov	r6, r0
+  34 0016 42F07062 		orr	r2, r2, #251658240
+  35 001a 5A62     		str	r2, [r3, #36]
+  36 001c 03F55023 		add	r3, r3, #851968
+  37 0020 D3F8AC21 		ldr	r2, [r3, #428]
+  38 0024 22F44022 		bic	r2, r2, #786432
+  39 0028 C3F8AC21 		str	r2, [r3, #428]
+  40 002c D3F8AC21 		ldr	r2, [r3, #428]
+  41 0030 42F48022 		orr	r2, r2, #262144
+  42 0034 C3F8AC21 		str	r2, [r3, #428]
+  43 0038 FFF7FEFF 		bl	sys_get_cpu_clock
+  44 003c 2A46     		mov	r2, r5
+  45 003e 0146     		mov	r1, r0
+  46 0040 2346     		mov	r3, r4
+  47 0042 3046     		mov	r0, r6
+  48 0044 0097     		str	r7, [sp, #0]
+  49 0046 FFF7FEFF 		bl	_ZN7UartDev4initEjjii
+  50 004a FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+  51              	.L3:
+  52              		.align	2
+  53              	.L2:
+  54 004c 00C00240 		.word	1073922048
+  56              		.align	1
+  57              		.global	_ZN5Uart3C2Ev
+  58              		.thumb
+  59              		.thumb_func
+  61              	_ZN5Uart3C2Ev:
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64 0050 10B5     		push	{r4, lr}
+  65 0052 0349     		ldr	r1, .L7
+  66 0054 0446     		mov	r4, r0
+  67 0056 FFF7FEFF 		bl	_ZN7UartDevC2EPj
+  68 005a 2046     		mov	r0, r4
+  69 005c 10BD     		pop	{r4, pc}
+  70              	.L8:
+  71 005e 00BF     		.align	2
+  72              	.L7:
+  73 0060 00C00940 		.word	1074380800
+  75              		.align	1
+  76              		.global	UART3_IRQHandler
+  77              		.thumb
+  78              		.thumb_func
+  80              	UART3_IRQHandler:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0064 38B5     		push	{r3, r4, r5, lr}
+  84 0066 074C     		ldr	r4, .L11
+  85 0068 2368     		ldr	r3, [r4, #0]
+  86 006a 33B9     		cbnz	r3, .L10
+  87 006c 2820     		movs	r0, #40
+  88 006e FFF7FEFF 		bl	_Znwj
+  89 0072 0546     		mov	r5, r0
+  90 0074 FFF7FEFF 		bl	_ZN5Uart3C1Ev
+  91 0078 2560     		str	r5, [r4, #0]
+  92              	.L10:
+  93 007a 2068     		ldr	r0, [r4, #0]
+  94 007c BDE83840 		pop	{r3, r4, r5, lr}
+  95 0080 FFF7FEBF 		b	_ZN7UartDev15handleInterruptEv
+  96              	.L12:
+  97              		.align	2
+  98              	.L11:
+  99 0084 00000000 		.word	_ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE
+ 101              		.weak	_ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE
+ 102              		.section	.bss._ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTem
+ 103              		.align	2
+ 106              	_ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE:
+ 107 0000 00000000 		.space	4
+ 108              		.global	_ZN5Uart3C1Ev
+ 109              		.thumb_set _ZN5Uart3C1Ev,_ZN5Uart3C2Ev
+ 110              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart3.cpp
+     /tmp/ccsVTHHf.s:16     .text:00000000 $t
+     /tmp/ccsVTHHf.s:21     .text:00000000 _ZN5Uart34initEjii
+     /tmp/ccsVTHHf.s:54     .text:0000004c $d
+     /tmp/ccsVTHHf.s:56     .text:00000050 $t
+     /tmp/ccsVTHHf.s:61     .text:00000050 _ZN5Uart3C2Ev
+     /tmp/ccsVTHHf.s:73     .text:00000060 $d
+     /tmp/ccsVTHHf.s:75     .text:00000064 $t
+     /tmp/ccsVTHHf.s:80     .text:00000064 UART3_IRQHandler
+     /tmp/ccsVTHHf.s:61     .text:00000050 _ZN5Uart3C1Ev
+     /tmp/ccsVTHHf.s:99     .text:00000084 $d
+     /tmp/ccsVTHHf.s:106    .bss._ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE
+     /tmp/ccsVTHHf.s:103    .bss._ZN17SingletonTemplateI5Uart3E19mpSingletonInstanceE:00000000 $d
+
+UNDEFINED SYMBOLS
+sys_get_cpu_clock
+_ZN7UartDev4initEjjii
+_ZN7UartDevC2EPj
+_Znwj
+_ZN7UartDev15handleInterruptEv

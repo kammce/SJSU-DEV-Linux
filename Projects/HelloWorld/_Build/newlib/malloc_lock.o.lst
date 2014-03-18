@@ -1,0 +1,43 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"malloc_lock.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	__malloc_lock
+  18              		.thumb
+  19              		.thumb_func
+  21              	__malloc_lock:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 FFF7FEBF 		b	vPortEnterCritical
+  27              		.align	1
+  28              		.global	__malloc_unlock
+  29              		.thumb
+  30              		.thumb_func
+  32              	__malloc_unlock:
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              		@ link register save eliminated.
+  36 0004 FFF7FEBF 		b	vPortExitCritical
+  38              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 malloc_lock.c
+     /tmp/ccI0YxwF.s:16     .text:00000000 $t
+     /tmp/ccI0YxwF.s:21     .text:00000000 __malloc_lock
+     /tmp/ccI0YxwF.s:32     .text:00000004 __malloc_unlock
+
+UNDEFINED SYMBOLS
+vPortEnterCritical
+vPortExitCritical

@@ -1,0 +1,207 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"diskio.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	disk_initialize
+  18              		.thumb
+  19              		.thumb_func
+  21              	disk_initialize:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 10B5     		push	{r4, lr}
+  25 0002 0446     		mov	r4, r0
+  26 0004 FFF7FEFF 		bl	spi1_lock_access
+  27 0008 14B1     		cbz	r4, .L3
+  28 000a 012C     		cmp	r4, #1
+  29 000c 07D1     		bne	.L6
+  30 000e 02E0     		b	.L8
+  31              	.L3:
+  32 0010 FFF7FEFF 		bl	flash_Initialize
+  33 0014 01E0     		b	.L7
+  34              	.L8:
+  35 0016 FFF7FEFF 		bl	sd_initialize
+  36              	.L7:
+  37 001a 0446     		mov	r4, r0
+  38 001c 00E0     		b	.L2
+  39              	.L6:
+  40 001e 0424     		movs	r4, #4
+  41              	.L2:
+  42 0020 FFF7FEFF 		bl	spi1_release_access
+  43 0024 2046     		mov	r0, r4
+  44 0026 10BD     		pop	{r4, pc}
+  46              		.align	1
+  47              		.global	disk_status
+  48              		.thumb
+  49              		.thumb_func
+  51              	disk_status:
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+  55 0028 20B1     		cbz	r0, .L10
+  56 002a 0128     		cmp	r0, #1
+  57 002c 01D1     		bne	.L14
+  58 002e FFF7FEBF 		b	sd_status
+  59              	.L14:
+  60 0032 0420     		movs	r0, #4
+  61              	.L10:
+  62 0034 7047     		bx	lr
+  64              		.align	1
+  65              		.global	disk_read
+  66              		.thumb
+  67              		.thumb_func
+  69              	disk_read:
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0036 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  73 0038 0446     		mov	r4, r0
+  74 003a 0F46     		mov	r7, r1
+  75 003c 1646     		mov	r6, r2
+  76 003e 1D46     		mov	r5, r3
+  77 0040 FFF7FEFF 		bl	spi1_lock_access
+  78 0044 14B1     		cbz	r4, .L17
+  79 0046 012C     		cmp	r4, #1
+  80 0048 0DD1     		bne	.L20
+  81 004a 05E0     		b	.L22
+  82              	.L17:
+  83 004c 3846     		mov	r0, r7
+  84 004e 3146     		mov	r1, r6
+  85 0050 2A46     		mov	r2, r5
+  86 0052 FFF7FEFF 		bl	flash_ReadSector
+  87 0056 04E0     		b	.L21
+  88              	.L22:
+  89 0058 3846     		mov	r0, r7
+  90 005a 3146     		mov	r1, r6
+  91 005c 2A46     		mov	r2, r5
+  92 005e FFF7FEFF 		bl	sd_read
+  93              	.L21:
+  94 0062 0446     		mov	r4, r0
+  95 0064 00E0     		b	.L16
+  96              	.L20:
+  97 0066 0424     		movs	r4, #4
+  98              	.L16:
+  99 0068 FFF7FEFF 		bl	spi1_release_access
+ 100 006c 2046     		mov	r0, r4
+ 101 006e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 103              		.align	1
+ 104              		.global	disk_write
+ 105              		.thumb
+ 106              		.thumb_func
+ 108              	disk_write:
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0070 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 112 0072 0446     		mov	r4, r0
+ 113 0074 0F46     		mov	r7, r1
+ 114 0076 1646     		mov	r6, r2
+ 115 0078 1D46     		mov	r5, r3
+ 116 007a FFF7FEFF 		bl	spi1_lock_access
+ 117 007e 14B1     		cbz	r4, .L25
+ 118 0080 012C     		cmp	r4, #1
+ 119 0082 11D1     		bne	.L28
+ 120 0084 09E0     		b	.L30
+ 121              	.L25:
+ 122 0086 0B4B     		ldr	r3, .L31
+ 123 0088 3846     		mov	r0, r7
+ 124 008a 1A68     		ldr	r2, [r3, #0]
+ 125 008c 3146     		mov	r1, r6
+ 126 008e 0132     		adds	r2, r2, #1
+ 127 0090 1A60     		str	r2, [r3, #0]
+ 128 0092 2A46     		mov	r2, r5
+ 129 0094 FFF7FEFF 		bl	flash_WriteSector
+ 130 0098 04E0     		b	.L29
+ 131              	.L30:
+ 132 009a 3846     		mov	r0, r7
+ 133 009c 3146     		mov	r1, r6
+ 134 009e 2A46     		mov	r2, r5
+ 135 00a0 FFF7FEFF 		bl	sd_write
+ 136              	.L29:
+ 137 00a4 0446     		mov	r4, r0
+ 138 00a6 00E0     		b	.L24
+ 139              	.L28:
+ 140 00a8 0424     		movs	r4, #4
+ 141              	.L24:
+ 142 00aa FFF7FEFF 		bl	spi1_release_access
+ 143 00ae 2046     		mov	r0, r4
+ 144 00b0 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 145              	.L32:
+ 146 00b2 00BF     		.align	2
+ 147              	.L31:
+ 148 00b4 00000000 		.word	.LANCHOR0
+ 150              		.align	1
+ 151              		.global	disk_ioctl
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	disk_ioctl:
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158 00b8 70B5     		push	{r4, r5, r6, lr}
+ 159 00ba 0446     		mov	r4, r0
+ 160 00bc 0E46     		mov	r6, r1
+ 161 00be 1546     		mov	r5, r2
+ 162 00c0 FFF7FEFF 		bl	spi1_lock_access
+ 163 00c4 14B1     		cbz	r4, .L35
+ 164 00c6 012C     		cmp	r4, #1
+ 165 00c8 0BD1     		bne	.L38
+ 166 00ca 04E0     		b	.L40
+ 167              	.L35:
+ 168 00cc 3046     		mov	r0, r6
+ 169 00ce 2946     		mov	r1, r5
+ 170 00d0 FFF7FEFF 		bl	flash_ioctl
+ 171 00d4 03E0     		b	.L39
+ 172              	.L40:
+ 173 00d6 3046     		mov	r0, r6
+ 174 00d8 2946     		mov	r1, r5
+ 175 00da FFF7FEFF 		bl	sd_ioctl
+ 176              	.L39:
+ 177 00de 0446     		mov	r4, r0
+ 178 00e0 00E0     		b	.L34
+ 179              	.L38:
+ 180 00e2 0424     		movs	r4, #4
+ 181              	.L34:
+ 182 00e4 FFF7FEFF 		bl	spi1_release_access
+ 183 00e8 2046     		mov	r0, r4
+ 184 00ea 70BD     		pop	{r4, r5, r6, pc}
+ 186              		.global	mFlashWriteCount
+ 187              		.bss
+ 188              		.align	2
+ 189              		.set	.LANCHOR0,. + 0
+ 192              	mFlashWriteCount:
+ 193 0000 00000000 		.space	4
+ 194              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 diskio.c
+     /tmp/cchGmyG4.s:16     .text:00000000 $t
+     /tmp/cchGmyG4.s:21     .text:00000000 disk_initialize
+     /tmp/cchGmyG4.s:51     .text:00000028 disk_status
+     /tmp/cchGmyG4.s:69     .text:00000036 disk_read
+     /tmp/cchGmyG4.s:108    .text:00000070 disk_write
+     /tmp/cchGmyG4.s:148    .text:000000b4 $d
+     /tmp/cchGmyG4.s:150    .text:000000b8 $t
+     /tmp/cchGmyG4.s:155    .text:000000b8 disk_ioctl
+     /tmp/cchGmyG4.s:192    .bss:00000000 mFlashWriteCount
+     /tmp/cchGmyG4.s:188    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+spi1_lock_access
+flash_Initialize
+sd_initialize
+spi1_release_access
+sd_status
+flash_ReadSector
+sd_read
+flash_WriteSector
+sd_write
+flash_ioctl
+sd_ioctl

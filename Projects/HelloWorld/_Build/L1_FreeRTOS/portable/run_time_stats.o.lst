@@ -1,0 +1,82 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"run_time_stats.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	vConfigureTimerForRunTimeStats
+  18              		.thumb
+  19              		.thumb_func
+  21              	vConfigureTimerForRunTimeStats:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 10B5     		push	{r4, lr}
+  25 0002 0123     		movs	r3, #1
+  26 0004 4FF04024 		mov	r4, #1073758208
+  27 0008 6360     		str	r3, [r4, #4]
+  28 000a 0023     		movs	r3, #0
+  29 000c 2367     		str	r3, [r4, #112]
+  30 000e 0B4B     		ldr	r3, .L2
+  31 0010 D3F8A821 		ldr	r2, [r3, #424]
+  32 0014 22F00C02 		bic	r2, r2, #12
+  33 0018 C3F8A821 		str	r2, [r3, #424]
+  34 001c D3F8A821 		ldr	r2, [r3, #424]
+  35 0020 42F00402 		orr	r2, r2, #4
+  36 0024 C3F8A821 		str	r2, [r3, #424]
+  37 0028 FFF7FEFF 		bl	sys_get_cpu_clock
+  38 002c 0A23     		movs	r3, #10
+  39 002e 5843     		muls	r0, r3, r0
+  40 0030 034B     		ldr	r3, .L2+4
+  41 0032 B0FBF3F0 		udiv	r0, r0, r3
+  42 0036 E060     		str	r0, [r4, #12]
+  43 0038 10BD     		pop	{r4, pc}
+  44              	.L3:
+  45 003a 00BF     		.align	2
+  46              	.L2:
+  47 003c 00C00F40 		.word	1074774016
+  48 0040 40420F00 		.word	1000000
+  50              		.align	1
+  51              		.global	uxGetTimerForRunTimeStats
+  52              		.thumb
+  53              		.thumb_func
+  55              	uxGetTimerForRunTimeStats:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59 0044 4FF04023 		mov	r3, #1073758208
+  60 0048 9868     		ldr	r0, [r3, #8]
+  61 004a 7047     		bx	lr
+  63              		.align	1
+  64              		.global	resetRunTimeCounter
+  65              		.thumb
+  66              		.thumb_func
+  68              	resetRunTimeCounter:
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72 004c 0022     		movs	r2, #0
+  73 004e 4FF04023 		mov	r3, #1073758208
+  74 0052 9A60     		str	r2, [r3, #8]
+  75 0054 7047     		bx	lr
+  77 0056 00BF     		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 run_time_stats.c
+     /tmp/ccpiTIV0.s:16     .text:00000000 $t
+     /tmp/ccpiTIV0.s:21     .text:00000000 vConfigureTimerForRunTimeStats
+     /tmp/ccpiTIV0.s:47     .text:0000003c $d
+     /tmp/ccpiTIV0.s:50     .text:00000044 $t
+     /tmp/ccpiTIV0.s:55     .text:00000044 uxGetTimerForRunTimeStats
+     /tmp/ccpiTIV0.s:68     .text:0000004c resetRunTimeCounter
+
+UNDEFINED SYMBOLS
+sys_get_cpu_clock

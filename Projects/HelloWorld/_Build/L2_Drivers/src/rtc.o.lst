@@ -1,0 +1,234 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"rtc.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	rtc_gettime
+  18              		.thumb
+  19              		.thumb_func
+  21              	rtc_gettime:
+  22              		@ args = 0, pretend = 0, frame = 24
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  25 0002 104D     		ldr	r5, .L5
+  26 0004 87B0     		sub	sp, sp, #28
+  27 0006 0646     		mov	r6, r0
+  28 0008 6C46     		mov	r4, sp
+  29 000a 95E80700 		ldmia	r5, {r0, r1, r2}
+  30 000e 03AF     		add	r7, sp, #12
+  31 0010 8DE80700 		stmia	sp, {r0, r1, r2}
+  32 0014 03E0     		b	.L4
+  33              	.L3:
+  34 0016 95E80700 		ldmia	r5, {r0, r1, r2}
+  35 001a 84E80700 		stmia	r4, {r0, r1, r2}
+  36              	.L4:
+  37 001e 95E80700 		ldmia	r5, {r0, r1, r2}
+  38 0022 87E80700 		stmia	r7, {r0, r1, r2}
+  39 0026 6846     		mov	r0, sp
+  40 0028 3946     		mov	r1, r7
+  41 002a 0C22     		movs	r2, #12
+  42 002c FFF7FEFF 		bl	memcmp
+  43 0030 0028     		cmp	r0, #0
+  44 0032 F0D1     		bne	.L3
+  45 0034 94E80700 		ldmia	r4, {r0, r1, r2}
+  46 0038 86E80700 		stmia	r6, {r0, r1, r2}
+  47 003c 3046     		mov	r0, r6
+  48 003e 07B0     		add	sp, sp, #28
+  49 0040 F0BD     		pop	{r4, r5, r6, r7, pc}
+  50              	.L6:
+  51 0042 00BF     		.align	2
+  52              	.L5:
+  53 0044 14400240 		.word	1073889300
+  55              		.align	1
+  56              		.global	rtc_settime
+  57              		.thumb
+  58              		.thumb_func
+  60              	rtc_settime:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0048 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+  65 004a 134B     		ldr	r3, .L8
+  66 004c C2F30502 		ubfx	r2, r2, #0, #6
+  67 0050 83F82020 		strb	r2, [r3, #32]
+  68 0054 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  69 0056 C2F30502 		ubfx	r2, r2, #0, #6
+  70 005a 83F82420 		strb	r2, [r3, #36]
+  71 005e 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  72 0060 C2F30402 		ubfx	r2, r2, #0, #5
+  73 0064 83F82820 		strb	r2, [r3, #40]
+  74 0068 C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+  75 006a C2F30202 		ubfx	r2, r2, #0, #3
+  76 006e 83F83020 		strb	r2, [r3, #48]
+  77 0072 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+  78 0074 C2F30402 		ubfx	r2, r2, #0, #5
+  79 0078 83F82C20 		strb	r2, [r3, #44]
+  80 007c 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
+  81 007e C2F30302 		ubfx	r2, r2, #0, #4
+  82 0082 83F83820 		strb	r2, [r3, #56]
+  83 0086 C288     		ldrh	r2, [r0, #6]
+  84 0088 C2F30B02 		ubfx	r2, r2, #0, #12
+  85 008c 9A87     		strh	r2, [r3, #60]	@ movhi
+  86 008e 0289     		ldrh	r2, [r0, #8]
+  87 0090 C2F30B02 		ubfx	r2, r2, #0, #12
+  88 0094 9A86     		strh	r2, [r3, #52]	@ movhi
+  89 0096 7047     		bx	lr
+  90              	.L9:
+  91              		.align	2
+  92              	.L8:
+  93 0098 00400240 		.word	1073889280
+  95              		.align	1
+  96              		.global	rtc_init
+  97              		.thumb
+  98              		.thumb_func
+ 100              	rtc_init:
+ 101              		@ args = 0, pretend = 0, frame = 16
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103 009c 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 104 009e 354B     		ldr	r3, .L13
+ 105 00a0 01A8     		add	r0, sp, #4
+ 106 00a2 D3F8C420 		ldr	r2, [r3, #196]
+ 107 00a6 42F40072 		orr	r2, r2, #512
+ 108 00aa C3F8C420 		str	r2, [r3, #196]
+ 109 00ae 0122     		movs	r2, #1
+ 110 00b0 A3F55823 		sub	r3, r3, #884736
+ 111 00b4 1A72     		strb	r2, [r3, #8]
+ 112 00b6 FFF7FEFF 		bl	rtc_gettime
+ 113 00ba BDF80A30 		ldrh	r3, [sp, #10]
+ 114 00be 40F2D972 		movw	r2, #2009
+ 115 00c2 C3F30B03 		ubfx	r3, r3, #0, #12
+ 116 00c6 9BB2     		uxth	r3, r3
+ 117 00c8 9342     		cmp	r3, r2
+ 118 00ca 21DD     		ble	.L11
+ 119 00cc 1032     		adds	r2, r2, #16
+ 120 00ce 9342     		cmp	r3, r2
+ 121 00d0 1EDC     		bgt	.L11
+ 122 00d2 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 123 00d6 03F03F03 		and	r3, r3, #63
+ 124 00da 3B2B     		cmp	r3, #59
+ 125 00dc 18DC     		bgt	.L11
+ 126 00de 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 127 00e2 03F03F03 		and	r3, r3, #63
+ 128 00e6 3B2B     		cmp	r3, #59
+ 129 00e8 12DC     		bgt	.L11
+ 130 00ea 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 131 00ee 03F01F03 		and	r3, r3, #31
+ 132 00f2 172B     		cmp	r3, #23
+ 133 00f4 0CDC     		bgt	.L11
+ 134 00f6 BDF80C30 		ldrh	r3, [sp, #12]
+ 135 00fa C3F30B03 		ubfx	r3, r3, #0, #12
+ 136 00fe B3F5B77F 		cmp	r3, #366
+ 137 0102 05DA     		bge	.L11
+ 138 0104 9DF80930 		ldrb	r3, [sp, #9]	@ zero_extendqisi2
+ 139 0108 03F00F03 		and	r3, r3, #15
+ 140 010c 0C2B     		cmp	r3, #12
+ 141 010e 2FDD     		ble	.L10
+ 142              	.L11:
+ 143 0110 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 144 0114 0122     		movs	r2, #1
+ 145 0116 62F30403 		bfi	r3, r2, #0, #5
+ 146 011a 8DF80830 		strb	r3, [sp, #8]
+ 147 011e 9DF80930 		ldrb	r3, [sp, #9]	@ zero_extendqisi2
+ 148 0122 01A8     		add	r0, sp, #4
+ 149 0124 62F30303 		bfi	r3, r2, #0, #4
+ 150 0128 8DF80930 		strb	r3, [sp, #9]
+ 151 012c BDF80A30 		ldrh	r3, [sp, #10]
+ 152 0130 40F2DA72 		movw	r2, #2010
+ 153 0134 62F30B03 		bfi	r3, r2, #0, #12
+ 154 0138 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+ 155 013c 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 156 0140 6FF30203 		bfc	r3, #0, #3
+ 157 0144 8DF80730 		strb	r3, [sp, #7]
+ 158 0148 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 159 014c 6FF30503 		bfc	r3, #0, #6
+ 160 0150 8DF80430 		strb	r3, [sp, #4]
+ 161 0154 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 162 0158 6FF30503 		bfc	r3, #0, #6
+ 163 015c 8DF80530 		strb	r3, [sp, #5]
+ 164 0160 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 165 0164 6FF30403 		bfc	r3, #0, #5
+ 166 0168 8DF80630 		strb	r3, [sp, #6]
+ 167 016c FFF7FEFF 		bl	rtc_settime
+ 168              	.L10:
+ 169 0170 05B0     		add	sp, sp, #20
+ 170 0172 00BD     		pop	{pc}
+ 171              	.L14:
+ 172              		.align	2
+ 173              	.L13:
+ 174 0174 00C00F40 		.word	1074774016
+ 176              		.align	1
+ 177              		.global	rtc_get_date_time_str
+ 178              		.thumb
+ 179              		.thumb_func
+ 181              	rtc_get_date_time_str:
+ 182              		@ args = 0, pretend = 0, frame = 16
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184 0178 10B5     		push	{r4, lr}
+ 185 017a 88B0     		sub	sp, sp, #32
+ 186 017c 0446     		mov	r4, r0
+ 187 017e 05A8     		add	r0, sp, #20
+ 188 0180 FFF7FEFF 		bl	rtc_gettime
+ 189 0184 BDF81A10 		ldrh	r1, [sp, #26]
+ 190 0188 9DF81920 		ldrb	r2, [sp, #25]	@ zero_extendqisi2
+ 191 018c C1F30B01 		ubfx	r1, r1, #0, #12
+ 192 0190 89B2     		uxth	r1, r1
+ 193 0192 0091     		str	r1, [sp, #0]
+ 194 0194 9DF81610 		ldrb	r1, [sp, #22]	@ zero_extendqisi2
+ 195 0198 9DF81830 		ldrb	r3, [sp, #24]	@ zero_extendqisi2
+ 196 019c 01F01F01 		and	r1, r1, #31
+ 197 01a0 0191     		str	r1, [sp, #4]
+ 198 01a2 9DF81510 		ldrb	r1, [sp, #21]	@ zero_extendqisi2
+ 199 01a6 02F00F02 		and	r2, r2, #15
+ 200 01aa 01F03F01 		and	r1, r1, #63
+ 201 01ae 0291     		str	r1, [sp, #8]
+ 202 01b0 9DF81410 		ldrb	r1, [sp, #20]	@ zero_extendqisi2
+ 203 01b4 03F01F03 		and	r3, r3, #31
+ 204 01b8 01F03F01 		and	r1, r1, #63
+ 205 01bc 0391     		str	r1, [sp, #12]
+ 206 01be 2046     		mov	r0, r4
+ 207 01c0 0249     		ldr	r1, .L16
+ 208 01c2 FFF7FEFF 		bl	siprintf
+ 209 01c6 2046     		mov	r0, r4
+ 210 01c8 08B0     		add	sp, sp, #32
+ 211 01ca 10BD     		pop	{r4, pc}
+ 212              	.L17:
+ 213              		.align	2
+ 214              	.L16:
+ 215 01cc 00000000 		.word	.LC0
+ 217              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 218              	.LC0:
+ 219 0000 25752F25 		.ascii	"%u/%u/%u,%02u:%02u:%02u\000"
+ 219      752F2575 
+ 219      2C253032 
+ 219      753A2530 
+ 219      32753A25 
+ 220              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtc.c
+     /tmp/ccWiOTeT.s:16     .text:00000000 $t
+     /tmp/ccWiOTeT.s:21     .text:00000000 rtc_gettime
+     /tmp/ccWiOTeT.s:53     .text:00000044 $d
+     /tmp/ccWiOTeT.s:55     .text:00000048 $t
+     /tmp/ccWiOTeT.s:60     .text:00000048 rtc_settime
+     /tmp/ccWiOTeT.s:93     .text:00000098 $d
+     /tmp/ccWiOTeT.s:95     .text:0000009c $t
+     /tmp/ccWiOTeT.s:100    .text:0000009c rtc_init
+     /tmp/ccWiOTeT.s:174    .text:00000174 $d
+     /tmp/ccWiOTeT.s:176    .text:00000178 $t
+     /tmp/ccWiOTeT.s:181    .text:00000178 rtc_get_date_time_str
+     /tmp/ccWiOTeT.s:215    .text:000001cc $d
+
+UNDEFINED SYMBOLS
+memcmp
+siprintf

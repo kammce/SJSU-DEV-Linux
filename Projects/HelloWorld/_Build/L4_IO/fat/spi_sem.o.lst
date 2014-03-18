@@ -1,0 +1,131 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"spi_sem.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	spi1_lock_access
+  18              		.thumb
+  19              		.thumb_func
+  21              	spi1_lock_access:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 10B5     		push	{r4, lr}
+  25 0002 084C     		ldr	r4, .L3
+  26 0004 2368     		ldr	r3, [r4, #0]
+  27 0006 1BB9     		cbnz	r3, .L2
+  28 0008 0120     		movs	r0, #1
+  29 000a FFF7FEFF 		bl	xQueueCreateMutex
+  30 000e 2060     		str	r0, [r4, #0]
+  31              	.L2:
+  32 0010 0021     		movs	r1, #0
+  33 0012 2068     		ldr	r0, [r4, #0]
+  34 0014 4FF0FF32 		mov	r2, #-1
+  35 0018 0B46     		mov	r3, r1
+  36 001a BDE81040 		pop	{r4, lr}
+  37 001e FFF7FEBF 		b	xQueueGenericReceive
+  38              	.L4:
+  39 0022 00BF     		.align	2
+  40              	.L3:
+  41 0024 00000000 		.word	.LANCHOR0
+  43              		.align	1
+  44              		.global	spi1_release_access
+  45              		.thumb
+  46              		.thumb_func
+  48              	spi1_release_access:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0028 034B     		ldr	r3, .L6
+  53 002a 0021     		movs	r1, #0
+  54 002c 1868     		ldr	r0, [r3, #0]
+  55 002e 0A46     		mov	r2, r1
+  56 0030 0B46     		mov	r3, r1
+  57 0032 FFF7FEBF 		b	xQueueGenericSend
+  58              	.L7:
+  59 0036 00BF     		.align	2
+  60              	.L6:
+  61 0038 00000000 		.word	.LANCHOR0
+  63              		.align	1
+  64              		.global	spi0_lock_access
+  65              		.thumb
+  66              		.thumb_func
+  68              	spi0_lock_access:
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 003c 10B5     		push	{r4, lr}
+  72 003e 084C     		ldr	r4, .L10
+  73 0040 6368     		ldr	r3, [r4, #4]
+  74 0042 1BB9     		cbnz	r3, .L9
+  75 0044 0120     		movs	r0, #1
+  76 0046 FFF7FEFF 		bl	xQueueCreateMutex
+  77 004a 6060     		str	r0, [r4, #4]
+  78              	.L9:
+  79 004c 0021     		movs	r1, #0
+  80 004e 6068     		ldr	r0, [r4, #4]
+  81 0050 4FF0FF32 		mov	r2, #-1
+  82 0054 0B46     		mov	r3, r1
+  83 0056 BDE81040 		pop	{r4, lr}
+  84 005a FFF7FEBF 		b	xQueueGenericReceive
+  85              	.L11:
+  86 005e 00BF     		.align	2
+  87              	.L10:
+  88 0060 00000000 		.word	.LANCHOR0
+  90              		.align	1
+  91              		.global	spi0_release_access
+  92              		.thumb
+  93              		.thumb_func
+  95              	spi0_release_access:
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+  99 0064 034B     		ldr	r3, .L13
+ 100 0066 0021     		movs	r1, #0
+ 101 0068 5868     		ldr	r0, [r3, #4]
+ 102 006a 0A46     		mov	r2, r1
+ 103 006c 0B46     		mov	r3, r1
+ 104 006e FFF7FEBF 		b	xQueueGenericSend
+ 105              	.L14:
+ 106 0072 00BF     		.align	2
+ 107              	.L13:
+ 108 0074 00000000 		.word	.LANCHOR0
+ 110              		.bss
+ 111              		.align	2
+ 112              		.set	.LANCHOR0,. + 0
+ 115              	mSpi0Lock:
+ 116 0000 00000000 		.space	4
+ 119              	mSpi1Lock:
+ 120 0004 00000000 		.space	4
+ 121              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 spi_sem.c
+     /tmp/ccqBJhn9.s:16     .text:00000000 $t
+     /tmp/ccqBJhn9.s:21     .text:00000000 spi1_lock_access
+     /tmp/ccqBJhn9.s:41     .text:00000024 $d
+     /tmp/ccqBJhn9.s:43     .text:00000028 $t
+     /tmp/ccqBJhn9.s:48     .text:00000028 spi1_release_access
+     /tmp/ccqBJhn9.s:61     .text:00000038 $d
+     /tmp/ccqBJhn9.s:63     .text:0000003c $t
+     /tmp/ccqBJhn9.s:68     .text:0000003c spi0_lock_access
+     /tmp/ccqBJhn9.s:88     .text:00000060 $d
+     /tmp/ccqBJhn9.s:90     .text:00000064 $t
+     /tmp/ccqBJhn9.s:95     .text:00000064 spi0_release_access
+     /tmp/ccqBJhn9.s:108    .text:00000074 $d
+     /tmp/ccqBJhn9.s:111    .bss:00000000 $d
+     /tmp/ccqBJhn9.s:115    .bss:00000000 mSpi0Lock
+     /tmp/ccqBJhn9.s:119    .bss:00000004 mSpi1Lock
+
+UNDEFINED SYMBOLS
+xQueueCreateMutex
+xQueueGenericReceive
+xQueueGenericSend

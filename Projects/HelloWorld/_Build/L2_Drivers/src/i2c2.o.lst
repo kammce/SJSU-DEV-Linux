@@ -1,0 +1,136 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"i2c2.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.global	_ZN4I2C24initEj
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN4I2C24initEj:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 70B5     		push	{r4, r5, r6, lr}
+  25 0002 194B     		ldr	r3, .L3
+  26 0004 0446     		mov	r4, r0
+  27 0006 5E69     		ldr	r6, [r3, #20]
+  28 0008 184B     		ldr	r3, .L3+4
+  29 000a 06F44066 		and	r6, r6, #3072
+  30 000e 1A6C     		ldr	r2, [r3, #64]
+  31 0010 0D46     		mov	r5, r1
+  32 0012 22F47002 		bic	r2, r2, #15728640
+  33 0016 1A64     		str	r2, [r3, #64]
+  34 0018 1A6C     		ldr	r2, [r3, #64]
+  35 001a 42F42002 		orr	r2, r2, #10485760
+  36 001e 1A64     		str	r2, [r3, #64]
+  37 0020 9A6E     		ldr	r2, [r3, #104]
+  38 0022 42F44062 		orr	r2, r2, #3072
+  39 0026 9A66     		str	r2, [r3, #104]
+  40 0028 1A68     		ldr	r2, [r3, #0]
+  41 002a 22F47002 		bic	r2, r2, #15728640
+  42 002e 1A60     		str	r2, [r3, #0]
+  43 0030 1A68     		ldr	r2, [r3, #0]
+  44 0032 42F42002 		orr	r2, r2, #10485760
+  45 0036 1A60     		str	r2, [r3, #0]
+  46 0038 03F55023 		add	r3, r3, #851968
+  47 003c D3F8AC21 		ldr	r2, [r3, #428]
+  48 0040 22F44012 		bic	r2, r2, #3145728
+  49 0044 C3F8AC21 		str	r2, [r3, #428]
+  50 0048 FFF7FEFF 		bl	sys_get_cpu_clock
+  51 004c B6F5406F 		cmp	r6, #3072
+  52 0050 06D1     		bne	.L2
+  53 0052 8108     		lsrs	r1, r0, #2
+  54 0054 2A46     		mov	r2, r5
+  55 0056 2046     		mov	r0, r4
+  56 0058 BDE87040 		pop	{r4, r5, r6, lr}
+  57 005c FFF7FEBF 		b	_ZN8I2C_Base4initEjj
+  58              	.L2:
+  59 0060 0123     		movs	r3, #1
+  60 0062 2374     		strb	r3, [r4, #16]
+  61 0064 0020     		movs	r0, #0
+  62 0066 70BD     		pop	{r4, r5, r6, pc}
+  63              	.L4:
+  64              		.align	2
+  65              	.L3:
+  66 0068 00C00920 		.word	537509888
+  67 006c 00C00240 		.word	1073922048
+  69              		.align	1
+  70              		.global	_ZN4I2C2C2Ev
+  71              		.thumb
+  72              		.thumb_func
+  74              	_ZN4I2C2C2Ev:
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77 0070 10B5     		push	{r4, lr}
+  78 0072 0349     		ldr	r1, .L8
+  79 0074 0446     		mov	r4, r0
+  80 0076 FFF7FEFF 		bl	_ZN8I2C_BaseC2EP15LPC_I2C_TypeDef
+  81 007a 2046     		mov	r0, r4
+  82 007c 10BD     		pop	{r4, pc}
+  83              	.L9:
+  84 007e 00BF     		.align	2
+  85              	.L8:
+  86 0080 00000A40 		.word	1074397184
+  88              		.align	1
+  89              		.global	I2C2_IRQHandler
+  90              		.thumb
+  91              		.thumb_func
+  93              	I2C2_IRQHandler:
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0084 38B5     		push	{r3, r4, r5, lr}
+  97 0086 074C     		ldr	r4, .L12
+  98 0088 2368     		ldr	r3, [r4, #0]
+  99 008a 33B9     		cbnz	r3, .L11
+ 100 008c 1C20     		movs	r0, #28
+ 101 008e FFF7FEFF 		bl	_Znwj
+ 102 0092 0546     		mov	r5, r0
+ 103 0094 FFF7FEFF 		bl	_ZN4I2C2C1Ev
+ 104 0098 2560     		str	r5, [r4, #0]
+ 105              	.L11:
+ 106 009a 2068     		ldr	r0, [r4, #0]
+ 107 009c BDE83840 		pop	{r3, r4, r5, lr}
+ 108 00a0 FFF7FEBF 		b	_ZN8I2C_Base15handleInterruptEv
+ 109              	.L13:
+ 110              		.align	2
+ 111              	.L12:
+ 112 00a4 00000000 		.word	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 114              		.weak	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 115              		.section	.bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTemp
+ 116              		.align	2
+ 119              	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:
+ 120 0000 00000000 		.space	4
+ 121              		.global	_ZN4I2C2C1Ev
+ 122              		.thumb_set _ZN4I2C2C1Ev,_ZN4I2C2C2Ev
+ 123              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c2.cpp
+     /tmp/cc2poucy.s:16     .text:00000000 $t
+     /tmp/cc2poucy.s:21     .text:00000000 _ZN4I2C24initEj
+     /tmp/cc2poucy.s:66     .text:00000068 $d
+     /tmp/cc2poucy.s:69     .text:00000070 $t
+     /tmp/cc2poucy.s:74     .text:00000070 _ZN4I2C2C2Ev
+     /tmp/cc2poucy.s:86     .text:00000080 $d
+     /tmp/cc2poucy.s:88     .text:00000084 $t
+     /tmp/cc2poucy.s:93     .text:00000084 I2C2_IRQHandler
+     /tmp/cc2poucy.s:74     .text:00000070 _ZN4I2C2C1Ev
+     /tmp/cc2poucy.s:112    .text:000000a4 $d
+     /tmp/cc2poucy.s:119    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+     /tmp/cc2poucy.s:116    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 $d
+
+UNDEFINED SYMBOLS
+sys_get_cpu_clock
+_ZN8I2C_Base4initEjj
+_ZN8I2C_BaseC2EP15LPC_I2C_TypeDef
+_Znwj
+_ZN8I2C_Base15handleInterruptEv

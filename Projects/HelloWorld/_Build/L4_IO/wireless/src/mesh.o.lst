@@ -1,0 +1,1618 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"mesh.c"
+  15              		.text
+  16              		.align	1
+  17              		.thumb
+  18              		.thumb_func
+  20              	mesh_incr_soft_timers_for_arr:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 30B5     		push	{r4, r5, lr}
+  24 0002 0023     		movs	r3, #0
+  25 0004 4FF6FF74 		movw	r4, #65535
+  26 0008 0AE0     		b	.L2
+  27              	.L4:
+  28 000a 4578     		ldrb	r5, [r0, #1]	@ zero_extendqisi2
+  29 000c 2DB1     		cbz	r5, .L3
+  30 000e 058C     		ldrh	r5, [r0, #32]	@ unaligned
+  31 0010 5519     		adds	r5, r2, r5
+  32 0012 A542     		cmp	r5, r4
+  33 0014 28BF     		it	cs
+  34 0016 2546     		movcs	r5, r4
+  35 0018 0584     		strh	r5, [r0, #32]	@ unaligned
+  36              	.L3:
+  37 001a 0133     		adds	r3, r3, #1
+  38 001c DBB2     		uxtb	r3, r3
+  39 001e 2430     		adds	r0, r0, #36
+  40              	.L2:
+  41 0020 8B42     		cmp	r3, r1
+  42 0022 F2D1     		bne	.L4
+  43 0024 30BD     		pop	{r4, r5, pc}
+  45              		.align	1
+  46              		.thumb
+  47              		.thumb_func
+  49              	mesh_update_soft_timers:
+  50              		@ args = 0, pretend = 0, frame = 8
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52 0026 73B5     		push	{r0, r1, r4, r5, r6, lr}
+  53 0028 0E4C     		ldr	r4, .L6
+  54 002a 02A8     		add	r0, sp, #8
+  55 002c 0023     		movs	r3, #0
+  56 002e 0421     		movs	r1, #4
+  57 0030 40F8043D 		str	r3, [r0, #-4]!
+  58 0034 6368     		ldr	r3, [r4, #4]
+  59 0036 9847     		blx	r3
+  60 0038 019B     		ldr	r3, [sp, #4]
+  61 003a 6569     		ldr	r5, [r4, #20]
+  62 003c 0646     		mov	r6, r0
+  63 003e 5D1B     		subs	r5, r3, r5
+  64 0040 04F11800 		add	r0, r4, #24
+  65 0044 0421     		movs	r1, #4
+  66 0046 2A46     		mov	r2, r5
+  67 0048 6361     		str	r3, [r4, #20]
+  68 004a FFF7D9FF 		bl	mesh_incr_soft_timers_for_arr
+  69 004e 04F1A800 		add	r0, r4, #168
+  70 0052 0221     		movs	r1, #2
+  71 0054 2A46     		mov	r2, r5
+  72 0056 FFF7D3FF 		bl	mesh_incr_soft_timers_for_arr
+  73 005a 301C     		adds	r0, r6, #0
+  74 005c 18BF     		it	ne
+  75 005e 0120     		movne	r0, #1
+  76 0060 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+  77              	.L7:
+  78 0062 00BF     		.align	2
+  79              	.L6:
+  80 0064 00000000 		.word	.LANCHOR0
+  82              		.align	1
+  83              		.thumb
+  84              		.thumb_func
+  86              	mesh_send_packet:
+  87              		@ args = 0, pretend = 0, frame = 0
+  88              		@ frame_needed = 0, uses_anonymous_args = 0
+  89 0068 08B5     		push	{r3, lr}
+  90 006a 0C4B     		ldr	r3, .L11
+  91 006c 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+  92 006e 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+  93 0070 9342     		cmp	r3, r2
+  94 0072 0B4B     		ldr	r3, .L11+4
+  95 0074 05D1     		bne	.L9
+  96 0076 B3F8F010 		ldrh	r1, [r3, #240]	@ unaligned
+  97 007a 0131     		adds	r1, r1, #1
+  98 007c A3F8F010 		strh	r1, [r3, #240]	@ unaligned
+  99 0080 04E0     		b	.L10
+ 100              	.L9:
+ 101 0082 B3F8F410 		ldrh	r1, [r3, #244]	@ unaligned
+ 102 0086 0131     		adds	r1, r1, #1
+ 103 0088 A3F8F410 		strh	r1, [r3, #244]	@ unaligned
+ 104              	.L10:
+ 105 008c 2021     		movs	r1, #32
+ 106 008e 8270     		strb	r2, [r0, #2]
+ 107 0090 DB68     		ldr	r3, [r3, #12]
+ 108 0092 9847     		blx	r3
+ 109 0094 0030     		adds	r0, r0, #0
+ 110 0096 18BF     		it	ne
+ 111 0098 0120     		movne	r0, #1
+ 112 009a 08BD     		pop	{r3, pc}
+ 113              	.L12:
+ 114              		.align	2
+ 115              	.L11:
+ 116 009c 00000000 		.word	.LANCHOR1
+ 117 00a0 00000000 		.word	.LANCHOR0
+ 119              		.align	1
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	mesh_send_retry_packet:
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127 00a4 0C4B     		ldr	r3, .L16
+ 128 00a6 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 129 00a8 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 130 00aa 9A42     		cmp	r2, r3
+ 131 00ac 0B4B     		ldr	r3, .L16+4
+ 132 00ae 05D1     		bne	.L14
+ 133 00b0 B3F8F620 		ldrh	r2, [r3, #246]	@ unaligned
+ 134 00b4 0132     		adds	r2, r2, #1
+ 135 00b6 A3F8F620 		strh	r2, [r3, #246]	@ unaligned
+ 136 00ba 04E0     		b	.L15
+ 137              	.L14:
+ 138 00bc B3F8F820 		ldrh	r2, [r3, #248]	@ unaligned
+ 139 00c0 0132     		adds	r2, r2, #1
+ 140 00c2 A3F8F820 		strh	r2, [r3, #248]	@ unaligned
+ 141              	.L15:
+ 142 00c6 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 143 00c8 C3F3C202 		ubfx	r2, r3, #3, #3
+ 144 00cc 013A     		subs	r2, r2, #1
+ 145 00ce 62F3C503 		bfi	r3, r2, #3, #3
+ 146 00d2 0371     		strb	r3, [r0, #4]
+ 147 00d4 C8E7     		b	mesh_send_packet
+ 148              	.L17:
+ 149 00d6 00BF     		.align	2
+ 150              	.L16:
+ 151 00d8 00000000 		.word	.LANCHOR1
+ 152 00dc 00000000 		.word	.LANCHOR0
+ 154              		.align	1
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	mesh_find_rte_tbl_entry:
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 00e0 10B5     		push	{r4, lr}
+ 162 00e2 0849     		ldr	r1, .L23
+ 163 00e4 0023     		movs	r3, #0
+ 164              	.L21:
+ 165 00e6 11F82340 		ldrb	r4, [r1, r3, lsl #2]	@ zero_extendqisi2
+ 166 00ea DAB2     		uxtb	r2, r3
+ 167 00ec 8442     		cmp	r4, r0
+ 168 00ee 03D1     		bne	.L19
+ 169 00f0 044B     		ldr	r3, .L23
+ 170 00f2 03EB8200 		add	r0, r3, r2, lsl #2
+ 171 00f6 10BD     		pop	{r4, pc}
+ 172              	.L19:
+ 173 00f8 0133     		adds	r3, r3, #1
+ 174 00fa 042B     		cmp	r3, #4
+ 175 00fc F3D1     		bne	.L21
+ 176 00fe 0020     		movs	r0, #0
+ 177 0100 10BD     		pop	{r4, pc}
+ 178              	.L24:
+ 179 0102 00BF     		.align	2
+ 180              	.L23:
+ 181 0104 FC000000 		.word	.LANCHOR0+252
+ 183              		.align	1
+ 184              		.thumb
+ 185              		.thumb_func
+ 187              	mesh_handle_pnd_pkts_for_arr:
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190 0108 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 191 010c 0546     		mov	r5, r0
+ 192 010e 9146     		mov	r9, r2
+ 193 0110 0C46     		mov	r4, r1
+ 194 0112 0027     		movs	r7, #0
+ 195 0114 DFF86C81 		ldr	r8, .L45
+ 196 0118 4FF0020A 		mov	sl, #2
+ 197 011c ADE0     		b	.L26
+ 198              	.L40:
+ 199 011e 94F82330 		ldrb	r3, [r4, #35]	@ zero_extendqisi2
+ 200 0122 03F08003 		and	r3, r3, #128
+ 201 0126 DBB2     		uxtb	r3, r3
+ 202 0128 33B3     		cbz	r3, .L27
+ 203 012a ADB1     		cbz	r5, .L28
+ 204 012c 2B78     		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+ 205 012e 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 206 0130 9342     		cmp	r3, r2
+ 207 0132 04D1     		bne	.L29
+ 208 0134 6878     		ldrb	r0, [r5, #1]	@ zero_extendqisi2
+ 209 0136 2178     		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+ 210 0138 8842     		cmp	r0, r1
+ 211 013a 00F09680 		beq	.L34
+ 212              	.L29:
+ 213 013e E978     		ldrb	r1, [r5, #3]	@ zero_extendqisi2
+ 214 0140 51B1     		cbz	r1, .L28
+ 215 0142 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 216 0144 9142     		cmp	r1, r2
+ 217 0146 07D1     		bne	.L28
+ 218 0148 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 219 014a 9A42     		cmp	r2, r3
+ 220 014c 04D1     		bne	.L28
+ 221 014e AA79     		ldrb	r2, [r5, #6]	@ zero_extendqisi2
+ 222 0150 A379     		ldrb	r3, [r4, #6]	@ zero_extendqisi2
+ 223 0152 9A42     		cmp	r2, r3
+ 224 0154 00F08980 		beq	.L34
+ 225              	.L28:
+ 226 0158 94F82330 		ldrb	r3, [r4, #35]	@ zero_extendqisi2
+ 227 015c 94F82210 		ldrb	r1, [r4, #34]	@ zero_extendqisi2
+ 228 0160 228C     		ldrh	r2, [r4, #32]	@ unaligned
+ 229 0162 03F07F03 		and	r3, r3, #127
+ 230 0166 41EA0323 		orr	r3, r1, r3, lsl #8
+ 231 016a 9A42     		cmp	r2, r3
+ 232 016c C0F28280 		blt	.L30
+ 233 0170 2046     		mov	r0, r4
+ 234 0172 FFF779FF 		bl	mesh_send_packet
+ 235 0176 78E0     		b	.L34
+ 236              	.L27:
+ 237 0178 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 238 017a 002B     		cmp	r3, #0
+ 239 017c 7AD0     		beq	.L30
+ 240 017e 002D     		cmp	r5, #0
+ 241 0180 34D0     		beq	.L31
+ 242 0182 2A79     		ldrb	r2, [r5, #4]	@ zero_extendqisi2
+ 243 0184 02F0C002 		and	r2, r2, #192
+ 244 0188 C02A     		cmp	r2, #192
+ 245 018a 15D1     		bne	.L32
+ 246 018c 6A78     		ldrb	r2, [r5, #1]	@ zero_extendqisi2
+ 247 018e 2178     		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+ 248 0190 9142     		cmp	r1, r2
+ 249 0192 02D1     		bne	.L33
+ 250 0194 2978     		ldrb	r1, [r5, #0]	@ zero_extendqisi2
+ 251 0196 9942     		cmp	r1, r3
+ 252 0198 67D0     		beq	.L34
+ 253              	.L33:
+ 254 019a E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 255 019c A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+ 256 019e 8842     		cmp	r0, r1
+ 257 01a0 0BD1     		bne	.L35
+ 258 01a2 9342     		cmp	r3, r2
+ 259 01a4 09D1     		bne	.L35
+ 260 01a6 2178     		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+ 261 01a8 2A78     		ldrb	r2, [r5, #0]	@ zero_extendqisi2
+ 262 01aa 9142     		cmp	r1, r2
+ 263 01ac 05D1     		bne	.L35
+ 264 01ae A179     		ldrb	r1, [r4, #6]	@ zero_extendqisi2
+ 265 01b0 AA79     		ldrb	r2, [r5, #6]	@ zero_extendqisi2
+ 266 01b2 9142     		cmp	r1, r2
+ 267 01b4 01D1     		bne	.L35
+ 268 01b6 58E0     		b	.L34
+ 269              	.L32:
+ 270 01b8 C2B1     		cbz	r2, .L31
+ 271              	.L35:
+ 272 01ba A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+ 273 01bc E278     		ldrb	r2, [r4, #3]	@ zero_extendqisi2
+ 274 01be 9142     		cmp	r1, r2
+ 275 01c0 14D1     		bne	.L31
+ 276 01c2 6A78     		ldrb	r2, [r5, #1]	@ zero_extendqisi2
+ 277 01c4 9A42     		cmp	r2, r3
+ 278 01c6 11D1     		bne	.L31
+ 279 01c8 2178     		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+ 280 01ca 2A78     		ldrb	r2, [r5, #0]	@ zero_extendqisi2
+ 281 01cc 9142     		cmp	r1, r2
+ 282 01ce 0DD1     		bne	.L31
+ 283 01d0 A179     		ldrb	r1, [r4, #6]	@ zero_extendqisi2
+ 284 01d2 AA79     		ldrb	r2, [r5, #6]	@ zero_extendqisi2
+ 285 01d4 9142     		cmp	r1, r2
+ 286 01d6 09D1     		bne	.L31
+ 287 01d8 2279     		ldrb	r2, [r4, #4]	@ zero_extendqisi2
+ 288 01da 0023     		movs	r3, #0
+ 289 01dc 63F3C502 		bfi	r2, r3, #3, #3
+ 290 01e0 84F82030 		strb	r3, [r4, #32]
+ 291 01e4 84F82130 		strb	r3, [r4, #33]
+ 292 01e8 2271     		strb	r2, [r4, #4]
+ 293 01ea 43E0     		b	.L30
+ 294              	.L31:
+ 295 01ec 94F82320 		ldrb	r2, [r4, #35]	@ zero_extendqisi2
+ 296 01f0 94F82200 		ldrb	r0, [r4, #34]	@ zero_extendqisi2
+ 297 01f4 218C     		ldrh	r1, [r4, #32]	@ unaligned
+ 298 01f6 02F07F02 		and	r2, r2, #127
+ 299 01fa 40EA0222 		orr	r2, r0, r2, lsl #8
+ 300 01fe 9142     		cmp	r1, r2
+ 301 0200 38DB     		blt	.L30
+ 302 0202 2179     		ldrb	r1, [r4, #4]	@ zero_extendqisi2
+ 303 0204 0022     		movs	r2, #0
+ 304 0206 84F82020 		strb	r2, [r4, #32]
+ 305 020a 84F82120 		strb	r2, [r4, #33]
+ 306 020e C1F3C202 		ubfx	r2, r1, #3, #3
+ 307 0212 D6B2     		uxtb	r6, r2
+ 308 0214 1EB1     		cbz	r6, .L37
+ 309 0216 2046     		mov	r0, r4
+ 310 0218 FFF744FF 		bl	mesh_send_retry_packet
+ 311 021c 2AE0     		b	.L30
+ 312              	.L37:
+ 313 021e 01F0C001 		and	r1, r1, #192
+ 314 0222 C029     		cmp	r1, #192
+ 315 0224 17D0     		beq	.L44
+ 316 0226 2078     		ldrb	r0, [r4, #0]	@ zero_extendqisi2
+ 317 0228 98F80010 		ldrb	r1, [r8, #0]	@ zero_extendqisi2
+ 318 022c 8842     		cmp	r0, r1
+ 319 022e 12D1     		bne	.L44
+ 320 0230 E178     		ldrb	r1, [r4, #3]	@ zero_extendqisi2
+ 321 0232 9942     		cmp	r1, r3
+ 322 0234 0FD0     		beq	.L44
+ 323 0236 71B1     		cbz	r1, .L44
+ 324 0238 6379     		ldrb	r3, [r4, #5]	@ zero_extendqisi2
+ 325 023a E270     		strb	r2, [r4, #3]
+ 326 023c 6AF30713 		bfi	r3, sl, #4, #4
+ 327 0240 6371     		strb	r3, [r4, #5]
+ 328 0242 2046     		mov	r0, r4
+ 329 0244 FFF72EFF 		bl	mesh_send_retry_packet
+ 330 0248 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 331 024a 98F80120 		ldrb	r2, [r8, #1]	@ zero_extendqisi2
+ 332 024e 62F3C503 		bfi	r3, r2, #3, #3
+ 333 0252 2371     		strb	r3, [r4, #4]
+ 334 0254 00E0     		b	.L38
+ 335              	.L44:
+ 336 0256 0126     		movs	r6, #1
+ 337              	.L38:
+ 338 0258 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 339 025a FFF741FF 		bl	mesh_find_rte_tbl_entry
+ 340 025e 18B1     		cbz	r0, .L39
+ 341 0260 0021     		movs	r1, #0
+ 342 0262 0422     		movs	r2, #4
+ 343 0264 FFF7FEFF 		bl	memset
+ 344              	.L39:
+ 345 0268 26B1     		cbz	r6, .L30
+ 346              	.L34:
+ 347 026a 2046     		mov	r0, r4
+ 348 026c 0021     		movs	r1, #0
+ 349 026e 2422     		movs	r2, #36
+ 350 0270 FFF7FEFF 		bl	memset
+ 351              	.L30:
+ 352 0274 0137     		adds	r7, r7, #1
+ 353 0276 FFB2     		uxtb	r7, r7
+ 354 0278 2434     		adds	r4, r4, #36
+ 355              	.L26:
+ 356 027a 4F45     		cmp	r7, r9
+ 357 027c 7FF44FAF 		bne	.L40
+ 358 0280 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 359              	.L46:
+ 360              		.align	2
+ 361              	.L45:
+ 362 0284 00000000 		.word	.LANCHOR1
+ 364              		.align	1
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	mesh_update_rte_scores:
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+ 372 0288 70B1     		cbz	r0, .L47
+ 373 028a C378     		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 374 028c 0133     		adds	r3, r3, #1
+ 375 028e DBB2     		uxtb	r3, r3
+ 376 0290 FF2B     		cmp	r3, #255
+ 377 0292 C370     		strb	r3, [r0, #3]
+ 378 0294 08D1     		bne	.L47
+ 379 0296 0549     		ldr	r1, .L51
+ 380 0298 0023     		movs	r3, #0
+ 381              	.L49:
+ 382 029a CA18     		adds	r2, r1, r3
+ 383 029c D078     		ldrb	r0, [r2, #3]	@ zero_extendqisi2
+ 384 029e 0433     		adds	r3, r3, #4
+ 385 02a0 4008     		lsrs	r0, r0, #1
+ 386 02a2 102B     		cmp	r3, #16
+ 387 02a4 D070     		strb	r0, [r2, #3]
+ 388 02a6 F8D1     		bne	.L49
+ 389              	.L47:
+ 390 02a8 7047     		bx	lr
+ 391              	.L52:
+ 392 02aa 00BF     		.align	2
+ 393              	.L51:
+ 394 02ac FC000000 		.word	.LANCHOR0+252
+ 396              		.align	1
+ 397              		.thumb
+ 398              		.thumb_func
+ 400              	mesh_get_pnd_pkt_slot:
+ 401              		@ args = 0, pretend = 0, frame = 0
+ 402              		@ frame_needed = 0, uses_anonymous_args = 0
+ 403 02b0 F0B5     		push	{r4, r5, r6, r7, lr}
+ 404 02b2 0346     		mov	r3, r0
+ 405 02b4 0246     		mov	r2, r0
+ 406 02b6 0024     		movs	r4, #0
+ 407 02b8 09E0     		b	.L54
+ 408              	.L58:
+ 409 02ba 1046     		mov	r0, r2
+ 410 02bc 2432     		adds	r2, r2, #36
+ 411 02be 12F8235C 		ldrb	r5, [r2, #-35]	@ zero_extendqisi2
+ 412 02c2 15B9     		cbnz	r5, .L55
+ 413 02c4 E0B9     		cbnz	r0, .L56
+ 414 02c6 1C46     		mov	r4, r3
+ 415 02c8 05E0     		b	.L63
+ 416              	.L55:
+ 417 02ca 0134     		adds	r4, r4, #1
+ 418 02cc E4B2     		uxtb	r4, r4
+ 419              	.L54:
+ 420 02ce 8C42     		cmp	r4, r1
+ 421 02d0 F3D1     		bne	.L58
+ 422 02d2 1C46     		mov	r4, r3
+ 423 02d4 0020     		movs	r0, #0
+ 424              	.L63:
+ 425 02d6 0246     		mov	r2, r0
+ 426 02d8 2427     		movs	r7, #36
+ 427 02da 0EE0     		b	.L62
+ 428              	.L61:
+ 429 02dc 07FB0235 		mla	r5, r7, r2, r3
+ 430 02e0 2E79     		ldrb	r6, [r5, #4]	@ zero_extendqisi2
+ 431 02e2 B5F820C0 		ldrh	ip, [r5, #32]	@ unaligned
+ 432 02e6 C6F3C206 		ubfx	r6, r6, #3, #3
+ 433 02ea 4CEA0646 		orr	r6, ip, r6, lsl #16
+ 434 02ee B042     		cmp	r0, r6
+ 435 02f0 3CBF     		itt	cc
+ 436 02f2 3046     		movcc	r0, r6
+ 437 02f4 2C46     		movcc	r4, r5
+ 438 02f6 0132     		adds	r2, r2, #1
+ 439 02f8 D2B2     		uxtb	r2, r2
+ 440              	.L62:
+ 441 02fa 8A42     		cmp	r2, r1
+ 442 02fc EED1     		bne	.L61
+ 443 02fe 2046     		mov	r0, r4
+ 444              	.L56:
+ 445 0300 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 447              		.align	1
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	mesh_pending_packets_add:
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454 0302 70B5     		push	{r4, r5, r6, lr}
+ 455 0304 0131     		adds	r1, r1, #1
+ 456 0306 0626     		movs	r6, #6
+ 457 0308 0546     		mov	r5, r0
+ 458 030a 4E43     		muls	r6, r1, r6
+ 459 030c FFF78BFE 		bl	mesh_update_soft_timers
+ 460 0310 194B     		ldr	r3, .L67
+ 461 0312 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 462 0314 2B78     		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+ 463 0316 9A42     		cmp	r2, r3
+ 464 0318 05D1     		bne	.L65
+ 465 031a 1848     		ldr	r0, .L67+4
+ 466 031c 0221     		movs	r1, #2
+ 467 031e FFF7C7FF 		bl	mesh_get_pnd_pkt_slot
+ 468 0322 0446     		mov	r4, r0
+ 469 0324 0DE0     		b	.L66
+ 470              	.L65:
+ 471 0326 1648     		ldr	r0, .L67+8
+ 472 0328 0421     		movs	r1, #4
+ 473 032a FFF7C1FF 		bl	mesh_get_pnd_pkt_slot
+ 474 032e EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 475 0330 0446     		mov	r4, r0
+ 476 0332 33B9     		cbnz	r3, .L66
+ 477 0334 90F82330 		ldrb	r3, [r0, #35]	@ zero_extendqisi2
+ 478 0338 0326     		movs	r6, #3
+ 479 033a 43F08003 		orr	r3, r3, #128
+ 480 033e 80F82330 		strb	r3, [r0, #35]
+ 481              	.L66:
+ 482 0342 0023     		movs	r3, #0
+ 483 0344 84F82030 		strb	r3, [r4, #32]
+ 484 0348 84F82130 		strb	r3, [r4, #33]
+ 485 034c 94F82330 		ldrb	r3, [r4, #35]	@ zero_extendqisi2
+ 486 0350 84F82260 		strb	r6, [r4, #34]
+ 487 0354 23F07F03 		bic	r3, r3, #127
+ 488 0358 43EA1626 		orr	r6, r3, r6, lsr #8
+ 489 035c 2022     		movs	r2, #32
+ 490 035e 84F82360 		strb	r6, [r4, #35]
+ 491 0362 2046     		mov	r0, r4
+ 492 0364 2946     		mov	r1, r5
+ 493 0366 FFF7FEFF 		bl	memcpy
+ 494 036a 034A     		ldr	r2, .L67
+ 495 036c 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 496 036e 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 497 0370 62F3C503 		bfi	r3, r2, #3, #3
+ 498 0374 2371     		strb	r3, [r4, #4]
+ 499 0376 70BD     		pop	{r4, r5, r6, pc}
+ 500              	.L68:
+ 501              		.align	2
+ 502              	.L67:
+ 503 0378 00000000 		.word	.LANCHOR1
+ 504 037c A8000000 		.word	.LANCHOR0+168
+ 505 0380 18000000 		.word	.LANCHOR0+24
+ 507              		.align	1
+ 508              		.thumb
+ 509              		.thumb_func
+ 511              	mesh_get_rte_to_modify:
+ 512              		@ args = 0, pretend = 0, frame = 0
+ 513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 514 0384 38B5     		push	{r3, r4, r5, lr}
+ 515 0386 FFF7ABFE 		bl	mesh_find_rte_tbl_entry
+ 516 038a 0446     		mov	r4, r0
+ 517 038c 48BB     		cbnz	r0, .L70
+ 518 038e FFF7A7FE 		bl	mesh_find_rte_tbl_entry
+ 519 0392 0446     		mov	r4, r0
+ 520 0394 28BB     		cbnz	r0, .L70
+ 521 0396 144A     		ldr	r2, .L75
+ 522 0398 144D     		ldr	r5, .L75+4
+ 523 039a 92F8FF30 		ldrb	r3, [r2, #255]	@ zero_extendqisi2
+ 524 039e 92F80311 		ldrb	r1, [r2, #259]	@ zero_extendqisi2
+ 525 03a2 9942     		cmp	r1, r3
+ 526 03a4 38BF     		it	cc
+ 527 03a6 0B46     		movcc	r3, r1
+ 528 03a8 92F80711 		ldrb	r1, [r2, #263]	@ zero_extendqisi2
+ 529 03ac 34BF     		ite	cc
+ 530 03ae 02F58074 		addcc	r4, r2, #256
+ 531 03b2 02F1FC04 		addcs	r4, r2, #252
+ 532 03b6 9942     		cmp	r1, r3
+ 533 03b8 38BF     		it	cc
+ 534 03ba 0D4C     		ldrcc	r4, .L75+8
+ 535 03bc 92F80B21 		ldrb	r2, [r2, #267]	@ zero_extendqisi2
+ 536 03c0 38BF     		it	cc
+ 537 03c2 0B46     		movcc	r3, r1
+ 538 03c4 9A42     		cmp	r2, r3
+ 539 03c6 38BF     		it	cc
+ 540 03c8 2C46     		movcc	r4, r5
+ 541 03ca 2046     		mov	r0, r4
+ 542 03cc 0021     		movs	r1, #0
+ 543 03ce 0422     		movs	r2, #4
+ 544 03d0 FFF7FEFF 		bl	memset
+ 545 03d4 15F80D3C 		ldrb	r3, [r5, #-13]	@ zero_extendqisi2
+ 546 03d8 0133     		adds	r3, r3, #1
+ 547 03da 05F80D3C 		strb	r3, [r5, #-13]
+ 548 03de A5F58475 		sub	r5, r5, #264
+ 549              	.L70:
+ 550 03e2 2046     		mov	r0, r4
+ 551 03e4 38BD     		pop	{r3, r4, r5, pc}
+ 552              	.L76:
+ 553 03e6 00BF     		.align	2
+ 554              	.L75:
+ 555 03e8 00000000 		.word	.LANCHOR0
+ 556 03ec 08010000 		.word	.LANCHOR0+264
+ 557 03f0 04010000 		.word	.LANCHOR0+260
+ 559              		.align	1
+ 560              		.global	mesh_set_node_address
+ 561              		.thumb
+ 562              		.thumb_func
+ 564              	mesh_set_node_address:
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 568 03f4 431E     		subs	r3, r0, #1
+ 569 03f6 DBB2     		uxtb	r3, r3
+ 570 03f8 FD2B     		cmp	r3, #253
+ 571 03fa 03D8     		bhi	.L79
+ 572 03fc 024B     		ldr	r3, .L80
+ 573 03fe 1870     		strb	r0, [r3, #0]
+ 574 0400 0120     		movs	r0, #1
+ 575 0402 7047     		bx	lr
+ 576              	.L79:
+ 577 0404 0020     		movs	r0, #0
+ 578 0406 7047     		bx	lr
+ 579              	.L81:
+ 580              		.align	2
+ 581              	.L80:
+ 582 0408 00000000 		.word	.LANCHOR1
+ 584              		.align	1
+ 585              		.global	mesh_get_node_address
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	mesh_get_node_address:
+ 590              		@ args = 0, pretend = 0, frame = 0
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592              		@ link register save eliminated.
+ 593 040c 014B     		ldr	r3, .L83
+ 594 040e 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 595 0410 7047     		bx	lr
+ 596              	.L84:
+ 597 0412 00BF     		.align	2
+ 598              	.L83:
+ 599 0414 00000000 		.word	.LANCHOR1
+ 601              		.align	1
+ 602              		.global	mesh_set_retry_count
+ 603              		.thumb
+ 604              		.thumb_func
+ 606              	mesh_set_retry_count:
+ 607              		@ args = 0, pretend = 0, frame = 0
+ 608              		@ frame_needed = 0, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 610 0418 0728     		cmp	r0, #7
+ 611 041a 9CBF     		itt	ls
+ 612 041c 014B     		ldrls	r3, .L87
+ 613 041e 5870     		strbls	r0, [r3, #1]
+ 614 0420 7047     		bx	lr
+ 615              	.L88:
+ 616 0422 00BF     		.align	2
+ 617              	.L87:
+ 618 0424 00000000 		.word	.LANCHOR1
+ 620              		.align	1
+ 621              		.global	mesh_form_pkt
+ 622              		.thumb
+ 623              		.thumb_func
+ 625              	mesh_form_pkt:
+ 626              		@ args = 4, pretend = 0, frame = 8
+ 627              		@ frame_needed = 0, uses_anonymous_args = 1
+ 628 0428 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+ 629 042c 0446     		mov	r4, r0
+ 630 042e 0D46     		mov	r5, r1
+ 631 0430 1646     		mov	r6, r2
+ 632 0432 9946     		mov	r9, r3
+ 633 0434 9DF82870 		ldrb	r7, [sp, #40]	@ zero_extendqisi2
+ 634 0438 0029     		cmp	r1, #0
+ 635 043a 61D0     		beq	.L95
+ 636 043c 344B     		ldr	r3, .L105
+ 637 043e 93F80080 		ldrb	r8, [r3, #0]	@ zero_extendqisi2
+ 638 0442 4145     		cmp	r1, r8
+ 639 0444 5ED0     		beq	.L97
+ 640 0446 B9F10F0F 		cmp	r9, #15
+ 641 044a 5BD8     		bhi	.L97
+ 642 044c 0028     		cmp	r0, #0
+ 643 044e 5BD0     		beq	.L98
+ 644 0450 2022     		movs	r2, #32
+ 645 0452 0021     		movs	r1, #0
+ 646 0454 FFF7FEFF 		bl	memset
+ 647 0458 FF2D     		cmp	r5, #255
+ 648 045a 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 649 045c 14BF     		ite	ne
+ 650 045e 06F00306 		andne	r6, r6, #3
+ 651 0462 0026     		moveq	r6, #0
+ 652 0464 66F38713 		bfi	r3, r6, #6, #2
+ 653 0468 0322     		movs	r2, #3
+ 654 046a 62F30203 		bfi	r3, r2, #0, #3
+ 655 046e 284A     		ldr	r2, .L105
+ 656 0470 2371     		strb	r3, [r4, #4]
+ 657 0472 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 658 0474 6570     		strb	r5, [r4, #1]
+ 659 0476 62F3C503 		bfi	r3, r2, #3, #3
+ 660 047a 264A     		ldr	r2, .L105+4
+ 661 047c 2371     		strb	r3, [r4, #4]
+ 662 047e 92F80C31 		ldrb	r3, [r2, #268]	@ zero_extendqisi2
+ 663 0482 84F80080 		strb	r8, [r4, #0]
+ 664 0486 0133     		adds	r3, r3, #1
+ 665 0488 DBB2     		uxtb	r3, r3
+ 666 048a 82F80C31 		strb	r3, [r2, #268]
+ 667 048e A371     		strb	r3, [r4, #6]
+ 668 0490 0BAB     		add	r3, sp, #44
+ 669 0492 84F80280 		strb	r8, [r4, #2]
+ 670 0496 0193     		str	r3, [sp, #4]
+ 671              	.L104:
+ 672 0498 A7B1     		cbz	r7, .L100
+ 673 049a 019B     		ldr	r3, [sp, #4]
+ 674 049c E079     		ldrb	r0, [r4, #7]	@ zero_extendqisi2
+ 675 049e 1A1D     		adds	r2, r3, #4
+ 676 04a0 0192     		str	r2, [sp, #4]
+ 677 04a2 1A46     		mov	r2, r3
+ 678 04a4 52F8081B 		ldr	r1, [r2], #8
+ 679 04a8 013F     		subs	r7, r7, #1
+ 680 04aa 0192     		str	r2, [sp, #4]
+ 681 04ac 5A68     		ldr	r2, [r3, #4]
+ 682 04ae FFB2     		uxtb	r7, r7
+ 683 04b0 8618     		adds	r6, r0, r2
+ 684 04b2 F6B2     		uxtb	r6, r6
+ 685 04b4 182E     		cmp	r6, #24
+ 686 04b6 07D8     		bhi	.L101
+ 687 04b8 0830     		adds	r0, r0, #8
+ 688 04ba 2018     		adds	r0, r4, r0
+ 689 04bc FFF7FEFF 		bl	memcpy
+ 690 04c0 E671     		strb	r6, [r4, #7]
+ 691 04c2 E9E7     		b	.L104
+ 692              	.L100:
+ 693 04c4 0126     		movs	r6, #1
+ 694 04c6 00E0     		b	.L92
+ 695              	.L101:
+ 696 04c8 0026     		movs	r6, #0
+ 697              	.L92:
+ 698 04ca 124F     		ldr	r7, .L105+4
+ 699 04cc 0123     		movs	r3, #1
+ 700 04ce 87F80D31 		strb	r3, [r7, #269]
+ 701 04d2 2846     		mov	r0, r5
+ 702 04d4 FFF704FE 		bl	mesh_find_rte_tbl_entry
+ 703 04d8 0546     		mov	r5, r0
+ 704 04da FFF7D5FE 		bl	mesh_update_rte_scores
+ 705 04de 0023     		movs	r3, #0
+ 706 04e0 87F80D31 		strb	r3, [r7, #269]
+ 707 04e4 6379     		ldrb	r3, [r4, #5]	@ zero_extendqisi2
+ 708 04e6 25B9     		cbnz	r5, .L94
+ 709 04e8 69F30713 		bfi	r3, r9, #4, #4
+ 710 04ec 6371     		strb	r3, [r4, #5]
+ 711 04ee E570     		strb	r5, [r4, #3]
+ 712 04f0 0BE0     		b	.L90
+ 713              	.L94:
+ 714 04f2 AA78     		ldrb	r2, [r5, #2]	@ zero_extendqisi2
+ 715 04f4 62F30713 		bfi	r3, r2, #4, #4
+ 716 04f8 6371     		strb	r3, [r4, #5]
+ 717 04fa 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 718 04fc E370     		strb	r3, [r4, #3]
+ 719 04fe 04E0     		b	.L90
+ 720              	.L95:
+ 721 0500 0E46     		mov	r6, r1
+ 722 0502 02E0     		b	.L90
+ 723              	.L97:
+ 724 0504 0026     		movs	r6, #0
+ 725 0506 00E0     		b	.L90
+ 726              	.L98:
+ 727 0508 0646     		mov	r6, r0
+ 728              	.L90:
+ 729 050a 3046     		mov	r0, r6
+ 730 050c BDE8FE83 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}
+ 731              	.L106:
+ 732              		.align	2
+ 733              	.L105:
+ 734 0510 00000000 		.word	.LANCHOR1
+ 735 0514 00000000 		.word	.LANCHOR0
+ 737              		.align	1
+ 738              		.global	mesh_deform_pkt
+ 739              		.thumb
+ 740              		.thumb_func
+ 742              	mesh_deform_pkt:
+ 743              		@ args = 4, pretend = 12, frame = 8
+ 744              		@ frame_needed = 0, uses_anonymous_args = 1
+ 745 0518 0EB4     		push	{r1, r2, r3}
+ 746 051a 77B5     		push	{r0, r1, r2, r4, r5, r6, lr}
+ 747 051c 07AB     		add	r3, sp, #28
+ 748 051e 13F8045B 		ldrb	r5, [r3], #4	@ zero_extendqisi2
+ 749 0522 0646     		mov	r6, r0
+ 750 0524 0193     		str	r3, [sp, #4]
+ 751 0526 0024     		movs	r4, #0
+ 752 0528 11E0     		b	.L108
+ 753              	.L111:
+ 754 052a 019B     		ldr	r3, [sp, #4]
+ 755 052c 1A1D     		adds	r2, r3, #4
+ 756 052e 0192     		str	r2, [sp, #4]
+ 757 0530 1A46     		mov	r2, r3
+ 758 0532 52F8080B 		ldr	r0, [r2], #8
+ 759 0536 0192     		str	r2, [sp, #4]
+ 760 0538 5A68     		ldr	r2, [r3, #4]
+ 761 053a A418     		adds	r4, r4, r2
+ 762 053c 182C     		cmp	r4, #24
+ 763 053e 0CD8     		bhi	.L112
+ 764 0540 18B1     		cbz	r0, .L110
+ 765 0542 0831     		adds	r1, r1, #8
+ 766 0544 7118     		adds	r1, r6, r1
+ 767 0546 FFF7FEFF 		bl	memcpy
+ 768              	.L110:
+ 769 054a 013D     		subs	r5, r5, #1
+ 770 054c EDB2     		uxtb	r5, r5
+ 771              	.L108:
+ 772 054e 182C     		cmp	r4, #24
+ 773 0550 2146     		mov	r1, r4
+ 774 0552 04D0     		beq	.L113
+ 775 0554 002D     		cmp	r5, #0
+ 776 0556 E8D1     		bne	.L111
+ 777 0558 01E0     		b	.L113
+ 778              	.L112:
+ 779 055a 0020     		movs	r0, #0
+ 780 055c 00E0     		b	.L109
+ 781              	.L113:
+ 782 055e 0120     		movs	r0, #1
+ 783              	.L109:
+ 784 0560 BDE87E40 		pop	{r1, r2, r3, r4, r5, r6, lr}
+ 785 0564 03B0     		add	sp, sp, #12
+ 786 0566 7047     		bx	lr
+ 788              		.align	1
+ 789              		.global	mesh_send_formed_pkt
+ 790              		.thumb
+ 791              		.thumb_func
+ 793              	mesh_send_formed_pkt:
+ 794              		@ args = 0, pretend = 0, frame = 0
+ 795              		@ frame_needed = 0, uses_anonymous_args = 0
+ 796 0568 174B     		ldr	r3, .L123
+ 797 056a 70B5     		push	{r4, r5, r6, lr}
+ 798 056c 0126     		movs	r6, #1
+ 799 056e 0546     		mov	r5, r0
+ 800 0570 83F80D61 		strb	r6, [r3, #269]
+ 801 0574 00B3     		cbz	r0, .L119
+ 802 0576 FFF777FD 		bl	mesh_send_packet
+ 803 057a 0446     		mov	r4, r0
+ 804 057c E8B1     		cbz	r0, .L115
+ 805 057e 2B79     		ldrb	r3, [r5, #4]	@ zero_extendqisi2
+ 806 0580 03F0C003 		and	r3, r3, #192
+ 807 0584 402B     		cmp	r3, #64
+ 808 0586 04D0     		beq	.L116
+ 809 0588 A3F18002 		sub	r2, r3, #128
+ 810 058c 5642     		rsbs	r6, r2, #0
+ 811 058e 46EB0206 		adc	r6, r6, r2
+ 812              	.L116:
+ 813 0592 C02B     		cmp	r3, #192
+ 814 0594 F6B2     		uxtb	r6, r6
+ 815 0596 06D1     		bne	.L121
+ 816 0598 EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 817 059a 2BB1     		cbz	r3, .L117
+ 818 059c 6A78     		ldrb	r2, [r5, #1]	@ zero_extendqisi2
+ 819 059e D31A     		subs	r3, r2, r3
+ 820 05a0 18BF     		it	ne
+ 821 05a2 0123     		movne	r3, #1
+ 822 05a4 00E0     		b	.L117
+ 823              	.L121:
+ 824 05a6 0023     		movs	r3, #0
+ 825              	.L117:
+ 826 05a8 06B9     		cbnz	r6, .L118
+ 827 05aa 33B1     		cbz	r3, .L115
+ 828              	.L118:
+ 829 05ac 6979     		ldrb	r1, [r5, #5]	@ zero_extendqisi2
+ 830 05ae 2846     		mov	r0, r5
+ 831 05b0 0909     		lsrs	r1, r1, #4
+ 832 05b2 FFF7A6FE 		bl	mesh_pending_packets_add
+ 833 05b6 00E0     		b	.L115
+ 834              	.L119:
+ 835 05b8 0446     		mov	r4, r0
+ 836              	.L115:
+ 837 05ba 034B     		ldr	r3, .L123
+ 838 05bc 0022     		movs	r2, #0
+ 839 05be 83F80D21 		strb	r2, [r3, #269]
+ 840 05c2 2046     		mov	r0, r4
+ 841 05c4 70BD     		pop	{r4, r5, r6, pc}
+ 842              	.L124:
+ 843 05c6 00BF     		.align	2
+ 844              	.L123:
+ 845 05c8 00000000 		.word	.LANCHOR0
+ 847              		.align	1
+ 848              		.global	mesh_send
+ 849              		.thumb
+ 850              		.thumb_func
+ 852              	mesh_send:
+ 853              		@ args = 4, pretend = 0, frame = 32
+ 854              		@ frame_needed = 0, uses_anonymous_args = 0
+ 855 05cc 30B5     		push	{r4, r5, lr}
+ 856 05ce 182B     		cmp	r3, #24
+ 857 05d0 8DB0     		sub	sp, sp, #52
+ 858 05d2 0546     		mov	r5, r0
+ 859 05d4 0C46     		mov	r4, r1
+ 860 05d6 19D8     		bhi	.L128
+ 861 05d8 D2F10100 		rsbs	r0, r2, #1
+ 862 05dc 38BF     		it	cc
+ 863 05de 0020     		movcc	r0, #0
+ 864 05e0 002B     		cmp	r3, #0
+ 865 05e2 18BF     		it	ne
+ 866 05e4 80F00100 		eorne	r0, r0, #1
+ 867 05e8 88B1     		cbz	r0, .L126
+ 868 05ea 191C     		adds	r1, r3, #0
+ 869 05ec 18BF     		it	ne
+ 870 05ee 0121     		movne	r1, #1
+ 871 05f0 8DE80E00 		stmia	sp, {r1, r2, r3}
+ 872 05f4 04A8     		add	r0, sp, #16
+ 873 05f6 2946     		mov	r1, r5
+ 874 05f8 2246     		mov	r2, r4
+ 875 05fa 9DF84030 		ldrb	r3, [sp, #64]	@ zero_extendqisi2
+ 876 05fe FFF7FEFF 		bl	mesh_form_pkt
+ 877 0602 20B1     		cbz	r0, .L126
+ 878 0604 04A8     		add	r0, sp, #16
+ 879 0606 FFF7FEFF 		bl	mesh_send_formed_pkt
+ 880 060a 00E0     		b	.L126
+ 881              	.L128:
+ 882 060c 0020     		movs	r0, #0
+ 883              	.L126:
+ 884 060e 0DB0     		add	sp, sp, #52
+ 885 0610 30BD     		pop	{r4, r5, pc}
+ 887              		.align	1
+ 888              		.global	mesh_init
+ 889              		.thumb
+ 890              		.thumb_func
+ 892              	mesh_init:
+ 893              		@ args = 28, pretend = 8, frame = 0
+ 894              		@ frame_needed = 0, uses_anonymous_args = 0
+ 895 0612 82B0     		sub	sp, sp, #8
+ 896 0614 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 897 0618 0993     		str	r3, [sp, #36]
+ 898 061a 431E     		subs	r3, r0, #1
+ 899 061c DBB2     		uxtb	r3, r3
+ 900 061e FD2B     		cmp	r3, #253
+ 901 0620 0546     		mov	r5, r0
+ 902 0622 0F46     		mov	r7, r1
+ 903 0624 1646     		mov	r6, r2
+ 904 0626 9DF83880 		ldrb	r8, [sp, #56]	@ zero_extendqisi2
+ 905 062a 57D8     		bhi	.L134
+ 906 062c 0998     		ldr	r0, [sp, #36]
+ 907 062e 0028     		cmp	r0, #0
+ 908 0630 55D0     		beq	.L132
+ 909 0632 0B98     		ldr	r0, [sp, #44]
+ 910 0634 0028     		cmp	r0, #0
+ 911 0636 52D0     		beq	.L132
+ 912 0638 0D98     		ldr	r0, [sp, #52]
+ 913 063a 0028     		cmp	r0, #0
+ 914 063c 4FD0     		beq	.L132
+ 915 063e 0C98     		ldr	r0, [sp, #48]
+ 916 0640 0028     		cmp	r0, #0
+ 917 0642 4CD0     		beq	.L132
+ 918 0644 0A98     		ldr	r0, [sp, #40]
+ 919 0646 0028     		cmp	r0, #0
+ 920 0648 49D0     		beq	.L132
+ 921 064a 274C     		ldr	r4, .L141
+ 922 064c 0021     		movs	r1, #0
+ 923 064e 4822     		movs	r2, #72
+ 924 0650 04F1A800 		add	r0, r4, #168
+ 925 0654 FFF7FEFF 		bl	memset
+ 926 0658 0021     		movs	r1, #0
+ 927 065a 9022     		movs	r2, #144
+ 928 065c 04F11800 		add	r0, r4, #24
+ 929 0660 FFF7FEFF 		bl	memset
+ 930 0664 0021     		movs	r1, #0
+ 931 0666 1022     		movs	r2, #16
+ 932 0668 04F1FC00 		add	r0, r4, #252
+ 933 066c FFF7FEFF 		bl	memset
+ 934 0670 0021     		movs	r1, #0
+ 935 0672 0C22     		movs	r2, #12
+ 936 0674 04F58770 		add	r0, r4, #270
+ 937 0678 FFF7FEFF 		bl	memset
+ 938 067c 0021     		movs	r1, #0
+ 939 067e 0C22     		movs	r2, #12
+ 940 0680 04F1F000 		add	r0, r4, #240
+ 941 0684 FFF7FEFF 		bl	memset
+ 942 0688 184B     		ldr	r3, .L141+4
+ 943 068a 84F81A71 		strb	r7, [r4, #282]
+ 944 068e 1D70     		strb	r5, [r3, #0]
+ 945 0690 09AF     		add	r7, sp, #36
+ 946 0692 2546     		mov	r5, r4
+ 947 0694 0FCF     		ldmia	r7!, {r0, r1, r2, r3}
+ 948 0696 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 949 0698 3B68     		ldr	r3, [r7, #0]
+ 950 069a 0021     		movs	r1, #0
+ 951 069c 2B60     		str	r3, [r5, #0]
+ 952 069e 1822     		movs	r2, #24
+ 953 06a0 1348     		ldr	r0, .L141+8
+ 954 06a2 FFF7FEFF 		bl	memset
+ 955 06a6 3146     		mov	r1, r6
+ 956 06a8 1148     		ldr	r0, .L141+8
+ 957 06aa 1722     		movs	r2, #23
+ 958 06ac FFF7FEFF 		bl	strncpy
+ 959 06b0 0020     		movs	r0, #0
+ 960 06b2 A368     		ldr	r3, [r4, #8]
+ 961 06b4 0146     		mov	r1, r0
+ 962 06b6 9847     		blx	r3
+ 963 06b8 88B1     		cbz	r0, .L132
+ 964 06ba B8F1000F 		cmp	r8, #0
+ 965 06be 08D0     		beq	.L133
+ 966 06c0 0123     		movs	r3, #1
+ 967 06c2 0093     		str	r3, [sp, #0]
+ 968 06c4 FF20     		movs	r0, #255
+ 969 06c6 0021     		movs	r1, #0
+ 970 06c8 0A4A     		ldr	r2, .L141+12
+ 971 06ca 0623     		movs	r3, #6
+ 972 06cc FFF7FEFF 		bl	mesh_send
+ 973 06d0 28B1     		cbz	r0, .L132
+ 974              	.L133:
+ 975 06d2 02B0     		add	sp, sp, #8
+ 976 06d4 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 977 06d8 02B0     		add	sp, sp, #8
+ 978 06da A4E4     		b	mesh_update_soft_timers
+ 979              	.L134:
+ 980 06dc 0020     		movs	r0, #0
+ 981              	.L132:
+ 982 06de 02B0     		add	sp, sp, #8
+ 983 06e0 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 984 06e4 02B0     		add	sp, sp, #8
+ 985 06e6 7047     		bx	lr
+ 986              	.L142:
+ 987              		.align	2
+ 988              	.L141:
+ 989 06e8 00000000 		.word	.LANCHOR0
+ 990 06ec 00000000 		.word	.LANCHOR1
+ 991 06f0 1B010000 		.word	.LANCHOR0+283
+ 992 06f4 00000000 		.word	.LC0
+ 994              		.align	1
+ 995              		.global	mesh_get_routing_entry
+ 996              		.thumb
+ 997              		.thumb_func
+ 999              	mesh_get_routing_entry:
+ 1000              		@ args = 0, pretend = 0, frame = 0
+ 1001              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1002 06f8 30B5     		push	{r4, r5, lr}
+ 1003 06fa 0023     		movs	r3, #0
+ 1004 06fc 094C     		ldr	r4, .L149
+ 1005 06fe 1A46     		mov	r2, r3
+ 1006              	.L147:
+ 1007 0700 14F82350 		ldrb	r5, [r4, r3, lsl #2]	@ zero_extendqisi2
+ 1008 0704 D9B2     		uxtb	r1, r3
+ 1009 0706 3DB1     		cbz	r5, .L144
+ 1010 0708 9042     		cmp	r0, r2
+ 1011 070a 03D1     		bne	.L145
+ 1012 070c 054B     		ldr	r3, .L149
+ 1013 070e 03EB8100 		add	r0, r3, r1, lsl #2
+ 1014 0712 30BD     		pop	{r4, r5, pc}
+ 1015              	.L145:
+ 1016 0714 0132     		adds	r2, r2, #1
+ 1017 0716 D2B2     		uxtb	r2, r2
+ 1018              	.L144:
+ 1019 0718 0133     		adds	r3, r3, #1
+ 1020 071a 042B     		cmp	r3, #4
+ 1021 071c F0D1     		bne	.L147
+ 1022 071e 0020     		movs	r0, #0
+ 1023 0720 30BD     		pop	{r4, r5, pc}
+ 1024              	.L150:
+ 1025 0722 00BF     		.align	2
+ 1026              	.L149:
+ 1027 0724 FC000000 		.word	.LANCHOR0+252
+ 1029              		.align	1
+ 1030              		.global	mesh_get_num_routing_entries
+ 1031              		.thumb
+ 1032              		.thumb_func
+ 1034              	mesh_get_num_routing_entries:
+ 1035              		@ args = 0, pretend = 0, frame = 0
+ 1036              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1037              		@ link register save eliminated.
+ 1038 0728 0023     		movs	r3, #0
+ 1039 072a 054A     		ldr	r2, .L155
+ 1040 072c 1846     		mov	r0, r3
+ 1041              	.L153:
+ 1042 072e 995C     		ldrb	r1, [r3, r2]	@ zero_extendqisi2
+ 1043 0730 09B1     		cbz	r1, .L152
+ 1044 0732 0130     		adds	r0, r0, #1
+ 1045 0734 C0B2     		uxtb	r0, r0
+ 1046              	.L152:
+ 1047 0736 0433     		adds	r3, r3, #4
+ 1048 0738 102B     		cmp	r3, #16
+ 1049 073a F8D1     		bne	.L153
+ 1050 073c 7047     		bx	lr
+ 1051              	.L156:
+ 1052 073e 00BF     		.align	2
+ 1053              	.L155:
+ 1054 0740 FC000000 		.word	.LANCHOR0+252
+ 1056              		.align	1
+ 1057              		.global	mesh_service
+ 1058              		.thumb
+ 1059              		.thumb_func
+ 1061              	mesh_service:
+ 1062              		@ args = 0, pretend = 0, frame = 32
+ 1063              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1064 0744 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 1065 0748 AE4D     		ldr	r5, .L216
+ 1066 074a 8AB0     		sub	sp, sp, #40
+ 1067 074c 02A8     		add	r0, sp, #8
+ 1068 074e 0021     		movs	r1, #0
+ 1069 0750 2022     		movs	r2, #32
+ 1070 0752 FFF7FEFF 		bl	memset
+ 1071 0756 95F80D41 		ldrb	r4, [r5, #269]	@ zero_extendqisi2
+ 1072 075a 002C     		cmp	r4, #0
+ 1073 075c 40F06A81 		bne	.L157
+ 1074 0760 2B69     		ldr	r3, [r5, #16]
+ 1075 0762 02A8     		add	r0, sp, #8
+ 1076 0764 2021     		movs	r1, #32
+ 1077 0766 9847     		blx	r3
+ 1078 0768 0028     		cmp	r0, #0
+ 1079 076a 00F03681 		beq	.L184
+ 1080 076e B5F8F230 		ldrh	r3, [r5, #242]	@ unaligned
+ 1081 0772 0133     		adds	r3, r3, #1
+ 1082 0774 A5F8F230 		strh	r3, [r5, #242]	@ unaligned
+ 1083 0778 FFF7FEFF 		bl	mesh_get_num_routing_entries
+ 1084 077c 85F8FA00 		strb	r0, [r5, #250]
+ 1085 0780 9DF80C10 		ldrb	r1, [sp, #12]	@ zero_extendqisi2
+ 1086 0784 01F00703 		and	r3, r1, #7
+ 1087 0788 032B     		cmp	r3, #3
+ 1088 078a 04D0     		beq	.L160
+ 1089 078c 95F83331 		ldrb	r3, [r5, #307]	@ zero_extendqisi2
+ 1090 0790 43F00103 		orr	r3, r3, #1
+ 1091 0794 09E0     		b	.L207
+ 1092              	.L160:
+ 1093 0796 9C4A     		ldr	r2, .L216+4
+ 1094 0798 1678     		ldrb	r6, [r2, #0]	@ zero_extendqisi2
+ 1095 079a 9DF80A20 		ldrb	r2, [sp, #10]	@ zero_extendqisi2
+ 1096 079e B242     		cmp	r2, r6
+ 1097 07a0 06D1     		bne	.L161
+ 1098 07a2 95F83331 		ldrb	r3, [r5, #307]	@ zero_extendqisi2
+ 1099 07a6 43F00203 		orr	r3, r3, #2
+ 1100              	.L207:
+ 1101 07aa 85F83331 		strb	r3, [r5, #307]
+ 1102 07ae 1BE1     		b	.L159
+ 1103              	.L161:
+ 1104 07b0 C1F3C201 		ubfx	r1, r1, #3, #3
+ 1105 07b4 9DF80870 		ldrb	r7, [sp, #8]	@ zero_extendqisi2
+ 1106 07b8 9DF80E00 		ldrb	r0, [sp, #14]	@ zero_extendqisi2
+ 1107 07bc 05F58772 		add	r2, r5, #270
+ 1108 07c0 5FFA81FC 		uxtb	ip, r1
+ 1109 07c4 1D46     		mov	r5, r3
+ 1110              	.L164:
+ 1111 07c6 05FB04FE 		mul	lr, r5, r4
+ 1112 07ca 02EB0E03 		add	r3, r2, lr
+ 1113 07ce 12F80EE0 		ldrb	lr, [r2, lr]	@ zero_extendqisi2
+ 1114 07d2 BE45     		cmp	lr, r7
+ 1115 07d4 0BD1     		bne	.L162
+ 1116 07d6 93F801E0 		ldrb	lr, [r3, #1]	@ zero_extendqisi2
+ 1117 07da 8645     		cmp	lr, r0
+ 1118 07dc 07D1     		bne	.L162
+ 1119 07de 9D78     		ldrb	r5, [r3, #2]	@ zero_extendqisi2
+ 1120 07e0 9970     		strb	r1, [r3, #2]
+ 1121 07e2 B5EB0C05 		subs	r5, r5, ip
+ 1122 07e6 18BF     		it	ne
+ 1123 07e8 0125     		movne	r5, #1
+ 1124 07ea 0126     		movs	r6, #1
+ 1125 07ec 2AE0     		b	.L163
+ 1126              	.L162:
+ 1127 07ee 0134     		adds	r4, r4, #1
+ 1128 07f0 042C     		cmp	r4, #4
+ 1129 07f2 E8D1     		bne	.L164
+ 1130 07f4 12E1     		b	.L213
+ 1131              	.L215:
+ 1132 07f6 5160     		str	r1, [r2, #4]
+ 1133 07f8 01E0     		b	.L166
+ 1134              	.L206:
+ 1135 07fa 0333     		adds	r3, r3, #3
+ 1136 07fc 5360     		str	r3, [r2, #4]
+ 1137              	.L166:
+ 1138 07fe 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 1139 0802 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 1140 0806 8342     		cmp	r3, r0
+ 1141 0808 1AD0     		beq	.L187
+ 1142 080a 8642     		cmp	r6, r0
+ 1143 080c 18D0     		beq	.L187
+ 1144 080e FFF7B9FD 		bl	mesh_get_rte_to_modify
+ 1145 0812 0446     		mov	r4, r0
+ 1146 0814 FFF738FD 		bl	mesh_update_rte_scores
+ 1147 0818 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 1148 081a 33B1     		cbz	r3, .L167
+ 1149 081c 9DF80D20 		ldrb	r2, [sp, #13]	@ zero_extendqisi2
+ 1150 0820 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1151 0822 02F00F02 		and	r2, r2, #15
+ 1152 0826 9A42     		cmp	r2, r3
+ 1153 0828 0ADC     		bgt	.L187
+ 1154              	.L167:
+ 1155 082a 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 1156 082e 2370     		strb	r3, [r4, #0]
+ 1157 0830 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 1158 0834 6370     		strb	r3, [r4, #1]
+ 1159 0836 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 1160 083a C3F30303 		ubfx	r3, r3, #0, #4
+ 1161 083e A370     		strb	r3, [r4, #2]
+ 1162              	.L187:
+ 1163 0840 0025     		movs	r5, #0
+ 1164 0842 2E46     		mov	r6, r5
+ 1165              	.L163:
+ 1166 0844 9DF80A00 		ldrb	r0, [sp, #10]	@ zero_extendqisi2
+ 1167 0848 FFF79CFD 		bl	mesh_get_rte_to_modify
+ 1168 084c 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 1169 0850 4FF00008 		mov	r8, #0
+ 1170 0854 0370     		strb	r3, [r0, #0]
+ 1171 0856 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 1172 085a 4645     		cmp	r6, r8
+ 1173 085c 14BF     		ite	ne
+ 1174 085e 2C46     		movne	r4, r5
+ 1175 0860 0124     		moveq	r4, #1
+ 1176 0862 4370     		strb	r3, [r0, #1]
+ 1177 0864 80F80280 		strb	r8, [r0, #2]
+ 1178 0868 E4B2     		uxtb	r4, r4
+ 1179 086a FFF70DFD 		bl	mesh_update_rte_scores
+ 1180 086e 002C     		cmp	r4, #0
+ 1181 0870 00F0BA80 		beq	.L159
+ 1182 0874 644B     		ldr	r3, .L216+4
+ 1183 0876 1F78     		ldrb	r7, [r3, #0]	@ zero_extendqisi2
+ 1184 0878 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 1185 087c BB42     		cmp	r3, r7
+ 1186 087e 00F0B280 		beq	.L202
+ 1187 0882 9DF80950 		ldrb	r5, [sp, #9]	@ zero_extendqisi2
+ 1188 0886 FF2D     		cmp	r5, #255
+ 1189 0888 1DD1     		bne	.L169
+ 1190 088a 5E4C     		ldr	r4, .L216
+ 1191 088c 02A8     		add	r0, sp, #8
+ 1192 088e 2368     		ldr	r3, [r4, #0]
+ 1193 0890 2021     		movs	r1, #32
+ 1194 0892 9847     		blx	r3
+ 1195 0894 28B9     		cbnz	r0, .L170
+ 1196 0896 94F83331 		ldrb	r3, [r4, #307]	@ zero_extendqisi2
+ 1197 089a 43F00403 		orr	r3, r3, #4
+ 1198 089e 84F83331 		strb	r3, [r4, #307]
+ 1199              	.L170:
+ 1200 08a2 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 1201 08a6 03F00F02 		and	r2, r3, #15
+ 1202 08aa 501C     		adds	r0, r2, #1
+ 1203 08ac 1946     		mov	r1, r3
+ 1204 08ae 60F30301 		bfi	r1, r0, #0, #4
+ 1205 08b2 B2EB131F 		cmp	r2, r3, lsr #4
+ 1206 08b6 8DF80D10 		strb	r1, [sp, #13]
+ 1207 08ba 80F29080 		bge	.L191
+ 1208 08be 02A8     		add	r0, sp, #8
+ 1209 08c0 FFF7D2FB 		bl	mesh_send_packet
+ 1210 08c4 8BE0     		b	.L191
+ 1211              	.L169:
+ 1212 08c6 AF42     		cmp	r7, r5
+ 1213 08c8 37D1     		bne	.L171
+ 1214 08ca 76B9     		cbnz	r6, .L172
+ 1215 08cc 9DF80F30 		ldrb	r3, [sp, #15]	@ zero_extendqisi2
+ 1216 08d0 5BB1     		cbz	r3, .L172
+ 1217 08d2 4C4C     		ldr	r4, .L216
+ 1218 08d4 02A8     		add	r0, sp, #8
+ 1219 08d6 2368     		ldr	r3, [r4, #0]
+ 1220 08d8 2021     		movs	r1, #32
+ 1221 08da 9847     		blx	r3
+ 1222 08dc 28B9     		cbnz	r0, .L172
+ 1223 08de 94F83331 		ldrb	r3, [r4, #307]	@ zero_extendqisi2
+ 1224 08e2 43F00403 		orr	r3, r3, #4
+ 1225 08e6 84F83331 		strb	r3, [r4, #307]
+ 1226              	.L172:
+ 1227 08ea 9DF80C30 		ldrb	r3, [sp, #12]	@ zero_extendqisi2
+ 1228 08ee 03F0C003 		and	r3, r3, #192
+ 1229 08f2 402B     		cmp	r3, #64
+ 1230 08f4 12D1     		bne	.L173
+ 1231 08f6 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 1232 08fa 9DF80F20 		ldrb	r2, [sp, #15]	@ zero_extendqisi2
+ 1233 08fe 1B09     		lsrs	r3, r3, #4
+ 1234 0900 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 1235 0904 0093     		str	r3, [sp, #0]
+ 1236 0906 0321     		movs	r1, #3
+ 1237 0908 12B9     		cbnz	r2, .L174
+ 1238 090a 404A     		ldr	r2, .L216+8
+ 1239 090c 1823     		movs	r3, #24
+ 1240 090e 11E0     		b	.L209
+ 1241              	.L174:
+ 1242 0910 3F4A     		ldr	r2, .L216+12
+ 1243 0912 0C23     		movs	r3, #12
+ 1244 0914 FFF7FEFF 		bl	mesh_send
+ 1245 0918 0246     		mov	r2, r0
+ 1246 091a 01E0     		b	.L212
+ 1247              	.L173:
+ 1248 091c 9DF80B20 		ldrb	r2, [sp, #11]	@ zero_extendqisi2
+ 1249              	.L212:
+ 1250 0920 002A     		cmp	r2, #0
+ 1251 0922 60D1     		bne	.L202
+ 1252 0924 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 1253 0928 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 1254 092c 1B09     		lsrs	r3, r3, #4
+ 1255 092e 0093     		str	r3, [sp, #0]
+ 1256 0930 0321     		movs	r1, #3
+ 1257 0932 1346     		mov	r3, r2
+ 1258              	.L209:
+ 1259 0934 FFF7FEFF 		bl	mesh_send
+ 1260 0938 55E0     		b	.L202
+ 1261              	.L171:
+ 1262 093a 324B     		ldr	r3, .L216
+ 1263 093c 93F81A41 		ldrb	r4, [r3, #282]	@ zero_extendqisi2
+ 1264 0940 002C     		cmp	r4, #0
+ 1265 0942 51D0     		beq	.L159
+ 1266 0944 9DF80D60 		ldrb	r6, [sp, #13]	@ zero_extendqisi2
+ 1267 0948 06F00F0A 		and	sl, r6, #15
+ 1268 094c 4FEA1619 		lsr	r9, r6, #4
+ 1269 0950 CA45     		cmp	sl, r9
+ 1270 0952 46DA     		bge	.L195
+ 1271 0954 2846     		mov	r0, r5
+ 1272 0956 FFF7C3FB 		bl	mesh_find_rte_tbl_entry
+ 1273 095a 9DF80B30 		ldrb	r3, [sp, #11]	@ zero_extendqisi2
+ 1274 095e 0AF1010A 		add	sl, sl, #1
+ 1275 0962 6AF30306 		bfi	r6, sl, #0, #4
+ 1276 0966 9F42     		cmp	r7, r3
+ 1277 0968 8DF80D60 		strb	r6, [sp, #13]
+ 1278 096c 1ED1     		bne	.L175
+ 1279 096e 9DF80C20 		ldrb	r2, [sp, #12]	@ zero_extendqisi2
+ 1280 0972 02F0C002 		and	r2, r2, #192
+ 1281 0976 402A     		cmp	r2, #64
+ 1282 0978 05D0     		beq	.L196
+ 1283 097a A2F18001 		sub	r1, r2, #128
+ 1284 097e 4B42     		rsbs	r3, r1, #0
+ 1285 0980 43EB0103 		adc	r3, r3, r1
+ 1286 0984 00E0     		b	.L176
+ 1287              	.L196:
+ 1288 0986 0123     		movs	r3, #1
+ 1289              	.L176:
+ 1290 0988 D9B2     		uxtb	r1, r3
+ 1291 098a 08B1     		cbz	r0, .L197
+ 1292 098c 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 1293 098e 00E0     		b	.L177
+ 1294              	.L197:
+ 1295 0990 0346     		mov	r3, r0
+ 1296              	.L177:
+ 1297 0992 C02A     		cmp	r2, #192
+ 1298 0994 05D1     		bne	.L199
+ 1299 0996 9D42     		cmp	r5, r3
+ 1300 0998 03D0     		beq	.L199
+ 1301 099a 0033     		adds	r3, r3, #0
+ 1302 099c 18BF     		it	ne
+ 1303 099e 0123     		movne	r3, #1
+ 1304 09a0 00E0     		b	.L178
+ 1305              	.L199:
+ 1306 09a2 0023     		movs	r3, #0
+ 1307              	.L178:
+ 1308 09a4 43EA0105 		orr	r5, r3, r1
+ 1309 09a8 30B9     		cbnz	r0, .L179
+ 1310 09aa 0AE0     		b	.L214
+ 1311              	.L175:
+ 1312 09ac DBB9     		cbnz	r3, .L202
+ 1313 09ae 10B9     		cbnz	r0, .L201
+ 1314 09b0 02A8     		add	r0, sp, #8
+ 1315 09b2 4946     		mov	r1, r9
+ 1316 09b4 0EE0     		b	.L208
+ 1317              	.L201:
+ 1318 09b6 1D46     		mov	r5, r3
+ 1319              	.L179:
+ 1320 09b8 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 1321 09ba 8DF80B30 		strb	r3, [sp, #11]
+ 1322 09be 8478     		ldrb	r4, [r0, #2]	@ zero_extendqisi2
+ 1323 09c0 02E0     		b	.L181
+ 1324              	.L214:
+ 1325 09c2 8DF80B00 		strb	r0, [sp, #11]
+ 1326 09c6 0446     		mov	r4, r0
+ 1327              	.L181:
+ 1328 09c8 02A8     		add	r0, sp, #8
+ 1329 09ca FFF74DFB 		bl	mesh_send_packet
+ 1330 09ce 55B1     		cbz	r5, .L202
+ 1331 09d0 02A8     		add	r0, sp, #8
+ 1332 09d2 2146     		mov	r1, r4
+ 1333              	.L208:
+ 1334 09d4 FFF795FC 		bl	mesh_pending_packets_add
+ 1335 09d8 05E0     		b	.L202
+ 1336              	.L184:
+ 1337 09da 0446     		mov	r4, r0
+ 1338 09dc 04E0     		b	.L159
+ 1339              	.L191:
+ 1340 09de 0024     		movs	r4, #0
+ 1341 09e0 02E0     		b	.L159
+ 1342              	.L195:
+ 1343 09e2 4446     		mov	r4, r8
+ 1344 09e4 00E0     		b	.L159
+ 1345              	.L202:
+ 1346 09e6 02AC     		add	r4, sp, #8
+ 1347              	.L159:
+ 1348 09e8 FFF71DFB 		bl	mesh_update_soft_timers
+ 1349 09ec 2046     		mov	r0, r4
+ 1350 09ee 0422     		movs	r2, #4
+ 1351 09f0 0849     		ldr	r1, .L216+16
+ 1352 09f2 FFF789FB 		bl	mesh_handle_pnd_pkts_for_arr
+ 1353 09f6 2046     		mov	r0, r4
+ 1354 09f8 0749     		ldr	r1, .L216+20
+ 1355 09fa 0222     		movs	r2, #2
+ 1356 09fc FFF784FB 		bl	mesh_handle_pnd_pkts_for_arr
+ 1357 0a00 18E0     		b	.L157
+ 1358              	.L217:
+ 1359 0a02 00BF     		.align	2
+ 1360              	.L216:
+ 1361 0a04 00000000 		.word	.LANCHOR0
+ 1362 0a08 00000000 		.word	.LANCHOR1
+ 1363 0a0c 1B010000 		.word	.LANCHOR0+283
+ 1364 0a10 F0000000 		.word	.LANCHOR0+240
+ 1365 0a14 18000000 		.word	.LANCHOR0+24
+ 1366 0a18 A8000000 		.word	.LANCHOR0+168
+ 1367              	.L213:
+ 1368 0a1c 074A     		ldr	r2, .L218
+ 1369 0a1e 5368     		ldr	r3, [r2, #4]
+ 1370 0a20 9970     		strb	r1, [r3, #2]
+ 1371 0a22 0749     		ldr	r1, .L218+4
+ 1372 0a24 5870     		strb	r0, [r3, #1]
+ 1373 0a26 01F10900 		add	r0, r1, #9
+ 1374 0a2a 8342     		cmp	r3, r0
+ 1375 0a2c 1F70     		strb	r7, [r3, #0]
+ 1376 0a2e 7FF4E4AE 		bne	.L206
+ 1377 0a32 E0E6     		b	.L215
+ 1378              	.L157:
+ 1379 0a34 0AB0     		add	sp, sp, #40
+ 1380 0a36 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 1381              	.L219:
+ 1382 0a3a 00BF     		.align	2
+ 1383              	.L218:
+ 1384 0a3c 00000000 		.word	.LANCHOR1
+ 1385 0a40 0E010000 		.word	.LANCHOR0+270
+ 1387              		.align	1
+ 1388              		.global	mesh_is_route_known
+ 1389              		.thumb
+ 1390              		.thumb_func
+ 1392              	mesh_is_route_known:
+ 1393              		@ args = 0, pretend = 0, frame = 0
+ 1394              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1395              		@ link register save eliminated.
+ 1396 0a44 054A     		ldr	r2, .L225
+ 1397 0a46 0023     		movs	r3, #0
+ 1398              	.L222:
+ 1399 0a48 995C     		ldrb	r1, [r3, r2]	@ zero_extendqisi2
+ 1400 0a4a 8142     		cmp	r1, r0
+ 1401 0a4c 04D0     		beq	.L223
+ 1402 0a4e 0433     		adds	r3, r3, #4
+ 1403 0a50 102B     		cmp	r3, #16
+ 1404 0a52 F9D1     		bne	.L222
+ 1405 0a54 0020     		movs	r0, #0
+ 1406 0a56 7047     		bx	lr
+ 1407              	.L223:
+ 1408 0a58 0120     		movs	r0, #1
+ 1409 0a5a 7047     		bx	lr
+ 1410              	.L226:
+ 1411              		.align	2
+ 1412              	.L225:
+ 1413 0a5c FC000000 		.word	.LANCHOR0+252
+ 1415              		.align	1
+ 1416              		.global	mesh_get_pnd_pkt_count
+ 1417              		.thumb
+ 1418              		.thumb_func
+ 1420              	mesh_get_pnd_pkt_count:
+ 1421              		@ args = 0, pretend = 0, frame = 0
+ 1422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1423              		@ link register save eliminated.
+ 1424 0a60 0023     		movs	r3, #0
+ 1425 0a62 0B4A     		ldr	r2, .L233
+ 1426 0a64 1846     		mov	r0, r3
+ 1427              	.L229:
+ 1428 0a66 D118     		adds	r1, r2, r3
+ 1429 0a68 4978     		ldrb	r1, [r1, #1]	@ zero_extendqisi2
+ 1430 0a6a 09B1     		cbz	r1, .L228
+ 1431 0a6c 0130     		adds	r0, r0, #1
+ 1432 0a6e C0B2     		uxtb	r0, r0
+ 1433              	.L228:
+ 1434 0a70 2433     		adds	r3, r3, #36
+ 1435 0a72 902B     		cmp	r3, #144
+ 1436 0a74 F7D1     		bne	.L229
+ 1437 0a76 074B     		ldr	r3, .L233+4
+ 1438 0a78 93F8A920 		ldrb	r2, [r3, #169]	@ zero_extendqisi2
+ 1439 0a7c 0AB1     		cbz	r2, .L230
+ 1440 0a7e 0130     		adds	r0, r0, #1
+ 1441 0a80 C0B2     		uxtb	r0, r0
+ 1442              	.L230:
+ 1443 0a82 93F8CD30 		ldrb	r3, [r3, #205]	@ zero_extendqisi2
+ 1444 0a86 0BB1     		cbz	r3, .L231
+ 1445 0a88 0130     		adds	r0, r0, #1
+ 1446 0a8a C0B2     		uxtb	r0, r0
+ 1447              	.L231:
+ 1448 0a8c 7047     		bx	lr
+ 1449              	.L234:
+ 1450 0a8e 00BF     		.align	2
+ 1451              	.L233:
+ 1452 0a90 18000000 		.word	.LANCHOR0+24
+ 1453 0a94 00000000 		.word	.LANCHOR0
+ 1455              		.align	1
+ 1456              		.global	mesh_get_stats
+ 1457              		.thumb
+ 1458              		.thumb_func
+ 1460              	mesh_get_stats:
+ 1461              		@ args = 0, pretend = 0, frame = 0
+ 1462              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1463 0a98 10B5     		push	{r4, lr}
+ 1464 0a9a 0349     		ldr	r1, .L236
+ 1465 0a9c 0446     		mov	r4, r0
+ 1466 0a9e 0C22     		movs	r2, #12
+ 1467 0aa0 FFF7FEFF 		bl	memcpy
+ 1468 0aa4 2046     		mov	r0, r4
+ 1469 0aa6 10BD     		pop	{r4, pc}
+ 1470              	.L237:
+ 1471              		.align	2
+ 1472              	.L236:
+ 1473 0aa8 F0000000 		.word	.LANCHOR0+240
+ 1475              		.align	1
+ 1476              		.global	mesh_get_error_mask
+ 1477              		.thumb
+ 1478              		.thumb_func
+ 1480              	mesh_get_error_mask:
+ 1481              		@ args = 0, pretend = 0, frame = 0
+ 1482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1483              		@ link register save eliminated.
+ 1484 0aac 014B     		ldr	r3, .L239
+ 1485 0aae 93F83301 		ldrb	r0, [r3, #307]	@ zero_extendqisi2
+ 1486 0ab2 7047     		bx	lr
+ 1487              	.L240:
+ 1488              		.align	2
+ 1489              	.L239:
+ 1490 0ab4 00000000 		.word	.LANCHOR0
+ 1492              		.align	1
+ 1493              		.global	mesh_reset_error_mask
+ 1494              		.thumb
+ 1495              		.thumb_func
+ 1497              	mesh_reset_error_mask:
+ 1498              		@ args = 0, pretend = 0, frame = 0
+ 1499              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1500              		@ link register save eliminated.
+ 1501 0ab8 024B     		ldr	r3, .L242
+ 1502 0aba 0022     		movs	r2, #0
+ 1503 0abc 83F83321 		strb	r2, [r3, #307]
+ 1504 0ac0 7047     		bx	lr
+ 1505              	.L243:
+ 1506 0ac2 00BF     		.align	2
+ 1507              	.L242:
+ 1508 0ac4 00000000 		.word	.LANCHOR0
+ 1510              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 1511              	.LC0:
+ 1512 0000 48454C4C 		.ascii	"HELLO\012\000"
+ 1512      4F0A00
+ 1513              		.data
+ 1514              		.align	2
+ 1515              		.set	.LANCHOR1,. + 0
+ 1518              	m_our_node_id:
+ 1519 0000 01       		.byte	1
+ 1522              	m_retry_count:
+ 1523 0001 02       		.byte	2
+ 1524 0002 0000     		.space	2
+ 1527              	m_pkt_hist_wptr:
+ 1528 0004 0E010000 		.word	m_pkt_hist
+ 1529              		.bss
+ 1530              		.align	2
+ 1531              		.set	.LANCHOR0,. + 0
+ 1534              	m_driver:
+ 1535 0000 00000000 		.space	20
+ 1535      00000000 
+ 1535      00000000 
+ 1535      00000000 
+ 1535      00000000 
+ 1538              	s_prev_time_ms.4442:
+ 1539 0014 00000000 		.space	4
+ 1542              	m_mesh_pnd_pkts:
+ 1543 0018 00000000 		.space	144
+ 1543      00000000 
+ 1543      00000000 
+ 1543      00000000 
+ 1543      00000000 
+ 1546              	m_our_pnd_pkts:
+ 1547 00a8 00000000 		.space	72
+ 1547      00000000 
+ 1547      00000000 
+ 1547      00000000 
+ 1547      00000000 
+ 1550              	m_mesh_stats:
+ 1551 00f0 00000000 		.space	12
+ 1551      00000000 
+ 1551      00000000 
+ 1554              	m_rte_table:
+ 1555 00fc 00000000 		.space	16
+ 1555      00000000 
+ 1555      00000000 
+ 1555      00000000 
+ 1558              	s_next_packet_id.4428:
+ 1559 010c 00       		.space	1
+ 1562              	m_locked:
+ 1563 010d 00       		.space	1
+ 1566              	m_pkt_hist:
+ 1567 010e 00000000 		.space	12
+ 1567      00000000 
+ 1567      00000000 
+ 1570              	m_rpt_node:
+ 1571 011a 00       		.space	1
+ 1574              	m_our_name:
+ 1575 011b 00000000 		.space	24
+ 1575      00000000 
+ 1575      00000000 
+ 1575      00000000 
+ 1575      00000000 
+ 1578              	m_error_mask:
+ 1579 0133 00       		.space	1
+ 1580              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 mesh.c
+     /tmp/cc0OgrS6.s:16     .text:00000000 $t
+     /tmp/cc0OgrS6.s:20     .text:00000000 mesh_incr_soft_timers_for_arr
+     /tmp/cc0OgrS6.s:49     .text:00000026 mesh_update_soft_timers
+     /tmp/cc0OgrS6.s:80     .text:00000064 $d
+     /tmp/cc0OgrS6.s:82     .text:00000068 $t
+     /tmp/cc0OgrS6.s:86     .text:00000068 mesh_send_packet
+     /tmp/cc0OgrS6.s:116    .text:0000009c $d
+     /tmp/cc0OgrS6.s:119    .text:000000a4 $t
+     /tmp/cc0OgrS6.s:123    .text:000000a4 mesh_send_retry_packet
+     /tmp/cc0OgrS6.s:151    .text:000000d8 $d
+     /tmp/cc0OgrS6.s:154    .text:000000e0 $t
+     /tmp/cc0OgrS6.s:158    .text:000000e0 mesh_find_rte_tbl_entry
+     /tmp/cc0OgrS6.s:181    .text:00000104 $d
+     /tmp/cc0OgrS6.s:183    .text:00000108 $t
+     /tmp/cc0OgrS6.s:187    .text:00000108 mesh_handle_pnd_pkts_for_arr
+     /tmp/cc0OgrS6.s:362    .text:00000284 $d
+     /tmp/cc0OgrS6.s:364    .text:00000288 $t
+     /tmp/cc0OgrS6.s:368    .text:00000288 mesh_update_rte_scores
+     /tmp/cc0OgrS6.s:394    .text:000002ac $d
+     /tmp/cc0OgrS6.s:396    .text:000002b0 $t
+     /tmp/cc0OgrS6.s:400    .text:000002b0 mesh_get_pnd_pkt_slot
+     /tmp/cc0OgrS6.s:451    .text:00000302 mesh_pending_packets_add
+     /tmp/cc0OgrS6.s:503    .text:00000378 $d
+     /tmp/cc0OgrS6.s:507    .text:00000384 $t
+     /tmp/cc0OgrS6.s:511    .text:00000384 mesh_get_rte_to_modify
+     /tmp/cc0OgrS6.s:555    .text:000003e8 $d
+     /tmp/cc0OgrS6.s:559    .text:000003f4 $t
+     /tmp/cc0OgrS6.s:564    .text:000003f4 mesh_set_node_address
+     /tmp/cc0OgrS6.s:582    .text:00000408 $d
+     /tmp/cc0OgrS6.s:584    .text:0000040c $t
+     /tmp/cc0OgrS6.s:589    .text:0000040c mesh_get_node_address
+     /tmp/cc0OgrS6.s:599    .text:00000414 $d
+     /tmp/cc0OgrS6.s:601    .text:00000418 $t
+     /tmp/cc0OgrS6.s:606    .text:00000418 mesh_set_retry_count
+     /tmp/cc0OgrS6.s:618    .text:00000424 $d
+     /tmp/cc0OgrS6.s:620    .text:00000428 $t
+     /tmp/cc0OgrS6.s:625    .text:00000428 mesh_form_pkt
+     /tmp/cc0OgrS6.s:734    .text:00000510 $d
+     /tmp/cc0OgrS6.s:737    .text:00000518 $t
+     /tmp/cc0OgrS6.s:742    .text:00000518 mesh_deform_pkt
+     /tmp/cc0OgrS6.s:793    .text:00000568 mesh_send_formed_pkt
+     /tmp/cc0OgrS6.s:845    .text:000005c8 $d
+     /tmp/cc0OgrS6.s:847    .text:000005cc $t
+     /tmp/cc0OgrS6.s:852    .text:000005cc mesh_send
+     /tmp/cc0OgrS6.s:892    .text:00000612 mesh_init
+     /tmp/cc0OgrS6.s:989    .text:000006e8 $d
+     /tmp/cc0OgrS6.s:994    .text:000006f8 $t
+     /tmp/cc0OgrS6.s:999    .text:000006f8 mesh_get_routing_entry
+     /tmp/cc0OgrS6.s:1027   .text:00000724 $d
+     /tmp/cc0OgrS6.s:1029   .text:00000728 $t
+     /tmp/cc0OgrS6.s:1034   .text:00000728 mesh_get_num_routing_entries
+     /tmp/cc0OgrS6.s:1054   .text:00000740 $d
+     /tmp/cc0OgrS6.s:1056   .text:00000744 $t
+     /tmp/cc0OgrS6.s:1061   .text:00000744 mesh_service
+     /tmp/cc0OgrS6.s:1361   .text:00000a04 $d
+     /tmp/cc0OgrS6.s:1368   .text:00000a1c $t
+     /tmp/cc0OgrS6.s:1384   .text:00000a3c $d
+     /tmp/cc0OgrS6.s:1387   .text:00000a44 $t
+     /tmp/cc0OgrS6.s:1392   .text:00000a44 mesh_is_route_known
+     /tmp/cc0OgrS6.s:1413   .text:00000a5c $d
+     /tmp/cc0OgrS6.s:1415   .text:00000a60 $t
+     /tmp/cc0OgrS6.s:1420   .text:00000a60 mesh_get_pnd_pkt_count
+     /tmp/cc0OgrS6.s:1452   .text:00000a90 $d
+     /tmp/cc0OgrS6.s:1455   .text:00000a98 $t
+     /tmp/cc0OgrS6.s:1460   .text:00000a98 mesh_get_stats
+     /tmp/cc0OgrS6.s:1473   .text:00000aa8 $d
+     /tmp/cc0OgrS6.s:1475   .text:00000aac $t
+     /tmp/cc0OgrS6.s:1480   .text:00000aac mesh_get_error_mask
+     /tmp/cc0OgrS6.s:1490   .text:00000ab4 $d
+     /tmp/cc0OgrS6.s:1492   .text:00000ab8 $t
+     /tmp/cc0OgrS6.s:1497   .text:00000ab8 mesh_reset_error_mask
+     /tmp/cc0OgrS6.s:1508   .text:00000ac4 $d
+     /tmp/cc0OgrS6.s:1514   .data:00000000 $d
+     /tmp/cc0OgrS6.s:1518   .data:00000000 m_our_node_id
+     /tmp/cc0OgrS6.s:1522   .data:00000001 m_retry_count
+     /tmp/cc0OgrS6.s:1527   .data:00000004 m_pkt_hist_wptr
+     /tmp/cc0OgrS6.s:1566   .bss:0000010e m_pkt_hist
+     /tmp/cc0OgrS6.s:1530   .bss:00000000 $d
+     /tmp/cc0OgrS6.s:1534   .bss:00000000 m_driver
+     /tmp/cc0OgrS6.s:1538   .bss:00000014 s_prev_time_ms.4442
+     /tmp/cc0OgrS6.s:1542   .bss:00000018 m_mesh_pnd_pkts
+     /tmp/cc0OgrS6.s:1546   .bss:000000a8 m_our_pnd_pkts
+     /tmp/cc0OgrS6.s:1550   .bss:000000f0 m_mesh_stats
+     /tmp/cc0OgrS6.s:1554   .bss:000000fc m_rte_table
+     /tmp/cc0OgrS6.s:1558   .bss:0000010c s_next_packet_id.4428
+     /tmp/cc0OgrS6.s:1562   .bss:0000010d m_locked
+     /tmp/cc0OgrS6.s:1570   .bss:0000011a m_rpt_node
+     /tmp/cc0OgrS6.s:1574   .bss:0000011b m_our_name
+     /tmp/cc0OgrS6.s:1578   .bss:00000133 m_error_mask
+
+UNDEFINED SYMBOLS
+memset
+memcpy
+strncpy

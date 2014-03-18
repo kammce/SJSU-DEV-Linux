@@ -1,0 +1,54 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"fatfs_time.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	get_fattime
+  18              		.thumb
+  19              		.thumb_func
+  21              	get_fattime:
+  22              		@ args = 0, pretend = 0, frame = 16
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+  25 0002 01A8     		add	r0, sp, #4
+  26 0004 FFF7FEFF 		bl	rtc_gettime
+  27 0008 9DF80920 		ldrb	r2, [sp, #9]	@ zero_extendqisi2
+  28 000c 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+  29 0010 02F00F02 		and	r2, r2, #15
+  30 0014 03F01F03 		and	r3, r3, #31
+  31 0018 5205     		lsls	r2, r2, #21
+  32 001a 42EA0342 		orr	r2, r2, r3, lsl #16
+  33 001e 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+  34 0022 9DF80500 		ldrb	r0, [sp, #5]	@ zero_extendqisi2
+  35 0026 03F01F03 		and	r3, r3, #31
+  36 002a 42EAC323 		orr	r3, r2, r3, lsl #11
+  37 002e 00F03F00 		and	r0, r0, #63
+  38 0032 43EA4010 		orr	r0, r3, r0, lsl #5
+  39 0036 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+  40 003a C3F34403 		ubfx	r3, r3, #1, #5
+  41 003e 1843     		orrs	r0, r0, r3
+  42 0040 BDF80A30 		ldrh	r3, [sp, #10]
+  43 0044 5B06     		lsls	r3, r3, #25
+  44 0046 03F10843 		add	r3, r3, #-2013265920
+  45 004a 1843     		orrs	r0, r0, r3
+  46 004c 05B0     		add	sp, sp, #20
+  47 004e 00BD     		pop	{pc}
+  49              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 fatfs_time.c
+     /tmp/ccYqJGPj.s:16     .text:00000000 $t
+     /tmp/ccYqJGPj.s:21     .text:00000000 get_fattime
+
+UNDEFINED SYMBOLS
+rtc_gettime

@@ -1,0 +1,329 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"port.c"
+  15              		.text
+  16              		.align	1
+  17              		.thumb
+  18              		.thumb_func
+  20              	prvPortStartFirstTask:
+  21              		@ Naked Function: prologue and epilogue provided by programmer.
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              	@ 224 "../L1_FreeRTOS/portable/port.c" 1
+  25 0000 5048     		 ldr r0, =0xE000ED08 	
+  26 0002 0068     	 ldr r0, [r0] 			
+  27 0004 0068     	 ldr r0, [r0] 			
+  28 0006 80F30888 	 msr msp, r0			
+  29 000a 62B6     	 cpsie i				
+  30 000c 00DF     	 svc 0					
+  31 000e 00BF     	 nop					
+  32              	
+  33              	@ 0 "" 2
+  34              		.thumb
+  36              		.align	1
+  37              		.global	pxPortInitialiseStack
+  38              		.thumb
+  39              		.thumb_func
+  41              	pxPortInitialiseStack:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 0010 4FF08073 		mov	r3, #16777216
+  46 0014 00E90A00 		stmdb	r0, {r1, r3}
+  47 0018 0023     		movs	r3, #0
+  48 001a 40F80C3C 		str	r3, [r0, #-12]
+  49 001e 40F8202C 		str	r2, [r0, #-32]
+  50 0022 4038     		subs	r0, r0, #64
+  51 0024 7047     		bx	lr
+  53              		.align	1
+  54              		.global	vPortSVCHandler
+  55              		.thumb
+  56              		.thumb_func
+  58              	vPortSVCHandler:
+  59              		@ Naked Function: prologue and epilogue provided by programmer.
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              	@ 205 "../L1_FreeRTOS/portable/port.c" 1
+  63 0026 074B     			ldr	r3, pxCurrentTCBConst2		
+  64 0028 1968     		ldr r1, [r3]					
+  65 002a 0868     		ldr r0, [r1]					
+  66 002c B0E8F00F 		ldmia r0!, {r4-r11}				
+  67 0030 80F30988 		msr psp, r0						
+  68 0034 4FF00000 		mov r0, #0 						
+  69 0038 80F31188 		msr	basepri, r0					
+  70 003c 4EF00D0E 		orr r14, #0xd					
+  71 0040 7047     		bx r14							
+  72              										
+  73 0042 00BF     		.align 2						
+  74 0044 00000000 	pxCurrentTCBConst2: .word pxCurrentTCB				
+  75              	
+  76              	@ 0 "" 2
+  77              		.thumb
+  79              		.align	1
+  80              		.global	vPortEndScheduler
+  81              		.thumb
+  82              		.thumb_func
+  84              	vPortEndScheduler:
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  88 0048 7047     		bx	lr
+  90              		.align	1
+  91              		.global	vPortYield
+  92              		.thumb
+  93              		.thumb_func
+  95              	vPortYield:
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+  99 004a 044B     		ldr	r3, .L6
+ 100 004c 4FF08052 		mov	r2, #268435456
+ 101 0050 1A60     		str	r2, [r3, #0]
+ 102              	@ 322 "../L1_FreeRTOS/portable/port.c" 1
+ 103 0052 BFF34F8F 		dsb
+ 104              	@ 0 "" 2
+ 105              	@ 323 "../L1_FreeRTOS/portable/port.c" 1
+ 106 0056 BFF36F8F 		isb
+ 107              	@ 0 "" 2
+ 108              		.thumb
+ 109 005a 7047     		bx	lr
+ 110              	.L7:
+ 111              		.align	2
+ 112              	.L6:
+ 113 005c 04ED00E0 		.word	-536810236
+ 115              		.align	1
+ 116              		.global	ulPortSetInterruptMask
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	ulPortSetInterruptMask:
+ 121              		@ Naked Function: prologue and epilogue provided by programmer.
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              	@ 348 "../L1_FreeRTOS/portable/port.c" 1
+ 125 0060 EFF31180 			mrs r0, basepri											
+ 126 0064 4FF02801 		mov r1, #40												
+ 127 0068 81F31188 		msr basepri, r1											
+ 128 006c 7047     		bx lr													
+ 129              	
+ 130              	@ 0 "" 2
+ 131              		.thumb
+ 132 006e 0020     		movs	r0, #0
+ 134              		.align	1
+ 135              		.global	vPortEnterCritical
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	vPortEnterCritical:
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0070 08B5     		push	{r3, lr}
+ 143 0072 FFF7FEFF 		bl	ulPortSetInterruptMask
+ 144 0076 044B     		ldr	r3, .L10
+ 145 0078 1A68     		ldr	r2, [r3, #0]
+ 146 007a 0132     		adds	r2, r2, #1
+ 147 007c 1A60     		str	r2, [r3, #0]
+ 148              	@ 331 "../L1_FreeRTOS/portable/port.c" 1
+ 149 007e BFF34F8F 		dsb
+ 150              	@ 0 "" 2
+ 151              	@ 332 "../L1_FreeRTOS/portable/port.c" 1
+ 152 0082 BFF36F8F 		isb
+ 153              	@ 0 "" 2
+ 154              		.thumb
+ 155 0086 08BD     		pop	{r3, pc}
+ 156              	.L11:
+ 157              		.align	2
+ 158              	.L10:
+ 159 0088 00000000 		.word	.LANCHOR0
+ 161              		.align	1
+ 162              		.global	vPortClearInterruptMask
+ 163              		.thumb
+ 164              		.thumb_func
+ 166              	vPortClearInterruptMask:
+ 167              		@ Naked Function: prologue and epilogue provided by programmer.
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              	@ 365 "../L1_FreeRTOS/portable/port.c" 1
+ 171 008c 80F31188 			msr basepri, r0										
+ 172 0090 7047     		bx lr												
+ 173              	
+ 174              	@ 0 "" 2
+ 175              		.thumb
+ 177              		.align	1
+ 178              		.global	vPortExitCritical
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	vPortExitCritical:
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185              		@ link register save eliminated.
+ 186 0092 034B     		ldr	r3, .L15
+ 187 0094 1868     		ldr	r0, [r3, #0]
+ 188 0096 0138     		subs	r0, r0, #1
+ 189 0098 1860     		str	r0, [r3, #0]
+ 190 009a 00B9     		cbnz	r0, .L13
+ 191 009c FEE7     		b	vPortClearInterruptMask
+ 192              	.L13:
+ 193 009e 7047     		bx	lr
+ 194              	.L16:
+ 195              		.align	2
+ 196              	.L15:
+ 197 00a0 00000000 		.word	.LANCHOR0
+ 199              		.align	1
+ 200              		.global	xPortPendSVHandler
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	xPortPendSVHandler:
+ 205              		@ Naked Function: prologue and epilogue provided by programmer.
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208              	@ 381 "../L1_FreeRTOS/portable/port.c" 1
+ 209 00a4 EFF30980 			mrs r0, psp							
+ 210              											
+ 211 00a8 0C4B     		ldr	r3, pxCurrentTCBConst			
+ 212 00aa 1A68     		ldr	r2, [r3]						
+ 213              											
+ 214 00ac 20E9F00F 		stmdb r0!, {r4-r11}					
+ 215 00b0 1060     		str r0, [r2]						
+ 216              											
+ 217 00b2 2DE90840 		stmdb sp!, {r3, r14}				
+ 218 00b6 4FF02800 		mov r0, #40							
+ 219 00ba 80F31188 		msr basepri, r0						
+ 220 00be FFF7FEFF 		bl vTaskSwitchContext				
+ 221 00c2 4FF00000 		mov r0, #0							
+ 222 00c6 80F31188 		msr basepri, r0						
+ 223 00ca BDE80840 		ldmia sp!, {r3, r14}				
+ 224              											
+ 225 00ce 1968     		ldr r1, [r3]						
+ 226 00d0 0868     		ldr r0, [r1]						
+ 227 00d2 B0E8F00F 		ldmia r0!, {r4-r11}					
+ 228 00d6 80F30988 		msr psp, r0							
+ 229 00da 7047     		bx r14								
+ 230              											
+ 231              		.align 2							
+ 232 00dc 00000000 	pxCurrentTCBConst: .word pxCurrentTCB	
+ 233              	
+ 234              	@ 0 "" 2
+ 235              		.thumb
+ 237              		.align	1
+ 238              		.global	xPortSysTickHandler
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	xPortSysTickHandler:
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245 00e0 08B5     		push	{r3, lr}
+ 246 00e2 FFF7FEFF 		bl	ulPortSetInterruptMask
+ 247 00e6 FFF7FEFF 		bl	xTaskIncrementTick
+ 248 00ea 18B1     		cbz	r0, .L19
+ 249 00ec 034B     		ldr	r3, .L20
+ 250 00ee 4FF08052 		mov	r2, #268435456
+ 251 00f2 1A60     		str	r2, [r3, #0]
+ 252              	.L19:
+ 253 00f4 0020     		movs	r0, #0
+ 254 00f6 BDE80840 		pop	{r3, lr}
+ 255 00fa FEE7     		b	vPortClearInterruptMask
+ 256              	.L21:
+ 257              		.align	2
+ 258              	.L20:
+ 259 00fc 04ED00E0 		.word	-536810236
+ 261              		.align	1
+ 262              		.weak	vPortSetupTimerInterrupt
+ 263              		.thumb
+ 264              		.thumb_func
+ 266              	vPortSetupTimerInterrupt:
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269              		@ link register save eliminated.
+ 270 0100 034B     		ldr	r3, .L23
+ 271 0102 4BF67F32 		movw	r2, #47999
+ 272 0106 1A60     		str	r2, [r3, #0]
+ 273 0108 0722     		movs	r2, #7
+ 274 010a 43F8042C 		str	r2, [r3, #-4]
+ 275 010e 7047     		bx	lr
+ 276              	.L24:
+ 277              		.align	2
+ 278              	.L23:
+ 279 0110 14E000E0 		.word	-536813548
+ 281              		.align	1
+ 282              		.global	xPortStartScheduler
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	xPortStartScheduler:
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 0114 10B5     		push	{r4, lr}
+ 290 0116 094B     		ldr	r3, .L26
+ 291 0118 0024     		movs	r4, #0
+ 292 011a 1A68     		ldr	r2, [r3, #0]
+ 293 011c 42F47802 		orr	r2, r2, #16252928
+ 294 0120 1A60     		str	r2, [r3, #0]
+ 295 0122 1A68     		ldr	r2, [r3, #0]
+ 296 0124 42F07842 		orr	r2, r2, #-134217728
+ 297 0128 1A60     		str	r2, [r3, #0]
+ 298 012a FFF7FEFF 		bl	vPortSetupTimerInterrupt
+ 299 012e 044B     		ldr	r3, .L26+4
+ 300 0130 1C60     		str	r4, [r3, #0]
+ 301 0132 FFF765FF 		bl	prvPortStartFirstTask
+ 302 0136 2046     		mov	r0, r4
+ 303 0138 10BD     		pop	{r4, pc}
+ 304              	.L27:
+ 305 013a 00BF     		.align	2
+ 306              	.L26:
+ 307 013c 20ED00E0 		.word	-536810208
+ 308 0140 00000000 		.word	.LANCHOR0
+ 310              		.data
+ 311              		.align	2
+ 312              		.set	.LANCHOR0,. + 0
+ 315              	uxCriticalNesting:
+ 316 0000 AAAAAAAA 		.word	-1431655766
+ 317              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 port.c
+     /tmp/ccnVpmlV.s:16     .text:00000000 $t
+     /tmp/ccnVpmlV.s:20     .text:00000000 prvPortStartFirstTask
+     /tmp/ccnVpmlV.s:41     .text:00000010 pxPortInitialiseStack
+     /tmp/ccnVpmlV.s:58     .text:00000026 vPortSVCHandler
+     /tmp/ccnVpmlV.s:74     .text:00000044 pxCurrentTCBConst2
+     /tmp/ccnVpmlV.s:74     .text:00000044 $d
+     /tmp/ccnVpmlV.s:79     .text:00000048 $t
+     /tmp/ccnVpmlV.s:84     .text:00000048 vPortEndScheduler
+     /tmp/ccnVpmlV.s:95     .text:0000004a vPortYield
+     /tmp/ccnVpmlV.s:113    .text:0000005c $d
+     /tmp/ccnVpmlV.s:115    .text:00000060 $t
+     /tmp/ccnVpmlV.s:120    .text:00000060 ulPortSetInterruptMask
+     /tmp/ccnVpmlV.s:139    .text:00000070 vPortEnterCritical
+     /tmp/ccnVpmlV.s:159    .text:00000088 $d
+     /tmp/ccnVpmlV.s:161    .text:0000008c $t
+     /tmp/ccnVpmlV.s:166    .text:0000008c vPortClearInterruptMask
+     /tmp/ccnVpmlV.s:182    .text:00000092 vPortExitCritical
+     /tmp/ccnVpmlV.s:197    .text:000000a0 $d
+     /tmp/ccnVpmlV.s:199    .text:000000a4 $t
+     /tmp/ccnVpmlV.s:204    .text:000000a4 xPortPendSVHandler
+     /tmp/ccnVpmlV.s:232    .text:000000dc pxCurrentTCBConst
+     /tmp/ccnVpmlV.s:232    .text:000000dc $d
+     /tmp/ccnVpmlV.s:237    .text:000000e0 $t
+     /tmp/ccnVpmlV.s:242    .text:000000e0 xPortSysTickHandler
+     /tmp/ccnVpmlV.s:259    .text:000000fc $d
+     /tmp/ccnVpmlV.s:261    .text:00000100 $t
+     /tmp/ccnVpmlV.s:266    .text:00000100 vPortSetupTimerInterrupt
+     /tmp/ccnVpmlV.s:279    .text:00000110 $d
+     /tmp/ccnVpmlV.s:281    .text:00000114 $t
+     /tmp/ccnVpmlV.s:286    .text:00000114 xPortStartScheduler
+     /tmp/ccnVpmlV.s:307    .text:0000013c $d
+     /tmp/ccnVpmlV.s:311    .data:00000000 $d
+     /tmp/ccnVpmlV.s:315    .data:00000000 uxCriticalNesting
+
+UNDEFINED SYMBOLS
+pxCurrentTCB
+vTaskSwitchContext
+xTaskIncrementTick

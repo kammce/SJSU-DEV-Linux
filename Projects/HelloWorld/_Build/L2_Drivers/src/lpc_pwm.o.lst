@@ -1,0 +1,195 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"lpc_pwm.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.global	_ZN3PWMC2ENS_7pwmTypeEj
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN3PWMC2ENS_7pwmTypeEj:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 70B5     		push	{r4, r5, r6, lr}
+  25 0002 224D     		ldr	r5, .L4
+  26 0004 0446     		mov	r4, r0
+  27 0006 2B68     		ldr	r3, [r5, #0]
+  28 0008 1646     		mov	r6, r2
+  29 000a 0170     		strb	r1, [r0, #0]
+  30 000c 23BB     		cbnz	r3, .L2
+  31 000e FFF7FEFF 		bl	sys_get_cpu_clock
+  32 0012 1F4B     		ldr	r3, .L4+4
+  33 0014 B0FBF6F6 		udiv	r6, r0, r6
+  34 0018 2E60     		str	r6, [r5, #0]
+  35 001a D3F8C420 		ldr	r2, [r3, #196]
+  36 001e 42F04002 		orr	r2, r2, #64
+  37 0022 C3F8C420 		str	r2, [r3, #196]
+  38 0026 D3F8A821 		ldr	r2, [r3, #424]
+  39 002a 22F44052 		bic	r2, r2, #12288
+  40 002e C3F8A821 		str	r2, [r3, #424]
+  41 0032 D3F8A821 		ldr	r2, [r3, #424]
+  42 0036 42F48052 		orr	r2, r2, #4096
+  43 003a C3F8A821 		str	r2, [r3, #424]
+  44 003e A3F56423 		sub	r3, r3, #933888
+  45 0042 5A69     		ldr	r2, [r3, #20]
+  46 0044 42F00202 		orr	r2, r2, #2
+  47 0048 5A61     		str	r2, [r3, #20]
+  48 004a 0922     		movs	r2, #9
+  49 004c 9E61     		str	r6, [r3, #24]
+  50 004e 5A60     		str	r2, [r3, #4]
+  51 0050 1A6F     		ldr	r2, [r3, #112]
+  52 0052 22F00F02 		bic	r2, r2, #15
+  53 0056 1A67     		str	r2, [r3, #112]
+  54              	.L2:
+  55 0058 2178     		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+  56 005a 0322     		movs	r2, #3
+  57 005c 4800     		lsls	r0, r1, #1
+  58 005e 02FA00F2 		lsl	r2, r2, r0
+  59 0062 0C4B     		ldr	r3, .L4+8
+  60 0064 0931     		adds	r1, r1, #9
+  61 0066 1D69     		ldr	r5, [r3, #16]
+  62 0068 25EA0202 		bic	r2, r5, r2
+  63 006c 1A61     		str	r2, [r3, #16]
+  64 006e 0122     		movs	r2, #1
+  65 0070 02FA00F0 		lsl	r0, r2, r0
+  66 0074 02FA01F2 		lsl	r2, r2, r1
+  67 0078 1D69     		ldr	r5, [r3, #16]
+  68 007a 2843     		orrs	r0, r0, r5
+  69 007c 1861     		str	r0, [r3, #16]
+  70 007e A3F5A033 		sub	r3, r3, #81920
+  71 0082 D86C     		ldr	r0, [r3, #76]
+  72 0084 0243     		orrs	r2, r2, r0
+  73 0086 DA64     		str	r2, [r3, #76]
+  74 0088 2046     		mov	r0, r4
+  75 008a 70BD     		pop	{r4, r5, r6, pc}
+  76              	.L5:
+  77              		.align	2
+  78              	.L4:
+  79 008c 00000000 		.word	.LANCHOR0
+  80 0090 00C00F40 		.word	1074774016
+  81 0094 00C00240 		.word	1073922048
+  83              		.global	__aeabi_fcmpgt
+  84              		.global	__aeabi_ui2f
+  85              		.global	__aeabi_fmul
+  86              		.global	__aeabi_fdiv
+  87              		.global	__aeabi_f2uiz
+  88              		.align	1
+  89              		.global	_ZN3PWM3setEf
+  90              		.thumb
+  91              		.thumb_func
+  93              	_ZN3PWM3setEf:
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0098 38B5     		push	{r3, r4, r5, lr}
+  97 009a 0546     		mov	r5, r0
+  98 009c 0C46     		mov	r4, r1
+  99 009e 0846     		mov	r0, r1
+ 100 00a0 1B49     		ldr	r1, .L18
+ 101 00a2 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 102 00a6 0028     		cmp	r0, #0
+ 103 00a8 2ED1     		bne	.L16
+ 104 00aa 1A4B     		ldr	r3, .L18+4
+ 105 00ac 1868     		ldr	r0, [r3, #0]
+ 106 00ae FFF7FEFF 		bl	__aeabi_ui2f
+ 107 00b2 0146     		mov	r1, r0
+ 108 00b4 2046     		mov	r0, r4
+ 109 00b6 FFF7FEFF 		bl	__aeabi_fmul
+ 110 00ba 1549     		ldr	r1, .L18
+ 111 00bc FFF7FEFF 		bl	__aeabi_fdiv
+ 112 00c0 FFF7FEFF 		bl	__aeabi_f2uiz
+ 113 00c4 2B78     		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+ 114 00c6 052B     		cmp	r3, #5
+ 115 00c8 20D8     		bhi	.L17
+ 116 00ca DFE803F0 		tbb	[pc, r3]
+ 117              	.L14:
+ 118 00ce 03       		.byte	(.L8-.L14)/2
+ 119 00cf 06       		.byte	(.L9-.L14)/2
+ 120 00d0 09       		.byte	(.L10-.L14)/2
+ 121 00d1 0C       		.byte	(.L11-.L14)/2
+ 122 00d2 0F       		.byte	(.L12-.L14)/2
+ 123 00d3 12       		.byte	(.L13-.L14)/2
+ 124              		.align	1
+ 125              	.L8:
+ 126 00d4 104A     		ldr	r2, .L18+8
+ 127 00d6 D061     		str	r0, [r2, #28]
+ 128 00d8 0DE0     		b	.L15
+ 129              	.L9:
+ 130 00da 0F4A     		ldr	r2, .L18+8
+ 131 00dc 1062     		str	r0, [r2, #32]
+ 132 00de 0AE0     		b	.L15
+ 133              	.L10:
+ 134 00e0 0D4A     		ldr	r2, .L18+8
+ 135 00e2 5062     		str	r0, [r2, #36]
+ 136 00e4 07E0     		b	.L15
+ 137              	.L11:
+ 138 00e6 0C4A     		ldr	r2, .L18+8
+ 139 00e8 1064     		str	r0, [r2, #64]
+ 140 00ea 04E0     		b	.L15
+ 141              	.L12:
+ 142 00ec 0A4A     		ldr	r2, .L18+8
+ 143 00ee 5064     		str	r0, [r2, #68]
+ 144 00f0 01E0     		b	.L15
+ 145              	.L13:
+ 146 00f2 094A     		ldr	r2, .L18+8
+ 147 00f4 9064     		str	r0, [r2, #72]
+ 148              	.L15:
+ 149 00f6 0133     		adds	r3, r3, #1
+ 150 00f8 0120     		movs	r0, #1
+ 151 00fa 00FA03F3 		lsl	r3, r0, r3
+ 152 00fe 064A     		ldr	r2, .L18+8
+ 153 0100 116D     		ldr	r1, [r2, #80]
+ 154 0102 0B43     		orrs	r3, r3, r1
+ 155 0104 1365     		str	r3, [r2, #80]
+ 156 0106 38BD     		pop	{r3, r4, r5, pc}
+ 157              	.L16:
+ 158 0108 0020     		movs	r0, #0
+ 159 010a 38BD     		pop	{r3, r4, r5, pc}
+ 160              	.L17:
+ 161 010c 0020     		movs	r0, #0
+ 162 010e 38BD     		pop	{r3, r4, r5, pc}
+ 163              	.L19:
+ 164              		.align	2
+ 165              	.L18:
+ 166 0110 0000C842 		.word	1120403456
+ 167 0114 00000000 		.word	.LANCHOR0
+ 168 0118 00800140 		.word	1073840128
+ 170              		.global	_ZN3PWM7msTcMaxE
+ 171              		.global	_ZN3PWMC1ENS_7pwmTypeEj
+ 172              		.thumb_set _ZN3PWMC1ENS_7pwmTypeEj,_ZN3PWMC2ENS_7pwmTypeEj
+ 173              		.bss
+ 174              		.align	2
+ 175              		.set	.LANCHOR0,. + 0
+ 178              	_ZN3PWM7msTcMaxE:
+ 179 0000 00000000 		.space	4
+ 180              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 lpc_pwm.cpp
+     /tmp/ccY941TP.s:16     .text:00000000 $t
+     /tmp/ccY941TP.s:21     .text:00000000 _ZN3PWMC2ENS_7pwmTypeEj
+     /tmp/ccY941TP.s:79     .text:0000008c $d
+     /tmp/ccY941TP.s:88     .text:00000098 $t
+     /tmp/ccY941TP.s:93     .text:00000098 _ZN3PWM3setEf
+     /tmp/ccY941TP.s:118    .text:000000ce $d
+     /tmp/ccY941TP.s:124    .text:000000d4 $t
+     /tmp/ccY941TP.s:166    .text:00000110 $d
+     /tmp/ccY941TP.s:178    .bss:00000000 _ZN3PWM7msTcMaxE
+     /tmp/ccY941TP.s:21     .text:00000000 _ZN3PWMC1ENS_7pwmTypeEj
+     /tmp/ccY941TP.s:174    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+sys_get_cpu_clock
+__aeabi_fcmpgt
+__aeabi_ui2f
+__aeabi_fmul
+__aeabi_fdiv
+__aeabi_f2uiz

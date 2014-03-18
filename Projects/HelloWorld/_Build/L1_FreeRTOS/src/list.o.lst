@@ -1,0 +1,134 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"list.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	vListInitialise
+  18              		.thumb
+  19              		.thumb_func
+  21              	vListInitialise:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 00F10803 		add	r3, r0, #8
+  26 0004 4360     		str	r3, [r0, #4]
+  27 0006 4FF0FF32 		mov	r2, #-1
+  28 000a C360     		str	r3, [r0, #12]
+  29 000c 0361     		str	r3, [r0, #16]
+  30 000e 0023     		movs	r3, #0
+  31 0010 8260     		str	r2, [r0, #8]
+  32 0012 0360     		str	r3, [r0, #0]
+  33 0014 7047     		bx	lr
+  35              		.align	1
+  36              		.global	vListInitialiseItem
+  37              		.thumb
+  38              		.thumb_func
+  40              	vListInitialiseItem:
+  41              		@ args = 0, pretend = 0, frame = 0
+  42              		@ frame_needed = 0, uses_anonymous_args = 0
+  43              		@ link register save eliminated.
+  44 0016 0023     		movs	r3, #0
+  45 0018 0361     		str	r3, [r0, #16]
+  46 001a 7047     		bx	lr
+  48              		.align	1
+  49              		.global	vListInsertEnd
+  50              		.thumb
+  51              		.thumb_func
+  53              	vListInsertEnd:
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56              		@ link register save eliminated.
+  57 001c 4368     		ldr	r3, [r0, #4]
+  58 001e 4B60     		str	r3, [r1, #4]
+  59 0020 9A68     		ldr	r2, [r3, #8]
+  60 0022 8A60     		str	r2, [r1, #8]
+  61 0024 9A68     		ldr	r2, [r3, #8]
+  62 0026 5160     		str	r1, [r2, #4]
+  63 0028 9960     		str	r1, [r3, #8]
+  64 002a 0861     		str	r0, [r1, #16]
+  65 002c 0368     		ldr	r3, [r0, #0]
+  66 002e 0133     		adds	r3, r3, #1
+  67 0030 0360     		str	r3, [r0, #0]
+  68 0032 7047     		bx	lr
+  70              		.align	1
+  71              		.global	vListInsert
+  72              		.thumb
+  73              		.thumb_func
+  75              	vListInsert:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0034 0A68     		ldr	r2, [r1, #0]
+  79 0036 30B5     		push	{r4, r5, lr}
+  80 0038 531C     		adds	r3, r2, #1
+  81 003a 01D1     		bne	.L5
+  82 003c 0369     		ldr	r3, [r0, #16]
+  83 003e 07E0     		b	.L6
+  84              	.L5:
+  85 0040 00F10803 		add	r3, r0, #8
+  86 0044 00E0     		b	.L7
+  87              	.L8:
+  88 0046 2346     		mov	r3, r4
+  89              	.L7:
+  90 0048 5C68     		ldr	r4, [r3, #4]
+  91 004a 2568     		ldr	r5, [r4, #0]
+  92 004c 9542     		cmp	r5, r2
+  93 004e FAD9     		bls	.L8
+  94              	.L6:
+  95 0050 5A68     		ldr	r2, [r3, #4]
+  96 0052 4A60     		str	r2, [r1, #4]
+  97 0054 9160     		str	r1, [r2, #8]
+  98 0056 8B60     		str	r3, [r1, #8]
+  99 0058 5960     		str	r1, [r3, #4]
+ 100 005a 0861     		str	r0, [r1, #16]
+ 101 005c 0368     		ldr	r3, [r0, #0]
+ 102 005e 0133     		adds	r3, r3, #1
+ 103 0060 0360     		str	r3, [r0, #0]
+ 104 0062 30BD     		pop	{r4, r5, pc}
+ 106              		.align	1
+ 107              		.global	uxListRemove
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	uxListRemove:
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115 0064 4368     		ldr	r3, [r0, #4]
+ 116 0066 8268     		ldr	r2, [r0, #8]
+ 117 0068 9A60     		str	r2, [r3, #8]
+ 118 006a 8368     		ldr	r3, [r0, #8]
+ 119 006c 4268     		ldr	r2, [r0, #4]
+ 120 006e 5A60     		str	r2, [r3, #4]
+ 121 0070 0369     		ldr	r3, [r0, #16]
+ 122 0072 5A68     		ldr	r2, [r3, #4]
+ 123 0074 8242     		cmp	r2, r0
+ 124 0076 04BF     		itt	eq
+ 125 0078 8268     		ldreq	r2, [r0, #8]
+ 126 007a 5A60     		streq	r2, [r3, #4]
+ 127 007c 0022     		movs	r2, #0
+ 128 007e 0261     		str	r2, [r0, #16]
+ 129 0080 1868     		ldr	r0, [r3, #0]
+ 130 0082 0138     		subs	r0, r0, #1
+ 131 0084 1860     		str	r0, [r3, #0]
+ 132 0086 7047     		bx	lr
+ 134              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 list.c
+     /tmp/ccVsk9lk.s:16     .text:00000000 $t
+     /tmp/ccVsk9lk.s:21     .text:00000000 vListInitialise
+     /tmp/ccVsk9lk.s:40     .text:00000016 vListInitialiseItem
+     /tmp/ccVsk9lk.s:53     .text:0000001c vListInsertEnd
+     /tmp/ccVsk9lk.s:75     .text:00000034 vListInsert
+     /tmp/ccVsk9lk.s:111    .text:00000064 uxListRemove
+
+NO UNDEFINED SYMBOLS

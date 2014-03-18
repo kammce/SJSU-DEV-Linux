@@ -1,0 +1,615 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"remote.cpp"
+  15              		.section	.text._ZN14scheduler_taskD2Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
+  16              		.align	1
+  17              		.weak	_ZN14scheduler_taskD2Ev
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN14scheduler_taskD2Ev:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 014B     		ldr	r3, .L3
+  26 0002 0360     		str	r3, [r0, #0]
+  27 0004 7047     		bx	lr
+  28              	.L4:
+  29 0006 00BF     		.align	2
+  30              	.L3:
+  31 0008 08000000 		.word	_ZTV14scheduler_task+8
+  33              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
+  34              		.align	1
+  35              		.weak	_ZN14scheduler_task4initEv
+  36              		.thumb
+  37              		.thumb_func
+  39              	_ZN14scheduler_task4initEv:
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 0, uses_anonymous_args = 0
+  42              		@ link register save eliminated.
+  43 0000 0120     		movs	r0, #1
+  44 0002 7047     		bx	lr
+  46              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
+  47              		.align	1
+  48              		.weak	_ZN14scheduler_task6regTlmEv
+  49              		.thumb
+  50              		.thumb_func
+  52              	_ZN14scheduler_task6regTlmEv:
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55              		@ link register save eliminated.
+  56 0000 0120     		movs	r0, #1
+  57 0002 7047     		bx	lr
+  59              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
+  60              		.align	1
+  61              		.weak	_ZN14scheduler_task9taskEntryEv
+  62              		.thumb
+  63              		.thumb_func
+  65              	_ZN14scheduler_task9taskEntryEv:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 0120     		movs	r0, #1
+  70 0002 7047     		bx	lr
+  72              		.text
+  73              		.align	1
+  74              		.global	_ZN10remoteTask6regTlmEv
+  75              		.thumb
+  76              		.thumb_func
+  78              	_ZN10remoteTask6regTlmEv:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+  82 0000 0120     		movs	r0, #1
+  83 0002 7047     		bx	lr
+  85              		.align	1
+  86              		.global	_ZN10remoteTask9taskEntryEv
+  87              		.thumb
+  88              		.thumb_func
+  90              	_ZN10remoteTask9taskEntryEv:
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              		@ link register save eliminated.
+  94 0004 0120     		movs	r0, #1
+  95 0006 7047     		bx	lr
+  97              		.section	.text._ZN10remoteTaskD2Ev,"axG",%progbits,_ZN10remoteTaskD5Ev,comdat
+  98              		.align	1
+  99              		.weak	_ZN10remoteTaskD2Ev
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	_ZN10remoteTaskD2Ev:
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107 0000 014B     		ldr	r3, .L13
+ 108 0002 0360     		str	r3, [r0, #0]
+ 109 0004 7047     		bx	lr
+ 110              	.L14:
+ 111 0006 00BF     		.align	2
+ 112              	.L13:
+ 113 0008 08000000 		.word	_ZTV14scheduler_task+8
+ 115              		.section	.text._ZN10remoteTaskD0Ev,"axG",%progbits,_ZN10remoteTaskD5Ev,comdat
+ 116              		.align	1
+ 117              		.weak	_ZN10remoteTaskD0Ev
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	_ZN10remoteTaskD0Ev:
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124 0000 034B     		ldr	r3, .L19
+ 125 0002 10B5     		push	{r4, lr}
+ 126 0004 0446     		mov	r4, r0
+ 127 0006 0360     		str	r3, [r0, #0]
+ 128 0008 FFF7FEFF 		bl	_ZdlPv
+ 129 000c 2046     		mov	r0, r4
+ 130 000e 10BD     		pop	{r4, pc}
+ 131              	.L20:
+ 132              		.align	2
+ 133              	.L19:
+ 134 0010 08000000 		.word	_ZTV14scheduler_task+8
+ 136              		.section	.text._ZN14scheduler_taskD0Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
+ 137              		.align	1
+ 138              		.weak	_ZN14scheduler_taskD0Ev
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	_ZN14scheduler_taskD0Ev:
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145 0000 034B     		ldr	r3, .L24
+ 146 0002 10B5     		push	{r4, lr}
+ 147 0004 0446     		mov	r4, r0
+ 148 0006 0360     		str	r3, [r0, #0]
+ 149 0008 FFF7FEFF 		bl	_ZdlPv
+ 150 000c 2046     		mov	r0, r4
+ 151 000e 10BD     		pop	{r4, pc}
+ 152              	.L25:
+ 153              		.align	2
+ 154              	.L24:
+ 155 0010 08000000 		.word	_ZTV14scheduler_task+8
+ 157              		.text
+ 158              		.align	1
+ 159              		.global	_ZN10remoteTask4initEv
+ 160              		.thumb
+ 161              		.thumb_func
+ 163              	_ZN10remoteTask4initEv:
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166 0008 6423     		movs	r3, #100
+ 167 000a 10B5     		push	{r4, lr}
+ 168 000c 0021     		movs	r1, #0
+ 169 000e 0446     		mov	r4, r0
+ 170 0010 0362     		str	r3, [r0, #32]
+ 171 0012 0322     		movs	r2, #3
+ 172 0014 0120     		movs	r0, #1
+ 173 0016 FFF7FEFF 		bl	xQueueGenericCreate
+ 174 001a 6066     		str	r0, [r4, #100]
+ 175 001c 20B1     		cbz	r0, .L27
+ 176 001e 0021     		movs	r1, #0
+ 177 0020 0A46     		mov	r2, r1
+ 178 0022 0B46     		mov	r3, r1
+ 179 0024 FFF7FEFF 		bl	xQueueGenericSend
+ 180              	.L27:
+ 181 0028 0021     		movs	r1, #0
+ 182 002a 0A46     		mov	r2, r1
+ 183 002c 0B46     		mov	r3, r1
+ 184 002e 606E     		ldr	r0, [r4, #100]
+ 185 0030 FFF7FEFF 		bl	xQueueGenericReceive
+ 186 0034 0349     		ldr	r1, .L28
+ 187 0036 626E     		ldr	r2, [r4, #100]
+ 188 0038 2046     		mov	r0, r4
+ 189 003a BDE81040 		pop	{r4, lr}
+ 190 003e FFF7FEBF 		b	_ZN14scheduler_task15addSharedObjectEPKcPv
+ 191              	.L29:
+ 192 0042 00BF     		.align	2
+ 193              	.L28:
+ 194 0044 00000000 		.word	.LC0
+ 196              		.align	1
+ 197              		.global	_ZN10remoteTaskC2Eh
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	_ZN10remoteTaskC2Eh:
+ 202              		@ args = 0, pretend = 0, frame = 0
+ 203              		@ frame_needed = 0, uses_anonymous_args = 0
+ 204 0048 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 205 004a 0B46     		mov	r3, r1
+ 206 004c 0025     		movs	r5, #0
+ 207 004e 0C49     		ldr	r1, .L33
+ 208 0050 4FF4C062 		mov	r2, #1536
+ 209 0054 0446     		mov	r4, r0
+ 210 0056 0095     		str	r5, [sp, #0]
+ 211 0058 FFF7FEFF 		bl	_ZN14scheduler_taskC2EPKcmhPv
+ 212 005c 094B     		ldr	r3, .L33+4
+ 213 005e 0022     		movs	r2, #0
+ 214 0060 2360     		str	r3, [r4, #0]
+ 215 0062 0023     		movs	r3, #0
+ 216 0064 C4E91A23 		strd	r2, [r4, #104]
+ 217 0068 C4E91C23 		strd	r2, [r4, #112]
+ 218 006c 2566     		str	r5, [r4, #96]
+ 219 006e 04F13800 		add	r0, r4, #56
+ 220 0072 2946     		mov	r1, r5
+ 221 0074 2822     		movs	r2, #40
+ 222 0076 FFF7FEFF 		bl	memset
+ 223 007a 2046     		mov	r0, r4
+ 224 007c 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 225              	.L34:
+ 226 007e 00BF     		.align	2
+ 227              	.L33:
+ 228 0080 0A000000 		.word	.LC1
+ 229 0084 08000000 		.word	.LANCHOR0+8
+ 231              		.align	1
+ 232              		.global	_ZN10remoteTask15handleUserEntryEi
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	_ZN10remoteTask15handleUserEntryEi:
+ 237              		@ args = 0, pretend = 0, frame = 0
+ 238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 239              		@ link register save eliminated.
+ 240 0088 7047     		bx	lr
+ 242              		.align	1
+ 243              		.global	_ZN10remoteTask17getNumberFromCodeEmRm
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	_ZN10remoteTask17getNumberFromCodeEmRm:
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250 008a 10B5     		push	{r4, lr}
+ 251 008c 0023     		movs	r3, #0
+ 252              	.L39:
+ 253 008e 846B     		ldr	r4, [r0, #56]
+ 254 0090 8C42     		cmp	r4, r1
+ 255 0092 02D1     		bne	.L37
+ 256 0094 1360     		str	r3, [r2, #0]
+ 257 0096 0120     		movs	r0, #1
+ 258 0098 10BD     		pop	{r4, pc}
+ 259              	.L37:
+ 260 009a 0133     		adds	r3, r3, #1
+ 261 009c 0430     		adds	r0, r0, #4
+ 262 009e 0A2B     		cmp	r3, #10
+ 263 00a0 F5D1     		bne	.L39
+ 264 00a2 0020     		movs	r0, #0
+ 265 00a4 10BD     		pop	{r4, pc}
+ 267              		.section	.text._ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv,"axG",%progbits,_ZN17Singleton
+ 268              		.align	1
+ 269              		.weak	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv:
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276 0000 0D4B     		ldr	r3, .L47
+ 277 0002 70B5     		push	{r4, r5, r6, lr}
+ 278 0004 1B68     		ldr	r3, [r3, #0]
+ 279 0006 9BB9     		cbnz	r3, .L42
+ 280 0008 0820     		movs	r0, #8
+ 281 000a FFF7FEFF 		bl	_Znwj
+ 282 000e 0B4D     		ldr	r5, .L47+4
+ 283 0010 0446     		mov	r4, r0
+ 284 0012 2B68     		ldr	r3, [r5, #0]
+ 285 0014 33B9     		cbnz	r3, .L43
+ 286 0016 1C20     		movs	r0, #28
+ 287 0018 FFF7FEFF 		bl	_Znwj
+ 288 001c 0646     		mov	r6, r0
+ 289 001e FFF7FEFF 		bl	_ZN4I2C2C1Ev
+ 290 0022 2E60     		str	r6, [r5, #0]
+ 291              	.L43:
+ 292 0024 2B68     		ldr	r3, [r5, #0]
+ 293 0026 2360     		str	r3, [r4, #0]
+ 294 0028 4023     		movs	r3, #64
+ 295 002a 2371     		strb	r3, [r4, #4]
+ 296 002c 024B     		ldr	r3, .L47
+ 297 002e 1C60     		str	r4, [r3, #0]
+ 298              	.L42:
+ 299 0030 014B     		ldr	r3, .L47
+ 300 0032 1868     		ldr	r0, [r3, #0]
+ 301 0034 70BD     		pop	{r4, r5, r6, pc}
+ 302              	.L48:
+ 303 0036 00BF     		.align	2
+ 304              	.L47:
+ 305 0038 00000000 		.word	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
+ 306 003c 00000000 		.word	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 308              		.section	.text._ZN17SingletonTemplateI9IR_SensorE11getInstanceEv,"axG",%progbits,_ZN17SingletonTem
+ 309              		.align	1
+ 310              		.weak	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 311              		.thumb
+ 312              		.thumb_func
+ 314              	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv:
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317 0000 10B5     		push	{r4, lr}
+ 318 0002 044C     		ldr	r4, .L53
+ 319 0004 2368     		ldr	r3, [r4, #0]
+ 320 0006 1BB9     		cbnz	r3, .L50
+ 321 0008 0120     		movs	r0, #1
+ 322 000a FFF7FEFF 		bl	_Znwj
+ 323 000e 2060     		str	r0, [r4, #0]
+ 324              	.L50:
+ 325 0010 2068     		ldr	r0, [r4, #0]
+ 326 0012 10BD     		pop	{r4, pc}
+ 327              	.L54:
+ 328              		.align	2
+ 329              	.L53:
+ 330 0014 00000000 		.word	_ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE
+ 332              		.text
+ 333              		.align	1
+ 334              		.global	_ZN10remoteTask3runEPv
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	_ZN10remoteTask3runEPv:
+ 339              		@ args = 0, pretend = 0, frame = 88
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341 00a6 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 342 00aa 96B0     		sub	sp, sp, #88
+ 343 00ac 0DF14008 		add	r8, sp, #64
+ 344 00b0 0024     		movs	r4, #0
+ 345 00b2 0646     		mov	r6, r0
+ 346 00b4 6946     		mov	r1, sp
+ 347 00b6 4022     		movs	r2, #64
+ 348 00b8 4046     		mov	r0, r8
+ 349 00ba 1594     		str	r4, [sp, #84]
+ 350 00bc FFF7FEFF 		bl	_ZN3strC1EPci
+ 351 00c0 706E     		ldr	r0, [r6, #100]
+ 352 00c2 2146     		mov	r1, r4
+ 353 00c4 2246     		mov	r2, r4
+ 354 00c6 2346     		mov	r3, r4
+ 355 00c8 FFF7FEFF 		bl	xQueueGenericReceive
+ 356 00cc 0028     		cmp	r0, #0
+ 357 00ce 38D0     		beq	.L56
+ 358 00d0 5948     		ldr	r0, .L69
+ 359 00d2 FFF7FEFF 		bl	puts
+ 360 00d6 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 361 00da 2D21     		movs	r1, #45
+ 362 00dc FFF7FEFF 		bl	_ZN11LED_Display12setLeftDigitEc
+ 363 00e0 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 364 00e4 2D21     		movs	r1, #45
+ 365 00e6 FFF7FEFF 		bl	_ZN11LED_Display13setRightDigitEc
+ 366 00ea 3546     		mov	r5, r6
+ 367 00ec 02E0     		b	.L67
+ 368              	.L58:
+ 369 00ee 6420     		movs	r0, #100
+ 370 00f0 FFF7FEFF 		bl	vTaskDelay
+ 371              	.L67:
+ 372 00f4 FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 373 00f8 FFF7FEFF 		bl	_ZN9IR_Sensor16isIRCodeReceivedEv
+ 374 00fc 0028     		cmp	r0, #0
+ 375 00fe F6D0     		beq	.L58
+ 376 0100 FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 377 0104 FFF7FEFF 		bl	_ZN9IR_Sensor13getLastIRCodeEv
+ 378 0108 0746     		mov	r7, r0
+ 379 010a 2246     		mov	r2, r4
+ 380 010c 4B49     		ldr	r1, .L69+4
+ 381 010e 3B46     		mov	r3, r7
+ 382 0110 4046     		mov	r0, r8
+ 383 0112 FFF7FEFF 		bl	_ZN3str6printfEPKcz
+ 384 0116 4046     		mov	r0, r8
+ 385 0118 FFF7FEFF 		bl	_ZNK3strclEv
+ 386 011c FFF7FEFF 		bl	puts
+ 387 0120 AF63     		str	r7, [r5, #56]
+ 388 0122 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 389 0126 E1B2     		uxtb	r1, r4
+ 390 0128 0134     		adds	r4, r4, #1
+ 391 012a FFF7FEFF 		bl	_ZN11LED_Display9setNumberEc
+ 392 012e 0435     		adds	r5, r5, #4
+ 393 0130 0A2C     		cmp	r4, #10
+ 394 0132 DFD1     		bne	.L67
+ 395 0134 4248     		ldr	r0, .L69+8
+ 396 0136 FFF7FEFF 		bl	puts
+ 397 013a 4FF4FA60 		mov	r0, #2000
+ 398 013e FFF7FEFF 		bl	vTaskDelay
+ 399              	.L56:
+ 400 0142 D6E91C23 		ldrd	r2, [r6, #112]
+ 401 0146 52EA0301 		orrs	r1, r2, r3
+ 402 014a 3DD0     		beq	.L61
+ 403 014c FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 404 0150 FFF7FEFF 		bl	_ZN9IR_Sensor16isIRCodeReceivedEv
+ 405 0154 0028     		cmp	r0, #0
+ 406 0156 69D0     		beq	.L62
+ 407 0158 FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 408 015c FFF7FEFF 		bl	_ZN9IR_Sensor13getLastIRCodeEv
+ 409 0160 15AA     		add	r2, sp, #84
+ 410 0162 0146     		mov	r1, r0
+ 411 0164 3046     		mov	r0, r6
+ 412 0166 FFF7FEFF 		bl	_ZN10remoteTask17getNumberFromCodeEmRm
+ 413 016a 0028     		cmp	r0, #0
+ 414 016c 5ED0     		beq	.L62
+ 415 016e 326E     		ldr	r2, [r6, #96]
+ 416 0170 159B     		ldr	r3, [sp, #84]
+ 417 0172 D318     		adds	r3, r2, r3
+ 418 0174 3366     		str	r3, [r6, #96]
+ 419 0176 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 420 017a 1599     		ldr	r1, [sp, #84]
+ 421 017c 3031     		adds	r1, r1, #48
+ 422 017e C9B2     		uxtb	r1, r1
+ 423 0180 FFF7FEFF 		bl	_ZN11LED_Display13setRightDigitEc
+ 424 0184 4FF4FA60 		mov	r0, #2000
+ 425 0188 FFF7FEFF 		bl	vTaskDelay
+ 426 018c FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 427 0190 FFF7FEFF 		bl	_ZN9IR_Sensor13getLastIRCodeEv
+ 428 0194 0022     		movs	r2, #0
+ 429 0196 0023     		movs	r3, #0
+ 430 0198 C6E91A23 		strd	r2, [r6, #104]
+ 431 019c C6E91C23 		strd	r2, [r6, #112]
+ 432 01a0 3DE0     		b	.L63
+ 433              	.L68:
+ 434 01a2 FFF7FEFF 		bl	sys_get_uptime_ms
+ 435 01a6 D6E91A23 		ldrd	r2, [r6, #104]
+ 436 01aa 9042     		cmp	r0, r2
+ 437 01ac 71EB0304 		sbcs	r4, r1, r3
+ 438 01b0 35D3     		bcc	.L63
+ 439 01b2 0022     		movs	r2, #0
+ 440 01b4 0023     		movs	r3, #0
+ 441 01b6 C6E91A23 		strd	r2, [r6, #104]
+ 442 01ba C6E91C23 		strd	r2, [r6, #112]
+ 443 01be FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 444 01c2 FFF7FEFF 		bl	_ZN11LED_Display5clearEv
+ 445 01c6 2AE0     		b	.L63
+ 446              	.L61:
+ 447 01c8 FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 448 01cc FFF7FEFF 		bl	_ZN9IR_Sensor16isIRCodeReceivedEv
+ 449 01d0 28B3     		cbz	r0, .L63
+ 450 01d2 FFF7FEFF 		bl	_ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+ 451 01d6 FFF7FEFF 		bl	_ZN9IR_Sensor13getLastIRCodeEv
+ 452 01da 15AA     		add	r2, sp, #84
+ 453 01dc 0146     		mov	r1, r0
+ 454 01de 3046     		mov	r0, r6
+ 455 01e0 FFF7FEFF 		bl	_ZN10remoteTask17getNumberFromCodeEmRm
+ 456 01e4 D8B1     		cbz	r0, .L63
+ 457 01e6 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 458 01ea 1599     		ldr	r1, [sp, #84]
+ 459 01ec 0025     		movs	r5, #0
+ 460 01ee 3031     		adds	r1, r1, #48
+ 461 01f0 C9B2     		uxtb	r1, r1
+ 462 01f2 FFF7FEFF 		bl	_ZN11LED_Display12setLeftDigitEc
+ 463 01f6 FFF7FEFF 		bl	_ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+ 464 01fa 2D21     		movs	r1, #45
+ 465 01fc FFF7FEFF 		bl	_ZN11LED_Display13setRightDigitEc
+ 466 0200 159B     		ldr	r3, [sp, #84]
+ 467 0202 0A22     		movs	r2, #10
+ 468 0204 5343     		muls	r3, r2, r3
+ 469 0206 42F21074 		movw	r4, #10000
+ 470 020a 3366     		str	r3, [r6, #96]
+ 471 020c C6E91C45 		strd	r4, [r6, #112]
+ 472 0210 FFF7FEFF 		bl	sys_get_uptime_ms
+ 473 0214 0019     		adds	r0, r0, r4
+ 474 0216 41EB0501 		adc	r1, r1, r5
+ 475 021a C6E91A01 		strd	r0, [r6, #104]
+ 476              	.L63:
+ 477 021e 10A8     		add	r0, sp, #64
+ 478 0220 FFF7FEFF 		bl	_ZN3strD1Ev
+ 479 0224 0120     		movs	r0, #1
+ 480 0226 16B0     		add	sp, sp, #88
+ 481 0228 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 482              	.L62:
+ 483 022c D6E91C23 		ldrd	r2, [r6, #112]
+ 484 0230 52EA0301 		orrs	r1, r2, r3
+ 485 0234 F3D0     		beq	.L63
+ 486 0236 B4E7     		b	.L68
+ 487              	.L70:
+ 488              		.align	2
+ 489              	.L69:
+ 490 0238 11000000 		.word	.LC2
+ 491 023c 4C000000 		.word	.LC3
+ 492 0240 5E000000 		.word	.LC4
+ 494              		.global	_ZTV10remoteTask
+ 495              		.weak	_ZTV14scheduler_task
+ 496              		.section	.rodata._ZTV14scheduler_task,"aG",%progbits,_ZTV14scheduler_task,comdat
+ 497              		.align	3
+ 500              	_ZTV14scheduler_task:
+ 501 0000 00000000 		.word	0
+ 502 0004 00000000 		.word	0
+ 503 0008 00000000 		.word	_ZN14scheduler_taskD1Ev
+ 504 000c 00000000 		.word	_ZN14scheduler_taskD0Ev
+ 505 0010 00000000 		.word	_ZN14scheduler_task4initEv
+ 506 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
+ 507 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
+ 508 001c 00000000 		.word	__cxa_pure_virtual
+ 509              		.weak	_ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE
+ 510              		.section	.bss._ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE,"awG",%nobits,_ZN17Singleto
+ 511              		.align	2
+ 514              	_ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE:
+ 515 0000 00000000 		.space	4
+ 516              		.weak	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
+ 517              		.section	.bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE,"awG",%nobits,_ZN17Singl
+ 518              		.align	2
+ 521              	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:
+ 522 0000 00000000 		.space	4
+ 523              		.weak	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 524              		.section	.bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTemp
+ 525              		.align	2
+ 528              	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:
+ 529 0000 00000000 		.space	4
+ 530              		.weak	_ZN14scheduler_taskD1Ev
+ 531              		.thumb_set _ZN14scheduler_taskD1Ev,_ZN14scheduler_taskD2Ev
+ 532              		.weak	_ZN10remoteTaskD1Ev
+ 533              		.thumb_set _ZN10remoteTaskD1Ev,_ZN10remoteTaskD2Ev
+ 534              		.global	_ZN10remoteTaskC1Eh
+ 535              		.thumb_set _ZN10remoteTaskC1Eh,_ZN10remoteTaskC2Eh
+ 536              		.section	.rodata
+ 537              		.align	3
+ 538              		.set	.LANCHOR0,. + 0
+ 541              	_ZTV10remoteTask:
+ 542 0000 00000000 		.word	0
+ 543 0004 00000000 		.word	0
+ 544 0008 00000000 		.word	_ZN10remoteTaskD1Ev
+ 545 000c 00000000 		.word	_ZN10remoteTaskD0Ev
+ 546 0010 00000000 		.word	_ZN10remoteTask4initEv
+ 547 0014 00000000 		.word	_ZN10remoteTask6regTlmEv
+ 548 0018 00000000 		.word	_ZN10remoteTask9taskEntryEv
+ 549 001c 00000000 		.word	_ZN10remoteTask3runEPv
+ 550              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 551              	.LC0:
+ 552 0000 6C656172 		.ascii	"learn_sem\000"
+ 552      6E5F7365 
+ 552      6D00
+ 553              	.LC1:
+ 554 000a 72656D6F 		.ascii	"remote\000"
+ 554      746500
+ 555              	.LC2:
+ 556 0011 49522043 		.ascii	"IR Codes will be learned.  Press buttons 0-9 on the"
+ 556      6F646573 
+ 556      2077696C 
+ 556      6C206265 
+ 556      206C6561 
+ 557 0044 2072656D 		.ascii	" remote\000"
+ 557      6F746500 
+ 558              	.LC3:
+ 559 004c 4C656172 		.ascii	"Learned: #%i = %x\000"
+ 559      6E65643A 
+ 559      20232569 
+ 559      203D2025 
+ 559      7800
+ 560              	.LC4:
+ 561 005e 4C656172 		.ascii	"Learned all numbers!\000"
+ 561      6E656420 
+ 561      616C6C20 
+ 561      6E756D62 
+ 561      65727321 
+ 562              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 remote.cpp
+     /tmp/ccN9W9sf.s:16     .text._ZN14scheduler_taskD2Ev:00000000 $t
+     /tmp/ccN9W9sf.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD2Ev
+     /tmp/ccN9W9sf.s:31     .text._ZN14scheduler_taskD2Ev:00000008 $d
+     /tmp/ccN9W9sf.s:500    .rodata._ZTV14scheduler_task:00000000 _ZTV14scheduler_task
+     /tmp/ccN9W9sf.s:34     .text._ZN14scheduler_task4initEv:00000000 $t
+     /tmp/ccN9W9sf.s:39     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
+     /tmp/ccN9W9sf.s:47     .text._ZN14scheduler_task6regTlmEv:00000000 $t
+     /tmp/ccN9W9sf.s:52     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
+     /tmp/ccN9W9sf.s:60     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
+     /tmp/ccN9W9sf.s:65     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
+     /tmp/ccN9W9sf.s:73     .text:00000000 $t
+     /tmp/ccN9W9sf.s:78     .text:00000000 _ZN10remoteTask6regTlmEv
+     /tmp/ccN9W9sf.s:90     .text:00000004 _ZN10remoteTask9taskEntryEv
+     /tmp/ccN9W9sf.s:98     .text._ZN10remoteTaskD2Ev:00000000 $t
+     /tmp/ccN9W9sf.s:103    .text._ZN10remoteTaskD2Ev:00000000 _ZN10remoteTaskD2Ev
+     /tmp/ccN9W9sf.s:113    .text._ZN10remoteTaskD2Ev:00000008 $d
+     /tmp/ccN9W9sf.s:116    .text._ZN10remoteTaskD0Ev:00000000 $t
+     /tmp/ccN9W9sf.s:121    .text._ZN10remoteTaskD0Ev:00000000 _ZN10remoteTaskD0Ev
+     /tmp/ccN9W9sf.s:134    .text._ZN10remoteTaskD0Ev:00000010 $d
+     /tmp/ccN9W9sf.s:137    .text._ZN14scheduler_taskD0Ev:00000000 $t
+     /tmp/ccN9W9sf.s:142    .text._ZN14scheduler_taskD0Ev:00000000 _ZN14scheduler_taskD0Ev
+     /tmp/ccN9W9sf.s:155    .text._ZN14scheduler_taskD0Ev:00000010 $d
+     /tmp/ccN9W9sf.s:163    .text:00000008 _ZN10remoteTask4initEv
+     /tmp/ccN9W9sf.s:194    .text:00000044 $d
+     /tmp/ccN9W9sf.s:196    .text:00000048 $t
+     /tmp/ccN9W9sf.s:201    .text:00000048 _ZN10remoteTaskC2Eh
+     /tmp/ccN9W9sf.s:228    .text:00000080 $d
+     /tmp/ccN9W9sf.s:231    .text:00000088 $t
+     /tmp/ccN9W9sf.s:236    .text:00000088 _ZN10remoteTask15handleUserEntryEi
+     /tmp/ccN9W9sf.s:247    .text:0000008a _ZN10remoteTask17getNumberFromCodeEmRm
+     /tmp/ccN9W9sf.s:268    .text._ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv:00000000 $t
+     /tmp/ccN9W9sf.s:273    .text._ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv:00000000 _ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv
+     /tmp/ccN9W9sf.s:305    .text._ZN17SingletonTemplateI11LED_DisplayE11getInstanceEv:00000038 $d
+     /tmp/ccN9W9sf.s:521    .bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
+     /tmp/ccN9W9sf.s:528    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+     /tmp/ccN9W9sf.s:309    .text._ZN17SingletonTemplateI9IR_SensorE11getInstanceEv:00000000 $t
+     /tmp/ccN9W9sf.s:314    .text._ZN17SingletonTemplateI9IR_SensorE11getInstanceEv:00000000 _ZN17SingletonTemplateI9IR_SensorE11getInstanceEv
+     /tmp/ccN9W9sf.s:330    .text._ZN17SingletonTemplateI9IR_SensorE11getInstanceEv:00000014 $d
+     /tmp/ccN9W9sf.s:514    .bss._ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE
+     /tmp/ccN9W9sf.s:338    .text:000000a6 _ZN10remoteTask3runEPv
+     /tmp/ccN9W9sf.s:490    .text:00000238 $d
+     /tmp/ccN9W9sf.s:541    .rodata:00000000 _ZTV10remoteTask
+     /tmp/ccN9W9sf.s:497    .rodata._ZTV14scheduler_task:00000000 $d
+     /tmp/ccN9W9sf.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD1Ev
+     /tmp/ccN9W9sf.s:511    .bss._ZN17SingletonTemplateI9IR_SensorE19mpSingletonInstanceE:00000000 $d
+     /tmp/ccN9W9sf.s:518    .bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:00000000 $d
+     /tmp/ccN9W9sf.s:525    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 $d
+     /tmp/ccN9W9sf.s:103    .text._ZN10remoteTaskD2Ev:00000000 _ZN10remoteTaskD1Ev
+     /tmp/ccN9W9sf.s:201    .text:00000048 _ZN10remoteTaskC1Eh
+     /tmp/ccN9W9sf.s:537    .rodata:00000000 $d
+                           .group:00000000 _ZN14scheduler_taskD5Ev
+                           .group:00000000 _ZN10remoteTaskD5Ev
+
+UNDEFINED SYMBOLS
+_ZdlPv
+xQueueGenericCreate
+xQueueGenericSend
+xQueueGenericReceive
+_ZN14scheduler_task15addSharedObjectEPKcPv
+_ZN14scheduler_taskC2EPKcmhPv
+memset
+_Znwj
+_ZN4I2C2C1Ev
+_ZN3strC1EPci
+puts
+_ZN11LED_Display12setLeftDigitEc
+_ZN11LED_Display13setRightDigitEc
+vTaskDelay
+_ZN9IR_Sensor16isIRCodeReceivedEv
+_ZN9IR_Sensor13getLastIRCodeEv
+_ZN3str6printfEPKcz
+_ZNK3strclEv
+_ZN11LED_Display9setNumberEc
+sys_get_uptime_ms
+_ZN11LED_Display5clearEv
+_ZN3strD1Ev
+__cxa_pure_virtual

@@ -1,0 +1,137 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"newlib_time.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	_gettimeofday
+  18              		.thumb
+  19              		.thumb_func
+  21              	_gettimeofday:
+  22              		@ args = 0, pretend = 0, frame = 48
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 30B5     		push	{r4, r5, lr}
+  25 0002 0446     		mov	r4, r0
+  26 0004 8DB0     		sub	sp, sp, #52
+  27 0006 0028     		cmp	r0, #0
+  28 0008 38D0     		beq	.L2
+  29 000a 09A8     		add	r0, sp, #36
+  30 000c FFF7FEFF 		bl	rtc_gettime
+  31 0010 9DF82430 		ldrb	r3, [sp, #36]	@ zero_extendqisi2
+  32 0014 0025     		movs	r5, #0
+  33 0016 03F03F03 		and	r3, r3, #63
+  34 001a 0093     		str	r3, [sp, #0]
+  35 001c 9DF82530 		ldrb	r3, [sp, #37]	@ zero_extendqisi2
+  36 0020 6846     		mov	r0, sp
+  37 0022 03F03F03 		and	r3, r3, #63
+  38 0026 0193     		str	r3, [sp, #4]
+  39 0028 9DF82630 		ldrb	r3, [sp, #38]	@ zero_extendqisi2
+  40 002c 0895     		str	r5, [sp, #32]
+  41 002e 03F01F03 		and	r3, r3, #31
+  42 0032 0293     		str	r3, [sp, #8]
+  43 0034 9DF82830 		ldrb	r3, [sp, #40]	@ zero_extendqisi2
+  44 0038 03F01F03 		and	r3, r3, #31
+  45 003c 0393     		str	r3, [sp, #12]
+  46 003e 9DF82930 		ldrb	r3, [sp, #41]	@ zero_extendqisi2
+  47 0042 03F00F03 		and	r3, r3, #15
+  48 0046 013B     		subs	r3, r3, #1
+  49 0048 0493     		str	r3, [sp, #16]
+  50 004a BDF82A30 		ldrh	r3, [sp, #42]
+  51 004e C3F30B03 		ubfx	r3, r3, #0, #12
+  52 0052 9BB2     		uxth	r3, r3
+  53 0054 A3F5EC63 		sub	r3, r3, #1888
+  54 0058 0C3B     		subs	r3, r3, #12
+  55 005a 0593     		str	r3, [sp, #20]
+  56 005c 9DF82730 		ldrb	r3, [sp, #39]	@ zero_extendqisi2
+  57 0060 03F00703 		and	r3, r3, #7
+  58 0064 0693     		str	r3, [sp, #24]
+  59 0066 BDF82C30 		ldrh	r3, [sp, #44]
+  60 006a C3F30B03 		ubfx	r3, r3, #0, #12
+  61 006e 9BB2     		uxth	r3, r3
+  62 0070 013B     		subs	r3, r3, #1
+  63 0072 0793     		str	r3, [sp, #28]
+  64 0074 FFF7FEFF 		bl	mktime
+  65 0078 84E82100 		stmia	r4, {r0, r5}
+  66              	.L2:
+  67 007c 0020     		movs	r0, #0
+  68 007e 0DB0     		add	sp, sp, #52
+  69 0080 30BD     		pop	{r4, r5, pc}
+  71              		.align	1
+  72              		.global	_settimeofday
+  73              		.thumb
+  74              		.thumb_func
+  76              	_settimeofday:
+  77              		@ args = 0, pretend = 0, frame = 16
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0082 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+  80 0084 0028     		cmp	r0, #0
+  81 0086 45D0     		beq	.L4
+  82 0088 FFF7FEFF 		bl	localtime
+  83 008c 0C22     		movs	r2, #12
+  84 008e 0446     		mov	r4, r0
+  85 0090 0021     		movs	r1, #0
+  86 0092 01A8     		add	r0, sp, #4
+  87 0094 FFF7FEFF 		bl	memset
+  88 0098 2268     		ldr	r2, [r4, #0]
+  89 009a 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+  90 009e 01A8     		add	r0, sp, #4
+  91 00a0 62F30503 		bfi	r3, r2, #0, #6
+  92 00a4 8DF80430 		strb	r3, [sp, #4]
+  93 00a8 6268     		ldr	r2, [r4, #4]
+  94 00aa 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+  95 00ae 62F30503 		bfi	r3, r2, #0, #6
+  96 00b2 8DF80530 		strb	r3, [sp, #5]
+  97 00b6 A268     		ldr	r2, [r4, #8]
+  98 00b8 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+  99 00bc 62F30403 		bfi	r3, r2, #0, #5
+ 100 00c0 8DF80630 		strb	r3, [sp, #6]
+ 101 00c4 E268     		ldr	r2, [r4, #12]
+ 102 00c6 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 103 00ca 62F30403 		bfi	r3, r2, #0, #5
+ 104 00ce 8DF80830 		strb	r3, [sp, #8]
+ 105 00d2 2269     		ldr	r2, [r4, #16]
+ 106 00d4 9DF80930 		ldrb	r3, [sp, #9]	@ zero_extendqisi2
+ 107 00d8 62F30303 		bfi	r3, r2, #0, #4
+ 108 00dc 8DF80930 		strb	r3, [sp, #9]
+ 109 00e0 6269     		ldr	r2, [r4, #20]
+ 110 00e2 BDF80A30 		ldrh	r3, [sp, #10]
+ 111 00e6 02F5EC62 		add	r2, r2, #1888
+ 112 00ea 0C32     		adds	r2, r2, #12
+ 113 00ec 62F30B03 		bfi	r3, r2, #0, #12
+ 114 00f0 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+ 115 00f4 A269     		ldr	r2, [r4, #24]
+ 116 00f6 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 117 00fa 62F30203 		bfi	r3, r2, #0, #3
+ 118 00fe 8DF80730 		strb	r3, [sp, #7]
+ 119 0102 E269     		ldr	r2, [r4, #28]
+ 120 0104 BDF80C30 		ldrh	r3, [sp, #12]
+ 121 0108 62F30B03 		bfi	r3, r2, #0, #12
+ 122 010c ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 123 0110 FFF7FEFF 		bl	rtc_settime
+ 124              	.L4:
+ 125 0114 0020     		movs	r0, #0
+ 126 0116 04B0     		add	sp, sp, #16
+ 127 0118 10BD     		pop	{r4, pc}
+ 129              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 newlib_time.c
+     /tmp/ccfyiHFe.s:16     .text:00000000 $t
+     /tmp/ccfyiHFe.s:21     .text:00000000 _gettimeofday
+     /tmp/ccfyiHFe.s:76     .text:00000082 _settimeofday
+
+UNDEFINED SYMBOLS
+rtc_gettime
+mktime
+localtime
+memset
+rtc_settime

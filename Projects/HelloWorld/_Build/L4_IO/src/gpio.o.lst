@@ -1,0 +1,285 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"gpio.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.global	_ZN4GPIOC2E17LPC1758_GPIO_Type
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN4GPIOC2E17LPC1758_GPIO_Type:
+  22              		@ args = 0, pretend = 0, frame = 24
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  25 0002 01F01F0C 		and	ip, r1, #31
+  26 0006 4F09     		lsrs	r7, r1, #5
+  27 0008 87B0     		sub	sp, sp, #28
+  28 000a 104D     		ldr	r5, .L3
+  29 000c 0770     		strb	r7, [r0, #0]
+  30 000e 80F801C0 		strb	ip, [r0, #1]
+  31 0012 01AC     		add	r4, sp, #4
+  32 0014 0646     		mov	r6, r0
+  33 0016 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  34 0018 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  35 001a 2B68     		ldr	r3, [r5, #0]
+  36 001c 06AA     		add	r2, sp, #24
+  37 001e 2360     		str	r3, [r4, #0]
+  38 0020 02EB8703 		add	r3, r2, r7, lsl #2
+  39 0024 53F8143C 		ldr	r3, [r3, #-20]
+  40 0028 4FEA4C0C 		lsl	ip, ip, #1
+  41 002c 7360     		str	r3, [r6, #4]
+  42 002e 0323     		movs	r3, #3
+  43 0030 03FA0CF3 		lsl	r3, r3, ip
+  44 0034 FF00     		lsls	r7, r7, #3
+  45 0036 07F18047 		add	r7, r7, #1073741824
+  46 003a 07F53037 		add	r7, r7, #180224
+  47 003e 3A68     		ldr	r2, [r7, #0]
+  48 0040 3046     		mov	r0, r6
+  49 0042 22EA0303 		bic	r3, r2, r3
+  50 0046 3B60     		str	r3, [r7, #0]
+  51 0048 07B0     		add	sp, sp, #28
+  52 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+  53              	.L4:
+  54              		.align	2
+  55              	.L3:
+  56 004c 00000000 		.word	.LANCHOR0
+  58              		.align	1
+  59              		.global	_ZN4GPIO10setAsInputEv
+  60              		.thumb
+  61              		.thumb_func
+  63              	_ZN4GPIO10setAsInputEv:
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67 0050 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  68 0052 4368     		ldr	r3, [r0, #4]
+  69 0054 0120     		movs	r0, #1
+  70 0056 00FA02F2 		lsl	r2, r0, r2
+  71 005a 1968     		ldr	r1, [r3, #0]
+  72 005c 21EA0202 		bic	r2, r1, r2
+  73 0060 1A60     		str	r2, [r3, #0]
+  74 0062 7047     		bx	lr
+  76              		.align	1
+  77              		.global	_ZN4GPIO11setAsOutputEv
+  78              		.thumb
+  79              		.thumb_func
+  81              	_ZN4GPIO11setAsOutputEv:
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  85 0064 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  86 0066 4368     		ldr	r3, [r0, #4]
+  87 0068 0120     		movs	r0, #1
+  88 006a 00FA02F2 		lsl	r2, r0, r2
+  89 006e 1968     		ldr	r1, [r3, #0]
+  90 0070 0A43     		orrs	r2, r2, r1
+  91 0072 1A60     		str	r2, [r3, #0]
+  92 0074 7047     		bx	lr
+  94              		.align	1
+  95              		.global	_ZNK4GPIO4readEv
+  96              		.thumb
+  97              		.thumb_func
+  99              	_ZNK4GPIO4readEv:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103 0076 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 104 0078 0121     		movs	r1, #1
+ 105 007a 01FA02F2 		lsl	r2, r1, r2
+ 106 007e 4368     		ldr	r3, [r0, #4]
+ 107 0080 5B69     		ldr	r3, [r3, #20]
+ 108 0082 1A42     		tst	r2, r3
+ 109 0084 0CBF     		ite	eq
+ 110 0086 0020     		moveq	r0, #0
+ 111 0088 0120     		movne	r0, #1
+ 112 008a 7047     		bx	lr
+ 114              		.align	1
+ 115              		.global	_ZN4GPIO7setHighEv
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	_ZN4GPIO7setHighEv:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123 008c 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 124 008e 0121     		movs	r1, #1
+ 125 0090 01FA02F2 		lsl	r2, r1, r2
+ 126 0094 4368     		ldr	r3, [r0, #4]
+ 127 0096 9A61     		str	r2, [r3, #24]
+ 128 0098 7047     		bx	lr
+ 130              		.align	1
+ 131              		.global	_ZN4GPIO6setLowEv
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	_ZN4GPIO6setLowEv:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139 009a 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 140 009c 0121     		movs	r1, #1
+ 141 009e 01FA02F2 		lsl	r2, r1, r2
+ 142 00a2 4368     		ldr	r3, [r0, #4]
+ 143 00a4 DA61     		str	r2, [r3, #28]
+ 144 00a6 7047     		bx	lr
+ 146              		.align	1
+ 147              		.global	_ZN4GPIO3setEb
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	_ZN4GPIO3setEb:
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 00a8 01B1     		cbz	r1, .L11
+ 156 00aa FEE7     		b	_ZN4GPIO7setHighEv
+ 157              	.L11:
+ 158 00ac FEE7     		b	_ZN4GPIO6setLowEv
+ 160              		.align	1
+ 161              		.global	_ZN4GPIO12enablePullUpEv
+ 162              		.thumb
+ 163              		.thumb_func
+ 165              	_ZN4GPIO12enablePullUpEv:
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168 00ae 10B5     		push	{r4, lr}
+ 169 00b0 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+ 170 00b2 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 171 00b4 4900     		lsls	r1, r1, #1
+ 172 00b6 0320     		movs	r0, #3
+ 173 00b8 00FA01F1 		lsl	r1, r0, r1
+ 174 00bc 034B     		ldr	r3, .L13
+ 175 00be 53F83240 		ldr	r4, [r3, r2, lsl #3]
+ 176 00c2 24EA0101 		bic	r1, r4, r1
+ 177 00c6 43F83210 		str	r1, [r3, r2, lsl #3]
+ 178 00ca 10BD     		pop	{r4, pc}
+ 179              	.L14:
+ 180              		.align	2
+ 181              	.L13:
+ 182 00cc 40C00240 		.word	1073922112
+ 184              		.align	1
+ 185              		.global	_ZN4GPIO14enablePullDownEv
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	_ZN4GPIO14enablePullDownEv:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 00d0 10B5     		push	{r4, lr}
+ 193 00d2 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+ 194 00d4 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 195 00d6 4900     		lsls	r1, r1, #1
+ 196 00d8 0320     		movs	r0, #3
+ 197 00da 00FA01F1 		lsl	r1, r0, r1
+ 198 00de 034B     		ldr	r3, .L16
+ 199 00e0 53F83240 		ldr	r4, [r3, r2, lsl #3]
+ 200 00e4 2143     		orrs	r1, r1, r4
+ 201 00e6 43F83210 		str	r1, [r3, r2, lsl #3]
+ 202 00ea 10BD     		pop	{r4, pc}
+ 203              	.L17:
+ 204              		.align	2
+ 205              	.L16:
+ 206 00ec 40C00240 		.word	1073922112
+ 208              		.align	1
+ 209              		.global	_ZN4GPIO21disablePullUpPullDownEv
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	_ZN4GPIO21disablePullUpPullDownEv:
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216 00f0 30B5     		push	{r4, r5, lr}
+ 217 00f2 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+ 218 00f4 0325     		movs	r5, #3
+ 219 00f6 4900     		lsls	r1, r1, #1
+ 220 00f8 05FA01F1 		lsl	r1, r5, r1
+ 221 00fc 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 222 00fe 094B     		ldr	r3, .L19
+ 223 0100 53F83240 		ldr	r4, [r3, r2, lsl #3]
+ 224 0104 24EA0101 		bic	r1, r4, r1
+ 225 0108 43F83210 		str	r1, [r3, r2, lsl #3]
+ 226 010c 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+ 227 010e 0220     		movs	r0, #2
+ 228 0110 4900     		lsls	r1, r1, #1
+ 229 0112 00FA01F1 		lsl	r1, r0, r1
+ 230 0116 53F83240 		ldr	r4, [r3, r2, lsl #3]
+ 231 011a 2143     		orrs	r1, r1, r4
+ 232 011c 43F83210 		str	r1, [r3, r2, lsl #3]
+ 233 0120 30BD     		pop	{r4, r5, pc}
+ 234              	.L20:
+ 235 0122 00BF     		.align	2
+ 236              	.L19:
+ 237 0124 40C00240 		.word	1073922112
+ 239              		.align	1
+ 240              		.global	_ZN4GPIO19enableOpenDrainModeEb
+ 241              		.thumb
+ 242              		.thumb_func
+ 244              	_ZN4GPIO19enableOpenDrainModeEb:
+ 245              		@ args = 0, pretend = 0, frame = 0
+ 246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 247 0128 10B5     		push	{r4, lr}
+ 248 012a 0A4B     		ldr	r3, .L25
+ 249 012c 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 250 012e 0124     		movs	r4, #1
+ 251 0130 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 252 0132 29B1     		cbz	r1, .L22
+ 253 0134 04FA00F0 		lsl	r0, r4, r0
+ 254 0138 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 255 013c 0843     		orrs	r0, r0, r1
+ 256 013e 05E0     		b	.L24
+ 257              	.L22:
+ 258 0140 04FA00F0 		lsl	r0, r4, r0
+ 259 0144 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 260 0148 21EA0000 		bic	r0, r1, r0
+ 261              	.L24:
+ 262 014c 43F82200 		str	r0, [r3, r2, lsl #2]
+ 263 0150 10BD     		pop	{r4, pc}
+ 264              	.L26:
+ 265 0152 00BF     		.align	2
+ 266              	.L25:
+ 267 0154 68C00240 		.word	1073922152
+ 269              		.global	_ZN4GPIOC1E17LPC1758_GPIO_Type
+ 270              		.thumb_set _ZN4GPIOC1E17LPC1758_GPIO_Type,_ZN4GPIOC2E17LPC1758_GPIO_Type
+ 271              		.section	.rodata
+ 272              		.align	2
+ 273              		.set	.LANCHOR0,. + 0
+ 274              	.LC0:
+ 275 0000 00C00920 		.word	537509888
+ 276 0004 20C00920 		.word	537509920
+ 277 0008 40C00920 		.word	537509952
+ 278 000c 60C00920 		.word	537509984
+ 279 0010 80C00920 		.word	537510016
+ 280              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 gpio.cpp
+     /tmp/ccznW6qB.s:16     .text:00000000 $t
+     /tmp/ccznW6qB.s:21     .text:00000000 _ZN4GPIOC2E17LPC1758_GPIO_Type
+     /tmp/ccznW6qB.s:56     .text:0000004c $d
+     /tmp/ccznW6qB.s:58     .text:00000050 $t
+     /tmp/ccznW6qB.s:63     .text:00000050 _ZN4GPIO10setAsInputEv
+     /tmp/ccznW6qB.s:81     .text:00000064 _ZN4GPIO11setAsOutputEv
+     /tmp/ccznW6qB.s:99     .text:00000076 _ZNK4GPIO4readEv
+     /tmp/ccznW6qB.s:119    .text:0000008c _ZN4GPIO7setHighEv
+     /tmp/ccznW6qB.s:135    .text:0000009a _ZN4GPIO6setLowEv
+     /tmp/ccznW6qB.s:151    .text:000000a8 _ZN4GPIO3setEb
+     /tmp/ccznW6qB.s:165    .text:000000ae _ZN4GPIO12enablePullUpEv
+     /tmp/ccznW6qB.s:182    .text:000000cc $d
+     /tmp/ccznW6qB.s:184    .text:000000d0 $t
+     /tmp/ccznW6qB.s:189    .text:000000d0 _ZN4GPIO14enablePullDownEv
+     /tmp/ccznW6qB.s:206    .text:000000ec $d
+     /tmp/ccznW6qB.s:208    .text:000000f0 $t
+     /tmp/ccznW6qB.s:213    .text:000000f0 _ZN4GPIO21disablePullUpPullDownEv
+     /tmp/ccznW6qB.s:237    .text:00000124 $d
+     /tmp/ccznW6qB.s:239    .text:00000128 $t
+     /tmp/ccznW6qB.s:244    .text:00000128 _ZN4GPIO19enableOpenDrainModeEb
+     /tmp/ccznW6qB.s:267    .text:00000154 $d
+     /tmp/ccznW6qB.s:21     .text:00000000 _ZN4GPIOC1E17LPC1758_GPIO_Type
+     /tmp/ccznW6qB.s:272    .rodata:00000000 $d
+
+NO UNDEFINED SYMBOLS

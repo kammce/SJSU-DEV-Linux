@@ -1,0 +1,2364 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"str.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.global	_ZN3str5toIntEPKc
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN3str5toIntEPKc:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 FFF7FEBF 		b	atoi
+  27              		.align	1
+  28              		.global	_ZN3strC2EPci
+  29              		.thumb
+  30              		.thumb_func
+  32              	_ZN3strC2EPci:
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35 0004 0123     		movs	r3, #1
+  36 0006 10B5     		push	{r4, lr}
+  37 0008 0370     		strb	r3, [r0, #0]
+  38 000a 0023     		movs	r3, #0
+  39 000c 9A42     		cmp	r2, r3
+  40 000e 0446     		mov	r4, r0
+  41 0010 8160     		str	r1, [r0, #8]
+  42 0012 C360     		str	r3, [r0, #12]
+  43 0014 0361     		str	r3, [r0, #16]
+  44 0016 01DD     		ble	.L5
+  45 0018 013A     		subs	r2, r2, #1
+  46 001a 00E0     		b	.L3
+  47              	.L5:
+  48 001c 1A46     		mov	r2, r3
+  49              	.L3:
+  50 001e 6260     		str	r2, [r4, #4]
+  51 0020 0846     		mov	r0, r1
+  52 0022 0021     		movs	r1, #0
+  53 0024 FFF7FEFF 		bl	memset
+  54 0028 2046     		mov	r0, r4
+  55 002a 10BD     		pop	{r4, pc}
+  57              		.align	1
+  58              		.global	_ZN3strD2Ev
+  59              		.thumb
+  60              		.thumb_func
+  62              	_ZN3strD2Ev:
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 002c 38B5     		push	{r3, r4, r5, lr}
+  66 002e 0446     		mov	r4, r0
+  67 0030 8068     		ldr	r0, [r0, #8]
+  68 0032 18B1     		cbz	r0, .L7
+  69 0034 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+  70 0036 0BB9     		cbnz	r3, .L7
+  71 0038 FFF7FEFF 		bl	_ZdlPv
+  72              	.L7:
+  73 003c E568     		ldr	r5, [r4, #12]
+  74 003e 2DB1     		cbz	r5, .L8
+  75 0040 2846     		mov	r0, r5
+  76 0042 FFF7FEFF 		bl	_ZN3strD1Ev
+  77 0046 2846     		mov	r0, r5
+  78 0048 FFF7FEFF 		bl	_ZdlPv
+  79              	.L8:
+  80 004c 2046     		mov	r0, r4
+  81 004e 38BD     		pop	{r3, r4, r5, pc}
+  83              		.align	1
+  84              		.global	_ZNK3str6getLenEv
+  85              		.thumb
+  86              		.thumb_func
+  88              	_ZNK3str6getLenEv:
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92 0050 8068     		ldr	r0, [r0, #8]
+  93 0052 FFF7FEBF 		b	strlen
+  95              		.align	1
+  96              		.global	_ZNK3str11getCapacityEv
+  97              		.thumb
+  98              		.thumb_func
+ 100              	_ZNK3str11getCapacityEv:
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103              		@ link register save eliminated.
+ 104 0056 4068     		ldr	r0, [r0, #4]
+ 105 0058 7047     		bx	lr
+ 107              		.align	1
+ 108              		.global	_ZN3str5clearEv
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	_ZN3str5clearEv:
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 005a 8368     		ldr	r3, [r0, #8]
+ 117 005c 0022     		movs	r2, #0
+ 118 005e 1A70     		strb	r2, [r3, #0]
+ 119 0060 7047     		bx	lr
+ 121              		.align	1
+ 122              		.global	_ZN3str8clearAllEv
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	_ZN3str8clearAllEv:
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+ 130 0062 0346     		mov	r3, r0
+ 131 0064 5A68     		ldr	r2, [r3, #4]
+ 132 0066 8068     		ldr	r0, [r0, #8]
+ 133 0068 0021     		movs	r1, #0
+ 134 006a FFF7FEBF 		b	memset
+ 136              		.align	1
+ 137              		.global	_ZN3str7toLowerEv
+ 138              		.thumb
+ 139              		.thumb_func
+ 141              	_ZN3str7toLowerEv:
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144 006e 10B5     		push	{r4, lr}
+ 145 0070 8468     		ldr	r4, [r0, #8]
+ 146 0072 03E0     		b	.L14
+ 147              	.L15:
+ 148 0074 FFF7FEFF 		bl	tolower
+ 149 0078 04F8010C 		strb	r0, [r4, #-1]
+ 150              	.L14:
+ 151 007c 14F8010B 		ldrb	r0, [r4], #1	@ zero_extendqisi2
+ 152 0080 0028     		cmp	r0, #0
+ 153 0082 F7D1     		bne	.L15
+ 154 0084 10BD     		pop	{r4, pc}
+ 156              		.align	1
+ 157              		.global	_ZN3str7toUpperEv
+ 158              		.thumb
+ 159              		.thumb_func
+ 161              	_ZN3str7toUpperEv:
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164 0086 10B5     		push	{r4, lr}
+ 165 0088 8468     		ldr	r4, [r0, #8]
+ 166 008a 03E0     		b	.L17
+ 167              	.L18:
+ 168 008c FFF7FEFF 		bl	toupper
+ 169 0090 04F8010C 		strb	r0, [r4, #-1]
+ 170              	.L17:
+ 171 0094 14F8010B 		ldrb	r0, [r4], #1	@ zero_extendqisi2
+ 172 0098 0028     		cmp	r0, #0
+ 173 009a F7D1     		bne	.L18
+ 174 009c 10BD     		pop	{r4, pc}
+ 176              		.align	1
+ 177              		.global	_ZN3str5scanfEPKcz
+ 178              		.thumb
+ 179              		.thumb_func
+ 181              	_ZN3str5scanfEPKcz:
+ 182              		@ args = 4, pretend = 12, frame = 8
+ 183              		@ frame_needed = 0, uses_anonymous_args = 1
+ 184 009e 0EB4     		push	{r1, r2, r3}
+ 185 00a0 03B5     		push	{r0, r1, lr}
+ 186 00a2 03AA     		add	r2, sp, #12
+ 187 00a4 52F8041B 		ldr	r1, [r2], #4
+ 188 00a8 8068     		ldr	r0, [r0, #8]
+ 189 00aa 0192     		str	r2, [sp, #4]
+ 190 00ac FFF7FEFF 		bl	vsiscanf
+ 191 00b0 BDE80C40 		pop	{r2, r3, lr}
+ 192 00b4 03B0     		add	sp, sp, #12
+ 193 00b6 7047     		bx	lr
+ 195              		.align	1
+ 196              		.global	_ZN3str8tokenizeEPKciz
+ 197              		.thumb
+ 198              		.thumb_func
+ 200              	_ZN3str8tokenizeEPKciz:
+ 201              		@ args = 4, pretend = 8, frame = 8
+ 202              		@ frame_needed = 0, uses_anonymous_args = 1
+ 203 00b8 0CB4     		push	{r2, r3}
+ 204 00ba F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 205 00bc 0024     		movs	r4, #0
+ 206 00be 08AB     		add	r3, sp, #32
+ 207 00c0 02AD     		add	r5, sp, #8
+ 208 00c2 53F8047B 		ldr	r7, [r3], #4
+ 209 00c6 45F8044D 		str	r4, [r5, #-4]!
+ 210 00ca 2A46     		mov	r2, r5
+ 211 00cc 8068     		ldr	r0, [r0, #8]
+ 212 00ce 0E46     		mov	r6, r1
+ 213 00d0 0093     		str	r3, [sp, #0]
+ 214 00d2 FFF7FEFF 		bl	strtok_r
+ 215 00d6 06E0     		b	.L21
+ 216              	.L23:
+ 217 00d8 1860     		str	r0, [r3, #0]
+ 218              	.L24:
+ 219 00da 0020     		movs	r0, #0
+ 220 00dc 3146     		mov	r1, r6
+ 221 00de 2A46     		mov	r2, r5
+ 222 00e0 FFF7FEFF 		bl	strtok_r
+ 223 00e4 0134     		adds	r4, r4, #1
+ 224              	.L21:
+ 225 00e6 48B1     		cbz	r0, .L22
+ 226 00e8 3B1B     		subs	r3, r7, r4
+ 227 00ea 002B     		cmp	r3, #0
+ 228 00ec 06DD     		ble	.L22
+ 229 00ee 009B     		ldr	r3, [sp, #0]
+ 230 00f0 1A1D     		adds	r2, r3, #4
+ 231 00f2 0092     		str	r2, [sp, #0]
+ 232 00f4 1B68     		ldr	r3, [r3, #0]
+ 233 00f6 002B     		cmp	r3, #0
+ 234 00f8 EED1     		bne	.L23
+ 235 00fa EEE7     		b	.L24
+ 236              	.L22:
+ 237 00fc 2046     		mov	r0, r4
+ 238 00fe BDE8FE40 		pop	{r1, r2, r3, r4, r5, r6, r7, lr}
+ 239 0102 02B0     		add	sp, sp, #8
+ 240 0104 7047     		bx	lr
+ 242              		.align	1
+ 243              		.global	_ZNK3str9compareToEPKc
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	_ZNK3str9compareToEPKc:
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250 0106 08B5     		push	{r3, lr}
+ 251 0108 0346     		mov	r3, r0
+ 252 010a 0846     		mov	r0, r1
+ 253 010c 9968     		ldr	r1, [r3, #8]
+ 254 010e FFF7FEFF 		bl	strcmp
+ 255 0112 D0F10100 		rsbs	r0, r0, #1
+ 256 0116 38BF     		it	cc
+ 257 0118 0020     		movcc	r0, #0
+ 258 011a 08BD     		pop	{r3, pc}
+ 260              		.align	1
+ 261              		.global	_ZNK3str19compareToIgnoreCaseEPKc
+ 262              		.thumb
+ 263              		.thumb_func
+ 265              	_ZNK3str19compareToIgnoreCaseEPKc:
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268 011c 08B5     		push	{r3, lr}
+ 269 011e 8068     		ldr	r0, [r0, #8]
+ 270 0120 FFF7FEFF 		bl	strcasecmp
+ 271 0124 D0F10100 		rsbs	r0, r0, #1
+ 272 0128 38BF     		it	cc
+ 273 012a 0020     		movcc	r0, #0
+ 274 012c 08BD     		pop	{r3, pc}
+ 276              		.align	1
+ 277              		.global	_ZNK3str22firstIndexOfIgnoreCaseEPKc
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	_ZNK3str22firstIndexOfIgnoreCaseEPKc:
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284 012e 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 285 0132 0D78     		ldrb	r5, [r1, #0]	@ zero_extendqisi2
+ 286 0134 0E46     		mov	r6, r1
+ 287 0136 002D     		cmp	r5, #0
+ 288 0138 33D0     		beq	.L36
+ 289 013a 8468     		ldr	r4, [r0, #8]
+ 290 013c 4FF0FF37 		mov	r7, #-1
+ 291 0140 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 292 0142 29E0     		b	.L38
+ 293              	.L34:
+ 294 0144 2846     		mov	r0, r5
+ 295 0146 FFF7FEFF 		bl	tolower
+ 296 014a 0146     		mov	r1, r0
+ 297 014c 2046     		mov	r0, r4
+ 298 014e FFF7FEFF 		bl	strchr
+ 299 0152 38B9     		cbnz	r0, .L30
+ 300 0154 2846     		mov	r0, r5
+ 301 0156 FFF7FEFF 		bl	toupper
+ 302 015a 0146     		mov	r1, r0
+ 303 015c 2046     		mov	r0, r4
+ 304 015e FFF7FEFF 		bl	strchr
+ 305 0162 F0B1     		cbz	r0, .L36
+ 306              	.L30:
+ 307 0164 071B     		subs	r7, r0, r4
+ 308 0166 00F1010A 		add	sl, r0, #1
+ 309 016a 8146     		mov	r9, r0
+ 310 016c 3346     		mov	r3, r6
+ 311              	.L32:
+ 312 016e 19F8010F 		ldrb	r0, [r9, #1]!	@ zero_extendqisi2
+ 313 0172 03F10108 		add	r8, r3, #1
+ 314 0176 60B1     		cbz	r0, .L31
+ 315 0178 5C78     		ldrb	r4, [r3, #1]	@ zero_extendqisi2
+ 316 017a 54B1     		cbz	r4, .L31
+ 317 017c FFF7FEFF 		bl	tolower
+ 318 0180 8346     		mov	fp, r0
+ 319 0182 2046     		mov	r0, r4
+ 320 0184 FFF7FEFF 		bl	tolower
+ 321 0188 8345     		cmp	fp, r0
+ 322 018a 4346     		mov	r3, r8
+ 323 018c EFD0     		beq	.L32
+ 324 018e 4FF0FF37 		mov	r7, #-1
+ 325              	.L31:
+ 326 0192 98F80030 		ldrb	r3, [r8, #0]	@ zero_extendqisi2
+ 327 0196 5446     		mov	r4, sl
+ 328              	.L38:
+ 329 0198 2BB1     		cbz	r3, .L28
+ 330              	.L33:
+ 331 019a 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 332 019c 002B     		cmp	r3, #0
+ 333 019e D1D1     		bne	.L34
+ 334 01a0 01E0     		b	.L28
+ 335              	.L36:
+ 336 01a2 4FF0FF37 		mov	r7, #-1
+ 337              	.L28:
+ 338 01a6 3846     		mov	r0, r7
+ 339 01a8 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 341              		.align	1
+ 342              		.global	_ZNK3str18containsIgnoreCaseEPKc
+ 343              		.thumb
+ 344              		.thumb_func
+ 346              	_ZNK3str18containsIgnoreCaseEPKc:
+ 347              		@ args = 0, pretend = 0, frame = 0
+ 348              		@ frame_needed = 0, uses_anonymous_args = 0
+ 349 01ac 08B5     		push	{r3, lr}
+ 350 01ae FFF7FEFF 		bl	_ZNK3str22firstIndexOfIgnoreCaseEPKc
+ 351 01b2 0130     		adds	r0, r0, #1
+ 352 01b4 18BF     		it	ne
+ 353 01b6 0120     		movne	r0, #1
+ 354 01b8 08BD     		pop	{r3, pc}
+ 356              		.align	1
+ 357              		.global	_ZNK3str12firstIndexOfEPKc
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	_ZNK3str12firstIndexOfEPKc:
+ 362              		@ args = 0, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364 01ba 10B5     		push	{r4, lr}
+ 365 01bc 8468     		ldr	r4, [r0, #8]
+ 366 01be 2046     		mov	r0, r4
+ 367 01c0 FFF7FEFF 		bl	strstr
+ 368 01c4 08B1     		cbz	r0, .L42
+ 369 01c6 001B     		subs	r0, r0, r4
+ 370 01c8 10BD     		pop	{r4, pc}
+ 371              	.L42:
+ 372 01ca 4FF0FF30 		mov	r0, #-1
+ 373 01ce 10BD     		pop	{r4, pc}
+ 375              		.align	1
+ 376              		.global	_ZNK3str8containsEPKc
+ 377              		.thumb
+ 378              		.thumb_func
+ 380              	_ZNK3str8containsEPKc:
+ 381              		@ args = 0, pretend = 0, frame = 0
+ 382              		@ frame_needed = 0, uses_anonymous_args = 0
+ 383 01d0 08B5     		push	{r3, lr}
+ 384 01d2 FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 385 01d6 0130     		adds	r0, r0, #1
+ 386 01d8 18BF     		it	ne
+ 387 01da 0120     		movne	r0, #1
+ 388 01dc 08BD     		pop	{r3, pc}
+ 390              		.align	1
+ 391              		.global	_ZNK3str11lastIndexOfEPKc
+ 392              		.thumb
+ 393              		.thumb_func
+ 395              	_ZNK3str11lastIndexOfEPKc:
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398 01de F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 399 01e0 0446     		mov	r4, r0
+ 400 01e2 0846     		mov	r0, r1
+ 401 01e4 0D46     		mov	r5, r1
+ 402 01e6 FFF7FEFF 		bl	strlen
+ 403 01ea 0746     		mov	r7, r0
+ 404 01ec 90B1     		cbz	r0, .L48
+ 405 01ee A668     		ldr	r6, [r4, #8]
+ 406 01f0 2946     		mov	r1, r5
+ 407 01f2 3046     		mov	r0, r6
+ 408 01f4 FFF7FEFF 		bl	strstr
+ 409 01f8 0446     		mov	r4, r0
+ 410 01fa 0346     		mov	r3, r0
+ 411 01fc 05E0     		b	.L46
+ 412              	.L47:
+ 413 01fe E019     		adds	r0, r4, r7
+ 414 0200 2946     		mov	r1, r5
+ 415 0202 FFF7FEFF 		bl	strstr
+ 416 0206 2346     		mov	r3, r4
+ 417 0208 0446     		mov	r4, r0
+ 418              	.L46:
+ 419 020a 002C     		cmp	r4, #0
+ 420 020c F7D1     		bne	.L47
+ 421 020e 23B1     		cbz	r3, .L49
+ 422 0210 981B     		subs	r0, r3, r6
+ 423 0212 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 424              	.L48:
+ 425 0214 4FF0FF30 		mov	r0, #-1
+ 426 0218 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 427              	.L49:
+ 428 021a 4FF0FF30 		mov	r0, #-1
+ 429 021e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 431              		.align	1
+ 432              		.global	_ZNK3str7countOfEPKc
+ 433              		.thumb
+ 434              		.thumb_func
+ 436              	_ZNK3str7countOfEPKc:
+ 437              		@ args = 0, pretend = 0, frame = 0
+ 438              		@ frame_needed = 0, uses_anonymous_args = 0
+ 439 0220 70B5     		push	{r4, r5, r6, lr}
+ 440 0222 0446     		mov	r4, r0
+ 441 0224 0846     		mov	r0, r1
+ 442 0226 0E46     		mov	r6, r1
+ 443 0228 FFF7FEFF 		bl	strlen
+ 444 022c 3146     		mov	r1, r6
+ 445 022e 0546     		mov	r5, r0
+ 446 0230 A068     		ldr	r0, [r4, #8]
+ 447 0232 FFF7FEFF 		bl	strstr
+ 448 0236 4DB1     		cbz	r5, .L54
+ 449 0238 0024     		movs	r4, #0
+ 450 023a 04E0     		b	.L52
+ 451              	.L53:
+ 452 023c 4019     		adds	r0, r0, r5
+ 453 023e 3146     		mov	r1, r6
+ 454 0240 0134     		adds	r4, r4, #1
+ 455 0242 FFF7FEFF 		bl	strstr
+ 456              	.L52:
+ 457 0246 0028     		cmp	r0, #0
+ 458 0248 F8D1     		bne	.L53
+ 459 024a 00E0     		b	.L51
+ 460              	.L54:
+ 461 024c 2C46     		mov	r4, r5
+ 462              	.L51:
+ 463 024e 2046     		mov	r0, r4
+ 464 0250 70BD     		pop	{r4, r5, r6, pc}
+ 466              		.align	1
+ 467              		.global	_ZNK3str10beginsWithEPKc
+ 468              		.thumb
+ 469              		.thumb_func
+ 471              	_ZNK3str10beginsWithEPKc:
+ 472              		@ args = 0, pretend = 0, frame = 0
+ 473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 474 0252 70B5     		push	{r4, r5, r6, lr}
+ 475 0254 0546     		mov	r5, r0
+ 476 0256 0846     		mov	r0, r1
+ 477 0258 0E46     		mov	r6, r1
+ 478 025a FFF7FEFF 		bl	strlen
+ 479 025e AD68     		ldr	r5, [r5, #8]
+ 480 0260 0446     		mov	r4, r0
+ 481 0262 2846     		mov	r0, r5
+ 482 0264 FFF7FEFF 		bl	strlen
+ 483 0268 A042     		cmp	r0, r4
+ 484 026a 09DB     		blt	.L57
+ 485 026c 2846     		mov	r0, r5
+ 486 026e 3146     		mov	r1, r6
+ 487 0270 2246     		mov	r2, r4
+ 488 0272 FFF7FEFF 		bl	strncmp
+ 489 0276 D0F10100 		rsbs	r0, r0, #1
+ 490 027a 38BF     		it	cc
+ 491 027c 0020     		movcc	r0, #0
+ 492 027e 70BD     		pop	{r4, r5, r6, pc}
+ 493              	.L57:
+ 494 0280 0020     		movs	r0, #0
+ 495 0282 70BD     		pop	{r4, r5, r6, pc}
+ 497              		.align	1
+ 498              		.global	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	_ZNK3str20beginsWithIgnoreCaseEPKc:
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505 0284 70B5     		push	{r4, r5, r6, lr}
+ 506 0286 0546     		mov	r5, r0
+ 507 0288 0846     		mov	r0, r1
+ 508 028a 0E46     		mov	r6, r1
+ 509 028c FFF7FEFF 		bl	strlen
+ 510 0290 AD68     		ldr	r5, [r5, #8]
+ 511 0292 0446     		mov	r4, r0
+ 512 0294 2846     		mov	r0, r5
+ 513 0296 FFF7FEFF 		bl	strlen
+ 514 029a A042     		cmp	r0, r4
+ 515 029c 09DB     		blt	.L60
+ 516 029e 3046     		mov	r0, r6
+ 517 02a0 2946     		mov	r1, r5
+ 518 02a2 2246     		mov	r2, r4
+ 519 02a4 FFF7FEFF 		bl	strncasecmp
+ 520 02a8 D0F10100 		rsbs	r0, r0, #1
+ 521 02ac 38BF     		it	cc
+ 522 02ae 0020     		movcc	r0, #0
+ 523 02b0 70BD     		pop	{r4, r5, r6, pc}
+ 524              	.L60:
+ 525 02b2 0020     		movs	r0, #0
+ 526 02b4 70BD     		pop	{r4, r5, r6, pc}
+ 528              		.align	1
+ 529              		.global	_ZNK3str19beginsWithWholeWordEPKcc
+ 530              		.thumb
+ 531              		.thumb_func
+ 533              	_ZNK3str19beginsWithWholeWordEPKcc:
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536 02b6 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 537 02b8 0446     		mov	r4, r0
+ 538 02ba 0846     		mov	r0, r1
+ 539 02bc 0E46     		mov	r6, r1
+ 540 02be 1746     		mov	r7, r2
+ 541 02c0 FFF7FEFF 		bl	strlen
+ 542 02c4 A368     		ldr	r3, [r4, #8]
+ 543 02c6 3146     		mov	r1, r6
+ 544 02c8 1D5C     		ldrb	r5, [r3, r0]	@ zero_extendqisi2
+ 545 02ca 2046     		mov	r0, r4
+ 546 02cc FFF7FEFF 		bl	_ZNK3str10beginsWithEPKc
+ 547 02d0 38B1     		cbz	r0, .L62
+ 548 02d2 AF42     		cmp	r7, r5
+ 549 02d4 04D0     		beq	.L64
+ 550 02d6 D5F10100 		rsbs	r0, r5, #1
+ 551 02da 38BF     		it	cc
+ 552 02dc 0020     		movcc	r0, #0
+ 553 02de F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 554              	.L64:
+ 555 02e0 0120     		movs	r0, #1
+ 556              	.L62:
+ 557 02e2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 559              		.align	1
+ 560              		.global	_ZNK3str29beginsWithWholeWordIgnoreCaseEPKcc
+ 561              		.thumb
+ 562              		.thumb_func
+ 564              	_ZNK3str29beginsWithWholeWordIgnoreCaseEPKcc:
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567 02e4 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 568 02e6 0446     		mov	r4, r0
+ 569 02e8 0846     		mov	r0, r1
+ 570 02ea 0E46     		mov	r6, r1
+ 571 02ec 1746     		mov	r7, r2
+ 572 02ee FFF7FEFF 		bl	strlen
+ 573 02f2 A368     		ldr	r3, [r4, #8]
+ 574 02f4 3146     		mov	r1, r6
+ 575 02f6 1D5C     		ldrb	r5, [r3, r0]	@ zero_extendqisi2
+ 576 02f8 2046     		mov	r0, r4
+ 577 02fa FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 578 02fe 38B1     		cbz	r0, .L66
+ 579 0300 AF42     		cmp	r7, r5
+ 580 0302 04D0     		beq	.L68
+ 581 0304 D5F10100 		rsbs	r0, r5, #1
+ 582 0308 38BF     		it	cc
+ 583 030a 0020     		movcc	r0, #0
+ 584 030c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 585              	.L68:
+ 586 030e 0120     		movs	r0, #1
+ 587              	.L66:
+ 588 0310 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 590              		.align	1
+ 591              		.global	_ZNK3str8endsWithEPKc
+ 592              		.thumb
+ 593              		.thumb_func
+ 595              	_ZNK3str8endsWithEPKc:
+ 596              		@ args = 0, pretend = 0, frame = 0
+ 597              		@ frame_needed = 0, uses_anonymous_args = 0
+ 598 0312 70B5     		push	{r4, r5, r6, lr}
+ 599 0314 0446     		mov	r4, r0
+ 600 0316 0846     		mov	r0, r1
+ 601 0318 0D46     		mov	r5, r1
+ 602 031a FFF7FEFF 		bl	strlen
+ 603 031e A468     		ldr	r4, [r4, #8]
+ 604 0320 0646     		mov	r6, r0
+ 605 0322 2046     		mov	r0, r4
+ 606 0324 FFF7FEFF 		bl	strlen
+ 607 0328 B042     		cmp	r0, r6
+ 608 032a 09DB     		blt	.L71
+ 609 032c 801B     		subs	r0, r0, r6
+ 610 032e 2018     		adds	r0, r4, r0
+ 611 0330 2946     		mov	r1, r5
+ 612 0332 FFF7FEFF 		bl	strcmp
+ 613 0336 D0F10100 		rsbs	r0, r0, #1
+ 614 033a 38BF     		it	cc
+ 615 033c 0020     		movcc	r0, #0
+ 616 033e 70BD     		pop	{r4, r5, r6, pc}
+ 617              	.L71:
+ 618 0340 0020     		movs	r0, #0
+ 619 0342 70BD     		pop	{r4, r5, r6, pc}
+ 621              		.align	1
+ 622              		.global	_ZNK3str18endsWithIgnoreCaseEPKc
+ 623              		.thumb
+ 624              		.thumb_func
+ 626              	_ZNK3str18endsWithIgnoreCaseEPKc:
+ 627              		@ args = 0, pretend = 0, frame = 0
+ 628              		@ frame_needed = 0, uses_anonymous_args = 0
+ 629 0344 70B5     		push	{r4, r5, r6, lr}
+ 630 0346 0446     		mov	r4, r0
+ 631 0348 0846     		mov	r0, r1
+ 632 034a 0D46     		mov	r5, r1
+ 633 034c FFF7FEFF 		bl	strlen
+ 634 0350 A468     		ldr	r4, [r4, #8]
+ 635 0352 0646     		mov	r6, r0
+ 636 0354 2046     		mov	r0, r4
+ 637 0356 FFF7FEFF 		bl	strlen
+ 638 035a 8642     		cmp	r6, r0
+ 639 035c 09DC     		bgt	.L74
+ 640 035e 861B     		subs	r6, r0, r6
+ 641 0360 A119     		adds	r1, r4, r6
+ 642 0362 2846     		mov	r0, r5
+ 643 0364 FFF7FEFF 		bl	strcasecmp
+ 644 0368 D0F10100 		rsbs	r0, r0, #1
+ 645 036c 38BF     		it	cc
+ 646 036e 0020     		movcc	r0, #0
+ 647 0370 70BD     		pop	{r4, r5, r6, pc}
+ 648              	.L74:
+ 649 0372 0020     		movs	r0, #0
+ 650 0374 70BD     		pop	{r4, r5, r6, pc}
+ 652              		.align	1
+ 653              		.global	_ZN3str10eraseFirstEi
+ 654              		.thumb
+ 655              		.thumb_func
+ 657              	_ZN3str10eraseFirstEi:
+ 658              		@ args = 0, pretend = 0, frame = 0
+ 659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 660 0376 38B5     		push	{r3, r4, r5, lr}
+ 661 0378 8568     		ldr	r5, [r0, #8]
+ 662 037a 0C46     		mov	r4, r1
+ 663 037c 2846     		mov	r0, r5
+ 664 037e FFF7FEFF 		bl	strlen
+ 665 0382 002C     		cmp	r4, #0
+ 666 0384 09DD     		ble	.L77
+ 667 0386 8442     		cmp	r4, r0
+ 668 0388 09DC     		bgt	.L78
+ 669 038a 2919     		adds	r1, r5, r4
+ 670 038c 041B     		subs	r4, r0, r4
+ 671 038e 621C     		adds	r2, r4, #1
+ 672 0390 2846     		mov	r0, r5
+ 673 0392 FFF7FEFF 		bl	memmove
+ 674 0396 0120     		movs	r0, #1
+ 675 0398 38BD     		pop	{r3, r4, r5, pc}
+ 676              	.L77:
+ 677 039a 0020     		movs	r0, #0
+ 678 039c 38BD     		pop	{r3, r4, r5, pc}
+ 679              	.L78:
+ 680 039e 0020     		movs	r0, #0
+ 681 03a0 38BD     		pop	{r3, r4, r5, pc}
+ 683              		.align	1
+ 684              		.global	_ZN3str9eraseLastEi
+ 685              		.thumb
+ 686              		.thumb_func
+ 688              	_ZN3str9eraseLastEi:
+ 689              		@ args = 0, pretend = 0, frame = 0
+ 690              		@ frame_needed = 0, uses_anonymous_args = 0
+ 691 03a2 38B5     		push	{r3, r4, r5, lr}
+ 692 03a4 8468     		ldr	r4, [r0, #8]
+ 693 03a6 0D46     		mov	r5, r1
+ 694 03a8 2046     		mov	r0, r4
+ 695 03aa FFF7FEFF 		bl	strlen
+ 696 03ae 8542     		cmp	r5, r0
+ 697 03b0 4FF00003 		mov	r3, #0
+ 698 03b4 03DC     		bgt	.L81
+ 699 03b6 451B     		subs	r5, r0, r5
+ 700 03b8 6355     		strb	r3, [r4, r5]
+ 701 03ba 0120     		movs	r0, #1
+ 702 03bc 38BD     		pop	{r3, r4, r5, pc}
+ 703              	.L81:
+ 704 03be 1846     		mov	r0, r3
+ 705 03c0 38BD     		pop	{r3, r4, r5, pc}
+ 707              		.align	1
+ 708              		.global	_ZN3str13eraseAllAfterEi
+ 709              		.thumb
+ 710              		.thumb_func
+ 712              	_ZN3str13eraseAllAfterEi:
+ 713              		@ args = 0, pretend = 0, frame = 0
+ 714              		@ frame_needed = 0, uses_anonymous_args = 0
+ 715 03c2 0029     		cmp	r1, #0
+ 716 03c4 38B5     		push	{r3, r4, r5, lr}
+ 717 03c6 0C46     		mov	r4, r1
+ 718 03c8 0ADB     		blt	.L84
+ 719 03ca 8568     		ldr	r5, [r0, #8]
+ 720 03cc 2846     		mov	r0, r5
+ 721 03ce FFF7FEFF 		bl	strlen
+ 722 03d2 8442     		cmp	r4, r0
+ 723 03d4 4FF00000 		mov	r0, #0
+ 724 03d8 03DA     		bge	.L83
+ 725 03da 2855     		strb	r0, [r5, r4]
+ 726 03dc 0120     		movs	r0, #1
+ 727 03de 38BD     		pop	{r3, r4, r5, pc}
+ 728              	.L84:
+ 729 03e0 0020     		movs	r0, #0
+ 730              	.L83:
+ 731 03e2 38BD     		pop	{r3, r4, r5, pc}
+ 733              		.align	1
+ 734              		.global	_ZN3str10eraseAfterEii
+ 735              		.thumb
+ 736              		.thumb_func
+ 738              	_ZN3str10eraseAfterEii:
+ 739              		@ args = 0, pretend = 0, frame = 0
+ 740              		@ frame_needed = 0, uses_anonymous_args = 0
+ 741 03e4 70B5     		push	{r4, r5, r6, lr}
+ 742 03e6 8568     		ldr	r5, [r0, #8]
+ 743 03e8 0C46     		mov	r4, r1
+ 744 03ea 2846     		mov	r0, r5
+ 745 03ec 1646     		mov	r6, r2
+ 746 03ee FFF7FEFF 		bl	strlen
+ 747 03f2 002C     		cmp	r4, #0
+ 748 03f4 10DB     		blt	.L89
+ 749 03f6 8442     		cmp	r4, r0
+ 750 03f8 0EDA     		bge	.L89
+ 751 03fa 002E     		cmp	r6, #0
+ 752 03fc 0EDD     		ble	.L90
+ 753 03fe 021B     		subs	r2, r0, r4
+ 754 0400 B242     		cmp	r2, r6
+ 755 0402 B8BF     		it	lt
+ 756 0404 1646     		movlt	r6, r2
+ 757 0406 2819     		adds	r0, r5, r4
+ 758 0408 921B     		subs	r2, r2, r6
+ 759 040a 3419     		adds	r4, r6, r4
+ 760 040c 2919     		adds	r1, r5, r4
+ 761 040e 0132     		adds	r2, r2, #1
+ 762 0410 FFF7FEFF 		bl	memmove
+ 763 0414 0120     		movs	r0, #1
+ 764 0416 70BD     		pop	{r4, r5, r6, pc}
+ 765              	.L89:
+ 766 0418 0020     		movs	r0, #0
+ 767 041a 70BD     		pop	{r4, r5, r6, pc}
+ 768              	.L90:
+ 769 041c 0020     		movs	r0, #0
+ 770 041e 70BD     		pop	{r4, r5, r6, pc}
+ 772              		.align	1
+ 773              		.global	_ZN3str11eraseCharAtEi
+ 774              		.thumb
+ 775              		.thumb_func
+ 777              	_ZN3str11eraseCharAtEi:
+ 778              		@ args = 0, pretend = 0, frame = 0
+ 779              		@ frame_needed = 0, uses_anonymous_args = 0
+ 780              		@ link register save eliminated.
+ 781 0420 0122     		movs	r2, #1
+ 782 0422 FEE7     		b	_ZN3str10eraseAfterEii
+ 784              		.align	1
+ 785              		.global	_ZN3str5eraseEPKc
+ 786              		.thumb
+ 787              		.thumb_func
+ 789              	_ZN3str5eraseEPKc:
+ 790              		@ args = 0, pretend = 0, frame = 0
+ 791              		@ frame_needed = 0, uses_anonymous_args = 0
+ 792 0424 70B5     		push	{r4, r5, r6, lr}
+ 793 0426 0446     		mov	r4, r0
+ 794 0428 0D46     		mov	r5, r1
+ 795 042a FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 796 042e 431C     		adds	r3, r0, #1
+ 797 0430 0646     		mov	r6, r0
+ 798 0432 08D0     		beq	.L93
+ 799 0434 2846     		mov	r0, r5
+ 800 0436 FFF7FEFF 		bl	strlen
+ 801 043a 3146     		mov	r1, r6
+ 802 043c 0246     		mov	r2, r0
+ 803 043e 2046     		mov	r0, r4
+ 804 0440 BDE87040 		pop	{r4, r5, r6, lr}
+ 805 0444 FEE7     		b	_ZN3str10eraseAfterEii
+ 806              	.L93:
+ 807 0446 0020     		movs	r0, #0
+ 808 0448 70BD     		pop	{r4, r5, r6, pc}
+ 810              		.align	1
+ 811              		.global	_ZN3str20eraseAllSpecialCharsEv
+ 812              		.thumb
+ 813              		.thumb_func
+ 815              	_ZN3str20eraseAllSpecialCharsEv:
+ 816              		@ args = 0, pretend = 0, frame = 0
+ 817              		@ frame_needed = 0, uses_anonymous_args = 0
+ 818 044a F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 819 044c 0024     		movs	r4, #0
+ 820 044e 0646     		mov	r6, r0
+ 821 0450 2546     		mov	r5, r4
+ 822 0452 0AE0     		b	.L95
+ 823              	.L97:
+ 824 0454 385D     		ldrb	r0, [r7, r4]	@ zero_extendqisi2
+ 825 0456 FFF7FEFF 		bl	isalnum
+ 826 045a 28B9     		cbnz	r0, .L96
+ 827 045c 2146     		mov	r1, r4
+ 828 045e 3046     		mov	r0, r6
+ 829 0460 FFF7FEFF 		bl	_ZN3str11eraseCharAtEi
+ 830 0464 013C     		subs	r4, r4, #1
+ 831 0466 0135     		adds	r5, r5, #1
+ 832              	.L96:
+ 833 0468 0134     		adds	r4, r4, #1
+ 834              	.L95:
+ 835 046a B768     		ldr	r7, [r6, #8]
+ 836 046c 3846     		mov	r0, r7
+ 837 046e FFF7FEFF 		bl	strlen
+ 838 0472 8442     		cmp	r4, r0
+ 839 0474 EEDB     		blt	.L97
+ 840 0476 2846     		mov	r0, r5
+ 841 0478 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 843              		.align	1
+ 844              		.global	_ZN3str9trimStartEPKc
+ 845              		.thumb
+ 846              		.thumb_func
+ 848              	_ZN3str9trimStartEPKc:
+ 849              		@ args = 0, pretend = 0, frame = 0
+ 850              		@ frame_needed = 0, uses_anonymous_args = 0
+ 851 047a 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 852 047e 8668     		ldr	r6, [r0, #8]
+ 853 0480 0446     		mov	r4, r0
+ 854 0482 3046     		mov	r0, r6
+ 855 0484 0F46     		mov	r7, r1
+ 856 0486 FFF7FEFF 		bl	strlen
+ 857 048a 0025     		movs	r5, #0
+ 858 048c 8046     		mov	r8, r0
+ 859 048e 0EE0     		b	.L99
+ 860              	.L104:
+ 861 0490 3846     		mov	r0, r7
+ 862 0492 FFF7FEFF 		bl	strlen
+ 863 0496 0023     		movs	r3, #0
+ 864 0498 06E0     		b	.L100
+ 865              	.L102:
+ 866 049a F95C     		ldrb	r1, [r7, r3]	@ zero_extendqisi2
+ 867 049c 725D     		ldrb	r2, [r6, r5]	@ zero_extendqisi2
+ 868 049e 9142     		cmp	r1, r2
+ 869 04a0 01D1     		bne	.L101
+ 870 04a2 0135     		adds	r5, r5, #1
+ 871 04a4 03E0     		b	.L99
+ 872              	.L101:
+ 873 04a6 0133     		adds	r3, r3, #1
+ 874              	.L100:
+ 875 04a8 8342     		cmp	r3, r0
+ 876 04aa F6DB     		blt	.L102
+ 877 04ac 01E0     		b	.L103
+ 878              	.L99:
+ 879 04ae 4545     		cmp	r5, r8
+ 880 04b0 EEDB     		blt	.L104
+ 881              	.L103:
+ 882 04b2 25B1     		cbz	r5, .L98
+ 883 04b4 2046     		mov	r0, r4
+ 884 04b6 2946     		mov	r1, r5
+ 885 04b8 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 886 04bc FEE7     		b	_ZN3str10eraseFirstEi
+ 887              	.L98:
+ 888 04be BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 890              		.align	1
+ 891              		.global	_ZN3str7trimEndEPKc
+ 892              		.thumb
+ 893              		.thumb_func
+ 895              	_ZN3str7trimEndEPKc:
+ 896              		@ args = 0, pretend = 0, frame = 0
+ 897              		@ frame_needed = 0, uses_anonymous_args = 0
+ 898 04c2 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 899 04c4 0446     		mov	r4, r0
+ 900 04c6 0846     		mov	r0, r1
+ 901 04c8 0D46     		mov	r5, r1
+ 902 04ca FFF7FEFF 		bl	strlen
+ 903 04ce 0646     		mov	r6, r0
+ 904 04d0 A068     		ldr	r0, [r4, #8]
+ 905 04d2 FFF7FEFF 		bl	strlen
+ 906 04d6 0021     		movs	r1, #0
+ 907 04d8 0138     		subs	r0, r0, #1
+ 908 04da 0FE0     		b	.L107
+ 909              	.L109:
+ 910 04dc A268     		ldr	r2, [r4, #8]
+ 911 04de 15F803C0 		ldrb	ip, [r5, r3]	@ zero_extendqisi2
+ 912 04e2 1718     		adds	r7, r2, r0
+ 913 04e4 125C     		ldrb	r2, [r2, r0]	@ zero_extendqisi2
+ 914 04e6 9445     		cmp	ip, r2
+ 915 04e8 02D1     		bne	.L108
+ 916 04ea 3970     		strb	r1, [r7, #0]
+ 917 04ec 0138     		subs	r0, r0, #1
+ 918 04ee 05E0     		b	.L107
+ 919              	.L108:
+ 920 04f0 0133     		adds	r3, r3, #1
+ 921 04f2 00E0     		b	.L111
+ 922              	.L112:
+ 923 04f4 0023     		movs	r3, #0
+ 924              	.L111:
+ 925 04f6 B342     		cmp	r3, r6
+ 926 04f8 F0DB     		blt	.L109
+ 927 04fa F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 928              	.L107:
+ 929 04fc 0028     		cmp	r0, #0
+ 930 04fe F9DA     		bge	.L112
+ 931 0500 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 933              		.align	1
+ 934              		.global	_ZNK3str10isAllAlphaEv
+ 935              		.thumb
+ 936              		.thumb_func
+ 938              	_ZNK3str10isAllAlphaEv:
+ 939              		@ args = 0, pretend = 0, frame = 0
+ 940              		@ frame_needed = 0, uses_anonymous_args = 0
+ 941 0502 70B5     		push	{r4, r5, r6, lr}
+ 942 0504 8568     		ldr	r5, [r0, #8]
+ 943 0506 0024     		movs	r4, #0
+ 944 0508 2846     		mov	r0, r5
+ 945 050a FFF7FEFF 		bl	strlen
+ 946 050e 0646     		mov	r6, r0
+ 947 0510 04E0     		b	.L114
+ 948              	.L116:
+ 949 0512 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+ 950 0514 FFF7FEFF 		bl	isalpha
+ 951 0518 18B1     		cbz	r0, .L115
+ 952 051a 0134     		adds	r4, r4, #1
+ 953              	.L114:
+ 954 051c B442     		cmp	r4, r6
+ 955 051e F8DB     		blt	.L116
+ 956 0520 0120     		movs	r0, #1
+ 957              	.L115:
+ 958 0522 70BD     		pop	{r4, r5, r6, pc}
+ 960              		.align	1
+ 961              		.global	_ZNK3str14isAlphaNumericEv
+ 962              		.thumb
+ 963              		.thumb_func
+ 965              	_ZNK3str14isAlphaNumericEv:
+ 966              		@ args = 0, pretend = 0, frame = 0
+ 967              		@ frame_needed = 0, uses_anonymous_args = 0
+ 968 0524 70B5     		push	{r4, r5, r6, lr}
+ 969 0526 8568     		ldr	r5, [r0, #8]
+ 970 0528 0024     		movs	r4, #0
+ 971 052a 2846     		mov	r0, r5
+ 972 052c FFF7FEFF 		bl	strlen
+ 973 0530 0646     		mov	r6, r0
+ 974 0532 04E0     		b	.L119
+ 975              	.L121:
+ 976 0534 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+ 977 0536 FFF7FEFF 		bl	isalnum
+ 978 053a 18B1     		cbz	r0, .L120
+ 979 053c 0134     		adds	r4, r4, #1
+ 980              	.L119:
+ 981 053e B442     		cmp	r4, r6
+ 982 0540 F8DB     		blt	.L121
+ 983 0542 0120     		movs	r0, #1
+ 984              	.L120:
+ 985 0544 70BD     		pop	{r4, r5, r6, pc}
+ 987              		.align	1
+ 988              		.global	_ZNK3str6isUintEv
+ 989              		.thumb
+ 990              		.thumb_func
+ 992              	_ZNK3str6isUintEv:
+ 993              		@ args = 0, pretend = 0, frame = 0
+ 994              		@ frame_needed = 0, uses_anonymous_args = 0
+ 995 0546 10B5     		push	{r4, lr}
+ 996 0548 8468     		ldr	r4, [r0, #8]
+ 997 054a 2046     		mov	r0, r4
+ 998 054c FFF7FEFF 		bl	strlen
+ 999 0550 0023     		movs	r3, #0
+ 1000 0552 04E0     		b	.L124
+ 1001              	.L126:
+ 1002 0554 E25C     		ldrb	r2, [r4, r3]	@ zero_extendqisi2
+ 1003 0556 303A     		subs	r2, r2, #48
+ 1004 0558 092A     		cmp	r2, #9
+ 1005 055a 04D8     		bhi	.L127
+ 1006 055c 0133     		adds	r3, r3, #1
+ 1007              	.L124:
+ 1008 055e 8342     		cmp	r3, r0
+ 1009 0560 F8DB     		blt	.L126
+ 1010 0562 0120     		movs	r0, #1
+ 1011 0564 10BD     		pop	{r4, pc}
+ 1012              	.L127:
+ 1013 0566 0020     		movs	r0, #0
+ 1014 0568 10BD     		pop	{r4, pc}
+ 1016              		.align	1
+ 1017              		.global	_ZNK3str5isIntEv
+ 1018              		.thumb
+ 1019              		.thumb_func
+ 1021              	_ZNK3str5isIntEv:
+ 1022              		@ args = 0, pretend = 0, frame = 0
+ 1023              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1024 056a 10B5     		push	{r4, lr}
+ 1025 056c 8468     		ldr	r4, [r0, #8]
+ 1026 056e 2046     		mov	r0, r4
+ 1027 0570 FFF7FEFF 		bl	strlen
+ 1028 0574 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 1029 0576 A3F12D02 		sub	r2, r3, #45
+ 1030 057a 5342     		rsbs	r3, r2, #0
+ 1031 057c 43EB0203 		adc	r3, r3, r2
+ 1032 0580 04E0     		b	.L129
+ 1033              	.L131:
+ 1034 0582 E25C     		ldrb	r2, [r4, r3]	@ zero_extendqisi2
+ 1035 0584 303A     		subs	r2, r2, #48
+ 1036 0586 092A     		cmp	r2, #9
+ 1037 0588 04D8     		bhi	.L132
+ 1038 058a 0133     		adds	r3, r3, #1
+ 1039              	.L129:
+ 1040 058c 8342     		cmp	r3, r0
+ 1041 058e F8DB     		blt	.L131
+ 1042 0590 0120     		movs	r0, #1
+ 1043 0592 10BD     		pop	{r4, pc}
+ 1044              	.L132:
+ 1045 0594 0020     		movs	r0, #0
+ 1046 0596 10BD     		pop	{r4, pc}
+ 1048              		.align	1
+ 1049              		.global	_ZN3str12checksum_GetEv
+ 1050              		.thumb
+ 1051              		.thumb_func
+ 1053              	_ZN3str12checksum_GetEv:
+ 1054              		@ args = 0, pretend = 0, frame = 0
+ 1055              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1056 0598 10B5     		push	{r4, lr}
+ 1057 059a 8468     		ldr	r4, [r0, #8]
+ 1058 059c 2046     		mov	r0, r4
+ 1059 059e FFF7FEFF 		bl	strlen
+ 1060 05a2 0023     		movs	r3, #0
+ 1061 05a4 1A46     		mov	r2, r3
+ 1062 05a6 02E0     		b	.L134
+ 1063              	.L135:
+ 1064 05a8 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
+ 1065 05aa 0133     		adds	r3, r3, #1
+ 1066 05ac 4A40     		eors	r2, r2, r1
+ 1067              	.L134:
+ 1068 05ae 8342     		cmp	r3, r0
+ 1069 05b0 FADB     		blt	.L135
+ 1070 05b2 1046     		mov	r0, r2
+ 1071 05b4 10BD     		pop	{r4, pc}
+ 1073              		.align	1
+ 1074              		.global	_ZN3str15checksum_RemoveEv
+ 1075              		.thumb
+ 1076              		.thumb_func
+ 1078              	_ZN3str15checksum_RemoveEv:
+ 1079              		@ args = 0, pretend = 0, frame = 0
+ 1080              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1081 05b6 10B5     		push	{r4, lr}
+ 1082 05b8 0449     		ldr	r1, .L137
+ 1083 05ba 0446     		mov	r4, r0
+ 1084 05bc FFF7FEFF 		bl	_ZNK3str11lastIndexOfEPKc
+ 1085 05c0 0146     		mov	r1, r0
+ 1086 05c2 2046     		mov	r0, r4
+ 1087 05c4 BDE81040 		pop	{r4, lr}
+ 1088 05c8 FEE7     		b	_ZN3str13eraseAllAfterEi
+ 1089              	.L138:
+ 1090 05ca 00BF     		.align	2
+ 1091              	.L137:
+ 1092 05cc 00000000 		.word	.LC0
+ 1094              		.align	1
+ 1095              		.global	_ZN3strmIEPKc
+ 1096              		.thumb
+ 1097              		.thumb_func
+ 1099              	_ZN3strmIEPKc:
+ 1100              		@ args = 0, pretend = 0, frame = 0
+ 1101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1102              		@ link register save eliminated.
+ 1103 05d0 FEE7     		b	_ZN3str5eraseEPKc
+ 1105              		.align	1
+ 1106              		.global	_ZN3strmIERKS_
+ 1107              		.thumb
+ 1108              		.thumb_func
+ 1110              	_ZN3strmIERKS_:
+ 1111              		@ args = 0, pretend = 0, frame = 0
+ 1112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1113              		@ link register save eliminated.
+ 1114 05d2 8968     		ldr	r1, [r1, #8]
+ 1115 05d4 FEE7     		b	_ZN3str5eraseEPKc
+ 1117              		.align	1
+ 1118              		.global	_ZNK3streqEPKc
+ 1119              		.thumb
+ 1120              		.thumb_func
+ 1122              	_ZNK3streqEPKc:
+ 1123              		@ args = 0, pretend = 0, frame = 0
+ 1124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1125              		@ link register save eliminated.
+ 1126 05d6 FEE7     		b	_ZNK3str9compareToEPKc
+ 1128              		.align	1
+ 1129              		.global	_ZNK3streqERKS_
+ 1130              		.thumb
+ 1131              		.thumb_func
+ 1133              	_ZNK3streqERKS_:
+ 1134              		@ args = 0, pretend = 0, frame = 0
+ 1135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1136              		@ link register save eliminated.
+ 1137 05d8 8968     		ldr	r1, [r1, #8]
+ 1138 05da FEE7     		b	_ZNK3str9compareToEPKc
+ 1140              		.align	1
+ 1141              		.global	_ZNK3streqEi
+ 1142              		.thumb
+ 1143              		.thumb_func
+ 1145              	_ZNK3streqEi:
+ 1146              		@ args = 0, pretend = 0, frame = 0
+ 1147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1148 05dc 10B5     		push	{r4, lr}
+ 1149 05de 8068     		ldr	r0, [r0, #8]
+ 1150 05e0 0C46     		mov	r4, r1
+ 1151 05e2 FFF7FEFF 		bl	atoi
+ 1152 05e6 011B     		subs	r1, r0, r4
+ 1153 05e8 4842     		rsbs	r0, r1, #0
+ 1154 05ea 40EB0100 		adc	r0, r0, r1
+ 1155 05ee 10BD     		pop	{r4, pc}
+ 1157              		.align	1
+ 1158              		.global	_ZNK3strneEPKc
+ 1159              		.thumb
+ 1160              		.thumb_func
+ 1162              	_ZNK3strneEPKc:
+ 1163              		@ args = 0, pretend = 0, frame = 0
+ 1164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1165 05f0 08B5     		push	{r3, lr}
+ 1166 05f2 FFF7FEFF 		bl	_ZNK3str9compareToEPKc
+ 1167 05f6 80F00100 		eor	r0, r0, #1
+ 1168 05fa C0B2     		uxtb	r0, r0
+ 1169 05fc 08BD     		pop	{r3, pc}
+ 1171              		.align	1
+ 1172              		.global	_ZNK3strneERKS_
+ 1173              		.thumb
+ 1174              		.thumb_func
+ 1176              	_ZNK3strneERKS_:
+ 1177              		@ args = 0, pretend = 0, frame = 0
+ 1178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1179 05fe 08B5     		push	{r3, lr}
+ 1180 0600 8968     		ldr	r1, [r1, #8]
+ 1181 0602 FFF7FEFF 		bl	_ZNK3str9compareToEPKc
+ 1182 0606 80F00100 		eor	r0, r0, #1
+ 1183 060a C0B2     		uxtb	r0, r0
+ 1184 060c 08BD     		pop	{r3, pc}
+ 1186              		.align	1
+ 1187              		.global	_ZNK3strneEi
+ 1188              		.thumb
+ 1189              		.thumb_func
+ 1191              	_ZNK3strneEi:
+ 1192              		@ args = 0, pretend = 0, frame = 0
+ 1193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1194 060e 10B5     		push	{r4, lr}
+ 1195 0610 8068     		ldr	r0, [r0, #8]
+ 1196 0612 0C46     		mov	r4, r1
+ 1197 0614 FFF7FEFF 		bl	atoi
+ 1198 0618 001B     		subs	r0, r0, r4
+ 1199 061a 18BF     		it	ne
+ 1200 061c 0120     		movne	r0, #1
+ 1201 061e 10BD     		pop	{r4, pc}
+ 1203              		.align	1
+ 1204              		.global	_ZNK3strltEPKc
+ 1205              		.thumb
+ 1206              		.thumb_func
+ 1208              	_ZNK3strltEPKc:
+ 1209              		@ args = 0, pretend = 0, frame = 0
+ 1210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1211 0620 08B5     		push	{r3, lr}
+ 1212 0622 8068     		ldr	r0, [r0, #8]
+ 1213 0624 FFF7FEFF 		bl	strcmp
+ 1214 0628 C00F     		lsrs	r0, r0, #31
+ 1215 062a 08BD     		pop	{r3, pc}
+ 1217              		.align	1
+ 1218              		.global	_ZNK3strltEi
+ 1219              		.thumb
+ 1220              		.thumb_func
+ 1222              	_ZNK3strltEi:
+ 1223              		@ args = 0, pretend = 0, frame = 0
+ 1224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1225 062c 10B5     		push	{r4, lr}
+ 1226 062e 8068     		ldr	r0, [r0, #8]
+ 1227 0630 0C46     		mov	r4, r1
+ 1228 0632 FFF7FEFF 		bl	atoi
+ 1229 0636 A042     		cmp	r0, r4
+ 1230 0638 ACBF     		ite	ge
+ 1231 063a 0020     		movge	r0, #0
+ 1232 063c 0120     		movlt	r0, #1
+ 1233 063e 10BD     		pop	{r4, pc}
+ 1235              		.align	1
+ 1236              		.global	_ZNK3strgtEPKc
+ 1237              		.thumb
+ 1238              		.thumb_func
+ 1240              	_ZNK3strgtEPKc:
+ 1241              		@ args = 0, pretend = 0, frame = 0
+ 1242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1243 0640 08B5     		push	{r3, lr}
+ 1244 0642 8068     		ldr	r0, [r0, #8]
+ 1245 0644 FFF7FEFF 		bl	strcmp
+ 1246 0648 0028     		cmp	r0, #0
+ 1247 064a D4BF     		ite	le
+ 1248 064c 0020     		movle	r0, #0
+ 1249 064e 0120     		movgt	r0, #1
+ 1250 0650 08BD     		pop	{r3, pc}
+ 1252              		.align	1
+ 1253              		.global	_ZNK3strgtEi
+ 1254              		.thumb
+ 1255              		.thumb_func
+ 1257              	_ZNK3strgtEi:
+ 1258              		@ args = 0, pretend = 0, frame = 0
+ 1259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1260 0652 10B5     		push	{r4, lr}
+ 1261 0654 8068     		ldr	r0, [r0, #8]
+ 1262 0656 0C46     		mov	r4, r1
+ 1263 0658 FFF7FEFF 		bl	atoi
+ 1264 065c A042     		cmp	r0, r4
+ 1265 065e D4BF     		ite	le
+ 1266 0660 0020     		movle	r0, #0
+ 1267 0662 0120     		movgt	r0, #1
+ 1268 0664 10BD     		pop	{r4, pc}
+ 1270              		.align	1
+ 1271              		.global	_ZNK3strleEPKc
+ 1272              		.thumb
+ 1273              		.thumb_func
+ 1275              	_ZNK3strleEPKc:
+ 1276              		@ args = 0, pretend = 0, frame = 0
+ 1277              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1278 0666 08B5     		push	{r3, lr}
+ 1279 0668 8068     		ldr	r0, [r0, #8]
+ 1280 066a FFF7FEFF 		bl	strcmp
+ 1281 066e 0028     		cmp	r0, #0
+ 1282 0670 CCBF     		ite	gt
+ 1283 0672 0020     		movgt	r0, #0
+ 1284 0674 0120     		movle	r0, #1
+ 1285 0676 08BD     		pop	{r3, pc}
+ 1287              		.align	1
+ 1288              		.global	_ZNK3strleEi
+ 1289              		.thumb
+ 1290              		.thumb_func
+ 1292              	_ZNK3strleEi:
+ 1293              		@ args = 0, pretend = 0, frame = 0
+ 1294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1295 0678 10B5     		push	{r4, lr}
+ 1296 067a 8068     		ldr	r0, [r0, #8]
+ 1297 067c 0C46     		mov	r4, r1
+ 1298 067e FFF7FEFF 		bl	atoi
+ 1299 0682 A042     		cmp	r0, r4
+ 1300 0684 CCBF     		ite	gt
+ 1301 0686 0020     		movgt	r0, #0
+ 1302 0688 0120     		movle	r0, #1
+ 1303 068a 10BD     		pop	{r4, pc}
+ 1305              		.align	1
+ 1306              		.global	_ZNK3strgeEPKc
+ 1307              		.thumb
+ 1308              		.thumb_func
+ 1310              	_ZNK3strgeEPKc:
+ 1311              		@ args = 0, pretend = 0, frame = 0
+ 1312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1313 068c 08B5     		push	{r3, lr}
+ 1314 068e 8068     		ldr	r0, [r0, #8]
+ 1315 0690 FFF7FEFF 		bl	strcmp
+ 1316 0694 C043     		mvns	r0, r0
+ 1317 0696 C00F     		lsrs	r0, r0, #31
+ 1318 0698 08BD     		pop	{r3, pc}
+ 1320              		.align	1
+ 1321              		.global	_ZNK3strgeEi
+ 1322              		.thumb
+ 1323              		.thumb_func
+ 1325              	_ZNK3strgeEi:
+ 1326              		@ args = 0, pretend = 0, frame = 0
+ 1327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1328 069a 10B5     		push	{r4, lr}
+ 1329 069c 8068     		ldr	r0, [r0, #8]
+ 1330 069e 0C46     		mov	r4, r1
+ 1331 06a0 FFF7FEFF 		bl	atoi
+ 1332 06a4 A042     		cmp	r0, r4
+ 1333 06a6 B4BF     		ite	lt
+ 1334 06a8 0020     		movlt	r0, #0
+ 1335 06aa 0120     		movge	r0, #1
+ 1336 06ac 10BD     		pop	{r4, pc}
+ 1338              		.align	1
+ 1339              		.global	_ZNK3strclEv
+ 1340              		.thumb
+ 1341              		.thumb_func
+ 1343              	_ZNK3strclEv:
+ 1344              		@ args = 0, pretend = 0, frame = 0
+ 1345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1346              		@ link register save eliminated.
+ 1347 06ae 8068     		ldr	r0, [r0, #8]
+ 1348 06b0 7047     		bx	lr
+ 1350              		.align	1
+ 1351              		.global	_ZNK3strcviEv
+ 1352              		.thumb
+ 1353              		.thumb_func
+ 1355              	_ZNK3strcviEv:
+ 1356              		@ args = 0, pretend = 0, frame = 0
+ 1357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1358              		@ link register save eliminated.
+ 1359 06b2 8068     		ldr	r0, [r0, #8]
+ 1360 06b4 FFF7FEBF 		b	atoi
+ 1362              		.align	1
+ 1363              		.global	_ZN3strixEi
+ 1364              		.thumb
+ 1365              		.thumb_func
+ 1367              	_ZN3strixEi:
+ 1368              		@ args = 0, pretend = 0, frame = 0
+ 1369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1370 06b8 38B5     		push	{r3, r4, r5, lr}
+ 1371 06ba 8468     		ldr	r4, [r0, #8]
+ 1372 06bc 0D46     		mov	r5, r1
+ 1373 06be 2046     		mov	r0, r4
+ 1374 06c0 FFF7FEFF 		bl	strlen
+ 1375 06c4 8542     		cmp	r5, r0
+ 1376 06c6 B8BF     		it	lt
+ 1377 06c8 6419     		addlt	r4, r4, r5
+ 1378 06ca 2046     		mov	r0, r4
+ 1379 06cc 38BD     		pop	{r3, r4, r5, pc}
+ 1381              		.align	1
+ 1382              		.global	_ZN3str13reAllocateMemEi
+ 1383              		.thumb
+ 1384              		.thumb_func
+ 1386              	_ZN3str13reAllocateMemEi:
+ 1387              		@ args = 0, pretend = 0, frame = 0
+ 1388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1389 06ce 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+ 1390 06d0 70B5     		push	{r4, r5, r6, lr}
+ 1391 06d2 0446     		mov	r4, r0
+ 1392 06d4 FBB9     		cbnz	r3, .L164
+ 1393 06d6 09B1     		cbz	r1, .L165
+ 1394 06d8 0131     		adds	r1, r1, #1
+ 1395 06da 00E0     		b	.L161
+ 1396              	.L165:
+ 1397 06dc 0421     		movs	r1, #4
+ 1398              	.L161:
+ 1399 06de 1025     		movs	r5, #16
+ 1400 06e0 91FBF5F1 		sdiv	r1, r1, r5
+ 1401 06e4 4D1C     		adds	r5, r1, #1
+ 1402 06e6 A668     		ldr	r6, [r4, #8]
+ 1403 06e8 2D01     		lsls	r5, r5, #4
+ 1404 06ea 6560     		str	r5, [r4, #4]
+ 1405 06ec 4EB9     		cbnz	r6, .L162
+ 1406 06ee 2846     		mov	r0, r5
+ 1407 06f0 FFF7FEFF 		bl	malloc
+ 1408 06f4 A060     		str	r0, [r4, #8]
+ 1409 06f6 48B1     		cbz	r0, .L163
+ 1410 06f8 3146     		mov	r1, r6
+ 1411 06fa 2A46     		mov	r2, r5
+ 1412 06fc FFF7FEFF 		bl	memset
+ 1413 0700 04E0     		b	.L163
+ 1414              	.L162:
+ 1415 0702 691C     		adds	r1, r5, #1
+ 1416 0704 3046     		mov	r0, r6
+ 1417 0706 FFF7FEFF 		bl	realloc
+ 1418 070a A060     		str	r0, [r4, #8]
+ 1419              	.L163:
+ 1420 070c A068     		ldr	r0, [r4, #8]
+ 1421 070e 0030     		adds	r0, r0, #0
+ 1422 0710 18BF     		it	ne
+ 1423 0712 0120     		movne	r0, #1
+ 1424 0714 70BD     		pop	{r4, r5, r6, pc}
+ 1425              	.L164:
+ 1426 0716 0020     		movs	r0, #0
+ 1427 0718 70BD     		pop	{r4, r5, r6, pc}
+ 1429              		.align	1
+ 1430              		.global	_ZN3str26ensureMemoryToInsertNCharsEi
+ 1431              		.thumb
+ 1432              		.thumb_func
+ 1434              	_ZN3str26ensureMemoryToInsertNCharsEi:
+ 1435              		@ args = 0, pretend = 0, frame = 0
+ 1436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1437 071a 38B5     		push	{r3, r4, r5, lr}
+ 1438 071c 0446     		mov	r4, r0
+ 1439 071e 8068     		ldr	r0, [r0, #8]
+ 1440 0720 0D46     		mov	r5, r1
+ 1441 0722 FFF7FEFF 		bl	strlen
+ 1442 0726 6368     		ldr	r3, [r4, #4]
+ 1443 0728 2918     		adds	r1, r5, r0
+ 1444 072a 8B42     		cmp	r3, r1
+ 1445 072c 04DA     		bge	.L167
+ 1446 072e 2031     		adds	r1, r1, #32
+ 1447 0730 2046     		mov	r0, r4
+ 1448 0732 BDE83840 		pop	{r3, r4, r5, lr}
+ 1449 0736 FEE7     		b	_ZN3str13reAllocateMemEi
+ 1450              	.L167:
+ 1451 0738 0120     		movs	r0, #1
+ 1452 073a 38BD     		pop	{r3, r4, r5, pc}
+ 1454              		.align	1
+ 1455              		.global	_ZN3str8insertAtEiPKc
+ 1456              		.thumb
+ 1457              		.thumb_func
+ 1459              	_ZN3str8insertAtEiPKc:
+ 1460              		@ args = 0, pretend = 0, frame = 0
+ 1461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1462 073c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1463 0740 0646     		mov	r6, r0
+ 1464 0742 1046     		mov	r0, r2
+ 1465 0744 0C46     		mov	r4, r1
+ 1466 0746 1746     		mov	r7, r2
+ 1467 0748 FFF7FEFF 		bl	strlen
+ 1468 074c 0546     		mov	r5, r0
+ 1469 074e 2946     		mov	r1, r5
+ 1470 0750 3046     		mov	r0, r6
+ 1471 0752 FFF7FEFF 		bl	_ZN3str26ensureMemoryToInsertNCharsEi
+ 1472 0756 00B3     		cbz	r0, .L169
+ 1473 0758 002C     		cmp	r4, #0
+ 1474 075a 1ADB     		blt	.L172
+ 1475 075c D6F80880 		ldr	r8, [r6, #8]
+ 1476 0760 4046     		mov	r0, r8
+ 1477 0762 FFF7FEFF 		bl	strlen
+ 1478 0766 8442     		cmp	r4, r0
+ 1479 0768 0246     		mov	r2, r0
+ 1480 076a 12DC     		bgt	.L172
+ 1481 076c 002D     		cmp	r5, #0
+ 1482 076e 13DD     		ble	.L173
+ 1483 0770 2819     		adds	r0, r5, r4
+ 1484 0772 121B     		subs	r2, r2, r4
+ 1485 0774 08EB0401 		add	r1, r8, r4
+ 1486 0778 0132     		adds	r2, r2, #1
+ 1487 077a 4044     		add	r0, r8, r0
+ 1488 077c FFF7FEFF 		bl	memmove
+ 1489 0780 B068     		ldr	r0, [r6, #8]
+ 1490 0782 3946     		mov	r1, r7
+ 1491 0784 0019     		adds	r0, r0, r4
+ 1492 0786 2A46     		mov	r2, r5
+ 1493 0788 FFF7FEFF 		bl	memcpy
+ 1494 078c 0120     		movs	r0, #1
+ 1495 078e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1496              	.L172:
+ 1497 0792 0020     		movs	r0, #0
+ 1498 0794 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1499              	.L173:
+ 1500 0798 0020     		movs	r0, #0
+ 1501              	.L169:
+ 1502 079a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1504              		.align	1
+ 1505              		.global	_ZN3str10replaceAllEPKcS1_
+ 1506              		.thumb
+ 1507              		.thumb_func
+ 1509              	_ZN3str10replaceAllEPKcS1_:
+ 1510              		@ args = 0, pretend = 0, frame = 0
+ 1511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1512 079e 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1513 07a2 0546     		mov	r5, r0
+ 1514 07a4 0F46     		mov	r7, r1
+ 1515 07a6 9046     		mov	r8, r2
+ 1516 07a8 0024     		movs	r4, #0
+ 1517 07aa 0DE0     		b	.L175
+ 1518              	.L176:
+ 1519 07ac 3846     		mov	r0, r7
+ 1520 07ae FFF7FEFF 		bl	strlen
+ 1521 07b2 3146     		mov	r1, r6
+ 1522 07b4 0246     		mov	r2, r0
+ 1523 07b6 2846     		mov	r0, r5
+ 1524 07b8 FFF7FEFF 		bl	_ZN3str10eraseAfterEii
+ 1525 07bc 2846     		mov	r0, r5
+ 1526 07be 3146     		mov	r1, r6
+ 1527 07c0 4246     		mov	r2, r8
+ 1528 07c2 FFF7FEFF 		bl	_ZN3str8insertAtEiPKc
+ 1529 07c6 0134     		adds	r4, r4, #1
+ 1530              	.L175:
+ 1531 07c8 2846     		mov	r0, r5
+ 1532 07ca 3946     		mov	r1, r7
+ 1533 07cc FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 1534 07d0 0646     		mov	r6, r0
+ 1535 07d2 0130     		adds	r0, r0, #1
+ 1536 07d4 EAD1     		bne	.L176
+ 1537 07d6 2046     		mov	r0, r4
+ 1538 07d8 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1540              		.align	1
+ 1541              		.global	_ZN3str11replaceLastEPKcS1_
+ 1542              		.thumb
+ 1543              		.thumb_func
+ 1545              	_ZN3str11replaceLastEPKcS1_:
+ 1546              		@ args = 0, pretend = 0, frame = 0
+ 1547              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1548 07dc F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1549 07de 0546     		mov	r5, r0
+ 1550 07e0 0E46     		mov	r6, r1
+ 1551 07e2 1746     		mov	r7, r2
+ 1552 07e4 FFF7FEFF 		bl	_ZNK3str11lastIndexOfEPKc
+ 1553 07e8 431C     		adds	r3, r0, #1
+ 1554 07ea 0446     		mov	r4, r0
+ 1555 07ec 0ED0     		beq	.L179
+ 1556 07ee 3046     		mov	r0, r6
+ 1557 07f0 FFF7FEFF 		bl	strlen
+ 1558 07f4 2146     		mov	r1, r4
+ 1559 07f6 0246     		mov	r2, r0
+ 1560 07f8 2846     		mov	r0, r5
+ 1561 07fa FFF7FEFF 		bl	_ZN3str10eraseAfterEii
+ 1562 07fe 2846     		mov	r0, r5
+ 1563 0800 2146     		mov	r1, r4
+ 1564 0802 3A46     		mov	r2, r7
+ 1565 0804 FFF7FEFF 		bl	_ZN3str8insertAtEiPKc
+ 1566 0808 0120     		movs	r0, #1
+ 1567 080a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1568              	.L179:
+ 1569 080c 0020     		movs	r0, #0
+ 1570 080e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1572              		.align	1
+ 1573              		.global	_ZN3str12replaceFirstEPKcS1_
+ 1574              		.thumb
+ 1575              		.thumb_func
+ 1577              	_ZN3str12replaceFirstEPKcS1_:
+ 1578              		@ args = 0, pretend = 0, frame = 0
+ 1579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1580 0810 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1581 0812 1746     		mov	r7, r2
+ 1582 0814 0546     		mov	r5, r0
+ 1583 0816 0E46     		mov	r6, r1
+ 1584 0818 FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 1585 081c 421C     		adds	r2, r0, #1
+ 1586 081e 0446     		mov	r4, r0
+ 1587 0820 0ED0     		beq	.L182
+ 1588 0822 3046     		mov	r0, r6
+ 1589 0824 FFF7FEFF 		bl	strlen
+ 1590 0828 2146     		mov	r1, r4
+ 1591 082a 0246     		mov	r2, r0
+ 1592 082c 2846     		mov	r0, r5
+ 1593 082e FFF7FEFF 		bl	_ZN3str10eraseAfterEii
+ 1594 0832 2846     		mov	r0, r5
+ 1595 0834 2146     		mov	r1, r4
+ 1596 0836 3A46     		mov	r2, r7
+ 1597 0838 FFF7FEFF 		bl	_ZN3str8insertAtEiPKc
+ 1598 083c 0120     		movs	r0, #1
+ 1599 083e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1600              	.L182:
+ 1601 0840 0020     		movs	r0, #0
+ 1602 0842 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1604              		.align	1
+ 1605              		.global	_ZN3str11insertAtBegEPKc
+ 1606              		.thumb
+ 1607              		.thumb_func
+ 1609              	_ZN3str11insertAtBegEPKc:
+ 1610              		@ args = 0, pretend = 0, frame = 0
+ 1611              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1612              		@ link register save eliminated.
+ 1613 0844 0A46     		mov	r2, r1
+ 1614 0846 0021     		movs	r1, #0
+ 1615 0848 FEE7     		b	_ZN3str8insertAtEiPKc
+ 1617              		.align	1
+ 1618              		.global	_ZN3str11insertAtEndEPKc
+ 1619              		.thumb
+ 1620              		.thumb_func
+ 1622              	_ZN3str11insertAtEndEPKc:
+ 1623              		@ args = 0, pretend = 0, frame = 0
+ 1624              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1625 084a 38B5     		push	{r3, r4, r5, lr}
+ 1626 084c 0546     		mov	r5, r0
+ 1627 084e 0846     		mov	r0, r1
+ 1628 0850 0C46     		mov	r4, r1
+ 1629 0852 FFF7FEFF 		bl	strlen
+ 1630 0856 0146     		mov	r1, r0
+ 1631 0858 2846     		mov	r0, r5
+ 1632 085a FFF7FEFF 		bl	_ZN3str26ensureMemoryToInsertNCharsEi
+ 1633 085e 20B1     		cbz	r0, .L185
+ 1634 0860 A868     		ldr	r0, [r5, #8]
+ 1635 0862 2146     		mov	r1, r4
+ 1636 0864 FFF7FEFF 		bl	strcat
+ 1637 0868 0120     		movs	r0, #1
+ 1638              	.L185:
+ 1639 086a 38BD     		pop	{r3, r4, r5, pc}
+ 1641              		.align	1
+ 1642              		.global	_ZN3str6appendEPKc
+ 1643              		.thumb
+ 1644              		.thumb_func
+ 1646              	_ZN3str6appendEPKc:
+ 1647              		@ args = 0, pretend = 0, frame = 0
+ 1648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1649              		@ link register save eliminated.
+ 1650 086c FEE7     		b	_ZN3str11insertAtEndEPKc
+ 1652              		.align	1
+ 1653              		.global	_ZN3strpLEc
+ 1654              		.thumb
+ 1655              		.thumb_func
+ 1657              	_ZN3strpLEc:
+ 1658              		@ args = 0, pretend = 0, frame = 8
+ 1659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1660 086e 07B5     		push	{r0, r1, r2, lr}
+ 1661 0870 0023     		movs	r3, #0
+ 1662 0872 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 1663 0876 02AB     		add	r3, sp, #8
+ 1664 0878 03F8041D 		strb	r1, [r3, #-4]!
+ 1665 087c 1946     		mov	r1, r3
+ 1666 087e FFF7FEFF 		bl	_ZN3str6appendEPKc
+ 1667 0882 0EBD     		pop	{r1, r2, r3, pc}
+ 1669              		.align	1
+ 1670              		.global	_ZN3strpLERKS_
+ 1671              		.thumb
+ 1672              		.thumb_func
+ 1674              	_ZN3strpLERKS_:
+ 1675              		@ args = 0, pretend = 0, frame = 0
+ 1676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1677              		@ link register save eliminated.
+ 1678 0884 8968     		ldr	r1, [r1, #8]
+ 1679 0886 FEE7     		b	_ZN3str6appendEPKc
+ 1681              		.align	1
+ 1682              		.global	_ZN3strpLEPKc
+ 1683              		.thumb
+ 1684              		.thumb_func
+ 1686              	_ZN3strpLEPKc:
+ 1687              		@ args = 0, pretend = 0, frame = 0
+ 1688              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1689              		@ link register save eliminated.
+ 1690 0888 FEE7     		b	_ZN3str6appendEPKc
+ 1692              		.align	1
+ 1693              		.global	_ZN3str11appendAsHexEj
+ 1694              		.thumb
+ 1695              		.thumb_func
+ 1697              	_ZN3str11appendAsHexEj:
+ 1698              		@ args = 0, pretend = 0, frame = 16
+ 1699              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1700 088a 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 1701 088c 0446     		mov	r4, r0
+ 1702 088e 0A46     		mov	r2, r1
+ 1703 0890 6846     		mov	r0, sp
+ 1704 0892 0449     		ldr	r1, .L192
+ 1705 0894 FFF7FEFF 		bl	siprintf
+ 1706 0898 2046     		mov	r0, r4
+ 1707 089a 6946     		mov	r1, sp
+ 1708 089c FFF7FEFF 		bl	_ZN3str6appendEPKc
+ 1709 08a0 1FBD     		pop	{r0, r1, r2, r3, r4, pc}
+ 1710              	.L193:
+ 1711 08a2 00BF     		.align	2
+ 1712              	.L192:
+ 1713 08a4 02000000 		.word	.LC1
+ 1715              		.align	1
+ 1716              		.global	_ZN3str15checksum_AppendEv
+ 1717              		.thumb
+ 1718              		.thumb_func
+ 1720              	_ZN3str15checksum_AppendEv:
+ 1721              		@ args = 0, pretend = 0, frame = 0
+ 1722              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1723 08a8 38B5     		push	{r3, r4, r5, lr}
+ 1724 08aa 0446     		mov	r4, r0
+ 1725 08ac FFF7FEFF 		bl	_ZN3str12checksum_GetEv
+ 1726 08b0 0449     		ldr	r1, .L195
+ 1727 08b2 0546     		mov	r5, r0
+ 1728 08b4 2046     		mov	r0, r4
+ 1729 08b6 FFF7FEFF 		bl	_ZN3str6appendEPKc
+ 1730 08ba 2046     		mov	r0, r4
+ 1731 08bc 2946     		mov	r1, r5
+ 1732 08be BDE83840 		pop	{r3, r4, r5, lr}
+ 1733 08c2 FEE7     		b	_ZN3str11appendAsHexEj
+ 1734              	.L196:
+ 1735              		.align	2
+ 1736              	.L195:
+ 1737 08c4 00000000 		.word	.LC0
+ 1739              		.align	1
+ 1740              		.global	_ZN3str6appendEi
+ 1741              		.thumb
+ 1742              		.thumb_func
+ 1744              	_ZN3str6appendEi:
+ 1745              		@ args = 0, pretend = 0, frame = 16
+ 1746              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1747 08c8 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 1748 08ca 0446     		mov	r4, r0
+ 1749 08cc 0A46     		mov	r2, r1
+ 1750 08ce 6846     		mov	r0, sp
+ 1751 08d0 0349     		ldr	r1, .L198
+ 1752 08d2 FFF7FEFF 		bl	siprintf
+ 1753 08d6 2046     		mov	r0, r4
+ 1754 08d8 6946     		mov	r1, sp
+ 1755 08da FFF7FEFF 		bl	_ZN3str6appendEPKc
+ 1756 08de 1FBD     		pop	{r0, r1, r2, r3, r4, pc}
+ 1757              	.L199:
+ 1758              		.align	2
+ 1759              	.L198:
+ 1760 08e0 07000000 		.word	.LC2
+ 1762              		.section	.text._ZN3str4initEi,"axG",%progbits,_ZN3str4initEi,comdat
+ 1763              		.align	1
+ 1764              		.weak	_ZN3str4initEi
+ 1765              		.thumb
+ 1766              		.thumb_func
+ 1768              	_ZN3str4initEi:
+ 1769              		@ args = 0, pretend = 0, frame = 0
+ 1770              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1771              		@ link register save eliminated.
+ 1772 0000 0023     		movs	r3, #0
+ 1773 0002 0370     		strb	r3, [r0, #0]
+ 1774 0004 4360     		str	r3, [r0, #4]
+ 1775 0006 8360     		str	r3, [r0, #8]
+ 1776 0008 C360     		str	r3, [r0, #12]
+ 1777 000a 0361     		str	r3, [r0, #16]
+ 1778 000c FFF7FEBF 		b	_ZN3str13reAllocateMemEi
+ 1780              		.text
+ 1781              		.align	1
+ 1782              		.global	_ZN3strC2Ei
+ 1783              		.thumb
+ 1784              		.thumb_func
+ 1786              	_ZN3strC2Ei:
+ 1787              		@ args = 0, pretend = 0, frame = 0
+ 1788              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1789 08e4 10B5     		push	{r4, lr}
+ 1790 08e6 0446     		mov	r4, r0
+ 1791 08e8 FFF7FEFF 		bl	_ZN3str4initEi
+ 1792 08ec 2046     		mov	r0, r4
+ 1793 08ee 10BD     		pop	{r4, pc}
+ 1795              		.align	1
+ 1796              		.global	_ZN3strC2Ev
+ 1797              		.thumb
+ 1798              		.thumb_func
+ 1800              	_ZN3strC2Ev:
+ 1801              		@ args = 0, pretend = 0, frame = 0
+ 1802              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1803 08f0 10B5     		push	{r4, lr}
+ 1804 08f2 1021     		movs	r1, #16
+ 1805 08f4 0446     		mov	r4, r0
+ 1806 08f6 FFF7FEFF 		bl	_ZN3str4initEi
+ 1807 08fa 2046     		mov	r0, r4
+ 1808 08fc 10BD     		pop	{r4, pc}
+ 1810              		.align	1
+ 1811              		.global	_ZN3str7reserveEi
+ 1812              		.thumb
+ 1813              		.thumb_func
+ 1815              	_ZN3str7reserveEi:
+ 1816              		@ args = 0, pretend = 0, frame = 0
+ 1817              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1818              		@ link register save eliminated.
+ 1819 08fe 4368     		ldr	r3, [r0, #4]
+ 1820 0900 8B42     		cmp	r3, r1
+ 1821 0902 00DA     		bge	.L206
+ 1822 0904 FEE7     		b	_ZN3str13reAllocateMemEi
+ 1823              	.L206:
+ 1824 0906 0120     		movs	r0, #1
+ 1825 0908 7047     		bx	lr
+ 1827              		.align	1
+ 1828              		.global	_ZN3str9subStringEii
+ 1829              		.thumb
+ 1830              		.thumb_func
+ 1832              	_ZN3str9subStringEii:
+ 1833              		@ args = 0, pretend = 0, frame = 0
+ 1834              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1835 090a 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 1836 090e C368     		ldr	r3, [r0, #12]
+ 1837 0910 0546     		mov	r5, r0
+ 1838 0912 0E46     		mov	r6, r1
+ 1839 0914 9046     		mov	r8, r2
+ 1840 0916 3BB9     		cbnz	r3, .L208
+ 1841 0918 1420     		movs	r0, #20
+ 1842 091a FFF7FEFF 		bl	_Znwj
+ 1843 091e 1021     		movs	r1, #16
+ 1844 0920 0446     		mov	r4, r0
+ 1845 0922 FFF7FEFF 		bl	_ZN3str4initEi
+ 1846 0926 EC60     		str	r4, [r5, #12]
+ 1847              	.L208:
+ 1848 0928 EC68     		ldr	r4, [r5, #12]
+ 1849 092a 0027     		movs	r7, #0
+ 1850 092c A368     		ldr	r3, [r4, #8]
+ 1851 092e 1F70     		strb	r7, [r3, #0]
+ 1852 0930 A868     		ldr	r0, [r5, #8]
+ 1853 0932 FFF7FEFF 		bl	strlen
+ 1854 0936 0146     		mov	r1, r0
+ 1855 0938 2046     		mov	r0, r4
+ 1856 093a FFF7FEFF 		bl	_ZN3str7reserveEi
+ 1857 093e B0B1     		cbz	r0, .L210
+ 1858 0940 BE42     		cmp	r6, r7
+ 1859 0942 14DB     		blt	.L210
+ 1860 0944 D5F80890 		ldr	r9, [r5, #8]
+ 1861 0948 4846     		mov	r0, r9
+ 1862 094a FFF7FEFF 		bl	strlen
+ 1863 094e 8642     		cmp	r6, r0
+ 1864 0950 0DDA     		bge	.L210
+ 1865 0952 B845     		cmp	r8, r7
+ 1866 0954 0BDD     		ble	.L210
+ 1867 0956 851B     		subs	r5, r0, r6
+ 1868 0958 4545     		cmp	r5, r8
+ 1869 095a A8BF     		it	ge
+ 1870 095c 4546     		movge	r5, r8
+ 1871 095e A068     		ldr	r0, [r4, #8]
+ 1872 0960 09EB0601 		add	r1, r9, r6
+ 1873 0964 2A46     		mov	r2, r5
+ 1874 0966 FFF7FEFF 		bl	memcpy
+ 1875 096a A368     		ldr	r3, [r4, #8]
+ 1876 096c 5F55     		strb	r7, [r3, r5]
+ 1877              	.L210:
+ 1878 096e 2046     		mov	r0, r4
+ 1879 0970 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1881              		.align	1
+ 1882              		.global	_ZN3str8getTokenEPKcb
+ 1883              		.thumb
+ 1884              		.thumb_func
+ 1886              	_ZN3str8getTokenEPKcb:
+ 1887              		@ args = 0, pretend = 0, frame = 0
+ 1888              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1889 0974 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1890 0976 0446     		mov	r4, r0
+ 1891 0978 0AB9     		cbnz	r2, .L212
+ 1892 097a 0369     		ldr	r3, [r0, #16]
+ 1893 097c 0BB9     		cbnz	r3, .L213
+ 1894              	.L212:
+ 1895 097e A368     		ldr	r3, [r4, #8]
+ 1896 0980 2361     		str	r3, [r4, #16]
+ 1897              	.L213:
+ 1898 0982 2569     		ldr	r5, [r4, #16]
+ 1899 0984 2878     		ldrb	r0, [r5, #0]	@ zero_extendqisi2
+ 1900 0986 C0B1     		cbz	r0, .L214
+ 1901 0988 2846     		mov	r0, r5
+ 1902 098a FFF7FEFF 		bl	strpbrk
+ 1903 098e A668     		ldr	r6, [r4, #8]
+ 1904 0990 AF1B     		subs	r7, r5, r6
+ 1905 0992 48B9     		cbnz	r0, .L215
+ 1906 0994 2846     		mov	r0, r5
+ 1907 0996 FFF7FEFF 		bl	strlen
+ 1908 099a 0546     		mov	r5, r0
+ 1909 099c 3046     		mov	r0, r6
+ 1910 099e FFF7FEFF 		bl	strlen
+ 1911 09a2 3618     		adds	r6, r6, r0
+ 1912 09a4 2661     		str	r6, [r4, #16]
+ 1913 09a6 02E0     		b	.L216
+ 1914              	.L215:
+ 1915 09a8 451B     		subs	r5, r0, r5
+ 1916 09aa 0130     		adds	r0, r0, #1
+ 1917 09ac 2061     		str	r0, [r4, #16]
+ 1918              	.L216:
+ 1919 09ae 2046     		mov	r0, r4
+ 1920 09b0 3946     		mov	r1, r7
+ 1921 09b2 2A46     		mov	r2, r5
+ 1922 09b4 BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 1923 09b8 FEE7     		b	_ZN3str9subStringEii
+ 1924              	.L214:
+ 1925 09ba F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1927              		.align	1
+ 1928              		.global	_ZN3str9subStringEcc
+ 1929              		.thumb
+ 1930              		.thumb_func
+ 1932              	_ZN3str9subStringEcc:
+ 1933              		@ args = 0, pretend = 0, frame = 8
+ 1934              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1935 09bc 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 1936 09be 0023     		movs	r3, #0
+ 1937 09c0 ADF80030 		strh	r3, [sp, #0]	@ movhi
+ 1938 09c4 8DF80010 		strb	r1, [sp, #0]
+ 1939 09c8 6946     		mov	r1, sp
+ 1940 09ca 0446     		mov	r4, r0
+ 1941 09cc ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 1942 09d0 8DF80420 		strb	r2, [sp, #4]
+ 1943 09d4 FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 1944 09d8 01A9     		add	r1, sp, #4
+ 1945 09da 0546     		mov	r5, r0
+ 1946 09dc 2046     		mov	r0, r4
+ 1947 09de FFF7FEFF 		bl	_ZNK3str11lastIndexOfEPKc
+ 1948 09e2 421B     		subs	r2, r0, r5
+ 1949 09e4 0132     		adds	r2, r2, #1
+ 1950 09e6 2046     		mov	r0, r4
+ 1951 09e8 2946     		mov	r1, r5
+ 1952 09ea FFF7FEFF 		bl	_ZN3str9subStringEii
+ 1953 09ee 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 1955              		.align	1
+ 1956              		.global	_ZN3str9subStringEPKci
+ 1957              		.thumb
+ 1958              		.thumb_func
+ 1960              	_ZN3str9subStringEPKci:
+ 1961              		@ args = 0, pretend = 0, frame = 0
+ 1962              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1963 09f0 38B5     		push	{r3, r4, r5, lr}
+ 1964 09f2 0446     		mov	r4, r0
+ 1965 09f4 1546     		mov	r5, r2
+ 1966 09f6 FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 1967 09fa 2A46     		mov	r2, r5
+ 1968 09fc 0146     		mov	r1, r0
+ 1969 09fe 2046     		mov	r0, r4
+ 1970 0a00 BDE83840 		pop	{r3, r4, r5, lr}
+ 1971 0a04 FEE7     		b	_ZN3str9subStringEii
+ 1973              		.align	1
+ 1974              		.global	_ZN3str9subStringEci
+ 1975              		.thumb
+ 1976              		.thumb_func
+ 1978              	_ZN3str9subStringEci:
+ 1979              		@ args = 0, pretend = 0, frame = 8
+ 1980              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1981 0a06 07B5     		push	{r0, r1, r2, lr}
+ 1982 0a08 0023     		movs	r3, #0
+ 1983 0a0a ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 1984 0a0e 02AB     		add	r3, sp, #8
+ 1985 0a10 03F8041D 		strb	r1, [r3, #-4]!
+ 1986 0a14 1946     		mov	r1, r3
+ 1987 0a16 FFF7FEFF 		bl	_ZN3str9subStringEPKci
+ 1988 0a1a 0EBD     		pop	{r1, r2, r3, pc}
+ 1990              		.align	1
+ 1991              		.global	_ZN3str9subStringEi
+ 1992              		.thumb
+ 1993              		.thumb_func
+ 1995              	_ZN3str9subStringEi:
+ 1996              		@ args = 0, pretend = 0, frame = 0
+ 1997              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1998 0a1c 38B5     		push	{r3, r4, r5, lr}
+ 1999 0a1e 0446     		mov	r4, r0
+ 2000 0a20 8068     		ldr	r0, [r0, #8]
+ 2001 0a22 0D46     		mov	r5, r1
+ 2002 0a24 FFF7FEFF 		bl	strlen
+ 2003 0a28 2946     		mov	r1, r5
+ 2004 0a2a 0246     		mov	r2, r0
+ 2005 0a2c 2046     		mov	r0, r4
+ 2006 0a2e BDE83840 		pop	{r3, r4, r5, lr}
+ 2007 0a32 FEE7     		b	_ZN3str9subStringEii
+ 2009              		.align	1
+ 2010              		.global	_ZN3str9subStringEPKc
+ 2011              		.thumb
+ 2012              		.thumb_func
+ 2014              	_ZN3str9subStringEPKc:
+ 2015              		@ args = 0, pretend = 0, frame = 0
+ 2016              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2017 0a34 10B5     		push	{r4, lr}
+ 2018 0a36 0446     		mov	r4, r0
+ 2019 0a38 FFF7FEFF 		bl	_ZNK3str12firstIndexOfEPKc
+ 2020 0a3c 0146     		mov	r1, r0
+ 2021 0a3e 2046     		mov	r0, r4
+ 2022 0a40 BDE81040 		pop	{r4, lr}
+ 2023 0a44 FEE7     		b	_ZN3str9subStringEi
+ 2025              		.align	1
+ 2026              		.global	_ZN3str9subStringEc
+ 2027              		.thumb
+ 2028              		.thumb_func
+ 2030              	_ZN3str9subStringEc:
+ 2031              		@ args = 0, pretend = 0, frame = 8
+ 2032              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2033 0a46 07B5     		push	{r0, r1, r2, lr}
+ 2034 0a48 0023     		movs	r3, #0
+ 2035 0a4a ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 2036 0a4e 02AB     		add	r3, sp, #8
+ 2037 0a50 03F8041D 		strb	r1, [r3, #-4]!
+ 2038 0a54 1946     		mov	r1, r3
+ 2039 0a56 FFF7FEFF 		bl	_ZN3str9subStringEPKc
+ 2040 0a5a 0EBD     		pop	{r1, r2, r3, pc}
+ 2042              		.align	1
+ 2043              		.global	_ZN3str6printfEPKcz
+ 2044              		.thumb
+ 2045              		.thumb_func
+ 2047              	_ZN3str6printfEPKcz:
+ 2048              		@ args = 4, pretend = 12, frame = 8
+ 2049              		@ frame_needed = 0, uses_anonymous_args = 1
+ 2050 0a5c 0EB4     		push	{r1, r2, r3}
+ 2051 0a5e F3B5     		push	{r0, r1, r4, r5, r6, r7, lr}
+ 2052 0a60 07AB     		add	r3, sp, #28
+ 2053 0a62 53F8046B 		ldr	r6, [r3], #4
+ 2054 0a66 0446     		mov	r4, r0
+ 2055 0a68 0093     		str	r3, [sp, #0]
+ 2056 0a6a 0027     		movs	r7, #0
+ 2057 0a6c 13E0     		b	.L224
+ 2058              	.L226:
+ 2059 0a6e 6568     		ldr	r5, [r4, #4]
+ 2060 0a70 009B     		ldr	r3, [sp, #0]
+ 2061 0a72 0135     		adds	r5, r5, #1
+ 2062 0a74 2946     		mov	r1, r5
+ 2063 0a76 3246     		mov	r2, r6
+ 2064 0a78 0193     		str	r3, [sp, #4]
+ 2065 0a7a FFF7FEFF 		bl	vsniprintf
+ 2066 0a7e A842     		cmp	r0, r5
+ 2067 0a80 0746     		mov	r7, r0
+ 2068 0a82 0BDB     		blt	.L225
+ 2069 0a84 411C     		adds	r1, r0, #1
+ 2070 0a86 2046     		mov	r0, r4
+ 2071 0a88 FFF7FEFF 		bl	_ZN3str7reserveEi
+ 2072 0a8c 80F00100 		eor	r0, r0, #1
+ 2073 0a90 10F0FF0F 		tst	r0, #255
+ 2074 0a94 02D1     		bne	.L225
+ 2075              	.L224:
+ 2076 0a96 A068     		ldr	r0, [r4, #8]
+ 2077 0a98 0028     		cmp	r0, #0
+ 2078 0a9a E8D1     		bne	.L226
+ 2079              	.L225:
+ 2080 0a9c 3846     		mov	r0, r7
+ 2081 0a9e BDE8FC40 		pop	{r2, r3, r4, r5, r6, r7, lr}
+ 2082 0aa2 03B0     		add	sp, sp, #12
+ 2083 0aa4 7047     		bx	lr
+ 2085              		.align	1
+ 2086              		.global	_ZN3str8copyFromEPKc
+ 2087              		.thumb
+ 2088              		.thumb_func
+ 2090              	_ZN3str8copyFromEPKc:
+ 2091              		@ args = 0, pretend = 0, frame = 0
+ 2092              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2093 0aa6 70B5     		push	{r4, r5, r6, lr}
+ 2094 0aa8 0446     		mov	r4, r0
+ 2095 0aaa 0846     		mov	r0, r1
+ 2096 0aac 0E46     		mov	r6, r1
+ 2097 0aae FFF7FEFF 		bl	strlen
+ 2098 0ab2 6368     		ldr	r3, [r4, #4]
+ 2099 0ab4 0146     		mov	r1, r0
+ 2100 0ab6 9842     		cmp	r0, r3
+ 2101 0ab8 0DDD     		ble	.L228
+ 2102 0aba 2046     		mov	r0, r4
+ 2103 0abc FFF7FEFF 		bl	_ZN3str13reAllocateMemEi
+ 2104 0ac0 0546     		mov	r5, r0
+ 2105 0ac2 40B9     		cbnz	r0, .L228
+ 2106 0ac4 6268     		ldr	r2, [r4, #4]
+ 2107 0ac6 A068     		ldr	r0, [r4, #8]
+ 2108 0ac8 3146     		mov	r1, r6
+ 2109 0aca FFF7FEFF 		bl	strncpy
+ 2110 0ace A268     		ldr	r2, [r4, #8]
+ 2111 0ad0 6368     		ldr	r3, [r4, #4]
+ 2112 0ad2 D554     		strb	r5, [r2, r3]
+ 2113 0ad4 70BD     		pop	{r4, r5, r6, pc}
+ 2114              	.L228:
+ 2115 0ad6 A068     		ldr	r0, [r4, #8]
+ 2116 0ad8 3146     		mov	r1, r6
+ 2117 0ada BDE87040 		pop	{r4, r5, r6, lr}
+ 2118 0ade FFF7FEBF 		b	strcpy
+ 2120              		.align	1
+ 2121              		.global	_ZN3straSEi
+ 2122              		.thumb
+ 2123              		.thumb_func
+ 2125              	_ZN3straSEi:
+ 2126              		@ args = 0, pretend = 0, frame = 32
+ 2127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2128 0ae2 10B5     		push	{r4, lr}
+ 2129 0ae4 88B0     		sub	sp, sp, #32
+ 2130 0ae6 0446     		mov	r4, r0
+ 2131 0ae8 0A46     		mov	r2, r1
+ 2132 0aea 6846     		mov	r0, sp
+ 2133 0aec 0449     		ldr	r1, .L231
+ 2134 0aee FFF7FEFF 		bl	siprintf
+ 2135 0af2 2046     		mov	r0, r4
+ 2136 0af4 6946     		mov	r1, sp
+ 2137 0af6 FFF7FEFF 		bl	_ZN3str8copyFromEPKc
+ 2138 0afa 08B0     		add	sp, sp, #32
+ 2139 0afc 10BD     		pop	{r4, pc}
+ 2140              	.L232:
+ 2141 0afe 00BF     		.align	2
+ 2142              	.L231:
+ 2143 0b00 07000000 		.word	.LC2
+ 2145              		.align	1
+ 2146              		.global	_ZN3strmIEi
+ 2147              		.thumb
+ 2148              		.thumb_func
+ 2150              	_ZN3strmIEi:
+ 2151              		@ args = 0, pretend = 0, frame = 0
+ 2152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2153 0b04 38B5     		push	{r3, r4, r5, lr}
+ 2154 0b06 0446     		mov	r4, r0
+ 2155 0b08 0D46     		mov	r5, r1
+ 2156 0b0a FFF7FEFF 		bl	_ZNK3str5isIntEv
+ 2157 0b0e 38B1     		cbz	r0, .L233
+ 2158 0b10 A068     		ldr	r0, [r4, #8]
+ 2159 0b12 FFF7FEFF 		bl	atoi
+ 2160 0b16 411B     		subs	r1, r0, r5
+ 2161 0b18 2046     		mov	r0, r4
+ 2162 0b1a BDE83840 		pop	{r3, r4, r5, lr}
+ 2163 0b1e FEE7     		b	_ZN3straSEi
+ 2164              	.L233:
+ 2165 0b20 38BD     		pop	{r3, r4, r5, pc}
+ 2167              		.align	1
+ 2168              		.global	_ZN3strmmEi
+ 2169              		.thumb
+ 2170              		.thumb_func
+ 2172              	_ZN3strmmEi:
+ 2173              		@ args = 0, pretend = 0, frame = 0
+ 2174              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2175              		@ link register save eliminated.
+ 2176 0b22 0121     		movs	r1, #1
+ 2177 0b24 FEE7     		b	_ZN3strmIEi
+ 2179              		.align	1
+ 2180              		.global	_ZN3strmmEv
+ 2181              		.thumb
+ 2182              		.thumb_func
+ 2184              	_ZN3strmmEv:
+ 2185              		@ args = 0, pretend = 0, frame = 0
+ 2186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2187              		@ link register save eliminated.
+ 2188 0b26 0121     		movs	r1, #1
+ 2189 0b28 FEE7     		b	_ZN3strmIEi
+ 2191              		.align	1
+ 2192              		.global	_ZN3strpLEi
+ 2193              		.thumb
+ 2194              		.thumb_func
+ 2196              	_ZN3strpLEi:
+ 2197              		@ args = 0, pretend = 0, frame = 0
+ 2198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2199 0b2a 38B5     		push	{r3, r4, r5, lr}
+ 2200 0b2c 0446     		mov	r4, r0
+ 2201 0b2e 0D46     		mov	r5, r1
+ 2202 0b30 FFF7FEFF 		bl	_ZNK3str5isIntEv
+ 2203 0b34 38B1     		cbz	r0, .L237
+ 2204 0b36 A068     		ldr	r0, [r4, #8]
+ 2205 0b38 FFF7FEFF 		bl	atoi
+ 2206 0b3c 4119     		adds	r1, r0, r5
+ 2207 0b3e 2046     		mov	r0, r4
+ 2208 0b40 BDE83840 		pop	{r3, r4, r5, lr}
+ 2209 0b44 FEE7     		b	_ZN3straSEi
+ 2210              	.L237:
+ 2211 0b46 38BD     		pop	{r3, r4, r5, pc}
+ 2213              		.align	1
+ 2214              		.global	_ZN3strppEi
+ 2215              		.thumb
+ 2216              		.thumb_func
+ 2218              	_ZN3strppEi:
+ 2219              		@ args = 0, pretend = 0, frame = 0
+ 2220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2221              		@ link register save eliminated.
+ 2222 0b48 0121     		movs	r1, #1
+ 2223 0b4a FEE7     		b	_ZN3strpLEi
+ 2225              		.align	1
+ 2226              		.global	_ZN3strppEv
+ 2227              		.thumb
+ 2228              		.thumb_func
+ 2230              	_ZN3strppEv:
+ 2231              		@ args = 0, pretend = 0, frame = 0
+ 2232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2233              		@ link register save eliminated.
+ 2234 0b4c 0121     		movs	r1, #1
+ 2235 0b4e FEE7     		b	_ZN3strpLEi
+ 2237              		.align	1
+ 2238              		.global	_ZN3straSEPKc
+ 2239              		.thumb
+ 2240              		.thumb_func
+ 2242              	_ZN3straSEPKc:
+ 2243              		@ args = 0, pretend = 0, frame = 0
+ 2244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2245              		@ link register save eliminated.
+ 2246 0b50 FEE7     		b	_ZN3str8copyFromEPKc
+ 2248              		.align	1
+ 2249              		.global	_ZN3straSERKS_
+ 2250              		.thumb
+ 2251              		.thumb_func
+ 2253              	_ZN3straSERKS_:
+ 2254              		@ args = 0, pretend = 0, frame = 0
+ 2255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2256 0b52 8842     		cmp	r0, r1
+ 2257 0b54 10B5     		push	{r4, lr}
+ 2258 0b56 0446     		mov	r4, r0
+ 2259 0b58 02D0     		beq	.L243
+ 2260 0b5a 8968     		ldr	r1, [r1, #8]
+ 2261 0b5c FFF7FEFF 		bl	_ZN3str8copyFromEPKc
+ 2262              	.L243:
+ 2263 0b60 2046     		mov	r0, r4
+ 2264 0b62 10BD     		pop	{r4, pc}
+ 2266              		.align	1
+ 2267              		.global	_ZN3strC2ERKS_
+ 2268              		.thumb
+ 2269              		.thumb_func
+ 2271              	_ZN3strC2ERKS_:
+ 2272              		@ args = 0, pretend = 0, frame = 0
+ 2273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2274 0b64 38B5     		push	{r3, r4, r5, lr}
+ 2275 0b66 0446     		mov	r4, r0
+ 2276 0b68 8868     		ldr	r0, [r1, #8]
+ 2277 0b6a 0D46     		mov	r5, r1
+ 2278 0b6c FFF7FEFF 		bl	strlen
+ 2279 0b70 0146     		mov	r1, r0
+ 2280 0b72 2046     		mov	r0, r4
+ 2281 0b74 FFF7FEFF 		bl	_ZN3str4initEi
+ 2282 0b78 2046     		mov	r0, r4
+ 2283 0b7a 2946     		mov	r1, r5
+ 2284 0b7c FFF7FEFF 		bl	_ZN3straSERKS_
+ 2285 0b80 2046     		mov	r0, r4
+ 2286 0b82 38BD     		pop	{r3, r4, r5, pc}
+ 2288              		.align	1
+ 2289              		.global	_ZN3strC2EPKc
+ 2290              		.thumb
+ 2291              		.thumb_func
+ 2293              	_ZN3strC2EPKc:
+ 2294              		@ args = 0, pretend = 0, frame = 0
+ 2295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2296 0b84 38B5     		push	{r3, r4, r5, lr}
+ 2297 0b86 0446     		mov	r4, r0
+ 2298 0b88 0846     		mov	r0, r1
+ 2299 0b8a 0D46     		mov	r5, r1
+ 2300 0b8c FFF7FEFF 		bl	strlen
+ 2301 0b90 0146     		mov	r1, r0
+ 2302 0b92 2046     		mov	r0, r4
+ 2303 0b94 FFF7FEFF 		bl	_ZN3str4initEi
+ 2304 0b98 2046     		mov	r0, r4
+ 2305 0b9a 2946     		mov	r1, r5
+ 2306 0b9c FFF7FEFF 		bl	_ZN3str8copyFromEPKc
+ 2307 0ba0 2046     		mov	r0, r4
+ 2308 0ba2 38BD     		pop	{r3, r4, r5, pc}
+ 2310              		.align	1
+ 2311              		.global	_ZN3str18singleHexCharToIntEh
+ 2312              		.thumb
+ 2313              		.thumb_func
+ 2315              	_ZN3str18singleHexCharToIntEh:
+ 2316              		@ args = 0, pretend = 0, frame = 0
+ 2317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2318              		@ link register save eliminated.
+ 2319 0ba4 4129     		cmp	r1, #65
+ 2320 0ba6 0AD3     		bcc	.L249
+ 2321 0ba8 4629     		cmp	r1, #70
+ 2322 0baa 05D9     		bls	.L250
+ 2323 0bac A1F16103 		sub	r3, r1, #97
+ 2324 0bb0 052B     		cmp	r3, #5
+ 2325 0bb2 04D8     		bhi	.L249
+ 2326 0bb4 6B39     		subs	r1, r1, #107
+ 2327 0bb6 00E0     		b	.L253
+ 2328              	.L250:
+ 2329 0bb8 4B39     		subs	r1, r1, #75
+ 2330              	.L253:
+ 2331 0bba C8B2     		uxtb	r0, r1
+ 2332 0bbc 7047     		bx	lr
+ 2333              	.L249:
+ 2334 0bbe 3039     		subs	r1, r1, #48
+ 2335 0bc0 C8B2     		uxtb	r0, r1
+ 2336 0bc2 7047     		bx	lr
+ 2338              		.align	1
+ 2339              		.global	_ZN3str17hexStrDigitsToIntEPc
+ 2340              		.thumb
+ 2341              		.thumb_func
+ 2343              	_ZN3str17hexStrDigitsToIntEPc:
+ 2344              		@ args = 0, pretend = 0, frame = 0
+ 2345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2346 0bc4 70B5     		push	{r4, r5, r6, lr}
+ 2347 0bc6 0D46     		mov	r5, r1
+ 2348 0bc8 0978     		ldrb	r1, [r1, #0]	@ zero_extendqisi2
+ 2349 0bca 0446     		mov	r4, r0
+ 2350 0bcc FFF7FEFF 		bl	_ZN3str18singleHexCharToIntEh
+ 2351 0bd0 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 2352 0bd2 0646     		mov	r6, r0
+ 2353 0bd4 2046     		mov	r0, r4
+ 2354 0bd6 FFF7FEFF 		bl	_ZN3str18singleHexCharToIntEh
+ 2355 0bda 00EB0610 		add	r0, r0, r6, lsl #4
+ 2356 0bde 70BD     		pop	{r4, r5, r6, pc}
+ 2358              		.align	1
+ 2359              		.global	_ZN3str15checksum_VerifyEv
+ 2360              		.thumb
+ 2361              		.thumb_func
+ 2363              	_ZN3str15checksum_VerifyEv:
+ 2364              		@ args = 0, pretend = 0, frame = 0
+ 2365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2366 0be0 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2367 0be2 0E49     		ldr	r1, .L258
+ 2368 0be4 0446     		mov	r4, r0
+ 2369 0be6 FFF7FEFF 		bl	_ZNK3str11lastIndexOfEPKc
+ 2370 0bea 0546     		mov	r5, r0
+ 2371 0bec 0130     		adds	r0, r0, #1
+ 2372 0bee 4FF00000 		mov	r0, #0
+ 2373 0bf2 11D0     		beq	.L256
+ 2374 0bf4 A368     		ldr	r3, [r4, #8]
+ 2375 0bf6 691C     		adds	r1, r5, #1
+ 2376 0bf8 5855     		strb	r0, [r3, r5]
+ 2377 0bfa A668     		ldr	r6, [r4, #8]
+ 2378 0bfc 2046     		mov	r0, r4
+ 2379 0bfe 7118     		adds	r1, r6, r1
+ 2380 0c00 FFF7FEFF 		bl	_ZN3str17hexStrDigitsToIntEPc
+ 2381 0c04 0746     		mov	r7, r0
+ 2382 0c06 2046     		mov	r0, r4
+ 2383 0c08 FFF7FEFF 		bl	_ZN3str12checksum_GetEv
+ 2384 0c0c 391A     		subs	r1, r7, r0
+ 2385 0c0e 4842     		rsbs	r0, r1, #0
+ 2386 0c10 40EB0100 		adc	r0, r0, r1
+ 2387 0c14 3A23     		movs	r3, #58
+ 2388 0c16 7355     		strb	r3, [r6, r5]
+ 2389              	.L256:
+ 2390 0c18 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2391              	.L259:
+ 2392 0c1a 00BF     		.align	2
+ 2393              	.L258:
+ 2394 0c1c 00000000 		.word	.LC0
+ 2396              		.global	_ZN3strC1EPci
+ 2397              		.thumb_set _ZN3strC1EPci,_ZN3strC2EPci
+ 2398              		.global	_ZN3strD1Ev
+ 2399              		.thumb_set _ZN3strD1Ev,_ZN3strD2Ev
+ 2400              		.global	_ZN3strC1Ei
+ 2401              		.thumb_set _ZN3strC1Ei,_ZN3strC2Ei
+ 2402              		.global	_ZN3strC1Ev
+ 2403              		.thumb_set _ZN3strC1Ev,_ZN3strC2Ev
+ 2404              		.global	_ZN3strC1ERKS_
+ 2405              		.thumb_set _ZN3strC1ERKS_,_ZN3strC2ERKS_
+ 2406              		.global	_ZN3strC1EPKc
+ 2407              		.thumb_set _ZN3strC1EPKc,_ZN3strC2EPKc
+ 2408              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 2409              	.LC0:
+ 2410 0000 3A00     		.ascii	":\000"
+ 2411              	.LC1:
+ 2412 0002 25303258 		.ascii	"%02X\000"
+ 2412      00
+ 2413              	.LC2:
+ 2414 0007 256900   		.ascii	"%i\000"
+ 2415              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 str.cpp
+     /tmp/ccNBOqGX.s:16     .text:00000000 $t
+     /tmp/ccNBOqGX.s:21     .text:00000000 _ZN3str5toIntEPKc
+     /tmp/ccNBOqGX.s:32     .text:00000004 _ZN3strC2EPci
+     /tmp/ccNBOqGX.s:62     .text:0000002c _ZN3strD2Ev
+     /tmp/ccNBOqGX.s:62     .text:0000002c _ZN3strD1Ev
+     /tmp/ccNBOqGX.s:88     .text:00000050 _ZNK3str6getLenEv
+     /tmp/ccNBOqGX.s:100    .text:00000056 _ZNK3str11getCapacityEv
+     /tmp/ccNBOqGX.s:112    .text:0000005a _ZN3str5clearEv
+     /tmp/ccNBOqGX.s:126    .text:00000062 _ZN3str8clearAllEv
+     /tmp/ccNBOqGX.s:141    .text:0000006e _ZN3str7toLowerEv
+     /tmp/ccNBOqGX.s:161    .text:00000086 _ZN3str7toUpperEv
+     /tmp/ccNBOqGX.s:181    .text:0000009e _ZN3str5scanfEPKcz
+     /tmp/ccNBOqGX.s:200    .text:000000b8 _ZN3str8tokenizeEPKciz
+     /tmp/ccNBOqGX.s:247    .text:00000106 _ZNK3str9compareToEPKc
+     /tmp/ccNBOqGX.s:265    .text:0000011c _ZNK3str19compareToIgnoreCaseEPKc
+     /tmp/ccNBOqGX.s:281    .text:0000012e _ZNK3str22firstIndexOfIgnoreCaseEPKc
+     /tmp/ccNBOqGX.s:346    .text:000001ac _ZNK3str18containsIgnoreCaseEPKc
+     /tmp/ccNBOqGX.s:361    .text:000001ba _ZNK3str12firstIndexOfEPKc
+     /tmp/ccNBOqGX.s:380    .text:000001d0 _ZNK3str8containsEPKc
+     /tmp/ccNBOqGX.s:395    .text:000001de _ZNK3str11lastIndexOfEPKc
+     /tmp/ccNBOqGX.s:436    .text:00000220 _ZNK3str7countOfEPKc
+     /tmp/ccNBOqGX.s:471    .text:00000252 _ZNK3str10beginsWithEPKc
+     /tmp/ccNBOqGX.s:502    .text:00000284 _ZNK3str20beginsWithIgnoreCaseEPKc
+     /tmp/ccNBOqGX.s:533    .text:000002b6 _ZNK3str19beginsWithWholeWordEPKcc
+     /tmp/ccNBOqGX.s:564    .text:000002e4 _ZNK3str29beginsWithWholeWordIgnoreCaseEPKcc
+     /tmp/ccNBOqGX.s:595    .text:00000312 _ZNK3str8endsWithEPKc
+     /tmp/ccNBOqGX.s:626    .text:00000344 _ZNK3str18endsWithIgnoreCaseEPKc
+     /tmp/ccNBOqGX.s:657    .text:00000376 _ZN3str10eraseFirstEi
+     /tmp/ccNBOqGX.s:688    .text:000003a2 _ZN3str9eraseLastEi
+     /tmp/ccNBOqGX.s:712    .text:000003c2 _ZN3str13eraseAllAfterEi
+     /tmp/ccNBOqGX.s:738    .text:000003e4 _ZN3str10eraseAfterEii
+     /tmp/ccNBOqGX.s:777    .text:00000420 _ZN3str11eraseCharAtEi
+     /tmp/ccNBOqGX.s:789    .text:00000424 _ZN3str5eraseEPKc
+     /tmp/ccNBOqGX.s:815    .text:0000044a _ZN3str20eraseAllSpecialCharsEv
+     /tmp/ccNBOqGX.s:848    .text:0000047a _ZN3str9trimStartEPKc
+     /tmp/ccNBOqGX.s:895    .text:000004c2 _ZN3str7trimEndEPKc
+     /tmp/ccNBOqGX.s:938    .text:00000502 _ZNK3str10isAllAlphaEv
+     /tmp/ccNBOqGX.s:965    .text:00000524 _ZNK3str14isAlphaNumericEv
+     /tmp/ccNBOqGX.s:992    .text:00000546 _ZNK3str6isUintEv
+     /tmp/ccNBOqGX.s:1021   .text:0000056a _ZNK3str5isIntEv
+     /tmp/ccNBOqGX.s:1053   .text:00000598 _ZN3str12checksum_GetEv
+     /tmp/ccNBOqGX.s:1078   .text:000005b6 _ZN3str15checksum_RemoveEv
+     /tmp/ccNBOqGX.s:1092   .text:000005cc $d
+     /tmp/ccNBOqGX.s:1094   .text:000005d0 $t
+     /tmp/ccNBOqGX.s:1099   .text:000005d0 _ZN3strmIEPKc
+     /tmp/ccNBOqGX.s:1110   .text:000005d2 _ZN3strmIERKS_
+     /tmp/ccNBOqGX.s:1122   .text:000005d6 _ZNK3streqEPKc
+     /tmp/ccNBOqGX.s:1133   .text:000005d8 _ZNK3streqERKS_
+     /tmp/ccNBOqGX.s:1145   .text:000005dc _ZNK3streqEi
+     /tmp/ccNBOqGX.s:1162   .text:000005f0 _ZNK3strneEPKc
+     /tmp/ccNBOqGX.s:1176   .text:000005fe _ZNK3strneERKS_
+     /tmp/ccNBOqGX.s:1191   .text:0000060e _ZNK3strneEi
+     /tmp/ccNBOqGX.s:1208   .text:00000620 _ZNK3strltEPKc
+     /tmp/ccNBOqGX.s:1222   .text:0000062c _ZNK3strltEi
+     /tmp/ccNBOqGX.s:1240   .text:00000640 _ZNK3strgtEPKc
+     /tmp/ccNBOqGX.s:1257   .text:00000652 _ZNK3strgtEi
+     /tmp/ccNBOqGX.s:1275   .text:00000666 _ZNK3strleEPKc
+     /tmp/ccNBOqGX.s:1292   .text:00000678 _ZNK3strleEi
+     /tmp/ccNBOqGX.s:1310   .text:0000068c _ZNK3strgeEPKc
+     /tmp/ccNBOqGX.s:1325   .text:0000069a _ZNK3strgeEi
+     /tmp/ccNBOqGX.s:1343   .text:000006ae _ZNK3strclEv
+     /tmp/ccNBOqGX.s:1355   .text:000006b2 _ZNK3strcviEv
+     /tmp/ccNBOqGX.s:1367   .text:000006b8 _ZN3strixEi
+     /tmp/ccNBOqGX.s:1386   .text:000006ce _ZN3str13reAllocateMemEi
+     /tmp/ccNBOqGX.s:1434   .text:0000071a _ZN3str26ensureMemoryToInsertNCharsEi
+     /tmp/ccNBOqGX.s:1459   .text:0000073c _ZN3str8insertAtEiPKc
+     /tmp/ccNBOqGX.s:1509   .text:0000079e _ZN3str10replaceAllEPKcS1_
+     /tmp/ccNBOqGX.s:1545   .text:000007dc _ZN3str11replaceLastEPKcS1_
+     /tmp/ccNBOqGX.s:1577   .text:00000810 _ZN3str12replaceFirstEPKcS1_
+     /tmp/ccNBOqGX.s:1609   .text:00000844 _ZN3str11insertAtBegEPKc
+     /tmp/ccNBOqGX.s:1622   .text:0000084a _ZN3str11insertAtEndEPKc
+     /tmp/ccNBOqGX.s:1646   .text:0000086c _ZN3str6appendEPKc
+     /tmp/ccNBOqGX.s:1657   .text:0000086e _ZN3strpLEc
+     /tmp/ccNBOqGX.s:1674   .text:00000884 _ZN3strpLERKS_
+     /tmp/ccNBOqGX.s:1686   .text:00000888 _ZN3strpLEPKc
+     /tmp/ccNBOqGX.s:1697   .text:0000088a _ZN3str11appendAsHexEj
+     /tmp/ccNBOqGX.s:1713   .text:000008a4 $d
+     /tmp/ccNBOqGX.s:1715   .text:000008a8 $t
+     /tmp/ccNBOqGX.s:1720   .text:000008a8 _ZN3str15checksum_AppendEv
+     /tmp/ccNBOqGX.s:1737   .text:000008c4 $d
+     /tmp/ccNBOqGX.s:1739   .text:000008c8 $t
+     /tmp/ccNBOqGX.s:1744   .text:000008c8 _ZN3str6appendEi
+     /tmp/ccNBOqGX.s:1760   .text:000008e0 $d
+     /tmp/ccNBOqGX.s:1763   .text._ZN3str4initEi:00000000 $t
+     /tmp/ccNBOqGX.s:1768   .text._ZN3str4initEi:00000000 _ZN3str4initEi
+     /tmp/ccNBOqGX.s:1781   .text:000008e4 $t
+     /tmp/ccNBOqGX.s:1786   .text:000008e4 _ZN3strC2Ei
+     /tmp/ccNBOqGX.s:1800   .text:000008f0 _ZN3strC2Ev
+     /tmp/ccNBOqGX.s:1815   .text:000008fe _ZN3str7reserveEi
+     /tmp/ccNBOqGX.s:1832   .text:0000090a _ZN3str9subStringEii
+     /tmp/ccNBOqGX.s:1886   .text:00000974 _ZN3str8getTokenEPKcb
+     /tmp/ccNBOqGX.s:1932   .text:000009bc _ZN3str9subStringEcc
+     /tmp/ccNBOqGX.s:1960   .text:000009f0 _ZN3str9subStringEPKci
+     /tmp/ccNBOqGX.s:1978   .text:00000a06 _ZN3str9subStringEci
+     /tmp/ccNBOqGX.s:1995   .text:00000a1c _ZN3str9subStringEi
+     /tmp/ccNBOqGX.s:2014   .text:00000a34 _ZN3str9subStringEPKc
+     /tmp/ccNBOqGX.s:2030   .text:00000a46 _ZN3str9subStringEc
+     /tmp/ccNBOqGX.s:2047   .text:00000a5c _ZN3str6printfEPKcz
+     /tmp/ccNBOqGX.s:2090   .text:00000aa6 _ZN3str8copyFromEPKc
+     /tmp/ccNBOqGX.s:2125   .text:00000ae2 _ZN3straSEi
+     /tmp/ccNBOqGX.s:2143   .text:00000b00 $d
+     /tmp/ccNBOqGX.s:2145   .text:00000b04 $t
+     /tmp/ccNBOqGX.s:2150   .text:00000b04 _ZN3strmIEi
+     /tmp/ccNBOqGX.s:2172   .text:00000b22 _ZN3strmmEi
+     /tmp/ccNBOqGX.s:2184   .text:00000b26 _ZN3strmmEv
+     /tmp/ccNBOqGX.s:2196   .text:00000b2a _ZN3strpLEi
+     /tmp/ccNBOqGX.s:2218   .text:00000b48 _ZN3strppEi
+     /tmp/ccNBOqGX.s:2230   .text:00000b4c _ZN3strppEv
+     /tmp/ccNBOqGX.s:2242   .text:00000b50 _ZN3straSEPKc
+     /tmp/ccNBOqGX.s:2253   .text:00000b52 _ZN3straSERKS_
+     /tmp/ccNBOqGX.s:2271   .text:00000b64 _ZN3strC2ERKS_
+     /tmp/ccNBOqGX.s:2293   .text:00000b84 _ZN3strC2EPKc
+     /tmp/ccNBOqGX.s:2315   .text:00000ba4 _ZN3str18singleHexCharToIntEh
+     /tmp/ccNBOqGX.s:2343   .text:00000bc4 _ZN3str17hexStrDigitsToIntEPc
+     /tmp/ccNBOqGX.s:2363   .text:00000be0 _ZN3str15checksum_VerifyEv
+     /tmp/ccNBOqGX.s:2394   .text:00000c1c $d
+     /tmp/ccNBOqGX.s:32     .text:00000004 _ZN3strC1EPci
+     /tmp/ccNBOqGX.s:1786   .text:000008e4 _ZN3strC1Ei
+     /tmp/ccNBOqGX.s:1800   .text:000008f0 _ZN3strC1Ev
+     /tmp/ccNBOqGX.s:2271   .text:00000b64 _ZN3strC1ERKS_
+     /tmp/ccNBOqGX.s:2293   .text:00000b84 _ZN3strC1EPKc
+
+UNDEFINED SYMBOLS
+atoi
+memset
+_ZdlPv
+strlen
+tolower
+toupper
+vsiscanf
+strtok_r
+strcmp
+strcasecmp
+strchr
+strstr
+strncmp
+strncasecmp
+memmove
+isalnum
+isalpha
+malloc
+realloc
+memcpy
+strcat
+siprintf
+_Znwj
+strpbrk
+vsniprintf
+strncpy
+strcpy

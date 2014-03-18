@@ -1,0 +1,406 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"system_init.cpp"
+  15              		.text
+  16              		.align	1
+  17              		.thumb
+  18              		.thumb_func
+  20              	NVIC_SetPriority:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23              		@ link register save eliminated.
+  24 0000 0028     		cmp	r0, #0
+  25 0002 4FEAC101 		lsl	r1, r1, #3
+  26 0006 06DA     		bge	.L2
+  27 0008 064B     		ldr	r3, .L4
+  28 000a 00F00F00 		and	r0, r0, #15
+  29 000e C9B2     		uxtb	r1, r1
+  30 0010 C318     		adds	r3, r0, r3
+  31 0012 1976     		strb	r1, [r3, #24]
+  32 0014 7047     		bx	lr
+  33              	.L2:
+  34 0016 044B     		ldr	r3, .L4+4
+  35 0018 C9B2     		uxtb	r1, r1
+  36 001a C318     		adds	r3, r0, r3
+  37 001c 83F80013 		strb	r1, [r3, #768]
+  38 0020 7047     		bx	lr
+  39              	.L5:
+  40 0022 00BF     		.align	2
+  41              	.L4:
+  42 0024 FCEC00E0 		.word	-536810244
+  43 0028 00E100E0 		.word	-536813312
+  45              		.align	1
+  46              		.global	sys_get_boot_type
+  47              		.thumb
+  48              		.thumb_func
+  50              	sys_get_boot_type:
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+  54 002c 014B     		ldr	r3, .L7
+  55 002e 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+  56 0030 7047     		bx	lr
+  57              	.L8:
+  58 0032 00BF     		.align	2
+  59              	.L7:
+  60 0034 00000000 		.word	.LANCHOR0
+  62              		.align	1
+  63              		.global	sys_get_boot_time
+  64              		.thumb
+  65              		.thumb_func
+  67              	sys_get_boot_time:
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71 0038 034A     		ldr	r2, .L10
+  72 003a 0346     		mov	r3, r0
+  73 003c 07CA     		ldmia	r2, {r0, r1, r2}
+  74 003e 83E80700 		stmia	r3, {r0, r1, r2}
+  75 0042 1846     		mov	r0, r3
+  76 0044 7047     		bx	lr
+  77              	.L11:
+  78 0046 00BF     		.align	2
+  79              	.L10:
+  80 0048 04000000 		.word	.LANCHOR0+4
+  82              		.align	1
+  83              		.global	_Z14low_level_initv
+  84              		.thumb
+  85              		.thumb_func
+  87              	_Z14low_level_initv:
+  88              		@ args = 0, pretend = 0, frame = 16
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 004c 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+  91 004e FFF7FEFF 		bl	rtc_init
+  92 0052 6846     		mov	r0, sp
+  93 0054 FFF7FEFF 		bl	rtc_gettime
+  94 0058 9DE80700 		ldmia	sp, {r0, r1, r2}
+  95 005c 8E4B     		ldr	r3, .L33
+  96 005e 83E80700 		stmia	r3, {r0, r1, r2}
+  97 0062 FFF7FEFF 		bl	_Z19sys_clock_configurev
+  98 0066 FFF7FEFF 		bl	sys_get_cpu_clock
+  99 006a 8C4B     		ldr	r3, .L33+4
+ 100 006c B0FBF3F0 		udiv	r0, r0, r3
+ 101 0070 3C28     		cmp	r0, #60
+ 102 0072 8B4B     		ldr	r3, .L33+8
+ 103 0074 04D8     		bhi	.L19
+ 104 0076 2928     		cmp	r0, #41
+ 105 0078 0CD2     		bcs	.L16
+ 106 007a 1428     		cmp	r0, #20
+ 107 007c 05D9     		bls	.L14
+ 108 007e 06E0     		b	.L31
+ 109              	.L19:
+ 110 0080 5028     		cmp	r0, #80
+ 111 0082 0AD9     		bls	.L17
+ 112 0084 6428     		cmp	r0, #100
+ 113 0086 0ED8     		bhi	.L13
+ 114 0088 0AE0     		b	.L32
+ 115              	.L14:
+ 116 008a 3A22     		movs	r2, #58
+ 117 008c 0DE0     		b	.L29
+ 118              	.L31:
+ 119 008e 41F23A02 		movw	r2, #4154
+ 120 0092 0AE0     		b	.L29
+ 121              	.L16:
+ 122 0094 42F23A02 		movw	r2, #8250
+ 123 0098 07E0     		b	.L29
+ 124              	.L17:
+ 125 009a 43F23A02 		movw	r2, #12346
+ 126 009e 04E0     		b	.L29
+ 127              	.L32:
+ 128 00a0 44F23A02 		movw	r2, #16442
+ 129 00a4 01E0     		b	.L29
+ 130              	.L13:
+ 131 00a6 45F23A02 		movw	r2, #20538
+ 132              	.L29:
+ 133 00aa 1A60     		str	r2, [r3, #0]
+ 134 00ac 0820     		movs	r0, #8
+ 135 00ae 1421     		movs	r1, #20
+ 136 00b0 FFF7A6FF 		bl	NVIC_SetPriority
+ 137 00b4 0020     		movs	r0, #0
+ 138 00b6 1421     		movs	r1, #20
+ 139 00b8 FFF7A2FF 		bl	NVIC_SetPriority
+ 140 00bc 0120     		movs	r0, #1
+ 141 00be 1421     		movs	r1, #20
+ 142 00c0 FFF79EFF 		bl	NVIC_SetPriority
+ 143 00c4 0220     		movs	r0, #2
+ 144 00c6 1421     		movs	r1, #20
+ 145 00c8 FFF79AFF 		bl	NVIC_SetPriority
+ 146 00cc 0320     		movs	r0, #3
+ 147 00ce 1421     		movs	r1, #20
+ 148 00d0 FFF796FF 		bl	NVIC_SetPriority
+ 149 00d4 0420     		movs	r0, #4
+ 150 00d6 1421     		movs	r1, #20
+ 151 00d8 FFF792FF 		bl	NVIC_SetPriority
+ 152 00dc 0520     		movs	r0, #5
+ 153 00de 1321     		movs	r1, #19
+ 154 00e0 FFF78EFF 		bl	NVIC_SetPriority
+ 155 00e4 0620     		movs	r0, #6
+ 156 00e6 1321     		movs	r1, #19
+ 157 00e8 FFF78AFF 		bl	NVIC_SetPriority
+ 158 00ec 0720     		movs	r0, #7
+ 159 00ee 1321     		movs	r1, #19
+ 160 00f0 FFF786FF 		bl	NVIC_SetPriority
+ 161 00f4 0820     		movs	r0, #8
+ 162 00f6 1321     		movs	r1, #19
+ 163 00f8 FFF782FF 		bl	NVIC_SetPriority
+ 164 00fc 1421     		movs	r1, #20
+ 165 00fe 0920     		movs	r0, #9
+ 166 0100 FFF77EFF 		bl	NVIC_SetPriority
+ 167 0104 0A20     		movs	r0, #10
+ 168 0106 1221     		movs	r1, #18
+ 169 0108 FFF77AFF 		bl	NVIC_SetPriority
+ 170 010c 0B20     		movs	r0, #11
+ 171 010e 1221     		movs	r1, #18
+ 172 0110 FFF776FF 		bl	NVIC_SetPriority
+ 173 0114 0C20     		movs	r0, #12
+ 174 0116 1221     		movs	r1, #18
+ 175 0118 FFF772FF 		bl	NVIC_SetPriority
+ 176 011c 0D20     		movs	r0, #13
+ 177 011e 1421     		movs	r1, #20
+ 178 0120 FFF76EFF 		bl	NVIC_SetPriority
+ 179 0124 0E20     		movs	r0, #14
+ 180 0126 1421     		movs	r1, #20
+ 181 0128 FFF76AFF 		bl	NVIC_SetPriority
+ 182 012c 0F20     		movs	r0, #15
+ 183 012e 1421     		movs	r1, #20
+ 184 0130 FFF766FF 		bl	NVIC_SetPriority
+ 185 0134 1020     		movs	r0, #16
+ 186 0136 1421     		movs	r1, #20
+ 187 0138 FFF762FF 		bl	NVIC_SetPriority
+ 188 013c 1120     		movs	r0, #17
+ 189 013e 1421     		movs	r1, #20
+ 190 0140 FFF75EFF 		bl	NVIC_SetPriority
+ 191 0144 1220     		movs	r0, #18
+ 192 0146 1421     		movs	r1, #20
+ 193 0148 FFF75AFF 		bl	NVIC_SetPriority
+ 194 014c 1320     		movs	r0, #19
+ 195 014e 1421     		movs	r1, #20
+ 196 0150 FFF756FF 		bl	NVIC_SetPriority
+ 197 0154 1420     		movs	r0, #20
+ 198 0156 0146     		mov	r1, r0
+ 199 0158 FFF752FF 		bl	NVIC_SetPriority
+ 200 015c 1520     		movs	r0, #21
+ 201 015e 1421     		movs	r1, #20
+ 202 0160 FFF74EFF 		bl	NVIC_SetPriority
+ 203 0164 1620     		movs	r0, #22
+ 204 0166 1421     		movs	r1, #20
+ 205 0168 FFF74AFF 		bl	NVIC_SetPriority
+ 206 016c 1720     		movs	r0, #23
+ 207 016e 1421     		movs	r1, #20
+ 208 0170 FFF746FF 		bl	NVIC_SetPriority
+ 209 0174 1820     		movs	r0, #24
+ 210 0176 1421     		movs	r1, #20
+ 211 0178 FFF742FF 		bl	NVIC_SetPriority
+ 212 017c 1920     		movs	r0, #25
+ 213 017e 1421     		movs	r1, #20
+ 214 0180 FFF73EFF 		bl	NVIC_SetPriority
+ 215 0184 1A20     		movs	r0, #26
+ 216 0186 1421     		movs	r1, #20
+ 217 0188 FFF73AFF 		bl	NVIC_SetPriority
+ 218 018c 1B20     		movs	r0, #27
+ 219 018e 1421     		movs	r1, #20
+ 220 0190 FFF736FF 		bl	NVIC_SetPriority
+ 221 0194 1C20     		movs	r0, #28
+ 222 0196 1421     		movs	r1, #20
+ 223 0198 FFF732FF 		bl	NVIC_SetPriority
+ 224 019c 1D20     		movs	r0, #29
+ 225 019e 0421     		movs	r1, #4
+ 226 01a0 FFF72EFF 		bl	NVIC_SetPriority
+ 227 01a4 1E20     		movs	r0, #30
+ 228 01a6 1421     		movs	r1, #20
+ 229 01a8 FFF72AFF 		bl	NVIC_SetPriority
+ 230 01ac 1F20     		movs	r0, #31
+ 231 01ae 1421     		movs	r1, #20
+ 232 01b0 FFF726FF 		bl	NVIC_SetPriority
+ 233 01b4 2020     		movs	r0, #32
+ 234 01b6 1421     		movs	r1, #20
+ 235 01b8 FFF722FF 		bl	NVIC_SetPriority
+ 236 01bc 2120     		movs	r0, #33
+ 237 01be 1421     		movs	r1, #20
+ 238 01c0 FFF71EFF 		bl	NVIC_SetPriority
+ 239 01c4 2220     		movs	r0, #34
+ 240 01c6 1421     		movs	r1, #20
+ 241 01c8 FFF71AFF 		bl	NVIC_SetPriority
+ 242              	@ 1189 "../L0_LowLevel/core_cm3.h" 1
+ 243 01cc 62B6     		cpsie i
+ 244              	@ 0 "" 2
+ 245              		.thumb
+ 246 01ce 4FF41640 		mov	r0, #38400
+ 247 01d2 FFF7FEFF 		bl	uart0_init
+ 248 01d6 334C     		ldr	r4, .L33+12
+ 249 01d8 3348     		ldr	r0, .L33+16
+ 250 01da FFF7FEFF 		bl	sys_set_outchar_func
+ 251 01de 3348     		ldr	r0, .L33+20
+ 252 01e0 FFF7FEFF 		bl	sys_set_inchar_func
+ 253 01e4 2368     		ldr	r3, [r4, #0]
+ 254 01e6 0021     		movs	r1, #0
+ 255 01e8 0222     		movs	r2, #2
+ 256 01ea 9868     		ldr	r0, [r3, #8]
+ 257 01ec 0B46     		mov	r3, r1
+ 258 01ee FFF7FEFF 		bl	setvbuf
+ 259 01f2 2368     		ldr	r3, [r4, #0]
+ 260 01f4 0021     		movs	r1, #0
+ 261 01f6 0222     		movs	r2, #2
+ 262 01f8 5868     		ldr	r0, [r3, #4]
+ 263 01fa 0B46     		mov	r3, r1
+ 264 01fc FFF7FEFF 		bl	setvbuf
+ 265 0200 FFF7FEFF 		bl	syscalls_init
+ 266 0204 2A4A     		ldr	r2, .L33+24
+ 267 0206 4FF08043 		mov	r3, #1073741824
+ 268 020a 5A60     		str	r2, [r3, #4]
+ 269 020c AA21     		movs	r1, #170
+ 270 020e 0322     		movs	r2, #3
+ 271 0210 1A70     		strb	r2, [r3, #0]
+ 272 0212 234C     		ldr	r4, .L33+8
+ 273 0214 1972     		strb	r1, [r3, #8]
+ 274 0216 5521     		movs	r1, #85
+ 275 0218 1972     		strb	r1, [r3, #8]
+ 276 021a D4F88031 		ldr	r3, [r4, #384]
+ 277 021e 254D     		ldr	r5, .L33+28
+ 278 0220 13F0010F 		tst	r3, #1
+ 279 0224 09D0     		beq	.L21
+ 280 0226 2448     		ldr	r0, .L33+32
+ 281 0228 FFF7FEFF 		bl	uart0_puts
+ 282 022c 0123     		movs	r3, #1
+ 283 022e 2B70     		strb	r3, [r5, #0]
+ 284 0230 D4F88031 		ldr	r3, [r4, #384]
+ 285 0234 43F00103 		orr	r3, r3, #1
+ 286 0238 0CE0     		b	.L30
+ 287              	.L21:
+ 288 023a D4F88031 		ldr	r3, [r4, #384]
+ 289 023e 9B07     		lsls	r3, r3, #30
+ 290 0240 0BD5     		bpl	.L23
+ 291 0242 1E48     		ldr	r0, .L33+36
+ 292 0244 FFF7FEFF 		bl	uart0_puts
+ 293 0248 0223     		movs	r3, #2
+ 294 024a 2B70     		strb	r3, [r5, #0]
+ 295 024c D4F88031 		ldr	r3, [r4, #384]
+ 296 0250 43F00203 		orr	r3, r3, #2
+ 297              	.L30:
+ 298 0254 C4F88031 		str	r3, [r4, #384]
+ 299 0258 1DE0     		b	.L12
+ 300              	.L23:
+ 301 025a D4F88031 		ldr	r3, [r4, #384]
+ 302 025e 13F00403 		ands	r3, r3, #4
+ 303 0262 17D0     		beq	.L24
+ 304 0264 164E     		ldr	r6, .L33+40
+ 305 0266 174B     		ldr	r3, .L33+44
+ 306 0268 B16C     		ldr	r1, [r6, #72]
+ 307 026a 9942     		cmp	r1, r3
+ 308 026c 05D1     		bne	.L25
+ 309 026e 0423     		movs	r3, #4
+ 310 0270 1548     		ldr	r0, .L33+48
+ 311 0272 2B70     		strb	r3, [r5, #0]
+ 312 0274 FFF7FEFF 		bl	uart0_puts
+ 313 0278 09E0     		b	.L26
+ 314              	.L25:
+ 315 027a 1448     		ldr	r0, .L33+52
+ 316 027c 2A70     		strb	r2, [r5, #0]
+ 317 027e FFF7FEFF 		bl	uart0_puts
+ 318 0282 D4F88031 		ldr	r3, [r4, #384]
+ 319 0286 43F00403 		orr	r3, r3, #4
+ 320 028a C4F88031 		str	r3, [r4, #384]
+ 321              	.L26:
+ 322 028e 0023     		movs	r3, #0
+ 323 0290 B364     		str	r3, [r6, #72]
+ 324 0292 00E0     		b	.L12
+ 325              	.L24:
+ 326 0294 2B70     		strb	r3, [r5, #0]
+ 327              	.L12:
+ 328 0296 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
+ 329              	.L34:
+ 330              		.align	2
+ 331              	.L33:
+ 332 0298 04000000 		.word	.LANCHOR0+4
+ 333 029c 40420F00 		.word	1000000
+ 334 02a0 00C00F40 		.word	1074774016
+ 335 02a4 00000000 		.word	_impure_ptr
+ 336 02a8 00000000 		.word	uart0_putchar
+ 337 02ac 00000000 		.word	uart0_getchar
+ 338 02b0 80969800 		.word	10000000
+ 339 02b4 00000000 		.word	.LANCHOR0
+ 340 02b8 00000000 		.word	.LC0
+ 341 02bc 1D000000 		.word	.LC1
+ 342 02c0 00400240 		.word	1073889280
+ 343 02c4 EFBEADDE 		.word	-559038737
+ 344 02c8 37000000 		.word	.LC2
+ 345 02cc 54000000 		.word	.LC3
+ 347              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 348              	.LC0:
+ 349 0000 53797374 		.ascii	"System Power-on: Booting ...\000"
+ 349      656D2050 
+ 349      6F776572 
+ 349      2D6F6E3A 
+ 349      20426F6F 
+ 350              	.LC1:
+ 351 001d 53797374 		.ascii	"System Reset: Booting ...\000"
+ 351      656D2052 
+ 351      65736574 
+ 351      3A20426F 
+ 351      6F74696E 
+ 352              	.LC2:
+ 353 0037 53797374 		.ascii	"System Crash: Re-booting ...\000"
+ 353      656D2043 
+ 353      72617368 
+ 353      3A205265 
+ 353      2D626F6F 
+ 354              	.LC3:
+ 355 0054 57617463 		.ascii	"Watchdog System Reset: Booting ...\000"
+ 355      68646F67 
+ 355      20537973 
+ 355      74656D20 
+ 355      52657365 
+ 356              		.bss
+ 357              		.align	2
+ 358              		.set	.LANCHOR0,. + 0
+ 361              	_ZL15m_sys_boot_type:
+ 362 0000 00       		.space	1
+ 363 0001 000000   		.space	3
+ 366              	_ZL15m_rtc_boot_time:
+ 367 0004 00000000 		.space	12
+ 367      00000000 
+ 367      00000000 
+ 368              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_init.cpp
+     /tmp/cc4xUyMu.s:16     .text:00000000 $t
+     /tmp/cc4xUyMu.s:20     .text:00000000 NVIC_SetPriority
+     /tmp/cc4xUyMu.s:42     .text:00000024 $d
+     /tmp/cc4xUyMu.s:45     .text:0000002c $t
+     /tmp/cc4xUyMu.s:50     .text:0000002c sys_get_boot_type
+     /tmp/cc4xUyMu.s:60     .text:00000034 $d
+     /tmp/cc4xUyMu.s:62     .text:00000038 $t
+     /tmp/cc4xUyMu.s:67     .text:00000038 sys_get_boot_time
+     /tmp/cc4xUyMu.s:80     .text:00000048 $d
+     /tmp/cc4xUyMu.s:82     .text:0000004c $t
+     /tmp/cc4xUyMu.s:87     .text:0000004c _Z14low_level_initv
+     /tmp/cc4xUyMu.s:332    .text:00000298 $d
+     /tmp/cc4xUyMu.s:357    .bss:00000000 $d
+     /tmp/cc4xUyMu.s:361    .bss:00000000 _ZL15m_sys_boot_type
+     /tmp/cc4xUyMu.s:366    .bss:00000004 _ZL15m_rtc_boot_time
+
+UNDEFINED SYMBOLS
+rtc_init
+rtc_gettime
+_Z19sys_clock_configurev
+sys_get_cpu_clock
+uart0_init
+sys_set_outchar_func
+sys_set_inchar_func
+setvbuf
+syscalls_init
+uart0_puts
+_impure_ptr
+uart0_putchar
+uart0_getchar

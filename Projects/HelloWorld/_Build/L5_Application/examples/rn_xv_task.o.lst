@@ -1,0 +1,1495 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"rn_xv_task.cpp"
+  15              		.section	.text._ZN14scheduler_taskD2Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
+  16              		.align	1
+  17              		.weak	_ZN14scheduler_taskD2Ev
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZN14scheduler_taskD2Ev:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 014B     		ldr	r3, .L3
+  26 0002 0360     		str	r3, [r0, #0]
+  27 0004 7047     		bx	lr
+  28              	.L4:
+  29 0006 00BF     		.align	2
+  30              	.L3:
+  31 0008 08000000 		.word	_ZTV14scheduler_task+8
+  33              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
+  34              		.align	1
+  35              		.weak	_ZN14scheduler_task4initEv
+  36              		.thumb
+  37              		.thumb_func
+  39              	_ZN14scheduler_task4initEv:
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 0, uses_anonymous_args = 0
+  42              		@ link register save eliminated.
+  43 0000 0120     		movs	r0, #1
+  44 0002 7047     		bx	lr
+  46              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
+  47              		.align	1
+  48              		.weak	_ZN14scheduler_task6regTlmEv
+  49              		.thumb
+  50              		.thumb_func
+  52              	_ZN14scheduler_task6regTlmEv:
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55              		@ link register save eliminated.
+  56 0000 0120     		movs	r0, #1
+  57 0002 7047     		bx	lr
+  59              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
+  60              		.align	1
+  61              		.weak	_ZN14scheduler_task9taskEntryEv
+  62              		.thumb
+  63              		.thumb_func
+  65              	_ZN14scheduler_task9taskEntryEv:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 0120     		movs	r0, #1
+  70 0002 7047     		bx	lr
+  72              		.text
+  73              		.align	1
+  74              		.global	_ZN8wifiTask6regTlmEv
+  75              		.thumb
+  76              		.thumb_func
+  78              	_ZN8wifiTask6regTlmEv:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+  82 0000 0120     		movs	r0, #1
+  83 0002 7047     		bx	lr
+  85              		.section	.text._ZN8wifiTaskD2Ev,"axG",%progbits,_ZN8wifiTaskD5Ev,comdat
+  86              		.align	1
+  87              		.weak	_ZN8wifiTaskD2Ev
+  88              		.thumb
+  89              		.thumb_func
+  91              	_ZN8wifiTaskD2Ev:
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		@ link register save eliminated.
+  95 0000 014B     		ldr	r3, .L12
+  96 0002 0360     		str	r3, [r0, #0]
+  97 0004 7047     		bx	lr
+  98              	.L13:
+  99 0006 00BF     		.align	2
+ 100              	.L12:
+ 101 0008 08000000 		.word	_ZTV14scheduler_task+8
+ 103              		.section	.text._ZN8wifiTaskD0Ev,"axG",%progbits,_ZN8wifiTaskD5Ev,comdat
+ 104              		.align	1
+ 105              		.weak	_ZN8wifiTaskD0Ev
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	_ZN8wifiTaskD0Ev:
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112 0000 034B     		ldr	r3, .L18
+ 113 0002 10B5     		push	{r4, lr}
+ 114 0004 0446     		mov	r4, r0
+ 115 0006 0360     		str	r3, [r0, #0]
+ 116 0008 FFF7FEFF 		bl	_ZdlPv
+ 117 000c 2046     		mov	r0, r4
+ 118 000e 10BD     		pop	{r4, pc}
+ 119              	.L19:
+ 120              		.align	2
+ 121              	.L18:
+ 122 0010 08000000 		.word	_ZTV14scheduler_task+8
+ 124              		.section	.text._ZN14scheduler_taskD0Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
+ 125              		.align	1
+ 126              		.weak	_ZN14scheduler_taskD0Ev
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	_ZN14scheduler_taskD0Ev:
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133 0000 034B     		ldr	r3, .L23
+ 134 0002 10B5     		push	{r4, lr}
+ 135 0004 0446     		mov	r4, r0
+ 136 0006 0360     		str	r3, [r0, #0]
+ 137 0008 FFF7FEFF 		bl	_ZdlPv
+ 138 000c 2046     		mov	r0, r4
+ 139 000e 10BD     		pop	{r4, pc}
+ 140              	.L24:
+ 141              		.align	2
+ 142              	.L23:
+ 143 0010 08000000 		.word	_ZTV14scheduler_task+8
+ 145              		.text
+ 146              		.align	1
+ 147              		.global	_ZN8wifiTask4initEv
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	_ZN8wifiTask4initEv:
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154 0004 08B5     		push	{r3, lr}
+ 155 0006 0349     		ldr	r1, .L26
+ 156 0008 026C     		ldr	r2, [r0, #64]
+ 157 000a FFF7FEFF 		bl	_ZN14scheduler_task15addSharedObjectEPKcPv
+ 158 000e 0120     		movs	r0, #1
+ 159 0010 08BD     		pop	{r3, pc}
+ 160              	.L27:
+ 161 0012 00BF     		.align	2
+ 162              	.L26:
+ 163 0014 00000000 		.word	.LC1
+ 165              		.align	1
+ 166              		.global	_ZN8wifiTask9wifiFlushEv
+ 167              		.thumb
+ 168              		.thumb_func
+ 170              	_ZN8wifiTask9wifiFlushEv:
+ 171              		@ args = 0, pretend = 0, frame = 8
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173 0018 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 174 001a 0023     		movs	r3, #0
+ 175 001c 02AD     		add	r5, sp, #8
+ 176 001e 0646     		mov	r6, r0
+ 177 0020 05F8013D 		strb	r3, [r5, #-1]!
+ 178 0024 174C     		ldr	r4, .L39
+ 179 0026 23E0     		b	.L38
+ 180              	.L35:
+ 181 0028 96F84430 		ldrb	r3, [r6, #68]	@ zero_extendqisi2
+ 182 002c 03B3     		cbz	r3, .L38
+ 183 002e 2068     		ldr	r0, [r4, #0]
+ 184 0030 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 185 0034 8268     		ldr	r2, [r0, #8]
+ 186 0036 9368     		ldr	r3, [r2, #8]
+ 187 0038 013B     		subs	r3, r3, #1
+ 188 003a 002B     		cmp	r3, #0
+ 189 003c 9360     		str	r3, [r2, #8]
+ 190 003e 10DA     		bge	.L31
+ 191 0040 9769     		ldr	r7, [r2, #24]
+ 192 0042 BB42     		cmp	r3, r7
+ 193 0044 0ADB     		blt	.L32
+ 194 0046 1368     		ldr	r3, [r2, #0]
+ 195 0048 1970     		strb	r1, [r3, #0]
+ 196 004a 2068     		ldr	r0, [r4, #0]
+ 197 004c 8268     		ldr	r2, [r0, #8]
+ 198 004e 1368     		ldr	r3, [r2, #0]
+ 199 0050 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 200 0052 0A29     		cmp	r1, #10
+ 201 0054 02D0     		beq	.L32
+ 202 0056 0133     		adds	r3, r3, #1
+ 203 0058 1360     		str	r3, [r2, #0]
+ 204 005a 09E0     		b	.L38
+ 205              	.L32:
+ 206 005c FFF7FEFF 		bl	__swbuf_r
+ 207 0060 06E0     		b	.L38
+ 208              	.L31:
+ 209 0062 1368     		ldr	r3, [r2, #0]
+ 210 0064 1970     		strb	r1, [r3, #0]
+ 211 0066 2368     		ldr	r3, [r4, #0]
+ 212 0068 9B68     		ldr	r3, [r3, #8]
+ 213 006a 1A68     		ldr	r2, [r3, #0]
+ 214 006c 0132     		adds	r2, r2, #1
+ 215 006e 1A60     		str	r2, [r3, #0]
+ 216              	.L38:
+ 217 0070 B06B     		ldr	r0, [r6, #56]
+ 218 0072 2946     		mov	r1, r5
+ 219 0074 4FF4FA72 		mov	r2, #500
+ 220 0078 FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 221 007c 0028     		cmp	r0, #0
+ 222 007e D3D1     		bne	.L35
+ 223 0080 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 224              	.L40:
+ 225 0082 00BF     		.align	2
+ 226              	.L39:
+ 227 0084 00000000 		.word	_impure_ptr
+ 229              		.align	1
+ 230              		.global	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 231              		.thumb
+ 232              		.thumb_func
+ 234              	_ZN8wifiTask11wifiSendCmdEPKcS1_:
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237 0088 38B5     		push	{r3, r4, r5, lr}
+ 238 008a 1546     		mov	r5, r2
+ 239 008c 0446     		mov	r4, r0
+ 240 008e 4FF0FF32 		mov	r2, #-1
+ 241 0092 806B     		ldr	r0, [r0, #56]
+ 242 0094 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 243 0098 2DB1     		cbz	r5, .L42
+ 244 009a A06B     		ldr	r0, [r4, #56]
+ 245 009c 2946     		mov	r1, r5
+ 246 009e 4FF0FF32 		mov	r2, #-1
+ 247 00a2 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 248              	.L42:
+ 249 00a6 A06B     		ldr	r0, [r4, #56]
+ 250 00a8 0449     		ldr	r1, .L43
+ 251 00aa 4FF0FF32 		mov	r2, #-1
+ 252 00ae FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 253 00b2 2046     		mov	r0, r4
+ 254 00b4 BDE83840 		pop	{r3, r4, r5, lr}
+ 255 00b8 FEE7     		b	_ZN8wifiTask9wifiFlushEv
+ 256              	.L44:
+ 257 00ba 00BF     		.align	2
+ 258              	.L43:
+ 259 00bc 06000000 		.word	.LC2
+ 261              		.align	1
+ 262              		.global	_ZN8wifiTask16wifiEnterCmdModeEv
+ 263              		.thumb
+ 264              		.thumb_func
+ 266              	_ZN8wifiTask16wifiEnterCmdModeEv:
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269 00c0 10B5     		push	{r4, lr}
+ 270 00c2 0C49     		ldr	r1, .L46
+ 271 00c4 0446     		mov	r4, r0
+ 272 00c6 4FF0FF32 		mov	r2, #-1
+ 273 00ca 806B     		ldr	r0, [r0, #56]
+ 274 00cc FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 275 00d0 4FF48270 		mov	r0, #260
+ 276 00d4 FFF7FEFF 		bl	vTaskDelay
+ 277 00d8 0749     		ldr	r1, .L46+4
+ 278 00da 4FF0FF32 		mov	r2, #-1
+ 279 00de A06B     		ldr	r0, [r4, #56]
+ 280 00e0 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 281 00e4 4FF48270 		mov	r0, #260
+ 282 00e8 FFF7FEFF 		bl	vTaskDelay
+ 283 00ec 2046     		mov	r0, r4
+ 284 00ee BDE81040 		pop	{r4, lr}
+ 285 00f2 FEE7     		b	_ZN8wifiTask9wifiFlushEv
+ 286              	.L47:
+ 287              		.align	2
+ 288              	.L46:
+ 289 00f4 09000000 		.word	.LC3
+ 290 00f8 0E000000 		.word	.LC4
+ 292              		.align	1
+ 293              		.global	_ZN8wifiTask11wifiConnectEv
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	_ZN8wifiTask11wifiConnectEv:
+ 298              		@ args = 0, pretend = 0, frame = 0
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 00fc 70B5     		push	{r4, r5, r6, lr}
+ 301 00fe 10F14506 		adds	r6, r0, #69
+ 302 0102 0446     		mov	r4, r0
+ 303 0104 00F09380 		beq	.L49
+ 304 0108 10F15D05 		adds	r5, r0, #93
+ 305 010c 00F08F80 		beq	.L49
+ 306 0110 90F84530 		ldrb	r3, [r0, #69]	@ zero_extendqisi2
+ 307 0114 002B     		cmp	r3, #0
+ 308 0116 00F08A80 		beq	.L49
+ 309 011a 90F85D30 		ldrb	r3, [r0, #93]	@ zero_extendqisi2
+ 310 011e 002B     		cmp	r3, #0
+ 311 0120 00F08580 		beq	.L49
+ 312 0124 4448     		ldr	r0, .L51
+ 313 0126 FFF7FEFF 		bl	puts
+ 314 012a 3046     		mov	r0, r6
+ 315 012c FFF7FEFF 		bl	puts
+ 316 0130 2846     		mov	r0, r5
+ 317 0132 FFF7FEFF 		bl	puts
+ 318 0136 4148     		ldr	r0, .L51+4
+ 319 0138 FFF7FEFF 		bl	puts
+ 320 013c 2046     		mov	r0, r4
+ 321 013e FFF7FEFF 		bl	_ZN8wifiTask16wifiEnterCmdModeEv
+ 322 0142 3F48     		ldr	r0, .L51+8
+ 323 0144 FFF7FEFF 		bl	puts
+ 324 0148 0022     		movs	r2, #0
+ 325 014a 2046     		mov	r0, r4
+ 326 014c 3D49     		ldr	r1, .L51+12
+ 327 014e FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 328 0152 0022     		movs	r2, #0
+ 329 0154 3C49     		ldr	r1, .L51+16
+ 330 0156 2046     		mov	r0, r4
+ 331 0158 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 332 015c 3B48     		ldr	r0, .L51+20
+ 333 015e FFF7FEFF 		bl	puts
+ 334 0162 0022     		movs	r2, #0
+ 335 0164 2046     		mov	r0, r4
+ 336 0166 3A49     		ldr	r1, .L51+24
+ 337 0168 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 338 016c 2046     		mov	r0, r4
+ 339 016e 3949     		ldr	r1, .L51+28
+ 340 0170 3246     		mov	r2, r6
+ 341 0172 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 342 0176 0022     		movs	r2, #0
+ 343 0178 2046     		mov	r0, r4
+ 344 017a 3749     		ldr	r1, .L51+32
+ 345 017c FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 346 0180 2046     		mov	r0, r4
+ 347 0182 3649     		ldr	r1, .L51+36
+ 348 0184 2A46     		mov	r2, r5
+ 349 0186 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 350 018a 0022     		movs	r2, #0
+ 351 018c 2046     		mov	r0, r4
+ 352 018e 3449     		ldr	r1, .L51+40
+ 353 0190 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 354 0194 0022     		movs	r2, #0
+ 355 0196 3349     		ldr	r1, .L51+44
+ 356 0198 2046     		mov	r0, r4
+ 357 019a FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 358 019e 3248     		ldr	r0, .L51+48
+ 359 01a0 FFF7FEFF 		bl	puts
+ 360 01a4 0022     		movs	r2, #0
+ 361 01a6 2046     		mov	r0, r4
+ 362 01a8 3049     		ldr	r1, .L51+52
+ 363 01aa FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 364 01ae 0022     		movs	r2, #0
+ 365 01b0 2046     		mov	r0, r4
+ 366 01b2 2F49     		ldr	r1, .L51+56
+ 367 01b4 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 368 01b8 0022     		movs	r2, #0
+ 369 01ba 2E49     		ldr	r1, .L51+60
+ 370 01bc 2046     		mov	r0, r4
+ 371 01be FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 372 01c2 2D48     		ldr	r0, .L51+64
+ 373 01c4 FFF7FEFF 		bl	puts
+ 374 01c8 0022     		movs	r2, #0
+ 375 01ca 2046     		mov	r0, r4
+ 376 01cc 2B49     		ldr	r1, .L51+68
+ 377 01ce FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 378 01d2 2046     		mov	r0, r4
+ 379 01d4 2A49     		ldr	r1, .L51+72
+ 380 01d6 0022     		movs	r2, #0
+ 381 01d8 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 382 01dc 0022     		movs	r2, #0
+ 383 01de 2046     		mov	r0, r4
+ 384 01e0 2849     		ldr	r1, .L51+76
+ 385 01e2 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 386 01e6 2849     		ldr	r1, .L51+80
+ 387 01e8 0022     		movs	r2, #0
+ 388 01ea 2046     		mov	r0, r4
+ 389 01ec FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 390 01f0 2648     		ldr	r0, .L51+84
+ 391 01f2 FFF7FEFF 		bl	puts
+ 392 01f6 2046     		mov	r0, r4
+ 393 01f8 2549     		ldr	r1, .L51+88
+ 394 01fa 0022     		movs	r2, #0
+ 395 01fc FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 396 0200 2449     		ldr	r1, .L51+92
+ 397 0202 0022     		movs	r2, #0
+ 398 0204 2046     		mov	r0, r4
+ 399 0206 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 400 020a 2348     		ldr	r0, .L51+96
+ 401 020c FFF7FEFF 		bl	puts
+ 402 0210 2046     		mov	r0, r4
+ 403 0212 2249     		ldr	r1, .L51+100
+ 404 0214 0022     		movs	r2, #0
+ 405 0216 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 406 021a 2046     		mov	r0, r4
+ 407 021c 2049     		ldr	r1, .L51+104
+ 408 021e 0022     		movs	r2, #0
+ 409 0220 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 410 0224 2046     		mov	r0, r4
+ 411 0226 FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 412 022a 0120     		movs	r0, #1
+ 413 022c 70BD     		pop	{r4, r5, r6, pc}
+ 414              	.L49:
+ 415 022e 1D48     		ldr	r0, .L51+108
+ 416 0230 FFF7FEFF 		bl	puts
+ 417 0234 0020     		movs	r0, #0
+ 418 0236 70BD     		pop	{r4, r5, r6, pc}
+ 419              	.L52:
+ 420              		.align	2
+ 421              	.L51:
+ 422 0238 12000000 		.word	.LC5
+ 423 023c 2D000000 		.word	.LC6
+ 424 0240 2E000000 		.word	.LC7
+ 425 0244 45000000 		.word	.LC8
+ 426 0248 58000000 		.word	.LC9
+ 427 024c 68000000 		.word	.LC10
+ 428 0250 82000000 		.word	.LC11
+ 429 0254 90000000 		.word	.LC12
+ 430 0258 9F000000 		.word	.LC13
+ 431 025c AF000000 		.word	.LC14
+ 432 0260 C0000000 		.word	.LC15
+ 433 0264 D3000000 		.word	.LC16
+ 434 0268 E8000000 		.word	.LC17
+ 435 026c 00010000 		.word	.LC18
+ 436 0270 11010000 		.word	.LC19
+ 437 0274 21010000 		.word	.LC20
+ 438 0278 33010000 		.word	.LC21
+ 439 027c 49010000 		.word	.LC22
+ 440 0280 5A010000 		.word	.LC23
+ 441 0284 6E010000 		.word	.LC24
+ 442 0288 81010000 		.word	.LC25
+ 443 028c 92010000 		.word	.LC26
+ 444 0290 9F010000 		.word	.LC27
+ 445 0294 B1010000 		.word	.LC28
+ 446 0298 C7010000 		.word	.LC29
+ 447 029c CE010000 		.word	.LC30
+ 448 02a0 D3010000 		.word	.LC31
+ 449 02a4 DA010000 		.word	.LC32
+ 451              		.align	1
+ 452              		.global	_ZN8wifiTask15wifiIsConnectedEv
+ 453              		.thumb
+ 454              		.thumb_func
+ 456              	_ZN8wifiTask15wifiIsConnectedEv:
+ 457              		@ args = 0, pretend = 0, frame = 152
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459 02a8 70B5     		push	{r4, r5, r6, lr}
+ 460 02aa 0446     		mov	r4, r0
+ 461 02ac A6B0     		sub	sp, sp, #152
+ 462 02ae FFF7FEFF 		bl	_ZN8wifiTask16wifiEnterCmdModeEv
+ 463 02b2 A06B     		ldr	r0, [r4, #56]
+ 464 02b4 2849     		ldr	r1, .L57
+ 465 02b6 4FF0FF32 		mov	r2, #-1
+ 466 02ba FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 467 02be 01A9     		add	r1, sp, #4
+ 468 02c0 8022     		movs	r2, #128
+ 469 02c2 21A8     		add	r0, sp, #132
+ 470 02c4 FFF7FEFF 		bl	_ZN3strC1EPci
+ 471 02c8 21A8     		add	r0, sp, #132
+ 472 02ca A66B     		ldr	r6, [r4, #56]
+ 473 02cc FFF7FEFF 		bl	_ZNK3strclEv
+ 474 02d0 0546     		mov	r5, r0
+ 475 02d2 21A8     		add	r0, sp, #132
+ 476 02d4 FFF7FEFF 		bl	_ZNK3str11getCapacityEv
+ 477 02d8 2946     		mov	r1, r5
+ 478 02da 0246     		mov	r2, r0
+ 479 02dc 4FF47A73 		mov	r3, #1000
+ 480 02e0 3046     		mov	r0, r6
+ 481 02e2 FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
+ 482 02e6 21A8     		add	r0, sp, #132
+ 483 02e8 1C49     		ldr	r1, .L57+4
+ 484 02ea FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 485 02ee 70B1     		cbz	r0, .L54
+ 486 02f0 21A8     		add	r0, sp, #132
+ 487 02f2 A66B     		ldr	r6, [r4, #56]
+ 488 02f4 FFF7FEFF 		bl	_ZNK3strclEv
+ 489 02f8 0546     		mov	r5, r0
+ 490 02fa 21A8     		add	r0, sp, #132
+ 491 02fc FFF7FEFF 		bl	_ZNK3str11getCapacityEv
+ 492 0300 2946     		mov	r1, r5
+ 493 0302 0246     		mov	r2, r0
+ 494 0304 4FF47A73 		mov	r3, #1000
+ 495 0308 3046     		mov	r0, r6
+ 496 030a FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
+ 497              	.L54:
+ 498 030e A06B     		ldr	r0, [r4, #56]
+ 499 0310 1349     		ldr	r1, .L57+8
+ 500 0312 4FF0FF32 		mov	r2, #-1
+ 501 0316 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 502 031a 2046     		mov	r0, r4
+ 503 031c FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 504 0320 0221     		movs	r1, #2
+ 505 0322 21A8     		add	r0, sp, #132
+ 506 0324 FFF7FEFF 		bl	_ZN3strixEi
+ 507 0328 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+ 508 032a A3F13004 		sub	r4, r3, #48
+ 509 032e E4B2     		uxtb	r4, r4
+ 510 0330 092C     		cmp	r4, #9
+ 511 0332 08D9     		bls	.L55
+ 512 0334 A3F14102 		sub	r2, r3, #65
+ 513 0338 D2B2     		uxtb	r2, r2
+ 514 033a 052A     		cmp	r2, #5
+ 515 033c 9ABF     		itte	ls
+ 516 033e A3F14B04 		subls	r4, r3, #75
+ 517 0342 E4B2     		uxtbls	r4, r4
+ 518 0344 1C46     		movhi	r4, r3
+ 519              	.L55:
+ 520 0346 21A8     		add	r0, sp, #132
+ 521 0348 FFF7FEFF 		bl	_ZN3strD1Ev
+ 522 034c 14F00300 		ands	r0, r4, #3
+ 523 0350 18BF     		it	ne
+ 524 0352 0120     		movne	r0, #1
+ 525 0354 26B0     		add	sp, sp, #152
+ 526 0356 70BD     		pop	{r4, r5, r6, pc}
+ 527              	.L58:
+ 528              		.align	2
+ 529              	.L57:
+ 530 0358 FA010000 		.word	.LC33
+ 531 035c 0A020000 		.word	.LC34
+ 532 0360 09000000 		.word	.LC3
+ 534              		.align	1
+ 535              		.global	_ZN8wifiTask15wifiSendTestCmdEv
+ 536              		.thumb
+ 537              		.thumb_func
+ 539              	_ZN8wifiTask15wifiSendTestCmdEv:
+ 540              		@ args = 0, pretend = 0, frame = 0
+ 541              		@ frame_needed = 0, uses_anonymous_args = 0
+ 542 0364 10B5     		push	{r4, lr}
+ 543 0366 0446     		mov	r4, r0
+ 544 0368 FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 545 036c 2046     		mov	r0, r4
+ 546 036e FFF7FEFF 		bl	_ZN8wifiTask16wifiEnterCmdModeEv
+ 547 0372 2046     		mov	r0, r4
+ 548 0374 FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 549 0378 A06B     		ldr	r0, [r4, #56]
+ 550 037a 0349     		ldr	r1, .L60
+ 551 037c 4FF0FF32 		mov	r2, #-1
+ 552 0380 BDE81040 		pop	{r4, lr}
+ 553 0384 FFF7FEBF 		b	_ZN7UartDev7putlineEPKcj
+ 554              	.L61:
+ 555              		.align	2
+ 556              	.L60:
+ 557 0388 0F020000 		.word	.LC35
+ 559              		.align	1
+ 560              		.global	_ZN8wifiTask16wifiInitBaudRateEv
+ 561              		.thumb
+ 562              		.thumb_func
+ 564              	_ZN8wifiTask16wifiInitBaudRateEv:
+ 565              		@ args = 0, pretend = 0, frame = 168
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567 038c 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 568 0390 ABB0     		sub	sp, sp, #172
+ 569 0392 20AD     		add	r5, sp, #128
+ 570 0394 8022     		movs	r2, #128
+ 571 0396 0446     		mov	r4, r0
+ 572 0398 6946     		mov	r1, sp
+ 573 039a 2846     		mov	r0, r5
+ 574 039c FFF7FEFF 		bl	_ZN3strC1EPci
+ 575 03a0 E16B     		ldr	r1, [r4, #60]
+ 576 03a2 5648     		ldr	r0, .L72
+ 577 03a4 FFF7FEFF 		bl	printf
+ 578 03a8 E16B     		ldr	r1, [r4, #60]
+ 579 03aa A06B     		ldr	r0, [r4, #56]
+ 580 03ac FFF7FEFF 		bl	_ZN7UartDev11setBaudRateEj
+ 581 03b0 2046     		mov	r0, r4
+ 582 03b2 FFF7FEFF 		bl	_ZN8wifiTask15wifiSendTestCmdEv
+ 583 03b6 2846     		mov	r0, r5
+ 584 03b8 FFF7FEFF 		bl	_ZN3str5clearEv
+ 585 03bc 2846     		mov	r0, r5
+ 586 03be A76B     		ldr	r7, [r4, #56]
+ 587 03c0 FFF7FEFF 		bl	_ZNK3strclEv
+ 588 03c4 0646     		mov	r6, r0
+ 589 03c6 2846     		mov	r0, r5
+ 590 03c8 FFF7FEFF 		bl	_ZNK3str11getCapacityEv
+ 591 03cc 3146     		mov	r1, r6
+ 592 03ce 0246     		mov	r2, r0
+ 593 03d0 4FF47A73 		mov	r3, #1000
+ 594 03d4 3846     		mov	r0, r7
+ 595 03d6 FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
+ 596 03da 2846     		mov	r0, r5
+ 597 03dc 4849     		ldr	r1, .L72+4
+ 598 03de FFF7FEFF 		bl	_ZNK3str18containsIgnoreCaseEPKc
+ 599 03e2 30B9     		cbnz	r0, .L63
+ 600 03e4 2846     		mov	r0, r5
+ 601 03e6 4749     		ldr	r1, .L72+8
+ 602 03e8 FFF7FEFF 		bl	_ZNK3str18containsIgnoreCaseEPKc
+ 603 03ec 8646     		mov	lr, r0
+ 604 03ee 0028     		cmp	r0, #0
+ 605 03f0 74D0     		beq	.L64
+ 606              	.L63:
+ 607 03f2 E16B     		ldr	r1, [r4, #60]
+ 608 03f4 4448     		ldr	r0, .L72+12
+ 609 03f6 FFF7FEFF 		bl	printf
+ 610 03fa 2046     		mov	r0, r4
+ 611 03fc 4349     		ldr	r1, .L72+16
+ 612 03fe 0022     		movs	r2, #0
+ 613 0400 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 614 0404 55E0     		b	.L71
+ 615              	.L69:
+ 616 0406 25AB     		add	r3, sp, #148
+ 617 0408 F758     		ldr	r7, [r6, r3]
+ 618 040a 3C48     		ldr	r0, .L72
+ 619 040c 3946     		mov	r1, r7
+ 620 040e FFF7FEFF 		bl	printf
+ 621 0412 2046     		mov	r0, r4
+ 622 0414 FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 623 0418 3946     		mov	r1, r7
+ 624 041a A06B     		ldr	r0, [r4, #56]
+ 625 041c FFF7FEFF 		bl	_ZN7UartDev11setBaudRateEj
+ 626 0420 2046     		mov	r0, r4
+ 627 0422 FFF7FEFF 		bl	_ZN8wifiTask15wifiSendTestCmdEv
+ 628 0426 2846     		mov	r0, r5
+ 629 0428 FFF7FEFF 		bl	_ZN3str5clearEv
+ 630 042c 2846     		mov	r0, r5
+ 631 042e D4F83890 		ldr	r9, [r4, #56]
+ 632 0432 FFF7FEFF 		bl	_ZNK3strclEv
+ 633 0436 8046     		mov	r8, r0
+ 634 0438 2846     		mov	r0, r5
+ 635 043a FFF7FEFF 		bl	_ZNK3str11getCapacityEv
+ 636 043e 4146     		mov	r1, r8
+ 637 0440 0246     		mov	r2, r0
+ 638 0442 4FF47A73 		mov	r3, #1000
+ 639 0446 4846     		mov	r0, r9
+ 640 0448 FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
+ 641 044c 0028     		cmp	r0, #0
+ 642 044e 32D0     		beq	.L66
+ 643 0450 2846     		mov	r0, r5
+ 644 0452 2B49     		ldr	r1, .L72+4
+ 645 0454 FFF7FEFF 		bl	_ZNK3str18containsIgnoreCaseEPKc
+ 646 0458 28B9     		cbnz	r0, .L67
+ 647 045a 2846     		mov	r0, r5
+ 648 045c 2949     		ldr	r1, .L72+8
+ 649 045e FFF7FEFF 		bl	_ZNK3str18containsIgnoreCaseEPKc
+ 650 0462 0028     		cmp	r0, #0
+ 651 0464 42D0     		beq	.L68
+ 652              	.L67:
+ 653 0466 3946     		mov	r1, r7
+ 654 0468 2948     		ldr	r0, .L72+20
+ 655 046a FFF7FEFF 		bl	printf
+ 656 046e E16B     		ldr	r1, [r4, #60]
+ 657 0470 2848     		ldr	r0, .L72+24
+ 658 0472 FFF7FEFF 		bl	printf
+ 659 0476 2849     		ldr	r1, .L72+28
+ 660 0478 E26B     		ldr	r2, [r4, #60]
+ 661 047a 20A8     		add	r0, sp, #128
+ 662 047c FFF7FEFF 		bl	_ZN3str6printfEPKcz
+ 663 0480 20A8     		add	r0, sp, #128
+ 664 0482 FFF7FEFF 		bl	_ZNK3strclEv
+ 665 0486 0022     		movs	r2, #0
+ 666 0488 0146     		mov	r1, r0
+ 667 048a 2046     		mov	r0, r4
+ 668 048c FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 669 0490 2046     		mov	r0, r4
+ 670 0492 2249     		ldr	r1, .L72+32
+ 671 0494 0022     		movs	r2, #0
+ 672 0496 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 673 049a 2046     		mov	r0, r4
+ 674 049c 2049     		ldr	r1, .L72+36
+ 675 049e 0022     		movs	r2, #0
+ 676 04a0 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 677 04a4 4FF4FA60 		mov	r0, #2000
+ 678 04a8 FFF7FEFF 		bl	delay_ms
+ 679 04ac 2046     		mov	r0, r4
+ 680 04ae FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 681              	.L71:
+ 682 04b2 0124     		movs	r4, #1
+ 683 04b4 0BE0     		b	.L65
+ 684              	.L66:
+ 685 04b6 0436     		adds	r6, r6, #4
+ 686 04b8 142E     		cmp	r6, #20
+ 687 04ba A4D1     		bne	.L69
+ 688 04bc A06B     		ldr	r0, [r4, #56]
+ 689 04be E16B     		ldr	r1, [r4, #60]
+ 690 04c0 FFF7FEFF 		bl	_ZN7UartDev11setBaudRateEj
+ 691 04c4 E16B     		ldr	r1, [r4, #60]
+ 692 04c6 1748     		ldr	r0, .L72+40
+ 693 04c8 FFF7FEFF 		bl	printf
+ 694 04cc 0024     		movs	r4, #0
+ 695              	.L65:
+ 696 04ce 20A8     		add	r0, sp, #128
+ 697 04d0 FFF7FEFF 		bl	_ZN3strD1Ev
+ 698 04d4 2046     		mov	r0, r4
+ 699 04d6 2BB0     		add	sp, sp, #172
+ 700 04d8 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 701              	.L64:
+ 702 04dc 124E     		ldr	r6, .L72+44
+ 703 04de 25AF     		add	r7, sp, #148
+ 704 04e0 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 705 04e2 0FC7     		stmia	r7!, {r0, r1, r2, r3}
+ 706 04e4 3368     		ldr	r3, [r6, #0]
+ 707 04e6 7646     		mov	r6, lr
+ 708 04e8 3B60     		str	r3, [r7, #0]
+ 709 04ea 8CE7     		b	.L69
+ 710              	.L68:
+ 711 04ec 2846     		mov	r0, r5
+ 712 04ee FFF7FEFF 		bl	_ZNK3strclEv
+ 713 04f2 0146     		mov	r1, r0
+ 714 04f4 0D48     		ldr	r0, .L72+48
+ 715 04f6 FFF7FEFF 		bl	printf
+ 716 04fa DCE7     		b	.L66
+ 717              	.L73:
+ 718              		.align	2
+ 719              	.L72:
+ 720 04fc 13020000 		.word	.LC36
+ 721 0500 3C020000 		.word	.LC37
+ 722 0504 0F020000 		.word	.LC35
+ 723 0508 42020000 		.word	.LC38
+ 724 050c 09000000 		.word	.LC3
+ 725 0510 65020000 		.word	.LC39
+ 726 0514 84020000 		.word	.LC40
+ 727 0518 A1020000 		.word	.LC41
+ 728 051c CE010000 		.word	.LC30
+ 729 0520 D3010000 		.word	.LC31
+ 730 0524 B6020000 		.word	.LC42
+ 731 0528 20000000 		.word	.LANCHOR0+32
+ 732 052c F0020000 		.word	.LC43
+ 734              		.align	1
+ 735              		.global	_ZN8wifiTask9taskEntryEv
+ 736              		.thumb
+ 737              		.thumb_func
+ 739              	_ZN8wifiTask9taskEntryEv:
+ 740              		@ args = 0, pretend = 0, frame = 0
+ 741              		@ frame_needed = 0, uses_anonymous_args = 0
+ 742 0530 836B     		ldr	r3, [r0, #56]
+ 743 0532 0022     		movs	r2, #0
+ 744 0534 10B5     		push	{r4, lr}
+ 745 0536 83F82420 		strb	r2, [r3, #36]
+ 746 053a 0446     		mov	r4, r0
+ 747 053c FFF7FEFF 		bl	_ZN8wifiTask16wifiInitBaudRateEv
+ 748 0540 C0B1     		cbz	r0, .L75
+ 749 0542 2046     		mov	r0, r4
+ 750 0544 FFF7FEFF 		bl	_ZN8wifiTask15wifiIsConnectedEv
+ 751 0548 50B9     		cbnz	r0, .L76
+ 752 054a 0B48     		ldr	r0, .L80
+ 753 054c FFF7FEFF 		bl	puts
+ 754 0550 2046     		mov	r0, r4
+ 755 0552 FFF7FEFF 		bl	_ZN8wifiTask11wifiConnectEv
+ 756 0556 08B1     		cbz	r0, .L77
+ 757 0558 0848     		ldr	r0, .L80+4
+ 758 055a 02E0     		b	.L79
+ 759              	.L77:
+ 760 055c 0848     		ldr	r0, .L80+8
+ 761 055e 00E0     		b	.L79
+ 762              	.L76:
+ 763 0560 0848     		ldr	r0, .L80+12
+ 764              	.L79:
+ 765 0562 FFF7FEFF 		bl	puts
+ 766 0566 2046     		mov	r0, r4
+ 767 0568 FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 768 056c A36B     		ldr	r3, [r4, #56]
+ 769 056e 0122     		movs	r2, #1
+ 770 0570 83F82420 		strb	r2, [r3, #36]
+ 771              	.L75:
+ 772 0574 0120     		movs	r0, #1
+ 773 0576 10BD     		pop	{r4, pc}
+ 774              	.L81:
+ 775              		.align	2
+ 776              	.L80:
+ 777 0578 0B030000 		.word	.LC44
+ 778 057c 22030000 		.word	.LC45
+ 779 0580 3D030000 		.word	.LC46
+ 780 0584 57030000 		.word	.LC47
+ 782              		.align	1
+ 783              		.global	_ZN8wifiTaskC2ER7UartDevh
+ 784              		.thumb
+ 785              		.thumb_func
+ 787              	_ZN8wifiTaskC2ER7UartDevh:
+ 788              		@ args = 0, pretend = 0, frame = 0
+ 789              		@ frame_needed = 0, uses_anonymous_args = 0
+ 790 0588 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 791 058c 1346     		mov	r3, r2
+ 792 058e 0025     		movs	r5, #0
+ 793 0590 0E46     		mov	r6, r1
+ 794 0592 4FF46062 		mov	r2, #3584
+ 795 0596 1849     		ldr	r1, .L84
+ 796 0598 0446     		mov	r4, r0
+ 797 059a 0095     		str	r5, [sp, #0]
+ 798 059c FFF7FEFF 		bl	_ZN14scheduler_taskC2EPKcmhPv
+ 799 05a0 164B     		ldr	r3, .L84+4
+ 800 05a2 0120     		movs	r0, #1
+ 801 05a4 2360     		str	r3, [r4, #0]
+ 802 05a6 4FF46133 		mov	r3, #230400
+ 803 05aa E363     		str	r3, [r4, #60]
+ 804 05ac A663     		str	r6, [r4, #56]
+ 805 05ae 0421     		movs	r1, #4
+ 806 05b0 2A46     		mov	r2, r5
+ 807 05b2 84F84400 		strb	r0, [r4, #68]
+ 808 05b6 FFF7FEFF 		bl	xQueueGenericCreate
+ 809 05ba 04F14507 		add	r7, r4, #69
+ 810 05be 4FF01808 		mov	r8, #24
+ 811 05c2 2064     		str	r0, [r4, #64]
+ 812 05c4 2946     		mov	r1, r5
+ 813 05c6 4246     		mov	r2, r8
+ 814 05c8 04F15D06 		add	r6, r4, #93
+ 815 05cc 3846     		mov	r0, r7
+ 816 05ce FFF7FEFF 		bl	memset
+ 817 05d2 2946     		mov	r1, r5
+ 818 05d4 4246     		mov	r2, r8
+ 819 05d6 3046     		mov	r0, r6
+ 820 05d8 FFF7FEFF 		bl	memset
+ 821 05dc 1722     		movs	r2, #23
+ 822 05de 3846     		mov	r0, r7
+ 823 05e0 0749     		ldr	r1, .L84+8
+ 824 05e2 FFF7FEFF 		bl	strncpy
+ 825 05e6 3046     		mov	r0, r6
+ 826 05e8 0649     		ldr	r1, .L84+12
+ 827 05ea 1722     		movs	r2, #23
+ 828 05ec FFF7FEFF 		bl	strncpy
+ 829 05f0 2046     		mov	r0, r4
+ 830 05f2 BDE8FC81 		pop	{r2, r3, r4, r5, r6, r7, r8, pc}
+ 831              	.L85:
+ 832 05f6 00BF     		.align	2
+ 833              	.L84:
+ 834 05f8 76030000 		.word	.LC48
+ 835 05fc 08000000 		.word	.LANCHOR0+8
+ 836 0600 7B030000 		.word	.LC49
+ 837 0604 80030000 		.word	.LC50
+ 839              		.section	.text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv,"axG",%progbits,_ZN17SingletonT
+ 840              		.align	1
+ 841              		.weak	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 842              		.thumb
+ 843              		.thumb_func
+ 845              	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 0, uses_anonymous_args = 0
+ 848 0000 38B5     		push	{r3, r4, r5, lr}
+ 849 0002 064C     		ldr	r4, .L88
+ 850 0004 2368     		ldr	r3, [r4, #0]
+ 851 0006 33B9     		cbnz	r3, .L87
+ 852 0008 1420     		movs	r0, #20
+ 853 000a FFF7FEFF 		bl	_Znwj
+ 854 000e 0546     		mov	r5, r0
+ 855 0010 FFF7FEFF 		bl	_ZN10FileLoggerC1Ev
+ 856 0014 2560     		str	r5, [r4, #0]
+ 857              	.L87:
+ 858 0016 2068     		ldr	r0, [r4, #0]
+ 859 0018 38BD     		pop	{r3, r4, r5, pc}
+ 860              	.L89:
+ 861 001a 00BF     		.align	2
+ 862              	.L88:
+ 863 001c 00000000 		.word	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+ 865              		.text
+ 866              		.align	1
+ 867              		.global	_ZN8wifiTask17wifiHandleHttpReqEP12web_req_type
+ 868              		.thumb
+ 869              		.thumb_func
+ 871              	_ZN8wifiTask17wifiHandleHttpReqEP12web_req_type:
+ 872              		@ args = 0, pretend = 0, frame = 8
+ 873              		@ frame_needed = 0, uses_anonymous_args = 0
+ 874 0608 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 875 060c 0A68     		ldr	r2, [r1, #0]
+ 876 060e 85B0     		sub	sp, sp, #20
+ 877 0610 0446     		mov	r4, r0
+ 878 0612 0D46     		mov	r5, r1
+ 879 0614 002A     		cmp	r2, #0
+ 880 0616 00F0B680 		beq	.L103
+ 881 061a 4B68     		ldr	r3, [r1, #4]
+ 882 061c 002B     		cmp	r3, #0
+ 883 061e 00F0B480 		beq	.L104
+ 884 0622 CE68     		ldr	r6, [r1, #12]
+ 885 0624 002E     		cmp	r6, #0
+ 886 0626 00F0B380 		beq	.L91
+ 887 062a 1E78     		ldrb	r6, [r3, #0]	@ zero_extendqisi2
+ 888 062c 002E     		cmp	r6, #0
+ 889 062e 00F0AF80 		beq	.L91
+ 890 0632 1678     		ldrb	r6, [r2, #0]	@ zero_extendqisi2
+ 891 0634 002E     		cmp	r6, #0
+ 892 0636 00F0AB80 		beq	.L91
+ 893 063a 0B69     		ldr	r3, [r1, #16]
+ 894 063c 002B     		cmp	r3, #0
+ 895 063e 40F3A680 		ble	.L108
+ 896 0642 FFF7FEFF 		bl	_ZN8wifiTask16wifiEnterCmdModeEv
+ 897 0646 2046     		mov	r0, r4
+ 898 0648 5849     		ldr	r1, .L111
+ 899 064a 0022     		movs	r2, #0
+ 900 064c FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 901 0650 5749     		ldr	r1, .L111+4
+ 902 0652 4FF0FF32 		mov	r2, #-1
+ 903 0656 A06B     		ldr	r0, [r4, #56]
+ 904 0658 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 905 065c 2968     		ldr	r1, [r5, #0]
+ 906 065e 4FF0FF32 		mov	r2, #-1
+ 907 0662 A06B     		ldr	r0, [r4, #56]
+ 908 0664 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 909 0668 A06B     		ldr	r0, [r4, #56]
+ 910 066a 5249     		ldr	r1, .L111+8
+ 911 066c 4FF0FF32 		mov	r2, #-1
+ 912 0670 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 913 0674 04AE     		add	r6, sp, #16
+ 914 0676 0023     		movs	r3, #0
+ 915 0678 06F8023D 		strb	r3, [r6, #-2]!
+ 916              	.L93:
+ 917 067c 9DF80E30 		ldrb	r3, [sp, #14]	@ zero_extendqisi2
+ 918 0680 402B     		cmp	r3, #64
+ 919 0682 00F08980 		beq	.L92
+ 920 0686 A06B     		ldr	r0, [r4, #56]
+ 921 0688 3146     		mov	r1, r6
+ 922 068a 47F23052 		movw	r2, #30000
+ 923 068e FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 924 0692 0028     		cmp	r0, #0
+ 925 0694 F2D1     		bne	.L93
+ 926 0696 7FE0     		b	.L92
+ 927              	.L101:
+ 928 0698 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 929 069c 5523     		movs	r3, #85
+ 930 069e 0093     		str	r3, [sp, #0]
+ 931 06a0 4549     		ldr	r1, .L111+12
+ 932 06a2 464A     		ldr	r2, .L111+16
+ 933 06a4 464B     		ldr	r3, .L111+20
+ 934 06a6 FFF7FEFF 		bl	_ZN10LoggerBase7logWarnEPKcS1_S1_i
+ 935              	.L102:
+ 936 06aa 4649     		ldr	r1, .L111+24
+ 937 06ac 4FF0FF32 		mov	r2, #-1
+ 938 06b0 A06B     		ldr	r0, [r4, #56]
+ 939 06b2 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 940 06b6 6968     		ldr	r1, [r5, #4]
+ 941 06b8 4FF0FF32 		mov	r2, #-1
+ 942 06bc A06B     		ldr	r0, [r4, #56]
+ 943 06be FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 944 06c2 0DF10E07 		add	r7, sp, #14
+ 945 06c6 A06B     		ldr	r0, [r4, #56]
+ 946 06c8 3F49     		ldr	r1, .L111+28
+ 947 06ca 4FF0FF32 		mov	r2, #-1
+ 948 06ce FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 949 06d2 A06B     		ldr	r0, [r4, #56]
+ 950 06d4 3946     		mov	r1, r7
+ 951 06d6 42F21072 		movw	r2, #10000
+ 952 06da FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 953 06de 0646     		mov	r6, r0
+ 954 06e0 48B9     		cbnz	r0, .L94
+ 955 06e2 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 956 06e6 6023     		movs	r3, #96
+ 957 06e8 0093     		str	r3, [sp, #0]
+ 958 06ea 3849     		ldr	r1, .L111+32
+ 959 06ec 334A     		ldr	r2, .L111+16
+ 960 06ee 344B     		ldr	r3, .L111+20
+ 961 06f0 FFF7FEFF 		bl	_ZN10LoggerBase7logWarnEPKcS1_S1_i
+ 962 06f4 0EE0     		b	.L95
+ 963              	.L94:
+ 964 06f6 2B7A     		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 965 06f8 3BB9     		cbnz	r3, .L110
+ 966 06fa 0BE0     		b	.L95
+ 967              	.L97:
+ 968 06fc A06B     		ldr	r0, [r4, #56]
+ 969 06fe 3946     		mov	r1, r7
+ 970 0700 4FF4FA72 		mov	r2, #500
+ 971 0704 FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 972 0708 20B1     		cbz	r0, .L95
+ 973              	.L110:
+ 974 070a 2A7A     		ldrb	r2, [r5, #8]	@ zero_extendqisi2
+ 975 070c 9DF80E30 		ldrb	r3, [sp, #14]	@ zero_extendqisi2
+ 976 0710 9A42     		cmp	r2, r3
+ 977 0712 F3D1     		bne	.L97
+ 978              	.L95:
+ 979 0714 EB68     		ldr	r3, [r5, #12]
+ 980 0716 9DF80E20 		ldrb	r2, [sp, #14]	@ zero_extendqisi2
+ 981 071a 4FF00008 		mov	r8, #0
+ 982 071e 1A70     		strb	r2, [r3, #0]
+ 983 0720 EB68     		ldr	r3, [r5, #12]
+ 984 0722 2A69     		ldr	r2, [r5, #16]
+ 985 0724 5F1C     		adds	r7, r3, #1
+ 986 0726 03EB0209 		add	r9, r3, r2
+ 987 072a 0DE0     		b	.L98
+ 988              	.L100:
+ 989 072c A06B     		ldr	r0, [r4, #56]
+ 990 072e 0DF10F01 		add	r1, sp, #15
+ 991 0732 4FF4FA72 		mov	r2, #500
+ 992 0736 8DF80F80 		strb	r8, [sp, #15]
+ 993 073a FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 994 073e 28B1     		cbz	r0, .L99
+ 995 0740 9DF80F30 		ldrb	r3, [sp, #15]	@ zero_extendqisi2
+ 996 0744 07F8013B 		strb	r3, [r7], #1
+ 997              	.L98:
+ 998 0748 4F45     		cmp	r7, r9
+ 999 074a EFD1     		bne	.L100
+ 1000              	.L99:
+ 1001 074c 4FF00008 		mov	r8, #0
+ 1002 0750 87F80080 		strb	r8, [r7, #0]
+ 1003 0754 EB68     		ldr	r3, [r5, #12]
+ 1004 0756 2046     		mov	r0, r4
+ 1005 0758 FF1A     		subs	r7, r7, r3
+ 1006 075a 2F61     		str	r7, [r5, #16]
+ 1007 075c FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 1008 0760 2046     		mov	r0, r4
+ 1009 0762 FFF7FEFF 		bl	_ZN8wifiTask16wifiEnterCmdModeEv
+ 1010 0766 2046     		mov	r0, r4
+ 1011 0768 4246     		mov	r2, r8
+ 1012 076a 1949     		ldr	r1, .L111+36
+ 1013 076c FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 1014 0770 2046     		mov	r0, r4
+ 1015 0772 4246     		mov	r2, r8
+ 1016 0774 1749     		ldr	r1, .L111+40
+ 1017 0776 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 1018 077a 2046     		mov	r0, r4
+ 1019 077c 1649     		ldr	r1, .L111+44
+ 1020 077e 4246     		mov	r2, r8
+ 1021 0780 FFF7FEFF 		bl	_ZN8wifiTask11wifiSendCmdEPKcS1_
+ 1022 0784 04E0     		b	.L91
+ 1023              	.L103:
+ 1024 0786 1646     		mov	r6, r2
+ 1025 0788 02E0     		b	.L91
+ 1026              	.L104:
+ 1027 078a 1E46     		mov	r6, r3
+ 1028 078c 00E0     		b	.L91
+ 1029              	.L108:
+ 1030 078e 0026     		movs	r6, #0
+ 1031              	.L91:
+ 1032 0790 3046     		mov	r0, r6
+ 1033 0792 05B0     		add	sp, sp, #20
+ 1034 0794 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 1035              	.L92:
+ 1036 0798 2046     		mov	r0, r4
+ 1037 079a FFF7FEFF 		bl	_ZN8wifiTask9wifiFlushEv
+ 1038 079e 9DF80E30 		ldrb	r3, [sp, #14]	@ zero_extendqisi2
+ 1039 07a2 402B     		cmp	r3, #64
+ 1040 07a4 7FF478AF 		bne	.L101
+ 1041 07a8 7FE7     		b	.L102
+ 1042              	.L112:
+ 1043 07aa 00BF     		.align	2
+ 1044              	.L111:
+ 1045 07ac 84030000 		.word	.LC51
+ 1046 07b0 94030000 		.word	.LC52
+ 1047 07b4 9A030000 		.word	.LC53
+ 1048 07b8 9E030000 		.word	.LC54
+ 1049 07bc CE030000 		.word	.LC55
+ 1050 07c0 34000000 		.word	.LANCHOR0+52
+ 1051 07c4 F8030000 		.word	.LC56
+ 1052 07c8 FD030000 		.word	.LC57
+ 1053 07cc 02040000 		.word	.LC58
+ 1054 07d0 33040000 		.word	.LC59
+ 1055 07d4 11010000 		.word	.LC19
+ 1056 07d8 09000000 		.word	.LC3
+ 1058              		.align	1
+ 1059              		.global	_ZN8wifiTask3runEPv
+ 1060              		.thumb
+ 1061              		.thumb_func
+ 1063              	_ZN8wifiTask3runEPv:
+ 1064              		@ args = 0, pretend = 0, frame = 8
+ 1065              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1066 07dc 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 1067 07de 0025     		movs	r5, #0
+ 1068 07e0 02A9     		add	r1, sp, #8
+ 1069 07e2 0446     		mov	r4, r0
+ 1070 07e4 41F8045D 		str	r5, [r1, #-4]!
+ 1071 07e8 006C     		ldr	r0, [r0, #64]
+ 1072 07ea 4FF0FF32 		mov	r2, #-1
+ 1073 07ee 2B46     		mov	r3, r5
+ 1074 07f0 FFF7FEFF 		bl	xQueueGenericReceive
+ 1075 07f4 A0B1     		cbz	r0, .L114
+ 1076 07f6 A36B     		ldr	r3, [r4, #56]
+ 1077 07f8 019E     		ldr	r6, [sp, #4]
+ 1078 07fa 83F82450 		strb	r5, [r3, #36]
+ 1079 07fe 2046     		mov	r0, r4
+ 1080 0800 3146     		mov	r1, r6
+ 1081 0802 FFF7FEFF 		bl	_ZN8wifiTask17wifiHandleHttpReqEP12web_req_type
+ 1082 0806 019B     		ldr	r3, [sp, #4]
+ 1083 0808 3075     		strb	r0, [r6, #20]
+ 1084 080a 9869     		ldr	r0, [r3, #24]
+ 1085 080c 20B1     		cbz	r0, .L115
+ 1086 080e 2946     		mov	r1, r5
+ 1087 0810 2A46     		mov	r2, r5
+ 1088 0812 2B46     		mov	r3, r5
+ 1089 0814 FFF7FEFF 		bl	xQueueGenericSend
+ 1090              	.L115:
+ 1091 0818 A36B     		ldr	r3, [r4, #56]
+ 1092 081a 0122     		movs	r2, #1
+ 1093 081c 83F82420 		strb	r2, [r3, #36]
+ 1094              	.L114:
+ 1095 0820 0120     		movs	r0, #1
+ 1096 0822 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+ 1098              		.global	_ZTV8wifiTask
+ 1099              		.weak	_ZTV14scheduler_task
+ 1100              		.section	.rodata._ZTV14scheduler_task,"aG",%progbits,_ZTV14scheduler_task,comdat
+ 1101              		.align	3
+ 1104              	_ZTV14scheduler_task:
+ 1105 0000 00000000 		.word	0
+ 1106 0004 00000000 		.word	0
+ 1107 0008 00000000 		.word	_ZN14scheduler_taskD1Ev
+ 1108 000c 00000000 		.word	_ZN14scheduler_taskD0Ev
+ 1109 0010 00000000 		.word	_ZN14scheduler_task4initEv
+ 1110 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
+ 1111 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
+ 1112 001c 00000000 		.word	__cxa_pure_virtual
+ 1113              		.weak	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+ 1114              		.section	.bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE,"awG",%nobits,_ZN17Single
+ 1115              		.align	2
+ 1118              	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:
+ 1119 0000 00000000 		.space	4
+ 1120              		.weak	_ZN14scheduler_taskD1Ev
+ 1121              		.thumb_set _ZN14scheduler_taskD1Ev,_ZN14scheduler_taskD2Ev
+ 1122              		.weak	_ZN8wifiTaskD1Ev
+ 1123              		.thumb_set _ZN8wifiTaskD1Ev,_ZN8wifiTaskD2Ev
+ 1124              		.global	_ZN8wifiTaskC1ER7UartDevh
+ 1125              		.thumb_set _ZN8wifiTaskC1ER7UartDevh,_ZN8wifiTaskC2ER7UartDevh
+ 1126              		.section	.rodata
+ 1127              		.align	3
+ 1128              		.set	.LANCHOR0,. + 0
+ 1131              	_ZTV8wifiTask:
+ 1132 0000 00000000 		.word	0
+ 1133 0004 00000000 		.word	0
+ 1134 0008 00000000 		.word	_ZN8wifiTaskD1Ev
+ 1135 000c 00000000 		.word	_ZN8wifiTaskD0Ev
+ 1136 0010 00000000 		.word	_ZN8wifiTask4initEv
+ 1137 0014 00000000 		.word	_ZN8wifiTask6regTlmEv
+ 1138 0018 00000000 		.word	_ZN8wifiTask9taskEntryEv
+ 1139 001c 00000000 		.word	_ZN8wifiTask3runEPv
+ 1140              	.LC0:
+ 1141 0020 80250000 		.word	9600
+ 1142 0024 00960000 		.word	38400
+ 1143 0028 00C20100 		.word	115200
+ 1144 002c 00840300 		.word	230400
+ 1145 0030 D0920600 		.word	430800
+ 1148              	_ZZN8wifiTask17wifiHandleHttpReqEP12web_req_typeE12__FUNCTION__:
+ 1149 0034 77696669 		.ascii	"wifiHandleHttpReq\000"
+ 1149      48616E64 
+ 1149      6C654874 
+ 1149      74705265 
+ 1149      7100
+ 1150 0046 0000     		.section	.rodata.str1.1,"aMS",%progbits,1
+ 1151              	.LC1:
+ 1152 0000 77656272 		.ascii	"webrq\000"
+ 1152      7100
+ 1153              	.LC2:
+ 1154 0006 0D0A00   		.ascii	"\015\012\000"
+ 1155              	.LC3:
+ 1156 0009 65786974 		.ascii	"exit\000"
+ 1156      00
+ 1157              	.LC4:
+ 1158 000e 24242400 		.ascii	"$$$\000"
+ 1159              	.LC5:
+ 1160 0012 5573696E 		.ascii	"Using SSID/KEY from disk: \000"
+ 1160      67205353 
+ 1160      49442F4B 
+ 1160      45592066 
+ 1160      726F6D20 
+ 1161              	.LC6:
+ 1162 002d 00       		.ascii	"\000"
+ 1163              	.LC7:
+ 1164 002e 44697361 		.ascii	"Disable extra printing\000"
+ 1164      626C6520 
+ 1164      65787472 
+ 1164      61207072 
+ 1164      696E7469 
+ 1165              	.LC8:
+ 1166 0045 73657420 		.ascii	"set sys printlvl 0\000"
+ 1166      73797320 
+ 1166      7072696E 
+ 1166      746C766C 
+ 1166      203000
+ 1167              	.LC9:
+ 1168 0058 73657420 		.ascii	"set uart mode 0\000"
+ 1168      75617274 
+ 1168      206D6F64 
+ 1168      65203000 
+ 1169              	.LC10:
+ 1170 0068 53657420 		.ascii	"Set connection parameters\000"
+ 1170      636F6E6E 
+ 1170      65637469 
+ 1170      6F6E2070 
+ 1170      6172616D 
+ 1171              	.LC11:
+ 1172 0082 73657420 		.ascii	"set ip dhcp 1\000"
+ 1172      69702064 
+ 1172      68637020 
+ 1172      3100
+ 1173              	.LC12:
+ 1174 0090 73657420 		.ascii	"set wlan ssid \000"
+ 1174      776C616E 
+ 1174      20737369 
+ 1174      642000
+ 1175              	.LC13:
+ 1176 009f 73657420 		.ascii	"set wlan auth 4\000"
+ 1176      776C616E 
+ 1176      20617574 
+ 1176      68203400 
+ 1177              	.LC14:
+ 1178 00af 73657420 		.ascii	"set wlan phrase \000"
+ 1178      776C616E 
+ 1178      20706872 
+ 1178      61736520 
+ 1178      00
+ 1179              	.LC15:
+ 1180 00c0 73657420 		.ascii	"set wlan channel 0\000"
+ 1180      776C616E 
+ 1180      20636861 
+ 1180      6E6E656C 
+ 1180      203000
+ 1181              	.LC16:
+ 1182 00d3 73657420 		.ascii	"set wlan mask 0x1FFF\000"
+ 1182      776C616E 
+ 1182      206D6173 
+ 1182      6B203078 
+ 1182      31464646 
+ 1183              	.LC17:
+ 1184 00e8 53657420 		.ascii	"Set greeting parameters\000"
+ 1184      67726565 
+ 1184      74696E67 
+ 1184      20706172 
+ 1184      616D6574 
+ 1185              	.LC18:
+ 1186 0100 73657420 		.ascii	"set comm close 0\000"
+ 1186      636F6D6D 
+ 1186      20636C6F 
+ 1186      73652030 
+ 1186      00
+ 1187              	.LC19:
+ 1188 0111 73657420 		.ascii	"set comm open 0\000"
+ 1188      636F6D6D 
+ 1188      206F7065 
+ 1188      6E203000 
+ 1189              	.LC20:
+ 1190 0121 73657420 		.ascii	"set comm remote 0\000"
+ 1190      636F6D6D 
+ 1190      2072656D 
+ 1190      6F746520 
+ 1190      3000
+ 1191              	.LC21:
+ 1192 0133 53657420 		.ascii	"Set buffer parameters\000"
+ 1192      62756666 
+ 1192      65722070 
+ 1192      6172616D 
+ 1192      65746572 
+ 1193              	.LC22:
+ 1194 0149 73657420 		.ascii	"set comm match 0\000"
+ 1194      636F6D6D 
+ 1194      206D6174 
+ 1194      63682030 
+ 1194      00
+ 1195              	.LC23:
+ 1196 015a 73657420 		.ascii	"set comm timeout 10\000"
+ 1196      636F6D6D 
+ 1196      2074696D 
+ 1196      656F7574 
+ 1196      20313000 
+ 1197              	.LC24:
+ 1198 016e 73657420 		.ascii	"set comm size 1024\000"
+ 1198      636F6D6D 
+ 1198      2073697A 
+ 1198      65203130 
+ 1198      323400
+ 1199              	.LC25:
+ 1200 0181 73657420 		.ascii	"set comm idle 10\000"
+ 1200      636F6D6D 
+ 1200      2069646C 
+ 1200      65203130 
+ 1200      00
+ 1201              	.LC26:
+ 1202 0192 53657475 		.ascii	"Setup TCP/IP\000"
+ 1202      70205443 
+ 1202      502F4950 
+ 1202      00
+ 1203              	.LC27:
+ 1204 019f 73657420 		.ascii	"set ip protocol 2\000"
+ 1204      69702070 
+ 1204      726F746F 
+ 1204      636F6C20 
+ 1204      3200
+ 1205              	.LC28:
+ 1206 01b1 73657420 		.ascii	"set ip localport 5555\000"
+ 1206      6970206C 
+ 1206      6F63616C 
+ 1206      706F7274 
+ 1206      20353535 
+ 1207              	.LC29:
+ 1208 01c7 5265626F 		.ascii	"Reboot\000"
+ 1208      6F7400
+ 1209              	.LC30:
+ 1210 01ce 73617665 		.ascii	"save\000"
+ 1210      00
+ 1211              	.LC31:
+ 1212 01d3 7265626F 		.ascii	"reboot\000"
+ 1212      6F7400
+ 1213              	.LC32:
+ 1214 01da 506C6561 		.ascii	"Please configure wifi settings.\000"
+ 1214      73652063 
+ 1214      6F6E6669 
+ 1214      67757265 
+ 1214      20776966 
+ 1215              	.LC33:
+ 1216 01fa 73686F77 		.ascii	"show connection\000"
+ 1216      20636F6E 
+ 1216      6E656374 
+ 1216      696F6E00 
+ 1217              	.LC34:
+ 1218 020a 73686F77 		.ascii	"show\000"
+ 1218      00
+ 1219              	.LC35:
+ 1220 020f 76657200 		.ascii	"ver\000"
+ 1221              	.LC36:
+ 1222 0213 20202020 		.ascii	"    Wifi attempt communication @ %i bps\012\000"
+ 1222      57696669 
+ 1222      20617474 
+ 1222      656D7074 
+ 1222      20636F6D 
+ 1223              	.LC37:
+ 1224 023c 7769666C 		.ascii	"wifly\000"
+ 1224      7900
+ 1225              	.LC38:
+ 1226 0242 20202020 		.ascii	"    Wifi Baud Rate confirmed @ %i\012\000"
+ 1226      57696669 
+ 1226      20426175 
+ 1226      64205261 
+ 1226      74652063 
+ 1227              	.LC39:
+ 1228 0265 20202020 		.ascii	"    Wifi Baud Rate is: %i bps\012\000"
+ 1228      57696669 
+ 1228      20426175 
+ 1228      64205261 
+ 1228      74652069 
+ 1229              	.LC40:
+ 1230 0284 20202020 		.ascii	"    Changing Wifi to %i bps\012\000"
+ 1230      4368616E 
+ 1230      67696E67 
+ 1230      20576966 
+ 1230      6920746F 
+ 1231              	.LC41:
+ 1232 02a1 73657420 		.ascii	"set uart baudrate %i\000"
+ 1232      75617274 
+ 1232      20626175 
+ 1232      64726174 
+ 1232      65202569 
+ 1233              	.LC42:
+ 1234 02b6 20202020 		.ascii	"    Wifi Baud Rate is UNKNOWN.  Set baud rate back "
+ 1234      57696669 
+ 1234      20426175 
+ 1234      64205261 
+ 1234      74652069 
+ 1235 02e9 746F2025 		.ascii	"to %i\012\000"
+ 1235      690A00
+ 1236              	.LC43:
+ 1237 02f0 20202020 		.ascii	"    Wifi bad response: %s\012\000"
+ 1237      57696669 
+ 1237      20626164 
+ 1237      20726573 
+ 1237      706F6E73 
+ 1238              	.LC44:
+ 1239 030b 20202020 		.ascii	"    Wifi not connected\000"
+ 1239      57696669 
+ 1239      206E6F74 
+ 1239      20636F6E 
+ 1239      6E656374 
+ 1240              	.LC45:
+ 1241 0322 20202020 		.ascii	"    Wifi is now connected!\000"
+ 1241      57696669 
+ 1241      20697320 
+ 1241      6E6F7720 
+ 1241      636F6E6E 
+ 1242              	.LC46:
+ 1243 033d 20202020 		.ascii	"    Wifi ERROR connecting\000"
+ 1243      57696669 
+ 1243      20455252 
+ 1243      4F522063 
+ 1243      6F6E6E65 
+ 1244              	.LC47:
+ 1245 0357 20202020 		.ascii	"    Wifi is connected already!\000"
+ 1245      57696669 
+ 1245      20697320 
+ 1245      636F6E6E 
+ 1245      65637465 
+ 1246              	.LC48:
+ 1247 0376 726E7876 		.ascii	"rnxv\000"
+ 1247      00
+ 1248              	.LC49:
+ 1249 037b 73736964 		.ascii	"ssid\000"
+ 1249      00
+ 1250              	.LC50:
+ 1251 0380 6B657900 		.ascii	"key\000"
+ 1252              	.LC51:
+ 1253 0384 73657420 		.ascii	"set comm open @\000"
+ 1253      636F6D6D 
+ 1253      206F7065 
+ 1253      6E204000 
+ 1254              	.LC52:
+ 1255 0394 6F70656E 		.ascii	"open \000"
+ 1255      2000
+ 1256              	.LC53:
+ 1257 039a 20383000 		.ascii	" 80\000"
+ 1258              	.LC54:
+ 1259 039e 4E6F2063 		.ascii	"No connection char while servicing HTTP request\000"
+ 1259      6F6E6E65 
+ 1259      6374696F 
+ 1259      6E206368 
+ 1259      61722077 
+ 1260              	.LC55:
+ 1261 03ce 2E2E2F4C 		.ascii	"../L5_Application/examples/rn_xv_task.cpp\000"
+ 1261      355F4170 
+ 1261      706C6963 
+ 1261      6174696F 
+ 1261      6E2F6578 
+ 1262              	.LC56:
+ 1263 03f8 47455420 		.ascii	"GET \000"
+ 1263      00
+ 1264              	.LC57:
+ 1265 03fd 0A0A0D0A 		.ascii	"\012\012\015\012\000"
+ 1265      00
+ 1266              	.LC58:
+ 1267 0402 4E6F2072 		.ascii	"No response data from HTTP server for 10 seconds\000"
+ 1267      6573706F 
+ 1267      6E736520 
+ 1267      64617461 
+ 1267      2066726F 
+ 1268              	.LC59:
+ 1269 0433 636C6F73 		.ascii	"close\000"
+ 1269      6500
+ 1270              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 rn_xv_task.cpp
+     /tmp/ccwvkyhP.s:16     .text._ZN14scheduler_taskD2Ev:00000000 $t
+     /tmp/ccwvkyhP.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD2Ev
+     /tmp/ccwvkyhP.s:31     .text._ZN14scheduler_taskD2Ev:00000008 $d
+     /tmp/ccwvkyhP.s:1104   .rodata._ZTV14scheduler_task:00000000 _ZTV14scheduler_task
+     /tmp/ccwvkyhP.s:34     .text._ZN14scheduler_task4initEv:00000000 $t
+     /tmp/ccwvkyhP.s:39     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
+     /tmp/ccwvkyhP.s:47     .text._ZN14scheduler_task6regTlmEv:00000000 $t
+     /tmp/ccwvkyhP.s:52     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
+     /tmp/ccwvkyhP.s:60     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
+     /tmp/ccwvkyhP.s:65     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
+     /tmp/ccwvkyhP.s:73     .text:00000000 $t
+     /tmp/ccwvkyhP.s:78     .text:00000000 _ZN8wifiTask6regTlmEv
+     /tmp/ccwvkyhP.s:86     .text._ZN8wifiTaskD2Ev:00000000 $t
+     /tmp/ccwvkyhP.s:91     .text._ZN8wifiTaskD2Ev:00000000 _ZN8wifiTaskD2Ev
+     /tmp/ccwvkyhP.s:101    .text._ZN8wifiTaskD2Ev:00000008 $d
+     /tmp/ccwvkyhP.s:104    .text._ZN8wifiTaskD0Ev:00000000 $t
+     /tmp/ccwvkyhP.s:109    .text._ZN8wifiTaskD0Ev:00000000 _ZN8wifiTaskD0Ev
+     /tmp/ccwvkyhP.s:122    .text._ZN8wifiTaskD0Ev:00000010 $d
+     /tmp/ccwvkyhP.s:125    .text._ZN14scheduler_taskD0Ev:00000000 $t
+     /tmp/ccwvkyhP.s:130    .text._ZN14scheduler_taskD0Ev:00000000 _ZN14scheduler_taskD0Ev
+     /tmp/ccwvkyhP.s:143    .text._ZN14scheduler_taskD0Ev:00000010 $d
+     /tmp/ccwvkyhP.s:151    .text:00000004 _ZN8wifiTask4initEv
+     /tmp/ccwvkyhP.s:163    .text:00000014 $d
+     /tmp/ccwvkyhP.s:165    .text:00000018 $t
+     /tmp/ccwvkyhP.s:170    .text:00000018 _ZN8wifiTask9wifiFlushEv
+     /tmp/ccwvkyhP.s:227    .text:00000084 $d
+     /tmp/ccwvkyhP.s:229    .text:00000088 $t
+     /tmp/ccwvkyhP.s:234    .text:00000088 _ZN8wifiTask11wifiSendCmdEPKcS1_
+     /tmp/ccwvkyhP.s:259    .text:000000bc $d
+     /tmp/ccwvkyhP.s:261    .text:000000c0 $t
+     /tmp/ccwvkyhP.s:266    .text:000000c0 _ZN8wifiTask16wifiEnterCmdModeEv
+     /tmp/ccwvkyhP.s:289    .text:000000f4 $d
+     /tmp/ccwvkyhP.s:292    .text:000000fc $t
+     /tmp/ccwvkyhP.s:297    .text:000000fc _ZN8wifiTask11wifiConnectEv
+     /tmp/ccwvkyhP.s:422    .text:00000238 $d
+     /tmp/ccwvkyhP.s:451    .text:000002a8 $t
+     /tmp/ccwvkyhP.s:456    .text:000002a8 _ZN8wifiTask15wifiIsConnectedEv
+     /tmp/ccwvkyhP.s:530    .text:00000358 $d
+     /tmp/ccwvkyhP.s:534    .text:00000364 $t
+     /tmp/ccwvkyhP.s:539    .text:00000364 _ZN8wifiTask15wifiSendTestCmdEv
+     /tmp/ccwvkyhP.s:557    .text:00000388 $d
+     /tmp/ccwvkyhP.s:559    .text:0000038c $t
+     /tmp/ccwvkyhP.s:564    .text:0000038c _ZN8wifiTask16wifiInitBaudRateEv
+     /tmp/ccwvkyhP.s:720    .text:000004fc $d
+     /tmp/ccwvkyhP.s:734    .text:00000530 $t
+     /tmp/ccwvkyhP.s:739    .text:00000530 _ZN8wifiTask9taskEntryEv
+     /tmp/ccwvkyhP.s:777    .text:00000578 $d
+     /tmp/ccwvkyhP.s:782    .text:00000588 $t
+     /tmp/ccwvkyhP.s:787    .text:00000588 _ZN8wifiTaskC2ER7UartDevh
+     /tmp/ccwvkyhP.s:834    .text:000005f8 $d
+     /tmp/ccwvkyhP.s:840    .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 $t
+     /tmp/ccwvkyhP.s:845    .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 _ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+     /tmp/ccwvkyhP.s:863    .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:0000001c $d
+     /tmp/ccwvkyhP.s:1118   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+     /tmp/ccwvkyhP.s:866    .text:00000608 $t
+     /tmp/ccwvkyhP.s:871    .text:00000608 _ZN8wifiTask17wifiHandleHttpReqEP12web_req_type
+     /tmp/ccwvkyhP.s:1045   .text:000007ac $d
+     /tmp/ccwvkyhP.s:1058   .text:000007dc $t
+     /tmp/ccwvkyhP.s:1063   .text:000007dc _ZN8wifiTask3runEPv
+     /tmp/ccwvkyhP.s:1131   .rodata:00000000 _ZTV8wifiTask
+     /tmp/ccwvkyhP.s:1101   .rodata._ZTV14scheduler_task:00000000 $d
+     /tmp/ccwvkyhP.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD1Ev
+     /tmp/ccwvkyhP.s:1115   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 $d
+     /tmp/ccwvkyhP.s:91     .text._ZN8wifiTaskD2Ev:00000000 _ZN8wifiTaskD1Ev
+     /tmp/ccwvkyhP.s:787    .text:00000588 _ZN8wifiTaskC1ER7UartDevh
+     /tmp/ccwvkyhP.s:1127   .rodata:00000000 $d
+     /tmp/ccwvkyhP.s:1148   .rodata:00000034 _ZZN8wifiTask17wifiHandleHttpReqEP12web_req_typeE12__FUNCTION__
+                           .group:00000000 _ZN14scheduler_taskD5Ev
+                           .group:00000000 _ZN8wifiTaskD5Ev
+
+UNDEFINED SYMBOLS
+_ZdlPv
+_ZN14scheduler_task15addSharedObjectEPKcPv
+__swbuf_r
+_ZNK7UartDev7getCharEPcj
+_impure_ptr
+_ZN7UartDev3putEPKcj
+_ZN7UartDev7putlineEPKcj
+vTaskDelay
+puts
+_ZN3strC1EPci
+_ZNK3strclEv
+_ZNK3str11getCapacityEv
+_ZN7UartDev4getsEPcij
+_ZNK3str20beginsWithIgnoreCaseEPKc
+_ZN3strixEi
+_ZN3strD1Ev
+printf
+_ZN7UartDev11setBaudRateEj
+_ZN3str5clearEv
+_ZNK3str18containsIgnoreCaseEPKc
+_ZN3str6printfEPKcz
+delay_ms
+_ZN14scheduler_taskC2EPKcmhPv
+xQueueGenericCreate
+memset
+strncpy
+_Znwj
+_ZN10FileLoggerC1Ev
+_ZN10LoggerBase7logWarnEPKcS1_S1_i
+xQueueGenericReceive
+xQueueGenericSend
+__cxa_pure_virtual

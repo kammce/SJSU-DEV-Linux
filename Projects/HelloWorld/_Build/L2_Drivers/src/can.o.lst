@@ -1,0 +1,946 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"can.c"
+  15              		.text
+  16              		.align	1
+  17              		.thumb
+  18              		.thumb_func
+  20              	CAN_tx_now:
+  21              		@ args = 0, pretend = 0, frame = 0
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 38B5     		push	{r3, r4, r5, lr}
+  24 0002 0446     		mov	r4, r0
+  25 0004 C069     		ldr	r0, [r0, #28]
+  26 0006 4207     		lsls	r2, r0, #29
+  27 0008 03D5     		bpl	.L2
+  28 000a 04F13000 		add	r0, r4, #48
+  29 000e 2125     		movs	r5, #33
+  30 0010 0BE0     		b	.L3
+  31              	.L2:
+  32 0012 4305     		lsls	r3, r0, #21
+  33 0014 03D5     		bpl	.L4
+  34 0016 04F14000 		add	r0, r4, #64
+  35 001a 4125     		movs	r5, #65
+  36 001c 05E0     		b	.L3
+  37              	.L4:
+  38 001e 10F48020 		ands	r0, r0, #262144
+  39 0022 07D0     		beq	.L5
+  40 0024 04F15000 		add	r0, r4, #80
+  41 0028 8125     		movs	r5, #129
+  42              	.L3:
+  43 002a 1022     		movs	r2, #16
+  44 002c FFF7FEFF 		bl	memcpy
+  45 0030 6560     		str	r5, [r4, #4]
+  46 0032 0120     		movs	r0, #1
+  47              	.L5:
+  48 0034 38BD     		pop	{r3, r4, r5, pc}
+  50              		.align	1
+  51              		.thumb
+  52              		.thumb_func
+  54              	CAN_handle_isr:
+  55              		@ args = 0, pretend = 0, frame = 16
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57 0036 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+  58 0038 4C1E     		subs	r4, r1, #1
+  59 003a 1646     		mov	r6, r2
+  60 003c C207     		lsls	r2, r0, #31
+  61 003e 0546     		mov	r5, r0
+  62 0040 E4B2     		uxtb	r4, r4
+  63 0042 20D5     		bpl	.L8
+  64 0044 B368     		ldr	r3, [r6, #8]
+  65 0046 DB07     		lsls	r3, r3, #31
+  66 0048 15D5     		bpl	.L9
+  67 004a 1022     		movs	r2, #16
+  68 004c 06F12001 		add	r1, r6, #32
+  69 0050 6846     		mov	r0, sp
+  70 0052 FFF7FEFF 		bl	memcpy
+  71 0056 0423     		movs	r3, #4
+  72 0058 7360     		str	r3, [r6, #4]
+  73 005a 9DF80330 		ldrb	r3, [sp, #3]	@ zero_extendqisi2
+  74 005e 019A     		ldr	r2, [sp, #4]
+  75 0060 03F08003 		and	r3, r3, #128
+  76 0064 DBB2     		uxtb	r3, r3
+  77 0066 002B     		cmp	r3, #0
+  78 0068 40F2FF73 		movw	r3, #2047
+  79 006c 18BF     		it	ne
+  80 006e 6FF06043 		mvnne	r3, #-536870912
+  81 0072 1340     		ands	r3, r3, r2
+  82 0074 0193     		str	r3, [sp, #4]
+  83              	.L9:
+  84 0076 144B     		ldr	r3, .L15
+  85 0078 0022     		movs	r2, #0
+  86 007a 53F82400 		ldr	r0, [r3, r4, lsl #2]
+  87 007e 6946     		mov	r1, sp
+  88 0080 1346     		mov	r3, r2
+  89 0082 FFF7FEFF 		bl	xQueueGenericSendFromISR
+  90              	.L8:
+  91 0086 40F20263 		movw	r3, #1538
+  92 008a 2B40     		ands	r3, r3, r5
+  93 008c 63B1     		cbz	r3, .L11
+  94 008e 0E4B     		ldr	r3, .L15
+  95 0090 6946     		mov	r1, sp
+  96 0092 03EB8403 		add	r3, r3, r4, lsl #2
+  97 0096 9868     		ldr	r0, [r3, #8]
+  98 0098 0022     		movs	r2, #0
+  99 009a FFF7FEFF 		bl	xQueueReceiveFromISR
+ 100 009e 18B1     		cbz	r0, .L11
+ 101 00a0 3046     		mov	r0, r6
+ 102 00a2 6946     		mov	r1, sp
+ 103 00a4 FFF7ACFF 		bl	CAN_tx_now
+ 104              	.L11:
+ 105 00a8 2806     		lsls	r0, r5, #24
+ 106 00aa 04D5     		bpl	.L12
+ 107 00ac 064B     		ldr	r3, .L15
+ 108 00ae 03EBC403 		add	r3, r3, r4, lsl #3
+ 109 00b2 1B69     		ldr	r3, [r3, #16]
+ 110 00b4 9847     		blx	r3
+ 111              	.L12:
+ 112 00b6 2907     		lsls	r1, r5, #28
+ 113 00b8 04D5     		bpl	.L7
+ 114 00ba 034B     		ldr	r3, .L15
+ 115 00bc 03EBC404 		add	r4, r3, r4, lsl #3
+ 116 00c0 6369     		ldr	r3, [r4, #20]
+ 117 00c2 9847     		blx	r3
+ 118              	.L7:
+ 119 00c4 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
+ 120              	.L16:
+ 121 00c6 00BF     		.align	2
+ 122              	.L15:
+ 123 00c8 00000000 		.word	.LANCHOR0
+ 125              		.align	1
+ 126              		.global	CAN_IRQHandler
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	CAN_IRQHandler:
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133 00cc 10B5     		push	{r4, lr}
+ 134 00ce 0A4B     		ldr	r3, .L20
+ 135 00d0 D3F8C440 		ldr	r4, [r3, #196]
+ 136 00d4 A004     		lsls	r0, r4, #18
+ 137 00d6 05D5     		bpl	.L18
+ 138 00d8 084A     		ldr	r2, .L20+4
+ 139 00da D068     		ldr	r0, [r2, #12]
+ 140 00dc 10B1     		cbz	r0, .L18
+ 141 00de 0121     		movs	r1, #1
+ 142 00e0 FFF7A9FF 		bl	CAN_handle_isr
+ 143              	.L18:
+ 144 00e4 6104     		lsls	r1, r4, #17
+ 145 00e6 06D5     		bpl	.L17
+ 146 00e8 054A     		ldr	r2, .L20+8
+ 147 00ea D068     		ldr	r0, [r2, #12]
+ 148 00ec 18B1     		cbz	r0, .L17
+ 149 00ee 0221     		movs	r1, #2
+ 150 00f0 BDE81040 		pop	{r4, lr}
+ 151 00f4 9FE7     		b	CAN_handle_isr
+ 152              	.L17:
+ 153 00f6 10BD     		pop	{r4, pc}
+ 154              	.L21:
+ 155              		.align	2
+ 156              	.L20:
+ 157 00f8 00C00F40 		.word	1074774016
+ 158 00fc 00400440 		.word	1074020352
+ 159 0100 00800440 		.word	1074036736
+ 161              		.align	1
+ 162              		.global	CAN_init
+ 163              		.thumb
+ 164              		.thumb_func
+ 166              	CAN_init:
+ 167              		@ args = 8, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169 0104 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 170 0108 0128     		cmp	r0, #1
+ 171 010a 8A46     		mov	sl, r1
+ 172 010c 1D46     		mov	r5, r3
+ 173 010e DDF82080 		ldr	r8, [sp, #32]
+ 174 0112 DDF82490 		ldr	r9, [sp, #36]
+ 175 0116 00F0A380 		beq	.L23
+ 176 011a 0228     		cmp	r0, #2
+ 177 011c 00F08D80 		beq	.L24
+ 178 0120 0020     		movs	r0, #0
+ 179 0122 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 180              	.L36:
+ 181 0126 471E     		subs	r7, r0, #1
+ 182 0128 574E     		ldr	r6, .L40
+ 183 012a FFB2     		uxtb	r7, r7
+ 184 012c 56F82730 		ldr	r3, [r6, r7, lsl #2]
+ 185 0130 4BB9     		cbnz	r3, .L26
+ 186 0132 002A     		cmp	r2, #0
+ 187 0134 14BF     		ite	ne
+ 188 0136 1046     		movne	r0, r2
+ 189 0138 0120     		moveq	r0, #1
+ 190 013a 1021     		movs	r1, #16
+ 191 013c 1A46     		mov	r2, r3
+ 192 013e FFF7FEFF 		bl	xQueueGenericCreate
+ 193 0142 46F82700 		str	r0, [r6, r7, lsl #2]
+ 194              	.L26:
+ 195 0146 504E     		ldr	r6, .L40
+ 196 0148 06EB8706 		add	r6, r6, r7, lsl #2
+ 197 014c B268     		ldr	r2, [r6, #8]
+ 198 014e 3AB9     		cbnz	r2, .L28
+ 199 0150 002D     		cmp	r5, #0
+ 200 0152 14BF     		ite	ne
+ 201 0154 2846     		movne	r0, r5
+ 202 0156 0120     		moveq	r0, #1
+ 203 0158 1021     		movs	r1, #16
+ 204 015a FFF7FEFF 		bl	xQueueGenericCreate
+ 205 015e B060     		str	r0, [r6, #8]
+ 206              	.L28:
+ 207 0160 4A4B     		ldr	r3, .L40+4
+ 208 0162 4B4E     		ldr	r6, .L40+8
+ 209 0164 D3F8A821 		ldr	r2, [r3, #424]
+ 210 0168 0025     		movs	r5, #0
+ 211 016a 22F07C42 		bic	r2, r2, #-67108864
+ 212 016e C3F8A821 		str	r2, [r3, #424]
+ 213 0172 D3F8A821 		ldr	r2, [r3, #424]
+ 214 0176 4748     		ldr	r0, .L40+12
+ 215 0178 42F0A842 		orr	r2, r2, #1409286144
+ 216 017c C3F8A821 		str	r2, [r3, #424]
+ 217 0180 0123     		movs	r3, #1
+ 218 0182 0E22     		movs	r2, #14
+ 219 0184 2360     		str	r3, [r4, #0]
+ 220 0186 2561     		str	r5, [r4, #16]
+ 221 0188 A560     		str	r5, [r4, #8]
+ 222 018a 6260     		str	r2, [r4, #4]
+ 223 018c 3360     		str	r3, [r6, #0]
+ 224 018e E368     		ldr	r3, [r4, #12]
+ 225 0190 2946     		mov	r1, r5
+ 226 0192 0360     		str	r3, [r0, #0]
+ 227 0194 4FF40062 		mov	r2, #2048
+ 228 0198 FFF7FEFF 		bl	memset
+ 229 019c 0223     		movs	r3, #2
+ 230 019e 7560     		str	r5, [r6, #4]
+ 231 01a0 B560     		str	r5, [r6, #8]
+ 232 01a2 F560     		str	r5, [r6, #12]
+ 233 01a4 3561     		str	r5, [r6, #16]
+ 234 01a6 7561     		str	r5, [r6, #20]
+ 235 01a8 3360     		str	r3, [r6, #0]
+ 236 01aa FFF7FEFF 		bl	sys_get_cpu_clock
+ 237 01ae 4FF47A73 		mov	r3, #1000
+ 238 01b2 03FB0AFA 		mul	sl, r3, sl
+ 239 01b6 1823     		movs	r3, #24
+ 240 01b8 B0FBFAFA 		udiv	sl, r0, sl
+ 241              	.L33:
+ 242 01bc BAFBF3F1 		udiv	r1, sl, r3
+ 243 01c0 03FB11A2 		mls	r2, r3, r1, sl
+ 244 01c4 BAB9     		cbnz	r2, .L30
+ 245 01c6 581E     		subs	r0, r3, #1
+ 246 01c8 0322     		movs	r2, #3
+ 247 01ca B0FBF2F2 		udiv	r2, r0, r2
+ 248 01ce 0139     		subs	r1, r1, #1
+ 249 01d0 0120     		movs	r0, #1
+ 250 01d2 2060     		str	r0, [r4, #0]
+ 251 01d4 023B     		subs	r3, r3, #2
+ 252 01d6 501E     		subs	r0, r2, #1
+ 253 01d8 41F44041 		orr	r1, r1, #49152
+ 254 01dc 9A1A     		subs	r2, r3, r2
+ 255 01de 41EA0051 		orr	r1, r1, r0, lsl #20
+ 256 01e2 41EA0242 		orr	r2, r1, r2, lsl #16
+ 257 01e6 40F20363 		movw	r3, #1539
+ 258 01ea 6261     		str	r2, [r4, #20]
+ 259 01ec 2361     		str	r3, [r4, #16]
+ 260 01ee B8F1000F 		cmp	r8, #0
+ 261 01f2 04D1     		bne	.L31
+ 262 01f4 0CE0     		b	.L32
+ 263              	.L30:
+ 264 01f6 023B     		subs	r3, r3, #2
+ 265 01f8 E0D1     		bne	.L33
+ 266 01fa 0120     		movs	r0, #1
+ 267 01fc 19E0     		b	.L34
+ 268              	.L31:
+ 269 01fe 224B     		ldr	r3, .L40
+ 270 0200 03EBC703 		add	r3, r3, r7, lsl #3
+ 271 0204 C3F81080 		str	r8, [r3, #16]
+ 272 0208 2369     		ldr	r3, [r4, #16]
+ 273 020a 43F08003 		orr	r3, r3, #128
+ 274 020e 2361     		str	r3, [r4, #16]
+ 275              	.L32:
+ 276 0210 B9F1000F 		cmp	r9, #0
+ 277 0214 08D0     		beq	.L35
+ 278 0216 1C4B     		ldr	r3, .L40
+ 279 0218 03EBC707 		add	r7, r3, r7, lsl #3
+ 280 021c C7F81490 		str	r9, [r7, #20]
+ 281 0220 2369     		ldr	r3, [r4, #16]
+ 282 0222 43F00803 		orr	r3, r3, #8
+ 283 0226 2361     		str	r3, [r4, #16]
+ 284              	.L35:
+ 285 0228 1B4B     		ldr	r3, .L40+16
+ 286 022a 4FF00072 		mov	r2, #33554432
+ 287 022e 1A60     		str	r2, [r3, #0]
+ 288 0230 0020     		movs	r0, #0
+ 289              	.L34:
+ 290 0232 80F00100 		eor	r0, r0, #1
+ 291 0236 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 292              	.L24:
+ 293 023a 144B     		ldr	r3, .L40+4
+ 294 023c 174C     		ldr	r4, .L40+20
+ 295 023e D3F8C410 		ldr	r1, [r3, #196]
+ 296 0242 41F48041 		orr	r1, r1, #16384
+ 297 0246 C3F8C410 		str	r1, [r3, #196]
+ 298 024a A3F55023 		sub	r3, r3, #851968
+ 299 024e 1969     		ldr	r1, [r3, #16]
+ 300 0250 21F47031 		bic	r1, r1, #245760
+ 301 0254 1961     		str	r1, [r3, #16]
+ 302 0256 1969     		ldr	r1, [r3, #16]
+ 303 0258 41F4A031 		orr	r1, r1, #81920
+ 304 025c 1961     		str	r1, [r3, #16]
+ 305 025e 62E7     		b	.L36
+ 306              	.L23:
+ 307 0260 0A4B     		ldr	r3, .L40+4
+ 308 0262 0F4C     		ldr	r4, .L40+24
+ 309 0264 D3F8C410 		ldr	r1, [r3, #196]
+ 310 0268 41F40051 		orr	r1, r1, #8192
+ 311 026c C3F8C410 		str	r1, [r3, #196]
+ 312 0270 A3F55023 		sub	r3, r3, #851968
+ 313 0274 1968     		ldr	r1, [r3, #0]
+ 314 0276 21F00F01 		bic	r1, r1, #15
+ 315 027a 1960     		str	r1, [r3, #0]
+ 316 027c 1968     		ldr	r1, [r3, #0]
+ 317 027e 41F00501 		orr	r1, r1, #5
+ 318 0282 1960     		str	r1, [r3, #0]
+ 319 0284 4FE7     		b	.L36
+ 320              	.L41:
+ 321 0286 00BF     		.align	2
+ 322              	.L40:
+ 323 0288 00000000 		.word	.LANCHOR0
+ 324 028c 00C00F40 		.word	1074774016
+ 325 0290 00C00340 		.word	1073987584
+ 326 0294 00800340 		.word	1073971200
+ 327 0298 00E100E0 		.word	-536813312
+ 328 029c 00800440 		.word	1074036736
+ 329 02a0 00400440 		.word	1074020352
+ 331              		.align	1
+ 332              		.global	CAN_tx
+ 333              		.thumb
+ 334              		.thumb_func
+ 336              	CAN_tx:
+ 337              		@ args = 0, pretend = 0, frame = 16
+ 338              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339 02a4 0128     		cmp	r0, #1
+ 340 02a6 2DE9FF41 		push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+ 341 02aa 0546     		mov	r5, r0
+ 342 02ac 0F46     		mov	r7, r1
+ 343 02ae 9046     		mov	r8, r2
+ 344 02b0 44D0     		beq	.L49
+ 345 02b2 0228     		cmp	r0, #2
+ 346 02b4 44D0     		beq	.L50
+ 347 02b6 0026     		movs	r6, #0
+ 348 02b8 3CE0     		b	.L44
+ 349              	.L52:
+ 350 02ba FFF7FEFF 		bl	vPortEnterCritical
+ 351 02be 2046     		mov	r0, r4
+ 352 02c0 3946     		mov	r1, r7
+ 353 02c2 FFF79DFE 		bl	CAN_tx_now
+ 354 02c6 0646     		mov	r6, r0
+ 355 02c8 FFF7FEFF 		bl	vPortExitCritical
+ 356 02cc 002E     		cmp	r6, #0
+ 357 02ce 31D1     		bne	.L44
+ 358 02d0 FFF7FEFF 		bl	xTaskGetSchedulerState
+ 359 02d4 013D     		subs	r5, r5, #1
+ 360 02d6 EDB2     		uxtb	r5, r5
+ 361 02d8 1B4A     		ldr	r2, .L55
+ 362 02da 4FEA8503 		lsl	r3, r5, #2
+ 363 02de 0128     		cmp	r0, #1
+ 364 02e0 1344     		add	r3, r2, r3
+ 365 02e2 9868     		ldr	r0, [r3, #8]
+ 366 02e4 3946     		mov	r1, r7
+ 367 02e6 04D1     		bne	.L45
+ 368 02e8 4246     		mov	r2, r8
+ 369 02ea 3346     		mov	r3, r6
+ 370 02ec FFF7FEFF 		bl	xQueueGenericSend
+ 371 02f0 03E0     		b	.L53
+ 372              	.L45:
+ 373 02f2 3246     		mov	r2, r6
+ 374 02f4 3346     		mov	r3, r6
+ 375 02f6 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 376              	.L53:
+ 377 02fa 061C     		adds	r6, r0, #0
+ 378 02fc 18BF     		it	ne
+ 379 02fe 0126     		movne	r6, #1
+ 380 0300 FFF7FEFF 		bl	vPortEnterCritical
+ 381 0304 E269     		ldr	r2, [r4, #28]
+ 382 0306 114B     		ldr	r3, .L55+4
+ 383 0308 1340     		ands	r3, r3, r2
+ 384 030a 104A     		ldr	r2, .L55+4
+ 385 030c 9342     		cmp	r3, r2
+ 386 030e 0DD1     		bne	.L47
+ 387 0310 0D4B     		ldr	r3, .L55
+ 388 0312 6946     		mov	r1, sp
+ 389 0314 03EB8505 		add	r5, r3, r5, lsl #2
+ 390 0318 A868     		ldr	r0, [r5, #8]
+ 391 031a 0022     		movs	r2, #0
+ 392 031c FFF7FEFF 		bl	xQueueReceiveFromISR
+ 393 0320 20B1     		cbz	r0, .L47
+ 394 0322 2046     		mov	r0, r4
+ 395 0324 6946     		mov	r1, sp
+ 396 0326 FFF76BFE 		bl	CAN_tx_now
+ 397 032a 0646     		mov	r6, r0
+ 398              	.L47:
+ 399 032c FFF7FEFF 		bl	vPortExitCritical
+ 400 0330 00E0     		b	.L44
+ 401              	.L54:
+ 402 0332 3E46     		mov	r6, r7
+ 403              	.L44:
+ 404 0334 3046     		mov	r0, r6
+ 405 0336 04B0     		add	sp, sp, #16
+ 406 0338 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 407              	.L49:
+ 408 033c 044C     		ldr	r4, .L55+8
+ 409 033e 00E0     		b	.L43
+ 410              	.L50:
+ 411 0340 044C     		ldr	r4, .L55+12
+ 412              	.L43:
+ 413 0342 002F     		cmp	r7, #0
+ 414 0344 B9D1     		bne	.L52
+ 415 0346 F4E7     		b	.L54
+ 416              	.L56:
+ 417              		.align	2
+ 418              	.L55:
+ 419 0348 00000000 		.word	.LANCHOR0
+ 420 034c 04040400 		.word	263172
+ 421 0350 00400440 		.word	1074020352
+ 422 0354 00800440 		.word	1074036736
+ 424              		.align	1
+ 425              		.global	CAN_rx
+ 426              		.thumb
+ 427              		.thumb_func
+ 429              	CAN_rx:
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 432 0358 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 433 035c 471E     		subs	r7, r0, #1
+ 434 035e FBB2     		uxtb	r3, r7
+ 435 0360 012B     		cmp	r3, #1
+ 436 0362 0646     		mov	r6, r0
+ 437 0364 0C46     		mov	r4, r1
+ 438 0366 1546     		mov	r5, r2
+ 439 0368 2FD8     		bhi	.L62
+ 440 036a 0029     		cmp	r1, #0
+ 441 036c 30D0     		beq	.L63
+ 442 036e FFF7FEFF 		bl	xTaskGetSchedulerState
+ 443 0372 0128     		cmp	r0, #1
+ 444 0374 0CD1     		bne	.L59
+ 445 0376 194B     		ldr	r3, .L65
+ 446 0378 2146     		mov	r1, r4
+ 447 037a 53F82700 		ldr	r0, [r3, r7, lsl #2]
+ 448 037e 2A46     		mov	r2, r5
+ 449 0380 0023     		movs	r3, #0
+ 450 0382 FFF7FEFF 		bl	xQueueGenericReceive
+ 451 0386 0030     		adds	r0, r0, #0
+ 452 0388 18BF     		it	ne
+ 453 038a 0120     		movne	r0, #1
+ 454 038c BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 455              	.L59:
+ 456 0390 FFF7FEFF 		bl	sys_get_uptime_ms
+ 457 0394 10EB0508 		adds	r8, r0, r5
+ 458 0398 41F10009 		adc	r9, r1, #0
+ 459 039c 0F4F     		ldr	r7, .L65
+ 460 039e 07E0     		b	.L60
+ 461              	.L61:
+ 462 03a0 FFF7FEFF 		bl	sys_get_uptime_ms
+ 463 03a4 0246     		mov	r2, r0
+ 464 03a6 0B46     		mov	r3, r1
+ 465 03a8 9045     		cmp	r8, r2
+ 466 03aa 79EB0301 		sbcs	r1, r9, r3
+ 467 03ae 12D3     		bcc	.L64
+ 468              	.L60:
+ 469 03b0 731E     		subs	r3, r6, #1
+ 470 03b2 57F82300 		ldr	r0, [r7, r3, lsl #2]
+ 471 03b6 2146     		mov	r1, r4
+ 472 03b8 0022     		movs	r2, #0
+ 473 03ba FFF7FEFF 		bl	xQueueReceiveFromISR
+ 474 03be 0546     		mov	r5, r0
+ 475 03c0 0028     		cmp	r0, #0
+ 476 03c2 EDD0     		beq	.L61
+ 477 03c4 0120     		movs	r0, #1
+ 478 03c6 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 479              	.L62:
+ 480 03ca 0020     		movs	r0, #0
+ 481 03cc BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 482              	.L63:
+ 483 03d0 0846     		mov	r0, r1
+ 484 03d2 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 485              	.L64:
+ 486 03d6 2846     		mov	r0, r5
+ 487 03d8 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 488              	.L66:
+ 489              		.align	2
+ 490              	.L65:
+ 491 03dc 00000000 		.word	.LANCHOR0
+ 493              		.align	1
+ 494              		.global	CAN_is_bus_off
+ 495              		.thumb
+ 496              		.thumb_func
+ 498              	CAN_is_bus_off:
+ 499              		@ args = 0, pretend = 0, frame = 0
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 501              		@ link register save eliminated.
+ 502 03e0 0128     		cmp	r0, #1
+ 503 03e2 03D0     		beq	.L70
+ 504 03e4 0228     		cmp	r0, #2
+ 505 03e6 03D0     		beq	.L71
+ 506 03e8 0120     		movs	r0, #1
+ 507 03ea 7047     		bx	lr
+ 508              	.L70:
+ 509 03ec 034B     		ldr	r3, .L72
+ 510 03ee 00E0     		b	.L68
+ 511              	.L71:
+ 512 03f0 034B     		ldr	r3, .L72+4
+ 513              	.L68:
+ 514 03f2 9868     		ldr	r0, [r3, #8]
+ 515 03f4 C0F3C010 		ubfx	r0, r0, #7, #1
+ 516 03f8 7047     		bx	lr
+ 517              	.L73:
+ 518 03fa 00BF     		.align	2
+ 519              	.L72:
+ 520 03fc 00400440 		.word	1074020352
+ 521 0400 00800440 		.word	1074036736
+ 523              		.align	1
+ 524              		.global	CAN_reset_bus
+ 525              		.thumb
+ 526              		.thumb_func
+ 528              	CAN_reset_bus:
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 0, uses_anonymous_args = 0
+ 531              		@ link register save eliminated.
+ 532 0404 0128     		cmp	r0, #1
+ 533 0406 02D0     		beq	.L77
+ 534 0408 0228     		cmp	r0, #2
+ 535 040a 05D1     		bne	.L74
+ 536 040c 01E0     		b	.L79
+ 537              	.L77:
+ 538 040e 034B     		ldr	r3, .L80
+ 539 0410 00E0     		b	.L75
+ 540              	.L79:
+ 541 0412 034B     		ldr	r3, .L80+4
+ 542              	.L75:
+ 543 0414 0022     		movs	r2, #0
+ 544 0416 1A60     		str	r2, [r3, #0]
+ 545              	.L74:
+ 546 0418 7047     		bx	lr
+ 547              	.L81:
+ 548 041a 00BF     		.align	2
+ 549              	.L80:
+ 550 041c 00400440 		.word	1074020352
+ 551 0420 00800440 		.word	1074036736
+ 553              		.align	1
+ 554              		.global	CAN_gen_sid
+ 555              		.thumb
+ 556              		.thumb_func
+ 558              	CAN_gen_sid:
+ 559              		@ args = 0, pretend = 0, frame = 8
+ 560              		@ frame_needed = 0, uses_anonymous_args = 0
+ 561 0424 13B5     		push	{r0, r1, r4, lr}
+ 562 0426 BDF80430 		ldrh	r3, [sp, #4]
+ 563 042a 4FF6FF74 		movw	r4, #65535
+ 564 042e 61F30A03 		bfi	r3, r1, #0, #11
+ 565 0432 C4EB010C 		rsb	ip, r4, r1
+ 566 0436 1A0A     		lsrs	r2, r3, #8
+ 567 0438 DCF10001 		rsbs	r1, ip, #0
+ 568 043c 41EB0C01 		adc	r1, r1, ip
+ 569 0440 02F0F702 		and	r2, r2, #247
+ 570 0444 61F30412 		bfi	r2, r1, #4, #1
+ 571 0448 60F34712 		bfi	r2, r0, #5, #3
+ 572 044c DBB2     		uxtb	r3, r3
+ 573 044e 0020     		movs	r0, #0
+ 574 0450 63F30700 		bfi	r0, r3, #0, #8
+ 575 0454 D2B2     		uxtb	r2, r2
+ 576 0456 62F30F20 		bfi	r0, r2, #8, #8
+ 577 045a 1CBD     		pop	{r2, r3, r4, pc}
+ 579              		.align	1
+ 580              		.global	CAN_gen_eid
+ 581              		.thumb
+ 582              		.thumb_func
+ 584              	CAN_gen_eid:
+ 585              		@ args = 0, pretend = 0, frame = 8
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587              		@ link register save eliminated.
+ 588 045c 82B0     		sub	sp, sp, #8
+ 589 045e 019B     		ldr	r3, [sp, #4]
+ 590 0460 61F31C03 		bfi	r3, r1, #0, #29
+ 591 0464 1A0E     		lsrs	r2, r3, #24
+ 592 0466 D9B2     		uxtb	r1, r3
+ 593 0468 60F34712 		bfi	r2, r0, #5, #3
+ 594 046c 0020     		movs	r0, #0
+ 595 046e 61F30700 		bfi	r0, r1, #0, #8
+ 596 0472 C3F30721 		ubfx	r1, r3, #8, #8
+ 597 0476 61F30F20 		bfi	r0, r1, #8, #8
+ 598 047a C3F30743 		ubfx	r3, r3, #16, #8
+ 599 047e 63F31740 		bfi	r0, r3, #16, #8
+ 600 0482 D2B2     		uxtb	r2, r2
+ 601 0484 62F31F60 		bfi	r0, r2, #24, #8
+ 602 0488 02B0     		add	sp, sp, #8
+ 603 048a 7047     		bx	lr
+ 605              		.align	1
+ 606              		.global	CAN_fullcan_add_entry
+ 607              		.thumb
+ 608              		.thumb_func
+ 610              	CAN_fullcan_add_entry:
+ 611              		@ args = 0, pretend = 0, frame = 16
+ 612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613 048c 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 614 048e 0138     		subs	r0, r0, #1
+ 615 0490 C0B2     		uxtb	r0, r0
+ 616 0492 0128     		cmp	r0, #1
+ 617 0494 ADF80410 		strh	r1, [sp, #4]	@ movhi
+ 618 0498 ADF80020 		strh	r2, [sp, #0]	@ movhi
+ 619 049c 26D8     		bhi	.L87
+ 620 049e 154C     		ldr	r4, .L88
+ 621 04a0 0E22     		movs	r2, #14
+ 622 04a2 6368     		ldr	r3, [r4, #4]
+ 623 04a4 C3F34703 		ubfx	r3, r3, #1, #8
+ 624 04a8 5343     		muls	r3, r2, r3
+ 625 04aa B3F5006F 		cmp	r3, #2048
+ 626 04ae 1DD2     		bcs	.L87
+ 627 04b0 0125     		movs	r5, #1
+ 628 04b2 6068     		ldr	r0, [r4, #4]
+ 629 04b4 2560     		str	r5, [r4, #0]
+ 630 04b6 BDF80430 		ldrh	r3, [sp, #4]
+ 631 04ba 0426     		movs	r6, #4
+ 632 04bc ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 633 04c0 00F18040 		add	r0, r0, #1073741824
+ 634 04c4 BDF80030 		ldrh	r3, [sp, #0]
+ 635 04c8 00F56030 		add	r0, r0, #229376
+ 636 04cc 03A9     		add	r1, sp, #12
+ 637 04ce 3246     		mov	r2, r6
+ 638 04d0 ADF80E30 		strh	r3, [sp, #14]	@ movhi
+ 639 04d4 FFF7FEFF 		bl	memcpy
+ 640 04d8 6368     		ldr	r3, [r4, #4]
+ 641 04da 2846     		mov	r0, r5
+ 642 04dc 9B19     		adds	r3, r3, r6
+ 643 04de 6360     		str	r3, [r4, #4]
+ 644 04e0 A360     		str	r3, [r4, #8]
+ 645 04e2 E360     		str	r3, [r4, #12]
+ 646 04e4 2361     		str	r3, [r4, #16]
+ 647 04e6 6361     		str	r3, [r4, #20]
+ 648 04e8 2660     		str	r6, [r4, #0]
+ 649 04ea 00E0     		b	.L85
+ 650              	.L87:
+ 651 04ec 0020     		movs	r0, #0
+ 652              	.L85:
+ 653 04ee 04B0     		add	sp, sp, #16
+ 654 04f0 70BD     		pop	{r4, r5, r6, pc}
+ 655              	.L89:
+ 656 04f2 00BF     		.align	2
+ 657              	.L88:
+ 658 04f4 00C00340 		.word	1073987584
+ 660              		.align	1
+ 661              		.global	CAN_fullcan_get_entry_ptr
+ 662              		.thumb
+ 663              		.thumb_func
+ 665              	CAN_fullcan_get_entry_ptr:
+ 666              		@ args = 0, pretend = 0, frame = 8
+ 667              		@ frame_needed = 0, uses_anonymous_args = 0
+ 668 04f8 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 669 04fa 134B     		ldr	r3, .L95
+ 670 04fc ADF80400 		strh	r0, [sp, #4]	@ movhi
+ 671 0500 BDF80410 		ldrh	r1, [sp, #4]
+ 672 0504 5868     		ldr	r0, [r3, #4]
+ 673 0506 C1F30A01 		ubfx	r1, r1, #0, #11
+ 674 050a C0F34700 		ubfx	r0, r0, #1, #8
+ 675 050e 89B2     		uxth	r1, r1
+ 676 0510 0E4A     		ldr	r2, .L95+4
+ 677 0512 0023     		movs	r3, #0
+ 678 0514 08E0     		b	.L91
+ 679              	.L93:
+ 680 0516 32F8025B 		ldrh	r5, [r2], #2
+ 681 051a 5C1C     		adds	r4, r3, #1
+ 682 051c C5F30A05 		ubfx	r5, r5, #0, #11
+ 683 0520 ADB2     		uxth	r5, r5
+ 684 0522 8D42     		cmp	r5, r1
+ 685 0524 05D0     		beq	.L92
+ 686 0526 2346     		mov	r3, r4
+ 687              	.L91:
+ 688 0528 9CB2     		uxth	r4, r3
+ 689 052a 8442     		cmp	r4, r0
+ 690 052c F3D3     		bcc	.L93
+ 691 052e 0020     		movs	r0, #0
+ 692 0530 08E0     		b	.L94
+ 693              	.L92:
+ 694 0532 054A     		ldr	r2, .L95
+ 695 0534 5069     		ldr	r0, [r2, #20]
+ 696 0536 0C22     		movs	r2, #12
+ 697 0538 00F18040 		add	r0, r0, #1073741824
+ 698 053c 00F56030 		add	r0, r0, #229376
+ 699 0540 02FB0300 		mla	r0, r2, r3, r0
+ 700              	.L94:
+ 701 0544 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 702              	.L96:
+ 703 0546 00BF     		.align	2
+ 704              	.L95:
+ 705 0548 00C00340 		.word	1073987584
+ 706 054c 00800340 		.word	1073971200
+ 708              		.align	1
+ 709              		.global	CAN_fullcan_read_msg_copy
+ 710              		.thumb
+ 711              		.thumb_func
+ 713              	CAN_fullcan_read_msg_copy:
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 716 0550 70B5     		push	{r4, r5, r6, lr}
+ 717 0552 164B     		ldr	r3, .L103
+ 718 0554 0446     		mov	r4, r0
+ 719 0556 5B69     		ldr	r3, [r3, #20]
+ 720 0558 0D46     		mov	r5, r1
+ 721 055a 03F18043 		add	r3, r3, #1073741824
+ 722 055e 03F56033 		add	r3, r3, #229376
+ 723 0562 8342     		cmp	r3, r0
+ 724 0564 1ED8     		bhi	.L101
+ 725 0566 124B     		ldr	r3, .L103+4
+ 726 0568 9842     		cmp	r0, r3
+ 727 056a 1BD8     		bhi	.L101
+ 728 056c E1B1     		cbz	r1, .L102
+ 729 056e 0668     		ldr	r6, [r0, #0]
+ 730 0570 0368     		ldr	r3, [r0, #0]
+ 731 0572 0C22     		movs	r2, #12
+ 732 0574 23F04073 		bic	r3, r3, #50331648
+ 733 0578 0360     		str	r3, [r0, #0]
+ 734 057a 0846     		mov	r0, r1
+ 735 057c 2146     		mov	r1, r4
+ 736 057e FFF7FEFF 		bl	memcpy
+ 737 0582 2368     		ldr	r3, [r4, #0]
+ 738 0584 13F0407F 		tst	r3, #50331648
+ 739 0588 05D1     		bne	.L99
+ 740 058a 16F0407F 		tst	r6, #50331648
+ 741 058e 0CBF     		ite	eq
+ 742 0590 0020     		moveq	r0, #0
+ 743 0592 0120     		movne	r0, #1
+ 744 0594 70BD     		pop	{r4, r5, r6, pc}
+ 745              	.L99:
+ 746 0596 2846     		mov	r0, r5
+ 747 0598 2146     		mov	r1, r4
+ 748 059a 0C22     		movs	r2, #12
+ 749 059c FFF7FEFF 		bl	memcpy
+ 750 05a0 0120     		movs	r0, #1
+ 751 05a2 70BD     		pop	{r4, r5, r6, pc}
+ 752              	.L101:
+ 753 05a4 0020     		movs	r0, #0
+ 754 05a6 70BD     		pop	{r4, r5, r6, pc}
+ 755              	.L102:
+ 756 05a8 0846     		mov	r0, r1
+ 757 05aa 70BD     		pop	{r4, r5, r6, pc}
+ 758              	.L104:
+ 759              		.align	2
+ 760              	.L103:
+ 761 05ac 00C00340 		.word	1073987584
+ 762 05b0 FF870340 		.word	1073973247
+ 764              		.align	1
+ 765              		.global	CAN_fullcan_get_num_entries
+ 766              		.thumb
+ 767              		.thumb_func
+ 769              	CAN_fullcan_get_num_entries:
+ 770              		@ args = 0, pretend = 0, frame = 0
+ 771              		@ frame_needed = 0, uses_anonymous_args = 0
+ 772              		@ link register save eliminated.
+ 773 05b4 024B     		ldr	r3, .L106
+ 774 05b6 5868     		ldr	r0, [r3, #4]
+ 775 05b8 C0F34700 		ubfx	r0, r0, #1, #8
+ 776 05bc 7047     		bx	lr
+ 777              	.L107:
+ 778 05be 00BF     		.align	2
+ 779              	.L106:
+ 780 05c0 00C00340 		.word	1073987584
+ 782              		.align	1
+ 783              		.global	CAN_setup_filter
+ 784              		.thumb
+ 785              		.thumb_func
+ 787              	CAN_setup_filter:
+ 788              		@ args = 16, pretend = 0, frame = 0
+ 789              		@ frame_needed = 0, uses_anonymous_args = 0
+ 790 05c4 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 791 05c8 9846     		mov	r8, r3
+ 792 05ca 11F00103 		ands	r3, r1, #1
+ 793 05ce 0546     		mov	r5, r0
+ 794 05d0 1446     		mov	r4, r2
+ 795 05d2 DDF828B0 		ldr	fp, [sp, #40]
+ 796 05d6 67D1     		bne	.L115
+ 797 05d8 354A     		ldr	r2, .L123
+ 798 05da 4FF00109 		mov	r9, #1
+ 799 05de C2F80090 		str	r9, [r2, #0]
+ 800 05e2 5068     		ldr	r0, [r2, #4]
+ 801 05e4 5768     		ldr	r7, [r2, #4]
+ 802 05e6 0C22     		movs	r2, #12
+ 803 05e8 C7F34707 		ubfx	r7, r7, #1, #8
+ 804 05ec 5743     		muls	r7, r2, r7
+ 805 05ee 00F18040 		add	r0, r0, #1073741824
+ 806 05f2 C7F18047 		rsb	r7, r7, #1073741824
+ 807 05f6 00F56030 		add	r0, r0, #229376
+ 808 05fa 07F56237 		add	r7, r7, #231424
+ 809 05fe 45B1     		cbz	r5, .L116
+ 810 0600 01FA09F2 		lsl	r2, r1, r9
+ 811 0604 8618     		adds	r6, r0, r2
+ 812 0606 BE42     		cmp	r6, r7
+ 813 0608 06D2     		bcs	.L117
+ 814 060a 2946     		mov	r1, r5
+ 815 060c FFF7FEFF 		bl	memcpy
+ 816 0610 00E0     		b	.L122
+ 817              	.L116:
+ 818 0612 0646     		mov	r6, r0
+ 819              	.L122:
+ 820 0614 4D46     		mov	r5, r9
+ 821 0616 01E0     		b	.L110
+ 822              	.L117:
+ 823 0618 0646     		mov	r6, r0
+ 824 061a 1D46     		mov	r5, r3
+ 825              	.L110:
+ 826 061c 254B     		ldr	r3, .L123+4
+ 827 061e 244A     		ldr	r2, .L123
+ 828 0620 F318     		adds	r3, r6, r3
+ 829 0622 9360     		str	r3, [r2, #8]
+ 830 0624 9146     		mov	r9, r2
+ 831 0626 64B1     		cbz	r4, .L111
+ 832 0628 4FEA8802 		lsl	r2, r8, #2
+ 833 062c 06EB020A 		add	sl, r6, r2
+ 834 0630 BA45     		cmp	sl, r7
+ 835 0632 05D2     		bcs	.L118
+ 836 0634 3046     		mov	r0, r6
+ 837 0636 2146     		mov	r1, r4
+ 838 0638 FFF7FEFF 		bl	memcpy
+ 839 063c 5646     		mov	r6, sl
+ 840 063e 00E0     		b	.L111
+ 841              	.L118:
+ 842 0640 0025     		movs	r5, #0
+ 843              	.L111:
+ 844 0642 1C4B     		ldr	r3, .L123+4
+ 845 0644 F318     		adds	r3, r6, r3
+ 846 0646 C9F80C30 		str	r3, [r9, #12]
+ 847 064a BBF1000F 		cmp	fp, #0
+ 848 064e 0CD0     		beq	.L112
+ 849 0650 BDF82C20 		ldrh	r2, [sp, #44]
+ 850 0654 9200     		lsls	r2, r2, #2
+ 851 0656 B418     		adds	r4, r6, r2
+ 852 0658 BC42     		cmp	r4, r7
+ 853 065a 05D2     		bcs	.L119
+ 854 065c 3046     		mov	r0, r6
+ 855 065e 5946     		mov	r1, fp
+ 856 0660 FFF7FEFF 		bl	memcpy
+ 857 0664 2646     		mov	r6, r4
+ 858 0666 00E0     		b	.L112
+ 859              	.L119:
+ 860 0668 0025     		movs	r5, #0
+ 861              	.L112:
+ 862 066a 124B     		ldr	r3, .L123+4
+ 863 066c 104C     		ldr	r4, .L123
+ 864 066e F318     		adds	r3, r6, r3
+ 865 0670 2361     		str	r3, [r4, #16]
+ 866 0672 0C9B     		ldr	r3, [sp, #48]
+ 867 0674 6BB1     		cbz	r3, .L113
+ 868 0676 BDF83420 		ldrh	r2, [sp, #52]
+ 869 067a D200     		lsls	r2, r2, #3
+ 870 067c 06EB0208 		add	r8, r6, r2
+ 871 0680 B845     		cmp	r8, r7
+ 872 0682 05D2     		bcs	.L120
+ 873 0684 3046     		mov	r0, r6
+ 874 0686 1946     		mov	r1, r3
+ 875 0688 FFF7FEFF 		bl	memcpy
+ 876 068c 4646     		mov	r6, r8
+ 877 068e 00E0     		b	.L113
+ 878              	.L120:
+ 879 0690 0025     		movs	r5, #0
+ 880              	.L113:
+ 881 0692 084B     		ldr	r3, .L123+4
+ 882 0694 F318     		adds	r3, r6, r3
+ 883 0696 6361     		str	r3, [r4, #20]
+ 884 0698 6268     		ldr	r2, [r4, #4]
+ 885 069a 054B     		ldr	r3, .L123
+ 886 069c 002A     		cmp	r2, #0
+ 887 069e 14BF     		ite	ne
+ 888 06a0 0422     		movne	r2, #4
+ 889 06a2 0022     		moveq	r2, #0
+ 890 06a4 1A60     		str	r2, [r3, #0]
+ 891 06a6 00E0     		b	.L109
+ 892              	.L115:
+ 893 06a8 0025     		movs	r5, #0
+ 894              	.L109:
+ 895 06aa 2846     		mov	r0, r5
+ 896 06ac BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 897              	.L124:
+ 898              		.align	2
+ 899              	.L123:
+ 900 06b0 00C00340 		.word	1073987584
+ 901 06b4 0080FCBF 		.word	-1073971200
+ 903              		.bss
+ 904              		.align	2
+ 905              		.set	.LANCHOR0,. + 0
+ 908              	m_can_rx_qs:
+ 909 0000 00000000 		.space	8
+ 909      00000000 
+ 912              	m_can_tx_qs:
+ 913 0008 00000000 		.space	8
+ 913      00000000 
+ 916              	m_can_callbacks:
+ 917 0010 00000000 		.space	16
+ 917      00000000 
+ 917      00000000 
+ 917      00000000 
+ 918              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 can.c
+     /tmp/cc0ePwyj.s:16     .text:00000000 $t
+     /tmp/cc0ePwyj.s:20     .text:00000000 CAN_tx_now
+     /tmp/cc0ePwyj.s:54     .text:00000036 CAN_handle_isr
+     /tmp/cc0ePwyj.s:123    .text:000000c8 $d
+     /tmp/cc0ePwyj.s:125    .text:000000cc $t
+     /tmp/cc0ePwyj.s:130    .text:000000cc CAN_IRQHandler
+     /tmp/cc0ePwyj.s:157    .text:000000f8 $d
+     /tmp/cc0ePwyj.s:161    .text:00000104 $t
+     /tmp/cc0ePwyj.s:166    .text:00000104 CAN_init
+     /tmp/cc0ePwyj.s:323    .text:00000288 $d
+     /tmp/cc0ePwyj.s:331    .text:000002a4 $t
+     /tmp/cc0ePwyj.s:336    .text:000002a4 CAN_tx
+     /tmp/cc0ePwyj.s:419    .text:00000348 $d
+     /tmp/cc0ePwyj.s:424    .text:00000358 $t
+     /tmp/cc0ePwyj.s:429    .text:00000358 CAN_rx
+     /tmp/cc0ePwyj.s:491    .text:000003dc $d
+     /tmp/cc0ePwyj.s:493    .text:000003e0 $t
+     /tmp/cc0ePwyj.s:498    .text:000003e0 CAN_is_bus_off
+     /tmp/cc0ePwyj.s:520    .text:000003fc $d
+     /tmp/cc0ePwyj.s:523    .text:00000404 $t
+     /tmp/cc0ePwyj.s:528    .text:00000404 CAN_reset_bus
+     /tmp/cc0ePwyj.s:550    .text:0000041c $d
+     /tmp/cc0ePwyj.s:553    .text:00000424 $t
+     /tmp/cc0ePwyj.s:558    .text:00000424 CAN_gen_sid
+     /tmp/cc0ePwyj.s:584    .text:0000045c CAN_gen_eid
+     /tmp/cc0ePwyj.s:610    .text:0000048c CAN_fullcan_add_entry
+     /tmp/cc0ePwyj.s:658    .text:000004f4 $d
+     /tmp/cc0ePwyj.s:660    .text:000004f8 $t
+     /tmp/cc0ePwyj.s:665    .text:000004f8 CAN_fullcan_get_entry_ptr
+     /tmp/cc0ePwyj.s:705    .text:00000548 $d
+     /tmp/cc0ePwyj.s:708    .text:00000550 $t
+     /tmp/cc0ePwyj.s:713    .text:00000550 CAN_fullcan_read_msg_copy
+     /tmp/cc0ePwyj.s:761    .text:000005ac $d
+     /tmp/cc0ePwyj.s:764    .text:000005b4 $t
+     /tmp/cc0ePwyj.s:769    .text:000005b4 CAN_fullcan_get_num_entries
+     /tmp/cc0ePwyj.s:780    .text:000005c0 $d
+     /tmp/cc0ePwyj.s:782    .text:000005c4 $t
+     /tmp/cc0ePwyj.s:787    .text:000005c4 CAN_setup_filter
+     /tmp/cc0ePwyj.s:900    .text:000006b0 $d
+     /tmp/cc0ePwyj.s:904    .bss:00000000 $d
+     /tmp/cc0ePwyj.s:908    .bss:00000000 m_can_rx_qs
+     /tmp/cc0ePwyj.s:912    .bss:00000008 m_can_tx_qs
+     /tmp/cc0ePwyj.s:916    .bss:00000010 m_can_callbacks
+
+UNDEFINED SYMBOLS
+memcpy
+xQueueGenericSendFromISR
+xQueueReceiveFromISR
+xQueueGenericCreate
+memset
+sys_get_cpu_clock
+vPortEnterCritical
+vPortExitCritical
+xTaskGetSchedulerState
+xQueueGenericSend
+xQueueGenericReceive
+sys_get_uptime_ms

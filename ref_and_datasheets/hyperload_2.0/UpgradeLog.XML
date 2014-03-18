@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="MegaLoad .NET">
+</Property><Property Name="Projektmappendatei" Value="C:\Dokumente und Einstellungen\beta\Desktop\MegaLoad 5.0 C#\MegaLoad .NET.sln">
+</Property><Property Name="Date" Value="Donnerstag, 13. Juli 2006">
+</Property><Property Name="Time" Value="08:57">
+</Property></Properties><Event ErrorLevel="0" Project="MegaLoad .NET" Source="MegaLoad .NET.csproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="MegaLoad .NET" Source="MegaLoad .NET.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="MegaLoad .NET.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="MegaLoad .NET.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MegaLoad .NET" Source="MegaLoad .NET.csproj" Description="Überprüfung abgeschlossen: Aktualisierung von Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>

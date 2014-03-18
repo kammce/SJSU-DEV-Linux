@@ -1,0 +1,316 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"c_list.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	c_list_create
+  18              		.thumb
+  19              		.thumb_func
+  21              	c_list_create:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 10B5     		push	{r4, lr}
+  25 0002 0C20     		movs	r0, #12
+  26 0004 FFF7FEFF 		bl	malloc
+  27 0008 0446     		mov	r4, r0
+  28 000a 18B1     		cbz	r0, .L2
+  29 000c 0021     		movs	r1, #0
+  30 000e 0C22     		movs	r2, #12
+  31 0010 FFF7FEFF 		bl	memset
+  32              	.L2:
+  33 0014 2046     		mov	r0, r4
+  34 0016 10BD     		pop	{r4, pc}
+  36              		.align	1
+  37              		.global	c_list_delete
+  38              		.thumb
+  39              		.thumb_func
+  41              	c_list_delete:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44 0018 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  45 001a 0546     		mov	r5, r0
+  46 001c 0E46     		mov	r6, r1
+  47 001e B0B1     		cbz	r0, .L8
+  48 0020 0468     		ldr	r4, [r0, #0]
+  49 0022 0AE0     		b	.L5
+  50              	.L7:
+  51 0024 26B1     		cbz	r6, .L6
+  52 0026 0021     		movs	r1, #0
+  53 0028 2068     		ldr	r0, [r4, #0]
+  54 002a 0A46     		mov	r2, r1
+  55 002c 0B46     		mov	r3, r1
+  56 002e B047     		blx	r6
+  57              	.L6:
+  58 0030 2046     		mov	r0, r4
+  59 0032 6768     		ldr	r7, [r4, #4]
+  60 0034 FFF7FEFF 		bl	free
+  61 0038 3C46     		mov	r4, r7
+  62              	.L5:
+  63 003a 002C     		cmp	r4, #0
+  64 003c F2D1     		bne	.L7
+  65 003e 2846     		mov	r0, r5
+  66 0040 2C60     		str	r4, [r5, #0]
+  67 0042 6C60     		str	r4, [r5, #4]
+  68 0044 AC60     		str	r4, [r5, #8]
+  69 0046 FFF7FEFF 		bl	free
+  70 004a 0120     		movs	r0, #1
+  71 004c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  72              	.L8:
+  73 004e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  75              		.align	1
+  76              		.global	c_list_node_count
+  77              		.thumb
+  78              		.thumb_func
+  80              	c_list_node_count:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  84 0050 00B1     		cbz	r0, .L10
+  85 0052 8068     		ldr	r0, [r0, #8]
+  86              	.L10:
+  87 0054 7047     		bx	lr
+  89              		.align	1
+  90              		.global	c_list_insert_elm_end
+  91              		.thumb
+  92              		.thumb_func
+  94              	c_list_insert_elm_end:
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0056 38B5     		push	{r3, r4, r5, lr}
+  98 0058 0446     		mov	r4, r0
+  99 005a 0D46     		mov	r5, r1
+ 100 005c 90B1     		cbz	r0, .L16
+ 101 005e 0820     		movs	r0, #8
+ 102 0060 FFF7FEFF 		bl	malloc
+ 103 0064 70B1     		cbz	r0, .L13
+ 104 0066 0023     		movs	r3, #0
+ 105 0068 4360     		str	r3, [r0, #4]
+ 106 006a 0560     		str	r5, [r0, #0]
+ 107 006c 2368     		ldr	r3, [r4, #0]
+ 108 006e 0BB9     		cbnz	r3, .L14
+ 109 0070 2060     		str	r0, [r4, #0]
+ 110 0072 01E0     		b	.L18
+ 111              	.L14:
+ 112 0074 6368     		ldr	r3, [r4, #4]
+ 113 0076 5860     		str	r0, [r3, #4]
+ 114              	.L18:
+ 115 0078 A368     		ldr	r3, [r4, #8]
+ 116 007a 6060     		str	r0, [r4, #4]
+ 117 007c 0133     		adds	r3, r3, #1
+ 118 007e A360     		str	r3, [r4, #8]
+ 119 0080 0120     		movs	r0, #1
+ 120 0082 38BD     		pop	{r3, r4, r5, pc}
+ 121              	.L16:
+ 122              	.L13:
+ 123 0084 38BD     		pop	{r3, r4, r5, pc}
+ 125              		.align	1
+ 126              		.global	c_list_insert_elm_beg
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	c_list_insert_elm_beg:
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133 0086 38B5     		push	{r3, r4, r5, lr}
+ 134 0088 0446     		mov	r4, r0
+ 135 008a 0D46     		mov	r5, r1
+ 136 008c 78B1     		cbz	r0, .L22
+ 137 008e 0820     		movs	r0, #8
+ 138 0090 FFF7FEFF 		bl	malloc
+ 139 0094 58B1     		cbz	r0, .L20
+ 140 0096 2368     		ldr	r3, [r4, #0]
+ 141 0098 0560     		str	r5, [r0, #0]
+ 142 009a 4360     		str	r3, [r0, #4]
+ 143 009c 6368     		ldr	r3, [r4, #4]
+ 144 009e 2060     		str	r0, [r4, #0]
+ 145 00a0 03B9     		cbnz	r3, .L21
+ 146 00a2 6060     		str	r0, [r4, #4]
+ 147              	.L21:
+ 148 00a4 A368     		ldr	r3, [r4, #8]
+ 149 00a6 0120     		movs	r0, #1
+ 150 00a8 0133     		adds	r3, r3, #1
+ 151 00aa A360     		str	r3, [r4, #8]
+ 152 00ac 38BD     		pop	{r3, r4, r5, pc}
+ 153              	.L22:
+ 154              	.L20:
+ 155 00ae 38BD     		pop	{r3, r4, r5, pc}
+ 157              		.align	1
+ 158              		.global	c_list_get_elm_at
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	c_list_get_elm_at:
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166 00b0 A0B1     		cbz	r0, .L25
+ 167 00b2 32B1     		cbz	r2, .L26
+ 168 00b4 29B1     		cbz	r1, .L26
+ 169 00b6 1068     		ldr	r0, [r2, #0]
+ 170 00b8 80B1     		cbz	r0, .L25
+ 171 00ba 4368     		ldr	r3, [r0, #4]
+ 172 00bc 1360     		str	r3, [r2, #0]
+ 173 00be 0068     		ldr	r0, [r0, #0]
+ 174 00c0 7047     		bx	lr
+ 175              	.L26:
+ 176 00c2 0068     		ldr	r0, [r0, #0]
+ 177 00c4 01E0     		b	.L27
+ 178              	.L29:
+ 179 00c6 4068     		ldr	r0, [r0, #4]
+ 180 00c8 0139     		subs	r1, r1, #1
+ 181              	.L27:
+ 182 00ca 11B1     		cbz	r1, .L28
+ 183 00cc 0028     		cmp	r0, #0
+ 184 00ce FAD1     		bne	.L29
+ 185 00d0 7047     		bx	lr
+ 186              	.L28:
+ 187 00d2 18B1     		cbz	r0, .L25
+ 188 00d4 0AB1     		cbz	r2, .L30
+ 189 00d6 4368     		ldr	r3, [r0, #4]
+ 190 00d8 1360     		str	r3, [r2, #0]
+ 191              	.L30:
+ 192 00da 0068     		ldr	r0, [r0, #0]
+ 193              	.L25:
+ 194 00dc 7047     		bx	lr
+ 196              		.align	1
+ 197              		.global	c_list_find_elm
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	c_list_find_elm:
+ 202              		@ args = 4, pretend = 0, frame = 0
+ 203              		@ frame_needed = 0, uses_anonymous_args = 0
+ 204 00de 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 205 00e2 DDF81880 		ldr	r8, [sp, #24]
+ 206 00e6 0D46     		mov	r5, r1
+ 207 00e8 1646     		mov	r6, r2
+ 208 00ea 1F46     		mov	r7, r3
+ 209 00ec 90B1     		cbz	r0, .L35
+ 210 00ee 81B1     		cbz	r1, .L40
+ 211 00f0 0468     		ldr	r4, [r0, #0]
+ 212 00f2 09E0     		b	.L36
+ 213              	.L38:
+ 214 00f4 2068     		ldr	r0, [r4, #0]
+ 215 00f6 3146     		mov	r1, r6
+ 216 00f8 3A46     		mov	r2, r7
+ 217 00fa 4346     		mov	r3, r8
+ 218 00fc A847     		blx	r5
+ 219 00fe 10B9     		cbnz	r0, .L37
+ 220 0100 2068     		ldr	r0, [r4, #0]
+ 221 0102 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 222              	.L37:
+ 223 0106 6468     		ldr	r4, [r4, #4]
+ 224              	.L36:
+ 225 0108 002C     		cmp	r4, #0
+ 226 010a F3D1     		bne	.L38
+ 227 010c 2046     		mov	r0, r4
+ 228 010e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 229              	.L40:
+ 230 0112 0846     		mov	r0, r1
+ 231              	.L35:
+ 232 0114 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 234              		.align	1
+ 235              		.global	c_list_delete_elm
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	c_list_delete_elm:
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242 0118 38B5     		push	{r3, r4, r5, lr}
+ 243 011a 0346     		mov	r3, r0
+ 244 011c E8B1     		cbz	r0, .L49
+ 245 011e 0468     		ldr	r4, [r0, #0]
+ 246 0120 0022     		movs	r2, #0
+ 247 0122 2046     		mov	r0, r4
+ 248 0124 16E0     		b	.L43
+ 249              	.L48:
+ 250 0126 0568     		ldr	r5, [r0, #0]
+ 251 0128 A942     		cmp	r1, r5
+ 252 012a 11D1     		bne	.L44
+ 253 012c 8442     		cmp	r4, r0
+ 254 012e 04BF     		itt	eq
+ 255 0130 4168     		ldreq	r1, [r0, #4]
+ 256 0132 1960     		streq	r1, [r3, #0]
+ 257 0134 5968     		ldr	r1, [r3, #4]
+ 258 0136 8142     		cmp	r1, r0
+ 259 0138 08BF     		it	eq
+ 260 013a 5A60     		streq	r2, [r3, #4]
+ 261 013c 0AB1     		cbz	r2, .L47
+ 262 013e 4168     		ldr	r1, [r0, #4]
+ 263 0140 5160     		str	r1, [r2, #4]
+ 264              	.L47:
+ 265 0142 9A68     		ldr	r2, [r3, #8]
+ 266 0144 013A     		subs	r2, r2, #1
+ 267 0146 9A60     		str	r2, [r3, #8]
+ 268 0148 FFF7FEFF 		bl	free
+ 269 014c 0120     		movs	r0, #1
+ 270 014e 38BD     		pop	{r3, r4, r5, pc}
+ 271              	.L44:
+ 272 0150 0246     		mov	r2, r0
+ 273 0152 4068     		ldr	r0, [r0, #4]
+ 274              	.L43:
+ 275 0154 0028     		cmp	r0, #0
+ 276 0156 E6D1     		bne	.L48
+ 277 0158 38BD     		pop	{r3, r4, r5, pc}
+ 278              	.L49:
+ 279 015a 38BD     		pop	{r3, r4, r5, pc}
+ 281              		.align	1
+ 282              		.global	c_list_for_each_elm
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	c_list_for_each_elm:
+ 287              		@ args = 4, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 015c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 290 0160 DDF81880 		ldr	r8, [sp, #24]
+ 291 0164 0D46     		mov	r5, r1
+ 292 0166 1646     		mov	r6, r2
+ 293 0168 1F46     		mov	r7, r3
+ 294 016a 58B1     		cbz	r0, .L54
+ 295 016c 69B1     		cbz	r1, .L55
+ 296 016e 0468     		ldr	r4, [r0, #0]
+ 297 0170 06E0     		b	.L52
+ 298              	.L53:
+ 299 0172 2068     		ldr	r0, [r4, #0]
+ 300 0174 3146     		mov	r1, r6
+ 301 0176 3A46     		mov	r2, r7
+ 302 0178 4346     		mov	r3, r8
+ 303 017a A847     		blx	r5
+ 304 017c 30B1     		cbz	r0, .L51
+ 305 017e 6468     		ldr	r4, [r4, #4]
+ 306              	.L52:
+ 307 0180 002C     		cmp	r4, #0
+ 308 0182 F6D1     		bne	.L53
+ 309              	.L54:
+ 310 0184 0120     		movs	r0, #1
+ 311 0186 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 312              	.L55:
+ 313 018a 0120     		movs	r0, #1
+ 314              	.L51:
+ 315 018c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 317              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 c_list.c
+     /tmp/cc3BoAgc.s:16     .text:00000000 $t
+     /tmp/cc3BoAgc.s:21     .text:00000000 c_list_create
+     /tmp/cc3BoAgc.s:41     .text:00000018 c_list_delete
+     /tmp/cc3BoAgc.s:80     .text:00000050 c_list_node_count
+     /tmp/cc3BoAgc.s:94     .text:00000056 c_list_insert_elm_end
+     /tmp/cc3BoAgc.s:130    .text:00000086 c_list_insert_elm_beg
+     /tmp/cc3BoAgc.s:162    .text:000000b0 c_list_get_elm_at
+     /tmp/cc3BoAgc.s:201    .text:000000de c_list_find_elm
+     /tmp/cc3BoAgc.s:239    .text:00000118 c_list_delete_elm
+     /tmp/cc3BoAgc.s:286    .text:0000015c c_list_for_each_elm
+
+UNDEFINED SYMBOLS
+malloc
+memset
+free

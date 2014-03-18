@@ -1,0 +1,136 @@
+Revision History:
+10-23-2013 :
+    1) Optimized PLL search algorithm for RTC
+    2) Fixed lpc_pwm.cpp
+    
+10-20-2013 :
+    1) Add RTC as clock input with PLL to provide many ranges from 0-100Mhz
+    2) Modifications to sys_clock.cpp and sys_config.h
+    3) Modified high_level_init.cpp to print correct CPU speed (fraction was wrong).
+    
+10-10-2013 :
+    1) Fixed a bug at CAN generate sid function
+    2) Enhanced I2C driver by removing a variable
+    3) Enhanced cpp_task.hpp by providing CPU API
+    4) Updated terminal.cpp to simplify command-line input
+    5) Provided RN-XV UART driver + task
+    6) Updated UartDev to include isReady() and setReady() API
+    
+09-28-2013 :
+    1) Added (experimental) CAN driver
+    2) Fixed GPIO read() method
+    
+09-10-2013 :
+    1) Modified wireless.c and wireless.cpp to use nordic interrupt rather than polling if
+       FreeRTOS is running.  This enhances performance and uses less CPU and SPI0 bus.
+    2) Added eint.h to support Port0 and Port2 rising/falling edge interrupts
+    
+09-09-2013 : 
+    1) Improvements to mesh algorithm
+    2) Improved mesh packet handler (terminal command)
+08-26-2013 : More testing of nordic mesh, fixed one small bug.
+08-22-2013 :
+    1) Previous revision date was 8-21-2013, which is fixed below.
+    2) Upgrade FreeRTOS to 7.5.2
+    3) Changed "info" handler at handlers.cpp to use new FreeRTOS function to list tasks' info
+    4) Modified/Enhanced wireless.c to improve mesh network algorithm to repeat a packet.
+       Also fixed a critical bug at mesh network.
+    5) Modified lpc_sys.h and renamed RIT functions.
+    6) Modified high_level_init.cpp to remove s_rit_running 
+    
+08-21-2013 :
+    1) Changed sys_get_uptime_ms() from unsigned int to uint64_t
+    2) Changed softTimer class to use uint64_t
+    3) Added mesh API to form and deform a packet
+    4) Changed mesh driver at wireless.c to send delayed packets to
+        avoid data collission.
+    
+08-09-2013 :
+    1) Added wireless_send() such that all wireless api is at wireless.h
+    2) Added -fno-strict-aliasing to the project to remove warning from ff.c
+    
+08-07-2013 :
+    1) Added mesh network API and nordic wireless support for the new SJ-One board
+    2) Added more example tasks, and a test task.
+    3) Enabled parallel build to speed up compilation for the project.
+    
+07-15-2013 :
+    1) Added SPI0 driver and L4_IO/nordic folder
+    2) Changed high_level_init() to initialize Nordic and SPI0
+    3) Added bio.hpp that provides single method to initialize ALL board pins
+        that are already connected
+    4) Changed gpio.hpp and lpc_pwm.hpp for the new version of the board.
+    5) Various other changes that remove some header files and consolidate the 
+       microcontroller related api to a single file called "lpc_sys.h"
+    6) Added L4_IO/nordic to encapsulate nordic wireless api
+    
+06-12-2013 :
+    1)  Changed rtc.c to check for invalid time.
+    2)  Moved rtc_initialize() from highLevelInitialize() to lowLevelInitialize()
+    3)  Added mprintf() to printf_lib.h
+
+06-05-2013 : 
+    Major changes to optimize memory, and add examples.
+    1)  Changed rtc_alarm.h API to be more consistent and added example in header file
+    2)  Added Examples directory to L5_Application
+    3)  Added malloc lock and unlock to make it safe across FreeRTOS tasks.
+    4)  Removed unncessary hooks.h file
+    5)  Added more documentation at tasks.hpp and added handleUserEntry() for remoteTask class.
+    6)  Changed command_handler.hpp by removing output str and adding output interface.
+          Changed all commands to directly output the data at tasks.cpp
+    7)  Combined uart_base.hpp and uart_iface.hpp
+    8)  Added lpc_pwm.hpp that supports 3 PWM channels on SJ One (v1) board.
+    9)  Added tokenize() to str class (str.hpp and str.cpp)
+    10) Changed uart_dev.cpp printf() to use heap vs. stack memory to do the printf
+    11) Added printf_lib.h to do u0_dbg_printf().  See file for more documentation.
+    12) Removed handles.h and misc.c
+    13) Added spi_sem.h and spi_sem.c
+    14) Changed syscalls.c to fix stdout, stdin, and stderr I/O
+    15) Enhanced scheduler_task() such that tasks can communicate with each other.
+    16) Added SoftTime class that relies on FreeRTOS.
+    
+04-25-2013
+    1) Added newlib hooks for time functions
+    2) Fixed infinite loop when no command was sent for 60 seconds.
+    
+04-20-2013
+    1) Fixed gets() bug at uart_iface.hpp
+    2) Modified command_handler.hpp
+    
+04-13-2013
+    1) Added rit_isr.h to provide API to setup repetitive callback which also provides
+        a free running timer for free.  RIT uses higher priority than FreeRTOS and if
+        it sees that FreeRTOS is not running, it will set BASEPRI register to zero to
+        ensure that accidental use of FreeRTOS API hasn't set the BASEPRI to non-zero
+        therefore blocking our interrupts higher than IP_SYSCALL
+    2) Fixed bug at uart_base.cpp for timeout without FreeRTOS.
+    3) Changed uart_base.cpp such that last activity time is when a char was received
+        such that when a char is sent, it is not considered as any activity.
+    4) Fixed bug at uart_iface.cpp for gets()
+
+03-29-2013
+    Removed memory configuration options.  Now heap can use almost all of 64Kb memory
+    
+02-01-2013:
+    Added telemetry system.
+    Newlib hooks added to use C FILE API, such as fopen() and fclose()
+    
+10-16-2012:
+    Added option to optimize SPI Flash write operation
+    Changed UART0 PCLK to CPU Clock instead of CPU/4 to support higher baud rates
+    
+10-07-2012:
+    Fixed critical FreeRTOS Priority bug by adding interruptPriorities.h
+    Included RTC Semaphore for FreeRTOS
+    DMA for SSP1
+    Added C++ Interface inheritance for UART driver
+    Added Boot information by L0/bootType.h
+    Added bit manipulation by L0/bit_manip.h
+    Added watchdog timer L0/watchdog.h
+    Added different memory schemes by configuring it at sys_config.h
+    Added more functionality to storage.h
+    Enabled sleep-mode configuration for temperature sensor.
+    
+09-16-2012:
+    str needed str.printf() fixed when string couldn't be printed due to insufficient capacity.
+    FATFS needed fix to get_fattime() due to change to RTC API()

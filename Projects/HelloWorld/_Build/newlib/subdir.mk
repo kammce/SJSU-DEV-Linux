@@ -1,0 +1,74 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables
+CPP_SRCS += \
+../newlib/memory.cpp
+
+C_SRCS += \
+../newlib/malloc_lock.c \
+../newlib/newlib_time.c \
+../newlib/printf_lib.c \
+../newlib/syscalls.c
+
+OBJS += \
+./newlib/malloc_lock.o \
+./newlib/memory.o \
+./newlib/newlib_time.o \
+./newlib/printf_lib.o \
+./newlib/syscalls.o
+
+C_DEPS += \
+./newlib/malloc_lock.d \
+./newlib/newlib_time.d \
+./newlib/printf_lib.d \
+./newlib/syscalls.d
+
+CPP_DEPS += \
+./newlib/memory.d
+
+
+# Each subdirectory must supply rules for building sources it contributes
+newlib/%.o: ../newlib/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC C Compiler'
+	arm-none-eabi-gcc \
+	-I"../" \
+	-I"../newlib" \
+	-I"../L0_LowLevel" \
+	-I"../L1_FreeRTOS" \
+	-I"../L1_FreeRTOS/include" \
+	-I"../L1_FreeRTOS/portable" \
+	-I"../L2_Drivers" \
+	-I"../L3_Utils" \
+	-I"../L3_Utils/tlm" \
+	-I"../L4_IO" \
+	-I"../L4_IO/fat" \
+	-I"../L4_IO/wireless" \
+	-I"../L5_Application" \
+	-Os -Wall -std=gnu99 -Wa,-adhlns="$@.lst" -c -fmessage-length=0 -fno-strict-aliasing -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -mcpu=cortex-m3 -mthumb -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+newlib/%.o: ../newlib/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC C++ Compiler'
+	arm-none-eabi-g++ \
+	-I"../" \
+	-I"../newlib" \
+	-I"../L0_LowLevel" \
+	-I"../L1_FreeRTOS" \
+	-I"../L1_FreeRTOS/include" \
+	-I"../L1_FreeRTOS/portable" \
+	-I"../L2_Drivers" \
+	-I"../L3_Utils" \
+	-I"../L3_Utils/tlm" \
+	-I"../L4_IO" \
+	-I"../L4_IO/fat" \
+	-I"../L4_IO/wireless" \
+	-I"../L5_Application" -Os -Wall -Wa,-adhlns="$@.lst" -fno-exceptions -fno-rtti -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -mcpu=cortex-m3 -mthumb -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

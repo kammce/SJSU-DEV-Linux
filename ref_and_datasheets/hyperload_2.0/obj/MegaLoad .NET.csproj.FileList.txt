@@ -1,0 +1,25 @@
+bin\Release\MegaLoad .NET.exe.manifest
+bin\Release\MegaLoad .NET.application
+bin\Release\MegaLoad .NET.exe
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\MegaLoad_.NET.AboutForm.resources
+obj\Release\MegaLoad_.NET.MegaLoadForm.resources
+obj\Release\MegaLoad_.NET.MonitorForm.resources
+obj\Release\MegaLoad .NET.csproj.GenerateResource.Cache
+obj\Release\MegaLoad .NET.exe.manifest
+obj\Release\MegaLoad .NET.application
+obj\Release\MegaLoad .NET.exe
+bin\Debug\MegaLoad .NET.exe.manifest
+bin\Debug\MegaLoad .NET.application
+bin\Debug\MegaLoad .NET.exe
+bin\Debug\MegaLoad .NET.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\MegaLoad_.NET.AboutForm.resources
+obj\Debug\MegaLoad_.NET.MegaLoadForm.resources
+obj\Debug\MegaLoad_.NET.MonitorForm.resources
+obj\Debug\MegaLoad_.NET.Properties.Resources.resources
+obj\Debug\MegaLoad .NET.csproj.GenerateResource.Cache
+obj\Debug\MegaLoad .NET.exe.manifest
+obj\Debug\MegaLoad .NET.application
+obj\Debug\MegaLoad .NET.exe
+obj\Debug\MegaLoad .NET.pdb

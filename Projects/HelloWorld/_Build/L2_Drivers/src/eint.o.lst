@@ -1,0 +1,161 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"eint.c"
+  15              		.text
+  16              		.align	1
+  17              		.global	EINT3_IRQHandler
+  18              		.thumb
+  19              		.thumb_func
+  21              	EINT3_IRQHandler:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  25 0002 184D     		ldr	r5, .L8
+  26 0004 184B     		ldr	r3, .L8+4
+  27 0006 0026     		movs	r6, #0
+  28 0008 1C68     		ldr	r4, [r3, #0]
+  29 000a 6B6A     		ldr	r3, [r5, #36]
+  30 000c AA6A     		ldr	r2, [r5, #40]
+  31 000e 42EA0307 		orr	r7, r2, r3
+  32 0012 6B68     		ldr	r3, [r5, #4]
+  33 0014 AA68     		ldr	r2, [r5, #8]
+  34 0016 1343     		orrs	r3, r3, r2
+  35 0018 1E43     		orrs	r6, r6, r3
+  36 001a 15E0     		b	.L2
+  37              	.L6:
+  38 001c D4E90023 		ldrd	r2, [r4]
+  39 0020 06EA0200 		and	r0, r6, r2
+  40 0024 07EA0301 		and	r1, r7, r3
+  41 0028 50EA010C 		orrs	ip, r0, r1
+  42 002c 0BD0     		beq	.L3
+  43 002e 27EA0307 		bic	r7, r7, r3
+  44 0032 A368     		ldr	r3, [r4, #8]
+  45 0034 26EA0206 		bic	r6, r6, r2
+  46 0038 9847     		blx	r3
+  47 003a 2368     		ldr	r3, [r4, #0]
+  48 003c 6268     		ldr	r2, [r4, #4]
+  49 003e 0BB1     		cbz	r3, .L4
+  50 0040 EB60     		str	r3, [r5, #12]
+  51 0042 00E0     		b	.L3
+  52              	.L4:
+  53 0044 EA62     		str	r2, [r5, #44]
+  54              	.L3:
+  55 0046 E468     		ldr	r4, [r4, #12]
+  56              	.L2:
+  57 0048 1CB1     		cbz	r4, .L5
+  58 004a 56EA0703 		orrs	r3, r6, r7
+  59 004e E5D1     		bne	.L6
+  60 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  61              	.L5:
+  62 0052 56EA070C 		orrs	ip, r6, r7
+  63 0056 04D0     		beq	.L1
+  64 0058 024B     		ldr	r3, .L8
+  65 005a 4FF0FF32 		mov	r2, #-1
+  66 005e DA60     		str	r2, [r3, #12]
+  67 0060 DA62     		str	r2, [r3, #44]
+  68              	.L1:
+  69 0062 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  70              	.L9:
+  71              		.align	2
+  72              	.L8:
+  73 0064 80800240 		.word	1073905792
+  74 0068 00000000 		.word	.LANCHOR0
+  76              		.global	__aeabi_llsl
+  77              		.align	1
+  78              		.global	eint3_enable
+  79              		.thumb
+  80              		.thumb_func
+  82              	eint3_enable:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85 006c 3F28     		cmp	r0, #63
+  86 006e F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  87 0070 0546     		mov	r5, r0
+  88 0072 0E46     		mov	r6, r1
+  89 0074 1746     		mov	r7, r2
+  90 0076 2CD8     		bhi	.L10
+  91 0078 002A     		cmp	r2, #0
+  92 007a 2AD0     		beq	.L10
+  93 007c 1020     		movs	r0, #16
+  94 007e FFF7FEFF 		bl	malloc
+  95 0082 0446     		mov	r4, r0
+  96 0084 28B3     		cbz	r0, .L10
+  97 0086 8760     		str	r7, [r0, #8]
+  98 0088 0021     		movs	r1, #0
+  99 008a 0120     		movs	r0, #1
+ 100 008c 2A46     		mov	r2, r5
+ 101 008e FFF7FEFF 		bl	__aeabi_llsl
+ 102 0092 104B     		ldr	r3, .L16
+ 103 0094 1F2D     		cmp	r5, #31
+ 104 0096 1A68     		ldr	r2, [r3, #0]
+ 105 0098 84E80300 		stmia	r4, {r0, r1}
+ 106 009c 1C60     		str	r4, [r3, #0]
+ 107 009e E260     		str	r2, [r4, #12]
+ 108 00a0 0D4B     		ldr	r3, .L16+4
+ 109 00a2 09D8     		bhi	.L12
+ 110 00a4 012E     		cmp	r6, #1
+ 111 00a6 03D1     		bne	.L13
+ 112 00a8 5A69     		ldr	r2, [r3, #20]
+ 113 00aa 1043     		orrs	r0, r0, r2
+ 114 00ac 5861     		str	r0, [r3, #20]
+ 115 00ae 0CE0     		b	.L14
+ 116              	.L13:
+ 117 00b0 1A69     		ldr	r2, [r3, #16]
+ 118 00b2 1043     		orrs	r0, r0, r2
+ 119 00b4 1861     		str	r0, [r3, #16]
+ 120 00b6 08E0     		b	.L14
+ 121              	.L12:
+ 122 00b8 012E     		cmp	r6, #1
+ 123 00ba 03D1     		bne	.L15
+ 124 00bc 5A6B     		ldr	r2, [r3, #52]
+ 125 00be 1143     		orrs	r1, r1, r2
+ 126 00c0 5963     		str	r1, [r3, #52]
+ 127 00c2 02E0     		b	.L14
+ 128              	.L15:
+ 129 00c4 1A6B     		ldr	r2, [r3, #48]
+ 130 00c6 1143     		orrs	r1, r1, r2
+ 131 00c8 1963     		str	r1, [r3, #48]
+ 132              	.L14:
+ 133 00ca 044B     		ldr	r3, .L16+8
+ 134 00cc 4FF40012 		mov	r2, #2097152
+ 135 00d0 1A60     		str	r2, [r3, #0]
+ 136              	.L10:
+ 137 00d2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 138              	.L17:
+ 139              		.align	2
+ 140              	.L16:
+ 141 00d4 00000000 		.word	.LANCHOR0
+ 142 00d8 80800240 		.word	1073905792
+ 143 00dc 00E100E0 		.word	-536813312
+ 145              		.global	m_eint3_list_head
+ 146              		.bss
+ 147              		.align	2
+ 148              		.set	.LANCHOR0,. + 0
+ 151              	m_eint3_list_head:
+ 152 0000 00000000 		.space	4
+ 153              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 eint.c
+     /tmp/cceISJkx.s:16     .text:00000000 $t
+     /tmp/cceISJkx.s:21     .text:00000000 EINT3_IRQHandler
+     /tmp/cceISJkx.s:73     .text:00000064 $d
+     /tmp/cceISJkx.s:77     .text:0000006c $t
+     /tmp/cceISJkx.s:82     .text:0000006c eint3_enable
+     /tmp/cceISJkx.s:141    .text:000000d4 $d
+     /tmp/cceISJkx.s:151    .bss:00000000 m_eint3_list_head
+     /tmp/cceISJkx.s:147    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_llsl
+malloc
