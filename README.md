@@ -1,7 +1,7 @@
 SJSU-DEV-Linux
 ==============
 
-** Tools **
+Tools
 -----------
  - **Hyperload.exe**: Used to upload programs to SJSU One Board.
 	* Requires: Windows OS or Mono C# runtime environment (cross platform)
@@ -19,14 +19,14 @@ Setup
  2. Install one or more Serial monitoring software. 
  3. Done! Now you have everything setup for development!
 
-** Directory Layout **
+Directory Layout
 ----------------------
  - **Projects:** holds all of the projects. 
     - The path to the main.cpp file to edit for each project is located at `Projects/*insert project name*/L5_Application/main.cpp`
  - **gcc-arm-none-eabi-*:** Binaries needed to compile the SJSU One sources code to ARM compatiable hex files. *Path to this folder is added when building using build.sh*
  - **ref_and_datasheets:** References and Datasheets about the SJSU One board, source code and documentation.
 
-** Getting Started **
+Getting Started
 ----------------------
  1. Write your program to the: 
         open Projects/*insert project name*/L5_Application/main.cpp
