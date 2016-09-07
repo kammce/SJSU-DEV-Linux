@@ -11,86 +11,87 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"reentrant.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	ff_cre_syncobj
-  18              		.thumb
-  19              		.thumb_func
-  21              	ff_cre_syncobj:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24 0000 10B5     		push	{r4, lr}
-  25 0002 0120     		movs	r0, #1
-  26 0004 0C46     		mov	r4, r1
-  27 0006 FFF7FEFF 		bl	xQueueCreateMutex
-  28 000a 2060     		str	r0, [r4, #0]
-  29 000c 0030     		adds	r0, r0, #0
-  30 000e 18BF     		it	ne
-  31 0010 0120     		movne	r0, #1
-  32 0012 10BD     		pop	{r4, pc}
-  34              		.align	1
-  35              		.global	ff_del_syncobj
-  36              		.thumb
-  37              		.thumb_func
-  39              	ff_del_syncobj:
-  40              		@ args = 0, pretend = 0, frame = 0
-  41              		@ frame_needed = 0, uses_anonymous_args = 0
-  42              		@ link register save eliminated.
-  43 0014 0120     		movs	r0, #1
-  44 0016 7047     		bx	lr
-  46              		.align	1
-  47              		.global	ff_req_grant
-  48              		.thumb
-  49              		.thumb_func
-  51              	ff_req_grant:
-  52              		@ args = 0, pretend = 0, frame = 0
-  53              		@ frame_needed = 0, uses_anonymous_args = 0
-  54 0018 10B5     		push	{r4, lr}
-  55 001a 0446     		mov	r4, r0
-  56 001c FFF7FEFF 		bl	xTaskGetSchedulerState
-  57 0020 0128     		cmp	r0, #1
-  58 0022 0CD1     		bne	.L5
-  59 0024 0021     		movs	r1, #0
-  60 0026 0B46     		mov	r3, r1
-  61 0028 2046     		mov	r0, r4
-  62 002a 40F6B832 		movw	r2, #3000
-  63 002e FFF7FEFF 		bl	xQueueGenericReceive
-  64 0032 A0F10103 		sub	r3, r0, #1
-  65 0036 5842     		rsbs	r0, r3, #0
-  66 0038 40EB0300 		adc	r0, r0, r3
-  67 003c 10BD     		pop	{r4, pc}
-  68              	.L5:
-  69 003e 0120     		movs	r0, #1
-  70 0040 10BD     		pop	{r4, pc}
-  72              		.align	1
-  73              		.global	ff_rel_grant
-  74              		.thumb
-  75              		.thumb_func
-  77              	ff_rel_grant:
-  78              		@ args = 0, pretend = 0, frame = 0
-  79              		@ frame_needed = 0, uses_anonymous_args = 0
-  80 0042 10B5     		push	{r4, lr}
-  81 0044 0446     		mov	r4, r0
-  82 0046 FFF7FEFF 		bl	xTaskGetSchedulerState
-  83 004a 0128     		cmp	r0, #1
-  84 004c 07D1     		bne	.L6
-  85 004e 0021     		movs	r1, #0
-  86 0050 2046     		mov	r0, r4
-  87 0052 0A46     		mov	r2, r1
-  88 0054 0B46     		mov	r3, r1
-  89 0056 BDE81040 		pop	{r4, lr}
-  90 005a FFF7FEBF 		b	xQueueGenericSend
-  91              	.L6:
-  92 005e 10BD     		pop	{r4, pc}
-  94              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"reentrant.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	ff_cre_syncobj
+  19              		.thumb
+  20              		.thumb_func
+  22              	ff_cre_syncobj:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0120     		movs	r0, #1
+  27 0004 0C46     		mov	r4, r1
+  28 0006 FFF7FEFF 		bl	xQueueCreateMutex
+  29 000a 2060     		str	r0, [r4]
+  30 000c 0030     		adds	r0, r0, #0
+  31 000e 18BF     		it	ne
+  32 0010 0120     		movne	r0, #1
+  33 0012 10BD     		pop	{r4, pc}
+  35              		.align	1
+  36              		.global	ff_del_syncobj
+  37              		.thumb
+  38              		.thumb_func
+  40              	ff_del_syncobj:
+  41              		@ args = 0, pretend = 0, frame = 0
+  42              		@ frame_needed = 0, uses_anonymous_args = 0
+  43              		@ link register save eliminated.
+  44 0014 0120     		movs	r0, #1
+  45 0016 7047     		bx	lr
+  47              		.align	1
+  48              		.global	ff_req_grant
+  49              		.thumb
+  50              		.thumb_func
+  52              	ff_req_grant:
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0018 10B5     		push	{r4, lr}
+  56 001a 0446     		mov	r4, r0
+  57 001c FFF7FEFF 		bl	xTaskGetSchedulerState
+  58 0020 0128     		cmp	r0, #1
+  59 0022 0AD1     		bne	.L5
+  60 0024 0023     		movs	r3, #0
+  61 0026 1946     		mov	r1, r3
+  62 0028 40F6B832 		movw	r2, #3000
+  63 002c 2046     		mov	r0, r4
+  64 002e FFF7FEFF 		bl	xQueueGenericReceive
+  65 0032 431E     		subs	r3, r0, #1
+  66 0034 5842     		rsbs	r0, r3, #0
+  67 0036 5841     		adcs	r0, r0, r3
+  68 0038 10BD     		pop	{r4, pc}
+  69              	.L5:
+  70 003a 0120     		movs	r0, #1
+  71 003c 10BD     		pop	{r4, pc}
+  73              		.align	1
+  74              		.global	ff_rel_grant
+  75              		.thumb
+  76              		.thumb_func
+  78              	ff_rel_grant:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 003e 10B5     		push	{r4, lr}
+  82 0040 0446     		mov	r4, r0
+  83 0042 FFF7FEFF 		bl	xTaskGetSchedulerState
+  84 0046 0128     		cmp	r0, #1
+  85 0048 07D1     		bne	.L7
+  86 004a 0023     		movs	r3, #0
+  87 004c 2046     		mov	r0, r4
+  88 004e BDE81040 		pop	{r4, lr}
+  89 0052 1A46     		mov	r2, r3
+  90 0054 1946     		mov	r1, r3
+  91 0056 FFF7FEBF 		b	xQueueGenericSend
+  92              	.L7:
+  93 005a 10BD     		pop	{r4, pc}
+  95              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 reentrant.c
-     /tmp/cc1FiFn0.s:16     .text:00000000 $t
-     /tmp/cc1FiFn0.s:21     .text:00000000 ff_cre_syncobj
-     /tmp/cc1FiFn0.s:39     .text:00000014 ff_del_syncobj
-     /tmp/cc1FiFn0.s:51     .text:00000018 ff_req_grant
-     /tmp/cc1FiFn0.s:77     .text:00000042 ff_rel_grant
+     /tmp/cc1EHu0e.s:17     .text:00000000 $t
+     /tmp/cc1EHu0e.s:22     .text:00000000 ff_cre_syncobj
+     /tmp/cc1EHu0e.s:40     .text:00000014 ff_del_syncobj
+     /tmp/cc1EHu0e.s:52     .text:00000018 ff_req_grant
+     /tmp/cc1EHu0e.s:78     .text:0000003e ff_rel_grant
 
 UNDEFINED SYMBOLS
 xQueueCreateMutex

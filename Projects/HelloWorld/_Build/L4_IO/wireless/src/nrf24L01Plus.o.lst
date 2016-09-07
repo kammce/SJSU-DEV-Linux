@@ -11,1044 +11,1037 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"nrf24L01Plus.c"
-  15              		.text
-  16              		.align	1
-  17              		.thumb
-  18              		.thumb_func
-  20              	nordic_transfer:
-  21              		@ args = 0, pretend = 0, frame = 0
-  22              		@ frame_needed = 0, uses_anonymous_args = 0
-  23 0000 70B5     		push	{r4, r5, r6, lr}
-  24 0002 164C     		ldr	r4, .L14
-  25 0004 4FF48035 		mov	r5, #65536
-  26 0008 E561     		str	r5, [r4, #28]
-  27 000a 154C     		ldr	r4, .L14+4
-  28 000c A060     		str	r0, [r4, #8]
-  29 000e 2646     		mov	r6, r4
-  30              	.L2:
-  31 0010 F068     		ldr	r0, [r6, #12]
-  32 0012 134C     		ldr	r4, .L14+4
-  33 0014 10F01005 		ands	r5, r0, #16
-  34 0018 FAD1     		bne	.L2
-  35 001a A068     		ldr	r0, [r4, #8]
-  36 001c C0B2     		uxtb	r0, r0
-  37 001e 53B9     		cbnz	r3, .L10
-  38 0020 2546     		mov	r5, r4
-  39 0022 14E0     		b	.L4
-  40              	.L6:
-  41 0024 CE5C     		ldrb	r6, [r1, r3]	@ zero_extendqisi2
-  42 0026 A660     		str	r6, [r4, #8]
-  43              	.L5:
-  44 0028 EE68     		ldr	r6, [r5, #12]
-  45 002a F606     		lsls	r6, r6, #27
-  46 002c FCD4     		bmi	.L5
-  47 002e AE68     		ldr	r6, [r5, #8]
-  48 0030 CE54     		strb	r6, [r1, r3]
-  49 0032 0133     		adds	r3, r3, #1
-  50 0034 01E0     		b	.L3
-  51              	.L10:
-  52 0036 2B46     		mov	r3, r5
-  53 0038 2546     		mov	r5, r4
-  54              	.L3:
-  55 003a 9342     		cmp	r3, r2
-  56 003c F2DB     		blt	.L6
-  57 003e 08E0     		b	.L7
-  58              	.L9:
-  59 0040 CE5C     		ldrb	r6, [r1, r3]	@ zero_extendqisi2
-  60 0042 A660     		str	r6, [r4, #8]
-  61              	.L8:
-  62 0044 EE68     		ldr	r6, [r5, #12]
-  63 0046 F606     		lsls	r6, r6, #27
-  64 0048 FCD4     		bmi	.L8
-  65 004a AE68     		ldr	r6, [r5, #8]
-  66 004c 0133     		adds	r3, r3, #1
-  67              	.L4:
-  68 004e 9342     		cmp	r3, r2
-  69 0050 F6DB     		blt	.L9
-  70              	.L7:
-  71 0052 024B     		ldr	r3, .L14
-  72 0054 4FF48032 		mov	r2, #65536
-  73 0058 9A61     		str	r2, [r3, #24]
-  74 005a 70BD     		pop	{r4, r5, r6, pc}
-  75              	.L15:
+  14              		.syntax unified
+  15              		.file	"nrf24L01Plus.c"
+  16              		.text
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	nordic_transfer:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 70B5     		push	{r4, r5, r6, lr}
+  25 0002 174C     		ldr	r4, .L16
+  26 0004 4FF48035 		mov	r5, #65536
+  27 0008 E561     		str	r5, [r4, #28]
+  28 000a 164C     		ldr	r4, .L16+4
+  29 000c A060     		str	r0, [r4, #8]
+  30 000e 2046     		mov	r0, r4
+  31              	.L2:
+  32 0010 C568     		ldr	r5, [r0, #12]
+  33 0012 144C     		ldr	r4, .L16+4
+  34 0014 ED06     		lsls	r5, r5, #27
+  35 0016 FBD4     		bmi	.L2
+  36 0018 A068     		ldr	r0, [r4, #8]
+  37 001a C0B2     		uxtb	r0, r0
+  38 001c 13B9     		cbnz	r3, .L3
+  39 001e 0B46     		mov	r3, r1
+  40 0020 2546     		mov	r5, r4
+  41 0022 11E0     		b	.L4
+  42              	.L3:
+  43 0024 0B46     		mov	r3, r1
+  44 0026 2546     		mov	r5, r4
+  45              	.L5:
+  46 0028 5E1A     		subs	r6, r3, r1
+  47 002a B242     		cmp	r2, r6
+  48 002c 13DD     		ble	.L10
+  49 002e 1E78     		ldrb	r6, [r3]	@ zero_extendqisi2
+  50 0030 A660     		str	r6, [r4, #8]
+  51              	.L6:
+  52 0032 EE68     		ldr	r6, [r5, #12]
+  53 0034 F606     		lsls	r6, r6, #27
+  54 0036 FCD4     		bmi	.L6
+  55 0038 AE68     		ldr	r6, [r5, #8]
+  56 003a 03F8016B 		strb	r6, [r3], #1
+  57 003e F3E7     		b	.L5
+  58              	.L8:
+  59 0040 EE68     		ldr	r6, [r5, #12]
+  60 0042 F606     		lsls	r6, r6, #27
+  61 0044 FCD4     		bmi	.L8
+  62 0046 AE68     		ldr	r6, [r5, #8]
+  63              	.L4:
+  64 0048 5E1A     		subs	r6, r3, r1
+  65 004a 9642     		cmp	r6, r2
+  66 004c 03DA     		bge	.L10
+  67 004e 13F8016B 		ldrb	r6, [r3], #1	@ zero_extendqisi2
+  68 0052 A660     		str	r6, [r4, #8]
+  69 0054 F4E7     		b	.L8
+  70              	.L10:
+  71 0056 024B     		ldr	r3, .L16
+  72 0058 4FF48032 		mov	r2, #65536
+  73 005c 9A61     		str	r2, [r3, #24]
+  74 005e 70BD     		pop	{r4, r5, r6, pc}
+  75              	.L17:
   76              		.align	2
-  77              	.L14:
-  78 005c 00C00920 		.word	537509888
-  79 0060 00800840 		.word	1074298880
+  77              	.L16:
+  78 0060 00C00920 		.word	537509888
+  79 0064 00800840 		.word	1074298880
   81              		.align	1
   82              		.thumb
   83              		.thumb_func
   85              	nordic_readRegister:
   86              		@ args = 0, pretend = 0, frame = 8
   87              		@ frame_needed = 0, uses_anonymous_args = 0
-  88 0064 07B5     		push	{r0, r1, r2, lr}
-  89 0066 0023     		movs	r3, #0
-  90 0068 02A9     		add	r1, sp, #8
-  91 006a 0122     		movs	r2, #1
-  92 006c 01F8013D 		strb	r3, [r1, #-1]!
-  93 0070 00F01F00 		and	r0, r0, #31
-  94 0074 1346     		mov	r3, r2
-  95 0076 FFF7C3FF 		bl	nordic_transfer
-  96 007a 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
-  97 007e 0EBD     		pop	{r1, r2, r3, pc}
-  99              		.align	1
- 100              		.thumb
- 101              		.thumb_func
- 103              	nordic_writeRegister:
- 104              		@ args = 0, pretend = 0, frame = 8
- 105              		@ frame_needed = 0, uses_anonymous_args = 0
- 106 0080 07B5     		push	{r0, r1, r2, lr}
- 107 0082 02AB     		add	r3, sp, #8
- 108 0084 03F8011D 		strb	r1, [r3, #-1]!
- 109 0088 00F01F00 		and	r0, r0, #31
- 110 008c 1946     		mov	r1, r3
- 111 008e 0122     		movs	r2, #1
- 112 0090 0023     		movs	r3, #0
- 113 0092 40F02000 		orr	r0, r0, #32
- 114 0096 FFF7B3FF 		bl	nordic_transfer
- 115 009a 0EBD     		pop	{r1, r2, r3, pc}
- 117              		.align	1
- 118              		.thumb
- 119              		.thumb_func
- 121              	nordic_readStatusRegister:
- 122              		@ args = 0, pretend = 0, frame = 0
- 123              		@ frame_needed = 0, uses_anonymous_args = 0
- 124              		@ link register save eliminated.
- 125 009c 0021     		movs	r1, #0
- 126 009e FF20     		movs	r0, #255
- 127 00a0 0A46     		mov	r2, r1
- 128 00a2 0123     		movs	r3, #1
- 129 00a4 ACE7     		b	nordic_transfer
- 131              		.align	1
- 132              		.global	nordic_is_air_free
- 133              		.thumb
- 134              		.thumb_func
- 136              	nordic_is_air_free:
- 137              		@ args = 0, pretend = 0, frame = 0
- 138              		@ frame_needed = 0, uses_anonymous_args = 0
- 139 00a6 08B5     		push	{r3, lr}
- 140 00a8 0920     		movs	r0, #9
- 141 00aa FFF7DBFF 		bl	nordic_readRegister
- 142 00ae 00F00100 		and	r0, r0, #1
- 143 00b2 08BD     		pop	{r3, pc}
- 145              		.align	1
- 146              		.global	nordic_is_tx_fifo_full
- 147              		.thumb
- 148              		.thumb_func
- 150              	nordic_is_tx_fifo_full:
- 151              		@ args = 0, pretend = 0, frame = 0
- 152              		@ frame_needed = 0, uses_anonymous_args = 0
- 153 00b4 08B5     		push	{r3, lr}
- 154 00b6 FFF7F1FF 		bl	nordic_readStatusRegister
- 155 00ba 00F00100 		and	r0, r0, #1
- 156 00be 08BD     		pop	{r3, pc}
- 158              		.align	1
- 159              		.global	nordic_is_tx_fifo_empty
- 160              		.thumb
- 161              		.thumb_func
- 163              	nordic_is_tx_fifo_empty:
- 164              		@ args = 0, pretend = 0, frame = 0
- 165              		@ frame_needed = 0, uses_anonymous_args = 0
- 166 00c0 08B5     		push	{r3, lr}
- 167 00c2 1720     		movs	r0, #23
- 168 00c4 FFF7CEFF 		bl	nordic_readRegister
- 169 00c8 C0F30010 		ubfx	r0, r0, #4, #1
- 170 00cc 08BD     		pop	{r3, pc}
- 172              		.align	1
- 173              		.global	nordic_clear_all_intr_flags
- 174              		.thumb
- 175              		.thumb_func
- 177              	nordic_clear_all_intr_flags:
- 178              		@ args = 0, pretend = 0, frame = 0
- 179              		@ frame_needed = 0, uses_anonymous_args = 0
- 180              		@ link register save eliminated.
- 181 00ce 0720     		movs	r0, #7
- 182 00d0 7021     		movs	r1, #112
- 183 00d2 D5E7     		b	nordic_writeRegister
- 185              		.align	1
- 186              		.global	nordic_queue_tx_fifo
- 187              		.thumb
- 188              		.thumb_func
- 190              	nordic_queue_tx_fifo:
- 191              		@ args = 0, pretend = 0, frame = 0
- 192              		@ frame_needed = 0, uses_anonymous_args = 0
- 193              		@ link register save eliminated.
- 194 00d4 0346     		mov	r3, r0
- 195 00d6 0A46     		mov	r2, r1
- 196 00d8 A020     		movs	r0, #160
- 197 00da 1946     		mov	r1, r3
- 198 00dc 0023     		movs	r3, #0
- 199 00de 8FE7     		b	nordic_transfer
- 201              		.align	1
- 202              		.global	nordic_standby1_to_tx_mode1
- 203              		.thumb
- 204              		.thumb_func
- 206              	nordic_standby1_to_tx_mode1:
- 207              		@ args = 0, pretend = 0, frame = 0
- 208              		@ frame_needed = 0, uses_anonymous_args = 0
- 209 00e0 08B5     		push	{r3, lr}
- 210 00e2 0020     		movs	r0, #0
- 211 00e4 FFF7BEFF 		bl	nordic_readRegister
- 212 00e8 00F0FE01 		and	r1, r0, #254
- 213 00ec 0020     		movs	r0, #0
- 214 00ee BDE80840 		pop	{r3, lr}
- 215 00f2 C5E7     		b	nordic_writeRegister
- 217              		.align	1
- 218              		.global	nordic_standby1_to_tx_mode2
- 219              		.thumb
- 220              		.thumb_func
- 222              	nordic_standby1_to_tx_mode2:
- 223              		@ args = 0, pretend = 0, frame = 0
- 224              		@ frame_needed = 0, uses_anonymous_args = 0
- 225 00f4 08B5     		push	{r3, lr}
- 226 00f6 FFF7FEFF 		bl	nordic_standby1_to_tx_mode1
- 227 00fa 024B     		ldr	r3, .L26
- 228 00fc 4FF08072 		mov	r2, #16777216
- 229 0100 9A61     		str	r2, [r3, #24]
- 230 0102 08BD     		pop	{r3, pc}
- 231              	.L27:
- 232              		.align	2
- 233              	.L26:
- 234 0104 20C00920 		.word	537509920
- 236              		.align	1
- 237              		.global	nordic_rx_to_Stanby1
- 238              		.thumb
- 239              		.thumb_func
- 241              	nordic_rx_to_Stanby1:
- 242              		@ args = 0, pretend = 0, frame = 0
- 243              		@ frame_needed = 0, uses_anonymous_args = 0
- 244              		@ link register save eliminated.
- 245 0108 024B     		ldr	r3, .L29
- 246 010a 4FF08072 		mov	r2, #16777216
- 247 010e DA61     		str	r2, [r3, #28]
- 248 0110 7047     		bx	lr
- 249              	.L30:
- 250 0112 00BF     		.align	2
- 251              	.L29:
- 252 0114 20C00920 		.word	537509920
- 254              		.align	1
- 255              		.global	nordic_standby1_to_rx
- 256              		.thumb
- 257              		.thumb_func
- 259              	nordic_standby1_to_rx:
- 260              		@ args = 0, pretend = 0, frame = 0
- 261              		@ frame_needed = 0, uses_anonymous_args = 0
- 262 0118 08B5     		push	{r3, lr}
- 263 011a 0020     		movs	r0, #0
- 264 011c FFF7A2FF 		bl	nordic_readRegister
- 265 0120 40F00101 		orr	r1, r0, #1
- 266 0124 C9B2     		uxtb	r1, r1
- 267 0126 0020     		movs	r0, #0
- 268 0128 FFF7AAFF 		bl	nordic_writeRegister
- 269 012c 024B     		ldr	r3, .L32
- 270 012e 4FF08072 		mov	r2, #16777216
- 271 0132 9A61     		str	r2, [r3, #24]
- 272 0134 08BD     		pop	{r3, pc}
- 273              	.L33:
- 274 0136 00BF     		.align	2
- 275              	.L32:
- 276 0138 20C00920 		.word	537509920
- 278              		.align	1
- 279              		.global	nordic_is_packet_sent
- 280              		.thumb
- 281              		.thumb_func
- 283              	nordic_is_packet_sent:
- 284              		@ args = 0, pretend = 0, frame = 0
- 285              		@ frame_needed = 0, uses_anonymous_args = 0
- 286 013c 08B5     		push	{r3, lr}
- 287 013e FFF7ADFF 		bl	nordic_readStatusRegister
- 288 0142 C0F34010 		ubfx	r0, r0, #5, #1
- 289 0146 08BD     		pop	{r3, pc}
- 291              		.align	1
- 292              		.global	nordic_clear_packet_sent_flag
- 293              		.thumb
- 294              		.thumb_func
- 296              	nordic_clear_packet_sent_flag:
- 297              		@ args = 0, pretend = 0, frame = 0
- 298              		@ frame_needed = 0, uses_anonymous_args = 0
- 299              		@ link register save eliminated.
- 300 0148 0720     		movs	r0, #7
- 301 014a 2021     		movs	r1, #32
- 302 014c 98E7     		b	nordic_writeRegister
- 304              		.align	1
- 305              		.global	nordic_is_max_retries_reached
- 306              		.thumb
- 307              		.thumb_func
- 309              	nordic_is_max_retries_reached:
- 310              		@ args = 0, pretend = 0, frame = 0
- 311              		@ frame_needed = 0, uses_anonymous_args = 0
- 312 014e 08B5     		push	{r3, lr}
- 313 0150 FFF7A4FF 		bl	nordic_readStatusRegister
- 314 0154 C0F30010 		ubfx	r0, r0, #4, #1
- 315 0158 08BD     		pop	{r3, pc}
- 317              		.align	1
- 318              		.global	nordic_clear_max_retries_flag
- 319              		.thumb
- 320              		.thumb_func
- 322              	nordic_clear_max_retries_flag:
- 323              		@ args = 0, pretend = 0, frame = 0
- 324              		@ frame_needed = 0, uses_anonymous_args = 0
- 325              		@ link register save eliminated.
- 326 015a 0720     		movs	r0, #7
- 327 015c 1021     		movs	r1, #16
- 328 015e 8FE7     		b	nordic_writeRegister
- 330              		.align	1
- 331              		.global	nordic_flush_tx_fifo
- 332              		.thumb
- 333              		.thumb_func
- 335              	nordic_flush_tx_fifo:
- 336              		@ args = 0, pretend = 0, frame = 0
- 337              		@ frame_needed = 0, uses_anonymous_args = 0
- 338              		@ link register save eliminated.
- 339 0160 0021     		movs	r1, #0
- 340 0162 E120     		movs	r0, #225
- 341 0164 0A46     		mov	r2, r1
- 342 0166 0B46     		mov	r3, r1
- 343 0168 4AE7     		b	nordic_transfer
- 345              		.align	1
- 346              		.global	nordic_mode1_send_single_packet
- 347              		.thumb
- 348              		.thumb_func
- 350              	nordic_mode1_send_single_packet:
- 351              		@ args = 0, pretend = 0, frame = 8
- 352              		@ frame_needed = 0, uses_anonymous_args = 0
- 353 016a 37B5     		push	{r0, r1, r2, r4, r5, lr}
- 354 016c 0546     		mov	r5, r0
- 355 016e 0C46     		mov	r4, r1
- 356 0170 FFF7FEFF 		bl	nordic_flush_tx_fifo
- 357 0174 2846     		mov	r0, r5
- 358 0176 2146     		mov	r1, r4
- 359 0178 FFF7FEFF 		bl	nordic_queue_tx_fifo
- 360 017c 0C4B     		ldr	r3, .L43
- 361 017e 4FF08072 		mov	r2, #16777216
- 362 0182 9A61     		str	r2, [r3, #24]
- 363 0184 0023     		movs	r3, #0
- 364 0186 ADF80630 		strh	r3, [sp, #6]	@ movhi
- 365              	.L41:
- 366 018a BDF80630 		ldrh	r3, [sp, #6]
- 367 018e 0133     		adds	r3, r3, #1
- 368 0190 9BB2     		uxth	r3, r3
- 369 0192 ADF80630 		strh	r3, [sp, #6]	@ movhi
- 370 0196 1BB1     		cbz	r3, .L40
- 371 0198 FFF7FEFF 		bl	nordic_is_tx_fifo_empty
- 372 019c 0028     		cmp	r0, #0
- 373 019e F4D0     		beq	.L41
- 374              	.L40:
- 375 01a0 034B     		ldr	r3, .L43
- 376 01a2 4FF08072 		mov	r2, #16777216
- 377 01a6 DA61     		str	r2, [r3, #28]
- 378 01a8 03B0     		add	sp, sp, #12
- 379 01aa BDE83040 		pop	{r4, r5, lr}
- 380 01ae FEE7     		b	nordic_flush_tx_fifo
- 381              	.L44:
- 382              		.align	2
- 383              	.L43:
- 384 01b0 20C00920 		.word	537509920
- 386              		.align	1
- 387              		.global	nordic_finishTxMode2_transitionToStandby1
- 388              		.thumb
- 389              		.thumb_func
- 391              	nordic_finishTxMode2_transitionToStandby1:
- 392              		@ args = 0, pretend = 0, frame = 0
- 393              		@ frame_needed = 0, uses_anonymous_args = 0
- 394 01b4 38B5     		push	{r3, r4, r5, lr}
- 395 01b6 0446     		mov	r4, r0
- 396 01b8 0D46     		mov	r5, r1
- 397              	.L46:
- 398 01ba FFF7FEFF 		bl	nordic_is_tx_fifo_empty
- 399 01be 0028     		cmp	r0, #0
- 400 01c0 FBD0     		beq	.L46
- 401 01c2 2046     		mov	r0, r4
- 402 01c4 2946     		mov	r1, r5
- 403 01c6 FFF7FEFF 		bl	nordic_mode1_send_single_packet
- 404 01ca 034B     		ldr	r3, .L50
- 405              	.L47:
- 406 01cc 5A69     		ldr	r2, [r3, #20]
- 407 01ce 5202     		lsls	r2, r2, #9
- 408 01d0 FCD5     		bpl	.L47
- 409 01d2 BDE83840 		pop	{r3, r4, r5, lr}
- 410 01d6 FEE7     		b	nordic_clear_packet_sent_flag
- 411              	.L51:
- 412              		.align	2
- 413              	.L50:
- 414 01d8 00C00920 		.word	537509888
- 416              		.align	1
- 417              		.global	nordic_is_packet_available
- 418              		.thumb
- 419              		.thumb_func
- 421              	nordic_is_packet_available:
- 422              		@ args = 0, pretend = 0, frame = 0
- 423              		@ frame_needed = 0, uses_anonymous_args = 0
- 424 01dc 08B5     		push	{r3, lr}
- 425 01de 1720     		movs	r0, #23
- 426 01e0 FFF740FF 		bl	nordic_readRegister
- 427 01e4 10F0010F 		tst	r0, #1
- 428 01e8 14BF     		ite	ne
- 429 01ea 0020     		movne	r0, #0
- 430 01ec 0120     		moveq	r0, #1
- 431 01ee 08BD     		pop	{r3, pc}
- 433              		.align	1
- 434              		.global	nordic_clear_packet_available_flag
- 435              		.thumb
- 436              		.thumb_func
- 438              	nordic_clear_packet_available_flag:
- 439              		@ args = 0, pretend = 0, frame = 0
- 440              		@ frame_needed = 0, uses_anonymous_args = 0
- 441              		@ link register save eliminated.
- 442 01f0 0720     		movs	r0, #7
- 443 01f2 4021     		movs	r1, #64
- 444 01f4 44E7     		b	nordic_writeRegister
- 446              		.align	1
- 447              		.global	nordic_read_rx_fifo
- 448              		.thumb
- 449              		.thumb_func
- 451              	nordic_read_rx_fifo:
- 452              		@ args = 0, pretend = 0, frame = 0
- 453              		@ frame_needed = 0, uses_anonymous_args = 0
- 454 01f6 08B5     		push	{r3, lr}
- 455 01f8 0346     		mov	r3, r0
- 456 01fa 0A46     		mov	r2, r1
- 457 01fc 6120     		movs	r0, #97
- 458 01fe 1946     		mov	r1, r3
- 459 0200 0123     		movs	r3, #1
- 460 0202 FFF7FDFE 		bl	nordic_transfer
- 461 0206 C0F34200 		ubfx	r0, r0, #1, #3
- 462 020a 08BD     		pop	{r3, pc}
- 464              		.align	1
- 465              		.global	nordic_flush_rx_fifo
- 466              		.thumb
- 467              		.thumb_func
- 469              	nordic_flush_rx_fifo:
- 470              		@ args = 0, pretend = 0, frame = 0
- 471              		@ frame_needed = 0, uses_anonymous_args = 0
- 472              		@ link register save eliminated.
- 473 020c 0021     		movs	r1, #0
- 474 020e E220     		movs	r0, #226
- 475 0210 0A46     		mov	r2, r1
- 476 0212 0B46     		mov	r3, r1
- 477 0214 F4E6     		b	nordic_transfer
- 479              		.align	1
- 480              		.global	nordic_set_intr_signals
- 481              		.thumb
- 482              		.thumb_func
- 484              	nordic_set_intr_signals:
- 485              		@ args = 0, pretend = 0, frame = 0
- 486              		@ frame_needed = 0, uses_anonymous_args = 0
- 487 0216 70B5     		push	{r4, r5, r6, lr}
- 488 0218 0446     		mov	r4, r0
- 489 021a 0020     		movs	r0, #0
- 490 021c 0D46     		mov	r5, r1
- 491 021e 1646     		mov	r6, r2
- 492 0220 FFF720FF 		bl	nordic_readRegister
- 493 0224 14B1     		cbz	r4, .L57
- 494 0226 00F0BF01 		and	r1, r0, #191
- 495 022a 02E0     		b	.L58
- 496              	.L57:
- 497 022c 40F04001 		orr	r1, r0, #64
- 498 0230 C9B2     		uxtb	r1, r1
- 499              	.L58:
- 500 0232 15B1     		cbz	r5, .L59
- 501 0234 01F0DF01 		and	r1, r1, #223
- 502 0238 01E0     		b	.L60
- 503              	.L59:
- 504 023a 41F02001 		orr	r1, r1, #32
- 505              	.L60:
- 506 023e 16B1     		cbz	r6, .L61
- 507 0240 01F0EF01 		and	r1, r1, #239
- 508 0244 01E0     		b	.L62
- 509              	.L61:
- 510 0246 41F01001 		orr	r1, r1, #16
- 511              	.L62:
- 512 024a 0020     		movs	r0, #0
- 513 024c BDE87040 		pop	{r4, r5, r6, lr}
- 514 0250 16E7     		b	nordic_writeRegister
- 516              		.align	1
- 517              		.global	nordic_get_intr_reg_status
- 518              		.thumb
- 519              		.thumb_func
- 521              	nordic_get_intr_reg_status:
- 522              		@ args = 0, pretend = 0, frame = 0
- 523              		@ frame_needed = 0, uses_anonymous_args = 0
- 524              		@ link register save eliminated.
- 525 0252 0720     		movs	r0, #7
- 526 0254 06E7     		b	nordic_readRegister
- 528              		.align	1
- 529              		.global	nordic_set_crc
- 530              		.thumb
- 531              		.thumb_func
- 533              	nordic_set_crc:
- 534              		@ args = 0, pretend = 0, frame = 0
- 535              		@ frame_needed = 0, uses_anonymous_args = 0
- 536 0256 10B5     		push	{r4, lr}
- 537 0258 0446     		mov	r4, r0
- 538 025a 0020     		movs	r0, #0
- 539 025c FFF702FF 		bl	nordic_readRegister
- 540 0260 40F00801 		orr	r1, r0, #8
- 541 0264 C9B2     		uxtb	r1, r1
- 542 0266 14B9     		cbnz	r4, .L65
- 543 0268 01F0F701 		and	r1, r1, #247
- 544 026c 08E0     		b	.L66
- 545              	.L65:
- 546 026e 012C     		cmp	r4, #1
- 547 0270 02D1     		bne	.L67
- 548 0272 01F0FB01 		and	r1, r1, #251
- 549 0276 03E0     		b	.L66
- 550              	.L67:
- 551 0278 022C     		cmp	r4, #2
- 552 027a 08BF     		it	eq
- 553 027c 41F00401 		orreq	r1, r1, #4
- 554              	.L66:
- 555 0280 0020     		movs	r0, #0
- 556 0282 BDE81040 		pop	{r4, lr}
- 557 0286 FBE6     		b	nordic_writeRegister
- 559              		.align	1
- 560              		.global	nordic_power_up
- 561              		.thumb
- 562              		.thumb_func
- 564              	nordic_power_up:
- 565              		@ args = 0, pretend = 0, frame = 0
- 566              		@ frame_needed = 0, uses_anonymous_args = 0
- 567 0288 08B5     		push	{r3, lr}
- 568 028a 0020     		movs	r0, #0
- 569 028c FFF7EAFE 		bl	nordic_readRegister
- 570 0290 40F00201 		orr	r1, r0, #2
- 571 0294 C9B2     		uxtb	r1, r1
- 572 0296 0020     		movs	r0, #0
- 573 0298 BDE80840 		pop	{r3, lr}
- 574 029c F0E6     		b	nordic_writeRegister
- 576              		.align	1
- 577              		.global	nordic_power_down
- 578              		.thumb
- 579              		.thumb_func
- 581              	nordic_power_down:
- 582              		@ args = 0, pretend = 0, frame = 0
- 583              		@ frame_needed = 0, uses_anonymous_args = 0
- 584 029e 08B5     		push	{r3, lr}
- 585 02a0 0020     		movs	r0, #0
- 586 02a2 FFF7DFFE 		bl	nordic_readRegister
- 587 02a6 00F0FD01 		and	r1, r0, #253
- 588 02aa 0020     		movs	r0, #0
- 589 02ac BDE80840 		pop	{r3, lr}
- 590 02b0 E6E6     		b	nordic_writeRegister
- 592              		.align	1
- 593              		.global	nordic_tx_mode2_to_standby1_through_power_down
- 594              		.thumb
- 595              		.thumb_func
- 597              	nordic_tx_mode2_to_standby1_through_power_down:
- 598              		@ args = 0, pretend = 0, frame = 0
- 599              		@ frame_needed = 0, uses_anonymous_args = 0
- 600 02b2 08B5     		push	{r3, lr}
- 601 02b4 044B     		ldr	r3, .L71
- 602 02b6 4FF08072 		mov	r2, #16777216
- 603 02ba DA61     		str	r2, [r3, #28]
- 604 02bc FFF7FEFF 		bl	nordic_power_down
- 605 02c0 BDE80840 		pop	{r3, lr}
- 606 02c4 FEE7     		b	nordic_power_up
- 607              	.L72:
- 608 02c6 00BF     		.align	2
- 609              	.L71:
- 610 02c8 20C00920 		.word	537509920
- 612              		.align	1
- 613              		.global	nordic_set_channel
- 614              		.thumb
- 615              		.thumb_func
- 617              	nordic_set_channel:
- 618              		@ args = 0, pretend = 0, frame = 0
- 619              		@ frame_needed = 0, uses_anonymous_args = 0
- 620              		@ link register save eliminated.
- 621 02cc 40F6DD13 		movw	r3, #2525
- 622 02d0 9842     		cmp	r0, r3
- 623 02d2 06D8     		bhi	.L75
- 624 02d4 40F66213 		movw	r3, #2402
- 625 02d8 B0F5166F 		cmp	r0, #2400
- 626 02dc 38BF     		it	cc
- 627 02de 1846     		movcc	r0, r3
- 628 02e0 00E0     		b	.L74
- 629              	.L75:
- 630 02e2 1846     		mov	r0, r3
- 631              	.L74:
- 632 02e4 A0F16001 		sub	r1, r0, #96
- 633 02e8 C9B2     		uxtb	r1, r1
- 634 02ea 0520     		movs	r0, #5
- 635 02ec C8E6     		b	nordic_writeRegister
- 637              		.align	1
- 638              		.global	nordic_set_continous_carrier_transmit
- 639              		.thumb
- 640              		.thumb_func
- 642              	nordic_set_continous_carrier_transmit:
- 643              		@ args = 0, pretend = 0, frame = 0
- 644              		@ frame_needed = 0, uses_anonymous_args = 0
- 645 02ee 08B5     		push	{r3, lr}
- 646 02f0 30B1     		cbz	r0, .L78
- 647 02f2 0620     		movs	r0, #6
- 648 02f4 FFF7B6FE 		bl	nordic_readRegister
- 649 02f8 60F07F01 		orn	r1, r0, #127
- 650 02fc C9B2     		uxtb	r1, r1
- 651 02fe 04E0     		b	.L79
- 652              	.L78:
- 653 0300 0620     		movs	r0, #6
- 654 0302 FFF7AFFE 		bl	nordic_readRegister
- 655 0306 00F07F01 		and	r1, r0, #127
- 656              	.L79:
- 657 030a 0620     		movs	r0, #6
- 658 030c BDE80840 		pop	{r3, lr}
- 659 0310 B6E6     		b	nordic_writeRegister
- 661              		.align	1
- 662              		.global	nordic_set_air_data_rate
- 663              		.thumb
- 664              		.thumb_func
- 666              	nordic_set_air_data_rate:
- 667              		@ args = 0, pretend = 0, frame = 0
- 668              		@ frame_needed = 0, uses_anonymous_args = 0
- 669 0312 10B5     		push	{r4, lr}
- 670 0314 0446     		mov	r4, r0
- 671 0316 0620     		movs	r0, #6
- 672 0318 FFF7A4FE 		bl	nordic_readRegister
- 673 031c FA2C     		cmp	r4, #250
- 674 031e 00F0D701 		and	r1, r0, #215
- 675 0322 02D1     		bne	.L81
- 676 0324 41F02001 		orr	r1, r1, #32
- 677 0328 04E0     		b	.L82
- 678              	.L81:
- 679 032a B4F5FA6F 		cmp	r4, #2000
- 680 032e 08BF     		it	eq
- 681 0330 41F00801 		orreq	r1, r1, #8
- 682              	.L82:
- 683 0334 0620     		movs	r0, #6
- 684 0336 BDE81040 		pop	{r4, lr}
- 685 033a A1E6     		b	nordic_writeRegister
- 687              		.align	1
- 688              		.global	nordic_set_power_level
- 689              		.thumb
- 690              		.thumb_func
- 692              	nordic_set_power_level:
- 693              		@ args = 0, pretend = 0, frame = 0
- 694              		@ frame_needed = 0, uses_anonymous_args = 0
- 695 033c 10B5     		push	{r4, lr}
- 696 033e 0446     		mov	r4, r0
- 697 0340 0620     		movs	r0, #6
- 698 0342 FFF78FFE 		bl	nordic_readRegister
- 699 0346 032C     		cmp	r4, #3
- 700 0348 34BF     		ite	cc
- 701 034a 2146     		movcc	r1, r4
- 702 034c 0321     		movcs	r1, #3
- 703 034e 20F00600 		bic	r0, r0, #6
- 704 0352 40EA4101 		orr	r1, r0, r1, lsl #1
- 705 0356 C9B2     		uxtb	r1, r1
- 706 0358 0620     		movs	r0, #6
- 707 035a BDE81040 		pop	{r4, lr}
- 708 035e 8FE6     		b	nordic_writeRegister
- 710              		.align	1
- 711              		.global	nordic_set_auto_transmit_options
- 712              		.thumb
- 713              		.thumb_func
- 715              	nordic_set_auto_transmit_options:
- 716              		@ args = 0, pretend = 0, frame = 0
- 717              		@ frame_needed = 0, uses_anonymous_args = 0
- 718              		@ link register save eliminated.
- 719 0360 F928     		cmp	r0, #249
- 720 0362 4FF0FA03 		mov	r3, #250
- 721 0366 05D9     		bls	.L87
- 722 0368 B0F57A6F 		cmp	r0, #4000
- 723 036c 28BF     		it	cs
- 724 036e 4FF47A60 		movcs	r0, #4000
- 725 0372 00E0     		b	.L86
- 726              	.L87:
- 727 0374 1846     		mov	r0, r3
- 728              	.L86:
- 729 0376 B0FBF3F3 		udiv	r3, r0, r3
- 730 037a 013B     		subs	r3, r3, #1
- 731 037c DBB2     		uxtb	r3, r3
- 732 037e 0F29     		cmp	r1, #15
- 733 0380 28BF     		it	cs
- 734 0382 0F21     		movcs	r1, #15
- 735 0384 41EA0311 		orr	r1, r1, r3, lsl #4
- 736 0388 C9B2     		uxtb	r1, r1
- 737 038a 0420     		movs	r0, #4
- 738 038c 78E6     		b	nordic_writeRegister
- 740              		.align	1
- 741              		.global	nordic_get_lost_packet_cnt
- 742              		.thumb
- 743              		.thumb_func
- 745              	nordic_get_lost_packet_cnt:
- 746              		@ args = 0, pretend = 0, frame = 0
- 747              		@ frame_needed = 0, uses_anonymous_args = 0
- 748 038e 38B5     		push	{r3, r4, r5, lr}
- 749 0390 0546     		mov	r5, r0
- 750 0392 0820     		movs	r0, #8
- 751 0394 FFF766FE 		bl	nordic_readRegister
- 752 0398 C0F30714 		ubfx	r4, r0, #4, #8
- 753 039c 35B1     		cbz	r5, .L90
- 754 039e 0520     		movs	r0, #5
- 755 03a0 FFF760FE 		bl	nordic_readRegister
- 756 03a4 0146     		mov	r1, r0
- 757 03a6 0520     		movs	r0, #5
- 758 03a8 FFF76AFE 		bl	nordic_writeRegister
- 759              	.L90:
- 760 03ac 2046     		mov	r0, r4
- 761 03ae 38BD     		pop	{r3, r4, r5, pc}
- 763              		.align	1
- 764              		.global	nordic_get_retransmit_count
- 765              		.thumb
- 766              		.thumb_func
- 768              	nordic_get_retransmit_count:
- 769              		@ args = 0, pretend = 0, frame = 0
- 770              		@ frame_needed = 0, uses_anonymous_args = 0
- 771 03b0 08B5     		push	{r3, lr}
- 772 03b2 0820     		movs	r0, #8
- 773 03b4 FFF756FE 		bl	nordic_readRegister
- 774 03b8 00F00F00 		and	r0, r0, #15
- 775 03bc 08BD     		pop	{r3, pc}
- 777              		.align	1
- 778              		.global	nordic_set_payload_for_pipe
- 779              		.thumb
- 780              		.thumb_func
- 782              	nordic_set_payload_for_pipe:
- 783              		@ args = 0, pretend = 0, frame = 0
- 784              		@ frame_needed = 0, uses_anonymous_args = 0
- 785              		@ link register save eliminated.
- 786 03be 1130     		adds	r0, r0, #17
- 787 03c0 C0B2     		uxtb	r0, r0
- 788 03c2 1628     		cmp	r0, #22
- 789 03c4 03D8     		bhi	.L92
- 790 03c6 2029     		cmp	r1, #32
- 791 03c8 28BF     		it	cs
- 792 03ca 2021     		movcs	r1, #32
- 793 03cc 58E6     		b	nordic_writeRegister
- 794              	.L92:
- 795 03ce 7047     		bx	lr
- 797              		.align	1
- 798              		.global	nordic_set_addr_width
- 799              		.thumb
- 800              		.thumb_func
- 802              	nordic_set_addr_width:
- 803              		@ args = 0, pretend = 0, frame = 0
- 804              		@ frame_needed = 0, uses_anonymous_args = 0
- 805              		@ link register save eliminated.
- 806 03d0 0328     		cmp	r0, #3
- 807 03d2 04D0     		beq	.L96
- 808 03d4 0428     		cmp	r0, #4
- 809 03d6 0CBF     		ite	eq
- 810 03d8 0221     		moveq	r1, #2
- 811 03da 0321     		movne	r1, #3
- 812 03dc 00E0     		b	.L95
- 813              	.L96:
- 814 03de 0121     		movs	r1, #1
- 815              	.L95:
- 816 03e0 0320     		movs	r0, #3
- 817 03e2 4DE6     		b	nordic_writeRegister
- 819              		.align	1
- 820              		.global	nordic_set_tx_address
- 821              		.thumb
- 822              		.thumb_func
- 824              	nordic_set_tx_address:
- 825              		@ args = 0, pretend = 0, frame = 0
- 826              		@ frame_needed = 0, uses_anonymous_args = 0
- 827              		@ link register save eliminated.
- 828 03e4 0346     		mov	r3, r0
- 829 03e6 0A46     		mov	r2, r1
- 830 03e8 3020     		movs	r0, #48
- 831 03ea 1946     		mov	r1, r3
- 832 03ec 0023     		movs	r3, #0
- 833 03ee 07E6     		b	nordic_transfer
- 835              		.align	1
- 836              		.global	nordic_set_rx_pipe0_addr
- 837              		.thumb
- 838              		.thumb_func
- 840              	nordic_set_rx_pipe0_addr:
- 841              		@ args = 0, pretend = 0, frame = 0
- 842              		@ frame_needed = 0, uses_anonymous_args = 0
- 843              		@ link register save eliminated.
- 844 03f0 0346     		mov	r3, r0
- 845 03f2 0A46     		mov	r2, r1
- 846 03f4 2A20     		movs	r0, #42
- 847 03f6 1946     		mov	r1, r3
- 848 03f8 0023     		movs	r3, #0
- 849 03fa 01E6     		b	nordic_transfer
- 851              		.align	1
- 852              		.global	nordic_set_rx_pipe1_addr
- 853              		.thumb
- 854              		.thumb_func
- 856              	nordic_set_rx_pipe1_addr:
- 857              		@ args = 0, pretend = 0, frame = 0
- 858              		@ frame_needed = 0, uses_anonymous_args = 0
- 859              		@ link register save eliminated.
- 860 03fc 0346     		mov	r3, r0
- 861 03fe 0A46     		mov	r2, r1
- 862 0400 2B20     		movs	r0, #43
- 863 0402 1946     		mov	r1, r3
- 864 0404 0023     		movs	r3, #0
- 865 0406 FBE5     		b	nordic_transfer
- 867              		.align	1
- 868              		.global	nordic_set_rx_pipe2_lsb_addr
- 869              		.thumb
- 870              		.thumb_func
- 872              	nordic_set_rx_pipe2_lsb_addr:
- 873              		@ args = 0, pretend = 0, frame = 0
- 874              		@ frame_needed = 0, uses_anonymous_args = 0
- 875              		@ link register save eliminated.
- 876 0408 0146     		mov	r1, r0
- 877 040a 0C20     		movs	r0, #12
- 878 040c 38E6     		b	nordic_writeRegister
- 880              		.align	1
- 881              		.global	nordic_set_rx_pipe3_lsb_addr
- 882              		.thumb
- 883              		.thumb_func
- 885              	nordic_set_rx_pipe3_lsb_addr:
- 886              		@ args = 0, pretend = 0, frame = 0
- 887              		@ frame_needed = 0, uses_anonymous_args = 0
- 888              		@ link register save eliminated.
- 889 040e 0146     		mov	r1, r0
- 890 0410 0D20     		movs	r0, #13
- 891 0412 35E6     		b	nordic_writeRegister
- 893              		.align	1
- 894              		.global	nordic_set_rx_pipe4_lsb_addr
- 895              		.thumb
- 896              		.thumb_func
- 898              	nordic_set_rx_pipe4_lsb_addr:
- 899              		@ args = 0, pretend = 0, frame = 0
- 900              		@ frame_needed = 0, uses_anonymous_args = 0
- 901              		@ link register save eliminated.
- 902 0414 0146     		mov	r1, r0
- 903 0416 0E20     		movs	r0, #14
- 904 0418 32E6     		b	nordic_writeRegister
- 906              		.align	1
- 907              		.global	nordic_set_rx_pipe5_lsb_addr
- 908              		.thumb
- 909              		.thumb_func
- 911              	nordic_set_rx_pipe5_lsb_addr:
- 912              		@ args = 0, pretend = 0, frame = 0
- 913              		@ frame_needed = 0, uses_anonymous_args = 0
- 914              		@ link register save eliminated.
- 915 041a 0146     		mov	r1, r0
- 916 041c 0F20     		movs	r0, #15
- 917 041e 2FE6     		b	nordic_writeRegister
- 919              		.align	1
- 920              		.global	nordic_set_auto_ack_for_pipes
- 921              		.thumb
- 922              		.thumb_func
- 924              	nordic_set_auto_ack_for_pipes:
- 925              		@ args = 8, pretend = 0, frame = 0
- 926              		@ frame_needed = 0, uses_anonymous_args = 0
- 927 0420 70B5     		push	{r4, r5, r6, lr}
- 928 0422 0446     		mov	r4, r0
- 929 0424 9DF81060 		ldrb	r6, [sp, #16]	@ zero_extendqisi2
- 930 0428 9DF81450 		ldrb	r5, [sp, #20]	@ zero_extendqisi2
- 931 042c 09B1     		cbz	r1, .L106
- 932 042e 40F00204 		orr	r4, r0, #2
- 933              	.L106:
- 934 0432 0AB1     		cbz	r2, .L107
- 935 0434 44F00404 		orr	r4, r4, #4
- 936              	.L107:
- 937 0438 0BB1     		cbz	r3, .L108
- 938 043a 44F00804 		orr	r4, r4, #8
- 939              	.L108:
- 940 043e 0EB1     		cbz	r6, .L109
- 941 0440 44F01004 		orr	r4, r4, #16
- 942              	.L109:
- 943 0444 0DB1     		cbz	r5, .L110
- 944 0446 44F02004 		orr	r4, r4, #32
- 945              	.L110:
- 946 044a 0120     		movs	r0, #1
- 947 044c 2146     		mov	r1, r4
- 948 044e BDE87040 		pop	{r4, r5, r6, lr}
- 949 0452 15E6     		b	nordic_writeRegister
- 951              		.align	1
- 952              		.global	nordic_enable_pipes
- 953              		.thumb
- 954              		.thumb_func
- 956              	nordic_enable_pipes:
- 957              		@ args = 8, pretend = 0, frame = 0
- 958              		@ frame_needed = 0, uses_anonymous_args = 0
- 959 0454 70B5     		push	{r4, r5, r6, lr}
- 960 0456 0446     		mov	r4, r0
- 961 0458 9DF81060 		ldrb	r6, [sp, #16]	@ zero_extendqisi2
- 962 045c 9DF81450 		ldrb	r5, [sp, #20]	@ zero_extendqisi2
- 963 0460 09B1     		cbz	r1, .L112
- 964 0462 40F00204 		orr	r4, r0, #2
- 965              	.L112:
- 966 0466 0AB1     		cbz	r2, .L113
- 967 0468 44F00404 		orr	r4, r4, #4
- 968              	.L113:
- 969 046c 0BB1     		cbz	r3, .L114
- 970 046e 44F00804 		orr	r4, r4, #8
- 971              	.L114:
- 972 0472 0EB1     		cbz	r6, .L115
- 973 0474 44F01004 		orr	r4, r4, #16
- 974              	.L115:
- 975 0478 0DB1     		cbz	r5, .L116
- 976 047a 44F02004 		orr	r4, r4, #32
- 977              	.L116:
- 978 047e 0220     		movs	r0, #2
- 979 0480 2146     		mov	r1, r4
- 980 0482 BDE87040 		pop	{r4, r5, r6, lr}
- 981 0486 FBE5     		b	nordic_writeRegister
- 983              		.align	1
- 984              		.global	nordic_init
- 985              		.thumb
- 986              		.thumb_func
- 988              	nordic_init:
- 989              		@ args = 0, pretend = 0, frame = 8
- 990              		@ frame_needed = 0, uses_anonymous_args = 0
- 991 0488 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
- 992 048a 0546     		mov	r5, r0
- 993 048c 0E46     		mov	r6, r1
- 994 048e 1446     		mov	r4, r2
- 995 0490 FFF7FEFF 		bl	nordic_flush_rx_fifo
- 996 0494 FFF7FEFF 		bl	nordic_flush_tx_fifo
- 997 0498 2F4B     		ldr	r3, .L118
- 998 049a 4FF08072 		mov	r2, #16777216
- 999 049e DA61     		str	r2, [r3, #28]
- 1000 04a0 FFF7FEFF 		bl	nordic_power_down
- 1001 04a4 0021     		movs	r1, #0
- 1002 04a6 0A46     		mov	r2, r1
- 1003 04a8 0120     		movs	r0, #1
- 1004 04aa FFF7FEFF 		bl	nordic_set_intr_signals
- 1005 04ae FFF7FEFF 		bl	nordic_clear_all_intr_flags
- 1006 04b2 0220     		movs	r0, #2
- 1007 04b4 FFF7FEFF 		bl	nordic_set_crc
- 1008 04b8 3046     		mov	r0, r6
- 1009 04ba FFF7FEFF 		bl	nordic_set_channel
- 1010 04be 2046     		mov	r0, r4
- 1011 04c0 FFF7FEFF 		bl	nordic_set_air_data_rate
- 1012 04c4 0320     		movs	r0, #3
- 1013 04c6 0024     		movs	r4, #0
- 1014 04c8 FFF7FEFF 		bl	nordic_set_power_level
- 1015 04cc 0120     		movs	r0, #1
- 1016 04ce 0146     		mov	r1, r0
- 1017 04d0 2246     		mov	r2, r4
- 1018 04d2 2346     		mov	r3, r4
- 1019 04d4 0094     		str	r4, [sp, #0]
- 1020 04d6 0194     		str	r4, [sp, #4]
- 1021 04d8 FFF7FEFF 		bl	nordic_enable_pipes
- 1022 04dc 2346     		mov	r3, r4
- 1023 04de 2246     		mov	r2, r4
- 1024 04e0 2046     		mov	r0, r4
- 1025 04e2 2146     		mov	r1, r4
- 1026 04e4 0094     		str	r4, [sp, #0]
- 1027 04e6 0194     		str	r4, [sp, #4]
- 1028 04e8 FFF7FEFF 		bl	nordic_set_auto_ack_for_pipes
- 1029 04ec 0321     		movs	r1, #3
- 1030 04ee 4FF4FA70 		mov	r0, #500
- 1031 04f2 FFF7FEFF 		bl	nordic_set_auto_transmit_options
- 1032 04f6 2046     		mov	r0, r4
- 1033 04f8 2946     		mov	r1, r5
- 1034 04fa FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1035 04fe 0120     		movs	r0, #1
- 1036 0500 2146     		mov	r1, r4
- 1037 0502 FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1038 0506 0220     		movs	r0, #2
- 1039 0508 2146     		mov	r1, r4
- 1040 050a FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1041 050e 0320     		movs	r0, #3
- 1042 0510 2146     		mov	r1, r4
- 1043 0512 FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1044 0516 0420     		movs	r0, #4
- 1045 0518 2146     		mov	r1, r4
- 1046 051a FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1047 051e 0520     		movs	r0, #5
- 1048 0520 2146     		mov	r1, r4
- 1049 0522 0524     		movs	r4, #5
- 1050 0524 FFF7FEFF 		bl	nordic_set_payload_for_pipe
- 1051 0528 2246     		mov	r2, r4
- 1052 052a 0C49     		ldr	r1, .L118+4
- 1053 052c 02A8     		add	r0, sp, #8
- 1054 052e FFF7FEFF 		bl	memcpy
- 1055 0532 2046     		mov	r0, r4
- 1056 0534 FFF7FEFF 		bl	nordic_set_addr_width
- 1057 0538 02A8     		add	r0, sp, #8
- 1058 053a 2146     		mov	r1, r4
- 1059 053c FFF7FEFF 		bl	nordic_set_tx_address
- 1060 0540 02A8     		add	r0, sp, #8
- 1061 0542 2146     		mov	r1, r4
- 1062 0544 FFF7FEFF 		bl	nordic_set_rx_pipe0_addr
- 1063 0548 FFF7FEFF 		bl	nordic_power_up
- 1064 054c 4FF4FA60 		mov	r0, #2000
- 1065 0550 FFF7FEFF 		bl	delay_us
- 1066 0554 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
- 1067              	.L119:
- 1068 0556 00BF     		.align	2
- 1069              	.L118:
- 1070 0558 20C00920 		.word	537509920
- 1071 055c 00000000 		.word	.LANCHOR0
- 1073              		.section	.rodata
- 1074              		.set	.LANCHOR0,. + 0
- 1075              	.LC0:
- 1076 0000 E7       		.byte	-25
- 1077 0001 DE       		.byte	-34
- 1078 0002 AD       		.byte	-83
- 1079 0003 E7       		.byte	-25
- 1080 0004 E7       		.byte	-25
- 1081              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  88 0068 07B5     		push	{r0, r1, r2, lr}
+  89 006a 0023     		movs	r3, #0
+  90 006c 02A9     		add	r1, sp, #8
+  91 006e 01F8013D 		strb	r3, [r1, #-1]!
+  92 0072 0123     		movs	r3, #1
+  93 0074 1A46     		mov	r2, r3
+  94 0076 00F01F00 		and	r0, r0, #31
+  95 007a FFF7C1FF 		bl	nordic_transfer
+  96 007e 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+  97 0082 03B0     		add	sp, sp, #12
+  98              		@ sp needed
+  99 0084 5DF804FB 		ldr	pc, [sp], #4
+ 101              		.align	1
+ 102              		.thumb
+ 103              		.thumb_func
+ 105              	nordic_writeRegister:
+ 106              		@ args = 0, pretend = 0, frame = 8
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108 0088 13B5     		push	{r0, r1, r4, lr}
+ 109 008a 02AC     		add	r4, sp, #8
+ 110 008c 04F8011D 		strb	r1, [r4, #-1]!
+ 111 0090 00F01F00 		and	r0, r0, #31
+ 112 0094 0023     		movs	r3, #0
+ 113 0096 0122     		movs	r2, #1
+ 114 0098 2146     		mov	r1, r4
+ 115 009a 40F02000 		orr	r0, r0, #32
+ 116 009e FFF7AFFF 		bl	nordic_transfer
+ 117 00a2 02B0     		add	sp, sp, #8
+ 118              		@ sp needed
+ 119 00a4 10BD     		pop	{r4, pc}
+ 121              		.align	1
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	nordic_readStatusRegister:
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+ 129 00a6 0022     		movs	r2, #0
+ 130 00a8 0123     		movs	r3, #1
+ 131 00aa 1146     		mov	r1, r2
+ 132 00ac FF20     		movs	r0, #255
+ 133 00ae A7E7     		b	nordic_transfer
+ 135              		.align	1
+ 136              		.global	nordic_is_air_free
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	nordic_is_air_free:
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 00b0 08B5     		push	{r3, lr}
+ 144 00b2 0920     		movs	r0, #9
+ 145 00b4 FFF7D8FF 		bl	nordic_readRegister
+ 146 00b8 00F00100 		and	r0, r0, #1
+ 147 00bc 08BD     		pop	{r3, pc}
+ 149              		.align	1
+ 150              		.global	nordic_is_tx_fifo_full
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	nordic_is_tx_fifo_full:
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157 00be 08B5     		push	{r3, lr}
+ 158 00c0 FFF7F1FF 		bl	nordic_readStatusRegister
+ 159 00c4 00F00100 		and	r0, r0, #1
+ 160 00c8 08BD     		pop	{r3, pc}
+ 162              		.align	1
+ 163              		.global	nordic_is_tx_fifo_empty
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	nordic_is_tx_fifo_empty:
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 00ca 08B5     		push	{r3, lr}
+ 171 00cc 1720     		movs	r0, #23
+ 172 00ce FFF7CBFF 		bl	nordic_readRegister
+ 173 00d2 C0F30010 		ubfx	r0, r0, #4, #1
+ 174 00d6 08BD     		pop	{r3, pc}
+ 176              		.align	1
+ 177              		.global	nordic_clear_all_intr_flags
+ 178              		.thumb
+ 179              		.thumb_func
+ 181              	nordic_clear_all_intr_flags:
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184              		@ link register save eliminated.
+ 185 00d8 7021     		movs	r1, #112
+ 186 00da 0720     		movs	r0, #7
+ 187 00dc D4E7     		b	nordic_writeRegister
+ 189              		.align	1
+ 190              		.global	nordic_queue_tx_fifo
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	nordic_queue_tx_fifo:
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              		@ link register save eliminated.
+ 198 00de 0A46     		mov	r2, r1
+ 199 00e0 0023     		movs	r3, #0
+ 200 00e2 0146     		mov	r1, r0
+ 201 00e4 A020     		movs	r0, #160
+ 202 00e6 8BE7     		b	nordic_transfer
+ 204              		.align	1
+ 205              		.global	nordic_standby1_to_tx_mode1
+ 206              		.thumb
+ 207              		.thumb_func
+ 209              	nordic_standby1_to_tx_mode1:
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212 00e8 08B5     		push	{r3, lr}
+ 213 00ea 0020     		movs	r0, #0
+ 214 00ec FFF7BCFF 		bl	nordic_readRegister
+ 215 00f0 BDE80840 		pop	{r3, lr}
+ 216 00f4 00F0FE01 		and	r1, r0, #254
+ 217 00f8 0020     		movs	r0, #0
+ 218 00fa C5E7     		b	nordic_writeRegister
+ 220              		.align	1
+ 221              		.global	nordic_standby1_to_tx_mode2
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	nordic_standby1_to_tx_mode2:
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228 00fc 08B5     		push	{r3, lr}
+ 229 00fe FFF7FEFF 		bl	nordic_standby1_to_tx_mode1
+ 230 0102 024B     		ldr	r3, .L28
+ 231 0104 4FF08072 		mov	r2, #16777216
+ 232 0108 9A61     		str	r2, [r3, #24]
+ 233 010a 08BD     		pop	{r3, pc}
+ 234              	.L29:
+ 235              		.align	2
+ 236              	.L28:
+ 237 010c 20C00920 		.word	537509920
+ 239              		.align	1
+ 240              		.global	nordic_rx_to_Stanby1
+ 241              		.thumb
+ 242              		.thumb_func
+ 244              	nordic_rx_to_Stanby1:
+ 245              		@ args = 0, pretend = 0, frame = 0
+ 246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 247              		@ link register save eliminated.
+ 248 0110 024B     		ldr	r3, .L31
+ 249 0112 4FF08072 		mov	r2, #16777216
+ 250 0116 DA61     		str	r2, [r3, #28]
+ 251 0118 7047     		bx	lr
+ 252              	.L32:
+ 253 011a 00BF     		.align	2
+ 254              	.L31:
+ 255 011c 20C00920 		.word	537509920
+ 257              		.align	1
+ 258              		.global	nordic_standby1_to_rx
+ 259              		.thumb
+ 260              		.thumb_func
+ 262              	nordic_standby1_to_rx:
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0120 08B5     		push	{r3, lr}
+ 266 0122 0020     		movs	r0, #0
+ 267 0124 FFF7A0FF 		bl	nordic_readRegister
+ 268 0128 40F00101 		orr	r1, r0, #1
+ 269 012c C9B2     		uxtb	r1, r1
+ 270 012e 0020     		movs	r0, #0
+ 271 0130 FFF7AAFF 		bl	nordic_writeRegister
+ 272 0134 024B     		ldr	r3, .L34
+ 273 0136 4FF08072 		mov	r2, #16777216
+ 274 013a 9A61     		str	r2, [r3, #24]
+ 275 013c 08BD     		pop	{r3, pc}
+ 276              	.L35:
+ 277 013e 00BF     		.align	2
+ 278              	.L34:
+ 279 0140 20C00920 		.word	537509920
+ 281              		.align	1
+ 282              		.global	nordic_is_packet_sent
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	nordic_is_packet_sent:
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 0144 08B5     		push	{r3, lr}
+ 290 0146 FFF7AEFF 		bl	nordic_readStatusRegister
+ 291 014a C0F34010 		ubfx	r0, r0, #5, #1
+ 292 014e 08BD     		pop	{r3, pc}
+ 294              		.align	1
+ 295              		.global	nordic_clear_packet_sent_flag
+ 296              		.thumb
+ 297              		.thumb_func
+ 299              	nordic_clear_packet_sent_flag:
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302              		@ link register save eliminated.
+ 303 0150 2021     		movs	r1, #32
+ 304 0152 0720     		movs	r0, #7
+ 305 0154 98E7     		b	nordic_writeRegister
+ 307              		.align	1
+ 308              		.global	nordic_is_max_retries_reached
+ 309              		.thumb
+ 310              		.thumb_func
+ 312              	nordic_is_max_retries_reached:
+ 313              		@ args = 0, pretend = 0, frame = 0
+ 314              		@ frame_needed = 0, uses_anonymous_args = 0
+ 315 0156 08B5     		push	{r3, lr}
+ 316 0158 FFF7A5FF 		bl	nordic_readStatusRegister
+ 317 015c C0F30010 		ubfx	r0, r0, #4, #1
+ 318 0160 08BD     		pop	{r3, pc}
+ 320              		.align	1
+ 321              		.global	nordic_clear_max_retries_flag
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	nordic_clear_max_retries_flag:
+ 326              		@ args = 0, pretend = 0, frame = 0
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328              		@ link register save eliminated.
+ 329 0162 1021     		movs	r1, #16
+ 330 0164 0720     		movs	r0, #7
+ 331 0166 8FE7     		b	nordic_writeRegister
+ 333              		.align	1
+ 334              		.global	nordic_flush_tx_fifo
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	nordic_flush_tx_fifo:
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              		@ link register save eliminated.
+ 342 0168 0023     		movs	r3, #0
+ 343 016a 1A46     		mov	r2, r3
+ 344 016c 1946     		mov	r1, r3
+ 345 016e E120     		movs	r0, #225
+ 346 0170 46E7     		b	nordic_transfer
+ 348              		.align	1
+ 349              		.global	nordic_mode1_send_single_packet
+ 350              		.thumb
+ 351              		.thumb_func
+ 353              	nordic_mode1_send_single_packet:
+ 354              		@ args = 0, pretend = 0, frame = 8
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356 0172 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 357 0174 0446     		mov	r4, r0
+ 358 0176 0D46     		mov	r5, r1
+ 359 0178 FFF7FEFF 		bl	nordic_flush_tx_fifo
+ 360 017c 2046     		mov	r0, r4
+ 361 017e 2946     		mov	r1, r5
+ 362 0180 FFF7FEFF 		bl	nordic_queue_tx_fifo
+ 363 0184 0D4B     		ldr	r3, .L46
+ 364 0186 4FF08072 		mov	r2, #16777216
+ 365 018a 1C46     		mov	r4, r3
+ 366 018c 9A61     		str	r2, [r3, #24]
+ 367 018e 0022     		movs	r2, #0
+ 368 0190 ADF80620 		strh	r2, [sp, #6]	@ movhi
+ 369              	.L44:
+ 370 0194 BDF80630 		ldrh	r3, [sp, #6]
+ 371 0198 0133     		adds	r3, r3, #1
+ 372 019a 9BB2     		uxth	r3, r3
+ 373 019c ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 374 01a0 33B9     		cbnz	r3, .L42
+ 375              	.L43:
+ 376 01a2 4FF08073 		mov	r3, #16777216
+ 377 01a6 E361     		str	r3, [r4, #28]
+ 378 01a8 FFF7FEFF 		bl	nordic_flush_tx_fifo
+ 379 01ac 03B0     		add	sp, sp, #12
+ 380              		@ sp needed
+ 381 01ae 30BD     		pop	{r4, r5, pc}
+ 382              	.L42:
+ 383 01b0 FFF7FEFF 		bl	nordic_is_tx_fifo_empty
+ 384 01b4 0028     		cmp	r0, #0
+ 385 01b6 EDD0     		beq	.L44
+ 386 01b8 F3E7     		b	.L43
+ 387              	.L47:
+ 388 01ba 00BF     		.align	2
+ 389              	.L46:
+ 390 01bc 20C00920 		.word	537509920
+ 392              		.align	1
+ 393              		.global	nordic_finishTxMode2_transitionToStandby1
+ 394              		.thumb
+ 395              		.thumb_func
+ 397              	nordic_finishTxMode2_transitionToStandby1:
+ 398              		@ args = 0, pretend = 0, frame = 0
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400 01c0 38B5     		push	{r3, r4, r5, lr}
+ 401 01c2 0446     		mov	r4, r0
+ 402 01c4 0D46     		mov	r5, r1
+ 403              	.L49:
+ 404 01c6 FFF7FEFF 		bl	nordic_is_tx_fifo_empty
+ 405 01ca 0028     		cmp	r0, #0
+ 406 01cc FBD0     		beq	.L49
+ 407 01ce 2946     		mov	r1, r5
+ 408 01d0 2046     		mov	r0, r4
+ 409 01d2 FFF7FEFF 		bl	nordic_mode1_send_single_packet
+ 410 01d6 044A     		ldr	r2, .L55
+ 411              	.L50:
+ 412 01d8 5369     		ldr	r3, [r2, #20]
+ 413 01da 5B02     		lsls	r3, r3, #9
+ 414 01dc FCD5     		bpl	.L50
+ 415 01de BDE83840 		pop	{r3, r4, r5, lr}
+ 416 01e2 FFF7FEBF 		b	nordic_clear_packet_sent_flag
+ 417              	.L56:
+ 418 01e6 00BF     		.align	2
+ 419              	.L55:
+ 420 01e8 00C00920 		.word	537509888
+ 422              		.align	1
+ 423              		.global	nordic_is_packet_available
+ 424              		.thumb
+ 425              		.thumb_func
+ 427              	nordic_is_packet_available:
+ 428              		@ args = 0, pretend = 0, frame = 0
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430 01ec 08B5     		push	{r3, lr}
+ 431 01ee 1720     		movs	r0, #23
+ 432 01f0 FFF73AFF 		bl	nordic_readRegister
+ 433 01f4 00F00100 		and	r0, r0, #1
+ 434 01f8 80F00100 		eor	r0, r0, #1
+ 435 01fc 08BD     		pop	{r3, pc}
+ 437              		.align	1
+ 438              		.global	nordic_clear_packet_available_flag
+ 439              		.thumb
+ 440              		.thumb_func
+ 442              	nordic_clear_packet_available_flag:
+ 443              		@ args = 0, pretend = 0, frame = 0
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445              		@ link register save eliminated.
+ 446 01fe 4021     		movs	r1, #64
+ 447 0200 0720     		movs	r0, #7
+ 448 0202 41E7     		b	nordic_writeRegister
+ 450              		.align	1
+ 451              		.global	nordic_read_rx_fifo
+ 452              		.thumb
+ 453              		.thumb_func
+ 455              	nordic_read_rx_fifo:
+ 456              		@ args = 0, pretend = 0, frame = 0
+ 457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458 0204 08B5     		push	{r3, lr}
+ 459 0206 0A46     		mov	r2, r1
+ 460 0208 0123     		movs	r3, #1
+ 461 020a 0146     		mov	r1, r0
+ 462 020c 6120     		movs	r0, #97
+ 463 020e FFF7F7FE 		bl	nordic_transfer
+ 464 0212 C0F34200 		ubfx	r0, r0, #1, #3
+ 465 0216 08BD     		pop	{r3, pc}
+ 467              		.align	1
+ 468              		.global	nordic_flush_rx_fifo
+ 469              		.thumb
+ 470              		.thumb_func
+ 472              	nordic_flush_rx_fifo:
+ 473              		@ args = 0, pretend = 0, frame = 0
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 475              		@ link register save eliminated.
+ 476 0218 0023     		movs	r3, #0
+ 477 021a 1A46     		mov	r2, r3
+ 478 021c 1946     		mov	r1, r3
+ 479 021e E220     		movs	r0, #226
+ 480 0220 EEE6     		b	nordic_transfer
+ 482              		.align	1
+ 483              		.global	nordic_set_intr_signals
+ 484              		.thumb
+ 485              		.thumb_func
+ 487              	nordic_set_intr_signals:
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0222 70B5     		push	{r4, r5, r6, lr}
+ 491 0224 0646     		mov	r6, r0
+ 492 0226 0020     		movs	r0, #0
+ 493 0228 0D46     		mov	r5, r1
+ 494 022a 1446     		mov	r4, r2
+ 495 022c FFF71CFF 		bl	nordic_readRegister
+ 496 0230 16B1     		cbz	r6, .L62
+ 497 0232 00F0BF00 		and	r0, r0, #191
+ 498 0236 02E0     		b	.L63
+ 499              	.L62:
+ 500 0238 40F04000 		orr	r0, r0, #64
+ 501 023c C0B2     		uxtb	r0, r0
+ 502              	.L63:
+ 503 023e 15B1     		cbz	r5, .L64
+ 504 0240 00F0DF01 		and	r1, r0, #223
+ 505 0244 01E0     		b	.L65
+ 506              	.L64:
+ 507 0246 40F02001 		orr	r1, r0, #32
+ 508              	.L65:
+ 509 024a 14B1     		cbz	r4, .L66
+ 510 024c 01F0EF01 		and	r1, r1, #239
+ 511 0250 01E0     		b	.L67
+ 512              	.L66:
+ 513 0252 41F01001 		orr	r1, r1, #16
+ 514              	.L67:
+ 515 0256 0020     		movs	r0, #0
+ 516 0258 BDE87040 		pop	{r4, r5, r6, lr}
+ 517 025c 14E7     		b	nordic_writeRegister
+ 519              		.align	1
+ 520              		.global	nordic_get_intr_reg_status
+ 521              		.thumb
+ 522              		.thumb_func
+ 524              	nordic_get_intr_reg_status:
+ 525              		@ args = 0, pretend = 0, frame = 0
+ 526              		@ frame_needed = 0, uses_anonymous_args = 0
+ 527              		@ link register save eliminated.
+ 528 025e 0720     		movs	r0, #7
+ 529 0260 02E7     		b	nordic_readRegister
+ 531              		.align	1
+ 532              		.global	nordic_set_crc
+ 533              		.thumb
+ 534              		.thumb_func
+ 536              	nordic_set_crc:
+ 537              		@ args = 0, pretend = 0, frame = 0
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 539 0262 10B5     		push	{r4, lr}
+ 540 0264 0446     		mov	r4, r0
+ 541 0266 0020     		movs	r0, #0
+ 542 0268 FFF7FEFE 		bl	nordic_readRegister
+ 543 026c 14B9     		cbnz	r4, .L70
+ 544 026e 00F0F701 		and	r1, r0, #247
+ 545 0272 0DE0     		b	.L71
+ 546              	.L70:
+ 547 0274 012C     		cmp	r4, #1
+ 548 0276 04D1     		bne	.L72
+ 549 0278 00F0FB01 		and	r1, r0, #251
+ 550 027c 41F00801 		orr	r1, r1, #8
+ 551 0280 06E0     		b	.L71
+ 552              	.L72:
+ 553 0282 022C     		cmp	r4, #2
+ 554 0284 14BF     		ite	ne
+ 555 0286 40F00801 		orrne	r1, r0, #8
+ 556 028a 40F00C01 		orreq	r1, r0, #12
+ 557 028e C9B2     		uxtb	r1, r1
+ 558              	.L71:
+ 559 0290 0020     		movs	r0, #0
+ 560 0292 BDE81040 		pop	{r4, lr}
+ 561 0296 F7E6     		b	nordic_writeRegister
+ 563              		.align	1
+ 564              		.global	nordic_power_up
+ 565              		.thumb
+ 566              		.thumb_func
+ 568              	nordic_power_up:
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571 0298 08B5     		push	{r3, lr}
+ 572 029a 0020     		movs	r0, #0
+ 573 029c FFF7E4FE 		bl	nordic_readRegister
+ 574 02a0 BDE80840 		pop	{r3, lr}
+ 575 02a4 40F00201 		orr	r1, r0, #2
+ 576 02a8 C9B2     		uxtb	r1, r1
+ 577 02aa 0020     		movs	r0, #0
+ 578 02ac ECE6     		b	nordic_writeRegister
+ 580              		.align	1
+ 581              		.global	nordic_power_down
+ 582              		.thumb
+ 583              		.thumb_func
+ 585              	nordic_power_down:
+ 586              		@ args = 0, pretend = 0, frame = 0
+ 587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 588 02ae 08B5     		push	{r3, lr}
+ 589 02b0 0020     		movs	r0, #0
+ 590 02b2 FFF7D9FE 		bl	nordic_readRegister
+ 591 02b6 BDE80840 		pop	{r3, lr}
+ 592 02ba 00F0FD01 		and	r1, r0, #253
+ 593 02be 0020     		movs	r0, #0
+ 594 02c0 E2E6     		b	nordic_writeRegister
+ 596              		.align	1
+ 597              		.global	nordic_tx_mode2_to_standby1_through_power_down
+ 598              		.thumb
+ 599              		.thumb_func
+ 601              	nordic_tx_mode2_to_standby1_through_power_down:
+ 602              		@ args = 0, pretend = 0, frame = 0
+ 603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 604 02c2 08B5     		push	{r3, lr}
+ 605 02c4 044B     		ldr	r3, .L78
+ 606 02c6 4FF08072 		mov	r2, #16777216
+ 607 02ca DA61     		str	r2, [r3, #28]
+ 608 02cc FFF7FEFF 		bl	nordic_power_down
+ 609 02d0 BDE80840 		pop	{r3, lr}
+ 610 02d4 FFF7FEBF 		b	nordic_power_up
+ 611              	.L79:
+ 612              		.align	2
+ 613              	.L78:
+ 614 02d8 20C00920 		.word	537509920
+ 616              		.align	1
+ 617              		.global	nordic_set_channel
+ 618              		.thumb
+ 619              		.thumb_func
+ 621              	nordic_set_channel:
+ 622              		@ args = 0, pretend = 0, frame = 0
+ 623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 624              		@ link register save eliminated.
+ 625 02dc 40F6DD13 		movw	r3, #2525
+ 626 02e0 9842     		cmp	r0, r3
+ 627 02e2 06D8     		bhi	.L82
+ 628 02e4 40F66213 		movw	r3, #2402
+ 629 02e8 B0F5166F 		cmp	r0, #2400
+ 630 02ec 38BF     		it	cc
+ 631 02ee 1846     		movcc	r0, r3
+ 632 02f0 00E0     		b	.L81
+ 633              	.L82:
+ 634 02f2 1846     		mov	r0, r3
+ 635              	.L81:
+ 636 02f4 A0F51661 		sub	r1, r0, #2400
+ 637 02f8 C9B2     		uxtb	r1, r1
+ 638 02fa 0520     		movs	r0, #5
+ 639 02fc C4E6     		b	nordic_writeRegister
+ 641              		.align	1
+ 642              		.global	nordic_set_continous_carrier_transmit
+ 643              		.thumb
+ 644              		.thumb_func
+ 646              	nordic_set_continous_carrier_transmit:
+ 647              		@ args = 0, pretend = 0, frame = 0
+ 648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 649 02fe 08B5     		push	{r3, lr}
+ 650 0300 30B1     		cbz	r0, .L84
+ 651 0302 0620     		movs	r0, #6
+ 652 0304 FFF7B0FE 		bl	nordic_readRegister
+ 653 0308 60F07F01 		orn	r1, r0, #127
+ 654 030c C9B2     		uxtb	r1, r1
+ 655 030e 04E0     		b	.L85
+ 656              	.L84:
+ 657 0310 0620     		movs	r0, #6
+ 658 0312 FFF7A9FE 		bl	nordic_readRegister
+ 659 0316 00F07F01 		and	r1, r0, #127
+ 660              	.L85:
+ 661 031a 0620     		movs	r0, #6
+ 662 031c BDE80840 		pop	{r3, lr}
+ 663 0320 B2E6     		b	nordic_writeRegister
+ 665              		.align	1
+ 666              		.global	nordic_set_air_data_rate
+ 667              		.thumb
+ 668              		.thumb_func
+ 670              	nordic_set_air_data_rate:
+ 671              		@ args = 0, pretend = 0, frame = 0
+ 672              		@ frame_needed = 0, uses_anonymous_args = 0
+ 673 0322 10B5     		push	{r4, lr}
+ 674 0324 0446     		mov	r4, r0
+ 675 0326 0620     		movs	r0, #6
+ 676 0328 FFF79EFE 		bl	nordic_readRegister
+ 677 032c FA2C     		cmp	r4, #250
+ 678 032e 00F0D701 		and	r1, r0, #215
+ 679 0332 02D1     		bne	.L87
+ 680 0334 41F02001 		orr	r1, r1, #32
+ 681 0338 04E0     		b	.L88
+ 682              	.L87:
+ 683 033a B4F5FA6F 		cmp	r4, #2000
+ 684 033e 08BF     		it	eq
+ 685 0340 41F00801 		orreq	r1, r1, #8
+ 686              	.L88:
+ 687 0344 0620     		movs	r0, #6
+ 688 0346 BDE81040 		pop	{r4, lr}
+ 689 034a 9DE6     		b	nordic_writeRegister
+ 691              		.align	1
+ 692              		.global	nordic_set_power_level
+ 693              		.thumb
+ 694              		.thumb_func
+ 696              	nordic_set_power_level:
+ 697              		@ args = 0, pretend = 0, frame = 0
+ 698              		@ frame_needed = 0, uses_anonymous_args = 0
+ 699 034c 10B5     		push	{r4, lr}
+ 700 034e 0446     		mov	r4, r0
+ 701 0350 0620     		movs	r0, #6
+ 702 0352 FFF789FE 		bl	nordic_readRegister
+ 703 0356 032C     		cmp	r4, #3
+ 704 0358 28BF     		it	cs
+ 705 035a 0324     		movcs	r4, #3
+ 706 035c 20F00600 		bic	r0, r0, #6
+ 707 0360 40EA4401 		orr	r1, r0, r4, lsl #1
+ 708 0364 C9B2     		uxtb	r1, r1
+ 709 0366 0620     		movs	r0, #6
+ 710 0368 BDE81040 		pop	{r4, lr}
+ 711 036c 8CE6     		b	nordic_writeRegister
+ 713              		.align	1
+ 714              		.global	nordic_set_auto_transmit_options
+ 715              		.thumb
+ 716              		.thumb_func
+ 718              	nordic_set_auto_transmit_options:
+ 719              		@ args = 0, pretend = 0, frame = 0
+ 720              		@ frame_needed = 0, uses_anonymous_args = 0
+ 721              		@ link register save eliminated.
+ 722 036e F928     		cmp	r0, #249
+ 723 0370 4FF0FA03 		mov	r3, #250
+ 724 0374 05D9     		bls	.L93
+ 725 0376 B0F57A6F 		cmp	r0, #4000
+ 726 037a 88BF     		it	hi
+ 727 037c 4FF47A60 		movhi	r0, #4000
+ 728 0380 00E0     		b	.L92
+ 729              	.L93:
+ 730 0382 1846     		mov	r0, r3
+ 731              	.L92:
+ 732 0384 B0FBF3F0 		udiv	r0, r0, r3
+ 733 0388 0F29     		cmp	r1, #15
+ 734 038a 00F1FF30 		add	r0, r0, #-1
+ 735 038e C0B2     		uxtb	r0, r0
+ 736 0390 28BF     		it	cs
+ 737 0392 0F21     		movcs	r1, #15
+ 738 0394 41EA0011 		orr	r1, r1, r0, lsl #4
+ 739 0398 C9B2     		uxtb	r1, r1
+ 740 039a 0420     		movs	r0, #4
+ 741 039c 74E6     		b	nordic_writeRegister
+ 743              		.align	1
+ 744              		.global	nordic_get_lost_packet_cnt
+ 745              		.thumb
+ 746              		.thumb_func
+ 748              	nordic_get_lost_packet_cnt:
+ 749              		@ args = 0, pretend = 0, frame = 0
+ 750              		@ frame_needed = 0, uses_anonymous_args = 0
+ 751 039e 38B5     		push	{r3, r4, r5, lr}
+ 752 03a0 0546     		mov	r5, r0
+ 753 03a2 0820     		movs	r0, #8
+ 754 03a4 FFF760FE 		bl	nordic_readRegister
+ 755 03a8 C0F30714 		ubfx	r4, r0, #4, #8
+ 756 03ac 35B1     		cbz	r5, .L96
+ 757 03ae 0520     		movs	r0, #5
+ 758 03b0 FFF75AFE 		bl	nordic_readRegister
+ 759 03b4 0146     		mov	r1, r0
+ 760 03b6 0520     		movs	r0, #5
+ 761 03b8 FFF766FE 		bl	nordic_writeRegister
+ 762              	.L96:
+ 763 03bc 2046     		mov	r0, r4
+ 764 03be 38BD     		pop	{r3, r4, r5, pc}
+ 766              		.align	1
+ 767              		.global	nordic_get_retransmit_count
+ 768              		.thumb
+ 769              		.thumb_func
+ 771              	nordic_get_retransmit_count:
+ 772              		@ args = 0, pretend = 0, frame = 0
+ 773              		@ frame_needed = 0, uses_anonymous_args = 0
+ 774 03c0 08B5     		push	{r3, lr}
+ 775 03c2 0820     		movs	r0, #8
+ 776 03c4 FFF750FE 		bl	nordic_readRegister
+ 777 03c8 00F00F00 		and	r0, r0, #15
+ 778 03cc 08BD     		pop	{r3, pc}
+ 780              		.align	1
+ 781              		.global	nordic_set_payload_for_pipe
+ 782              		.thumb
+ 783              		.thumb_func
+ 785              	nordic_set_payload_for_pipe:
+ 786              		@ args = 0, pretend = 0, frame = 0
+ 787              		@ frame_needed = 0, uses_anonymous_args = 0
+ 788              		@ link register save eliminated.
+ 789 03ce 1130     		adds	r0, r0, #17
+ 790 03d0 C0B2     		uxtb	r0, r0
+ 791 03d2 1628     		cmp	r0, #22
+ 792 03d4 03D8     		bhi	.L101
+ 793 03d6 2029     		cmp	r1, #32
+ 794 03d8 28BF     		it	cs
+ 795 03da 2021     		movcs	r1, #32
+ 796 03dc 54E6     		b	nordic_writeRegister
+ 797              	.L101:
+ 798 03de 7047     		bx	lr
+ 800              		.align	1
+ 801              		.global	nordic_set_addr_width
+ 802              		.thumb
+ 803              		.thumb_func
+ 805              	nordic_set_addr_width:
+ 806              		@ args = 0, pretend = 0, frame = 0
+ 807              		@ frame_needed = 0, uses_anonymous_args = 0
+ 808              		@ link register save eliminated.
+ 809 03e0 0328     		cmp	r0, #3
+ 810 03e2 04D0     		beq	.L105
+ 811 03e4 0428     		cmp	r0, #4
+ 812 03e6 14BF     		ite	ne
+ 813 03e8 0321     		movne	r1, #3
+ 814 03ea 0221     		moveq	r1, #2
+ 815 03ec 00E0     		b	.L104
+ 816              	.L105:
+ 817 03ee 0121     		movs	r1, #1
+ 818              	.L104:
+ 819 03f0 0320     		movs	r0, #3
+ 820 03f2 49E6     		b	nordic_writeRegister
+ 822              		.align	1
+ 823              		.global	nordic_set_tx_address
+ 824              		.thumb
+ 825              		.thumb_func
+ 827              	nordic_set_tx_address:
+ 828              		@ args = 0, pretend = 0, frame = 0
+ 829              		@ frame_needed = 0, uses_anonymous_args = 0
+ 830              		@ link register save eliminated.
+ 831 03f4 0A46     		mov	r2, r1
+ 832 03f6 0023     		movs	r3, #0
+ 833 03f8 0146     		mov	r1, r0
+ 834 03fa 3020     		movs	r0, #48
+ 835 03fc 00E6     		b	nordic_transfer
+ 837              		.align	1
+ 838              		.global	nordic_set_rx_pipe0_addr
+ 839              		.thumb
+ 840              		.thumb_func
+ 842              	nordic_set_rx_pipe0_addr:
+ 843              		@ args = 0, pretend = 0, frame = 0
+ 844              		@ frame_needed = 0, uses_anonymous_args = 0
+ 845              		@ link register save eliminated.
+ 846 03fe 0A46     		mov	r2, r1
+ 847 0400 0023     		movs	r3, #0
+ 848 0402 0146     		mov	r1, r0
+ 849 0404 2A20     		movs	r0, #42
+ 850 0406 FBE5     		b	nordic_transfer
+ 852              		.align	1
+ 853              		.global	nordic_init
+ 854              		.thumb
+ 855              		.thumb_func
+ 857              	nordic_init:
+ 858              		@ args = 0, pretend = 0, frame = 8
+ 859              		@ frame_needed = 0, uses_anonymous_args = 0
+ 860 0408 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 861 040a 0E46     		mov	r6, r1
+ 862 040c 1546     		mov	r5, r2
+ 863 040e 0446     		mov	r4, r0
+ 864 0410 FFF7FEFF 		bl	nordic_flush_rx_fifo
+ 865 0414 FFF7FEFF 		bl	nordic_flush_tx_fifo
+ 866 0418 2B4B     		ldr	r3, .L110
+ 867 041a 4FF08072 		mov	r2, #16777216
+ 868 041e DA61     		str	r2, [r3, #28]
+ 869 0420 FFF7FEFF 		bl	nordic_power_down
+ 870 0424 0022     		movs	r2, #0
+ 871 0426 1146     		mov	r1, r2
+ 872 0428 0120     		movs	r0, #1
+ 873 042a FFF7FEFF 		bl	nordic_set_intr_signals
+ 874 042e FFF7FEFF 		bl	nordic_clear_all_intr_flags
+ 875 0432 0220     		movs	r0, #2
+ 876 0434 FFF7FEFF 		bl	nordic_set_crc
+ 877 0438 3046     		mov	r0, r6
+ 878 043a FFF7FEFF 		bl	nordic_set_channel
+ 879 043e 2846     		mov	r0, r5
+ 880 0440 FFF7FEFF 		bl	nordic_set_air_data_rate
+ 881 0444 0320     		movs	r0, #3
+ 882 0446 FFF7FEFF 		bl	nordic_set_power_level
+ 883 044a 0321     		movs	r1, #3
+ 884 044c 0220     		movs	r0, #2
+ 885 044e FFF71BFE 		bl	nordic_writeRegister
+ 886 0452 0021     		movs	r1, #0
+ 887 0454 0120     		movs	r0, #1
+ 888 0456 FFF717FE 		bl	nordic_writeRegister
+ 889 045a 0321     		movs	r1, #3
+ 890 045c 4FF4FA70 		mov	r0, #500
+ 891 0460 FFF7FEFF 		bl	nordic_set_auto_transmit_options
+ 892 0464 2146     		mov	r1, r4
+ 893 0466 0020     		movs	r0, #0
+ 894 0468 FFF7FEFF 		bl	nordic_set_payload_for_pipe
+ 895 046c 0021     		movs	r1, #0
+ 896 046e 1220     		movs	r0, #18
+ 897 0470 FFF70AFE 		bl	nordic_writeRegister
+ 898 0474 0021     		movs	r1, #0
+ 899 0476 1320     		movs	r0, #19
+ 900 0478 FFF706FE 		bl	nordic_writeRegister
+ 901 047c 0021     		movs	r1, #0
+ 902 047e 1420     		movs	r0, #20
+ 903 0480 FFF702FE 		bl	nordic_writeRegister
+ 904 0484 0021     		movs	r1, #0
+ 905 0486 1520     		movs	r0, #21
+ 906 0488 FFF7FEFD 		bl	nordic_writeRegister
+ 907 048c 0021     		movs	r1, #0
+ 908 048e 1620     		movs	r0, #22
+ 909 0490 FFF7FAFD 		bl	nordic_writeRegister
+ 910 0494 0D4B     		ldr	r3, .L110+4
+ 911 0496 1868     		ldr	r0, [r3]	@ unaligned
+ 912 0498 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 913 049a 0090     		str	r0, [sp]	@ unaligned
+ 914 049c 0520     		movs	r0, #5
+ 915 049e 8DF80430 		strb	r3, [sp, #4]
+ 916 04a2 FFF7FEFF 		bl	nordic_set_addr_width
+ 917 04a6 6846     		mov	r0, sp
+ 918 04a8 0521     		movs	r1, #5
+ 919 04aa FFF7FEFF 		bl	nordic_set_tx_address
+ 920 04ae 0521     		movs	r1, #5
+ 921 04b0 6846     		mov	r0, sp
+ 922 04b2 FFF7FEFF 		bl	nordic_set_rx_pipe0_addr
+ 923 04b6 FFF7FEFF 		bl	nordic_power_up
+ 924 04ba 4FF4FA60 		mov	r0, #2000
+ 925 04be FFF7FEFF 		bl	delay_us
+ 926 04c2 02B0     		add	sp, sp, #8
+ 927              		@ sp needed
+ 928 04c4 70BD     		pop	{r4, r5, r6, pc}
+ 929              	.L111:
+ 930 04c6 00BF     		.align	2
+ 931              	.L110:
+ 932 04c8 20C00920 		.word	537509920
+ 933 04cc 00000000 		.word	.LANCHOR0
+ 935              		.align	1
+ 936              		.global	nordic_set_rx_pipe1_addr
+ 937              		.thumb
+ 938              		.thumb_func
+ 940              	nordic_set_rx_pipe1_addr:
+ 941              		@ args = 0, pretend = 0, frame = 0
+ 942              		@ frame_needed = 0, uses_anonymous_args = 0
+ 943              		@ link register save eliminated.
+ 944 04d0 0A46     		mov	r2, r1
+ 945 04d2 0023     		movs	r3, #0
+ 946 04d4 0146     		mov	r1, r0
+ 947 04d6 2B20     		movs	r0, #43
+ 948 04d8 92E5     		b	nordic_transfer
+ 950              		.align	1
+ 951              		.global	nordic_set_rx_pipe2_lsb_addr
+ 952              		.thumb
+ 953              		.thumb_func
+ 955              	nordic_set_rx_pipe2_lsb_addr:
+ 956              		@ args = 0, pretend = 0, frame = 0
+ 957              		@ frame_needed = 0, uses_anonymous_args = 0
+ 958              		@ link register save eliminated.
+ 959 04da 0146     		mov	r1, r0
+ 960 04dc 0C20     		movs	r0, #12
+ 961 04de D3E5     		b	nordic_writeRegister
+ 963              		.align	1
+ 964              		.global	nordic_set_rx_pipe3_lsb_addr
+ 965              		.thumb
+ 966              		.thumb_func
+ 968              	nordic_set_rx_pipe3_lsb_addr:
+ 969              		@ args = 0, pretend = 0, frame = 0
+ 970              		@ frame_needed = 0, uses_anonymous_args = 0
+ 971              		@ link register save eliminated.
+ 972 04e0 0146     		mov	r1, r0
+ 973 04e2 0D20     		movs	r0, #13
+ 974 04e4 D0E5     		b	nordic_writeRegister
+ 976              		.align	1
+ 977              		.global	nordic_set_rx_pipe4_lsb_addr
+ 978              		.thumb
+ 979              		.thumb_func
+ 981              	nordic_set_rx_pipe4_lsb_addr:
+ 982              		@ args = 0, pretend = 0, frame = 0
+ 983              		@ frame_needed = 0, uses_anonymous_args = 0
+ 984              		@ link register save eliminated.
+ 985 04e6 0146     		mov	r1, r0
+ 986 04e8 0E20     		movs	r0, #14
+ 987 04ea CDE5     		b	nordic_writeRegister
+ 989              		.align	1
+ 990              		.global	nordic_set_rx_pipe5_lsb_addr
+ 991              		.thumb
+ 992              		.thumb_func
+ 994              	nordic_set_rx_pipe5_lsb_addr:
+ 995              		@ args = 0, pretend = 0, frame = 0
+ 996              		@ frame_needed = 0, uses_anonymous_args = 0
+ 997              		@ link register save eliminated.
+ 998 04ec 0146     		mov	r1, r0
+ 999 04ee 0F20     		movs	r0, #15
+ 1000 04f0 CAE5     		b	nordic_writeRegister
+ 1002              		.align	1
+ 1003              		.global	nordic_set_auto_ack_for_pipes
+ 1004              		.thumb
+ 1005              		.thumb_func
+ 1007              	nordic_set_auto_ack_for_pipes:
+ 1008              		@ args = 8, pretend = 0, frame = 0
+ 1009              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1010              		@ link register save eliminated.
+ 1011 04f2 30B4     		push	{r4, r5}
+ 1012 04f4 9DF80850 		ldrb	r5, [sp, #8]	@ zero_extendqisi2
+ 1013 04f8 9DF80C40 		ldrb	r4, [sp, #12]	@ zero_extendqisi2
+ 1014 04fc 09B1     		cbz	r1, .L118
+ 1015 04fe 40F00200 		orr	r0, r0, #2
+ 1016              	.L118:
+ 1017 0502 0AB1     		cbz	r2, .L119
+ 1018 0504 40F00400 		orr	r0, r0, #4
+ 1019              	.L119:
+ 1020 0508 0BB1     		cbz	r3, .L120
+ 1021 050a 40F00800 		orr	r0, r0, #8
+ 1022              	.L120:
+ 1023 050e 0DB1     		cbz	r5, .L121
+ 1024 0510 40F01000 		orr	r0, r0, #16
+ 1025              	.L121:
+ 1026 0514 0CB1     		cbz	r4, .L122
+ 1027 0516 40F02000 		orr	r0, r0, #32
+ 1028              	.L122:
+ 1029 051a 0146     		mov	r1, r0
+ 1030 051c 30BC     		pop	{r4, r5}
+ 1031 051e 0120     		movs	r0, #1
+ 1032 0520 B2E5     		b	nordic_writeRegister
+ 1034              		.align	1
+ 1035              		.global	nordic_enable_pipes
+ 1036              		.thumb
+ 1037              		.thumb_func
+ 1039              	nordic_enable_pipes:
+ 1040              		@ args = 8, pretend = 0, frame = 0
+ 1041              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1042              		@ link register save eliminated.
+ 1043 0522 30B4     		push	{r4, r5}
+ 1044 0524 9DF80850 		ldrb	r5, [sp, #8]	@ zero_extendqisi2
+ 1045 0528 9DF80C40 		ldrb	r4, [sp, #12]	@ zero_extendqisi2
+ 1046 052c 09B1     		cbz	r1, .L139
+ 1047 052e 40F00200 		orr	r0, r0, #2
+ 1048              	.L139:
+ 1049 0532 0AB1     		cbz	r2, .L140
+ 1050 0534 40F00400 		orr	r0, r0, #4
+ 1051              	.L140:
+ 1052 0538 0BB1     		cbz	r3, .L141
+ 1053 053a 40F00800 		orr	r0, r0, #8
+ 1054              	.L141:
+ 1055 053e 0DB1     		cbz	r5, .L142
+ 1056 0540 40F01000 		orr	r0, r0, #16
+ 1057              	.L142:
+ 1058 0544 0CB1     		cbz	r4, .L143
+ 1059 0546 40F02000 		orr	r0, r0, #32
+ 1060              	.L143:
+ 1061 054a 0146     		mov	r1, r0
+ 1062 054c 30BC     		pop	{r4, r5}
+ 1063 054e 0220     		movs	r0, #2
+ 1064 0550 9AE5     		b	nordic_writeRegister
+ 1066 0552 00BF     		.section	.rodata
+ 1067              		.set	.LANCHOR0,. + 0
+ 1068              	.LC0:
+ 1069 0000 E7       		.byte	-25
+ 1070 0001 DE       		.byte	-34
+ 1071 0002 AD       		.byte	-83
+ 1072 0003 E7       		.byte	-25
+ 1073 0004 E7       		.byte	-25
+ 1074              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 nrf24L01Plus.c
-     /tmp/cc3QDrRi.s:16     .text:00000000 $t
-     /tmp/cc3QDrRi.s:20     .text:00000000 nordic_transfer
-     /tmp/cc3QDrRi.s:78     .text:0000005c $d
-     /tmp/cc3QDrRi.s:81     .text:00000064 $t
-     /tmp/cc3QDrRi.s:85     .text:00000064 nordic_readRegister
-     /tmp/cc3QDrRi.s:103    .text:00000080 nordic_writeRegister
-     /tmp/cc3QDrRi.s:121    .text:0000009c nordic_readStatusRegister
-     /tmp/cc3QDrRi.s:136    .text:000000a6 nordic_is_air_free
-     /tmp/cc3QDrRi.s:150    .text:000000b4 nordic_is_tx_fifo_full
-     /tmp/cc3QDrRi.s:163    .text:000000c0 nordic_is_tx_fifo_empty
-     /tmp/cc3QDrRi.s:177    .text:000000ce nordic_clear_all_intr_flags
-     /tmp/cc3QDrRi.s:190    .text:000000d4 nordic_queue_tx_fifo
-     /tmp/cc3QDrRi.s:206    .text:000000e0 nordic_standby1_to_tx_mode1
-     /tmp/cc3QDrRi.s:222    .text:000000f4 nordic_standby1_to_tx_mode2
-     /tmp/cc3QDrRi.s:234    .text:00000104 $d
-     /tmp/cc3QDrRi.s:236    .text:00000108 $t
-     /tmp/cc3QDrRi.s:241    .text:00000108 nordic_rx_to_Stanby1
-     /tmp/cc3QDrRi.s:252    .text:00000114 $d
-     /tmp/cc3QDrRi.s:254    .text:00000118 $t
-     /tmp/cc3QDrRi.s:259    .text:00000118 nordic_standby1_to_rx
-     /tmp/cc3QDrRi.s:276    .text:00000138 $d
-     /tmp/cc3QDrRi.s:278    .text:0000013c $t
-     /tmp/cc3QDrRi.s:283    .text:0000013c nordic_is_packet_sent
-     /tmp/cc3QDrRi.s:296    .text:00000148 nordic_clear_packet_sent_flag
-     /tmp/cc3QDrRi.s:309    .text:0000014e nordic_is_max_retries_reached
-     /tmp/cc3QDrRi.s:322    .text:0000015a nordic_clear_max_retries_flag
-     /tmp/cc3QDrRi.s:335    .text:00000160 nordic_flush_tx_fifo
-     /tmp/cc3QDrRi.s:350    .text:0000016a nordic_mode1_send_single_packet
-     /tmp/cc3QDrRi.s:384    .text:000001b0 $d
-     /tmp/cc3QDrRi.s:386    .text:000001b4 $t
-     /tmp/cc3QDrRi.s:391    .text:000001b4 nordic_finishTxMode2_transitionToStandby1
-     /tmp/cc3QDrRi.s:414    .text:000001d8 $d
-     /tmp/cc3QDrRi.s:416    .text:000001dc $t
-     /tmp/cc3QDrRi.s:421    .text:000001dc nordic_is_packet_available
-     /tmp/cc3QDrRi.s:438    .text:000001f0 nordic_clear_packet_available_flag
-     /tmp/cc3QDrRi.s:451    .text:000001f6 nordic_read_rx_fifo
-     /tmp/cc3QDrRi.s:469    .text:0000020c nordic_flush_rx_fifo
-     /tmp/cc3QDrRi.s:484    .text:00000216 nordic_set_intr_signals
-     /tmp/cc3QDrRi.s:521    .text:00000252 nordic_get_intr_reg_status
-     /tmp/cc3QDrRi.s:533    .text:00000256 nordic_set_crc
-     /tmp/cc3QDrRi.s:564    .text:00000288 nordic_power_up
-     /tmp/cc3QDrRi.s:581    .text:0000029e nordic_power_down
-     /tmp/cc3QDrRi.s:597    .text:000002b2 nordic_tx_mode2_to_standby1_through_power_down
-     /tmp/cc3QDrRi.s:610    .text:000002c8 $d
-     /tmp/cc3QDrRi.s:612    .text:000002cc $t
-     /tmp/cc3QDrRi.s:617    .text:000002cc nordic_set_channel
-     /tmp/cc3QDrRi.s:642    .text:000002ee nordic_set_continous_carrier_transmit
-     /tmp/cc3QDrRi.s:666    .text:00000312 nordic_set_air_data_rate
-     /tmp/cc3QDrRi.s:692    .text:0000033c nordic_set_power_level
-     /tmp/cc3QDrRi.s:715    .text:00000360 nordic_set_auto_transmit_options
-     /tmp/cc3QDrRi.s:745    .text:0000038e nordic_get_lost_packet_cnt
-     /tmp/cc3QDrRi.s:768    .text:000003b0 nordic_get_retransmit_count
-     /tmp/cc3QDrRi.s:782    .text:000003be nordic_set_payload_for_pipe
-     /tmp/cc3QDrRi.s:802    .text:000003d0 nordic_set_addr_width
-     /tmp/cc3QDrRi.s:824    .text:000003e4 nordic_set_tx_address
-     /tmp/cc3QDrRi.s:840    .text:000003f0 nordic_set_rx_pipe0_addr
-     /tmp/cc3QDrRi.s:856    .text:000003fc nordic_set_rx_pipe1_addr
-     /tmp/cc3QDrRi.s:872    .text:00000408 nordic_set_rx_pipe2_lsb_addr
-     /tmp/cc3QDrRi.s:885    .text:0000040e nordic_set_rx_pipe3_lsb_addr
-     /tmp/cc3QDrRi.s:898    .text:00000414 nordic_set_rx_pipe4_lsb_addr
-     /tmp/cc3QDrRi.s:911    .text:0000041a nordic_set_rx_pipe5_lsb_addr
-     /tmp/cc3QDrRi.s:924    .text:00000420 nordic_set_auto_ack_for_pipes
-     /tmp/cc3QDrRi.s:956    .text:00000454 nordic_enable_pipes
-     /tmp/cc3QDrRi.s:988    .text:00000488 nordic_init
-     /tmp/cc3QDrRi.s:1070   .text:00000558 $d
+     /tmp/ccQyniIU.s:17     .text:00000000 $t
+     /tmp/ccQyniIU.s:21     .text:00000000 nordic_transfer
+     /tmp/ccQyniIU.s:78     .text:00000060 $d
+     /tmp/ccQyniIU.s:81     .text:00000068 $t
+     /tmp/ccQyniIU.s:85     .text:00000068 nordic_readRegister
+     /tmp/ccQyniIU.s:105    .text:00000088 nordic_writeRegister
+     /tmp/ccQyniIU.s:125    .text:000000a6 nordic_readStatusRegister
+     /tmp/ccQyniIU.s:140    .text:000000b0 nordic_is_air_free
+     /tmp/ccQyniIU.s:154    .text:000000be nordic_is_tx_fifo_full
+     /tmp/ccQyniIU.s:167    .text:000000ca nordic_is_tx_fifo_empty
+     /tmp/ccQyniIU.s:181    .text:000000d8 nordic_clear_all_intr_flags
+     /tmp/ccQyniIU.s:194    .text:000000de nordic_queue_tx_fifo
+     /tmp/ccQyniIU.s:209    .text:000000e8 nordic_standby1_to_tx_mode1
+     /tmp/ccQyniIU.s:225    .text:000000fc nordic_standby1_to_tx_mode2
+     /tmp/ccQyniIU.s:237    .text:0000010c $d
+     /tmp/ccQyniIU.s:239    .text:00000110 $t
+     /tmp/ccQyniIU.s:244    .text:00000110 nordic_rx_to_Stanby1
+     /tmp/ccQyniIU.s:255    .text:0000011c $d
+     /tmp/ccQyniIU.s:257    .text:00000120 $t
+     /tmp/ccQyniIU.s:262    .text:00000120 nordic_standby1_to_rx
+     /tmp/ccQyniIU.s:279    .text:00000140 $d
+     /tmp/ccQyniIU.s:281    .text:00000144 $t
+     /tmp/ccQyniIU.s:286    .text:00000144 nordic_is_packet_sent
+     /tmp/ccQyniIU.s:299    .text:00000150 nordic_clear_packet_sent_flag
+     /tmp/ccQyniIU.s:312    .text:00000156 nordic_is_max_retries_reached
+     /tmp/ccQyniIU.s:325    .text:00000162 nordic_clear_max_retries_flag
+     /tmp/ccQyniIU.s:338    .text:00000168 nordic_flush_tx_fifo
+     /tmp/ccQyniIU.s:353    .text:00000172 nordic_mode1_send_single_packet
+     /tmp/ccQyniIU.s:390    .text:000001bc $d
+     /tmp/ccQyniIU.s:392    .text:000001c0 $t
+     /tmp/ccQyniIU.s:397    .text:000001c0 nordic_finishTxMode2_transitionToStandby1
+     /tmp/ccQyniIU.s:420    .text:000001e8 $d
+     /tmp/ccQyniIU.s:422    .text:000001ec $t
+     /tmp/ccQyniIU.s:427    .text:000001ec nordic_is_packet_available
+     /tmp/ccQyniIU.s:442    .text:000001fe nordic_clear_packet_available_flag
+     /tmp/ccQyniIU.s:455    .text:00000204 nordic_read_rx_fifo
+     /tmp/ccQyniIU.s:472    .text:00000218 nordic_flush_rx_fifo
+     /tmp/ccQyniIU.s:487    .text:00000222 nordic_set_intr_signals
+     /tmp/ccQyniIU.s:524    .text:0000025e nordic_get_intr_reg_status
+     /tmp/ccQyniIU.s:536    .text:00000262 nordic_set_crc
+     /tmp/ccQyniIU.s:568    .text:00000298 nordic_power_up
+     /tmp/ccQyniIU.s:585    .text:000002ae nordic_power_down
+     /tmp/ccQyniIU.s:601    .text:000002c2 nordic_tx_mode2_to_standby1_through_power_down
+     /tmp/ccQyniIU.s:614    .text:000002d8 $d
+     /tmp/ccQyniIU.s:616    .text:000002dc $t
+     /tmp/ccQyniIU.s:621    .text:000002dc nordic_set_channel
+     /tmp/ccQyniIU.s:646    .text:000002fe nordic_set_continous_carrier_transmit
+     /tmp/ccQyniIU.s:670    .text:00000322 nordic_set_air_data_rate
+     /tmp/ccQyniIU.s:696    .text:0000034c nordic_set_power_level
+     /tmp/ccQyniIU.s:718    .text:0000036e nordic_set_auto_transmit_options
+     /tmp/ccQyniIU.s:748    .text:0000039e nordic_get_lost_packet_cnt
+     /tmp/ccQyniIU.s:771    .text:000003c0 nordic_get_retransmit_count
+     /tmp/ccQyniIU.s:785    .text:000003ce nordic_set_payload_for_pipe
+     /tmp/ccQyniIU.s:805    .text:000003e0 nordic_set_addr_width
+     /tmp/ccQyniIU.s:827    .text:000003f4 nordic_set_tx_address
+     /tmp/ccQyniIU.s:842    .text:000003fe nordic_set_rx_pipe0_addr
+     /tmp/ccQyniIU.s:857    .text:00000408 nordic_init
+     /tmp/ccQyniIU.s:932    .text:000004c8 $d
+     /tmp/ccQyniIU.s:935    .text:000004d0 $t
+     /tmp/ccQyniIU.s:940    .text:000004d0 nordic_set_rx_pipe1_addr
+     /tmp/ccQyniIU.s:955    .text:000004da nordic_set_rx_pipe2_lsb_addr
+     /tmp/ccQyniIU.s:968    .text:000004e0 nordic_set_rx_pipe3_lsb_addr
+     /tmp/ccQyniIU.s:981    .text:000004e6 nordic_set_rx_pipe4_lsb_addr
+     /tmp/ccQyniIU.s:994    .text:000004ec nordic_set_rx_pipe5_lsb_addr
+     /tmp/ccQyniIU.s:1007   .text:000004f2 nordic_set_auto_ack_for_pipes
+     /tmp/ccQyniIU.s:1039   .text:00000522 nordic_enable_pipes
 
 UNDEFINED SYMBOLS
-memcpy
 delay_us

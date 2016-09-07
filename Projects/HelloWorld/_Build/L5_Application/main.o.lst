@@ -11,174 +11,65 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"main.cpp"
-  15              		.text
-  16              		.align	1
-  17              		.global	_Z5ctobaPcc
-  18              		.thumb
-  19              		.thumb_func
-  21              	_Z5ctobaPcc:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
+  14              		.syntax unified
+  15              		.file	"main.cpp"
+  16              		.text
+  17              		.align	1
+  18              		.global	_Z5ctobaPcc
+  19              		.thumb
+  20              		.thumb_func
+  22              	_Z5ctobaPcc:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
   25 0000 0023     		movs	r3, #0
-  26 0002 0371     		strb	r3, [r0, #4]
-  27 0004 0323     		movs	r3, #3
-  28              	.L5:
-  29 0006 0822     		movs	r2, #8
-  30 0008 1A41     		asrs	r2, r2, r3
-  31 000a 0A42     		tst	r2, r1
-  32 000c 14BF     		ite	ne
-  33 000e 3122     		movne	r2, #49
-  34 0010 3022     		moveq	r2, #48
-  35 0012 C254     		strb	r2, [r0, r3]
-  36 0014 13F1FF33 		adds	r3, r3, #-1
-  37 0018 F5D2     		bcs	.L5
-  38 001a 7047     		bx	lr
-  40              		.section	.text._ZN17SingletonTemplateI3LEDE11getInstanceEv,"axG",%progbits,_ZN17SingletonTemplateI
-  41              		.align	1
-  42              		.weak	_ZN17SingletonTemplateI3LEDE11getInstanceEv
-  43              		.thumb
-  44              		.thumb_func
-  46              	_ZN17SingletonTemplateI3LEDE11getInstanceEv:
-  47              		@ args = 0, pretend = 0, frame = 0
-  48              		@ frame_needed = 0, uses_anonymous_args = 0
-  49 0000 38B5     		push	{r3, r4, r5, lr}
-  50 0002 054C     		ldr	r4, .L12
-  51 0004 2568     		ldr	r5, [r4]
-  52 0006 25B9     		cbnz	r5, .L11
-  53 0008 0120     		movs	r0, #1
-  54 000a FFF7FEFF 		bl	_Znwj
-  55 000e 0570     		strb	r5, [r0]
-  56 0010 2060     		str	r0, [r4]
-  57              	.L11:
-  58 0012 2068     		ldr	r0, [r4]
-  59 0014 38BD     		pop	{r3, r4, r5, pc}
-  60              	.L13:
-  61 0016 00BF     		.align	2
-  62              	.L12:
-  63 0018 00000000 		.word	_ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE
-  65              		.section	.text.startup,"ax",%progbits
-  66              		.align	1
-  67              		.global	main
-  68              		.thumb
-  69              		.thumb_func
-  71              	main:
-  72              		@ args = 0, pretend = 0, frame = 8
-  73              		@ frame_needed = 0, uses_anonymous_args = 0
-  74 0000 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
-  75 0004 0024     		movs	r4, #0
-  76 0006 0094     		str	r4, [sp]
-  77 0008 8DF80440 		strb	r4, [sp, #4]
-  78              	.L15:
-  79 000c 5FFA84F8 		uxtb	r8, r4
-  80 0010 4146     		mov	r1, r8
-  81 0012 6846     		mov	r0, sp
-  82 0014 FFF7FEFF 		bl	_Z5ctobaPcc
-  83 0018 1D48     		ldr	r0, .L23
-  84 001a 6946     		mov	r1, sp
-  85 001c FFF7FEFF 		bl	printf
-  86 0020 0425     		movs	r5, #4
-  87              	.L19:
-  88 0022 6E1E     		subs	r6, r5, #1
-  89 0024 0823     		movs	r3, #8
-  90 0026 3341     		asrs	r3, r3, r6
-  91 0028 2342     		tst	r3, r4
-  92 002a 05D0     		beq	.L16
-  93 002c FFF7FEFF 		bl	_ZN17SingletonTemplateI3LEDE11getInstanceEv
-  94 0030 2946     		mov	r1, r5
-  95 0032 FFF7FEFF 		bl	_ZN3LED2onEi
-  96 0036 04E0     		b	.L17
-  97              	.L16:
-  98 0038 FFF7FEFF 		bl	_ZN17SingletonTemplateI3LEDE11getInstanceEv
-  99 003c 2946     		mov	r1, r5
- 100 003e FFF7FEFF 		bl	_ZN3LED3offEi
- 101              	.L17:
- 102 0042 0EB1     		cbz	r6, .L18
- 103 0044 3546     		mov	r5, r6
- 104 0046 ECE7     		b	.L19
- 105              	.L18:
- 106 0048 124D     		ldr	r5, .L23+4
- 107 004a 2B68     		ldr	r3, [r5]
- 108 004c 9BB9     		cbnz	r3, .L20
- 109 004e 0820     		movs	r0, #8
- 110 0050 FFF7FEFF 		bl	_Znwj
- 111 0054 104F     		ldr	r7, .L23+8
- 112 0056 0646     		mov	r6, r0
- 113 0058 3B68     		ldr	r3, [r7]
- 114 005a 3BB9     		cbnz	r3, .L21
- 115 005c 1C20     		movs	r0, #28
- 116 005e FFF7FEFF 		bl	_Znwj
- 117 0062 8146     		mov	r9, r0
- 118 0064 FFF7FEFF 		bl	_ZN4I2C2C1Ev
- 119 0068 C7F80090 		str	r9, [r7]
- 120              	.L21:
- 121 006c 3B68     		ldr	r3, [r7]
- 122 006e 3360     		str	r3, [r6]
- 123 0070 4023     		movs	r3, #64
- 124 0072 3371     		strb	r3, [r6, #4]
- 125 0074 2E60     		str	r6, [r5]
- 126              	.L20:
- 127 0076 2868     		ldr	r0, [r5]
- 128 0078 4146     		mov	r1, r8
- 129 007a FFF7FEFF 		bl	_ZN11LED_Display9setNumberEc
- 130 007e 0134     		adds	r4, r4, #1
- 131 0080 40F2DC50 		movw	r0, #1500
- 132 0084 FFF7FEFF 		bl	delay_ms
- 133 0088 102C     		cmp	r4, #16
- 134 008a A8BF     		it	ge
- 135 008c 0024     		movge	r4, #0
- 136 008e BDE7     		b	.L15
- 137              	.L24:
- 138              		.align	2
- 139              	.L23:
- 140 0090 00000000 		.word	.LC0
- 141 0094 00000000 		.word	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
- 142 0098 00000000 		.word	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
- 144              		.weak	_ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE
- 145              		.section	.bss._ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTempl
- 146              		.align	2
- 149              	_ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE:
- 150 0000 00000000 		.space	4
- 151              		.weak	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
- 152              		.section	.bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE,"awG",%nobits,_ZN17Singl
- 153              		.align	2
- 156              	_ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:
- 157 0000 00000000 		.space	4
- 158              		.weak	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
- 159              		.section	.bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTemp
- 160              		.align	2
- 163              	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:
- 164 0000 00000000 		.space	4
- 165              		.section	.rodata.str1.1,"aMS",%progbits,1
- 166              	.LC0:
- 167 0000 416B6173 		.ascii	"Akash i = 0b%s\012\000"
- 167      68206920 
- 167      3D203062 
- 167      25730A00 
- 168              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20131129 (release) [ARM/embedded-4_8-br
+  26 0002 70B5     		push	{r4, r5, r6, lr}
+  27 0004 0371     		strb	r3, [r0, #4]
+  28 0006 0822     		movs	r2, #8
+  29 0008 0323     		movs	r3, #3
+  30 000a 3024     		movs	r4, #48
+  31 000c 3125     		movs	r5, #49
+  32              	.L4:
+  33 000e 42FA03F6 		asr	r6, r2, r3
+  34 0012 0E42     		tst	r6, r1
+  35 0014 14BF     		ite	ne
+  36 0016 C554     		strbne	r5, [r0, r3]
+  37 0018 C454     		strbeq	r4, [r0, r3]
+  38 001a 13F1FF33 		adds	r3, r3, #-1
+  39 001e F6D2     		bcs	.L4
+  40 0020 70BD     		pop	{r4, r5, r6, pc}
+  42              		.section	.text.startup,"ax",%progbits
+  43              		.align	1
+  44              		.global	main
+  45              		.thumb
+  46              		.thumb_func
+  48              	main:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51 0000 08B5     		push	{r3, lr}
+  52              	.L8:
+  53 0002 0448     		ldr	r0, .L9
+  54 0004 FFF7FEFF 		bl	puts
+  55 0008 40F2DC50 		movw	r0, #1500
+  56 000c FFF7FEFF 		bl	delay_ms
+  57 0010 F7E7     		b	.L8
+  58              	.L10:
+  59 0012 00BF     		.align	2
+  60              	.L9:
+  61 0014 00000000 		.word	.LC0
+  63              		.section	.rodata.str1.1,"aMS",%progbits,1
+  64              	.LC0:
+  65 0000 48656C6C 		.ascii	"Hello World\000"
+  65      6F20576F 
+  65      726C6400 
+  66              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 main.cpp
-     /tmp/ccTmjUQj.s:16     .text:0000000000000000 $t
-     /tmp/ccTmjUQj.s:21     .text:0000000000000000 _Z5ctobaPcc
-     /tmp/ccTmjUQj.s:41     .text._ZN17SingletonTemplateI3LEDE11getInstanceEv:0000000000000000 $t
-     /tmp/ccTmjUQj.s:46     .text._ZN17SingletonTemplateI3LEDE11getInstanceEv:0000000000000000 _ZN17SingletonTemplateI3LEDE11getInstanceEv
-     /tmp/ccTmjUQj.s:63     .text._ZN17SingletonTemplateI3LEDE11getInstanceEv:0000000000000018 $d
-     /tmp/ccTmjUQj.s:149    .bss._ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE:0000000000000000 _ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE
-     /tmp/ccTmjUQj.s:66     .text.startup:0000000000000000 $t
-     /tmp/ccTmjUQj.s:71     .text.startup:0000000000000000 main
-     /tmp/ccTmjUQj.s:140    .text.startup:0000000000000090 $d
-     /tmp/ccTmjUQj.s:156    .bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:0000000000000000 _ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE
-     /tmp/ccTmjUQj.s:163    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:0000000000000000 _ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
-     /tmp/ccTmjUQj.s:146    .bss._ZN17SingletonTemplateI3LEDE19mpSingletonInstanceE:0000000000000000 $d
-     /tmp/ccTmjUQj.s:153    .bss._ZN17SingletonTemplateI11LED_DisplayE19mpSingletonInstanceE:0000000000000000 $d
-     /tmp/ccTmjUQj.s:160    .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:0000000000000000 $d
+                            *ABS*:00000000 main.cpp
+     /tmp/ccuvl1hw.s:17     .text:00000000 $t
+     /tmp/ccuvl1hw.s:22     .text:00000000 _Z5ctobaPcc
+     /tmp/ccuvl1hw.s:43     .text.startup:00000000 $t
+     /tmp/ccuvl1hw.s:48     .text.startup:00000000 main
+     /tmp/ccuvl1hw.s:61     .text.startup:00000014 $d
 
 UNDEFINED SYMBOLS
-_Znwj
-printf
-_ZN3LED2onEi
-_ZN3LED3offEi
-_ZN4I2C2C1Ev
-_ZN11LED_Display9setNumberEc
+puts
 delay_ms

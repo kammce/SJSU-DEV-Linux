@@ -11,50 +11,51 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"heap_3.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	pvPortMalloc
-  18              		.thumb
-  19              		.thumb_func
-  21              	pvPortMalloc:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24 0000 10B5     		push	{r4, lr}
-  25 0002 0446     		mov	r4, r0
-  26 0004 FFF7FEFF 		bl	vTaskSuspendAll
-  27 0008 2046     		mov	r0, r4
-  28 000a FFF7FEFF 		bl	malloc
-  29 000e 0446     		mov	r4, r0
-  30 0010 FFF7FEFF 		bl	xTaskResumeAll
-  31 0014 0CB9     		cbnz	r4, .L2
-  32 0016 FFF7FEFF 		bl	vApplicationMallocFailedHook
-  33              	.L2:
-  34 001a 2046     		mov	r0, r4
-  35 001c 10BD     		pop	{r4, pc}
-  37              		.align	1
-  38              		.global	vPortFree
-  39              		.thumb
-  40              		.thumb_func
-  42              	vPortFree:
-  43              		@ args = 0, pretend = 0, frame = 0
-  44              		@ frame_needed = 0, uses_anonymous_args = 0
-  45 001e 10B5     		push	{r4, lr}
-  46 0020 0446     		mov	r4, r0
-  47 0022 40B1     		cbz	r0, .L3
-  48 0024 FFF7FEFF 		bl	vTaskSuspendAll
-  49 0028 2046     		mov	r0, r4
-  50 002a FFF7FEFF 		bl	free
-  51 002e BDE81040 		pop	{r4, lr}
-  52 0032 FFF7FEBF 		b	xTaskResumeAll
-  53              	.L3:
-  54 0036 10BD     		pop	{r4, pc}
-  56              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"heap_3.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	pvPortMalloc
+  19              		.thumb
+  20              		.thumb_func
+  22              	pvPortMalloc:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0446     		mov	r4, r0
+  27 0004 FFF7FEFF 		bl	vTaskSuspendAll
+  28 0008 2046     		mov	r0, r4
+  29 000a FFF7FEFF 		bl	malloc
+  30 000e 0446     		mov	r4, r0
+  31 0010 FFF7FEFF 		bl	xTaskResumeAll
+  32 0014 0CB9     		cbnz	r4, .L2
+  33 0016 FFF7FEFF 		bl	vApplicationMallocFailedHook
+  34              	.L2:
+  35 001a 2046     		mov	r0, r4
+  36 001c 10BD     		pop	{r4, pc}
+  38              		.align	1
+  39              		.global	vPortFree
+  40              		.thumb
+  41              		.thumb_func
+  43              	vPortFree:
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  46 001e 10B5     		push	{r4, lr}
+  47 0020 0446     		mov	r4, r0
+  48 0022 40B1     		cbz	r0, .L4
+  49 0024 FFF7FEFF 		bl	vTaskSuspendAll
+  50 0028 2046     		mov	r0, r4
+  51 002a FFF7FEFF 		bl	free
+  52 002e BDE81040 		pop	{r4, lr}
+  53 0032 FFF7FEBF 		b	xTaskResumeAll
+  54              	.L4:
+  55 0036 10BD     		pop	{r4, pc}
+  57              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 heap_3.c
-     /tmp/cc9tZ0Nc.s:16     .text:00000000 $t
-     /tmp/cc9tZ0Nc.s:21     .text:00000000 pvPortMalloc
-     /tmp/cc9tZ0Nc.s:42     .text:0000001e vPortFree
+     /tmp/ccoCDzNg.s:17     .text:00000000 $t
+     /tmp/ccoCDzNg.s:22     .text:00000000 pvPortMalloc
+     /tmp/ccoCDzNg.s:43     .text:0000001e vPortFree
 
 UNDEFINED SYMBOLS
 vTaskSuspendAll

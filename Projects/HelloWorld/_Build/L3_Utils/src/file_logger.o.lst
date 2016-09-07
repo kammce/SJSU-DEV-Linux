@@ -11,515 +11,427 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"file_logger.cpp"
-  15              		.section	.text._ZN10LoggerBaseD2Ev,"axG",%progbits,_ZN10LoggerBaseD5Ev,comdat
-  16              		.align	1
-  17              		.weak	_ZN10LoggerBaseD2Ev
-  18              		.thumb
-  19              		.thumb_func
-  21              	_ZN10LoggerBaseD2Ev:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 014B     		ldr	r3, .L3
-  26 0002 0360     		str	r3, [r0, #0]
-  27 0004 7047     		bx	lr
-  28              	.L4:
-  29 0006 00BF     		.align	2
-  30              	.L3:
-  31 0008 08000000 		.word	_ZTV10LoggerBase+8
-  33              		.section	.text._ZN10LoggerBase7semTakeEv,"axG",%progbits,_ZN10LoggerBase7semTakeEv,comdat
-  34              		.align	1
-  35              		.weak	_ZN10LoggerBase7semTakeEv
-  36              		.thumb
-  37              		.thumb_func
-  39              	_ZN10LoggerBase7semTakeEv:
-  40              		@ args = 0, pretend = 0, frame = 0
-  41              		@ frame_needed = 0, uses_anonymous_args = 0
-  42              		@ link register save eliminated.
-  43 0000 7047     		bx	lr
-  45              		.section	.text._ZN10LoggerBase7semGiveEv,"axG",%progbits,_ZN10LoggerBase7semGiveEv,comdat
-  46              		.align	1
-  47              		.weak	_ZN10LoggerBase7semGiveEv
-  48              		.thumb
-  49              		.thumb_func
-  51              	_ZN10LoggerBase7semGiveEv:
-  52              		@ args = 0, pretend = 0, frame = 0
-  53              		@ frame_needed = 0, uses_anonymous_args = 0
-  54              		@ link register save eliminated.
-  55 0000 7047     		bx	lr
-  57              		.section	.text._ZN10LoggerBase12getTimestampEv,"axG",%progbits,_ZN10LoggerBase12getTimestampEv,com
-  58              		.align	1
-  59              		.weak	_ZN10LoggerBase12getTimestampEv
-  60              		.thumb
-  61              		.thumb_func
-  63              	_ZN10LoggerBase12getTimestampEv:
-  64              		@ args = 0, pretend = 0, frame = 0
-  65              		@ frame_needed = 0, uses_anonymous_args = 0
-  66              		@ link register save eliminated.
-  67 0000 0020     		movs	r0, #0
-  68 0002 7047     		bx	lr
-  70              		.section	.text._ZN12SimpleLoggerD2Ev,"axG",%progbits,_ZN12SimpleLoggerD5Ev,comdat
-  71              		.align	1
-  72              		.weak	_ZN12SimpleLoggerD2Ev
-  73              		.thumb
-  74              		.thumb_func
-  76              	_ZN12SimpleLoggerD2Ev:
-  77              		@ args = 0, pretend = 0, frame = 0
-  78              		@ frame_needed = 0, uses_anonymous_args = 0
-  79              		@ link register save eliminated.
-  80 0000 014B     		ldr	r3, .L11
-  81 0002 0360     		str	r3, [r0, #0]
-  82 0004 7047     		bx	lr
-  83              	.L12:
-  84 0006 00BF     		.align	2
-  85              	.L11:
-  86 0008 08000000 		.word	_ZTV10LoggerBase+8
-  88              		.section	.text._ZN10FileLoggerD2Ev,"axG",%progbits,_ZN10FileLoggerD5Ev,comdat
-  89              		.align	1
-  90              		.weak	_ZN10FileLoggerD2Ev
-  91              		.thumb
-  92              		.thumb_func
-  94              	_ZN10FileLoggerD2Ev:
-  95              		@ args = 0, pretend = 0, frame = 0
-  96              		@ frame_needed = 0, uses_anonymous_args = 0
-  97              		@ link register save eliminated.
-  98 0000 014B     		ldr	r3, .L16
-  99 0002 0360     		str	r3, [r0, #0]
- 100 0004 7047     		bx	lr
- 101              	.L17:
- 102 0006 00BF     		.align	2
- 103              	.L16:
- 104 0008 08000000 		.word	_ZTV10LoggerBase+8
- 106              		.section	.text._ZN10FileLoggerD0Ev,"axG",%progbits,_ZN10FileLoggerD5Ev,comdat
- 107              		.align	1
- 108              		.weak	_ZN10FileLoggerD0Ev
- 109              		.thumb
- 110              		.thumb_func
- 112              	_ZN10FileLoggerD0Ev:
- 113              		@ args = 0, pretend = 0, frame = 0
- 114              		@ frame_needed = 0, uses_anonymous_args = 0
- 115 0000 034B     		ldr	r3, .L22
- 116 0002 10B5     		push	{r4, lr}
- 117 0004 0446     		mov	r4, r0
- 118 0006 0360     		str	r3, [r0, #0]
- 119 0008 FFF7FEFF 		bl	_ZdlPv
- 120 000c 2046     		mov	r0, r4
- 121 000e 10BD     		pop	{r4, pc}
- 122              	.L23:
- 123              		.align	2
- 124              	.L22:
- 125 0010 08000000 		.word	_ZTV10LoggerBase+8
- 127              		.section	.text._ZN12SimpleLoggerD0Ev,"axG",%progbits,_ZN12SimpleLoggerD5Ev,comdat
- 128              		.align	1
- 129              		.weak	_ZN12SimpleLoggerD0Ev
- 130              		.thumb
- 131              		.thumb_func
- 133              	_ZN12SimpleLoggerD0Ev:
- 134              		@ args = 0, pretend = 0, frame = 0
- 135              		@ frame_needed = 0, uses_anonymous_args = 0
- 136 0000 034B     		ldr	r3, .L28
- 137 0002 10B5     		push	{r4, lr}
- 138 0004 0446     		mov	r4, r0
- 139 0006 0360     		str	r3, [r0, #0]
- 140 0008 FFF7FEFF 		bl	_ZdlPv
- 141 000c 2046     		mov	r0, r4
- 142 000e 10BD     		pop	{r4, pc}
- 143              	.L29:
- 144              		.align	2
- 145              	.L28:
- 146 0010 08000000 		.word	_ZTV10LoggerBase+8
- 148              		.section	.text._ZN10LoggerBaseD0Ev,"axG",%progbits,_ZN10LoggerBaseD5Ev,comdat
- 149              		.align	1
- 150              		.weak	_ZN10LoggerBaseD0Ev
- 151              		.thumb
- 152              		.thumb_func
- 154              	_ZN10LoggerBaseD0Ev:
- 155              		@ args = 0, pretend = 0, frame = 0
- 156              		@ frame_needed = 0, uses_anonymous_args = 0
- 157 0000 034B     		ldr	r3, .L33
- 158 0002 10B5     		push	{r4, lr}
- 159 0004 0446     		mov	r4, r0
- 160 0006 0360     		str	r3, [r0, #0]
- 161 0008 FFF7FEFF 		bl	_ZdlPv
- 162 000c 2046     		mov	r0, r4
- 163 000e 10BD     		pop	{r4, pc}
- 164              	.L34:
- 165              		.align	2
- 166              	.L33:
- 167 0010 08000000 		.word	_ZTV10LoggerBase+8
- 169              		.text
- 170              		.align	1
- 171              		.global	_ZN12SimpleLogger21handleCompletedBufferEPcj
- 172              		.thumb
- 173              		.thumb_func
- 175              	_ZN12SimpleLogger21handleCompletedBufferEPcj:
- 176              		@ args = 0, pretend = 0, frame = 0
- 177              		@ frame_needed = 0, uses_anonymous_args = 0
- 178              		@ link register save eliminated.
- 179 0000 0069     		ldr	r0, [r0, #16]
- 180 0002 0023     		movs	r3, #0
- 181 0004 FFF7FEBF 		b	_ZN7Storage6appendEPKcPvjj
- 183              		.align	1
- 184              		.global	_ZN10FileLogger12getTimestampEv
- 185              		.thumb
- 186              		.thumb_func
- 188              	_ZN10FileLogger12getTimestampEv:
- 189              		@ args = 0, pretend = 0, frame = 0
- 190              		@ frame_needed = 0, uses_anonymous_args = 0
- 191 0008 08B5     		push	{r3, lr}
- 192 000a FFF7FEFF 		bl	sys_get_uptime_ms
- 193 000e 08BD     		pop	{r3, pc}
- 195              		.align	1
- 196              		.global	_ZN10FileLogger7semGiveEv
- 197              		.thumb
- 198              		.thumb_func
- 200              	_ZN10FileLogger7semGiveEv:
- 201              		@ args = 0, pretend = 0, frame = 0
- 202              		@ frame_needed = 0, uses_anonymous_args = 0
- 203 0010 10B5     		push	{r4, lr}
- 204 0012 0446     		mov	r4, r0
- 205 0014 FFF7FEFF 		bl	is_freertos_running
- 206 0018 38B1     		cbz	r0, .L37
- 207 001a 0021     		movs	r1, #0
- 208 001c 2069     		ldr	r0, [r4, #16]
- 209 001e 0A46     		mov	r2, r1
- 210 0020 0B46     		mov	r3, r1
- 211 0022 BDE81040 		pop	{r4, lr}
- 212 0026 FFF7FEBF 		b	xQueueGenericSend
- 213              	.L37:
- 214 002a 10BD     		pop	{r4, pc}
- 216              		.align	1
- 217              		.global	_ZN10FileLogger7semTakeEv
- 218              		.thumb
- 219              		.thumb_func
- 221              	_ZN10FileLogger7semTakeEv:
- 222              		@ args = 0, pretend = 0, frame = 0
- 223              		@ frame_needed = 0, uses_anonymous_args = 0
- 224 002c 10B5     		push	{r4, lr}
- 225 002e 0446     		mov	r4, r0
- 226 0030 FFF7FEFF 		bl	is_freertos_running
- 227 0034 40B1     		cbz	r0, .L39
- 228 0036 0021     		movs	r1, #0
- 229 0038 2069     		ldr	r0, [r4, #16]
- 230 003a 4FF0FF32 		mov	r2, #-1
- 231 003e 0B46     		mov	r3, r1
- 232 0040 BDE81040 		pop	{r4, lr}
- 233 0044 FFF7FEBF 		b	xQueueGenericReceive
- 234              	.L39:
- 235 0048 10BD     		pop	{r4, pc}
- 237              		.align	1
- 238              		.global	_ZN10FileLogger21handleCompletedBufferEPcj
- 239              		.thumb
- 240              		.thumb_func
- 242              	_ZN10FileLogger21handleCompletedBufferEPcj:
- 243              		@ args = 0, pretend = 0, frame = 0
- 244              		@ frame_needed = 0, uses_anonymous_args = 0
- 245 004a F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 246 004c 1948     		ldr	r0, .L50
- 247 004e 0023     		movs	r3, #0
- 248 0050 0C46     		mov	r4, r1
- 249 0052 1546     		mov	r5, r2
- 250 0054 FFF7FEFF 		bl	_ZN7Storage6appendEPKcPvjj
- 251 0058 0028     		cmp	r0, #0
- 252 005a 2AD0     		beq	.L41
- 253 005c 1648     		ldr	r0, .L50+4
- 254 005e FFF7FEFF 		bl	puts
- 255 0062 0026     		movs	r6, #0
- 256 0064 154F     		ldr	r7, .L50+8
- 257 0066 22E0     		b	.L43
- 258              	.L48:
- 259 0068 3868     		ldr	r0, [r7, #0]
- 260 006a 8268     		ldr	r2, [r0, #8]
- 261 006c 9368     		ldr	r3, [r2, #8]
- 262 006e 013B     		subs	r3, r3, #1
- 263 0070 002B     		cmp	r3, #0
- 264 0072 9360     		str	r3, [r2, #8]
- 265 0074 12DA     		bge	.L44
- 266 0076 9169     		ldr	r1, [r2, #24]
- 267 0078 8B42     		cmp	r3, r1
- 268 007a 0BDB     		blt	.L45
- 269 007c 1368     		ldr	r3, [r2, #0]
- 270 007e A25D     		ldrb	r2, [r4, r6]	@ zero_extendqisi2
- 271 0080 1A70     		strb	r2, [r3, #0]
- 272 0082 3868     		ldr	r0, [r7, #0]
- 273 0084 8268     		ldr	r2, [r0, #8]
- 274 0086 1368     		ldr	r3, [r2, #0]
- 275 0088 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
- 276 008a 0A29     		cmp	r1, #10
- 277 008c 03D0     		beq	.L49
- 278 008e 0133     		adds	r3, r3, #1
- 279 0090 1360     		str	r3, [r2, #0]
- 280 0092 0BE0     		b	.L47
- 281              	.L45:
- 282 0094 A15D     		ldrb	r1, [r4, r6]	@ zero_extendqisi2
- 283              	.L49:
- 284 0096 FFF7FEFF 		bl	__swbuf_r
- 285 009a 07E0     		b	.L47
- 286              	.L44:
- 287 009c 1368     		ldr	r3, [r2, #0]
- 288 009e A25D     		ldrb	r2, [r4, r6]	@ zero_extendqisi2
- 289 00a0 1A70     		strb	r2, [r3, #0]
- 290 00a2 3B68     		ldr	r3, [r7, #0]
- 291 00a4 9B68     		ldr	r3, [r3, #8]
- 292 00a6 1A68     		ldr	r2, [r3, #0]
- 293 00a8 0132     		adds	r2, r2, #1
- 294 00aa 1A60     		str	r2, [r3, #0]
- 295              	.L47:
- 296 00ac 0136     		adds	r6, r6, #1
- 297              	.L43:
- 298 00ae AE42     		cmp	r6, r5
- 299 00b0 DAD1     		bne	.L48
- 300              	.L41:
- 301 00b2 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 302              	.L51:
- 303              		.align	2
- 304              	.L50:
- 305 00b4 00000000 		.word	.LC0
- 306 00b8 04000000 		.word	.LC1
- 307 00bc 00000000 		.word	_impure_ptr
- 309              		.align	1
- 310              		.global	_ZN10FileLogger5flushEv
- 311              		.thumb
- 312              		.thumb_func
- 314              	_ZN10FileLogger5flushEv:
- 315              		@ args = 0, pretend = 0, frame = 0
- 316              		@ frame_needed = 0, uses_anonymous_args = 0
- 317 00c0 0368     		ldr	r3, [r0, #0]
- 318 00c2 10B5     		push	{r4, lr}
- 319 00c4 DB68     		ldr	r3, [r3, #12]
- 320 00c6 0446     		mov	r4, r0
- 321 00c8 9847     		blx	r3
- 322 00ca 2046     		mov	r0, r4
- 323 00cc FFF7FEFF 		bl	_ZN10LoggerBase5flushEv
- 324 00d0 2368     		ldr	r3, [r4, #0]
- 325 00d2 2046     		mov	r0, r4
- 326 00d4 1B69     		ldr	r3, [r3, #16]
- 327 00d6 9847     		blx	r3
- 328 00d8 10BD     		pop	{r4, pc}
- 330              		.align	1
- 331              		.global	_ZN10FileLoggerC2Ev
- 332              		.thumb
- 333              		.thumb_func
- 335              	_ZN10FileLoggerC2Ev:
- 336              		@ args = 0, pretend = 0, frame = 0
- 337              		@ frame_needed = 0, uses_anonymous_args = 0
- 338 00da 0A4B     		ldr	r3, .L57
- 339 00dc 10B5     		push	{r4, lr}
- 340 00de 0360     		str	r3, [r0, #0]
- 341 00e0 0023     		movs	r3, #0
- 342 00e2 0446     		mov	r4, r0
- 343 00e4 4360     		str	r3, [r0, #4]
- 344 00e6 4FF48060 		mov	r0, #1024
- 345 00ea E360     		str	r3, [r4, #12]
- 346 00ec A060     		str	r0, [r4, #8]
- 347 00ee FFF7FEFF 		bl	_Znaj
- 348 00f2 054B     		ldr	r3, .L57+4
- 349 00f4 6060     		str	r0, [r4, #4]
- 350 00f6 2360     		str	r3, [r4, #0]
- 351 00f8 0120     		movs	r0, #1
- 352 00fa FFF7FEFF 		bl	xQueueCreateMutex
- 353 00fe 2061     		str	r0, [r4, #16]
- 354 0100 2046     		mov	r0, r4
- 355 0102 10BD     		pop	{r4, pc}
- 356              	.L58:
- 357              		.align	2
- 358              	.L57:
- 359 0104 08000000 		.word	_ZTV10LoggerBase+8
- 360 0108 28000000 		.word	.LANCHOR0+40
- 362              		.align	1
- 363              		.global	_ZN12SimpleLoggerC2EPKcPci
- 364              		.thumb
- 365              		.thumb_func
- 367              	_ZN12SimpleLoggerC2EPKcPci:
- 368              		@ args = 0, pretend = 0, frame = 0
- 369              		@ frame_needed = 0, uses_anonymous_args = 0
- 370 010c 38B5     		push	{r3, r4, r5, lr}
- 371 010e 0D46     		mov	r5, r1
- 372 0110 0749     		ldr	r1, .L62
- 373 0112 0446     		mov	r4, r0
- 374 0114 80E80E00 		stmia	r0, {r1, r2, r3}
- 375 0118 0021     		movs	r1, #0
- 376 011a C160     		str	r1, [r0, #12]
- 377 011c 1AB9     		cbnz	r2, .L60
- 378 011e 1846     		mov	r0, r3
- 379 0120 FFF7FEFF 		bl	_Znaj
- 380 0124 6060     		str	r0, [r4, #4]
- 381              	.L60:
- 382 0126 034B     		ldr	r3, .L62+4
- 383 0128 2561     		str	r5, [r4, #16]
- 384 012a 2360     		str	r3, [r4, #0]
- 385 012c 2046     		mov	r0, r4
- 386 012e 38BD     		pop	{r3, r4, r5, pc}
- 387              	.L63:
- 388              		.align	2
- 389              	.L62:
- 390 0130 08000000 		.word	_ZTV10LoggerBase+8
- 391 0134 08000000 		.word	.LANCHOR0+8
- 393              		.align	1
- 394              		.global	_ZN12SimpleLogger6printfEPKcz
- 395              		.thumb
- 396              		.thumb_func
- 398              	_ZN12SimpleLogger6printfEPKcz:
- 399              		@ args = 4, pretend = 12, frame = 264
- 400              		@ frame_needed = 0, uses_anonymous_args = 1
- 401 0138 0EB4     		push	{r1, r2, r3}
- 402 013a 70B5     		push	{r4, r5, r6, lr}
- 403 013c C3B0     		sub	sp, sp, #268
- 404 013e 47AD     		add	r5, sp, #284
- 405 0140 55F8046B 		ldr	r6, [r5], #4
- 406 0144 0446     		mov	r4, r0
- 407 0146 0021     		movs	r1, #0
- 408 0148 01A8     		add	r0, sp, #4
- 409 014a 4FF48072 		mov	r2, #256
- 410 014e 4195     		str	r5, [sp, #260]
- 411 0150 FFF7FEFF 		bl	memset
- 412 0154 FF21     		movs	r1, #255
- 413 0156 01A8     		add	r0, sp, #4
- 414 0158 3246     		mov	r2, r6
- 415 015a 2B46     		mov	r3, r5
- 416 015c FFF7FEFF 		bl	vsnprintf
- 417 0160 2046     		mov	r0, r4
- 418 0162 01A9     		add	r1, sp, #4
- 419 0164 FFF7FEFF 		bl	_ZN10LoggerBase3logEPKc
- 420 0168 43B0     		add	sp, sp, #268
- 421 016a BDE87040 		pop	{r4, r5, r6, lr}
- 422 016e 03B0     		add	sp, sp, #12
- 423 0170 7047     		bx	lr
- 425              		.align	1
- 426              		.global	_ZN12SimpleLogger5flushEv
- 427              		.thumb
- 428              		.thumb_func
- 430              	_ZN12SimpleLogger5flushEv:
- 431              		@ args = 0, pretend = 0, frame = 0
- 432              		@ frame_needed = 0, uses_anonymous_args = 0
- 433              		@ link register save eliminated.
- 434 0172 FFF7FEBF 		b	_ZN10LoggerBase5flushEv
- 436              		.global	_ZTV10FileLogger
- 437              		.global	_ZTV12SimpleLogger
- 438              		.weak	_ZTV10LoggerBase
- 439 0176 00BF     		.section	.rodata._ZTV10LoggerBase,"aG",%progbits,_ZTV10LoggerBase,comdat
- 440              		.align	3
- 443              	_ZTV10LoggerBase:
- 444 0000 00000000 		.word	0
- 445 0004 00000000 		.word	0
- 446 0008 00000000 		.word	_ZN10LoggerBaseD1Ev
- 447 000c 00000000 		.word	_ZN10LoggerBaseD0Ev
- 448 0010 00000000 		.word	__cxa_pure_virtual
- 449 0014 00000000 		.word	_ZN10LoggerBase7semTakeEv
- 450 0018 00000000 		.word	_ZN10LoggerBase7semGiveEv
- 451 001c 00000000 		.word	_ZN10LoggerBase12getTimestampEv
- 452              		.weak	_ZN10LoggerBaseD1Ev
- 453              		.thumb_set _ZN10LoggerBaseD1Ev,_ZN10LoggerBaseD2Ev
- 454              		.weak	_ZN12SimpleLoggerD1Ev
- 455              		.thumb_set _ZN12SimpleLoggerD1Ev,_ZN12SimpleLoggerD2Ev
- 456              		.weak	_ZN10FileLoggerD1Ev
- 457              		.thumb_set _ZN10FileLoggerD1Ev,_ZN10FileLoggerD2Ev
- 458              		.global	_ZN10FileLoggerC1Ev
- 459              		.thumb_set _ZN10FileLoggerC1Ev,_ZN10FileLoggerC2Ev
- 460              		.global	_ZN12SimpleLoggerC1EPKcPci
- 461              		.thumb_set _ZN12SimpleLoggerC1EPKcPci,_ZN12SimpleLoggerC2EPKcPci
- 462              		.section	.rodata
- 463              		.align	3
- 464              		.set	.LANCHOR0,. + 0
- 467              	_ZTV12SimpleLogger:
- 468 0000 00000000 		.word	0
- 469 0004 00000000 		.word	0
- 470 0008 00000000 		.word	_ZN12SimpleLoggerD1Ev
- 471 000c 00000000 		.word	_ZN12SimpleLoggerD0Ev
- 472 0010 00000000 		.word	_ZN12SimpleLogger21handleCompletedBufferEPcj
- 473 0014 00000000 		.word	_ZN10LoggerBase7semTakeEv
- 474 0018 00000000 		.word	_ZN10LoggerBase7semGiveEv
- 475 001c 00000000 		.word	_ZN10LoggerBase12getTimestampEv
- 478              	_ZTV10FileLogger:
- 479 0020 00000000 		.word	0
- 480 0024 00000000 		.word	0
- 481 0028 00000000 		.word	_ZN10FileLoggerD1Ev
- 482 002c 00000000 		.word	_ZN10FileLoggerD0Ev
- 483 0030 00000000 		.word	_ZN10FileLogger21handleCompletedBufferEPcj
- 484 0034 00000000 		.word	_ZN10FileLogger7semTakeEv
- 485 0038 00000000 		.word	_ZN10FileLogger7semGiveEv
- 486 003c 00000000 		.word	_ZN10FileLogger12getTimestampEv
- 487              		.section	.rodata.str1.1,"aMS",%progbits,1
- 488              	.LC0:
- 489 0000 6C6F6700 		.ascii	"log\000"
- 490              	.LC1:
- 491 0004 4572726F 		.ascii	"Error logging data to file, here is a printout of t"
- 491      72206C6F 
- 491      6767696E 
- 491      67206461 
- 491      74612074 
- 492 0037 68652064 		.ascii	"he data: \000"
- 492      6174613A 
- 492      2000
- 493              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"file_logger.cpp"
+  16              		.section	.text._ZN10LoggerBase7semTakeEv,"axG",%progbits,_ZN10LoggerBase7semTakeEv,comdat
+  17              		.align	1
+  18              		.weak	_ZN10LoggerBase7semTakeEv
+  19              		.thumb
+  20              		.thumb_func
+  22              	_ZN10LoggerBase7semTakeEv:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 7047     		bx	lr
+  28              		.section	.text._ZN10LoggerBase7semGiveEv,"axG",%progbits,_ZN10LoggerBase7semGiveEv,comdat
+  29              		.align	1
+  30              		.weak	_ZN10LoggerBase7semGiveEv
+  31              		.thumb
+  32              		.thumb_func
+  34              	_ZN10LoggerBase7semGiveEv:
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		@ link register save eliminated.
+  38 0000 7047     		bx	lr
+  40              		.section	.text._ZN10LoggerBase12getTimestampEv,"axG",%progbits,_ZN10LoggerBase12getTimestampEv,com
+  41              		.align	1
+  42              		.weak	_ZN10LoggerBase12getTimestampEv
+  43              		.thumb
+  44              		.thumb_func
+  46              	_ZN10LoggerBase12getTimestampEv:
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49              		@ link register save eliminated.
+  50 0000 0020     		movs	r0, #0
+  51 0002 7047     		bx	lr
+  53              		.section	.text._ZN12SimpleLoggerD2Ev,"axG",%progbits,_ZN12SimpleLoggerD5Ev,comdat
+  54              		.align	1
+  55              		.weak	_ZN12SimpleLoggerD2Ev
+  56              		.thumb
+  57              		.thumb_func
+  59              	_ZN12SimpleLoggerD2Ev:
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0000 7047     		bx	lr
+  65              		.weak	_ZN12SimpleLoggerD1Ev
+  66              		.thumb_set _ZN12SimpleLoggerD1Ev,_ZN12SimpleLoggerD2Ev
+  67              		.section	.text._ZN10FileLoggerD2Ev,"axG",%progbits,_ZN10FileLoggerD5Ev,comdat
+  68              		.align	1
+  69              		.weak	_ZN10FileLoggerD2Ev
+  70              		.thumb
+  71              		.thumb_func
+  73              	_ZN10FileLoggerD2Ev:
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  77 0000 7047     		bx	lr
+  79              		.weak	_ZN10FileLoggerD1Ev
+  80              		.thumb_set _ZN10FileLoggerD1Ev,_ZN10FileLoggerD2Ev
+  81              		.text
+  82              		.align	1
+  83              		.global	_ZN12SimpleLogger21handleCompletedBufferEPcj
+  84              		.thumb
+  85              		.thumb_func
+  87              	_ZN12SimpleLogger21handleCompletedBufferEPcj:
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91 0000 0023     		movs	r3, #0
+  92 0002 0069     		ldr	r0, [r0, #16]
+  93 0004 FFF7FEBF 		b	_ZN7Storage6appendEPKcPvjj
+  95              		.align	1
+  96              		.global	_ZN10FileLogger12getTimestampEv
+  97              		.thumb
+  98              		.thumb_func
+ 100              	_ZN10FileLogger12getTimestampEv:
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103 0008 08B5     		push	{r3, lr}
+ 104 000a FFF7FEFF 		bl	sys_get_uptime_ms
+ 105 000e 08BD     		pop	{r3, pc}
+ 107              		.section	.text._ZN12SimpleLoggerD0Ev,"axG",%progbits,_ZN12SimpleLoggerD5Ev,comdat
+ 108              		.align	1
+ 109              		.weak	_ZN12SimpleLoggerD0Ev
+ 110              		.thumb
+ 111              		.thumb_func
+ 113              	_ZN12SimpleLoggerD0Ev:
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116 0000 10B5     		push	{r4, lr}
+ 117 0002 0446     		mov	r4, r0
+ 118 0004 FFF7FEFF 		bl	_ZdlPv
+ 119 0008 2046     		mov	r0, r4
+ 120 000a 10BD     		pop	{r4, pc}
+ 122              		.section	.text._ZN10FileLoggerD0Ev,"axG",%progbits,_ZN10FileLoggerD5Ev,comdat
+ 123              		.align	1
+ 124              		.weak	_ZN10FileLoggerD0Ev
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	_ZN10FileLoggerD0Ev:
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131 0000 10B5     		push	{r4, lr}
+ 132 0002 0446     		mov	r4, r0
+ 133 0004 FFF7FEFF 		bl	_ZdlPv
+ 134 0008 2046     		mov	r0, r4
+ 135 000a 10BD     		pop	{r4, pc}
+ 137              		.text
+ 138              		.align	1
+ 139              		.global	_ZN10FileLogger21handleCompletedBufferEPcj
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	_ZN10FileLogger21handleCompletedBufferEPcj:
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146 0010 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 147 0012 1248     		ldr	r0, .L20
+ 148 0014 0023     		movs	r3, #0
+ 149 0016 0C46     		mov	r4, r1
+ 150 0018 1546     		mov	r5, r2
+ 151 001a FFF7FEFF 		bl	_ZN7Storage6appendEPKcPvjj
+ 152 001e E0B1     		cbz	r0, .L10
+ 153 0020 0F48     		ldr	r0, .L20+4
+ 154 0022 FFF7FEFF 		bl	puts
+ 155 0026 0F4E     		ldr	r6, .L20+8
+ 156 0028 2544     		add	r5, r5, r4
+ 157              	.L14:
+ 158 002a AC42     		cmp	r4, r5
+ 159 002c 15D0     		beq	.L10
+ 160 002e 3068     		ldr	r0, [r6]
+ 161 0030 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
+ 162 0034 8268     		ldr	r2, [r0, #8]
+ 163 0036 9368     		ldr	r3, [r2, #8]
+ 164 0038 013B     		subs	r3, r3, #1
+ 165 003a 002B     		cmp	r3, #0
+ 166 003c 9360     		str	r3, [r2, #8]
+ 167 003e 04DA     		bge	.L12
+ 168 0040 9769     		ldr	r7, [r2, #24]
+ 169 0042 BB42     		cmp	r3, r7
+ 170 0044 06DB     		blt	.L13
+ 171 0046 0A29     		cmp	r1, #10
+ 172 0048 04D0     		beq	.L13
+ 173              	.L12:
+ 174 004a 1368     		ldr	r3, [r2]
+ 175 004c 581C     		adds	r0, r3, #1
+ 176 004e 1060     		str	r0, [r2]
+ 177 0050 1970     		strb	r1, [r3]
+ 178 0052 EAE7     		b	.L14
+ 179              	.L13:
+ 180 0054 FFF7FEFF 		bl	__swbuf_r
+ 181 0058 E7E7     		b	.L14
+ 182              	.L10:
+ 183 005a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 184              	.L21:
+ 185              		.align	2
+ 186              	.L20:
+ 187 005c 00000000 		.word	.LC0
+ 188 0060 04000000 		.word	.LC1
+ 189 0064 00000000 		.word	_impure_ptr
+ 191              		.align	1
+ 192              		.global	_ZN10FileLogger7semGiveEv
+ 193              		.thumb
+ 194              		.thumb_func
+ 196              	_ZN10FileLogger7semGiveEv:
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199 0068 10B5     		push	{r4, lr}
+ 200 006a 0446     		mov	r4, r0
+ 201 006c FFF7FEFF 		bl	is_freertos_running
+ 202 0070 38B1     		cbz	r0, .L22
+ 203 0072 0023     		movs	r3, #0
+ 204 0074 2069     		ldr	r0, [r4, #16]
+ 205 0076 1A46     		mov	r2, r3
+ 206 0078 BDE81040 		pop	{r4, lr}
+ 207 007c 1946     		mov	r1, r3
+ 208 007e FFF7FEBF 		b	xQueueGenericSend
+ 209              	.L22:
+ 210 0082 10BD     		pop	{r4, pc}
+ 212              		.align	1
+ 213              		.global	_ZN10FileLogger7semTakeEv
+ 214              		.thumb
+ 215              		.thumb_func
+ 217              	_ZN10FileLogger7semTakeEv:
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220 0084 10B5     		push	{r4, lr}
+ 221 0086 0446     		mov	r4, r0
+ 222 0088 FFF7FEFF 		bl	is_freertos_running
+ 223 008c 40B1     		cbz	r0, .L24
+ 224 008e 0023     		movs	r3, #0
+ 225 0090 2069     		ldr	r0, [r4, #16]
+ 226 0092 4FF0FF32 		mov	r2, #-1
+ 227 0096 1946     		mov	r1, r3
+ 228 0098 BDE81040 		pop	{r4, lr}
+ 229 009c FFF7FEBF 		b	xQueueGenericReceive
+ 230              	.L24:
+ 231 00a0 10BD     		pop	{r4, pc}
+ 233              		.align	1
+ 234              		.global	_ZN10FileLogger5flushEv
+ 235              		.thumb
+ 236              		.thumb_func
+ 238              	_ZN10FileLogger5flushEv:
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241 00a2 10B5     		push	{r4, lr}
+ 242 00a4 0446     		mov	r4, r0
+ 243 00a6 0368     		ldr	r3, [r0]
+ 244 00a8 DB68     		ldr	r3, [r3, #12]
+ 245 00aa 9847     		blx	r3
+ 246 00ac 2046     		mov	r0, r4
+ 247 00ae FFF7FEFF 		bl	_ZN10LoggerBase5flushEv
+ 248 00b2 2368     		ldr	r3, [r4]
+ 249 00b4 2046     		mov	r0, r4
+ 250 00b6 BDE81040 		pop	{r4, lr}
+ 251 00ba 1B69     		ldr	r3, [r3, #16]
+ 252 00bc 1847     		bx	r3	@ indirect register sibling call
+ 254              		.align	1
+ 255              		.global	_ZN10FileLoggerC2Ev
+ 256              		.thumb
+ 257              		.thumb_func
+ 259              	_ZN10FileLoggerC2Ev:
+ 260              		@ args = 0, pretend = 0, frame = 0
+ 261              		@ frame_needed = 0, uses_anonymous_args = 0
+ 262 00be 10B5     		push	{r4, lr}
+ 263 00c0 0446     		mov	r4, r0
+ 264 00c2 094B     		ldr	r3, .L28
+ 265 00c4 0360     		str	r3, [r0]
+ 266 00c6 0023     		movs	r3, #0
+ 267 00c8 4360     		str	r3, [r0, #4]
+ 268 00ca 4FF48060 		mov	r0, #1024
+ 269 00ce E360     		str	r3, [r4, #12]
+ 270 00d0 A060     		str	r0, [r4, #8]
+ 271 00d2 FFF7FEFF 		bl	_Znaj
+ 272 00d6 054B     		ldr	r3, .L28+4
+ 273 00d8 6060     		str	r0, [r4, #4]
+ 274 00da 2360     		str	r3, [r4]
+ 275 00dc 0120     		movs	r0, #1
+ 276 00de FFF7FEFF 		bl	xQueueCreateMutex
+ 277 00e2 2061     		str	r0, [r4, #16]
+ 278 00e4 2046     		mov	r0, r4
+ 279 00e6 10BD     		pop	{r4, pc}
+ 280              	.L29:
+ 281              		.align	2
+ 282              	.L28:
+ 283 00e8 08000000 		.word	_ZTV10LoggerBase+8
+ 284 00ec 08000000 		.word	.LANCHOR0+8
+ 286              		.global	_ZN10FileLoggerC1Ev
+ 287              		.thumb_set _ZN10FileLoggerC1Ev,_ZN10FileLoggerC2Ev
+ 288              		.align	1
+ 289              		.global	_ZN12SimpleLoggerC2EPKcPci
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	_ZN12SimpleLoggerC2EPKcPci:
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296 00f0 38B5     		push	{r3, r4, r5, lr}
+ 297 00f2 0D46     		mov	r5, r1
+ 298 00f4 0749     		ldr	r1, .L32
+ 299 00f6 0446     		mov	r4, r0
+ 300 00f8 80E80E00 		stmia	r0, {r1, r2, r3}
+ 301 00fc 0021     		movs	r1, #0
+ 302 00fe C160     		str	r1, [r0, #12]
+ 303 0100 1AB9     		cbnz	r2, .L31
+ 304 0102 1846     		mov	r0, r3
+ 305 0104 FFF7FEFF 		bl	_Znaj
+ 306 0108 6060     		str	r0, [r4, #4]
+ 307              	.L31:
+ 308 010a 034B     		ldr	r3, .L32+4
+ 309 010c 2561     		str	r5, [r4, #16]
+ 310 010e 2360     		str	r3, [r4]
+ 311 0110 2046     		mov	r0, r4
+ 312 0112 38BD     		pop	{r3, r4, r5, pc}
+ 313              	.L33:
+ 314              		.align	2
+ 315              	.L32:
+ 316 0114 08000000 		.word	_ZTV10LoggerBase+8
+ 317 0118 28000000 		.word	.LANCHOR0+40
+ 319              		.global	_ZN12SimpleLoggerC1EPKcPci
+ 320              		.thumb_set _ZN12SimpleLoggerC1EPKcPci,_ZN12SimpleLoggerC2EPKcPci
+ 321              		.align	1
+ 322              		.global	_ZN12SimpleLogger6printfEPKcz
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	_ZN12SimpleLogger6printfEPKcz:
+ 327              		@ args = 4, pretend = 12, frame = 264
+ 328              		@ frame_needed = 0, uses_anonymous_args = 1
+ 329 011c 0EB4     		push	{r1, r2, r3}
+ 330 011e 70B5     		push	{r4, r5, r6, lr}
+ 331 0120 C3B0     		sub	sp, sp, #268
+ 332 0122 47AB     		add	r3, sp, #284
+ 333 0124 53F8046B 		ldr	r6, [r3], #4
+ 334 0128 0546     		mov	r5, r0
+ 335 012a 1C46     		mov	r4, r3
+ 336 012c 4FF48072 		mov	r2, #256
+ 337 0130 0021     		movs	r1, #0
+ 338 0132 02A8     		add	r0, sp, #8
+ 339 0134 0193     		str	r3, [sp, #4]
+ 340 0136 FFF7FEFF 		bl	memset
+ 341 013a 2346     		mov	r3, r4
+ 342 013c 3246     		mov	r2, r6
+ 343 013e FF21     		movs	r1, #255
+ 344 0140 02A8     		add	r0, sp, #8
+ 345 0142 FFF7FEFF 		bl	vsnprintf
+ 346 0146 02A9     		add	r1, sp, #8
+ 347 0148 2846     		mov	r0, r5
+ 348 014a FFF7FEFF 		bl	_ZN10LoggerBase3logEPKc
+ 349 014e 43B0     		add	sp, sp, #268
+ 350              		@ sp needed
+ 351 0150 BDE87040 		pop	{r4, r5, r6, lr}
+ 352 0154 03B0     		add	sp, sp, #12
+ 353 0156 7047     		bx	lr
+ 355              		.align	1
+ 356              		.global	_ZN12SimpleLogger5flushEv
+ 357              		.thumb
+ 358              		.thumb_func
+ 360              	_ZN12SimpleLogger5flushEv:
+ 361              		@ args = 0, pretend = 0, frame = 0
+ 362              		@ frame_needed = 0, uses_anonymous_args = 0
+ 363              		@ link register save eliminated.
+ 364 0158 FFF7FEBF 		b	_ZN10LoggerBase5flushEv
+ 366              		.weak	_ZTV10LoggerBase
+ 367              		.section	.rodata._ZTV10LoggerBase,"aG",%progbits,_ZTV10LoggerBase,comdat
+ 368              		.align	2
+ 371              	_ZTV10LoggerBase:
+ 372 0000 00000000 		.word	0
+ 373 0004 00000000 		.word	0
+ 374 0008 00000000 		.word	0
+ 375 000c 00000000 		.word	0
+ 376 0010 00000000 		.word	__cxa_pure_virtual
+ 377 0014 00000000 		.word	_ZN10LoggerBase7semTakeEv
+ 378 0018 00000000 		.word	_ZN10LoggerBase7semGiveEv
+ 379 001c 00000000 		.word	_ZN10LoggerBase12getTimestampEv
+ 380              		.global	_ZTV10FileLogger
+ 381              		.global	_ZTV12SimpleLogger
+ 382              		.section	.rodata
+ 383              		.align	2
+ 384              		.set	.LANCHOR0,. + 0
+ 387              	_ZTV10FileLogger:
+ 388 0000 00000000 		.word	0
+ 389 0004 00000000 		.word	0
+ 390 0008 00000000 		.word	_ZN10FileLoggerD1Ev
+ 391 000c 00000000 		.word	_ZN10FileLoggerD0Ev
+ 392 0010 00000000 		.word	_ZN10FileLogger21handleCompletedBufferEPcj
+ 393 0014 00000000 		.word	_ZN10FileLogger7semTakeEv
+ 394 0018 00000000 		.word	_ZN10FileLogger7semGiveEv
+ 395 001c 00000000 		.word	_ZN10FileLogger12getTimestampEv
+ 398              	_ZTV12SimpleLogger:
+ 399 0020 00000000 		.word	0
+ 400 0024 00000000 		.word	0
+ 401 0028 00000000 		.word	_ZN12SimpleLoggerD1Ev
+ 402 002c 00000000 		.word	_ZN12SimpleLoggerD0Ev
+ 403 0030 00000000 		.word	_ZN12SimpleLogger21handleCompletedBufferEPcj
+ 404 0034 00000000 		.word	_ZN10LoggerBase7semTakeEv
+ 405 0038 00000000 		.word	_ZN10LoggerBase7semGiveEv
+ 406 003c 00000000 		.word	_ZN10LoggerBase12getTimestampEv
+ 407              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 408              	.LC0:
+ 409 0000 6C6F6700 		.ascii	"log\000"
+ 410              	.LC1:
+ 411 0004 4572726F 		.ascii	"Error logging data to file, here is a printout of t"
+ 411      72206C6F 
+ 411      6767696E 
+ 411      67206461 
+ 411      74612074 
+ 412 0037 68652064 		.ascii	"he data: \000"
+ 412      6174613A 
+ 412      2000
+ 413              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 file_logger.cpp
-     /tmp/ccJ5q2XA.s:16     .text._ZN10LoggerBaseD2Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:21     .text._ZN10LoggerBaseD2Ev:00000000 _ZN10LoggerBaseD2Ev
-     /tmp/ccJ5q2XA.s:31     .text._ZN10LoggerBaseD2Ev:00000008 $d
-     /tmp/ccJ5q2XA.s:443    .rodata._ZTV10LoggerBase:00000000 _ZTV10LoggerBase
-     /tmp/ccJ5q2XA.s:34     .text._ZN10LoggerBase7semTakeEv:00000000 $t
-     /tmp/ccJ5q2XA.s:39     .text._ZN10LoggerBase7semTakeEv:00000000 _ZN10LoggerBase7semTakeEv
-     /tmp/ccJ5q2XA.s:46     .text._ZN10LoggerBase7semGiveEv:00000000 $t
-     /tmp/ccJ5q2XA.s:51     .text._ZN10LoggerBase7semGiveEv:00000000 _ZN10LoggerBase7semGiveEv
-     /tmp/ccJ5q2XA.s:58     .text._ZN10LoggerBase12getTimestampEv:00000000 $t
-     /tmp/ccJ5q2XA.s:63     .text._ZN10LoggerBase12getTimestampEv:00000000 _ZN10LoggerBase12getTimestampEv
-     /tmp/ccJ5q2XA.s:71     .text._ZN12SimpleLoggerD2Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:76     .text._ZN12SimpleLoggerD2Ev:00000000 _ZN12SimpleLoggerD2Ev
-     /tmp/ccJ5q2XA.s:86     .text._ZN12SimpleLoggerD2Ev:00000008 $d
-     /tmp/ccJ5q2XA.s:89     .text._ZN10FileLoggerD2Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:94     .text._ZN10FileLoggerD2Ev:00000000 _ZN10FileLoggerD2Ev
-     /tmp/ccJ5q2XA.s:104    .text._ZN10FileLoggerD2Ev:00000008 $d
-     /tmp/ccJ5q2XA.s:107    .text._ZN10FileLoggerD0Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:112    .text._ZN10FileLoggerD0Ev:00000000 _ZN10FileLoggerD0Ev
-     /tmp/ccJ5q2XA.s:125    .text._ZN10FileLoggerD0Ev:00000010 $d
-     /tmp/ccJ5q2XA.s:128    .text._ZN12SimpleLoggerD0Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:133    .text._ZN12SimpleLoggerD0Ev:00000000 _ZN12SimpleLoggerD0Ev
-     /tmp/ccJ5q2XA.s:146    .text._ZN12SimpleLoggerD0Ev:00000010 $d
-     /tmp/ccJ5q2XA.s:149    .text._ZN10LoggerBaseD0Ev:00000000 $t
-     /tmp/ccJ5q2XA.s:154    .text._ZN10LoggerBaseD0Ev:00000000 _ZN10LoggerBaseD0Ev
-     /tmp/ccJ5q2XA.s:167    .text._ZN10LoggerBaseD0Ev:00000010 $d
-     /tmp/ccJ5q2XA.s:170    .text:00000000 $t
-     /tmp/ccJ5q2XA.s:175    .text:00000000 _ZN12SimpleLogger21handleCompletedBufferEPcj
-     /tmp/ccJ5q2XA.s:188    .text:00000008 _ZN10FileLogger12getTimestampEv
-     /tmp/ccJ5q2XA.s:200    .text:00000010 _ZN10FileLogger7semGiveEv
-     /tmp/ccJ5q2XA.s:221    .text:0000002c _ZN10FileLogger7semTakeEv
-     /tmp/ccJ5q2XA.s:242    .text:0000004a _ZN10FileLogger21handleCompletedBufferEPcj
-     /tmp/ccJ5q2XA.s:305    .text:000000b4 $d
-     /tmp/ccJ5q2XA.s:309    .text:000000c0 $t
-     /tmp/ccJ5q2XA.s:314    .text:000000c0 _ZN10FileLogger5flushEv
-     /tmp/ccJ5q2XA.s:335    .text:000000da _ZN10FileLoggerC2Ev
-     /tmp/ccJ5q2XA.s:359    .text:00000104 $d
-     /tmp/ccJ5q2XA.s:362    .text:0000010c $t
-     /tmp/ccJ5q2XA.s:367    .text:0000010c _ZN12SimpleLoggerC2EPKcPci
-     /tmp/ccJ5q2XA.s:390    .text:00000130 $d
-     /tmp/ccJ5q2XA.s:393    .text:00000138 $t
-     /tmp/ccJ5q2XA.s:398    .text:00000138 _ZN12SimpleLogger6printfEPKcz
-     /tmp/ccJ5q2XA.s:430    .text:00000172 _ZN12SimpleLogger5flushEv
-     /tmp/ccJ5q2XA.s:478    .rodata:00000020 _ZTV10FileLogger
-     /tmp/ccJ5q2XA.s:467    .rodata:00000000 _ZTV12SimpleLogger
-     /tmp/ccJ5q2XA.s:440    .rodata._ZTV10LoggerBase:00000000 $d
-     /tmp/ccJ5q2XA.s:21     .text._ZN10LoggerBaseD2Ev:00000000 _ZN10LoggerBaseD1Ev
-     /tmp/ccJ5q2XA.s:76     .text._ZN12SimpleLoggerD2Ev:00000000 _ZN12SimpleLoggerD1Ev
-     /tmp/ccJ5q2XA.s:94     .text._ZN10FileLoggerD2Ev:00000000 _ZN10FileLoggerD1Ev
-     /tmp/ccJ5q2XA.s:335    .text:000000da _ZN10FileLoggerC1Ev
-     /tmp/ccJ5q2XA.s:367    .text:0000010c _ZN12SimpleLoggerC1EPKcPci
-     /tmp/ccJ5q2XA.s:463    .rodata:00000000 $d
-                           .group:00000000 _ZN10LoggerBaseD5Ev
+     /tmp/ccmYroVs.s:17     .text._ZN10LoggerBase7semTakeEv:00000000 $t
+     /tmp/ccmYroVs.s:22     .text._ZN10LoggerBase7semTakeEv:00000000 _ZN10LoggerBase7semTakeEv
+     /tmp/ccmYroVs.s:29     .text._ZN10LoggerBase7semGiveEv:00000000 $t
+     /tmp/ccmYroVs.s:34     .text._ZN10LoggerBase7semGiveEv:00000000 _ZN10LoggerBase7semGiveEv
+     /tmp/ccmYroVs.s:41     .text._ZN10LoggerBase12getTimestampEv:00000000 $t
+     /tmp/ccmYroVs.s:46     .text._ZN10LoggerBase12getTimestampEv:00000000 _ZN10LoggerBase12getTimestampEv
+     /tmp/ccmYroVs.s:54     .text._ZN12SimpleLoggerD2Ev:00000000 $t
+     /tmp/ccmYroVs.s:59     .text._ZN12SimpleLoggerD2Ev:00000000 _ZN12SimpleLoggerD2Ev
+     /tmp/ccmYroVs.s:59     .text._ZN12SimpleLoggerD2Ev:00000000 _ZN12SimpleLoggerD1Ev
+     /tmp/ccmYroVs.s:68     .text._ZN10FileLoggerD2Ev:00000000 $t
+     /tmp/ccmYroVs.s:73     .text._ZN10FileLoggerD2Ev:00000000 _ZN10FileLoggerD2Ev
+     /tmp/ccmYroVs.s:73     .text._ZN10FileLoggerD2Ev:00000000 _ZN10FileLoggerD1Ev
+     /tmp/ccmYroVs.s:82     .text:00000000 $t
+     /tmp/ccmYroVs.s:87     .text:00000000 _ZN12SimpleLogger21handleCompletedBufferEPcj
+     /tmp/ccmYroVs.s:100    .text:00000008 _ZN10FileLogger12getTimestampEv
+     /tmp/ccmYroVs.s:108    .text._ZN12SimpleLoggerD0Ev:00000000 $t
+     /tmp/ccmYroVs.s:113    .text._ZN12SimpleLoggerD0Ev:00000000 _ZN12SimpleLoggerD0Ev
+     /tmp/ccmYroVs.s:123    .text._ZN10FileLoggerD0Ev:00000000 $t
+     /tmp/ccmYroVs.s:128    .text._ZN10FileLoggerD0Ev:00000000 _ZN10FileLoggerD0Ev
+     /tmp/ccmYroVs.s:143    .text:00000010 _ZN10FileLogger21handleCompletedBufferEPcj
+     /tmp/ccmYroVs.s:187    .text:0000005c $d
+     /tmp/ccmYroVs.s:191    .text:00000068 $t
+     /tmp/ccmYroVs.s:196    .text:00000068 _ZN10FileLogger7semGiveEv
+     /tmp/ccmYroVs.s:217    .text:00000084 _ZN10FileLogger7semTakeEv
+     /tmp/ccmYroVs.s:238    .text:000000a2 _ZN10FileLogger5flushEv
+     /tmp/ccmYroVs.s:259    .text:000000be _ZN10FileLoggerC2Ev
+     /tmp/ccmYroVs.s:283    .text:000000e8 $d
+     /tmp/ccmYroVs.s:371    .rodata._ZTV10LoggerBase:00000000 _ZTV10LoggerBase
+     /tmp/ccmYroVs.s:259    .text:000000be _ZN10FileLoggerC1Ev
+     /tmp/ccmYroVs.s:288    .text:000000f0 $t
+     /tmp/ccmYroVs.s:293    .text:000000f0 _ZN12SimpleLoggerC2EPKcPci
+     /tmp/ccmYroVs.s:316    .text:00000114 $d
+     /tmp/ccmYroVs.s:293    .text:000000f0 _ZN12SimpleLoggerC1EPKcPci
+     /tmp/ccmYroVs.s:321    .text:0000011c $t
+     /tmp/ccmYroVs.s:326    .text:0000011c _ZN12SimpleLogger6printfEPKcz
+     /tmp/ccmYroVs.s:360    .text:00000158 _ZN12SimpleLogger5flushEv
+     /tmp/ccmYroVs.s:368    .rodata._ZTV10LoggerBase:00000000 $d
+     /tmp/ccmYroVs.s:387    .rodata:00000000 _ZTV10FileLogger
+     /tmp/ccmYroVs.s:398    .rodata:00000020 _ZTV12SimpleLogger
+     /tmp/ccmYroVs.s:383    .rodata:00000000 $d
                            .group:00000000 _ZN12SimpleLoggerD5Ev
                            .group:00000000 _ZN10FileLoggerD5Ev
 
 UNDEFINED SYMBOLS
-_ZdlPv
 _ZN7Storage6appendEPKcPvjj
 sys_get_uptime_ms
-is_freertos_running
-xQueueGenericSend
-xQueueGenericReceive
+_ZdlPv
 puts
 __swbuf_r
 _impure_ptr
+is_freertos_running
+xQueueGenericSend
+xQueueGenericReceive
 _ZN10LoggerBase5flushEv
 _Znaj
 xQueueCreateMutex

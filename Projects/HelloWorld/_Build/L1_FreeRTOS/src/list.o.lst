@@ -11,79 +11,79 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"list.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	vListInitialise
-  18              		.thumb
-  19              		.thumb_func
-  21              	vListInitialise:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 00F10803 		add	r3, r0, #8
-  26 0004 4360     		str	r3, [r0, #4]
-  27 0006 4FF0FF32 		mov	r2, #-1
-  28 000a C360     		str	r3, [r0, #12]
-  29 000c 0361     		str	r3, [r0, #16]
-  30 000e 0023     		movs	r3, #0
-  31 0010 8260     		str	r2, [r0, #8]
-  32 0012 0360     		str	r3, [r0, #0]
-  33 0014 7047     		bx	lr
-  35              		.align	1
-  36              		.global	vListInitialiseItem
-  37              		.thumb
-  38              		.thumb_func
-  40              	vListInitialiseItem:
-  41              		@ args = 0, pretend = 0, frame = 0
-  42              		@ frame_needed = 0, uses_anonymous_args = 0
-  43              		@ link register save eliminated.
-  44 0016 0023     		movs	r3, #0
-  45 0018 0361     		str	r3, [r0, #16]
-  46 001a 7047     		bx	lr
-  48              		.align	1
-  49              		.global	vListInsertEnd
-  50              		.thumb
-  51              		.thumb_func
-  53              	vListInsertEnd:
-  54              		@ args = 0, pretend = 0, frame = 0
-  55              		@ frame_needed = 0, uses_anonymous_args = 0
-  56              		@ link register save eliminated.
-  57 001c 4368     		ldr	r3, [r0, #4]
-  58 001e 4B60     		str	r3, [r1, #4]
-  59 0020 9A68     		ldr	r2, [r3, #8]
-  60 0022 8A60     		str	r2, [r1, #8]
-  61 0024 9A68     		ldr	r2, [r3, #8]
-  62 0026 5160     		str	r1, [r2, #4]
-  63 0028 9960     		str	r1, [r3, #8]
-  64 002a 0861     		str	r0, [r1, #16]
-  65 002c 0368     		ldr	r3, [r0, #0]
-  66 002e 0133     		adds	r3, r3, #1
-  67 0030 0360     		str	r3, [r0, #0]
-  68 0032 7047     		bx	lr
-  70              		.align	1
-  71              		.global	vListInsert
-  72              		.thumb
-  73              		.thumb_func
-  75              	vListInsert:
-  76              		@ args = 0, pretend = 0, frame = 0
-  77              		@ frame_needed = 0, uses_anonymous_args = 0
-  78 0034 0A68     		ldr	r2, [r1, #0]
-  79 0036 30B5     		push	{r4, r5, lr}
-  80 0038 531C     		adds	r3, r2, #1
-  81 003a 01D1     		bne	.L5
-  82 003c 0369     		ldr	r3, [r0, #16]
-  83 003e 07E0     		b	.L6
-  84              	.L5:
-  85 0040 00F10803 		add	r3, r0, #8
-  86 0044 00E0     		b	.L7
-  87              	.L8:
-  88 0046 2346     		mov	r3, r4
-  89              	.L7:
-  90 0048 5C68     		ldr	r4, [r3, #4]
-  91 004a 2568     		ldr	r5, [r4, #0]
-  92 004c 9542     		cmp	r5, r2
-  93 004e FAD9     		bls	.L8
+  14              		.syntax unified
+  15              		.file	"list.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	vListInitialise
+  19              		.thumb
+  20              		.thumb_func
+  22              	vListInitialise:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 00F10803 		add	r3, r0, #8
+  27 0004 4360     		str	r3, [r0, #4]
+  28 0006 4FF0FF32 		mov	r2, #-1
+  29 000a C360     		str	r3, [r0, #12]
+  30 000c 0361     		str	r3, [r0, #16]
+  31 000e 0023     		movs	r3, #0
+  32 0010 8260     		str	r2, [r0, #8]
+  33 0012 0360     		str	r3, [r0]
+  34 0014 7047     		bx	lr
+  36              		.align	1
+  37              		.global	vListInitialiseItem
+  38              		.thumb
+  39              		.thumb_func
+  41              	vListInitialiseItem:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 0016 0023     		movs	r3, #0
+  46 0018 0361     		str	r3, [r0, #16]
+  47 001a 7047     		bx	lr
+  49              		.align	1
+  50              		.global	vListInsertEnd
+  51              		.thumb
+  52              		.thumb_func
+  54              	vListInsertEnd:
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57              		@ link register save eliminated.
+  58 001c 4368     		ldr	r3, [r0, #4]
+  59 001e 4B60     		str	r3, [r1, #4]
+  60 0020 9A68     		ldr	r2, [r3, #8]
+  61 0022 8A60     		str	r2, [r1, #8]
+  62 0024 9A68     		ldr	r2, [r3, #8]
+  63 0026 5160     		str	r1, [r2, #4]
+  64 0028 9960     		str	r1, [r3, #8]
+  65 002a 0861     		str	r0, [r1, #16]
+  66 002c 0368     		ldr	r3, [r0]
+  67 002e 0133     		adds	r3, r3, #1
+  68 0030 0360     		str	r3, [r0]
+  69 0032 7047     		bx	lr
+  71              		.align	1
+  72              		.global	vListInsert
+  73              		.thumb
+  74              		.thumb_func
+  76              	vListInsert:
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0034 0A68     		ldr	r2, [r1]
+  80 0036 30B5     		push	{r4, r5, lr}
+  81 0038 531C     		adds	r3, r2, #1
+  82 003a 01D1     		bne	.L5
+  83 003c 0369     		ldr	r3, [r0, #16]
+  84 003e 07E0     		b	.L6
+  85              	.L5:
+  86 0040 00F10803 		add	r3, r0, #8
+  87              	.L7:
+  88 0044 5C68     		ldr	r4, [r3, #4]
+  89 0046 2568     		ldr	r5, [r4]
+  90 0048 AA42     		cmp	r2, r5
+  91 004a 01D3     		bcc	.L6
+  92 004c 2346     		mov	r3, r4
+  93 004e F9E7     		b	.L7
   94              	.L6:
   95 0050 5A68     		ldr	r2, [r3, #4]
   96 0052 4A60     		str	r2, [r1, #4]
@@ -91,9 +91,9 @@
   98 0056 8B60     		str	r3, [r1, #8]
   99 0058 5960     		str	r1, [r3, #4]
  100 005a 0861     		str	r0, [r1, #16]
- 101 005c 0368     		ldr	r3, [r0, #0]
+ 101 005c 0368     		ldr	r3, [r0]
  102 005e 0133     		adds	r3, r3, #1
- 103 0060 0360     		str	r3, [r0, #0]
+ 103 0060 0360     		str	r3, [r0]
  104 0062 30BD     		pop	{r4, r5, pc}
  106              		.align	1
  107              		.global	uxListRemove
@@ -111,24 +111,24 @@
  120 006e 5A60     		str	r2, [r3, #4]
  121 0070 0369     		ldr	r3, [r0, #16]
  122 0072 5A68     		ldr	r2, [r3, #4]
- 123 0074 8242     		cmp	r2, r0
+ 123 0074 9042     		cmp	r0, r2
  124 0076 04BF     		itt	eq
  125 0078 8268     		ldreq	r2, [r0, #8]
  126 007a 5A60     		streq	r2, [r3, #4]
  127 007c 0022     		movs	r2, #0
  128 007e 0261     		str	r2, [r0, #16]
- 129 0080 1868     		ldr	r0, [r3, #0]
+ 129 0080 1868     		ldr	r0, [r3]
  130 0082 0138     		subs	r0, r0, #1
- 131 0084 1860     		str	r0, [r3, #0]
+ 131 0084 1860     		str	r0, [r3]
  132 0086 7047     		bx	lr
- 134              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+ 134              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 list.c
-     /tmp/ccVsk9lk.s:16     .text:00000000 $t
-     /tmp/ccVsk9lk.s:21     .text:00000000 vListInitialise
-     /tmp/ccVsk9lk.s:40     .text:00000016 vListInitialiseItem
-     /tmp/ccVsk9lk.s:53     .text:0000001c vListInsertEnd
-     /tmp/ccVsk9lk.s:75     .text:00000034 vListInsert
-     /tmp/ccVsk9lk.s:111    .text:00000064 uxListRemove
+     /tmp/ccrjL3TO.s:17     .text:00000000 $t
+     /tmp/ccrjL3TO.s:22     .text:00000000 vListInitialise
+     /tmp/ccrjL3TO.s:41     .text:00000016 vListInitialiseItem
+     /tmp/ccrjL3TO.s:54     .text:0000001c vListInsertEnd
+     /tmp/ccrjL3TO.s:76     .text:00000034 vListInsert
+     /tmp/ccrjL3TO.s:111    .text:00000064 uxListRemove
 
 NO UNDEFINED SYMBOLS

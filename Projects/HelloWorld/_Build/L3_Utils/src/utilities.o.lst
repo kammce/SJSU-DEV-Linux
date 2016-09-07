@@ -11,190 +11,194 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"utilities.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	delay_us
-  18              		.thumb
-  19              		.thumb_func
-  21              	delay_us:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 4FF04023 		mov	r3, #1073758208
-  26 0004 9A68     		ldr	r2, [r3, #8]
-  27 0006 0A21     		movs	r1, #10
-  28 0008 B0FBF1F0 		udiv	r0, r0, r1
-  29 000c 8018     		adds	r0, r0, r2
-  30 000e 9A68     		ldr	r2, [r3, #8]
-  31 0010 9042     		cmp	r0, r2
-  32 0012 02D2     		bcs	.L2
-  33              	.L5:
-  34 0014 9A68     		ldr	r2, [r3, #8]
-  35 0016 8242     		cmp	r2, r0
-  36 0018 FCD8     		bhi	.L5
-  37              	.L2:
-  38 001a 4FF04023 		mov	r3, #1073758208
-  39              	.L4:
-  40 001e 9A68     		ldr	r2, [r3, #8]
-  41 0020 8242     		cmp	r2, r0
-  42 0022 FCD3     		bcc	.L4
-  43 0024 7047     		bx	lr
-  45              		.align	1
-  46              		.global	is_freertos_running
-  47              		.thumb
-  48              		.thumb_func
-  50              	is_freertos_running:
-  51              		@ args = 0, pretend = 0, frame = 0
-  52              		@ frame_needed = 0, uses_anonymous_args = 0
-  53 0026 08B5     		push	{r3, lr}
-  54 0028 FFF7FEFF 		bl	xTaskGetSchedulerState
-  55 002c A0F10103 		sub	r3, r0, #1
-  56 0030 5842     		rsbs	r0, r3, #0
-  57 0032 40EB0300 		adc	r0, r0, r3
-  58 0036 08BD     		pop	{r3, pc}
-  60              		.align	1
-  61              		.global	delay_ms
-  62              		.thumb
-  63              		.thumb_func
-  65              	delay_ms:
-  66              		@ args = 0, pretend = 0, frame = 0
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68 0038 10B5     		push	{r4, lr}
-  69 003a 0446     		mov	r4, r0
-  70 003c FFF7FEFF 		bl	is_freertos_running
-  71 0040 20B1     		cbz	r0, .L10
-  72 0042 2046     		mov	r0, r4
-  73 0044 BDE81040 		pop	{r4, lr}
-  74 0048 FFF7FEBF 		b	vTaskDelay
-  75              	.L10:
-  76 004c 4FF47A70 		mov	r0, #1000
-  77 0050 6043     		muls	r0, r4, r0
-  78 0052 BDE81040 		pop	{r4, lr}
-  79 0056 FEE7     		b	delay_us
-  81              		.align	1
-  82              		.global	log_boot_info
-  83              		.thumb
-  84              		.thumb_func
-  86              	log_boot_info:
-  87              		@ args = 0, pretend = 0, frame = 208
-  88              		@ frame_needed = 0, uses_anonymous_args = 0
-  89 0058 10B5     		push	{r4, lr}
-  90 005a B8B0     		sub	sp, sp, #224
-  91 005c 0B22     		movs	r2, #11
-  92 005e 2649     		ldr	r1, .L17
-  93 0060 0446     		mov	r4, r0
-  94 0062 34A8     		add	r0, sp, #208
-  95 0064 FFF7FEFF 		bl	memcpy
-  96 0068 0021     		movs	r1, #0
-  97 006a 8022     		movs	r2, #128
-  98 006c 04A8     		add	r0, sp, #16
-  99 006e FFF7FEFF 		bl	memset
- 100 0072 0021     		movs	r1, #0
- 101 0074 1822     		movs	r2, #24
- 102 0076 2EA8     		add	r0, sp, #184
- 103 0078 FFF7FEFF 		bl	memset
- 104 007c 2EA8     		add	r0, sp, #184
- 105 007e FFF7FEFF 		bl	rtc_get_date_time_str
- 106 0082 FFF7FEFF 		bl	sys_get_boot_type
- 107 0086 0428     		cmp	r0, #4
- 108 0088 0CD1     		bne	.L12
- 109 008a 1C4B     		ldr	r3, .L17+4
- 110 008c 04A8     		add	r0, sp, #16
- 111 008e D96C     		ldr	r1, [r3, #76]
- 112 0090 1A6D     		ldr	r2, [r3, #80]
- 113 0092 5B6D     		ldr	r3, [r3, #84]
- 114 0094 8DE80E00 		stmia	sp, {r1, r2, r3}
- 115 0098 1949     		ldr	r1, .L17+8
- 116 009a 2EAA     		add	r2, sp, #184
- 117 009c 2346     		mov	r3, r4
- 118 009e FFF7FEFF 		bl	sprintf
- 119 00a2 05E0     		b	.L13
- 120              	.L12:
- 121 00a4 04A8     		add	r0, sp, #16
- 122 00a6 1749     		ldr	r1, .L17+12
- 123 00a8 2EAA     		add	r2, sp, #184
- 124 00aa 2346     		mov	r3, r4
- 125 00ac FFF7FEFF 		bl	sprintf
- 126              	.L13:
- 127 00b0 0023     		movs	r3, #0
- 128 00b2 24A8     		add	r0, sp, #144
- 129 00b4 34A9     		add	r1, sp, #208
- 130 00b6 1222     		movs	r2, #18
- 131 00b8 3793     		str	r3, [sp, #220]
- 132 00ba FFF7FEFF 		bl	f_open
- 133 00be 80B9     		cbnz	r0, .L14
- 134 00c0 24A8     		add	r0, sp, #144
- 135 00c2 2799     		ldr	r1, [sp, #156]
- 136 00c4 FFF7FEFF 		bl	f_lseek
- 137 00c8 40B9     		cbnz	r0, .L15
- 138 00ca 04A8     		add	r0, sp, #16
- 139 00cc FFF7FEFF 		bl	strlen
- 140 00d0 04A9     		add	r1, sp, #16
- 141 00d2 0246     		mov	r2, r0
- 142 00d4 37AB     		add	r3, sp, #220
- 143 00d6 24A8     		add	r0, sp, #144
- 144 00d8 FFF7FEFF 		bl	f_write
- 145              	.L15:
- 146 00dc 24A8     		add	r0, sp, #144
- 147 00de FFF7FEFF 		bl	f_close
- 148              	.L14:
- 149 00e2 04A8     		add	r0, sp, #16
- 150 00e4 FFF7FEFF 		bl	strlen
- 151 00e8 379B     		ldr	r3, [sp, #220]
- 152 00ea 9842     		cmp	r0, r3
- 153 00ec 02D0     		beq	.L11
- 154 00ee 0648     		ldr	r0, .L17+16
- 155 00f0 FFF7FEFF 		bl	puts
- 156              	.L11:
- 157 00f4 38B0     		add	sp, sp, #224
- 158 00f6 10BD     		pop	{r4, pc}
- 159              	.L18:
- 160              		.align	2
- 161              	.L17:
- 162 00f8 64000000 		.word	.LC0
- 163 00fc 00400240 		.word	1073889280
- 164 0100 00000000 		.word	.LC1
- 165 0104 36000000 		.word	.LC2
- 166 0108 4C000000 		.word	.LC3
- 168              		.section	.rodata.str1.1,"aMS",%progbits,1
- 169              	.LC1:
- 170 0000 25732C20 		.ascii	"%s, BAD BOOT (%s): PC: 0x%08X LR: 0x%08X PSR: 0x%08"
- 170      42414420 
- 170      424F4F54 
- 170      20282573 
- 170      293A2050 
- 171 0033 580A00   		.ascii	"X\012\000"
- 172              	.LC2:
- 173 0036 25732C20 		.ascii	"%s, NORMAL BOOT (%s)\012\000"
- 173      4E4F524D 
- 173      414C2042 
- 173      4F4F5420 
- 173      28257329 
- 174              	.LC3:
- 175 004c 4572726F 		.ascii	"Error writing boot info\000"
- 175      72207772 
- 175      6974696E 
- 175      6720626F 
- 175      6F742069 
- 176              	.LC0:
- 177 0064 303A626F 		.ascii	"0:boot.csv\000"
- 177      6F742E63 
- 177      737600
- 178              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"utilities.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	delay_us
+  19              		.thumb
+  20              		.thumb_func
+  22              	delay_us:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0A21     		movs	r1, #10
+  27 0002 B0FBF1F0 		udiv	r0, r0, r1
+  28 0006 4FF04022 		mov	r2, #1073758208
+  29 000a 9368     		ldr	r3, [r2, #8]
+  30 000c 1844     		add	r0, r0, r3
+  31              	.L8:
+  32 000e 9368     		ldr	r3, [r2, #8]
+  33 0010 9842     		cmp	r0, r3
+  34 0012 FCD3     		bcc	.L8
+  35 0014 4FF04022 		mov	r2, #1073758208
+  36              	.L4:
+  37 0018 9368     		ldr	r3, [r2, #8]
+  38 001a 9842     		cmp	r0, r3
+  39 001c FCD8     		bhi	.L4
+  40 001e 7047     		bx	lr
+  42              		.align	1
+  43              		.global	is_freertos_running
+  44              		.thumb
+  45              		.thumb_func
+  47              	is_freertos_running:
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50 0020 08B5     		push	{r3, lr}
+  51 0022 FFF7FEFF 		bl	xTaskGetSchedulerState
+  52 0026 431E     		subs	r3, r0, #1
+  53 0028 5842     		rsbs	r0, r3, #0
+  54 002a 5841     		adcs	r0, r0, r3
+  55 002c 08BD     		pop	{r3, pc}
+  57              		.align	1
+  58              		.global	delay_ms
+  59              		.thumb
+  60              		.thumb_func
+  62              	delay_ms:
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 002e 10B5     		push	{r4, lr}
+  66 0030 0446     		mov	r4, r0
+  67 0032 FFF7FEFF 		bl	is_freertos_running
+  68 0036 20B1     		cbz	r0, .L12
+  69 0038 2046     		mov	r0, r4
+  70 003a BDE81040 		pop	{r4, lr}
+  71 003e FFF7FEBF 		b	vTaskDelay
+  72              	.L12:
+  73 0042 4FF47A70 		mov	r0, #1000
+  74 0046 6043     		muls	r0, r4, r0
+  75 0048 BDE81040 		pop	{r4, lr}
+  76 004c FFF7FEBF 		b	delay_us
+  78              		.align	1
+  79              		.global	log_boot_info
+  80              		.thumb
+  81              		.thumb_func
+  83              	log_boot_info:
+  84              		@ args = 0, pretend = 0, frame = 208
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0050 30B5     		push	{r4, r5, lr}
+  87 0052 2A4C     		ldr	r4, .L19
+  88 0054 B9B0     		sub	sp, sp, #228
+  89 0056 6168     		ldr	r1, [r4, #4]	@ unaligned
+  90 0058 0546     		mov	r5, r0
+  91 005a 2068     		ldr	r0, [r4]	@ unaligned
+  92 005c 05AA     		add	r2, sp, #20
+  93 005e 03C2     		stmia	r2!, {r0, r1}
+  94 0060 A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+  95 0062 2189     		ldrh	r1, [r4, #8]	@ unaligned
+  96 0064 9370     		strb	r3, [r2, #2]
+  97 0066 1180     		strh	r1, [r2]	@ unaligned
+  98 0068 18A8     		add	r0, sp, #96
+  99 006a 8022     		movs	r2, #128
+ 100 006c 0021     		movs	r1, #0
+ 101 006e FFF7FEFF 		bl	memset
+ 102 0072 1822     		movs	r2, #24
+ 103 0074 0021     		movs	r1, #0
+ 104 0076 08A8     		add	r0, sp, #32
+ 105 0078 FFF7FEFF 		bl	memset
+ 106 007c 08A8     		add	r0, sp, #32
+ 107 007e FFF7FEFF 		bl	rtc_get_date_time_str
+ 108 0082 FFF7FEFF 		bl	sys_get_boot_type
+ 109 0086 0428     		cmp	r0, #4
+ 110 0088 0DD1     		bne	.L14
+ 111 008a 1D4A     		ldr	r2, .L19+4
+ 112 008c 18A8     		add	r0, sp, #96
+ 113 008e D36C     		ldr	r3, [r2, #76]
+ 114 0090 116D     		ldr	r1, [r2, #80]
+ 115 0092 526D     		ldr	r2, [r2, #84]
+ 116 0094 0191     		str	r1, [sp, #4]
+ 117 0096 0292     		str	r2, [sp, #8]
+ 118 0098 0093     		str	r3, [sp]
+ 119 009a 08AA     		add	r2, sp, #32
+ 120 009c 2B46     		mov	r3, r5
+ 121 009e 1949     		ldr	r1, .L19+8
+ 122 00a0 FFF7FEFF 		bl	sprintf
+ 123 00a4 05E0     		b	.L15
+ 124              	.L14:
+ 125 00a6 2B46     		mov	r3, r5
+ 126 00a8 08AA     		add	r2, sp, #32
+ 127 00aa 1749     		ldr	r1, .L19+12
+ 128 00ac 18A8     		add	r0, sp, #96
+ 129 00ae FFF7FEFF 		bl	sprintf
+ 130              	.L15:
+ 131 00b2 0023     		movs	r3, #0
+ 132 00b4 1222     		movs	r2, #18
+ 133 00b6 05A9     		add	r1, sp, #20
+ 134 00b8 0EA8     		add	r0, sp, #56
+ 135 00ba 0493     		str	r3, [sp, #16]
+ 136 00bc FFF7FEFF 		bl	f_open
+ 137 00c0 80B9     		cbnz	r0, .L16
+ 138 00c2 1199     		ldr	r1, [sp, #68]
+ 139 00c4 0EA8     		add	r0, sp, #56
+ 140 00c6 FFF7FEFF 		bl	f_lseek
+ 141 00ca 40B9     		cbnz	r0, .L17
+ 142 00cc 18A8     		add	r0, sp, #96
+ 143 00ce FFF7FEFF 		bl	strlen
+ 144 00d2 04AB     		add	r3, sp, #16
+ 145 00d4 0246     		mov	r2, r0
+ 146 00d6 18A9     		add	r1, sp, #96
+ 147 00d8 0EA8     		add	r0, sp, #56
+ 148 00da FFF7FEFF 		bl	f_write
+ 149              	.L17:
+ 150 00de 0EA8     		add	r0, sp, #56
+ 151 00e0 FFF7FEFF 		bl	f_close
+ 152              	.L16:
+ 153 00e4 18A8     		add	r0, sp, #96
+ 154 00e6 FFF7FEFF 		bl	strlen
+ 155 00ea 049B     		ldr	r3, [sp, #16]
+ 156 00ec 9842     		cmp	r0, r3
+ 157 00ee 02D0     		beq	.L13
+ 158 00f0 0648     		ldr	r0, .L19+16
+ 159 00f2 FFF7FEFF 		bl	puts
+ 160              	.L13:
+ 161 00f6 39B0     		add	sp, sp, #228
+ 162              		@ sp needed
+ 163 00f8 30BD     		pop	{r4, r5, pc}
+ 164              	.L20:
+ 165 00fa 00BF     		.align	2
+ 166              	.L19:
+ 167 00fc 64000000 		.word	.LC0
+ 168 0100 00400240 		.word	1073889280
+ 169 0104 00000000 		.word	.LC1
+ 170 0108 36000000 		.word	.LC2
+ 171 010c 4C000000 		.word	.LC3
+ 173              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 174              	.LC1:
+ 175 0000 25732C20 		.ascii	"%s, BAD BOOT (%s): PC: 0x%08X LR: 0x%08X PSR: 0x%08"
+ 175      42414420 
+ 175      424F4F54 
+ 175      20282573 
+ 175      293A2050 
+ 176 0033 580A00   		.ascii	"X\012\000"
+ 177              	.LC2:
+ 178 0036 25732C20 		.ascii	"%s, NORMAL BOOT (%s)\012\000"
+ 178      4E4F524D 
+ 178      414C2042 
+ 178      4F4F5420 
+ 178      28257329 
+ 179              	.LC3:
+ 180 004c 4572726F 		.ascii	"Error writing boot info\000"
+ 180      72207772 
+ 180      6974696E 
+ 180      6720626F 
+ 180      6F742069 
+ 181              	.LC0:
+ 182 0064 303A626F 		.ascii	"0:boot.csv\000"
+ 182      6F742E63 
+ 182      737600
+ 183              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 utilities.c
-     /tmp/ccOkpBXe.s:16     .text:00000000 $t
-     /tmp/ccOkpBXe.s:21     .text:00000000 delay_us
-     /tmp/ccOkpBXe.s:50     .text:00000026 is_freertos_running
-     /tmp/ccOkpBXe.s:65     .text:00000038 delay_ms
-     /tmp/ccOkpBXe.s:86     .text:00000058 log_boot_info
-     /tmp/ccOkpBXe.s:162    .text:000000f8 $d
+     /tmp/cc6lgXJ5.s:17     .text:00000000 $t
+     /tmp/cc6lgXJ5.s:22     .text:00000000 delay_us
+     /tmp/cc6lgXJ5.s:47     .text:00000020 is_freertos_running
+     /tmp/cc6lgXJ5.s:62     .text:0000002e delay_ms
+     /tmp/cc6lgXJ5.s:83     .text:00000050 log_boot_info
+     /tmp/cc6lgXJ5.s:167    .text:000000fc $d
 
 UNDEFINED SYMBOLS
 xTaskGetSchedulerState
 vTaskDelay
-memcpy
 memset
 rtc_get_date_time_str
 sys_get_boot_type

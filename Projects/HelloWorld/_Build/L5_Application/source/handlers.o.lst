@@ -11,2166 +11,2168 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"handlers.cpp"
-  15              		.text
-  16              		.align	1
-  17              		.thumb
-  18              		.thumb_func
-  20              	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th:
-  21              		@ args = 0, pretend = 0, frame = 0
-  22              		@ frame_needed = 0, uses_anonymous_args = 0
-  23 0000 30B5     		push	{r4, r5, lr}
-  24 0002 0C46     		mov	r4, r1
-  25 0004 87B0     		sub	sp, sp, #28
-  26 0006 0B49     		ldr	r1, .L2
-  27 0008 0546     		mov	r5, r0
-  28 000a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
-  29 000e A17A     		ldrb	r1, [r4, #10]	@ zero_extendqisi2
-  30 0010 6288     		ldrh	r2, [r4, #2]	@ unaligned
-  31 0012 0091     		str	r1, [sp, #0]
-  32 0014 E17A     		ldrb	r1, [r4, #11]	@ zero_extendqisi2
-  33 0016 2388     		ldrh	r3, [r4, #0]	@ unaligned
-  34 0018 0191     		str	r1, [sp, #4]
-  35 001a E188     		ldrh	r1, [r4, #6]	@ unaligned
-  36 001c 2846     		mov	r0, r5
-  37 001e 0291     		str	r1, [sp, #8]
-  38 0020 2189     		ldrh	r1, [r4, #8]	@ unaligned
-  39 0022 0391     		str	r1, [sp, #12]
-  40 0024 A188     		ldrh	r1, [r4, #4]	@ unaligned
-  41 0026 0491     		str	r1, [sp, #16]
-  42 0028 0349     		ldr	r1, .L2+4
-  43 002a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
-  44 002e 07B0     		add	sp, sp, #28
-  45 0030 30BD     		pop	{r4, r5, pc}
-  46              	.L3:
-  47 0032 00BF     		.align	2
-  48              	.L2:
-  49 0034 00000000 		.word	.LC1
-  50 0038 36000000 		.word	.LC2
-  52              		.section	.text._ZN7Storage13getFlashDriveEv,"axG",%progbits,_ZN7Storage13getFlashDriveEv,comdat
-  53              		.align	1
-  54              		.weak	_ZN7Storage13getFlashDriveEv
-  55              		.thumb
-  56              		.thumb_func
-  58              	_ZN7Storage13getFlashDriveEv:
-  59              		@ args = 0, pretend = 0, frame = 0
-  60              		@ frame_needed = 0, uses_anonymous_args = 0
-  61 0000 38B5     		push	{r3, r4, r5, lr}
-  62 0002 0F4C     		ldr	r4, .L7
-  63 0004 2568     		ldr	r5, [r4, #0]
-  64 0006 15F00105 		ands	r5, r5, #1
-  65 000a 16D1     		bne	.L5
-  66 000c 2046     		mov	r0, r4
-  67 000e FFF7FEFF 		bl	__cxa_guard_acquire
-  68 0012 90B1     		cbz	r0, .L5
-  69 0014 4FF40E70 		mov	r0, #568
-  70 0018 FFF7FEFF 		bl	_Znwj
-  71 001c 3023     		movs	r3, #48
-  72 001e 80F83532 		strb	r3, [r0, #565]
-  73 0022 3A23     		movs	r3, #58
-  74 0024 80F83632 		strb	r3, [r0, #566]
-  75 0028 064B     		ldr	r3, .L7+4
-  76 002a 80F83452 		strb	r5, [r0, #564]
-  77 002e 80F83752 		strb	r5, [r0, #567]
-  78 0032 1860     		str	r0, [r3, #0]
-  79 0034 2046     		mov	r0, r4
-  80 0036 FFF7FEFF 		bl	__cxa_guard_release
-  81              	.L5:
-  82 003a 024B     		ldr	r3, .L7+4
-  83 003c 1868     		ldr	r0, [r3, #0]
-  84 003e 38BD     		pop	{r3, r4, r5, pc}
-  85              	.L8:
-  86              		.align	2
-  87              	.L7:
-  88 0040 00000000 		.word	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
-  89 0044 00000000 		.word	_ZZN7Storage13getFlashDriveEvE11pFlashDrive
-  91              		.section	.text._ZN7Storage10getSDDriveEv,"axG",%progbits,_ZN7Storage10getSDDriveEv,comdat
-  92              		.align	1
-  93              		.weak	_ZN7Storage10getSDDriveEv
-  94              		.thumb
-  95              		.thumb_func
-  97              	_ZN7Storage10getSDDriveEv:
-  98              		@ args = 0, pretend = 0, frame = 0
-  99              		@ frame_needed = 0, uses_anonymous_args = 0
- 100 0000 38B5     		push	{r3, r4, r5, lr}
- 101 0002 104C     		ldr	r4, .L12
- 102 0004 2568     		ldr	r5, [r4, #0]
- 103 0006 15F00105 		ands	r5, r5, #1
- 104 000a 17D1     		bne	.L10
- 105 000c 2046     		mov	r0, r4
- 106 000e FFF7FEFF 		bl	__cxa_guard_acquire
- 107 0012 98B1     		cbz	r0, .L10
- 108 0014 4FF40E70 		mov	r0, #568
- 109 0018 FFF7FEFF 		bl	_Znwj
- 110 001c 0123     		movs	r3, #1
- 111 001e 80F83432 		strb	r3, [r0, #564]
- 112 0022 3123     		movs	r3, #49
- 113 0024 80F83532 		strb	r3, [r0, #565]
- 114 0028 3A23     		movs	r3, #58
- 115 002a 80F83632 		strb	r3, [r0, #566]
- 116 002e 064B     		ldr	r3, .L12+4
- 117 0030 80F83752 		strb	r5, [r0, #567]
- 118 0034 1860     		str	r0, [r3, #0]
- 119 0036 2046     		mov	r0, r4
- 120 0038 FFF7FEFF 		bl	__cxa_guard_release
- 121              	.L10:
- 122 003c 024B     		ldr	r3, .L12+4
- 123 003e 1868     		ldr	r0, [r3, #0]
- 124 0040 38BD     		pop	{r3, r4, r5, pc}
- 125              	.L13:
- 126 0042 00BF     		.align	2
- 127              	.L12:
- 128 0044 00000000 		.word	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
- 129 0048 00000000 		.word	_ZZN7Storage10getSDDriveEvE12pSDCardDrive
- 131              		.text
- 132              		.align	1
- 133              		.global	_Z15taskListHandlerR3strR7UartDevPvi
- 134              		.thumb
- 135              		.thumb_func
- 137              	_Z15taskListHandlerR3strR7UartDevPvi:
- 138              		@ args = 0, pretend = 0, frame = 336
- 139              		@ frame_needed = 0, uses_anonymous_args = 0
- 140 003c F0B5     		push	{r4, r5, r6, r7, lr}
- 141 003e D9B0     		sub	sp, sp, #356
- 142 0040 0D46     		mov	r5, r1
- 143 0042 FFF7FEFF 		bl	_ZNK3strcviEv
- 144 0046 0028     		cmp	r0, #0
- 145 0048 0446     		mov	r4, r0
- 146 004a 04DD     		ble	.L15
- 147 004c FFF7FEFF 		bl	vTaskResetRunTimeStats
- 148 0050 2046     		mov	r0, r4
- 149 0052 FFF7FEFF 		bl	vTaskDelay
- 150              	.L15:
- 151 0056 0522     		movs	r2, #5
- 152 0058 55A8     		add	r0, sp, #340
- 153 005a 2049     		ldr	r1, .L21
- 154 005c 05AE     		add	r6, sp, #20
- 155 005e FFF7FEFF 		bl	memcpy
- 156 0062 0024     		movs	r4, #0
- 157 0064 0A21     		movs	r1, #10
- 158 0066 57AA     		add	r2, sp, #348
- 159 0068 3046     		mov	r0, r6
- 160 006a 5794     		str	r4, [sp, #348]
- 161 006c FFF7FEFF 		bl	uxTaskGetSystemState
- 162 0070 579A     		ldr	r2, [sp, #348]
- 163 0072 6423     		movs	r3, #100
- 164 0074 B2FBF3F3 		udiv	r3, r2, r3
- 165 0078 0746     		mov	r7, r0
- 166 007a 5793     		str	r3, [sp, #348]
- 167 007c 2846     		mov	r0, r5
- 168 007e 1849     		ldr	r1, .L21+4
- 169 0080 184A     		ldr	r2, .L21+8
- 170 0082 0A23     		movs	r3, #10
- 171 0084 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 172 0088 1AE0     		b	.L16
- 173              	.L18:
- 174 008a 579B     		ldr	r3, [sp, #348]
- 175 008c 06EB4412 		add	r2, r6, r4, lsl #5
- 176 0090 1BB1     		cbz	r3, .L20
- 177 0092 9169     		ldr	r1, [r2, #24]
- 178 0094 B1FBF3F1 		udiv	r1, r1, r3
- 179 0098 00E0     		b	.L17
- 180              	.L20:
- 181 009a 1946     		mov	r1, r3
- 182              	.L17:
- 183 009c 137B     		ldrb	r3, [r2, #12]	@ zero_extendqisi2
- 184 009e 58A8     		add	r0, sp, #352
- 185 00a0 C318     		adds	r3, r0, r3
- 186 00a2 5069     		ldr	r0, [r2, #20]
- 187 00a4 13F80C3C 		ldrb	r3, [r3, #-12]	@ zero_extendqisi2
- 188 00a8 0090     		str	r0, [sp, #0]
- 189 00aa 908B     		ldrh	r0, [r2, #28]
- 190 00ac 0291     		str	r1, [sp, #8]
- 191 00ae 0190     		str	r0, [sp, #4]
- 192 00b0 9169     		ldr	r1, [r2, #24]
- 193 00b2 2846     		mov	r0, r5
- 194 00b4 0391     		str	r1, [sp, #12]
- 195 00b6 5268     		ldr	r2, [r2, #4]
- 196 00b8 0B49     		ldr	r1, .L21+12
- 197 00ba FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 198 00be 0134     		adds	r4, r4, #1
- 199              	.L16:
- 200 00c0 BC42     		cmp	r4, r7
- 201 00c2 E2D1     		bne	.L18
- 202 00c4 FFF7FEFF 		bl	uxTaskGetNumberOfTasks
- 203 00c8 0A28     		cmp	r0, #10
- 204 00ca 04D9     		bls	.L19
- 205 00cc 2846     		mov	r0, r5
- 206 00ce 0749     		ldr	r1, .L21+16
- 207 00d0 0A22     		movs	r2, #10
- 208 00d2 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 209              	.L19:
- 210 00d6 0120     		movs	r0, #1
- 211 00d8 59B0     		add	sp, sp, #356
- 212 00da F0BD     		pop	{r4, r5, r6, r7, pc}
- 213              	.L22:
- 214              		.align	2
- 215              	.L21:
- 216 00dc 00000000 		.word	.LANCHOR0
- 217 00e0 57000000 		.word	.LC3
- 218 00e4 84000000 		.word	.LC4
- 219 00e8 89000000 		.word	.LC5
- 220 00ec A6000000 		.word	.LC6
- 222              		.align	1
- 223              		.global	_Z14memInfoHandlerR3strR7UartDevPvi
- 224              		.thumb
- 225              		.thumb_func
- 227              	_Z14memInfoHandlerR3strR7UartDevPvi:
- 228              		@ args = 0, pretend = 0, frame = 128
- 229              		@ frame_needed = 0, uses_anonymous_args = 0
- 230 00f0 10B5     		push	{r4, lr}
- 231 00f2 A0B0     		sub	sp, sp, #128
- 232 00f4 8022     		movs	r2, #128
- 233 00f6 0C46     		mov	r4, r1
- 234 00f8 6846     		mov	r0, sp
- 235 00fa 0021     		movs	r1, #0
- 236 00fc FFF7FEFF 		bl	memset
- 237 0100 6846     		mov	r0, sp
- 238 0102 FFF7FEFF 		bl	sys_get_mem_info_str
- 239 0106 2046     		mov	r0, r4
- 240 0108 6946     		mov	r1, sp
- 241 010a 4FF0FF32 		mov	r2, #-1
- 242 010e FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 243 0112 0120     		movs	r0, #1
- 244 0114 20B0     		add	sp, sp, #128
- 245 0116 10BD     		pop	{r4, pc}
- 247              		.global	__aeabi_f2iz
- 248              		.global	__aeabi_i2f
- 249              		.global	__aeabi_fsub
- 250              		.global	__aeabi_fmul
- 251              		.align	1
- 252              		.global	_Z13healthHandlerR3strR7UartDevPvi
- 253              		.thumb
- 254              		.thumb_func
- 256              	_Z13healthHandlerR3strR7UartDevPvi:
- 257              		@ args = 0, pretend = 0, frame = 48
- 258              		@ frame_needed = 0, uses_anonymous_args = 0
- 259 0118 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
- 260 011c 4F4C     		ldr	r4, .L37
- 261 011e 98B0     		sub	sp, sp, #96
- 262 0120 2368     		ldr	r3, [r4, #0]
- 263 0122 8846     		mov	r8, r1
- 264 0124 33B9     		cbnz	r3, .L25
- 265 0126 2820     		movs	r0, #40
- 266 0128 FFF7FEFF 		bl	_Znwj
- 267 012c 0546     		mov	r5, r0
- 268 012e FFF7FEFF 		bl	_ZN5Uart0C1Ev
- 269 0132 2560     		str	r5, [r4, #0]
- 270              	.L25:
- 271 0134 2668     		ldr	r6, [r4, #0]
- 272 0136 FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
- 273 013a 0024     		movs	r4, #0
- 274 013c 18A9     		add	r1, sp, #96
- 275 013e 00F50C70 		add	r0, r0, #560
- 276 0142 41F8044D 		str	r4, [r1, #-4]!
- 277 0146 0530     		adds	r0, r0, #5
- 278 0148 16AA     		add	r2, sp, #88
- 279 014a FFF7FEFF 		bl	f_getfree
- 280 014e 48B9     		cbnz	r0, .L36
- 281 0150 169A     		ldr	r2, [sp, #88]
- 282 0152 179C     		ldr	r4, [sp, #92]
- 283 0154 D569     		ldr	r5, [r2, #28]
- 284 0156 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
- 285 0158 023D     		subs	r5, r5, #2
- 286 015a 5C43     		muls	r4, r3, r4
- 287 015c 5D43     		muls	r5, r3, r5
- 288 015e 6408     		lsrs	r4, r4, #1
- 289 0160 6D08     		lsrs	r5, r5, #1
- 290 0162 00E0     		b	.L26
- 291              	.L36:
- 292 0164 2546     		mov	r5, r4
- 293              	.L26:
- 294 0166 3E4B     		ldr	r3, .L37+4
- 295 0168 1B68     		ldr	r3, [r3, #0]
- 296 016a C3B9     		cbnz	r3, .L27
- 297 016c 0C20     		movs	r0, #12
- 298 016e FFF7FEFF 		bl	_Znwj
- 299 0172 3C4B     		ldr	r3, .L37+8
- 300 0174 0746     		mov	r7, r0
- 301 0176 1A68     		ldr	r2, [r3, #0]
- 302 0178 9946     		mov	r9, r3
- 303 017a 3AB9     		cbnz	r2, .L28
- 304 017c 1C20     		movs	r0, #28
- 305 017e FFF7FEFF 		bl	_Znwj
- 306 0182 8246     		mov	sl, r0
- 307 0184 FFF7FEFF 		bl	_ZN4I2C2C1Ev
- 308 0188 C9F800A0 		str	sl, [r9, #0]
- 309              	.L28:
- 310 018c D9F80030 		ldr	r3, [r9, #0]
- 311 0190 3B60     		str	r3, [r7, #0]
- 312 0192 9023     		movs	r3, #144
- 313 0194 3B71     		strb	r3, [r7, #4]
- 314 0196 0023     		movs	r3, #0
- 315 0198 BB60     		str	r3, [r7, #8]	@ float
- 316 019a 314B     		ldr	r3, .L37+4
- 317 019c 1F60     		str	r7, [r3, #0]
- 318              	.L27:
- 319 019e 304B     		ldr	r3, .L37+4
- 320 01a0 1868     		ldr	r0, [r3, #0]
- 321 01a2 FFF7FEFF 		bl	_ZN8I2C_Temp12getFarenheitEv
- 322 01a6 8146     		mov	r9, r0
- 323 01a8 FFF7FEFF 		bl	__aeabi_f2iz
- 324 01ac 0746     		mov	r7, r0
- 325 01ae FFF7FEFF 		bl	__aeabi_i2f
- 326 01b2 0146     		mov	r1, r0
- 327 01b4 4846     		mov	r0, r9
- 328 01b6 FFF7FEFF 		bl	__aeabi_fsub
- 329 01ba 2B49     		ldr	r1, .L37+12
- 330 01bc FFF7FEFF 		bl	__aeabi_fmul
- 331 01c0 FFF7FEFF 		bl	__aeabi_f2iz
- 332 01c4 8146     		mov	r9, r0
- 333 01c6 13A8     		add	r0, sp, #76
- 334 01c8 FFF7FEFF 		bl	sys_get_boot_time
- 335 01cc 1822     		movs	r2, #24
- 336 01ce 0021     		movs	r1, #0
- 337 01d0 0DA8     		add	r0, sp, #52
- 338 01d2 FFF7FEFF 		bl	memset
- 339 01d6 0DA8     		add	r0, sp, #52
- 340 01d8 FFF7FEFF 		bl	rtc_get_date_time_str
- 341 01dc 234B     		ldr	r3, .L37+16
- 342 01de 1A68     		ldr	r2, [r3, #0]
- 343 01e0 9A46     		mov	sl, r3
- 344 01e2 22B9     		cbnz	r2, .L33
- 345 01e4 0120     		movs	r0, #1
- 346 01e6 FFF7FEFF 		bl	_Znwj
- 347 01ea CAF80000 		str	r0, [sl, #0]
- 348              	.L33:
- 349 01ee DAF80000 		ldr	r0, [sl, #0]
- 350 01f2 FFF7FEFF 		bl	_ZN12Light_Sensor11getRawValueEv
- 351 01f6 0DAB     		add	r3, sp, #52
- 352 01f8 0393     		str	r3, [sp, #12]
- 353 01fa 9DF85130 		ldrb	r3, [sp, #81]	@ zero_extendqisi2
- 354 01fe 8DE88002 		stmia	sp, {r7, r9}
- 355 0202 03F00F03 		and	r3, r3, #15
- 356 0206 0493     		str	r3, [sp, #16]
- 357 0208 9DF85030 		ldrb	r3, [sp, #80]	@ zero_extendqisi2
- 358 020c 0290     		str	r0, [sp, #8]
- 359 020e 03F01F03 		and	r3, r3, #31
- 360 0212 0593     		str	r3, [sp, #20]
- 361 0214 BDF85230 		ldrh	r3, [sp, #82]
- 362 0218 4046     		mov	r0, r8
- 363 021a C3F30B03 		ubfx	r3, r3, #0, #12
- 364 021e 9BB2     		uxth	r3, r3
- 365 0220 0693     		str	r3, [sp, #24]
- 366 0222 9DF84E30 		ldrb	r3, [sp, #78]	@ zero_extendqisi2
- 367 0226 1249     		ldr	r1, .L37+20
- 368 0228 03F01F03 		and	r3, r3, #31
- 369 022c 0793     		str	r3, [sp, #28]
- 370 022e 9DF84D30 		ldrb	r3, [sp, #77]	@ zero_extendqisi2
- 371 0232 2246     		mov	r2, r4
- 372 0234 03F03F03 		and	r3, r3, #63
- 373 0238 0893     		str	r3, [sp, #32]
- 374 023a 9DF84C30 		ldrb	r3, [sp, #76]	@ zero_extendqisi2
- 375 023e 03F03F03 		and	r3, r3, #63
- 376 0242 0993     		str	r3, [sp, #36]
- 377 0244 338A     		ldrh	r3, [r6, #16]
- 378 0246 0A93     		str	r3, [sp, #40]
- 379 0248 738A     		ldrh	r3, [r6, #18]
- 380 024a 0B93     		str	r3, [sp, #44]
- 381 024c 2B46     		mov	r3, r5
- 382 024e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 383 0252 0120     		movs	r0, #1
- 384 0254 18B0     		add	sp, sp, #96
- 385 0256 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
- 386              	.L38:
- 387 025a 00BF     		.align	2
- 388              	.L37:
- 389 025c 00000000 		.word	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
- 390 0260 00000000 		.word	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
- 391 0264 00000000 		.word	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
- 392 0268 00002041 		.word	1092616192
- 393 026c 00000000 		.word	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
- 394 0270 D0000000 		.word	.LC7
- 396              		.align	1
- 397              		.global	_Z11timeHandlerR3strR7UartDevPvi
- 398              		.thumb
- 399              		.thumb_func
- 401              	_Z11timeHandlerR3strR7UartDevPvi:
- 402              		@ args = 0, pretend = 0, frame = 56
- 403              		@ frame_needed = 0, uses_anonymous_args = 0
- 404 0274 30B5     		push	{r4, r5, lr}
- 405 0276 0C46     		mov	r4, r1
- 406 0278 95B0     		sub	sp, sp, #84
- 407 027a 4049     		ldr	r1, .L43
- 408 027c 0546     		mov	r5, r0
- 409 027e FFF7FEFF 		bl	_ZNK3str10beginsWithEPKc
- 410 0282 0028     		cmp	r0, #0
- 411 0284 45D0     		beq	.L40
- 412 0286 0FAB     		add	r3, sp, #60
- 413 0288 0093     		str	r3, [sp, #0]
- 414 028a 10AB     		add	r3, sp, #64
- 415 028c 0193     		str	r3, [sp, #4]
- 416 028e 11AB     		add	r3, sp, #68
- 417 0290 0293     		str	r3, [sp, #8]
- 418 0292 12AB     		add	r3, sp, #72
- 419 0294 0393     		str	r3, [sp, #12]
- 420 0296 13AB     		add	r3, sp, #76
- 421 0298 0493     		str	r3, [sp, #16]
- 422 029a 2846     		mov	r0, r5
- 423 029c 3849     		ldr	r1, .L43+4
- 424 029e 0DAA     		add	r2, sp, #52
- 425 02a0 0EAB     		add	r3, sp, #56
- 426 02a2 FFF7FEFF 		bl	_ZN3str5scanfEPKcz
- 427 02a6 0728     		cmp	r0, #7
- 428 02a8 64D1     		bne	.L42
- 429 02aa 9DF82D30 		ldrb	r3, [sp, #45]	@ zero_extendqisi2
- 430 02ae 0D9A     		ldr	r2, [sp, #52]
- 431 02b0 0AA8     		add	r0, sp, #40
- 432 02b2 62F30303 		bfi	r3, r2, #0, #4
- 433 02b6 8DF82D30 		strb	r3, [sp, #45]
- 434 02ba 0E9A     		ldr	r2, [sp, #56]
- 435 02bc 9DF82C30 		ldrb	r3, [sp, #44]	@ zero_extendqisi2
- 436 02c0 62F30403 		bfi	r3, r2, #0, #5
- 437 02c4 8DF82C30 		strb	r3, [sp, #44]
- 438 02c8 0F9A     		ldr	r2, [sp, #60]
- 439 02ca BDF82E30 		ldrh	r3, [sp, #46]
- 440 02ce 62F30B03 		bfi	r3, r2, #0, #12
- 441 02d2 ADF82E30 		strh	r3, [sp, #46]	@ movhi
- 442 02d6 109A     		ldr	r2, [sp, #64]
- 443 02d8 9DF82A30 		ldrb	r3, [sp, #42]	@ zero_extendqisi2
- 444 02dc 62F30403 		bfi	r3, r2, #0, #5
- 445 02e0 8DF82A30 		strb	r3, [sp, #42]
- 446 02e4 119A     		ldr	r2, [sp, #68]
- 447 02e6 9DF82930 		ldrb	r3, [sp, #41]	@ zero_extendqisi2
- 448 02ea 62F30503 		bfi	r3, r2, #0, #6
- 449 02ee 8DF82930 		strb	r3, [sp, #41]
- 450 02f2 129A     		ldr	r2, [sp, #72]
- 451 02f4 9DF82830 		ldrb	r3, [sp, #40]	@ zero_extendqisi2
- 452 02f8 62F30503 		bfi	r3, r2, #0, #6
- 453 02fc 8DF82830 		strb	r3, [sp, #40]
- 454 0300 139A     		ldr	r2, [sp, #76]
- 455 0302 9DF82B30 		ldrb	r3, [sp, #43]	@ zero_extendqisi2
- 456 0306 62F30203 		bfi	r3, r2, #0, #3
- 457 030a 8DF82B30 		strb	r3, [sp, #43]
- 458 030e FFF7FEFF 		bl	rtc_settime
- 459              	.L40:
- 460 0312 06AD     		add	r5, sp, #24
- 461 0314 2846     		mov	r0, r5
- 462 0316 FFF7FEFF 		bl	rtc_gettime
- 463 031a 95E80700 		ldmia	r5, {r0, r1, r2}
- 464 031e 0AAB     		add	r3, sp, #40
- 465 0320 83E80700 		stmia	r3, {r0, r1, r2}
- 466 0324 BDF82E10 		ldrh	r1, [sp, #46]
- 467 0328 9DF82D20 		ldrb	r2, [sp, #45]	@ zero_extendqisi2
- 468 032c C1F30B01 		ubfx	r1, r1, #0, #12
- 469 0330 89B2     		uxth	r1, r1
- 470 0332 0091     		str	r1, [sp, #0]
- 471 0334 9DF82A10 		ldrb	r1, [sp, #42]	@ zero_extendqisi2
- 472 0338 9DF82C30 		ldrb	r3, [sp, #44]	@ zero_extendqisi2
- 473 033c 01F01F01 		and	r1, r1, #31
- 474 0340 0191     		str	r1, [sp, #4]
- 475 0342 9DF82910 		ldrb	r1, [sp, #41]	@ zero_extendqisi2
- 476 0346 02F00F02 		and	r2, r2, #15
- 477 034a 01F03F01 		and	r1, r1, #63
- 478 034e 0291     		str	r1, [sp, #8]
- 479 0350 9DF82810 		ldrb	r1, [sp, #40]	@ zero_extendqisi2
- 480 0354 03F01F03 		and	r3, r3, #31
- 481 0358 01F03F01 		and	r1, r1, #63
- 482 035c 0391     		str	r1, [sp, #12]
- 483 035e 9DF82B10 		ldrb	r1, [sp, #43]	@ zero_extendqisi2
- 484 0362 2046     		mov	r0, r4
- 485 0364 01F00701 		and	r1, r1, #7
- 486 0368 0491     		str	r1, [sp, #16]
- 487 036a 0649     		ldr	r1, .L43+8
- 488 036c FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 489 0370 0120     		movs	r0, #1
- 490 0372 00E0     		b	.L41
- 491              	.L42:
- 492 0374 0020     		movs	r0, #0
- 493              	.L41:
- 494 0376 15B0     		add	sp, sp, #84
- 495 0378 30BD     		pop	{r4, r5, pc}
- 496              	.L44:
- 497 037a 00BF     		.align	2
- 498              	.L43:
- 499 037c 46010000 		.word	.LC8
- 500 0380 4A010000 		.word	.LC9
- 501 0384 63010000 		.word	.LC10
- 503              		.align	1
- 504              		.global	_Z9cpHandlerR3strR7UartDevPvi
- 505              		.thumb
- 506              		.thumb_func
- 508              	_Z9cpHandlerR3strR7UartDevPvi:
- 509              		@ args = 0, pretend = 0, frame = 24
- 510              		@ frame_needed = 0, uses_anonymous_args = 0
- 511 0388 30B5     		push	{r4, r5, lr}
- 512 038a 89B0     		sub	sp, sp, #36
- 513 038c 04AB     		add	r3, sp, #16
- 514 038e 0024     		movs	r4, #0
- 515 0390 0093     		str	r3, [sp, #0]
- 516 0392 0222     		movs	r2, #2
- 517 0394 0D46     		mov	r5, r1
- 518 0396 03AB     		add	r3, sp, #12
- 519 0398 1849     		ldr	r1, .L54
- 520 039a 0394     		str	r4, [sp, #12]
- 521 039c 0494     		str	r4, [sp, #16]
- 522 039e FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
- 523 03a2 0228     		cmp	r0, #2
- 524 03a4 27D1     		bne	.L50
- 525 03a6 07AB     		add	r3, sp, #28
- 526 03a8 0093     		str	r3, [sp, #0]
- 527 03aa 05AA     		add	r2, sp, #20
- 528 03ac 0398     		ldr	r0, [sp, #12]
- 529 03ae 0499     		ldr	r1, [sp, #16]
- 530 03b0 06AB     		add	r3, sp, #24
- 531 03b2 0594     		str	r4, [sp, #20]
- 532 03b4 0694     		str	r4, [sp, #24]
- 533 03b6 0794     		str	r4, [sp, #28]
- 534 03b8 FFF7FEFF 		bl	_ZN7Storage4copyEPKcS1_PjS2_S2_
- 535 03bc 0246     		mov	r2, r0
- 536 03be 38B1     		cbz	r0, .L47
- 537 03c0 049B     		ldr	r3, [sp, #16]
- 538 03c2 2846     		mov	r0, r5
- 539 03c4 0093     		str	r3, [sp, #0]
- 540 03c6 0E49     		ldr	r1, .L54+4
- 541 03c8 039B     		ldr	r3, [sp, #12]
- 542 03ca FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 543 03ce 10E0     		b	.L53
- 544              	.L47:
- 545 03d0 059A     		ldr	r2, [sp, #20]
- 546 03d2 069B     		ldr	r3, [sp, #24]
- 547 03d4 0799     		ldr	r1, [sp, #28]
- 548 03d6 002A     		cmp	r2, #0
- 549 03d8 08BF     		it	eq
- 550 03da 0122     		moveq	r2, #1
- 551 03dc 002B     		cmp	r3, #0
- 552 03de 08BF     		it	eq
- 553 03e0 0123     		moveq	r3, #1
- 554 03e2 B1FBF2F2 		udiv	r2, r1, r2
- 555 03e6 B1FBF3F3 		udiv	r3, r1, r3
- 556 03ea 2846     		mov	r0, r5
- 557 03ec 0549     		ldr	r1, .L54+8
- 558 03ee FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 559              	.L53:
- 560 03f2 0120     		movs	r0, #1
- 561 03f4 00E0     		b	.L46
- 562              	.L50:
- 563 03f6 2046     		mov	r0, r4
- 564              	.L46:
- 565 03f8 09B0     		add	sp, sp, #36
- 566 03fa 30BD     		pop	{r4, r5, pc}
- 567              	.L55:
- 568              		.align	2
- 569              	.L54:
- 570 03fc 8A010000 		.word	.LC11
- 571 0400 8C010000 		.word	.LC12
- 572 0404 AB010000 		.word	.LC13
- 574              		.align	1
- 575              		.global	_Z10catHandlerR3strR7UartDevPvi
- 576              		.thumb
- 577              		.thumb_func
- 579              	_Z10catHandlerR3strR7UartDevPvi:
- 580              		@ args = 0, pretend = 0, frame = 1072
- 581              		@ frame_needed = 0, uses_anonymous_args = 0
- 582 0408 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
- 583 040c 0C46     		mov	r4, r1
- 584 040e ADF5866D 		sub	sp, sp, #1072
- 585 0412 3549     		ldr	r1, .L68
- 586 0414 0646     		mov	r6, r0
- 587 0416 FFF7FEFF 		bl	_ZN3str5eraseEPKc
- 588 041a 3449     		ldr	r1, .L68+4
- 589 041c 80F00109 		eor	r9, r0, #1
- 590 0420 3046     		mov	r0, r6
- 591 0422 FFF7FEFF 		bl	_ZN3str9trimStartEPKc
- 592 0426 3149     		ldr	r1, .L68+4
- 593 0428 3046     		mov	r0, r6
- 594 042a FFF7FEFF 		bl	_ZN3str7trimEndEPKc
- 595 042e 3046     		mov	r0, r6
- 596 0430 FFF7FEFF 		bl	_ZNK3strclEv
- 597 0434 0DF58068 		add	r8, sp, #1024
- 598 0438 08F10408 		add	r8, r8, #4
- 599 043c 0146     		mov	r1, r0
- 600 043e 0122     		movs	r2, #1
- 601 0440 4046     		mov	r0, r8
- 602 0442 FFF7FEFF 		bl	f_open
- 603 0446 5FFA89F9 		uxtb	r9, r9
- 604 044a 0546     		mov	r5, r0
- 605 044c 40B1     		cbz	r0, .L57
- 606 044e 3046     		mov	r0, r6
- 607 0450 FFF7FEFF 		bl	_ZNK3strclEv
- 608 0454 2649     		ldr	r1, .L68+8
- 609 0456 0246     		mov	r2, r0
- 610 0458 2046     		mov	r0, r4
- 611 045a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 612 045e 3EE0     		b	.L58
- 613              	.L57:
- 614 0460 2946     		mov	r1, r5
- 615 0462 40F20142 		movw	r2, #1025
- 616 0466 6846     		mov	r0, sp
- 617 0468 0DF58667 		add	r7, sp, #1072
- 618 046c FFF7FEFF 		bl	memset
- 619 0470 47F8045D 		str	r5, [r7, #-4]!
- 620 0474 FFF7FEFF 		bl	sys_get_uptime_ms
- 621 0478 6E46     		mov	r6, sp
- 622 047a 8246     		mov	sl, r0
- 623 047c 05E0     		b	.L66
- 624              	.L67:
- 625 047e 2046     		mov	r0, r4
- 626 0480 6946     		mov	r1, sp
- 627 0482 4FF0FF32 		mov	r2, #-1
- 628 0486 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
- 629              	.L66:
- 630 048a 4046     		mov	r0, r8
- 631 048c 6946     		mov	r1, sp
- 632 048e 4FF48062 		mov	r2, #1024
- 633 0492 3B46     		mov	r3, r7
- 634 0494 FFF7FEFF 		bl	f_read
- 635 0498 40B9     		cbnz	r0, .L60
- 636 049a DDF82C34 		ldr	r3, [sp, #1068]
- 637 049e 2BB1     		cbz	r3, .L60
- 638 04a0 ED18     		adds	r5, r5, r3
- 639 04a2 F054     		strb	r0, [r6, r3]
- 640 04a4 B9F1000F 		cmp	r9, #0
- 641 04a8 EFD0     		beq	.L66
- 642 04aa E8E7     		b	.L67
- 643              	.L60:
- 644 04ac 4046     		mov	r0, r8
- 645 04ae FFF7FEFF 		bl	f_close
- 646 04b2 B9F1000F 		cmp	r9, #0
- 647 04b6 0CD1     		bne	.L63
- 648 04b8 FFF7FEFF 		bl	sys_get_uptime_ms
- 649 04bc B0EB0A03 		subs	r3, r0, sl
- 650 04c0 08BF     		it	eq
- 651 04c2 0123     		moveq	r3, #1
- 652 04c4 B5FBF3F3 		udiv	r3, r5, r3
- 653 04c8 2046     		mov	r0, r4
- 654 04ca 0A49     		ldr	r1, .L68+12
- 655 04cc 2A46     		mov	r2, r5
- 656 04ce FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 657              	.L63:
- 658 04d2 2046     		mov	r0, r4
- 659 04d4 0849     		ldr	r1, .L68+16
- 660 04d6 4FF0FF32 		mov	r2, #-1
- 661 04da FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 662              	.L58:
- 663 04de 0120     		movs	r0, #1
- 664 04e0 0DF5866D 		add	sp, sp, #1072
- 665 04e4 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
- 666              	.L69:
- 667              		.align	2
- 668              	.L68:
- 669 04e8 D9010000 		.word	.LC14
- 670 04ec 8A010000 		.word	.LC11
- 671 04f0 E2010000 		.word	.LC15
- 672 04f4 F6010000 		.word	.LC16
- 673 04f8 11020000 		.word	.LC17
- 675              		.align	1
- 676              		.global	_Z9lsHandlerR3strR7UartDevPvi
- 677              		.thumb
- 678              		.thumb_func
- 680              	_Z9lsHandlerR3strR7UartDevPvi:
- 681              		@ args = 0, pretend = 0, frame = 216
- 682              		@ frame_needed = 0, uses_anonymous_args = 0
- 683 04fc 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
- 684 0500 C1B0     		sub	sp, sp, #260
- 685 0502 3FAB     		add	r3, sp, #252
- 686 0504 0025     		movs	r5, #0
- 687 0506 0093     		str	r3, [sp, #0]
- 688 0508 0222     		movs	r2, #2
- 689 050a 0C46     		mov	r4, r1
- 690 050c 3EAB     		add	r3, sp, #248
- 691 050e 5C49     		ldr	r1, .L91
- 692 0510 3D95     		str	r5, [sp, #244]
- 693 0512 3E95     		str	r5, [sp, #248]
- 694 0514 3F95     		str	r5, [sp, #252]
- 695 0516 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
- 696 051a 0228     		cmp	r0, #2
- 697 051c 03D1     		bne	.L71
- 698 051e 3F98     		ldr	r0, [sp, #252]
- 699 0520 FFF7FEFF 		bl	atoi
- 700 0524 0546     		mov	r5, r0
- 701              	.L71:
- 702 0526 3E9B     		ldr	r3, [sp, #248]
- 703 0528 0BB9     		cbnz	r3, .L72
- 704 052a 564B     		ldr	r3, .L91+4
- 705 052c 3E93     		str	r3, [sp, #248]
- 706              	.L72:
- 707 052e 2BAE     		add	r6, sp, #172
- 708 0530 3046     		mov	r0, r6
- 709 0532 3E99     		ldr	r1, [sp, #248]
- 710 0534 FFF7FEFF 		bl	f_opendir
- 711 0538 0346     		mov	r3, r0
- 712 053a 08B9     		cbnz	r0, .L73
- 713 053c 0BAF     		add	r7, sp, #44
- 714 053e 0EE0     		b	.L74
- 715              	.L73:
- 716 0540 2046     		mov	r0, r4
- 717 0542 5149     		ldr	r1, .L91+8
- 718 0544 3E9A     		ldr	r2, [sp, #248]
- 719 0546 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 720 054a 95E0     		b	.L75
- 721              	.L77:
- 722 054c 8023     		movs	r3, #128
- 723 054e 3046     		mov	r0, r6
- 724 0550 34A9     		add	r1, sp, #208
- 725 0552 3A97     		str	r7, [sp, #232]
- 726 0554 3B93     		str	r3, [sp, #236]
- 727 0556 FFF7FEFF 		bl	f_readdir
- 728 055a 013D     		subs	r5, r5, #1
- 729 055c 08B9     		cbnz	r0, .L76
- 730              	.L74:
- 731 055e 002D     		cmp	r5, #0
- 732 0560 F4DC     		bgt	.L77
- 733              	.L76:
- 734 0562 2046     		mov	r0, r4
- 735 0564 4949     		ldr	r1, .L91+12
- 736 0566 3E9A     		ldr	r2, [sp, #248]
- 737 0568 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 738 056c 0025     		movs	r5, #0
- 739 056e 2E46     		mov	r6, r5
- 740 0570 0BAF     		add	r7, sp, #44
- 741 0572 0DF1D908 		add	r8, sp, #217
- 742              	.L85:
- 743 0576 8023     		movs	r3, #128
- 744 0578 2BA8     		add	r0, sp, #172
- 745 057a 34A9     		add	r1, sp, #208
- 746 057c 3A97     		str	r7, [sp, #232]
- 747 057e 3B93     		str	r3, [sp, #236]
- 748 0580 FFF7FEFF 		bl	f_readdir
- 749 0584 0028     		cmp	r0, #0
- 750 0586 5FD1     		bne	.L78
- 751 0588 9DF8D930 		ldrb	r3, [sp, #217]	@ zero_extendqisi2
- 752 058c 002B     		cmp	r3, #0
- 753 058e 5BD0     		beq	.L78
- 754 0590 9DF8D810 		ldrb	r1, [sp, #216]	@ zero_extendqisi2
- 755 0594 CB06     		lsls	r3, r1, #27
- 756 0596 02D5     		bpl	.L79
- 757 0598 0135     		adds	r5, r5, #1
- 758 059a 4422     		movs	r2, #68
- 759 059c 05E0     		b	.L80
- 760              	.L79:
- 761 059e 3D9A     		ldr	r2, [sp, #244]
- 762 05a0 349B     		ldr	r3, [sp, #208]
- 763 05a2 0136     		adds	r6, r6, #1
- 764 05a4 D318     		adds	r3, r2, r3
- 765 05a6 3D93     		str	r3, [sp, #244]
- 766 05a8 2D22     		movs	r2, #45
- 767              	.L80:
- 768 05aa 11F0010F 		tst	r1, #1
- 769 05ae 0CBF     		ite	eq
- 770 05b0 2D23     		moveq	r3, #45
- 771 05b2 5223     		movne	r3, #82
- 772 05b4 11F0020F 		tst	r1, #2
- 773 05b8 0CBF     		ite	eq
- 774 05ba 4FF02D09 		moveq	r9, #45
- 775 05be 4FF04809 		movne	r9, #72
- 776 05c2 11F0040F 		tst	r1, #4
- 777 05c6 0CBF     		ite	eq
- 778 05c8 4FF02D0C 		moveq	ip, #45
- 779 05cc 4FF0530C 		movne	ip, #83
- 780 05d0 11F0200F 		tst	r1, #32
- 781 05d4 BDF8D410 		ldrh	r1, [sp, #212]
- 782 05d8 0CBF     		ite	eq
- 783 05da 4FF02D0E 		moveq	lr, #45
- 784 05de 4FF0410E 		movne	lr, #65
- 785 05e2 8DE80052 		stmia	sp, {r9, ip, lr}
- 786 05e6 4FEA612E 		asr	lr, r1, #9
- 787 05ea 0EF5F66E 		add	lr, lr, #1968
- 788 05ee BDF8D600 		ldrh	r0, [sp, #214]
- 789 05f2 0EF10C0E 		add	lr, lr, #12
- 790 05f6 CDF80CE0 		str	lr, [sp, #12]
- 791 05fa C1F3431E 		ubfx	lr, r1, #5, #4
- 792 05fe 01F01F01 		and	r1, r1, #31
- 793 0602 0591     		str	r1, [sp, #20]
- 794 0604 C112     		asrs	r1, r0, #11
- 795 0606 0691     		str	r1, [sp, #24]
- 796 0608 3499     		ldr	r1, [sp, #208]
- 797 060a C0F34510 		ubfx	r0, r0, #5, #6
- 798 060e 0790     		str	r0, [sp, #28]
- 799 0610 0891     		str	r1, [sp, #32]
- 800 0612 2046     		mov	r0, r4
- 801 0614 1E49     		ldr	r1, .L91+16
- 802 0616 CDF810E0 		str	lr, [sp, #16]
- 803 061a CDF82480 		str	r8, [sp, #36]
- 804 061e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 805 0622 2046     		mov	r0, r4
- 806 0624 1B49     		ldr	r1, .L91+20
- 807 0626 4FF0FF32 		mov	r2, #-1
- 808 062a FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
- 809 062e 3946     		mov	r1, r7
- 810 0630 2046     		mov	r0, r4
- 811 0632 4FF0FF32 		mov	r2, #-1
- 812 0636 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
- 813 063a 2046     		mov	r0, r4
- 814 063c 1649     		ldr	r1, .L91+24
- 815 063e 4FF0FF32 		mov	r2, #-1
- 816 0642 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 817 0646 96E7     		b	.L85
- 818              	.L78:
- 819 0648 0095     		str	r5, [sp, #0]
- 820 064a 40AD     		add	r5, sp, #256
- 821 064c 55F80C3D 		ldr	r3, [r5, #-12]!
- 822 0650 1249     		ldr	r1, .L91+28
- 823 0652 3246     		mov	r2, r6
- 824 0654 2046     		mov	r0, r4
- 825 0656 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 826 065a 3E98     		ldr	r0, [sp, #248]
- 827 065c 2946     		mov	r1, r5
- 828 065e 3CAA     		add	r2, sp, #240
- 829 0660 FFF7FEFF 		bl	f_getfree
- 830 0664 40B9     		cbnz	r0, .L75
- 831 0666 3C9B     		ldr	r3, [sp, #240]
- 832 0668 3D9A     		ldr	r2, [sp, #244]
- 833 066a 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
- 834 066c 2046     		mov	r0, r4
- 835 066e 5A43     		muls	r2, r3, r2
- 836 0670 0B49     		ldr	r1, .L91+32
- 837 0672 5208     		lsrs	r2, r2, #1
- 838 0674 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 839              	.L75:
- 840 0678 0120     		movs	r0, #1
- 841 067a 41B0     		add	sp, sp, #260
- 842 067c BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 843              	.L92:
- 844              		.align	2
- 845              	.L91:
- 846 0680 8A010000 		.word	.LC11
- 847 0684 12020000 		.word	.LC18
- 848 0688 15020000 		.word	.LC19
- 849 068c 39020000 		.word	.LC20
- 850 0690 54020000 		.word	.LC21
- 851 0694 81020000 		.word	.LC22
- 852 0698 11020000 		.word	.LC17
- 853 069c 85020000 		.word	.LC23
- 854 06a0 AF020000 		.word	.LC24
- 856              		.align	1
- 857              		.global	_Z12mkdirHandlerR3strR7UartDevPvi
- 858              		.thumb
- 859              		.thumb_func
- 861              	_Z12mkdirHandlerR3strR7UartDevPvi:
- 862              		@ args = 0, pretend = 0, frame = 0
- 863              		@ frame_needed = 0, uses_anonymous_args = 0
- 864 06a4 70B5     		push	{r4, r5, r6, lr}
- 865 06a6 0E46     		mov	r6, r1
- 866 06a8 0446     		mov	r4, r0
- 867 06aa FFF7FEFF 		bl	_ZNK3strclEv
- 868 06ae 0546     		mov	r5, r0
- 869 06b0 2046     		mov	r0, r4
- 870 06b2 FFF7FEFF 		bl	_ZNK3strclEv
- 871 06b6 FFF7FEFF 		bl	f_mkdir
- 872 06ba 064A     		ldr	r2, .L96
- 873 06bc 064B     		ldr	r3, .L96+4
- 874 06be 0749     		ldr	r1, .L96+8
- 875 06c0 0028     		cmp	r0, #0
- 876 06c2 08BF     		it	eq
- 877 06c4 1346     		moveq	r3, r2
- 878 06c6 3046     		mov	r0, r6
- 879 06c8 2A46     		mov	r2, r5
- 880 06ca FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 881 06ce 0120     		movs	r0, #1
- 882 06d0 70BD     		pop	{r4, r5, r6, pc}
- 883              	.L97:
- 884 06d2 00BF     		.align	2
- 885              	.L96:
- 886 06d4 C3020000 		.word	.LC25
- 887 06d8 C6020000 		.word	.LC26
- 888 06dc CC020000 		.word	.LC27
- 890              		.align	1
- 891              		.global	_Z9rmHandlerR3strR7UartDevPvi
- 892              		.thumb
- 893              		.thumb_func
- 895              	_Z9rmHandlerR3strR7UartDevPvi:
- 896              		@ args = 0, pretend = 0, frame = 0
- 897              		@ frame_needed = 0, uses_anonymous_args = 0
- 898 06e0 70B5     		push	{r4, r5, r6, lr}
- 899 06e2 0E46     		mov	r6, r1
- 900 06e4 0446     		mov	r4, r0
- 901 06e6 FFF7FEFF 		bl	_ZNK3strclEv
- 902 06ea 0546     		mov	r5, r0
- 903 06ec 2046     		mov	r0, r4
- 904 06ee FFF7FEFF 		bl	_ZNK3strclEv
- 905 06f2 FFF7FEFF 		bl	f_unlink
- 906 06f6 064A     		ldr	r2, .L101
- 907 06f8 064B     		ldr	r3, .L101+4
- 908 06fa 0749     		ldr	r1, .L101+8
- 909 06fc 0028     		cmp	r0, #0
- 910 06fe 08BF     		it	eq
- 911 0700 1346     		moveq	r3, r2
- 912 0702 3046     		mov	r0, r6
- 913 0704 2A46     		mov	r2, r5
- 914 0706 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 915 070a 0120     		movs	r0, #1
- 916 070c 70BD     		pop	{r4, r5, r6, pc}
- 917              	.L102:
- 918 070e 00BF     		.align	2
- 919              	.L101:
- 920 0710 C3020000 		.word	.LC25
- 921 0714 C6020000 		.word	.LC26
- 922 0718 E8020000 		.word	.LC28
- 924              		.align	1
- 925              		.global	_Z9mvHandlerR3strR7UartDevPvi
- 926              		.thumb
- 927              		.thumb_func
- 929              	_Z9mvHandlerR3strR7UartDevPvi:
- 930              		@ args = 0, pretend = 0, frame = 8
- 931              		@ frame_needed = 0, uses_anonymous_args = 0
- 932 071c 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
- 933 071e 03AB     		add	r3, sp, #12
- 934 0720 0024     		movs	r4, #0
- 935 0722 0093     		str	r3, [sp, #0]
- 936 0724 0222     		movs	r2, #2
- 937 0726 0D46     		mov	r5, r1
- 938 0728 02AB     		add	r3, sp, #8
- 939 072a 0F49     		ldr	r1, .L108
- 940 072c 0294     		str	r4, [sp, #8]
- 941 072e 0394     		str	r4, [sp, #12]
- 942 0730 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
- 943 0734 0228     		cmp	r0, #2
- 944 0736 14D1     		bne	.L106
- 945 0738 029E     		ldr	r6, [sp, #8]
- 946 073a 039C     		ldr	r4, [sp, #12]
- 947 073c 3046     		mov	r0, r6
- 948 073e 2146     		mov	r1, r4
- 949 0740 FFF7FEFF 		bl	f_rename
- 950 0744 094B     		ldr	r3, .L108+4
- 951 0746 0A4A     		ldr	r2, .L108+8
- 952 0748 0A49     		ldr	r1, .L108+12
- 953 074a 0028     		cmp	r0, #0
- 954 074c 14BF     		ite	ne
- 955 074e 1046     		movne	r0, r2
- 956 0750 1846     		moveq	r0, r3
- 957 0752 0090     		str	r0, [sp, #0]
- 958 0754 3246     		mov	r2, r6
- 959 0756 2846     		mov	r0, r5
- 960 0758 2346     		mov	r3, r4
- 961 075a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 962 075e 0120     		movs	r0, #1
- 963 0760 00E0     		b	.L104
- 964              	.L106:
- 965 0762 2046     		mov	r0, r4
- 966              	.L104:
- 967 0764 04B0     		add	sp, sp, #16
- 968 0766 70BD     		pop	{r4, r5, r6, pc}
- 969              	.L109:
- 970              		.align	2
- 971              	.L108:
- 972 0768 8A010000 		.word	.LC11
- 973 076c C3020000 		.word	.LC25
- 974 0770 C6020000 		.word	.LC26
- 975 0774 FA020000 		.word	.LC29
- 977              		.align	1
- 978              		.global	_Z14newFileHandlerR3strR7UartDevPvi
- 979              		.thumb
- 980              		.thumb_func
- 982              	_Z14newFileHandlerR3strR7UartDevPvi:
- 983              		@ args = 0, pretend = 0, frame = 48
- 984              		@ frame_needed = 0, uses_anonymous_args = 0
- 985 0778 70B5     		push	{r4, r5, r6, lr}
- 986 077a 8CB0     		sub	sp, sp, #48
- 987 077c 0C46     		mov	r4, r1
- 988 077e 0646     		mov	r6, r0
- 989 0780 FFF7FEFF 		bl	_ZNK3strclEv
- 990 0784 0A22     		movs	r2, #10
- 991 0786 0146     		mov	r1, r0
- 992 0788 6846     		mov	r0, sp
- 993 078a 6D46     		mov	r5, sp
- 994 078c FFF7FEFF 		bl	f_open
- 995 0790 40B1     		cbz	r0, .L111
- 996 0792 3046     		mov	r0, r6
- 997 0794 FFF7FEFF 		bl	_ZNK3strclEv
- 998 0798 2049     		ldr	r1, .L119
- 999 079a 0246     		mov	r2, r0
- 1000 079c 2046     		mov	r0, r4
- 1001 079e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1002 07a2 2CE0     		b	.L112
- 1003              	.L111:
- 1004 07a4 8DF82F00 		strb	r0, [sp, #47]
- 1005 07a8 0A90     		str	r0, [sp, #40]
- 1006 07aa 1D49     		ldr	r1, .L119+4
- 1007 07ac 7E22     		movs	r2, #126
- 1008 07ae 42F21073 		movw	r3, #10000
- 1009 07b2 2046     		mov	r0, r4
- 1010 07b4 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1011 07b8 2046     		mov	r0, r4
- 1012 07ba 1A49     		ldr	r1, .L119+8
- 1013 07bc FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1014 07c0 6D46     		mov	r5, sp
- 1015 07c2 06E0     		b	.L118
- 1016              	.L116:
- 1017 07c4 0A9B     		ldr	r3, [sp, #40]
- 1018 07c6 012B     		cmp	r3, #1
- 1019 07c8 1CD0     		beq	.L114
- 1020 07ca 2046     		mov	r0, r4
- 1021 07cc 1649     		ldr	r1, .L119+12
- 1022 07ce FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1023              	.L118:
- 1024 07d2 2046     		mov	r0, r4
- 1025 07d4 0DF12F01 		add	r1, sp, #47
- 1026 07d8 42F21072 		movw	r2, #10000
- 1027 07dc FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
- 1028 07e0 C0B1     		cbz	r0, .L115
- 1029 07e2 9DF82F30 		ldrb	r3, [sp, #47]	@ zero_extendqisi2
- 1030 07e6 7E2B     		cmp	r3, #126
- 1031 07e8 14D0     		beq	.L115
- 1032 07ea 6846     		mov	r0, sp
- 1033 07ec 0DF12F01 		add	r1, sp, #47
- 1034 07f0 0122     		movs	r2, #1
- 1035 07f2 0AAB     		add	r3, sp, #40
- 1036 07f4 FFF7FEFF 		bl	f_write
- 1037 07f8 0028     		cmp	r0, #0
- 1038 07fa E3D1     		bne	.L116
- 1039 07fc 02E0     		b	.L114
- 1040              	.L112:
- 1041 07fe 0120     		movs	r0, #1
- 1042 0800 0CB0     		add	sp, sp, #48
- 1043 0802 70BD     		pop	{r4, r5, r6, pc}
- 1044              	.L114:
- 1045 0804 9DF82F10 		ldrb	r1, [sp, #47]	@ zero_extendqisi2
- 1046 0808 2046     		mov	r0, r4
- 1047 080a 4FF0FF32 		mov	r2, #-1
- 1048 080e FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
- 1049 0812 DEE7     		b	.L118
- 1050              	.L115:
- 1051 0814 6846     		mov	r0, sp
- 1052 0816 FFF7FEFF 		bl	f_close
- 1053 081a F0E7     		b	.L112
- 1054              	.L120:
- 1055              		.align	2
- 1056              	.L119:
- 1057 081c 12030000 		.word	.LC30
- 1058 0820 39030000 		.word	.LC31
- 1059 0824 71030000 		.word	.LC32
- 1060 0828 91030000 		.word	.LC33
- 1062              		.align	1
- 1063              		.global	_Z10dcpHandlerR3strR7UartDevPvi
- 1064              		.thumb
- 1065              		.thumb_func
- 1067              	_Z10dcpHandlerR3strR7UartDevPvi:
- 1068              		@ args = 0, pretend = 0, frame = 760
- 1069              		@ frame_needed = 0, uses_anonymous_args = 0
- 1070 082c 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 1071 0830 0023     		movs	r3, #0
- 1072 0832 ADF5417D 		sub	sp, sp, #772
- 1073 0836 BE93     		str	r3, [sp, #760]
- 1074 0838 BF93     		str	r3, [sp, #764]
- 1075 083a BFAB     		add	r3, sp, #764
- 1076 083c 0093     		str	r3, [sp, #0]
- 1077 083e 0222     		movs	r2, #2
- 1078 0840 0C46     		mov	r4, r1
- 1079 0842 BEAB     		add	r3, sp, #760
- 1080 0844 4049     		ldr	r1, .L136
- 1081 0846 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
- 1082 084a 0228     		cmp	r0, #2
- 1083 084c 06D0     		beq	.L122
- 1084 084e 2046     		mov	r0, r4
- 1085 0850 3E49     		ldr	r1, .L136+4
- 1086 0852 4FF0FF32 		mov	r2, #-1
- 1087 0856 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1088 085a 6AE0     		b	.L123
- 1089              	.L122:
- 1090 085c A3A8     		add	r0, sp, #652
- 1091 085e BF99     		ldr	r1, [sp, #764]
- 1092 0860 FFF7FEFF 		bl	f_opendir
- 1093 0864 18B1     		cbz	r0, .L124
- 1094 0866 2046     		mov	r0, r4
- 1095 0868 3949     		ldr	r1, .L136+8
- 1096 086a BF9A     		ldr	r2, [sp, #764]
- 1097 086c 07E0     		b	.L134
- 1098              	.L124:
- 1099 086e A3A8     		add	r0, sp, #652
- 1100 0870 BE99     		ldr	r1, [sp, #760]
- 1101 0872 FFF7FEFF 		bl	f_opendir
- 1102 0876 28B1     		cbz	r0, .L125
- 1103 0878 3649     		ldr	r1, .L136+12
- 1104 087a BE9A     		ldr	r2, [sp, #760]
- 1105 087c 2046     		mov	r0, r4
- 1106              	.L134:
- 1107 087e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1108 0882 56E0     		b	.L123
- 1109              	.L125:
- 1110 0884 03A9     		add	r1, sp, #12
- 1111 0886 4FF48072 		mov	r2, #256
- 1112 088a B4A8     		add	r0, sp, #720
- 1113 088c FFF7FEFF 		bl	_ZN3strC1EPci
- 1114 0890 B9A8     		add	r0, sp, #740
- 1115 0892 43A9     		add	r1, sp, #268
- 1116 0894 4FF48072 		mov	r2, #256
- 1117 0898 FFF7FEFF 		bl	_ZN3strC1EPci
- 1118 089c ACAB     		add	r3, sp, #688
- 1119 089e 0DF5037A 		add	sl, sp, #524
- 1120 08a2 03F10905 		add	r5, r3, #9
- 1121              	.L133:
- 1122 08a6 8023     		movs	r3, #128
- 1123 08a8 A3A8     		add	r0, sp, #652
- 1124 08aa ACA9     		add	r1, sp, #688
- 1125 08ac CDF8C8A2 		str	sl, [sp, #712]
- 1126 08b0 B393     		str	r3, [sp, #716]
- 1127 08b2 FFF7FEFF 		bl	f_readdir
- 1128 08b6 18B9     		cbnz	r0, .L126
- 1129 08b8 9DF8B932 		ldrb	r3, [sp, #697]	@ zero_extendqisi2
- 1130 08bc 002B     		cmp	r3, #0
- 1131 08be 3DD1     		bne	.L127
- 1132              	.L126:
- 1133 08c0 B9A8     		add	r0, sp, #740
- 1134 08c2 FFF7FEFF 		bl	_ZN3strD1Ev
- 1135 08c6 B4A8     		add	r0, sp, #720
- 1136 08c8 FFF7FEFF 		bl	_ZN3strD1Ev
- 1137 08cc 31E0     		b	.L123
- 1138              	.L135:
- 1139 08ce BE9A     		ldr	r2, [sp, #760]
- 1140 08d0 2B46     		mov	r3, r5
- 1141 08d2 B4A8     		add	r0, sp, #720
- 1142 08d4 2049     		ldr	r1, .L136+16
- 1143 08d6 FFF7FEFF 		bl	_ZN3str6printfEPKcz
- 1144 08da BF9A     		ldr	r2, [sp, #764]
- 1145 08dc 2B46     		mov	r3, r5
- 1146 08de 1E49     		ldr	r1, .L136+16
- 1147 08e0 B9A8     		add	r0, sp, #740
- 1148 08e2 FFF7FEFF 		bl	_ZN3str6printfEPKcz
- 1149 08e6 B4A8     		add	r0, sp, #720
- 1150 08e8 FFF7FEFF 		bl	_ZNK3strclEv
- 1151 08ec 8046     		mov	r8, r0
- 1152 08ee B9A8     		add	r0, sp, #740
- 1153 08f0 FFF7FEFF 		bl	_ZNK3strclEv
- 1154 08f4 8146     		mov	r9, r0
- 1155 08f6 B4A8     		add	r0, sp, #720
- 1156 08f8 AC9F     		ldr	r7, [sp, #688]
- 1157 08fa FFF7FEFF 		bl	_ZNK3strclEv
- 1158 08fe 8346     		mov	fp, r0
- 1159 0900 B9A8     		add	r0, sp, #740
- 1160 0902 FFF7FEFF 		bl	_ZNK3strclEv
- 1161 0906 3246     		mov	r2, r6
- 1162 0908 0146     		mov	r1, r0
- 1163 090a 3346     		mov	r3, r6
- 1164 090c 5846     		mov	r0, fp
- 1165 090e 0096     		str	r6, [sp, #0]
- 1166 0910 FFF7FEFF 		bl	_ZN7Storage4copyEPKcS1_PjS2_S2_
- 1167 0914 114B     		ldr	r3, .L136+20
- 1168 0916 124A     		ldr	r2, .L136+24
- 1169 0918 1249     		ldr	r1, .L136+28
- 1170 091a 0028     		cmp	r0, #0
- 1171 091c 14BF     		ite	ne
- 1172 091e 1046     		movne	r0, r2
- 1173 0920 1846     		moveq	r0, r3
- 1174 0922 0190     		str	r0, [sp, #4]
- 1175 0924 4246     		mov	r2, r8
- 1176 0926 2046     		mov	r0, r4
- 1177 0928 4B46     		mov	r3, r9
- 1178 092a 0097     		str	r7, [sp, #0]
- 1179 092c FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1180 0930 B9E7     		b	.L133
- 1181              	.L123:
- 1182 0932 0120     		movs	r0, #1
- 1183 0934 0DF5417D 		add	sp, sp, #772
- 1184 0938 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
- 1185              	.L127:
- 1186 093c 9DF8B862 		ldrb	r6, [sp, #696]	@ zero_extendqisi2
- 1187 0940 16F01006 		ands	r6, r6, #16
- 1188 0944 AFD1     		bne	.L133
- 1189 0946 C2E7     		b	.L135
- 1190              	.L137:
- 1191              		.align	2
- 1192              	.L136:
- 1193 0948 8A010000 		.word	.LC11
- 1194 094c B8030000 		.word	.LC34
- 1195 0950 FD030000 		.word	.LC35
- 1196 0954 22040000 		.word	.LC36
- 1197 0958 42040000 		.word	.LC37
- 1198 095c C3020000 		.word	.LC25
- 1199 0960 C6020000 		.word	.LC26
- 1200 0964 48040000 		.word	.LC38
- 1202              		.align	1
- 1203              		.global	_Z14storageHandlerR3strR7UartDevPvi
- 1204              		.thumb
- 1205              		.thumb_func
- 1207              	_Z14storageHandlerR3strR7UartDevPvi:
- 1208              		@ args = 0, pretend = 0, frame = 0
- 1209              		@ frame_needed = 0, uses_anonymous_args = 0
- 1210 0968 70B5     		push	{r4, r5, r6, lr}
- 1211 096a 0C46     		mov	r4, r1
- 1212 096c 2C49     		ldr	r1, .L155
- 1213 096e 0546     		mov	r5, r0
- 1214 0970 FFF7FEFF 		bl	_ZNK3streqEPKc
- 1215 0974 0646     		mov	r6, r0
- 1216 0976 28B1     		cbz	r0, .L139
- 1217 0978 FFF7FEFF 		bl	_ZN7Storage10getSDDriveEv
- 1218 097c 0021     		movs	r1, #0
- 1219 097e 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
- 1220 0982 09E0     		b	.L154
- 1221              	.L139:
- 1222 0984 2846     		mov	r0, r5
- 1223 0986 2749     		ldr	r1, .L155+4
- 1224 0988 FFF7FEFF 		bl	_ZNK3streqEPKc
- 1225 098c 70B1     		cbz	r0, .L142
- 1226 098e FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
- 1227 0992 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
- 1228 0996 3146     		mov	r1, r6
- 1229              	.L154:
- 1230 0998 0A46     		mov	r2, r1
- 1231 099a FFF7FEFF 		bl	f_mkfs
- 1232 099e 224B     		ldr	r3, .L155+8
- 1233 09a0 224A     		ldr	r2, .L155+12
- 1234 09a2 0028     		cmp	r0, #0
- 1235 09a4 14BF     		ite	ne
- 1236 09a6 1146     		movne	r1, r2
- 1237 09a8 1946     		moveq	r1, r3
- 1238 09aa 15E0     		b	.L146
- 1239              	.L142:
- 1240 09ac 2846     		mov	r0, r5
- 1241 09ae 2049     		ldr	r1, .L155+16
- 1242 09b0 FFF7FEFF 		bl	_ZNK3streqEPKc
- 1243 09b4 B8B1     		cbz	r0, .L144
- 1244 09b6 FFF7FEFF 		bl	_ZN7Storage10getSDDriveEv
- 1245 09ba 0546     		mov	r5, r0
- 1246 09bc 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
- 1247 09c0 FFF7FEFF 		bl	disk_initialize
- 1248 09c4 28B9     		cbnz	r0, .L145
- 1249 09c6 95F83402 		ldrb	r0, [r5, #564]	@ zero_extendqisi2
- 1250 09ca 2946     		mov	r1, r5
- 1251 09cc FFF7FEFF 		bl	f_mount
- 1252 09d0 08B1     		cbz	r0, .L151
- 1253              	.L145:
- 1254 09d2 1849     		ldr	r1, .L155+20
- 1255 09d4 00E0     		b	.L146
- 1256              	.L151:
- 1257 09d6 1849     		ldr	r1, .L155+24
- 1258              	.L146:
- 1259 09d8 2046     		mov	r0, r4
- 1260 09da 4FF0FF32 		mov	r2, #-1
- 1261 09de FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1262 09e2 0120     		movs	r0, #1
- 1263 09e4 70BD     		pop	{r4, r5, r6, pc}
- 1264              	.L144:
- 1265 09e6 2846     		mov	r0, r5
- 1266 09e8 1449     		ldr	r1, .L155+28
- 1267 09ea FFF7FEFF 		bl	_ZNK3streqEPKc
- 1268 09ee B0B1     		cbz	r0, .L141
- 1269 09f0 FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
- 1270 09f4 0546     		mov	r5, r0
- 1271 09f6 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
- 1272 09fa FFF7FEFF 		bl	disk_initialize
- 1273 09fe 28B9     		cbnz	r0, .L147
- 1274 0a00 95F83402 		ldrb	r0, [r5, #564]	@ zero_extendqisi2
- 1275 0a04 2946     		mov	r1, r5
- 1276 0a06 FFF7FEFF 		bl	f_mount
- 1277 0a0a 08B1     		cbz	r0, .L153
- 1278              	.L147:
- 1279 0a0c 0C49     		ldr	r1, .L155+32
- 1280 0a0e 00E0     		b	.L148
- 1281              	.L153:
- 1282 0a10 0C49     		ldr	r1, .L155+36
- 1283              	.L148:
- 1284 0a12 2046     		mov	r0, r4
- 1285 0a14 4FF0FF32 		mov	r2, #-1
- 1286 0a18 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1287 0a1c 0120     		movs	r0, #1
- 1288              	.L141:
- 1289 0a1e 70BD     		pop	{r4, r5, r6, pc}
- 1290              	.L156:
- 1291              		.align	2
- 1292              	.L155:
- 1293 0a20 CF040000 		.word	.LC45
- 1294 0a24 D9040000 		.word	.LC46
- 1295 0a28 67040000 		.word	.LC39
- 1296 0a2c 71040000 		.word	.LC40
- 1297 0a30 E6040000 		.word	.LC47
- 1298 0a34 8E040000 		.word	.LC42
- 1299 0a38 7E040000 		.word	.LC41
- 1300 0a3c EF040000 		.word	.LC48
- 1301 0a40 B3040000 		.word	.LC44
- 1302 0a44 A5040000 		.word	.LC43
- 1304              		.align	1
- 1305              		.global	_Z14learnIrHandlerR3strR7UartDevPvi
- 1306              		.thumb
- 1307              		.thumb_func
- 1309              	_Z14learnIrHandlerR3strR7UartDevPvi:
- 1310              		@ args = 0, pretend = 0, frame = 0
- 1311              		@ frame_needed = 0, uses_anonymous_args = 0
- 1312 0a48 10B5     		push	{r4, lr}
- 1313 0a4a 0C46     		mov	r4, r1
- 1314 0a4c 0021     		movs	r1, #0
- 1315 0a4e 0B46     		mov	r3, r1
- 1316 0a50 1046     		mov	r0, r2
- 1317 0a52 0A46     		mov	r2, r1
- 1318 0a54 FFF7FEFF 		bl	xQueueGenericSend
- 1319 0a58 2046     		mov	r0, r4
- 1320 0a5a 0349     		ldr	r1, .L158
- 1321 0a5c 4FF0FF32 		mov	r2, #-1
- 1322 0a60 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1323 0a64 0120     		movs	r0, #1
- 1324 0a66 10BD     		pop	{r4, pc}
- 1325              	.L159:
- 1326              		.align	2
- 1327              	.L158:
- 1328 0a68 FB040000 		.word	.LC49
- 1330              		.align	1
- 1331              		.global	_Z15wirelessHandlerR3strR7UartDevPvi
- 1332              		.thumb
- 1333              		.thumb_func
- 1335              	_Z15wirelessHandlerR3strR7UartDevPvi:
- 1336              		@ args = 0, pretend = 0, frame = 80
- 1337              		@ frame_needed = 0, uses_anonymous_args = 0
- 1338 0a6c F0B5     		push	{r4, r5, r6, r7, lr}
- 1339 0a6e 97B0     		sub	sp, sp, #92
- 1340 0a70 0546     		mov	r5, r0
- 1341 0a72 4FF47A73 		mov	r3, #1000
- 1342 0a76 0C22     		movs	r2, #12
- 1343 0a78 0C46     		mov	r4, r1
- 1344 0a7a 0FA8     		add	r0, sp, #60
- 1345 0a7c 0021     		movs	r1, #0
- 1346 0a7e 1291     		str	r1, [sp, #72]
- 1347 0a80 1391     		str	r1, [sp, #76]
- 1348 0a82 1493     		str	r3, [sp, #80]
- 1349 0a84 FFF7FEFF 		bl	memset
- 1350 0a88 2846     		mov	r0, r5
- 1351 0a8a 7249     		ldr	r1, .L188
- 1352 0a8c FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
- 1353 0a90 0746     		mov	r7, r0
- 1354 0a92 2846     		mov	r0, r5
- 1355 0a94 87B1     		cbz	r7, .L161
- 1356 0a96 7049     		ldr	r1, .L188+4
- 1357 0a98 14AA     		add	r2, sp, #80
- 1358 0a9a FFF7FEFF 		bl	_ZN3str5scanfEPKcz
- 1359 0a9e 07A8     		add	r0, sp, #28
- 1360 0aa0 1499     		ldr	r1, [sp, #80]
- 1361 0aa2 FFF7FEFF 		bl	wireless_get_rx_pkt
- 1362 0aa6 20B1     		cbz	r0, .L162
- 1363 0aa8 9DF81C20 		ldrb	r2, [sp, #28]	@ zero_extendqisi2
- 1364 0aac 2046     		mov	r0, r4
- 1365 0aae 6B49     		ldr	r1, .L188+8
- 1366 0ab0 CCE0     		b	.L187
- 1367              	.L162:
- 1368 0ab2 2046     		mov	r0, r4
- 1369 0ab4 6A49     		ldr	r1, .L188+12
- 1370 0ab6 BCE0     		b	.L186
- 1371              	.L161:
- 1372 0ab8 6A49     		ldr	r1, .L188+16
- 1373 0aba FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
- 1374 0abe 0646     		mov	r6, r0
- 1375 0ac0 A8B1     		cbz	r0, .L164
- 1376 0ac2 16AA     		add	r2, sp, #88
- 1377 0ac4 42F8047D 		str	r7, [r2, #-4]!
- 1378 0ac8 6349     		ldr	r1, .L188+4
- 1379 0aca 2846     		mov	r0, r5
- 1380 0acc FFF7FEFF 		bl	_ZN3str5scanfEPKcz
- 1381 0ad0 159D     		ldr	r5, [sp, #84]
- 1382 0ad2 E8B2     		uxtb	r0, r5
- 1383 0ad4 FFF7FEFF 		bl	mesh_set_node_address
- 1384 0ad8 634A     		ldr	r2, .L188+20
- 1385 0ada 644B     		ldr	r3, .L188+24
- 1386 0adc 6449     		ldr	r1, .L188+28
- 1387 0ade 0028     		cmp	r0, #0
- 1388 0ae0 18BF     		it	ne
- 1389 0ae2 1346     		movne	r3, r2
- 1390 0ae4 2046     		mov	r0, r4
- 1391 0ae6 2A46     		mov	r2, r5
- 1392 0ae8 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1393 0aec A8E0     		b	.L184
- 1394              	.L164:
- 1395 0aee 2846     		mov	r0, r5
- 1396 0af0 6049     		ldr	r1, .L188+32
- 1397 0af2 FFF7FEFF 		bl	_ZNK3str19compareToIgnoreCaseEPKc
- 1398 0af6 C0B1     		cbz	r0, .L166
- 1399 0af8 FFF7FEFF 		bl	mesh_get_num_routing_entries
- 1400 0afc 5E49     		ldr	r1, .L188+36
- 1401 0afe 0246     		mov	r2, r0
- 1402 0b00 2046     		mov	r0, r4
- 1403 0b02 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1404 0b06 3046     		mov	r0, r6
- 1405 0b08 08E0     		b	.L167
- 1406              	.L168:
- 1407 0b0a 8178     		ldrb	r1, [r0, #2]	@ zero_extendqisi2
- 1408 0b0c 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
- 1409 0b0e 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
- 1410 0b10 0091     		str	r1, [sp, #0]
- 1411 0b12 2046     		mov	r0, r4
- 1412 0b14 5949     		ldr	r1, .L188+40
- 1413 0b16 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1414 0b1a 2846     		mov	r0, r5
- 1415              	.L167:
- 1416 0b1c 451C     		adds	r5, r0, #1
- 1417 0b1e EDB2     		uxtb	r5, r5
- 1418 0b20 FFF7FEFF 		bl	mesh_get_routing_entry
- 1419 0b24 0028     		cmp	r0, #0
- 1420 0b26 F0D1     		bne	.L168
- 1421 0b28 8AE0     		b	.L184
- 1422              	.L166:
- 1423 0b2a 2846     		mov	r0, r5
- 1424 0b2c 5449     		ldr	r1, .L188+44
- 1425 0b2e FFF7FEFF 		bl	_ZNK3str19compareToIgnoreCaseEPKc
- 1426 0b32 78B1     		cbz	r0, .L169
- 1427 0b34 02A8     		add	r0, sp, #8
- 1428 0b36 FFF7FEFF 		bl	mesh_get_stats
- 1429 0b3a 02A9     		add	r1, sp, #8
- 1430 0b3c 0C22     		movs	r2, #12
- 1431 0b3e 0FA8     		add	r0, sp, #60
- 1432 0b40 FFF7FEFF 		bl	memcpy
- 1433 0b44 FFF7FEFF 		bl	mesh_get_node_address
- 1434 0b48 0FA9     		add	r1, sp, #60
- 1435 0b4a 0246     		mov	r2, r0
- 1436 0b4c 2046     		mov	r0, r4
- 1437 0b4e FFF757FA 		bl	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
- 1438 0b52 75E0     		b	.L184
- 1439              	.L169:
- 1440 0b54 2846     		mov	r0, r5
- 1441 0b56 4B49     		ldr	r1, .L188+48
- 1442 0b58 FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
- 1443 0b5c 28B9     		cbnz	r0, .L170
- 1444 0b5e 2846     		mov	r0, r5
- 1445 0b60 4949     		ldr	r1, .L188+52
- 1446 0b62 FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
- 1447 0b66 0028     		cmp	r0, #0
- 1448 0b68 6BD0     		beq	.L163
- 1449              	.L170:
- 1450 0b6a 12AB     		add	r3, sp, #72
- 1451 0b6c 0093     		str	r3, [sp, #0]
- 1452 0b6e 13AB     		add	r3, sp, #76
- 1453 0b70 0193     		str	r3, [sp, #4]
- 1454 0b72 0322     		movs	r2, #3
- 1455 0b74 0023     		movs	r3, #0
- 1456 0b76 2846     		mov	r0, r5
- 1457 0b78 4449     		ldr	r1, .L188+56
- 1458 0b7a FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
- 1459 0b7e 0128     		cmp	r0, #1
- 1460 0b80 5CDD     		ble	.L182
- 1461 0b82 4049     		ldr	r1, .L188+48
- 1462 0b84 2846     		mov	r0, r5
- 1463 0b86 FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
- 1464 0b8a 0746     		mov	r7, r0
- 1465 0b8c 1298     		ldr	r0, [sp, #72]
- 1466 0b8e FFF7FEFF 		bl	atoi
- 1467 0b92 C6B2     		uxtb	r6, r0
- 1468 0b94 1398     		ldr	r0, [sp, #76]
- 1469 0b96 18B1     		cbz	r0, .L183
- 1470 0b98 FFF7FEFF 		bl	strlen
- 1471 0b9c C5B2     		uxtb	r5, r0
- 1472 0b9e 07E0     		b	.L185
- 1473              	.L183:
- 1474 0ba0 0546     		mov	r5, r0
- 1475 0ba2 05E0     		b	.L185
- 1476              	.L173:
- 1477 0ba4 2046     		mov	r0, r4
- 1478 0ba6 3A49     		ldr	r1, .L188+60
- 1479 0ba8 4FF0FF32 		mov	r2, #-1
- 1480 0bac FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1481              	.L185:
- 1482 0bb0 07A8     		add	r0, sp, #28
- 1483 0bb2 0021     		movs	r1, #0
- 1484 0bb4 FFF7FEFF 		bl	wireless_get_rx_pkt
- 1485 0bb8 0028     		cmp	r0, #0
- 1486 0bba F3D1     		bne	.L173
- 1487 0bbc 0223     		movs	r3, #2
- 1488 0bbe 0093     		str	r3, [sp, #0]
- 1489 0bc0 3046     		mov	r0, r6
- 1490 0bc2 3946     		mov	r1, r7
- 1491 0bc4 139A     		ldr	r2, [sp, #76]
- 1492 0bc6 2B46     		mov	r3, r5
- 1493 0bc8 FFF7FEFF 		bl	mesh_send
- 1494 0bcc 10B9     		cbnz	r0, .L174
- 1495 0bce 2046     		mov	r0, r4
- 1496 0bd0 3049     		ldr	r1, .L188+64
- 1497 0bd2 2EE0     		b	.L186
- 1498              	.L174:
- 1499 0bd4 002F     		cmp	r7, #0
- 1500 0bd6 33D0     		beq	.L184
- 1501 0bd8 07A8     		add	r0, sp, #28
- 1502 0bda 1499     		ldr	r1, [sp, #80]
- 1503 0bdc FFF7FEFF 		bl	wireless_get_ack_pkt
- 1504 0be0 0028     		cmp	r0, #0
- 1505 0be2 30D0     		beq	.L175
- 1506 0be4 9DF81C30 		ldrb	r3, [sp, #28]	@ zero_extendqisi2
- 1507 0be8 B342     		cmp	r3, r6
- 1508 0bea 2CD1     		bne	.L175
- 1509 0bec 9DF82330 		ldrb	r3, [sp, #35]	@ zero_extendqisi2
- 1510 0bf0 0C2B     		cmp	r3, #12
- 1511 0bf2 04D1     		bne	.L176
- 1512 0bf4 09A9     		add	r1, sp, #36
- 1513 0bf6 2046     		mov	r0, r4
- 1514 0bf8 3246     		mov	r2, r6
- 1515 0bfa FFF701FA 		bl	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
- 1516              	.L176:
- 1517 0bfe 2046     		mov	r0, r4
- 1518 0c00 B5B9     		cbnz	r5, .L177
- 1519 0c02 2549     		ldr	r1, .L188+68
- 1520 0c04 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1521 0c08 0DF12306 		add	r6, sp, #35
- 1522 0c0c 07E0     		b	.L178
- 1523              	.L179:
- 1524 0c0e 16F8011F 		ldrb	r1, [r6, #1]!	@ zero_extendqisi2
- 1525 0c12 2046     		mov	r0, r4
- 1526 0c14 4FF0FF32 		mov	r2, #-1
- 1527 0c18 FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
- 1528 0c1c 0135     		adds	r5, r5, #1
- 1529              	.L178:
- 1530 0c1e 9DF82330 		ldrb	r3, [sp, #35]	@ zero_extendqisi2
- 1531 0c22 9D42     		cmp	r5, r3
- 1532 0c24 F3DB     		blt	.L179
- 1533 0c26 2046     		mov	r0, r4
- 1534 0c28 1C49     		ldr	r1, .L188+72
- 1535 0c2a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1536 0c2e 07E0     		b	.L184
- 1537              	.L177:
- 1538 0c30 1B49     		ldr	r1, .L188+76
- 1539              	.L186:
- 1540 0c32 4FF0FF32 		mov	r2, #-1
- 1541 0c36 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1542 0c3a 01E0     		b	.L184
- 1543              	.L182:
- 1544 0c3c 0020     		movs	r0, #0
- 1545 0c3e 00E0     		b	.L163
- 1546              	.L184:
- 1547 0c40 0120     		movs	r0, #1
- 1548              	.L163:
- 1549 0c42 17B0     		add	sp, sp, #92
- 1550 0c44 F0BD     		pop	{r4, r5, r6, r7, pc}
- 1551              	.L175:
- 1552 0c46 1749     		ldr	r1, .L188+80
- 1553 0c48 129A     		ldr	r2, [sp, #72]
- 1554 0c4a 2046     		mov	r0, r4
- 1555              	.L187:
- 1556 0c4c FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1557 0c50 F6E7     		b	.L184
- 1558              	.L189:
- 1559 0c52 00BF     		.align	2
- 1560              	.L188:
- 1561 0c54 18050000 		.word	.LC51
- 1562 0c58 1B050000 		.word	.LC52
- 1563 0c5c 22050000 		.word	.LC53
- 1564 0c60 39050000 		.word	.LC54
- 1565 0c64 4A050000 		.word	.LC55
- 1566 0c68 C3020000 		.word	.LC25
- 1567 0c6c 11050000 		.word	.LC50
- 1568 0c70 4F050000 		.word	.LC56
- 1569 0c74 66050000 		.word	.LC57
- 1570 0c78 6D050000 		.word	.LC58
- 1571 0c7c 87050000 		.word	.LC59
- 1572 0c80 AA050000 		.word	.LC60
- 1573 0c84 B0050000 		.word	.LC61
- 1574 0c88 B4050000 		.word	.LC62
- 1575 0c8c 8A010000 		.word	.LC11
- 1576 0c90 B9050000 		.word	.LC63
- 1577 0c94 DB050000 		.word	.LC64
- 1578 0c98 03060000 		.word	.LC65
- 1579 0c9c 17060000 		.word	.LC66
- 1580 0ca0 1A060000 		.word	.LC67
- 1581 0ca4 37060000 		.word	.LC68
- 1583              		.section	.text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv,"axG",%progbits,_ZN17SingletonT
- 1584              		.align	1
- 1585              		.weak	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
- 1586              		.thumb
- 1587              		.thumb_func
- 1589              	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:
- 1590              		@ args = 0, pretend = 0, frame = 0
- 1591              		@ frame_needed = 0, uses_anonymous_args = 0
- 1592 0000 38B5     		push	{r3, r4, r5, lr}
- 1593 0002 064C     		ldr	r4, .L192
- 1594 0004 2368     		ldr	r3, [r4, #0]
- 1595 0006 33B9     		cbnz	r3, .L191
- 1596 0008 1420     		movs	r0, #20
- 1597 000a FFF7FEFF 		bl	_Znwj
- 1598 000e 0546     		mov	r5, r0
- 1599 0010 FFF7FEFF 		bl	_ZN10FileLoggerC1Ev
- 1600 0014 2560     		str	r5, [r4, #0]
- 1601              	.L191:
- 1602 0016 2068     		ldr	r0, [r4, #0]
- 1603 0018 38BD     		pop	{r3, r4, r5, pc}
- 1604              	.L193:
- 1605 001a 00BF     		.align	2
- 1606              	.L192:
- 1607 001c 00000000 		.word	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
- 1609              		.text
- 1610              		.align	1
- 1611              		.global	_Z13rebootHandlerR3strR7UartDevPvi
- 1612              		.thumb
- 1613              		.thumb_func
- 1615              	_Z13rebootHandlerR3strR7UartDevPvi:
- 1616              		@ args = 0, pretend = 0, frame = 0
- 1617              		@ frame_needed = 0, uses_anonymous_args = 0
- 1618 0ca8 08B5     		push	{r3, lr}
- 1619 0caa 4FF0FF32 		mov	r2, #-1
- 1620 0cae 0846     		mov	r0, r1
- 1621 0cb0 0949     		ldr	r1, .L195
- 1622 0cb2 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1623 0cb6 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
- 1624 0cba FFF7FEFF 		bl	_ZN10FileLogger5flushEv
- 1625 0cbe 4FF4FA60 		mov	r0, #2000
- 1626 0cc2 FFF7FEFF 		bl	vTaskDelay
- 1627 0cc6 4FF08043 		mov	r3, #1073741824
- 1628 0cca AA22     		movs	r2, #170
- 1629 0ccc 1A72     		strb	r2, [r3, #8]
- 1630 0cce 0022     		movs	r2, #0
- 1631 0cd0 1A70     		strb	r2, [r3, #0]
- 1632 0cd2 0120     		movs	r0, #1
- 1633 0cd4 08BD     		pop	{r3, pc}
- 1634              	.L196:
- 1635 0cd6 00BF     		.align	2
- 1636              	.L195:
- 1637 0cd8 5D060000 		.word	.LC69
- 1639              		.align	1
- 1640              		.global	_Z10logHandlerR3strR7UartDevPvi
- 1641              		.thumb
- 1642              		.thumb_func
- 1644              	_Z10logHandlerR3strR7UartDevPvi:
- 1645              		@ args = 0, pretend = 0, frame = 0
- 1646              		@ frame_needed = 0, uses_anonymous_args = 0
- 1647 0cdc 73B5     		push	{r0, r1, r4, r5, r6, lr}
- 1648 0cde 0D46     		mov	r5, r1
- 1649 0ce0 1349     		ldr	r1, .L200
- 1650 0ce2 0446     		mov	r4, r0
- 1651 0ce4 FFF7FEFF 		bl	_ZNK3streqEPKc
- 1652 0ce8 50B1     		cbz	r0, .L198
- 1653 0cea FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
- 1654 0cee FFF7FEFF 		bl	_ZN10FileLogger5flushEv
- 1655 0cf2 2846     		mov	r0, r5
- 1656 0cf4 0F49     		ldr	r1, .L200+4
- 1657 0cf6 4FF0FF32 		mov	r2, #-1
- 1658 0cfa FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
- 1659 0cfe 15E0     		b	.L199
- 1660              	.L198:
- 1661 0d00 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
- 1662 0d04 0646     		mov	r6, r0
- 1663 0d06 2046     		mov	r0, r4
- 1664 0d08 FFF7FEFF 		bl	_ZNK3strclEv
- 1665 0d0c 9B23     		movs	r3, #155
- 1666 0d0e 0146     		mov	r1, r0
- 1667 0d10 094A     		ldr	r2, .L200+8
- 1668 0d12 0093     		str	r3, [sp, #0]
- 1669 0d14 3046     		mov	r0, r6
- 1670 0d16 094B     		ldr	r3, .L200+12
- 1671 0d18 FFF7FEFF 		bl	_ZN10LoggerBase7logInfoEPKcS1_S1_i
- 1672 0d1c 2046     		mov	r0, r4
- 1673 0d1e FFF7FEFF 		bl	_ZNK3strclEv
- 1674 0d22 0749     		ldr	r1, .L200+16
- 1675 0d24 0246     		mov	r2, r0
- 1676 0d26 2846     		mov	r0, r5
- 1677 0d28 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
- 1678              	.L199:
- 1679 0d2c 0120     		movs	r0, #1
- 1680 0d2e 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
- 1681              	.L201:
- 1682              		.align	2
- 1683              	.L200:
- 1684 0d30 6E060000 		.word	.LC70
- 1685 0d34 74060000 		.word	.LC71
- 1686 0d38 8D060000 		.word	.LC72
- 1687 0d3c 05000000 		.word	.LANCHOR0+5
- 1688 0d40 B3060000 		.word	.LC73
- 1690              		.weak	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
- 1691              		.section	.bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTem
- 1692              		.align	2
- 1695              	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:
- 1696 0000 00000000 		.space	4
- 1697              		.weak	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
- 1698              		.section	.bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE,"awG",%nobits,_ZN1
- 1699              		.align	2
- 1702              	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:
- 1703 0000 00000000 		.space	4
- 1704              		.weak	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
- 1705              		.section	.bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTemp
- 1706              		.align	2
- 1709              	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:
- 1710 0000 00000000 		.space	4
- 1711              		.weak	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
- 1712              		.section	.bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE,"awG",%nobits,_ZN17Sing
- 1713              		.align	2
- 1716              	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:
- 1717 0000 00000000 		.space	4
- 1718              		.weak	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
- 1719              		.section	.bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive,"awG",%nobits,_ZGVZN7Storage13getFlash
- 1720              		.align	2
- 1723              	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:
- 1724 0000 00000000 		.space	4
- 1725              		.weak	_ZZN7Storage13getFlashDriveEvE11pFlashDrive
- 1726              		.section	.bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive,"awG",%nobits,_ZZN7Storage13getFlashDriv
- 1727              		.align	2
- 1730              	_ZZN7Storage13getFlashDriveEvE11pFlashDrive:
- 1731 0000 00000000 		.space	4
- 1732              		.weak	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
- 1733              		.section	.bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE,"awG",%nobits,_ZN17Single
- 1734              		.align	2
- 1737              	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:
- 1738 0000 00000000 		.space	4
- 1739              		.weak	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
- 1740              		.section	.bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive,"awG",%nobits,_ZGVZN7Storage10getSDDrive
- 1741              		.align	2
- 1744              	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:
- 1745 0000 00000000 		.space	4
- 1746              		.weak	_ZZN7Storage10getSDDriveEvE12pSDCardDrive
- 1747              		.section	.bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive,"awG",%nobits,_ZZN7Storage10getSDDriveEvE1
- 1748              		.align	2
- 1751              	_ZZN7Storage10getSDDriveEvE12pSDCardDrive:
- 1752 0000 00000000 		.space	4
- 1753              		.section	.rodata
- 1754              		.set	.LANCHOR0,. + 0
- 1755              	.LC0:
- 1756 0000 4E       		.byte	78
- 1757 0001 52       		.byte	82
- 1758 0002 42       		.byte	66
- 1759 0003 53       		.byte	83
- 1760 0004 44       		.byte	68
- 1763              	_ZZ10logHandlerR3strR7UartDevPviE12__FUNCTION__:
- 1764 0005 6C6F6748 		.ascii	"logHandler\000"
- 1764      616E646C 
- 1764      657200
- 1765              		.section	.rodata.str1.1,"aMS",%progbits,1
- 1766              	.LC1:
- 1767 0000 4E25753A 		.ascii	"N%u: Rx/Tx, Rte/Ovt, Retried/Mesh Retried/Repeated:"
- 1767      2052782F 
- 1767      54782C20 
- 1767      5274652F 
- 1767      4F76742C 
- 1768 0033 200A00   		.ascii	" \012\000"
- 1769              	.LC2:
- 1770 0036 20202020 		.ascii	"       %3u/%-3u %u/%u, %u/%u/%u\012\000"
- 1770      20202025 
- 1770      33752F25 
- 1770      2D337520 
- 1770      25752F25 
- 1771              	.LC3:
- 1772 0057 25313073 		.ascii	"%10s St Pr  Stack  CPU%%  Ticks(%u uS/tick)\012\000"
- 1772      20537420 
- 1772      50722020 
- 1772      53746163 
- 1772      6B202043 
- 1773              	.LC4:
- 1774 0084 4E616D65 		.ascii	"Name\000"
- 1774      00
- 1775              	.LC5:
- 1776 0089 25313073 		.ascii	"%10s  %c %2u  %5u  %4u  %lu\012\000"
- 1776      20202563 
- 1776      20253275 
- 1776      20202535 
- 1776      75202025 
- 1777              	.LC6:
- 1778 00a6 2A2A2057 		.ascii	"** WARNING: Only reported first %u tasks\012\000"
- 1778      41524E49 
- 1778      4E473A20 
- 1778      4F6E6C79 
- 1778      20726570 
- 1779              	.LC7:
- 1780 00d0 466C6173 		.ascii	"Flash: %u/%u\012Temp : %u.%u\012Light: %u\012Time  "
- 1780      683A2025 
- 1780      752F2575 
- 1780      0A54656D 
- 1780      70203A20 
- 1781 00fa 2020203A 		.ascii	"   : %s\012Boot Time: %u/%u/%u,%02u:%02u:%02u\012Ua"
- 1781      2025730A 
- 1781      426F6F74 
- 1781      2054696D 
- 1781      653A2025 
- 1782 0127 72743020 		.ascii	"rt0 Watermarks: %u/%u (rx/tx)\012\000"
- 1782      57617465 
- 1782      726D6172 
- 1782      6B733A20 
- 1782      25752F25 
- 1783              	.LC8:
- 1784 0146 73657400 		.ascii	"set\000"
- 1785              	.LC9:
- 1786 014a 252A7320 		.ascii	"%*s %u %u %u %u %u %u %u\000"
- 1786      25752025 
- 1786      75202575 
- 1786      20257520 
- 1786      25752025 
- 1787              	.LC10:
- 1788 0163 25303275 		.ascii	"%02u/%02u/%u  --  %02u:%02u:%02u (%u)\012\000"
- 1788      2F253032 
- 1788      752F2575 
- 1788      20202D2D 
- 1788      20202530 
- 1789              	.LC11:
- 1790 018a 2000     		.ascii	" \000"
- 1791              	.LC12:
- 1792 018c 4572726F 		.ascii	"Error %u copying |%s| -> |%s|\012\000"
- 1792      72202575 
- 1792      20636F70 
- 1792      79696E67 
- 1792      207C2573 
- 1793              	.LC13:
- 1794 01ab 46696E69 		.ascii	"Finished!  Read: %u Kb/sec, Write: %u Kb/sec\012\000"
- 1794      73686564 
- 1794      21202052 
- 1794      6561643A 
- 1794      20257520 
- 1795              	.LC14:
- 1796 01d9 2D6E6F70 		.ascii	"-noprint\000"
- 1796      72696E74 
- 1796      00
- 1797              	.LC15:
- 1798 01e2 4661696C 		.ascii	"Failed to open: %s\012\000"
- 1798      65642074 
- 1798      6F206F70 
- 1798      656E3A20 
- 1798      25730A00 
- 1799              	.LC16:
- 1800 01f6 0A526561 		.ascii	"\012Read %d bytes @ %d Kb/sec\000"
- 1800      64202564 
- 1800      20627974 
- 1800      65732040 
- 1800      20256420 
- 1801              	.LC17:
- 1802 0211 00       		.ascii	"\000"
- 1803              	.LC18:
- 1804 0212 303A00   		.ascii	"0:\000"
- 1805              	.LC19:
- 1806 0215 496E7661 		.ascii	"Invalid directory: |%s| (Error %i)\012\000"
- 1806      6C696420 
- 1806      64697265 
- 1806      63746F72 
- 1806      793A207C 
- 1807              	.LC20:
- 1808 0239 44697265 		.ascii	"Directory listing of: %s\012\012\000"
- 1808      63746F72 
- 1808      79206C69 
- 1808      7374696E 
- 1808      67206F66 
- 1809              	.LC21:
- 1810 0254 25632563 		.ascii	"%c%c%c%c%c %u/%02u/%02u %02u:%02u %10lu %13s\000"
- 1810      25632563 
- 1810      25632025 
- 1810      752F2530 
- 1810      32752F25 
- 1811              	.LC22:
- 1812 0281 202D2000 		.ascii	" - \000"
- 1813              	.LC23:
- 1814 0285 0A253475 		.ascii	"\012%4u File(s), %10d bytes total\012%4d Dir(s)\000"
- 1814      2046696C 
- 1814      65287329 
- 1814      2C202531 
- 1814      30642062 
- 1815              	.LC24:
- 1816 02af 2C202531 		.ascii	", %10dK bytes free\012\000"
- 1816      30644B20 
- 1816      62797465 
- 1816      73206672 
- 1816      65650A00 
- 1817              	.LC25:
- 1818 02c3 4F4B00   		.ascii	"OK\000"
- 1819              	.LC26:
- 1820 02c6 4552524F 		.ascii	"ERROR\000"
- 1820      5200
- 1821              	.LC27:
- 1822 02cc 43726561 		.ascii	"Create directory '%s' : %s\012\000"
- 1822      74652064 
- 1822      69726563 
- 1822      746F7279 
- 1822      20272573 
- 1823              	.LC28:
- 1824 02e8 44656C65 		.ascii	"Delete '%s' : %s\012\000"
- 1824      74652027 
- 1824      25732720 
- 1824      3A202573 
- 1824      0A00
- 1825              	.LC29:
- 1826 02fa 4D6F7665 		.ascii	"Move '%s' -> '%s' : %s\012\000"
- 1826      20272573 
- 1826      27202D3E 
- 1826      20272573 
- 1826      27203A20 
- 1827              	.LC30:
- 1828 0312 556E6162 		.ascii	"Unable to open '%s' to write the file\012\000"
- 1828      6C652074 
- 1828      6F206F70 
- 1828      656E2027 
- 1828      25732720 
- 1829              	.LC31:
- 1830 0339 456E6420 		.ascii	"End the file by using %c character.  %i is the time"
- 1830      74686520 
- 1830      66696C65 
- 1830      20627920 
- 1830      7573696E 
- 1831 036c 6F75740A 		.ascii	"out\012\000"
- 1831      00
- 1832              	.LC32:
- 1833 0371 536F7272 		.ascii	"Sorry, no backspace support :(\012\000"
- 1833      792C206E 
- 1833      6F206261 
- 1833      636B7370 
- 1833      61636520 
- 1834              	.LC33:
- 1835 0391 4572726F 		.ascii	"Error occurred while writing the file\012\000"
- 1835      72206F63 
- 1835      63757272 
- 1835      65642077 
- 1835      68696C65 
- 1836              	.LC34:
- 1837 03b8 4552524F 		.ascii	"ERROR: Give me source and destination directory sep"
- 1837      523A2047 
- 1837      69766520 
- 1837      6D652073 
- 1837      6F757263 
- 1838 03eb 61726174 		.ascii	"arated by a space\000"
- 1838      65642062 
- 1838      79206120 
- 1838      73706163 
- 1838      6500
- 1839              	.LC35:
- 1840 03fd 496E7661 		.ascii	"Invalid destination directory: |%s|\012\000"
- 1840      6C696420 
- 1840      64657374 
- 1840      696E6174 
- 1840      696F6E20 
- 1841              	.LC36:
- 1842 0422 496E7661 		.ascii	"Invalid source directory: |%s|\012\000"
- 1842      6C696420 
- 1842      736F7572 
- 1842      63652064 
- 1842      69726563 
- 1843              	.LC37:
- 1844 0442 25732F25 		.ascii	"%s/%s\000"
- 1844      7300
- 1845              	.LC38:
- 1846 0448 436F7079 		.ascii	"Copy %s -> %s : %d Bytes : %s\012\000"
- 1846      20257320 
- 1846      2D3E2025 
- 1846      73203A20 
- 1846      25642042 
- 1847              	.LC39:
- 1848 0467 466F726D 		.ascii	"Format OK\000"
- 1848      6174204F 
- 1848      4B00
- 1849              	.LC40:
- 1850 0471 466F726D 		.ascii	"Format ERROR\000"
- 1850      61742045 
- 1850      52524F52 
- 1850      00
- 1851              	.LC41:
- 1852 047e 53442043 		.ascii	"SD Card mounted\000"
- 1852      61726420 
- 1852      6D6F756E 
- 1852      74656400 
- 1853              	.LC42:
- 1854 048e 4572726F 		.ascii	"Error mounting SD Card\000"
- 1854      72206D6F 
- 1854      756E7469 
- 1854      6E672053 
- 1854      44204361 
- 1855              	.LC43:
- 1856 04a5 466C6173 		.ascii	"Flash mounted\000"
- 1856      68206D6F 
- 1856      756E7465 
- 1856      6400
- 1857              	.LC44:
- 1858 04b3 4572726F 		.ascii	"Error mounting Flash Memory\000"
- 1858      72206D6F 
- 1858      756E7469 
- 1858      6E672046 
- 1858      6C617368 
- 1859              	.LC45:
- 1860 04cf 666F726D 		.ascii	"format sd\000"
- 1860      61742073 
- 1860      6400
- 1861              	.LC46:
- 1862 04d9 666F726D 		.ascii	"format flash\000"
- 1862      61742066 
- 1862      6C617368 
- 1862      00
- 1863              	.LC47:
- 1864 04e6 6D6F756E 		.ascii	"mount sd\000"
- 1864      74207364 
- 1864      00
- 1865              	.LC48:
- 1866 04ef 6D6F756E 		.ascii	"mount flash\000"
- 1866      7420666C 
- 1866      61736800 
- 1867              	.LC49:
- 1868 04fb 4C656172 		.ascii	"Learning mode enabled\000"
- 1868      6E696E67 
- 1868      206D6F64 
- 1868      6520656E 
- 1868      61626C65 
- 1869              	.LC50:
- 1870 0511 4641494C 		.ascii	"FAILED\000"
- 1870      454400
- 1871              	.LC51:
- 1872 0518 727800   		.ascii	"rx\000"
- 1873              	.LC52:
- 1874 051b 252A7320 		.ascii	"%*s %i\000"
- 1874      256900
- 1875              	.LC53:
- 1876 0522 52656365 		.ascii	"Received data from %i\012\000"
- 1876      69766564 
- 1876      20646174 
- 1876      61206672 
- 1876      6F6D2025 
- 1877              	.LC54:
- 1878 0539 4E6F2064 		.ascii	"No data received\000"
- 1878      61746120 
- 1878      72656365 
- 1878      69766564 
- 1878      00
- 1879              	.LC55:
- 1880 054a 61646472 		.ascii	"addr\000"
- 1880      00
- 1881              	.LC56:
- 1882 054f 53657420 		.ascii	"Set address to %i: %s\012\000"
- 1882      61646472 
- 1882      65737320 
- 1882      746F2025 
- 1882      693A2025 
- 1883              	.LC57:
- 1884 0566 726F7574 		.ascii	"routes\000"
- 1884      657300
- 1885              	.LC58:
- 1886 056d 526F7574 		.ascii	"Routing table size is %i\012\000"
- 1886      696E6720 
- 1886      7461626C 
- 1886      65207369 
- 1886      7A652069 
- 1887              	.LC59:
- 1888 0587 4453543A 		.ascii	"DST: %3i, Next Hop: %3i, Hops: %i\012\000"
- 1888      20253369 
- 1888      2C204E65 
- 1888      78742048 
- 1888      6F703A20 
- 1889              	.LC60:
- 1890 05aa 73746174 		.ascii	"stats\000"
- 1890      7300
- 1891              	.LC61:
- 1892 05b0 61636B00 		.ascii	"ack\000"
- 1893              	.LC62:
- 1894 05b4 6E61636B 		.ascii	"nack\000"
- 1894      00
- 1895              	.LC63:
- 1896 05b9 44697363 		.ascii	"Discarded a stale wireless packet\000"
- 1896      61726465 
- 1896      64206120 
- 1896      7374616C 
- 1896      65207769 
- 1897              	.LC64:
- 1898 05db 4572726F 		.ascii	"Error sending packet, check parameters!\000"
- 1898      72207365 
- 1898      6E64696E 
- 1898      67207061 
- 1898      636B6574 
- 1899              	.LC65:
- 1900 0603 52656D6F 		.ascii	"Remote node name: '\000"
- 1900      7465206E 
- 1900      6F646520 
- 1900      6E616D65 
- 1900      3A202700 
- 1901              	.LC66:
- 1902 0617 270A00   		.ascii	"'\012\000"
- 1903              	.LC67:
- 1904 061a 52656365 		.ascii	"Received the acknowledgment!\000"
- 1904      69766564 
- 1904      20746865 
- 1904      2061636B 
- 1904      6E6F776C 
- 1905              	.LC68:
- 1906 0637 5061636B 		.ascii	"Packet sent to %s but no ACK received\000"
- 1906      65742073 
- 1906      656E7420 
- 1906      746F2025 
- 1906      73206275 
- 1907              	.LC69:
- 1908 065d 5265626F 		.ascii	"Rebooting System\000"
- 1908      6F74696E 
- 1908      67205379 
- 1908      7374656D 
- 1908      00
- 1909              	.LC70:
- 1910 066e 666C7573 		.ascii	"flush\000"
- 1910      6800
- 1911              	.LC71:
- 1912 0674 4C6F6728 		.ascii	"Log(s) have been flushed\000"
- 1912      73292068 
- 1912      61766520 
- 1912      6265656E 
- 1912      20666C75 
- 1913              	.LC72:
- 1914 068d 2E2E2F4C 		.ascii	"../L5_Application/source/handlers.cpp\000"
- 1914      355F4170 
- 1914      706C6963 
- 1914      6174696F 
- 1914      6E2F736F 
- 1915              	.LC73:
- 1916 06b3 4C6F6767 		.ascii	"Logged: |%s|\012\000"
- 1916      65643A20 
- 1916      7C25737C 
- 1916      0A00
- 1917              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"handlers.cpp"
+  16              		.text
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 30B5     		push	{r4, r5, lr}
+  25 0002 0C46     		mov	r4, r1
+  26 0004 0546     		mov	r5, r0
+  27 0006 87B0     		sub	sp, sp, #28
+  28 0008 0A49     		ldr	r1, .L2
+  29 000a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+  30 000e A188     		ldrh	r1, [r4, #4]
+  31 0010 2388     		ldrh	r3, [r4]
+  32 0012 0491     		str	r1, [sp, #16]
+  33 0014 2189     		ldrh	r1, [r4, #8]
+  34 0016 6288     		ldrh	r2, [r4, #2]
+  35 0018 0391     		str	r1, [sp, #12]
+  36 001a E188     		ldrh	r1, [r4, #6]
+  37 001c 2846     		mov	r0, r5
+  38 001e 0291     		str	r1, [sp, #8]
+  39 0020 E17A     		ldrb	r1, [r4, #11]	@ zero_extendqisi2
+  40 0022 0191     		str	r1, [sp, #4]
+  41 0024 A17A     		ldrb	r1, [r4, #10]	@ zero_extendqisi2
+  42 0026 0091     		str	r1, [sp]
+  43 0028 0349     		ldr	r1, .L2+4
+  44 002a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+  45 002e 07B0     		add	sp, sp, #28
+  46              		@ sp needed
+  47 0030 30BD     		pop	{r4, r5, pc}
+  48              	.L3:
+  49 0032 00BF     		.align	2
+  50              	.L2:
+  51 0034 00000000 		.word	.LC1
+  52 0038 36000000 		.word	.LC2
+  54              		.section	.text._ZNK16FileSystemObject5mountEv,"axG",%progbits,_ZNK16FileSystemObject5mountEv,comda
+  55              		.align	1
+  56              		.weak	_ZNK16FileSystemObject5mountEv
+  57              		.thumb
+  58              		.thumb_func
+  60              	_ZNK16FileSystemObject5mountEv:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 0000 10B5     		push	{r4, lr}
+  64 0002 0446     		mov	r4, r0
+  65 0004 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
+  66 0008 FFF7FEFF 		bl	disk_initialize
+  67 000c 30B9     		cbnz	r0, .L5
+  68 000e 2146     		mov	r1, r4
+  69 0010 94F83402 		ldrb	r0, [r4, #564]	@ zero_extendqisi2
+  70 0014 BDE81040 		pop	{r4, lr}
+  71 0018 FFF7FEBF 		b	f_mount
+  72              	.L5:
+  73 001c 10BD     		pop	{r4, pc}
+  75              		.section	.text._ZN7Storage13getFlashDriveEv,"axG",%progbits,_ZN7Storage13getFlashDriveEv,comdat
+  76              		.align	1
+  77              		.weak	_ZN7Storage13getFlashDriveEv
+  78              		.thumb
+  79              		.thumb_func
+  81              	_ZN7Storage13getFlashDriveEv:
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84 0000 70B5     		push	{r4, r5, r6, lr}
+  85 0002 0F4D     		ldr	r5, .L14
+  86 0004 0F4E     		ldr	r6, .L14+4
+  87 0006 2C68     		ldr	r4, [r5]
+  88 0008 14F00104 		ands	r4, r4, #1
+  89 000c 15D1     		bne	.L9
+  90 000e 2846     		mov	r0, r5
+  91 0010 FFF7FEFF 		bl	__cxa_guard_acquire
+  92 0014 88B1     		cbz	r0, .L9
+  93 0016 4FF40E70 		mov	r0, #568
+  94 001a FFF7FEFF 		bl	_Znwj
+  95 001e 3023     		movs	r3, #48
+  96 0020 80F83532 		strb	r3, [r0, #565]
+  97 0024 3A23     		movs	r3, #58
+  98 0026 80F83442 		strb	r4, [r0, #564]
+  99 002a 80F83632 		strb	r3, [r0, #566]
+ 100 002e 80F83742 		strb	r4, [r0, #567]
+ 101 0032 3060     		str	r0, [r6]
+ 102 0034 2846     		mov	r0, r5
+ 103 0036 FFF7FEFF 		bl	__cxa_guard_release
+ 104              	.L9:
+ 105 003a 3068     		ldr	r0, [r6]
+ 106 003c 70BD     		pop	{r4, r5, r6, pc}
+ 107              	.L15:
+ 108 003e 00BF     		.align	2
+ 109              	.L14:
+ 110 0040 00000000 		.word	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
+ 111 0044 00000000 		.word	_ZZN7Storage13getFlashDriveEvE11pFlashDrive
+ 113              		.section	.text._ZN7Storage10getSDDriveEv,"axG",%progbits,_ZN7Storage10getSDDriveEv,comdat
+ 114              		.align	1
+ 115              		.weak	_ZN7Storage10getSDDriveEv
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	_ZN7Storage10getSDDriveEv:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122 0000 70B5     		push	{r4, r5, r6, lr}
+ 123 0002 0F4D     		ldr	r5, .L23
+ 124 0004 0F4E     		ldr	r6, .L23+4
+ 125 0006 2B68     		ldr	r3, [r5]
+ 126 0008 13F00104 		ands	r4, r3, #1
+ 127 000c 16D1     		bne	.L18
+ 128 000e 2846     		mov	r0, r5
+ 129 0010 FFF7FEFF 		bl	__cxa_guard_acquire
+ 130 0014 90B1     		cbz	r0, .L18
+ 131 0016 4FF40E70 		mov	r0, #568
+ 132 001a FFF7FEFF 		bl	_Znwj
+ 133 001e 0123     		movs	r3, #1
+ 134 0020 80F83432 		strb	r3, [r0, #564]
+ 135 0024 3123     		movs	r3, #49
+ 136 0026 80F83532 		strb	r3, [r0, #565]
+ 137 002a 3A23     		movs	r3, #58
+ 138 002c 80F83632 		strb	r3, [r0, #566]
+ 139 0030 80F83742 		strb	r4, [r0, #567]
+ 140 0034 3060     		str	r0, [r6]
+ 141 0036 2846     		mov	r0, r5
+ 142 0038 FFF7FEFF 		bl	__cxa_guard_release
+ 143              	.L18:
+ 144 003c 3068     		ldr	r0, [r6]
+ 145 003e 70BD     		pop	{r4, r5, r6, pc}
+ 146              	.L24:
+ 147              		.align	2
+ 148              	.L23:
+ 149 0040 00000000 		.word	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
+ 150 0044 00000000 		.word	_ZZN7Storage10getSDDriveEvE12pSDCardDrive
+ 152              		.text
+ 153              		.align	1
+ 154              		.global	_Z15taskListHandlerR3strR7UartDevPvi
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	_Z15taskListHandlerR3strR7UartDevPvi:
+ 159              		@ args = 0, pretend = 0, frame = 336
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 003c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 162 0040 D8B0     		sub	sp, sp, #352
+ 163 0042 0E46     		mov	r6, r1
+ 164 0044 FFF7FEFF 		bl	_ZNK3strcviEv
+ 165 0048 041E     		subs	r4, r0, #0
+ 166 004a 04DD     		ble	.L26
+ 167 004c FFF7FEFF 		bl	vTaskResetRunTimeStats
+ 168 0050 2046     		mov	r0, r4
+ 169 0052 FFF7FEFF 		bl	vTaskDelay
+ 170              	.L26:
+ 171 0056 204B     		ldr	r3, .L32
+ 172 0058 06AF     		add	r7, sp, #24
+ 173 005a 1868     		ldr	r0, [r3]	@ unaligned
+ 174 005c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 175 005e 3860     		str	r0, [r7]	@ unaligned
+ 176 0060 05AA     		add	r2, sp, #20
+ 177 0062 0A21     		movs	r1, #10
+ 178 0064 0025     		movs	r5, #0
+ 179 0066 08A8     		add	r0, sp, #32
+ 180 0068 3B71     		strb	r3, [r7, #4]
+ 181 006a 0595     		str	r5, [sp, #20]
+ 182 006c FFF7FEFF 		bl	uxTaskGetSystemState
+ 183 0070 059B     		ldr	r3, [sp, #20]
+ 184 0072 6422     		movs	r2, #100
+ 185 0074 B3FBF2F3 		udiv	r3, r3, r2
+ 186 0078 8046     		mov	r8, r0
+ 187 007a 0593     		str	r3, [sp, #20]
+ 188 007c 174A     		ldr	r2, .L32+4
+ 189 007e 0A23     		movs	r3, #10
+ 190 0080 1749     		ldr	r1, .L32+8
+ 191 0082 3046     		mov	r0, r6
+ 192 0084 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 193 0088 08AC     		add	r4, sp, #32
+ 194              	.L29:
+ 195 008a 4545     		cmp	r5, r8
+ 196 008c 17D0     		beq	.L27
+ 197 008e 059B     		ldr	r3, [sp, #20]
+ 198 0090 1BB1     		cbz	r3, .L31
+ 199 0092 A269     		ldr	r2, [r4, #24]
+ 200 0094 B2FBF3F2 		udiv	r2, r2, r3
+ 201 0098 00E0     		b	.L28
+ 202              	.L31:
+ 203 009a 1A46     		mov	r2, r3
+ 204              	.L28:
+ 205 009c 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
+ 206 009e A169     		ldr	r1, [r4, #24]
+ 207 00a0 FB5C     		ldrb	r3, [r7, r3]	@ zero_extendqisi2
+ 208 00a2 0391     		str	r1, [sp, #12]
+ 209 00a4 0292     		str	r2, [sp, #8]
+ 210 00a6 A28B     		ldrh	r2, [r4, #28]
+ 211 00a8 0E49     		ldr	r1, .L32+12
+ 212 00aa 0192     		str	r2, [sp, #4]
+ 213 00ac 6269     		ldr	r2, [r4, #20]
+ 214 00ae 3046     		mov	r0, r6
+ 215 00b0 0092     		str	r2, [sp]
+ 216 00b2 6268     		ldr	r2, [r4, #4]
+ 217 00b4 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 218 00b8 0135     		adds	r5, r5, #1
+ 219 00ba 2034     		adds	r4, r4, #32
+ 220 00bc E5E7     		b	.L29
+ 221              	.L27:
+ 222 00be FFF7FEFF 		bl	uxTaskGetNumberOfTasks
+ 223 00c2 0A28     		cmp	r0, #10
+ 224 00c4 04D9     		bls	.L30
+ 225 00c6 0A22     		movs	r2, #10
+ 226 00c8 0749     		ldr	r1, .L32+16
+ 227 00ca 3046     		mov	r0, r6
+ 228 00cc FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 229              	.L30:
+ 230 00d0 0120     		movs	r0, #1
+ 231 00d2 58B0     		add	sp, sp, #352
+ 232              		@ sp needed
+ 233 00d4 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 234              	.L33:
+ 235              		.align	2
+ 236              	.L32:
+ 237 00d8 00000000 		.word	.LANCHOR0
+ 238 00dc 57000000 		.word	.LC3
+ 239 00e0 5C000000 		.word	.LC4
+ 240 00e4 89000000 		.word	.LC5
+ 241 00e8 A6000000 		.word	.LC6
+ 243              		.align	1
+ 244              		.global	_Z14memInfoHandlerR3strR7UartDevPvi
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	_Z14memInfoHandlerR3strR7UartDevPvi:
+ 249              		@ args = 0, pretend = 0, frame = 128
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251 00ec 10B5     		push	{r4, lr}
+ 252 00ee 0C46     		mov	r4, r1
+ 253 00f0 A0B0     		sub	sp, sp, #128
+ 254 00f2 8022     		movs	r2, #128
+ 255 00f4 0021     		movs	r1, #0
+ 256 00f6 6846     		mov	r0, sp
+ 257 00f8 FFF7FEFF 		bl	memset
+ 258 00fc 6846     		mov	r0, sp
+ 259 00fe FFF7FEFF 		bl	sys_get_mem_info_str
+ 260 0102 2046     		mov	r0, r4
+ 261 0104 4FF0FF32 		mov	r2, #-1
+ 262 0108 6946     		mov	r1, sp
+ 263 010a FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 264 010e 0120     		movs	r0, #1
+ 265 0110 20B0     		add	sp, sp, #128
+ 266              		@ sp needed
+ 267 0112 10BD     		pop	{r4, pc}
+ 269              		.global	__aeabi_f2iz
+ 270              		.global	__aeabi_i2f
+ 271              		.global	__aeabi_fsub
+ 272              		.global	__aeabi_fmul
+ 273              		.align	1
+ 274              		.global	_Z13healthHandlerR3strR7UartDevPvi
+ 275              		.thumb
+ 276              		.thumb_func
+ 278              	_Z13healthHandlerR3strR7UartDevPvi:
+ 279              		@ args = 0, pretend = 0, frame = 48
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281 0114 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 282 0118 4F4C     		ldr	r4, .L42
+ 283 011a 99B0     		sub	sp, sp, #100
+ 284 011c 2368     		ldr	r3, [r4]
+ 285 011e 8946     		mov	r9, r1
+ 286 0120 33B9     		cbnz	r3, .L36
+ 287 0122 2820     		movs	r0, #40
+ 288 0124 FFF7FEFF 		bl	_Znwj
+ 289 0128 0546     		mov	r5, r0
+ 290 012a FFF7FEFF 		bl	_ZN5Uart0C1Ev
+ 291 012e 2560     		str	r5, [r4]
+ 292              	.L36:
+ 293 0130 D4F80080 		ldr	r8, [r4]
+ 294 0134 FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
+ 295 0138 12AF     		add	r7, sp, #72
+ 296 013a 0024     		movs	r4, #0
+ 297 013c 0FAA     		add	r2, sp, #60
+ 298 013e 3946     		mov	r1, r7
+ 299 0140 00F23520 		addw	r0, r0, #565
+ 300 0144 1294     		str	r4, [sp, #72]
+ 301 0146 FFF7FEFF 		bl	f_getfree
+ 302 014a 48B9     		cbnz	r0, .L41
+ 303 014c 0F9A     		ldr	r2, [sp, #60]
+ 304 014e 129C     		ldr	r4, [sp, #72]
+ 305 0150 D569     		ldr	r5, [r2, #28]
+ 306 0152 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+ 307 0154 023D     		subs	r5, r5, #2
+ 308 0156 5C43     		muls	r4, r3, r4
+ 309 0158 5D43     		muls	r5, r3, r5
+ 310 015a 6408     		lsrs	r4, r4, #1
+ 311 015c 6D08     		lsrs	r5, r5, #1
+ 312 015e 00E0     		b	.L37
+ 313              	.L41:
+ 314 0160 2546     		mov	r5, r4
+ 315              	.L37:
+ 316 0162 3E4E     		ldr	r6, .L42+4
+ 317 0164 3368     		ldr	r3, [r6]
+ 318 0166 E3B9     		cbnz	r3, .L38
+ 319 0168 0C20     		movs	r0, #12
+ 320 016a FFF7FEFF 		bl	_Znwj
+ 321 016e 3C4B     		ldr	r3, .L42+8
+ 322 0170 8346     		mov	fp, r0
+ 323 0172 1A68     		ldr	r2, [r3]
+ 324 0174 9A46     		mov	r10, r3
+ 325 0176 42B9     		cbnz	r2, .L39
+ 326 0178 1C20     		movs	r0, #28
+ 327 017a FFF7FEFF 		bl	_Znwj
+ 328 017e 0D90     		str	r0, [sp, #52]
+ 329 0180 FFF7FEFF 		bl	_ZN4I2C2C1Ev
+ 330 0184 0D9B     		ldr	r3, [sp, #52]
+ 331 0186 CAF80030 		str	r3, [r10]
+ 332              	.L39:
+ 333 018a DAF80030 		ldr	r3, [r10]
+ 334 018e C6F800B0 		str	fp, [r6]
+ 335 0192 CBF80030 		str	r3, [fp]
+ 336 0196 9023     		movs	r3, #144
+ 337 0198 8BF80430 		strb	r3, [fp, #4]
+ 338 019c 0023     		movs	r3, #0
+ 339 019e CBF80830 		str	r3, [fp, #8]	@ float
+ 340              	.L38:
+ 341 01a2 3068     		ldr	r0, [r6]
+ 342 01a4 FFF7FEFF 		bl	_ZN8I2C_Temp12getFarenheitEv
+ 343 01a8 0646     		mov	r6, r0
+ 344 01aa FFF7FEFF 		bl	__aeabi_f2iz
+ 345 01ae 8246     		mov	r10, r0
+ 346 01b0 FFF7FEFF 		bl	__aeabi_i2f
+ 347 01b4 0146     		mov	r1, r0
+ 348 01b6 3046     		mov	r0, r6
+ 349 01b8 FFF7FEFF 		bl	__aeabi_fsub
+ 350 01bc 2949     		ldr	r1, .L42+12
+ 351 01be FFF7FEFF 		bl	__aeabi_fmul
+ 352 01c2 FFF7FEFF 		bl	__aeabi_f2iz
+ 353 01c6 8346     		mov	fp, r0
+ 354 01c8 0FA8     		add	r0, sp, #60
+ 355 01ca FFF7FEFF 		bl	sys_get_boot_time
+ 356 01ce 264E     		ldr	r6, .L42+16
+ 357 01d0 1822     		movs	r2, #24
+ 358 01d2 0021     		movs	r1, #0
+ 359 01d4 3846     		mov	r0, r7
+ 360 01d6 FFF7FEFF 		bl	memset
+ 361 01da 3846     		mov	r0, r7
+ 362 01dc FFF7FEFF 		bl	rtc_get_date_time_str
+ 363 01e0 3368     		ldr	r3, [r6]
+ 364 01e2 1BB9     		cbnz	r3, .L40
+ 365 01e4 0120     		movs	r0, #1
+ 366 01e6 FFF7FEFF 		bl	_Znwj
+ 367 01ea 3060     		str	r0, [r6]
+ 368              	.L40:
+ 369 01ec 3068     		ldr	r0, [r6]
+ 370 01ee FFF7FEFF 		bl	_ZN12Light_Sensor11getRawValueEv
+ 371 01f2 B8F81230 		ldrh	r3, [r8, #18]
+ 372 01f6 2246     		mov	r2, r4
+ 373 01f8 0B93     		str	r3, [sp, #44]
+ 374 01fa B8F81030 		ldrh	r3, [r8, #16]
+ 375 01fe 1B49     		ldr	r1, .L42+20
+ 376 0200 0A93     		str	r3, [sp, #40]
+ 377 0202 9DF83C30 		ldrb	r3, [sp, #60]	@ zero_extendqisi2
+ 378 0206 0290     		str	r0, [sp, #8]
+ 379 0208 03F03F03 		and	r3, r3, #63
+ 380 020c 0993     		str	r3, [sp, #36]
+ 381 020e 9DF83D30 		ldrb	r3, [sp, #61]	@ zero_extendqisi2
+ 382 0212 0397     		str	r7, [sp, #12]
+ 383 0214 03F03F03 		and	r3, r3, #63
+ 384 0218 0893     		str	r3, [sp, #32]
+ 385 021a 9DF83E30 		ldrb	r3, [sp, #62]	@ zero_extendqisi2
+ 386 021e 8DE8000C 		stmia	sp, {r10, fp}
+ 387 0222 03F01F03 		and	r3, r3, #31
+ 388 0226 0793     		str	r3, [sp, #28]
+ 389 0228 BDF84230 		ldrh	r3, [sp, #66]
+ 390 022c 4846     		mov	r0, r9
+ 391 022e C3F30B03 		ubfx	r3, r3, #0, #12
+ 392 0232 0693     		str	r3, [sp, #24]
+ 393 0234 9DF84030 		ldrb	r3, [sp, #64]	@ zero_extendqisi2
+ 394 0238 03F01F03 		and	r3, r3, #31
+ 395 023c 0593     		str	r3, [sp, #20]
+ 396 023e 9DF84130 		ldrb	r3, [sp, #65]	@ zero_extendqisi2
+ 397 0242 03F00F03 		and	r3, r3, #15
+ 398 0246 0493     		str	r3, [sp, #16]
+ 399 0248 2B46     		mov	r3, r5
+ 400 024a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 401 024e 0120     		movs	r0, #1
+ 402 0250 19B0     		add	sp, sp, #100
+ 403              		@ sp needed
+ 404 0252 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 405              	.L43:
+ 406 0256 00BF     		.align	2
+ 407              	.L42:
+ 408 0258 00000000 		.word	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
+ 409 025c 00000000 		.word	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
+ 410 0260 00000000 		.word	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 411 0264 00002041 		.word	1092616192
+ 412 0268 00000000 		.word	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
+ 413 026c D0000000 		.word	.LC7
+ 415              		.align	1
+ 416              		.global	_Z11timeHandlerR3strR7UartDevPvi
+ 417              		.thumb
+ 418              		.thumb_func
+ 420              	_Z11timeHandlerR3strR7UartDevPvi:
+ 421              		@ args = 0, pretend = 0, frame = 56
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423 0270 30B5     		push	{r4, r5, lr}
+ 424 0272 0D46     		mov	r5, r1
+ 425 0274 95B0     		sub	sp, sp, #84
+ 426 0276 3F49     		ldr	r1, .L51
+ 427 0278 0446     		mov	r4, r0
+ 428 027a FFF7FEFF 		bl	_ZNK3str10beginsWithEPKc
+ 429 027e 0028     		cmp	r0, #0
+ 430 0280 47D0     		beq	.L45
+ 431 0282 10AB     		add	r3, sp, #64
+ 432 0284 0493     		str	r3, [sp, #16]
+ 433 0286 0FAB     		add	r3, sp, #60
+ 434 0288 0393     		str	r3, [sp, #12]
+ 435 028a 0EAB     		add	r3, sp, #56
+ 436 028c 0293     		str	r3, [sp, #8]
+ 437 028e 0DAB     		add	r3, sp, #52
+ 438 0290 0193     		str	r3, [sp, #4]
+ 439 0292 0CAB     		add	r3, sp, #48
+ 440 0294 0093     		str	r3, [sp]
+ 441 0296 0AAA     		add	r2, sp, #40
+ 442 0298 0BAB     		add	r3, sp, #44
+ 443 029a 3749     		ldr	r1, .L51+4
+ 444 029c 2046     		mov	r0, r4
+ 445 029e FFF7FEFF 		bl	_ZN3str5scanfEPKcz
+ 446 02a2 0728     		cmp	r0, #7
+ 447 02a4 01D0     		beq	.L46
+ 448 02a6 0020     		movs	r0, #0
+ 449 02a8 62E0     		b	.L47
+ 450              	.L46:
+ 451 02aa 9DF84930 		ldrb	r3, [sp, #73]	@ zero_extendqisi2
+ 452 02ae 0A9A     		ldr	r2, [sp, #40]
+ 453 02b0 11A8     		add	r0, sp, #68
+ 454 02b2 62F30303 		bfi	r3, r2, #0, #4
+ 455 02b6 8DF84930 		strb	r3, [sp, #73]
+ 456 02ba 0B9A     		ldr	r2, [sp, #44]
+ 457 02bc 9DF84830 		ldrb	r3, [sp, #72]	@ zero_extendqisi2
+ 458 02c0 62F30403 		bfi	r3, r2, #0, #5
+ 459 02c4 8DF84830 		strb	r3, [sp, #72]
+ 460 02c8 0C9A     		ldr	r2, [sp, #48]
+ 461 02ca BDF84A30 		ldrh	r3, [sp, #74]
+ 462 02ce 62F30B03 		bfi	r3, r2, #0, #12
+ 463 02d2 ADF84A30 		strh	r3, [sp, #74]	@ movhi
+ 464 02d6 0D9A     		ldr	r2, [sp, #52]
+ 465 02d8 9DF84630 		ldrb	r3, [sp, #70]	@ zero_extendqisi2
+ 466 02dc 62F30403 		bfi	r3, r2, #0, #5
+ 467 02e0 8DF84630 		strb	r3, [sp, #70]
+ 468 02e4 0E9A     		ldr	r2, [sp, #56]
+ 469 02e6 9DF84530 		ldrb	r3, [sp, #69]	@ zero_extendqisi2
+ 470 02ea 62F30503 		bfi	r3, r2, #0, #6
+ 471 02ee 8DF84530 		strb	r3, [sp, #69]
+ 472 02f2 0F9A     		ldr	r2, [sp, #60]
+ 473 02f4 9DF84430 		ldrb	r3, [sp, #68]	@ zero_extendqisi2
+ 474 02f8 62F30503 		bfi	r3, r2, #0, #6
+ 475 02fc 8DF84430 		strb	r3, [sp, #68]
+ 476 0300 109A     		ldr	r2, [sp, #64]
+ 477 0302 9DF84730 		ldrb	r3, [sp, #71]	@ zero_extendqisi2
+ 478 0306 62F30203 		bfi	r3, r2, #0, #3
+ 479 030a 8DF84730 		strb	r3, [sp, #71]
+ 480 030e FFF7FEFF 		bl	rtc_settime
+ 481              	.L45:
+ 482 0312 06AC     		add	r4, sp, #24
+ 483 0314 2046     		mov	r0, r4
+ 484 0316 FFF7FEFF 		bl	rtc_gettime
+ 485 031a 94E80700 		ldmia	r4, {r0, r1, r2}
+ 486 031e 14AB     		add	r3, sp, #80
+ 487 0320 03E90700 		stmdb	r3, {r0, r1, r2}
+ 488 0324 9DF84710 		ldrb	r1, [sp, #71]	@ zero_extendqisi2
+ 489 0328 9DF84830 		ldrb	r3, [sp, #72]	@ zero_extendqisi2
+ 490 032c 01F00701 		and	r1, r1, #7
+ 491 0330 0491     		str	r1, [sp, #16]
+ 492 0332 9DF84410 		ldrb	r1, [sp, #68]	@ zero_extendqisi2
+ 493 0336 9DF84920 		ldrb	r2, [sp, #73]	@ zero_extendqisi2
+ 494 033a 01F03F01 		and	r1, r1, #63
+ 495 033e 0391     		str	r1, [sp, #12]
+ 496 0340 9DF84510 		ldrb	r1, [sp, #69]	@ zero_extendqisi2
+ 497 0344 03F01F03 		and	r3, r3, #31
+ 498 0348 01F03F01 		and	r1, r1, #63
+ 499 034c 0291     		str	r1, [sp, #8]
+ 500 034e 9DF84610 		ldrb	r1, [sp, #70]	@ zero_extendqisi2
+ 501 0352 02F00F02 		and	r2, r2, #15
+ 502 0356 01F01F01 		and	r1, r1, #31
+ 503 035a 0191     		str	r1, [sp, #4]
+ 504 035c BDF84A10 		ldrh	r1, [sp, #74]
+ 505 0360 2846     		mov	r0, r5
+ 506 0362 C1F30B01 		ubfx	r1, r1, #0, #12
+ 507 0366 0091     		str	r1, [sp]
+ 508 0368 0449     		ldr	r1, .L51+8
+ 509 036a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 510 036e 0120     		movs	r0, #1
+ 511              	.L47:
+ 512 0370 15B0     		add	sp, sp, #84
+ 513              		@ sp needed
+ 514 0372 30BD     		pop	{r4, r5, pc}
+ 515              	.L52:
+ 516              		.align	2
+ 517              	.L51:
+ 518 0374 46010000 		.word	.LC8
+ 519 0378 4A010000 		.word	.LC9
+ 520 037c 63010000 		.word	.LC10
+ 522              		.align	1
+ 523              		.global	_Z9cpHandlerR3strR7UartDevPvi
+ 524              		.thumb
+ 525              		.thumb_func
+ 527              	_Z9cpHandlerR3strR7UartDevPvi:
+ 528              		@ args = 0, pretend = 0, frame = 24
+ 529              		@ frame_needed = 0, uses_anonymous_args = 0
+ 530 0380 30B5     		push	{r4, r5, lr}
+ 531 0382 89B0     		sub	sp, sp, #36
+ 532 0384 04AB     		add	r3, sp, #16
+ 533 0386 0024     		movs	r4, #0
+ 534 0388 0093     		str	r3, [sp]
+ 535 038a 0D46     		mov	r5, r1
+ 536 038c 03AB     		add	r3, sp, #12
+ 537 038e 0222     		movs	r2, #2
+ 538 0390 1849     		ldr	r1, .L62
+ 539 0392 0394     		str	r4, [sp, #12]
+ 540 0394 0494     		str	r4, [sp, #16]
+ 541 0396 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
+ 542 039a 0228     		cmp	r0, #2
+ 543 039c 27D1     		bne	.L58
+ 544 039e 07AB     		add	r3, sp, #28
+ 545 03a0 0093     		str	r3, [sp]
+ 546 03a2 05AA     		add	r2, sp, #20
+ 547 03a4 06AB     		add	r3, sp, #24
+ 548 03a6 0499     		ldr	r1, [sp, #16]
+ 549 03a8 0398     		ldr	r0, [sp, #12]
+ 550 03aa 0594     		str	r4, [sp, #20]
+ 551 03ac 0694     		str	r4, [sp, #24]
+ 552 03ae 0794     		str	r4, [sp, #28]
+ 553 03b0 FFF7FEFF 		bl	_ZN7Storage4copyEPKcS1_PjS2_S2_
+ 554 03b4 0246     		mov	r2, r0
+ 555 03b6 38B1     		cbz	r0, .L55
+ 556 03b8 049B     		ldr	r3, [sp, #16]
+ 557 03ba 0F49     		ldr	r1, .L62+4
+ 558 03bc 0093     		str	r3, [sp]
+ 559 03be 2846     		mov	r0, r5
+ 560 03c0 039B     		ldr	r3, [sp, #12]
+ 561 03c2 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 562 03c6 10E0     		b	.L61
+ 563              	.L55:
+ 564 03c8 059A     		ldr	r2, [sp, #20]
+ 565 03ca 069B     		ldr	r3, [sp, #24]
+ 566 03cc 002A     		cmp	r2, #0
+ 567 03ce 0799     		ldr	r1, [sp, #28]
+ 568 03d0 08BF     		it	eq
+ 569 03d2 0122     		moveq	r2, #1
+ 570 03d4 002B     		cmp	r3, #0
+ 571 03d6 08BF     		it	eq
+ 572 03d8 0123     		moveq	r3, #1
+ 573 03da B1FBF3F3 		udiv	r3, r1, r3
+ 574 03de B1FBF2F2 		udiv	r2, r1, r2
+ 575 03e2 2846     		mov	r0, r5
+ 576 03e4 0549     		ldr	r1, .L62+8
+ 577 03e6 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 578              	.L61:
+ 579 03ea 0120     		movs	r0, #1
+ 580 03ec 00E0     		b	.L54
+ 581              	.L58:
+ 582 03ee 2046     		mov	r0, r4
+ 583              	.L54:
+ 584 03f0 09B0     		add	sp, sp, #36
+ 585              		@ sp needed
+ 586 03f2 30BD     		pop	{r4, r5, pc}
+ 587              	.L63:
+ 588              		.align	2
+ 589              	.L62:
+ 590 03f4 8A010000 		.word	.LC11
+ 591 03f8 8C010000 		.word	.LC12
+ 592 03fc AB010000 		.word	.LC13
+ 594              		.align	1
+ 595              		.global	_Z10catHandlerR3strR7UartDevPvi
+ 596              		.thumb
+ 597              		.thumb_func
+ 599              	_Z10catHandlerR3strR7UartDevPvi:
+ 600              		@ args = 0, pretend = 0, frame = 1072
+ 601              		@ frame_needed = 0, uses_anonymous_args = 0
+ 602 0400 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 603 0404 0F46     		mov	r7, r1
+ 604 0406 ADF5866D 		sub	sp, sp, #1072
+ 605 040a 2F49     		ldr	r1, .L78
+ 606 040c 0546     		mov	r5, r0
+ 607 040e FFF7FEFF 		bl	_ZN3str5eraseEPKc
+ 608 0412 2E49     		ldr	r1, .L78+4
+ 609 0414 8046     		mov	r8, r0
+ 610 0416 2846     		mov	r0, r5
+ 611 0418 FFF7FEFF 		bl	_ZN3str9trimStartEPKc
+ 612 041c 2B49     		ldr	r1, .L78+4
+ 613 041e 2846     		mov	r0, r5
+ 614 0420 FFF7FEFF 		bl	_ZN3str7trimEndEPKc
+ 615 0424 2846     		mov	r0, r5
+ 616 0426 FFF7FEFF 		bl	_ZNK3strclEv
+ 617 042a 0122     		movs	r2, #1
+ 618 042c 0146     		mov	r1, r0
+ 619 042e 01A8     		add	r0, sp, #4
+ 620 0430 FFF7FEFF 		bl	f_open
+ 621 0434 0446     		mov	r4, r0
+ 622 0436 40B1     		cbz	r0, .L65
+ 623 0438 2846     		mov	r0, r5
+ 624 043a FFF7FEFF 		bl	_ZNK3strclEv
+ 625 043e 2449     		ldr	r1, .L78+8
+ 626 0440 0246     		mov	r2, r0
+ 627 0442 3846     		mov	r0, r7
+ 628 0444 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 629 0448 39E0     		b	.L76
+ 630              	.L65:
+ 631 044a 0BAE     		add	r6, sp, #44
+ 632 044c 0146     		mov	r1, r0
+ 633 044e 40F20142 		movw	r2, #1025
+ 634 0452 3046     		mov	r0, r6
+ 635 0454 FFF7FEFF 		bl	memset
+ 636 0458 0094     		str	r4, [sp]
+ 637 045a FFF7FEFF 		bl	sys_get_uptime_ms
+ 638 045e 0546     		mov	r5, r0
+ 639              	.L67:
+ 640 0460 6B46     		mov	r3, sp
+ 641 0462 4FF48062 		mov	r2, #1024
+ 642 0466 3146     		mov	r1, r6
+ 643 0468 01A8     		add	r0, sp, #4
+ 644 046a FFF7FEFF 		bl	f_read
+ 645 046e 68B9     		cbnz	r0, .L68
+ 646 0470 009B     		ldr	r3, [sp]
+ 647 0472 5BB1     		cbz	r3, .L68
+ 648 0474 1C44     		add	r4, r4, r3
+ 649 0476 F054     		strb	r0, [r6, r3]
+ 650 0478 B8F1000F 		cmp	r8, #0
+ 651 047c F0D1     		bne	.L67
+ 652 047e 4FF0FF32 		mov	r2, #-1
+ 653 0482 3146     		mov	r1, r6
+ 654 0484 3846     		mov	r0, r7
+ 655 0486 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 656 048a E9E7     		b	.L67
+ 657              	.L68:
+ 658 048c 01A8     		add	r0, sp, #4
+ 659 048e FFF7FEFF 		bl	f_close
+ 660 0492 B8F1000F 		cmp	r8, #0
+ 661 0496 0CD0     		beq	.L74
+ 662 0498 FFF7FEFF 		bl	sys_get_uptime_ms
+ 663 049c 401B     		subs	r0, r0, r5
+ 664 049e 14BF     		ite	ne
+ 665 04a0 0346     		movne	r3, r0
+ 666 04a2 0123     		moveq	r3, #1
+ 667 04a4 B4FBF3F3 		udiv	r3, r4, r3
+ 668 04a8 2246     		mov	r2, r4
+ 669 04aa 0A49     		ldr	r1, .L78+12
+ 670 04ac 3846     		mov	r0, r7
+ 671 04ae FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 672              	.L74:
+ 673 04b2 4FF0FF32 		mov	r2, #-1
+ 674 04b6 0849     		ldr	r1, .L78+16
+ 675 04b8 3846     		mov	r0, r7
+ 676 04ba FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 677              	.L76:
+ 678 04be 0120     		movs	r0, #1
+ 679 04c0 0DF5866D 		add	sp, sp, #1072
+ 680              		@ sp needed
+ 681 04c4 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 682              	.L79:
+ 683              		.align	2
+ 684              	.L78:
+ 685 04c8 D9010000 		.word	.LC14
+ 686 04cc 8A010000 		.word	.LC11
+ 687 04d0 E2010000 		.word	.LC15
+ 688 04d4 F6010000 		.word	.LC16
+ 689 04d8 11020000 		.word	.LC17
+ 691              		.align	1
+ 692              		.global	_Z9lsHandlerR3strR7UartDevPvi
+ 693              		.thumb
+ 694              		.thumb_func
+ 696              	_Z9lsHandlerR3strR7UartDevPvi:
+ 697              		@ args = 0, pretend = 0, frame = 216
+ 698              		@ frame_needed = 0, uses_anonymous_args = 0
+ 699 04dc 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 700 04e0 C0B0     		sub	sp, sp, #256
+ 701 04e2 0EAB     		add	r3, sp, #56
+ 702 04e4 0024     		movs	r4, #0
+ 703 04e6 0093     		str	r3, [sp]
+ 704 04e8 0D46     		mov	r5, r1
+ 705 04ea 0DAB     		add	r3, sp, #52
+ 706 04ec 0222     		movs	r2, #2
+ 707 04ee 5D49     		ldr	r1, .L105
+ 708 04f0 0C94     		str	r4, [sp, #48]
+ 709 04f2 0D94     		str	r4, [sp, #52]
+ 710 04f4 0E94     		str	r4, [sp, #56]
+ 711 04f6 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
+ 712 04fa 0228     		cmp	r0, #2
+ 713 04fc 03D1     		bne	.L81
+ 714 04fe 0E98     		ldr	r0, [sp, #56]
+ 715 0500 FFF7FEFF 		bl	atoi
+ 716 0504 0446     		mov	r4, r0
+ 717              	.L81:
+ 718 0506 0D9B     		ldr	r3, [sp, #52]
+ 719 0508 0BB9     		cbnz	r3, .L82
+ 720 050a 574B     		ldr	r3, .L105+4
+ 721 050c 0D93     		str	r3, [sp, #52]
+ 722              	.L82:
+ 723 050e 0D99     		ldr	r1, [sp, #52]
+ 724 0510 17A8     		add	r0, sp, #92
+ 725 0512 FFF7FEFF 		bl	f_opendir
+ 726 0516 0346     		mov	r3, r0
+ 727 0518 28B1     		cbz	r0, .L83
+ 728 051a 0D9A     		ldr	r2, [sp, #52]
+ 729 051c 5349     		ldr	r1, .L105+8
+ 730 051e 2846     		mov	r0, r5
+ 731 0520 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 732 0524 9AE0     		b	.L84
+ 733              	.L83:
+ 734 0526 20AE     		add	r6, sp, #128
+ 735 0528 8027     		movs	r7, #128
+ 736              	.L88:
+ 737 052a 002C     		cmp	r4, #0
+ 738 052c 07DC     		bgt	.L85
+ 739              	.L87:
+ 740 052e 0D9A     		ldr	r2, [sp, #52]
+ 741 0530 4F49     		ldr	r1, .L105+12
+ 742 0532 2846     		mov	r0, r5
+ 743 0534 0024     		movs	r4, #0
+ 744 0536 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 745 053a 2746     		mov	r7, r4
+ 746 053c 6FE0     		b	.L86
+ 747              	.L85:
+ 748 053e 0FA9     		add	r1, sp, #60
+ 749 0540 17A8     		add	r0, sp, #92
+ 750 0542 1596     		str	r6, [sp, #84]
+ 751 0544 1697     		str	r7, [sp, #88]
+ 752 0546 FFF7FEFF 		bl	f_readdir
+ 753 054a 013C     		subs	r4, r4, #1
+ 754 054c 0028     		cmp	r0, #0
+ 755 054e ECD0     		beq	.L88
+ 756 0550 EDE7     		b	.L87
+ 757              	.L104:
+ 758 0552 9DF84530 		ldrb	r3, [sp, #69]	@ zero_extendqisi2
+ 759 0556 002B     		cmp	r3, #0
+ 760 0558 6AD0     		beq	.L89
+ 761 055a 9DF84410 		ldrb	r1, [sp, #68]	@ zero_extendqisi2
+ 762 055e BDF84200 		ldrh	r0, [sp, #66]
+ 763 0562 CB06     		lsls	r3, r1, #27
+ 764 0564 5BBF     		ittet	pl
+ 765 0566 0C9A     		ldrpl	r2, [sp, #48]
+ 766 0568 0F9B     		ldrpl	r3, [sp, #60]
+ 767 056a 4422     		movmi	r2, #68
+ 768 056c 9B18     		addpl	r3, r3, r2
+ 769 056e 5BBF     		ittet	pl
+ 770 0570 0C93     		strpl	r3, [sp, #48]
+ 771 0572 2D22     		movpl	r2, #45
+ 772 0574 0134     		addmi	r4, r4, #1
+ 773 0576 0137     		addpl	r7, r7, #1
+ 774 0578 11F0010F 		tst	r1, #1
+ 775 057c 14BF     		ite	ne
+ 776 057e 4FF0520A 		movne	r10, #82
+ 777 0582 4FF02D0A 		moveq	r10, #45
+ 778 0586 11F0020F 		tst	r1, #2
+ 779 058a 14BF     		ite	ne
+ 780 058c 4FF0480E 		movne	lr, #72
+ 781 0590 4FF02D0E 		moveq	lr, #45
+ 782 0594 11F0040F 		tst	r1, #4
+ 783 0598 14BF     		ite	ne
+ 784 059a 4FF0530C 		movne	ip, #83
+ 785 059e 4FF02D0C 		moveq	ip, #45
+ 786 05a2 0DF14509 		add	r9, sp, #69
+ 787 05a6 11F0200F 		tst	r1, #32
+ 788 05aa BDF84010 		ldrh	r1, [sp, #64]
+ 789 05ae CDF82490 		str	r9, [sp, #36]
+ 790 05b2 C0F34519 		ubfx	r9, r0, #5, #6
+ 791 05b6 4FEAE020 		asr	r0, r0, #11
+ 792 05ba 0690     		str	r0, [sp, #24]
+ 793 05bc 01F01F00 		and	r0, r1, #31
+ 794 05c0 0F9B     		ldr	r3, [sp, #60]
+ 795 05c2 0590     		str	r0, [sp, #20]
+ 796 05c4 C1F34310 		ubfx	r0, r1, #5, #4
+ 797 05c8 4FEA6121 		asr	r1, r1, #9
+ 798 05cc 14BF     		ite	ne
+ 799 05ce 4FF04108 		movne	r8, #65
+ 800 05d2 4FF02D08 		moveq	r8, #45
+ 801 05d6 01F2BC71 		addw	r1, r1, #1980
+ 802 05da CDF804C0 		str	ip, [sp, #4]
+ 803 05de CDF800E0 		str	lr, [sp]
+ 804 05e2 0893     		str	r3, [sp, #32]
+ 805 05e4 0490     		str	r0, [sp, #16]
+ 806 05e6 5346     		mov	r3, r10
+ 807 05e8 0391     		str	r1, [sp, #12]
+ 808 05ea CDF81C90 		str	r9, [sp, #28]
+ 809 05ee 2149     		ldr	r1, .L105+16
+ 810 05f0 CDF80880 		str	r8, [sp, #8]
+ 811 05f4 2846     		mov	r0, r5
+ 812 05f6 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 813 05fa 4FF0FF32 		mov	r2, #-1
+ 814 05fe 1E49     		ldr	r1, .L105+20
+ 815 0600 2846     		mov	r0, r5
+ 816 0602 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 817 0606 4FF0FF32 		mov	r2, #-1
+ 818 060a 3146     		mov	r1, r6
+ 819 060c 2846     		mov	r0, r5
+ 820 060e FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 821 0612 4FF0FF32 		mov	r2, #-1
+ 822 0616 1949     		ldr	r1, .L105+24
+ 823 0618 2846     		mov	r0, r5
+ 824 061a FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 825              	.L86:
+ 826 061e 8023     		movs	r3, #128
+ 827 0620 0FA9     		add	r1, sp, #60
+ 828 0622 17A8     		add	r0, sp, #92
+ 829 0624 1596     		str	r6, [sp, #84]
+ 830 0626 1693     		str	r3, [sp, #88]
+ 831 0628 FFF7FEFF 		bl	f_readdir
+ 832 062c 0028     		cmp	r0, #0
+ 833 062e 90D0     		beq	.L104
+ 834              	.L89:
+ 835 0630 3A46     		mov	r2, r7
+ 836 0632 1349     		ldr	r1, .L105+28
+ 837 0634 0094     		str	r4, [sp]
+ 838 0636 0C9B     		ldr	r3, [sp, #48]
+ 839 0638 2846     		mov	r0, r5
+ 840 063a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 841 063e 0BAA     		add	r2, sp, #44
+ 842 0640 0CA9     		add	r1, sp, #48
+ 843 0642 0D98     		ldr	r0, [sp, #52]
+ 844 0644 FFF7FEFF 		bl	f_getfree
+ 845 0648 40B9     		cbnz	r0, .L84
+ 846 064a 0B9B     		ldr	r3, [sp, #44]
+ 847 064c 0D49     		ldr	r1, .L105+32
+ 848 064e 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 849 0650 0C9B     		ldr	r3, [sp, #48]
+ 850 0652 2846     		mov	r0, r5
+ 851 0654 5A43     		muls	r2, r3, r2
+ 852 0656 5208     		lsrs	r2, r2, #1
+ 853 0658 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 854              	.L84:
+ 855 065c 0120     		movs	r0, #1
+ 856 065e 40B0     		add	sp, sp, #256
+ 857              		@ sp needed
+ 858 0660 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 859              	.L106:
+ 860              		.align	2
+ 861              	.L105:
+ 862 0664 8A010000 		.word	.LC11
+ 863 0668 12020000 		.word	.LC18
+ 864 066c 15020000 		.word	.LC19
+ 865 0670 39020000 		.word	.LC20
+ 866 0674 54020000 		.word	.LC21
+ 867 0678 81020000 		.word	.LC22
+ 868 067c 11020000 		.word	.LC17
+ 869 0680 85020000 		.word	.LC23
+ 870 0684 AF020000 		.word	.LC24
+ 872              		.align	1
+ 873              		.global	_Z12mkdirHandlerR3strR7UartDevPvi
+ 874              		.thumb
+ 875              		.thumb_func
+ 877              	_Z12mkdirHandlerR3strR7UartDevPvi:
+ 878              		@ args = 0, pretend = 0, frame = 0
+ 879              		@ frame_needed = 0, uses_anonymous_args = 0
+ 880 0688 70B5     		push	{r4, r5, r6, lr}
+ 881 068a 0C46     		mov	r4, r1
+ 882 068c 0646     		mov	r6, r0
+ 883 068e FFF7FEFF 		bl	_ZNK3strclEv
+ 884 0692 0546     		mov	r5, r0
+ 885 0694 3046     		mov	r0, r6
+ 886 0696 FFF7FEFF 		bl	_ZNK3strclEv
+ 887 069a FFF7FEFF 		bl	f_mkdir
+ 888 069e 064A     		ldr	r2, .L110
+ 889 06a0 064B     		ldr	r3, .L110+4
+ 890 06a2 0749     		ldr	r1, .L110+8
+ 891 06a4 0028     		cmp	r0, #0
+ 892 06a6 08BF     		it	eq
+ 893 06a8 1346     		moveq	r3, r2
+ 894 06aa 2A46     		mov	r2, r5
+ 895 06ac 2046     		mov	r0, r4
+ 896 06ae FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 897 06b2 0120     		movs	r0, #1
+ 898 06b4 70BD     		pop	{r4, r5, r6, pc}
+ 899              	.L111:
+ 900 06b6 00BF     		.align	2
+ 901              	.L110:
+ 902 06b8 C3020000 		.word	.LC25
+ 903 06bc C6020000 		.word	.LC26
+ 904 06c0 CC020000 		.word	.LC27
+ 906              		.align	1
+ 907              		.global	_Z9rmHandlerR3strR7UartDevPvi
+ 908              		.thumb
+ 909              		.thumb_func
+ 911              	_Z9rmHandlerR3strR7UartDevPvi:
+ 912              		@ args = 0, pretend = 0, frame = 0
+ 913              		@ frame_needed = 0, uses_anonymous_args = 0
+ 914 06c4 70B5     		push	{r4, r5, r6, lr}
+ 915 06c6 0C46     		mov	r4, r1
+ 916 06c8 0646     		mov	r6, r0
+ 917 06ca FFF7FEFF 		bl	_ZNK3strclEv
+ 918 06ce 0546     		mov	r5, r0
+ 919 06d0 3046     		mov	r0, r6
+ 920 06d2 FFF7FEFF 		bl	_ZNK3strclEv
+ 921 06d6 FFF7FEFF 		bl	f_unlink
+ 922 06da 064A     		ldr	r2, .L115
+ 923 06dc 064B     		ldr	r3, .L115+4
+ 924 06de 0749     		ldr	r1, .L115+8
+ 925 06e0 0028     		cmp	r0, #0
+ 926 06e2 08BF     		it	eq
+ 927 06e4 1346     		moveq	r3, r2
+ 928 06e6 2A46     		mov	r2, r5
+ 929 06e8 2046     		mov	r0, r4
+ 930 06ea FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 931 06ee 0120     		movs	r0, #1
+ 932 06f0 70BD     		pop	{r4, r5, r6, pc}
+ 933              	.L116:
+ 934 06f2 00BF     		.align	2
+ 935              	.L115:
+ 936 06f4 C3020000 		.word	.LC25
+ 937 06f8 C6020000 		.word	.LC26
+ 938 06fc E8020000 		.word	.LC28
+ 940              		.align	1
+ 941              		.global	_Z9mvHandlerR3strR7UartDevPvi
+ 942              		.thumb
+ 943              		.thumb_func
+ 945              	_Z9mvHandlerR3strR7UartDevPvi:
+ 946              		@ args = 0, pretend = 0, frame = 8
+ 947              		@ frame_needed = 0, uses_anonymous_args = 0
+ 948 0700 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 949 0702 03AB     		add	r3, sp, #12
+ 950 0704 0024     		movs	r4, #0
+ 951 0706 0093     		str	r3, [sp]
+ 952 0708 0E46     		mov	r6, r1
+ 953 070a 02AB     		add	r3, sp, #8
+ 954 070c 0222     		movs	r2, #2
+ 955 070e 0F49     		ldr	r1, .L122
+ 956 0710 0294     		str	r4, [sp, #8]
+ 957 0712 0394     		str	r4, [sp, #12]
+ 958 0714 FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
+ 959 0718 0228     		cmp	r0, #2
+ 960 071a 14D1     		bne	.L120
+ 961 071c 029C     		ldr	r4, [sp, #8]
+ 962 071e 039D     		ldr	r5, [sp, #12]
+ 963 0720 2046     		mov	r0, r4
+ 964 0722 2946     		mov	r1, r5
+ 965 0724 FFF7FEFF 		bl	f_rename
+ 966 0728 094B     		ldr	r3, .L122+4
+ 967 072a 0A49     		ldr	r1, .L122+8
+ 968 072c 2246     		mov	r2, r4
+ 969 072e 0028     		cmp	r0, #0
+ 970 0730 0CBF     		ite	eq
+ 971 0732 0846     		moveq	r0, r1
+ 972 0734 1846     		movne	r0, r3
+ 973 0736 2B46     		mov	r3, r5
+ 974 0738 0090     		str	r0, [sp]
+ 975 073a 0749     		ldr	r1, .L122+12
+ 976 073c 3046     		mov	r0, r6
+ 977 073e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 978 0742 0120     		movs	r0, #1
+ 979 0744 00E0     		b	.L118
+ 980              	.L120:
+ 981 0746 2046     		mov	r0, r4
+ 982              	.L118:
+ 983 0748 04B0     		add	sp, sp, #16
+ 984              		@ sp needed
+ 985 074a 70BD     		pop	{r4, r5, r6, pc}
+ 986              	.L123:
+ 987              		.align	2
+ 988              	.L122:
+ 989 074c 8A010000 		.word	.LC11
+ 990 0750 C6020000 		.word	.LC26
+ 991 0754 C3020000 		.word	.LC25
+ 992 0758 FA020000 		.word	.LC29
+ 994              		.align	1
+ 995              		.global	_Z14newFileHandlerR3strR7UartDevPvi
+ 996              		.thumb
+ 997              		.thumb_func
+ 999              	_Z14newFileHandlerR3strR7UartDevPvi:
+ 1000              		@ args = 0, pretend = 0, frame = 48
+ 1001              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1002 075c 30B5     		push	{r4, r5, lr}
+ 1003 075e 8DB0     		sub	sp, sp, #52
+ 1004 0760 0C46     		mov	r4, r1
+ 1005 0762 0546     		mov	r5, r0
+ 1006 0764 FFF7FEFF 		bl	_ZNK3strclEv
+ 1007 0768 0A22     		movs	r2, #10
+ 1008 076a 0146     		mov	r1, r0
+ 1009 076c 02A8     		add	r0, sp, #8
+ 1010 076e FFF7FEFF 		bl	f_open
+ 1011 0772 40B1     		cbz	r0, .L125
+ 1012 0774 2846     		mov	r0, r5
+ 1013 0776 FFF7FEFF 		bl	_ZNK3strclEv
+ 1014 077a 1E49     		ldr	r1, .L139
+ 1015 077c 0246     		mov	r2, r0
+ 1016 077e 2046     		mov	r0, r4
+ 1017 0780 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1018 0784 32E0     		b	.L137
+ 1019              	.L125:
+ 1020 0786 8DF80300 		strb	r0, [sp, #3]
+ 1021 078a 0190     		str	r0, [sp, #4]
+ 1022 078c 1A49     		ldr	r1, .L139+4
+ 1023 078e 42F21073 		movw	r3, #10000
+ 1024 0792 7E22     		movs	r2, #126
+ 1025 0794 2046     		mov	r0, r4
+ 1026 0796 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1027 079a 1849     		ldr	r1, .L139+8
+ 1028              	.L138:
+ 1029 079c 2046     		mov	r0, r4
+ 1030 079e FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1031              	.L127:
+ 1032 07a2 42F21072 		movw	r2, #10000
+ 1033 07a6 0DF10301 		add	r1, sp, #3
+ 1034 07aa 2046     		mov	r0, r4
+ 1035 07ac FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 1036 07b0 18B1     		cbz	r0, .L128
+ 1037 07b2 9DF80330 		ldrb	r3, [sp, #3]	@ zero_extendqisi2
+ 1038 07b6 7E2B     		cmp	r3, #126
+ 1039 07b8 03D1     		bne	.L129
+ 1040              	.L128:
+ 1041 07ba 02A8     		add	r0, sp, #8
+ 1042 07bc FFF7FEFF 		bl	f_close
+ 1043 07c0 14E0     		b	.L137
+ 1044              	.L129:
+ 1045 07c2 01AB     		add	r3, sp, #4
+ 1046 07c4 0122     		movs	r2, #1
+ 1047 07c6 0DF10301 		add	r1, sp, #3
+ 1048 07ca 02A8     		add	r0, sp, #8
+ 1049 07cc FFF7FEFF 		bl	f_write
+ 1050 07d0 10B1     		cbz	r0, .L131
+ 1051 07d2 019B     		ldr	r3, [sp, #4]
+ 1052 07d4 012B     		cmp	r3, #1
+ 1053 07d6 07D1     		bne	.L130
+ 1054              	.L131:
+ 1055 07d8 4FF0FF32 		mov	r2, #-1
+ 1056 07dc 9DF80310 		ldrb	r1, [sp, #3]	@ zero_extendqisi2
+ 1057 07e0 2046     		mov	r0, r4
+ 1058 07e2 FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
+ 1059 07e6 DCE7     		b	.L127
+ 1060              	.L130:
+ 1061 07e8 0549     		ldr	r1, .L139+12
+ 1062 07ea D7E7     		b	.L138
+ 1063              	.L137:
+ 1064 07ec 0120     		movs	r0, #1
+ 1065 07ee 0DB0     		add	sp, sp, #52
+ 1066              		@ sp needed
+ 1067 07f0 30BD     		pop	{r4, r5, pc}
+ 1068              	.L140:
+ 1069 07f2 00BF     		.align	2
+ 1070              	.L139:
+ 1071 07f4 12030000 		.word	.LC30
+ 1072 07f8 39030000 		.word	.LC31
+ 1073 07fc 71030000 		.word	.LC32
+ 1074 0800 91030000 		.word	.LC33
+ 1076              		.align	1
+ 1077              		.global	_Z10dcpHandlerR3strR7UartDevPvi
+ 1078              		.thumb
+ 1079              		.thumb_func
+ 1081              	_Z10dcpHandlerR3strR7UartDevPvi:
+ 1082              		@ args = 0, pretend = 0, frame = 760
+ 1083              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1084 0804 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1085 0808 ADF5417D 		sub	sp, sp, #772
+ 1086 080c 0023     		movs	r3, #0
+ 1087 080e 04AC     		add	r4, sp, #16
+ 1088 0810 2360     		str	r3, [r4]
+ 1089 0812 0393     		str	r3, [sp, #12]
+ 1090 0814 0D46     		mov	r5, r1
+ 1091 0816 0094     		str	r4, [sp]
+ 1092 0818 03AB     		add	r3, sp, #12
+ 1093 081a 0222     		movs	r2, #2
+ 1094 081c 4149     		ldr	r1, .L159
+ 1095 081e FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
+ 1096 0822 0228     		cmp	r0, #2
+ 1097 0824 06D0     		beq	.L142
+ 1098 0826 4FF0FF32 		mov	r2, #-1
+ 1099 082a 3F49     		ldr	r1, .L159+4
+ 1100 082c 2846     		mov	r0, r5
+ 1101 082e FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1102 0832 72E0     		b	.L156
+ 1103              	.L142:
+ 1104 0834 2168     		ldr	r1, [r4]
+ 1105 0836 17A8     		add	r0, sp, #92
+ 1106 0838 FFF7FEFF 		bl	f_opendir
+ 1107 083c 10B1     		cbz	r0, .L144
+ 1108 083e 2268     		ldr	r2, [r4]
+ 1109 0840 3A49     		ldr	r1, .L159+8
+ 1110 0842 06E0     		b	.L158
+ 1111              	.L144:
+ 1112 0844 0399     		ldr	r1, [sp, #12]
+ 1113 0846 17A8     		add	r0, sp, #92
+ 1114 0848 FFF7FEFF 		bl	f_opendir
+ 1115 084c 28B1     		cbz	r0, .L145
+ 1116 084e 039A     		ldr	r2, [sp, #12]
+ 1117 0850 3749     		ldr	r1, .L159+12
+ 1118              	.L158:
+ 1119 0852 2846     		mov	r0, r5
+ 1120 0854 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1121 0858 5FE0     		b	.L156
+ 1122              	.L145:
+ 1123 085a 4FF48072 		mov	r2, #256
+ 1124 085e 0DEB0201 		add	r1, sp, r2
+ 1125 0862 05A8     		add	r0, sp, #20
+ 1126 0864 FFF7FEFF 		bl	_ZN3strC1EPci
+ 1127 0868 4FF48072 		mov	r2, #256
+ 1128 086c 80A9     		add	r1, sp, #512
+ 1129 086e 0AA8     		add	r0, sp, #40
+ 1130 0870 FFF7FEFF 		bl	_ZN3strC1EPci
+ 1131 0874 20AE     		add	r6, sp, #128
+ 1132              	.L149:
+ 1133 0876 8027     		movs	r7, #128
+ 1134              	.L151:
+ 1135 0878 0FA9     		add	r1, sp, #60
+ 1136 087a 17A8     		add	r0, sp, #92
+ 1137 087c 1596     		str	r6, [sp, #84]
+ 1138 087e 1697     		str	r7, [sp, #88]
+ 1139 0880 FFF7FEFF 		bl	f_readdir
+ 1140 0884 0028     		cmp	r0, #0
+ 1141 0886 42D1     		bne	.L146
+ 1142 0888 9DF84530 		ldrb	r3, [sp, #69]	@ zero_extendqisi2
+ 1143 088c 002B     		cmp	r3, #0
+ 1144 088e 3ED0     		beq	.L146
+ 1145 0890 9DF84430 		ldrb	r3, [sp, #68]	@ zero_extendqisi2
+ 1146 0894 03F01003 		and	r3, r3, #16
+ 1147 0898 03F0FF0A 		and	r10, r3, #255
+ 1148 089c 002B     		cmp	r3, #0
+ 1149 089e EBD1     		bne	.L151
+ 1150 08a0 0DF14503 		add	r3, sp, #69
+ 1151 08a4 039A     		ldr	r2, [sp, #12]
+ 1152 08a6 2349     		ldr	r1, .L159+16
+ 1153 08a8 05A8     		add	r0, sp, #20
+ 1154 08aa FFF7FEFF 		bl	_ZN3str6printfEPKcz
+ 1155 08ae 0DF14503 		add	r3, sp, #69
+ 1156 08b2 2268     		ldr	r2, [r4]
+ 1157 08b4 1F49     		ldr	r1, .L159+16
+ 1158 08b6 0AA8     		add	r0, sp, #40
+ 1159 08b8 FFF7FEFF 		bl	_ZN3str6printfEPKcz
+ 1160 08bc 05A8     		add	r0, sp, #20
+ 1161 08be FFF7FEFF 		bl	_ZNK3strclEv
+ 1162 08c2 0746     		mov	r7, r0
+ 1163 08c4 0AA8     		add	r0, sp, #40
+ 1164 08c6 FFF7FEFF 		bl	_ZNK3strclEv
+ 1165 08ca 8046     		mov	r8, r0
+ 1166 08cc 05A8     		add	r0, sp, #20
+ 1167 08ce DDF83C90 		ldr	r9, [sp, #60]
+ 1168 08d2 FFF7FEFF 		bl	_ZNK3strclEv
+ 1169 08d6 8346     		mov	fp, r0
+ 1170 08d8 0AA8     		add	r0, sp, #40
+ 1171 08da FFF7FEFF 		bl	_ZNK3strclEv
+ 1172 08de 5346     		mov	r3, r10
+ 1173 08e0 5246     		mov	r2, r10
+ 1174 08e2 0146     		mov	r1, r0
+ 1175 08e4 CDF800A0 		str	r10, [sp]
+ 1176 08e8 5846     		mov	r0, fp
+ 1177 08ea FFF7FEFF 		bl	_ZN7Storage4copyEPKcS1_PjS2_S2_
+ 1178 08ee 124A     		ldr	r2, .L159+20
+ 1179 08f0 124B     		ldr	r3, .L159+24
+ 1180 08f2 CDF80090 		str	r9, [sp]
+ 1181 08f6 0028     		cmp	r0, #0
+ 1182 08f8 0CBF     		ite	eq
+ 1183 08fa 1846     		moveq	r0, r3
+ 1184 08fc 1046     		movne	r0, r2
+ 1185 08fe 1049     		ldr	r1, .L159+28
+ 1186 0900 0190     		str	r0, [sp, #4]
+ 1187 0902 4346     		mov	r3, r8
+ 1188 0904 3A46     		mov	r2, r7
+ 1189 0906 2846     		mov	r0, r5
+ 1190 0908 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1191 090c B3E7     		b	.L149
+ 1192              	.L146:
+ 1193 090e 0AA8     		add	r0, sp, #40
+ 1194 0910 FFF7FEFF 		bl	_ZN3strD1Ev
+ 1195 0914 05A8     		add	r0, sp, #20
+ 1196 0916 FFF7FEFF 		bl	_ZN3strD1Ev
+ 1197              	.L156:
+ 1198 091a 0120     		movs	r0, #1
+ 1199 091c 0DF5417D 		add	sp, sp, #772
+ 1200              		@ sp needed
+ 1201 0920 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1202              	.L160:
+ 1203              		.align	2
+ 1204              	.L159:
+ 1205 0924 8A010000 		.word	.LC11
+ 1206 0928 B8030000 		.word	.LC34
+ 1207 092c FD030000 		.word	.LC35
+ 1208 0930 22040000 		.word	.LC36
+ 1209 0934 42040000 		.word	.LC37
+ 1210 0938 C6020000 		.word	.LC26
+ 1211 093c C3020000 		.word	.LC25
+ 1212 0940 48040000 		.word	.LC38
+ 1214              		.align	1
+ 1215              		.global	_Z14storageHandlerR3strR7UartDevPvi
+ 1216              		.thumb
+ 1217              		.thumb_func
+ 1219              	_Z14storageHandlerR3strR7UartDevPvi:
+ 1220              		@ args = 0, pretend = 0, frame = 0
+ 1221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1222 0944 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1223 0946 0D46     		mov	r5, r1
+ 1224 0948 2149     		ldr	r1, .L179
+ 1225 094a 0646     		mov	r6, r0
+ 1226 094c FFF7FEFF 		bl	_ZNK3streqEPKc
+ 1227 0950 0446     		mov	r4, r0
+ 1228 0952 0746     		mov	r7, r0
+ 1229 0954 18B1     		cbz	r0, .L162
+ 1230 0956 FFF7FEFF 		bl	_ZN7Storage10getSDDriveEv
+ 1231 095a 0022     		movs	r2, #0
+ 1232 095c 08E0     		b	.L178
+ 1233              	.L162:
+ 1234 095e 1D49     		ldr	r1, .L179+4
+ 1235 0960 3046     		mov	r0, r6
+ 1236 0962 FFF7FEFF 		bl	_ZNK3streqEPKc
+ 1237 0966 0446     		mov	r4, r0
+ 1238 0968 60B1     		cbz	r0, .L165
+ 1239 096a FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
+ 1240 096e 3A46     		mov	r2, r7
+ 1241              	.L178:
+ 1242 0970 1146     		mov	r1, r2
+ 1243 0972 90F83402 		ldrb	r0, [r0, #564]	@ zero_extendqisi2
+ 1244 0976 FFF7FEFF 		bl	f_mkfs
+ 1245 097a 4FF0FF32 		mov	r2, #-1
+ 1246 097e 164B     		ldr	r3, .L179+8
+ 1247 0980 1649     		ldr	r1, .L179+12
+ 1248 0982 1CE0     		b	.L177
+ 1249              	.L165:
+ 1250 0984 1649     		ldr	r1, .L179+16
+ 1251 0986 3046     		mov	r0, r6
+ 1252 0988 FFF7FEFF 		bl	_ZNK3streqEPKc
+ 1253 098c 0446     		mov	r4, r0
+ 1254 098e 40B1     		cbz	r0, .L167
+ 1255 0990 FFF7FEFF 		bl	_ZN7Storage10getSDDriveEv
+ 1256 0994 FFF7FEFF 		bl	_ZNK16FileSystemObject5mountEv
+ 1257 0998 4FF0FF32 		mov	r2, #-1
+ 1258 099c 114B     		ldr	r3, .L179+20
+ 1259 099e 1249     		ldr	r1, .L179+24
+ 1260 09a0 0DE0     		b	.L177
+ 1261              	.L167:
+ 1262 09a2 1249     		ldr	r1, .L179+28
+ 1263 09a4 3046     		mov	r0, r6
+ 1264 09a6 FFF7FEFF 		bl	_ZNK3streqEPKc
+ 1265 09aa 0446     		mov	r4, r0
+ 1266 09ac 68B1     		cbz	r0, .L164
+ 1267 09ae FFF7FEFF 		bl	_ZN7Storage13getFlashDriveEv
+ 1268 09b2 FFF7FEFF 		bl	_ZNK16FileSystemObject5mountEv
+ 1269 09b6 0E4B     		ldr	r3, .L179+32
+ 1270 09b8 0E49     		ldr	r1, .L179+36
+ 1271 09ba 4FF0FF32 		mov	r2, #-1
+ 1272              	.L177:
+ 1273 09be 0028     		cmp	r0, #0
+ 1274 09c0 18BF     		it	ne
+ 1275 09c2 1946     		movne	r1, r3
+ 1276 09c4 2846     		mov	r0, r5
+ 1277 09c6 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1278              	.L164:
+ 1279 09ca 2046     		mov	r0, r4
+ 1280 09cc F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1281              	.L180:
+ 1282 09ce 00BF     		.align	2
+ 1283              	.L179:
+ 1284 09d0 CF040000 		.word	.LC45
+ 1285 09d4 D9040000 		.word	.LC46
+ 1286 09d8 71040000 		.word	.LC40
+ 1287 09dc 67040000 		.word	.LC39
+ 1288 09e0 E6040000 		.word	.LC47
+ 1289 09e4 8E040000 		.word	.LC42
+ 1290 09e8 7E040000 		.word	.LC41
+ 1291 09ec EF040000 		.word	.LC48
+ 1292 09f0 B3040000 		.word	.LC44
+ 1293 09f4 A5040000 		.word	.LC43
+ 1295              		.align	1
+ 1296              		.global	_Z14learnIrHandlerR3strR7UartDevPvi
+ 1297              		.thumb
+ 1298              		.thumb_func
+ 1300              	_Z14learnIrHandlerR3strR7UartDevPvi:
+ 1301              		@ args = 0, pretend = 0, frame = 0
+ 1302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1303 09f8 10B5     		push	{r4, lr}
+ 1304 09fa 0C46     		mov	r4, r1
+ 1305 09fc 0023     		movs	r3, #0
+ 1306 09fe 1946     		mov	r1, r3
+ 1307 0a00 1046     		mov	r0, r2
+ 1308 0a02 1A46     		mov	r2, r3
+ 1309 0a04 FFF7FEFF 		bl	xQueueGenericSend
+ 1310 0a08 2046     		mov	r0, r4
+ 1311 0a0a 4FF0FF32 		mov	r2, #-1
+ 1312 0a0e 0249     		ldr	r1, .L182
+ 1313 0a10 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1314 0a14 0120     		movs	r0, #1
+ 1315 0a16 10BD     		pop	{r4, pc}
+ 1316              	.L183:
+ 1317              		.align	2
+ 1318              	.L182:
+ 1319 0a18 FB040000 		.word	.LC49
+ 1321              		.align	1
+ 1322              		.global	_Z15wirelessHandlerR3strR7UartDevPvi
+ 1323              		.thumb
+ 1324              		.thumb_func
+ 1326              	_Z15wirelessHandlerR3strR7UartDevPvi:
+ 1327              		@ args = 0, pretend = 0, frame = 72
+ 1328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1329 0a1c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1330 0a20 0023     		movs	r3, #0
+ 1331 0a22 94B0     		sub	sp, sp, #80
+ 1332 0a24 4FF47A72 		mov	r2, #1000
+ 1333 0a28 0D46     		mov	r5, r1
+ 1334 0a2a 7A49     		ldr	r1, .L224
+ 1335 0a2c 0646     		mov	r6, r0
+ 1336 0a2e 0693     		str	r3, [sp, #24]
+ 1337 0a30 0793     		str	r3, [sp, #28]
+ 1338 0a32 0892     		str	r2, [sp, #32]
+ 1339 0a34 0993     		str	r3, [sp, #36]
+ 1340 0a36 0A93     		str	r3, [sp, #40]
+ 1341 0a38 0B93     		str	r3, [sp, #44]
+ 1342 0a3a FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 1343 0a3e 0446     		mov	r4, r0
+ 1344 0a40 0746     		mov	r7, r0
+ 1345 0a42 88B1     		cbz	r0, .L185
+ 1346 0a44 7449     		ldr	r1, .L224+4
+ 1347 0a46 08AA     		add	r2, sp, #32
+ 1348 0a48 3046     		mov	r0, r6
+ 1349 0a4a FFF7FEFF 		bl	_ZN3str5scanfEPKcz
+ 1350 0a4e 0899     		ldr	r1, [sp, #32]
+ 1351 0a50 0CA8     		add	r0, sp, #48
+ 1352 0a52 FFF7FEFF 		bl	wireless_get_rx_pkt
+ 1353 0a56 18B1     		cbz	r0, .L186
+ 1354 0a58 9DF83020 		ldrb	r2, [sp, #48]	@ zero_extendqisi2
+ 1355 0a5c 6F49     		ldr	r1, .L224+8
+ 1356 0a5e D1E0     		b	.L219
+ 1357              	.L186:
+ 1358 0a60 4FF0FF32 		mov	r2, #-1
+ 1359 0a64 6E49     		ldr	r1, .L224+12
+ 1360 0a66 7CE0     		b	.L220
+ 1361              	.L185:
+ 1362 0a68 6E49     		ldr	r1, .L224+16
+ 1363 0a6a 3046     		mov	r0, r6
+ 1364 0a6c FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 1365 0a70 0446     		mov	r4, r0
+ 1366 0a72 A8B1     		cbz	r0, .L188
+ 1367 0a74 14AA     		add	r2, sp, #80
+ 1368 0a76 42F8207D 		str	r7, [r2, #-32]!
+ 1369 0a7a 6749     		ldr	r1, .L224+4
+ 1370 0a7c 3046     		mov	r0, r6
+ 1371 0a7e FFF7FEFF 		bl	_ZN3str5scanfEPKcz
+ 1372 0a82 0C9E     		ldr	r6, [sp, #48]
+ 1373 0a84 F0B2     		uxtb	r0, r6
+ 1374 0a86 FFF7FEFF 		bl	mesh_set_node_address
+ 1375 0a8a 674A     		ldr	r2, .L224+20
+ 1376 0a8c 674B     		ldr	r3, .L224+24
+ 1377 0a8e 6849     		ldr	r1, .L224+28
+ 1378 0a90 0028     		cmp	r0, #0
+ 1379 0a92 18BF     		it	ne
+ 1380 0a94 1346     		movne	r3, r2
+ 1381 0a96 3246     		mov	r2, r6
+ 1382 0a98 2846     		mov	r0, r5
+ 1383 0a9a FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1384 0a9e B4E0     		b	.L218
+ 1385              	.L188:
+ 1386 0aa0 6449     		ldr	r1, .L224+32
+ 1387 0aa2 3046     		mov	r0, r6
+ 1388 0aa4 FFF7FEFF 		bl	_ZNK3str19compareToIgnoreCaseEPKc
+ 1389 0aa8 A8B1     		cbz	r0, .L190
+ 1390 0aaa FFF7FEFF 		bl	mesh_get_num_routing_entries
+ 1391 0aae 6249     		ldr	r1, .L224+36
+ 1392 0ab0 0246     		mov	r2, r0
+ 1393 0ab2 2846     		mov	r0, r5
+ 1394 0ab4 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1395              	.L192:
+ 1396 0ab8 E0B2     		uxtb	r0, r4
+ 1397 0aba FFF7FEFF 		bl	mesh_get_routing_entry
+ 1398 0abe 0134     		adds	r4, r4, #1
+ 1399 0ac0 0028     		cmp	r0, #0
+ 1400 0ac2 49D0     		beq	.L221
+ 1401 0ac4 8178     		ldrb	r1, [r0, #2]	@ zero_extendqisi2
+ 1402 0ac6 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 1403 0ac8 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 1404 0aca 0091     		str	r1, [sp]
+ 1405 0acc 2846     		mov	r0, r5
+ 1406 0ace 5B49     		ldr	r1, .L224+40
+ 1407 0ad0 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1408 0ad4 F0E7     		b	.L192
+ 1409              	.L190:
+ 1410 0ad6 5A49     		ldr	r1, .L224+44
+ 1411 0ad8 3046     		mov	r0, r6
+ 1412 0ada FFF7FEFF 		bl	_ZNK3str19compareToIgnoreCaseEPKc
+ 1413 0ade 0446     		mov	r4, r0
+ 1414 0ae0 80B1     		cbz	r0, .L193
+ 1415 0ae2 02A8     		add	r0, sp, #8
+ 1416 0ae4 FFF7FEFF 		bl	mesh_get_stats
+ 1417 0ae8 0298     		ldr	r0, [sp, #8]	@ unaligned
+ 1418 0aea 0399     		ldr	r1, [sp, #12]	@ unaligned
+ 1419 0aec 09AB     		add	r3, sp, #36
+ 1420 0aee 03C3     		stmia	r3!, {r0, r1}
+ 1421 0af0 0498     		ldr	r0, [sp, #16]	@ unaligned
+ 1422 0af2 1860     		str	r0, [r3]	@ unaligned
+ 1423 0af4 FFF7FEFF 		bl	mesh_get_node_address
+ 1424 0af8 09A9     		add	r1, sp, #36
+ 1425 0afa 0246     		mov	r2, r0
+ 1426 0afc 2846     		mov	r0, r5
+ 1427 0afe FFF77FFA 		bl	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
+ 1428 0b02 82E0     		b	.L218
+ 1429              	.L193:
+ 1430 0b04 4F49     		ldr	r1, .L224+48
+ 1431 0b06 3046     		mov	r0, r6
+ 1432 0b08 FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 1433 0b0c 60B1     		cbz	r0, .L194
+ 1434              	.L197:
+ 1435 0b0e 07AB     		add	r3, sp, #28
+ 1436 0b10 0193     		str	r3, [sp, #4]
+ 1437 0b12 06AB     		add	r3, sp, #24
+ 1438 0b14 0093     		str	r3, [sp]
+ 1439 0b16 0322     		movs	r2, #3
+ 1440 0b18 0023     		movs	r3, #0
+ 1441 0b1a 4B49     		ldr	r1, .L224+52
+ 1442 0b1c 3046     		mov	r0, r6
+ 1443 0b1e FFF7FEFF 		bl	_ZN3str8tokenizeEPKciz
+ 1444 0b22 0128     		cmp	r0, #1
+ 1445 0b24 21DC     		bgt	.L195
+ 1446 0b26 70E0     		b	.L218
+ 1447              	.L194:
+ 1448 0b28 4849     		ldr	r1, .L224+56
+ 1449 0b2a 3046     		mov	r0, r6
+ 1450 0b2c FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 1451 0b30 0028     		cmp	r0, #0
+ 1452 0b32 ECD1     		bne	.L197
+ 1453 0b34 69E0     		b	.L218
+ 1454              	.L198:
+ 1455 0b36 0223     		movs	r3, #2
+ 1456 0b38 FFB2     		uxtb	r7, r7
+ 1457 0b3a 0093     		str	r3, [sp]
+ 1458 0b3c 079A     		ldr	r2, [sp, #28]
+ 1459 0b3e 3346     		mov	r3, r6
+ 1460 0b40 4146     		mov	r1, r8
+ 1461 0b42 3846     		mov	r0, r7
+ 1462 0b44 FFF7FEFF 		bl	mesh_send
+ 1463 0b48 0446     		mov	r4, r0
+ 1464 0b4a 48BB     		cbnz	r0, .L200
+ 1465 0b4c 4FF0FF32 		mov	r2, #-1
+ 1466 0b50 3F49     		ldr	r1, .L224+60
+ 1467 0b52 2846     		mov	r0, r5
+ 1468 0b54 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1469              	.L221:
+ 1470 0b58 0124     		movs	r4, #1
+ 1471 0b5a 56E0     		b	.L218
+ 1472              	.L204:
+ 1473 0b5c 3D49     		ldr	r1, .L224+64
+ 1474 0b5e 4FF0FF32 		mov	r2, #-1
+ 1475              	.L220:
+ 1476 0b62 2846     		mov	r0, r5
+ 1477 0b64 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1478 0b68 4FE0     		b	.L218
+ 1479              	.L195:
+ 1480 0b6a 3649     		ldr	r1, .L224+48
+ 1481 0b6c 3046     		mov	r0, r6
+ 1482 0b6e FFF7FEFF 		bl	_ZNK3str20beginsWithIgnoreCaseEPKc
+ 1483 0b72 8046     		mov	r8, r0
+ 1484 0b74 0698     		ldr	r0, [sp, #24]
+ 1485 0b76 FFF7FEFF 		bl	atoi
+ 1486 0b7a 0746     		mov	r7, r0
+ 1487 0b7c 0798     		ldr	r0, [sp, #28]
+ 1488 0b7e E0B1     		cbz	r0, .L222
+ 1489 0b80 FFF7FEFF 		bl	strlen
+ 1490 0b84 C6B2     		uxtb	r6, r0
+ 1491              	.L199:
+ 1492 0b86 0021     		movs	r1, #0
+ 1493 0b88 0CA8     		add	r0, sp, #48
+ 1494 0b8a FFF7FEFF 		bl	wireless_get_rx_pkt
+ 1495 0b8e 0028     		cmp	r0, #0
+ 1496 0b90 D1D0     		beq	.L198
+ 1497 0b92 4FF0FF32 		mov	r2, #-1
+ 1498 0b96 3049     		ldr	r1, .L224+68
+ 1499 0b98 2846     		mov	r0, r5
+ 1500 0b9a FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1501 0b9e F2E7     		b	.L199
+ 1502              	.L200:
+ 1503 0ba0 B8F1000F 		cmp	r8, #0
+ 1504 0ba4 D8D0     		beq	.L221
+ 1505 0ba6 0899     		ldr	r1, [sp, #32]
+ 1506 0ba8 0CA8     		add	r0, sp, #48
+ 1507 0baa FFF7FEFF 		bl	wireless_get_ack_pkt
+ 1508 0bae 38B3     		cbz	r0, .L202
+ 1509 0bb0 9DF83020 		ldrb	r2, [sp, #48]	@ zero_extendqisi2
+ 1510 0bb4 BA42     		cmp	r2, r7
+ 1511 0bb6 23D1     		bne	.L202
+ 1512 0bb8 01E0     		b	.L223
+ 1513              	.L222:
+ 1514 0bba 0646     		mov	r6, r0
+ 1515 0bbc E3E7     		b	.L199
+ 1516              	.L223:
+ 1517 0bbe 9DF83730 		ldrb	r3, [sp, #55]	@ zero_extendqisi2
+ 1518 0bc2 0C2B     		cmp	r3, #12
+ 1519 0bc4 03D1     		bne	.L210
+ 1520 0bc6 0EA9     		add	r1, sp, #56
+ 1521 0bc8 2846     		mov	r0, r5
+ 1522 0bca FFF719FA 		bl	_ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
+ 1523              	.L210:
+ 1524 0bce 002E     		cmp	r6, #0
+ 1525 0bd0 C4D1     		bne	.L204
+ 1526 0bd2 2249     		ldr	r1, .L224+72
+ 1527 0bd4 2846     		mov	r0, r5
+ 1528 0bd6 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1529              	.L206:
+ 1530 0bda 9DF83730 		ldrb	r3, [sp, #55]	@ zero_extendqisi2
+ 1531 0bde 9E42     		cmp	r6, r3
+ 1532 0be0 09DA     		bge	.L205
+ 1533 0be2 0CAB     		add	r3, sp, #48
+ 1534 0be4 3344     		add	r3, r3, r6
+ 1535 0be6 4FF0FF32 		mov	r2, #-1
+ 1536 0bea 197A     		ldrb	r1, [r3, #8]	@ zero_extendqisi2
+ 1537 0bec 2846     		mov	r0, r5
+ 1538 0bee FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
+ 1539 0bf2 0136     		adds	r6, r6, #1
+ 1540 0bf4 F1E7     		b	.L206
+ 1541              	.L205:
+ 1542 0bf6 1A49     		ldr	r1, .L224+76
+ 1543 0bf8 2846     		mov	r0, r5
+ 1544 0bfa FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1545 0bfe 04E0     		b	.L218
+ 1546              	.L202:
+ 1547 0c00 069A     		ldr	r2, [sp, #24]
+ 1548 0c02 1849     		ldr	r1, .L224+80
+ 1549              	.L219:
+ 1550 0c04 2846     		mov	r0, r5
+ 1551 0c06 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1552              	.L218:
+ 1553 0c0a 2046     		mov	r0, r4
+ 1554 0c0c 14B0     		add	sp, sp, #80
+ 1555              		@ sp needed
+ 1556 0c0e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1557              	.L225:
+ 1558 0c12 00BF     		.align	2
+ 1559              	.L224:
+ 1560 0c14 18050000 		.word	.LC51
+ 1561 0c18 1B050000 		.word	.LC52
+ 1562 0c1c 22050000 		.word	.LC53
+ 1563 0c20 39050000 		.word	.LC54
+ 1564 0c24 4A050000 		.word	.LC55
+ 1565 0c28 C3020000 		.word	.LC25
+ 1566 0c2c 11050000 		.word	.LC50
+ 1567 0c30 4F050000 		.word	.LC56
+ 1568 0c34 66050000 		.word	.LC57
+ 1569 0c38 6D050000 		.word	.LC58
+ 1570 0c3c 87050000 		.word	.LC59
+ 1571 0c40 AA050000 		.word	.LC60
+ 1572 0c44 B0050000 		.word	.LC61
+ 1573 0c48 8A010000 		.word	.LC11
+ 1574 0c4c B4050000 		.word	.LC62
+ 1575 0c50 DB050000 		.word	.LC64
+ 1576 0c54 1A060000 		.word	.LC67
+ 1577 0c58 B9050000 		.word	.LC63
+ 1578 0c5c 03060000 		.word	.LC65
+ 1579 0c60 17060000 		.word	.LC66
+ 1580 0c64 37060000 		.word	.LC68
+ 1582              		.section	.text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv,"axG",%progbits,_ZN17SingletonT
+ 1583              		.align	1
+ 1584              		.weak	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 1585              		.thumb
+ 1586              		.thumb_func
+ 1588              	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:
+ 1589              		@ args = 0, pretend = 0, frame = 0
+ 1590              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1591 0000 38B5     		push	{r3, r4, r5, lr}
+ 1592 0002 064C     		ldr	r4, .L228
+ 1593 0004 2368     		ldr	r3, [r4]
+ 1594 0006 33B9     		cbnz	r3, .L227
+ 1595 0008 1420     		movs	r0, #20
+ 1596 000a FFF7FEFF 		bl	_Znwj
+ 1597 000e 0546     		mov	r5, r0
+ 1598 0010 FFF7FEFF 		bl	_ZN10FileLoggerC1Ev
+ 1599 0014 2560     		str	r5, [r4]
+ 1600              	.L227:
+ 1601 0016 2068     		ldr	r0, [r4]
+ 1602 0018 38BD     		pop	{r3, r4, r5, pc}
+ 1603              	.L229:
+ 1604 001a 00BF     		.align	2
+ 1605              	.L228:
+ 1606 001c 00000000 		.word	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+ 1608              		.text
+ 1609              		.align	1
+ 1610              		.global	_Z10logHandlerR3strR7UartDevPvi
+ 1611              		.thumb
+ 1612              		.thumb_func
+ 1614              	_Z10logHandlerR3strR7UartDevPvi:
+ 1615              		@ args = 0, pretend = 0, frame = 0
+ 1616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1617 0c68 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 1618 0c6a 0C46     		mov	r4, r1
+ 1619 0c6c 1449     		ldr	r1, .L233
+ 1620 0c6e 0546     		mov	r5, r0
+ 1621 0c70 FFF7FEFF 		bl	_ZNK3streqEPKc
+ 1622 0c74 50B1     		cbz	r0, .L231
+ 1623 0c76 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 1624 0c7a FFF7FEFF 		bl	_ZN10FileLogger5flushEv
+ 1625 0c7e 4FF0FF32 		mov	r2, #-1
+ 1626 0c82 1049     		ldr	r1, .L233+4
+ 1627 0c84 2046     		mov	r0, r4
+ 1628 0c86 FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1629 0c8a 15E0     		b	.L232
+ 1630              	.L231:
+ 1631 0c8c FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 1632 0c90 0646     		mov	r6, r0
+ 1633 0c92 2846     		mov	r0, r5
+ 1634 0c94 FFF7FEFF 		bl	_ZNK3strclEv
+ 1635 0c98 9B23     		movs	r3, #155
+ 1636 0c9a 0146     		mov	r1, r0
+ 1637 0c9c 0A4A     		ldr	r2, .L233+8
+ 1638 0c9e 0093     		str	r3, [sp]
+ 1639 0ca0 3046     		mov	r0, r6
+ 1640 0ca2 0A4B     		ldr	r3, .L233+12
+ 1641 0ca4 FFF7FEFF 		bl	_ZN10LoggerBase7logInfoEPKcS1_S1_i
+ 1642 0ca8 2846     		mov	r0, r5
+ 1643 0caa FFF7FEFF 		bl	_ZNK3strclEv
+ 1644 0cae 0849     		ldr	r1, .L233+16
+ 1645 0cb0 0246     		mov	r2, r0
+ 1646 0cb2 2046     		mov	r0, r4
+ 1647 0cb4 FFF7FEFF 		bl	_ZN7UartDev6printfEPKcz
+ 1648              	.L232:
+ 1649 0cb8 0120     		movs	r0, #1
+ 1650 0cba 02B0     		add	sp, sp, #8
+ 1651              		@ sp needed
+ 1652 0cbc 70BD     		pop	{r4, r5, r6, pc}
+ 1653              	.L234:
+ 1654 0cbe 00BF     		.align	2
+ 1655              	.L233:
+ 1656 0cc0 5D060000 		.word	.LC69
+ 1657 0cc4 63060000 		.word	.LC70
+ 1658 0cc8 7C060000 		.word	.LC71
+ 1659 0ccc 05000000 		.word	.LANCHOR0+5
+ 1660 0cd0 A2060000 		.word	.LC72
+ 1662              		.align	1
+ 1663              		.global	_Z13rebootHandlerR3strR7UartDevPvi
+ 1664              		.thumb
+ 1665              		.thumb_func
+ 1667              	_Z13rebootHandlerR3strR7UartDevPvi:
+ 1668              		@ args = 0, pretend = 0, frame = 0
+ 1669              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1670 0cd4 08B5     		push	{r3, lr}
+ 1671 0cd6 4FF0FF32 		mov	r2, #-1
+ 1672 0cda 0846     		mov	r0, r1
+ 1673 0cdc 0949     		ldr	r1, .L236
+ 1674 0cde FFF7FEFF 		bl	_ZN7UartDev7putlineEPKcj
+ 1675 0ce2 FFF7FEFF 		bl	_ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+ 1676 0ce6 FFF7FEFF 		bl	_ZN10FileLogger5flushEv
+ 1677 0cea 4FF4FA60 		mov	r0, #2000
+ 1678 0cee FFF7FEFF 		bl	vTaskDelay
+ 1679 0cf2 4FF08043 		mov	r3, #1073741824
+ 1680 0cf6 AA22     		movs	r2, #170
+ 1681 0cf8 1A72     		strb	r2, [r3, #8]
+ 1682 0cfa 0022     		movs	r2, #0
+ 1683 0cfc 1A70     		strb	r2, [r3]
+ 1684 0cfe 0120     		movs	r0, #1
+ 1685 0d00 08BD     		pop	{r3, pc}
+ 1686              	.L237:
+ 1687 0d02 00BF     		.align	2
+ 1688              	.L236:
+ 1689 0d04 B0060000 		.word	.LC73
+ 1691              		.weak	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
+ 1692              		.section	.bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE,"awG",%nobits,_ZN1
+ 1693              		.align	2
+ 1696              	_ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:
+ 1697 0000 00000000 		.space	4
+ 1698              		.weak	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
+ 1699              		.section	.bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE,"awG",%nobits,_ZN17Sing
+ 1700              		.align	2
+ 1703              	_ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:
+ 1704 0000 00000000 		.space	4
+ 1705              		.weak	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+ 1706              		.section	.bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTemp
+ 1707              		.align	2
+ 1710              	_ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:
+ 1711 0000 00000000 		.space	4
+ 1712              		.weak	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
+ 1713              		.section	.bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE,"awG",%nobits,_ZN17SingletonTem
+ 1714              		.align	2
+ 1717              	_ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:
+ 1718 0000 00000000 		.space	4
+ 1719              		.weak	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+ 1720              		.section	.bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE,"awG",%nobits,_ZN17Single
+ 1721              		.align	2
+ 1724              	_ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:
+ 1725 0000 00000000 		.space	4
+ 1726              		.weak	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
+ 1727              		.section	.bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive,"awG",%nobits,_ZGVZN7Storage10getSDDrive
+ 1728              		.align	2
+ 1731              	_ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:
+ 1732 0000 00000000 		.space	4
+ 1733              		.weak	_ZZN7Storage10getSDDriveEvE12pSDCardDrive
+ 1734              		.section	.bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive,"awG",%nobits,_ZZN7Storage10getSDDriveEvE1
+ 1735              		.align	2
+ 1738              	_ZZN7Storage10getSDDriveEvE12pSDCardDrive:
+ 1739 0000 00000000 		.space	4
+ 1740              		.weak	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
+ 1741              		.section	.bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive,"awG",%nobits,_ZGVZN7Storage13getFlash
+ 1742              		.align	2
+ 1745              	_ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:
+ 1746 0000 00000000 		.space	4
+ 1747              		.weak	_ZZN7Storage13getFlashDriveEvE11pFlashDrive
+ 1748              		.section	.bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive,"awG",%nobits,_ZZN7Storage13getFlashDriv
+ 1749              		.align	2
+ 1752              	_ZZN7Storage13getFlashDriveEvE11pFlashDrive:
+ 1753 0000 00000000 		.space	4
+ 1754              		.section	.rodata
+ 1755              		.set	.LANCHOR0,. + 0
+ 1756              	.LC0:
+ 1757 0000 4E       		.byte	78
+ 1758 0001 52       		.byte	82
+ 1759 0002 42       		.byte	66
+ 1760 0003 53       		.byte	83
+ 1761 0004 44       		.byte	68
+ 1764              	_ZZ10logHandlerR3strR7UartDevPviE12__FUNCTION__:
+ 1765 0005 6C6F6748 		.ascii	"logHandler\000"
+ 1765      616E646C 
+ 1765      657200
+ 1766              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 1767              	.LC1:
+ 1768 0000 4E25753A 		.ascii	"N%u: Rx/Tx, Rte/Ovt, Retried/Mesh Retried/Repeated:"
+ 1768      2052782F 
+ 1768      54782C20 
+ 1768      5274652F 
+ 1768      4F76742C 
+ 1769 0033 200A00   		.ascii	" \012\000"
+ 1770              	.LC2:
+ 1771 0036 20202020 		.ascii	"       %3u/%-3u %u/%u, %u/%u/%u\012\000"
+ 1771      20202025 
+ 1771      33752F25 
+ 1771      2D337520 
+ 1771      25752F25 
+ 1772              	.LC3:
+ 1773 0057 4E616D65 		.ascii	"Name\000"
+ 1773      00
+ 1774              	.LC4:
+ 1775 005c 25313073 		.ascii	"%10s St Pr  Stack  CPU%%  Ticks(%u uS/tick)\012\000"
+ 1775      20537420 
+ 1775      50722020 
+ 1775      53746163 
+ 1775      6B202043 
+ 1776              	.LC5:
+ 1777 0089 25313073 		.ascii	"%10s  %c %2u  %5u  %4u  %lu\012\000"
+ 1777      20202563 
+ 1777      20253275 
+ 1777      20202535 
+ 1777      75202025 
+ 1778              	.LC6:
+ 1779 00a6 2A2A2057 		.ascii	"** WARNING: Only reported first %u tasks\012\000"
+ 1779      41524E49 
+ 1779      4E473A20 
+ 1779      4F6E6C79 
+ 1779      20726570 
+ 1780              	.LC7:
+ 1781 00d0 466C6173 		.ascii	"Flash: %u/%u\012Temp : %u.%u\012Light: %u\012Time  "
+ 1781      683A2025 
+ 1781      752F2575 
+ 1781      0A54656D 
+ 1781      70203A20 
+ 1782 00fa 2020203A 		.ascii	"   : %s\012Boot Time: %u/%u/%u,%02u:%02u:%02u\012Ua"
+ 1782      2025730A 
+ 1782      426F6F74 
+ 1782      2054696D 
+ 1782      653A2025 
+ 1783 0127 72743020 		.ascii	"rt0 Watermarks: %u/%u (rx/tx)\012\000"
+ 1783      57617465 
+ 1783      726D6172 
+ 1783      6B733A20 
+ 1783      25752F25 
+ 1784              	.LC8:
+ 1785 0146 73657400 		.ascii	"set\000"
+ 1786              	.LC9:
+ 1787 014a 252A7320 		.ascii	"%*s %u %u %u %u %u %u %u\000"
+ 1787      25752025 
+ 1787      75202575 
+ 1787      20257520 
+ 1787      25752025 
+ 1788              	.LC10:
+ 1789 0163 25303275 		.ascii	"%02u/%02u/%u  --  %02u:%02u:%02u (%u)\012\000"
+ 1789      2F253032 
+ 1789      752F2575 
+ 1789      20202D2D 
+ 1789      20202530 
+ 1790              	.LC11:
+ 1791 018a 2000     		.ascii	" \000"
+ 1792              	.LC12:
+ 1793 018c 4572726F 		.ascii	"Error %u copying |%s| -> |%s|\012\000"
+ 1793      72202575 
+ 1793      20636F70 
+ 1793      79696E67 
+ 1793      207C2573 
+ 1794              	.LC13:
+ 1795 01ab 46696E69 		.ascii	"Finished!  Read: %u Kb/sec, Write: %u Kb/sec\012\000"
+ 1795      73686564 
+ 1795      21202052 
+ 1795      6561643A 
+ 1795      20257520 
+ 1796              	.LC14:
+ 1797 01d9 2D6E6F70 		.ascii	"-noprint\000"
+ 1797      72696E74 
+ 1797      00
+ 1798              	.LC15:
+ 1799 01e2 4661696C 		.ascii	"Failed to open: %s\012\000"
+ 1799      65642074 
+ 1799      6F206F70 
+ 1799      656E3A20 
+ 1799      25730A00 
+ 1800              	.LC16:
+ 1801 01f6 0A526561 		.ascii	"\012Read %d bytes @ %d Kb/sec\000"
+ 1801      64202564 
+ 1801      20627974 
+ 1801      65732040 
+ 1801      20256420 
+ 1802              	.LC17:
+ 1803 0211 00       		.ascii	"\000"
+ 1804              	.LC18:
+ 1805 0212 303A00   		.ascii	"0:\000"
+ 1806              	.LC19:
+ 1807 0215 496E7661 		.ascii	"Invalid directory: |%s| (Error %i)\012\000"
+ 1807      6C696420 
+ 1807      64697265 
+ 1807      63746F72 
+ 1807      793A207C 
+ 1808              	.LC20:
+ 1809 0239 44697265 		.ascii	"Directory listing of: %s\012\012\000"
+ 1809      63746F72 
+ 1809      79206C69 
+ 1809      7374696E 
+ 1809      67206F66 
+ 1810              	.LC21:
+ 1811 0254 25632563 		.ascii	"%c%c%c%c%c %u/%02u/%02u %02u:%02u %10lu %13s\000"
+ 1811      25632563 
+ 1811      25632025 
+ 1811      752F2530 
+ 1811      32752F25 
+ 1812              	.LC22:
+ 1813 0281 202D2000 		.ascii	" - \000"
+ 1814              	.LC23:
+ 1815 0285 0A253475 		.ascii	"\012%4u File(s), %10d bytes total\012%4d Dir(s)\000"
+ 1815      2046696C 
+ 1815      65287329 
+ 1815      2C202531 
+ 1815      30642062 
+ 1816              	.LC24:
+ 1817 02af 2C202531 		.ascii	", %10dK bytes free\012\000"
+ 1817      30644B20 
+ 1817      62797465 
+ 1817      73206672 
+ 1817      65650A00 
+ 1818              	.LC25:
+ 1819 02c3 4F4B00   		.ascii	"OK\000"
+ 1820              	.LC26:
+ 1821 02c6 4552524F 		.ascii	"ERROR\000"
+ 1821      5200
+ 1822              	.LC27:
+ 1823 02cc 43726561 		.ascii	"Create directory '%s' : %s\012\000"
+ 1823      74652064 
+ 1823      69726563 
+ 1823      746F7279 
+ 1823      20272573 
+ 1824              	.LC28:
+ 1825 02e8 44656C65 		.ascii	"Delete '%s' : %s\012\000"
+ 1825      74652027 
+ 1825      25732720 
+ 1825      3A202573 
+ 1825      0A00
+ 1826              	.LC29:
+ 1827 02fa 4D6F7665 		.ascii	"Move '%s' -> '%s' : %s\012\000"
+ 1827      20272573 
+ 1827      27202D3E 
+ 1827      20272573 
+ 1827      27203A20 
+ 1828              	.LC30:
+ 1829 0312 556E6162 		.ascii	"Unable to open '%s' to write the file\012\000"
+ 1829      6C652074 
+ 1829      6F206F70 
+ 1829      656E2027 
+ 1829      25732720 
+ 1830              	.LC31:
+ 1831 0339 456E6420 		.ascii	"End the file by using %c character.  %i is the time"
+ 1831      74686520 
+ 1831      66696C65 
+ 1831      20627920 
+ 1831      7573696E 
+ 1832 036c 6F75740A 		.ascii	"out\012\000"
+ 1832      00
+ 1833              	.LC32:
+ 1834 0371 536F7272 		.ascii	"Sorry, no backspace support :(\012\000"
+ 1834      792C206E 
+ 1834      6F206261 
+ 1834      636B7370 
+ 1834      61636520 
+ 1835              	.LC33:
+ 1836 0391 4572726F 		.ascii	"Error occurred while writing the file\012\000"
+ 1836      72206F63 
+ 1836      63757272 
+ 1836      65642077 
+ 1836      68696C65 
+ 1837              	.LC34:
+ 1838 03b8 4552524F 		.ascii	"ERROR: Give me source and destination directory sep"
+ 1838      523A2047 
+ 1838      69766520 
+ 1838      6D652073 
+ 1838      6F757263 
+ 1839 03eb 61726174 		.ascii	"arated by a space\000"
+ 1839      65642062 
+ 1839      79206120 
+ 1839      73706163 
+ 1839      6500
+ 1840              	.LC35:
+ 1841 03fd 496E7661 		.ascii	"Invalid destination directory: |%s|\012\000"
+ 1841      6C696420 
+ 1841      64657374 
+ 1841      696E6174 
+ 1841      696F6E20 
+ 1842              	.LC36:
+ 1843 0422 496E7661 		.ascii	"Invalid source directory: |%s|\012\000"
+ 1843      6C696420 
+ 1843      736F7572 
+ 1843      63652064 
+ 1843      69726563 
+ 1844              	.LC37:
+ 1845 0442 25732F25 		.ascii	"%s/%s\000"
+ 1845      7300
+ 1846              	.LC38:
+ 1847 0448 436F7079 		.ascii	"Copy %s -> %s : %d Bytes : %s\012\000"
+ 1847      20257320 
+ 1847      2D3E2025 
+ 1847      73203A20 
+ 1847      25642042 
+ 1848              	.LC39:
+ 1849 0467 466F726D 		.ascii	"Format OK\000"
+ 1849      6174204F 
+ 1849      4B00
+ 1850              	.LC40:
+ 1851 0471 466F726D 		.ascii	"Format ERROR\000"
+ 1851      61742045 
+ 1851      52524F52 
+ 1851      00
+ 1852              	.LC41:
+ 1853 047e 53442043 		.ascii	"SD Card mounted\000"
+ 1853      61726420 
+ 1853      6D6F756E 
+ 1853      74656400 
+ 1854              	.LC42:
+ 1855 048e 4572726F 		.ascii	"Error mounting SD Card\000"
+ 1855      72206D6F 
+ 1855      756E7469 
+ 1855      6E672053 
+ 1855      44204361 
+ 1856              	.LC43:
+ 1857 04a5 466C6173 		.ascii	"Flash mounted\000"
+ 1857      68206D6F 
+ 1857      756E7465 
+ 1857      6400
+ 1858              	.LC44:
+ 1859 04b3 4572726F 		.ascii	"Error mounting Flash Memory\000"
+ 1859      72206D6F 
+ 1859      756E7469 
+ 1859      6E672046 
+ 1859      6C617368 
+ 1860              	.LC45:
+ 1861 04cf 666F726D 		.ascii	"format sd\000"
+ 1861      61742073 
+ 1861      6400
+ 1862              	.LC46:
+ 1863 04d9 666F726D 		.ascii	"format flash\000"
+ 1863      61742066 
+ 1863      6C617368 
+ 1863      00
+ 1864              	.LC47:
+ 1865 04e6 6D6F756E 		.ascii	"mount sd\000"
+ 1865      74207364 
+ 1865      00
+ 1866              	.LC48:
+ 1867 04ef 6D6F756E 		.ascii	"mount flash\000"
+ 1867      7420666C 
+ 1867      61736800 
+ 1868              	.LC49:
+ 1869 04fb 4C656172 		.ascii	"Learning mode enabled\000"
+ 1869      6E696E67 
+ 1869      206D6F64 
+ 1869      6520656E 
+ 1869      61626C65 
+ 1870              	.LC50:
+ 1871 0511 4641494C 		.ascii	"FAILED\000"
+ 1871      454400
+ 1872              	.LC51:
+ 1873 0518 727800   		.ascii	"rx\000"
+ 1874              	.LC52:
+ 1875 051b 252A7320 		.ascii	"%*s %i\000"
+ 1875      256900
+ 1876              	.LC53:
+ 1877 0522 52656365 		.ascii	"Received data from %i\012\000"
+ 1877      69766564 
+ 1877      20646174 
+ 1877      61206672 
+ 1877      6F6D2025 
+ 1878              	.LC54:
+ 1879 0539 4E6F2064 		.ascii	"No data received\000"
+ 1879      61746120 
+ 1879      72656365 
+ 1879      69766564 
+ 1879      00
+ 1880              	.LC55:
+ 1881 054a 61646472 		.ascii	"addr\000"
+ 1881      00
+ 1882              	.LC56:
+ 1883 054f 53657420 		.ascii	"Set address to %i: %s\012\000"
+ 1883      61646472 
+ 1883      65737320 
+ 1883      746F2025 
+ 1883      693A2025 
+ 1884              	.LC57:
+ 1885 0566 726F7574 		.ascii	"routes\000"
+ 1885      657300
+ 1886              	.LC58:
+ 1887 056d 526F7574 		.ascii	"Routing table size is %i\012\000"
+ 1887      696E6720 
+ 1887      7461626C 
+ 1887      65207369 
+ 1887      7A652069 
+ 1888              	.LC59:
+ 1889 0587 4453543A 		.ascii	"DST: %3i, Next Hop: %3i, Hops: %i\012\000"
+ 1889      20253369 
+ 1889      2C204E65 
+ 1889      78742048 
+ 1889      6F703A20 
+ 1890              	.LC60:
+ 1891 05aa 73746174 		.ascii	"stats\000"
+ 1891      7300
+ 1892              	.LC61:
+ 1893 05b0 61636B00 		.ascii	"ack\000"
+ 1894              	.LC62:
+ 1895 05b4 6E61636B 		.ascii	"nack\000"
+ 1895      00
+ 1896              	.LC63:
+ 1897 05b9 44697363 		.ascii	"Discarded a stale wireless packet\000"
+ 1897      61726465 
+ 1897      64206120 
+ 1897      7374616C 
+ 1897      65207769 
+ 1898              	.LC64:
+ 1899 05db 4572726F 		.ascii	"Error sending packet, check parameters!\000"
+ 1899      72207365 
+ 1899      6E64696E 
+ 1899      67207061 
+ 1899      636B6574 
+ 1900              	.LC65:
+ 1901 0603 52656D6F 		.ascii	"Remote node name: '\000"
+ 1901      7465206E 
+ 1901      6F646520 
+ 1901      6E616D65 
+ 1901      3A202700 
+ 1902              	.LC66:
+ 1903 0617 270A00   		.ascii	"'\012\000"
+ 1904              	.LC67:
+ 1905 061a 52656365 		.ascii	"Received the acknowledgment!\000"
+ 1905      69766564 
+ 1905      20746865 
+ 1905      2061636B 
+ 1905      6E6F776C 
+ 1906              	.LC68:
+ 1907 0637 5061636B 		.ascii	"Packet sent to %s but no ACK received\000"
+ 1907      65742073 
+ 1907      656E7420 
+ 1907      746F2025 
+ 1907      73206275 
+ 1908              	.LC69:
+ 1909 065d 666C7573 		.ascii	"flush\000"
+ 1909      6800
+ 1910              	.LC70:
+ 1911 0663 4C6F6728 		.ascii	"Log(s) have been flushed\000"
+ 1911      73292068 
+ 1911      61766520 
+ 1911      6265656E 
+ 1911      20666C75 
+ 1912              	.LC71:
+ 1913 067c 2E2E2F4C 		.ascii	"../L5_Application/source/handlers.cpp\000"
+ 1913      355F4170 
+ 1913      706C6963 
+ 1913      6174696F 
+ 1913      6E2F736F 
+ 1914              	.LC72:
+ 1915 06a2 4C6F6767 		.ascii	"Logged: |%s|\012\000"
+ 1915      65643A20 
+ 1915      7C25737C 
+ 1915      0A00
+ 1916              	.LC73:
+ 1917 06b0 5265626F 		.ascii	"Rebooting System\000"
+ 1917      6F74696E 
+ 1917      67205379 
+ 1917      7374656D 
+ 1917      00
+ 1918              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 handlers.cpp
-     /tmp/cch7FvRz.s:16     .text:00000000 $t
-     /tmp/cch7FvRz.s:20     .text:00000000 _ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
-     /tmp/cch7FvRz.s:49     .text:00000034 $d
-     /tmp/cch7FvRz.s:53     .text._ZN7Storage13getFlashDriveEv:00000000 $t
-     /tmp/cch7FvRz.s:58     .text._ZN7Storage13getFlashDriveEv:00000000 _ZN7Storage13getFlashDriveEv
-     /tmp/cch7FvRz.s:88     .text._ZN7Storage13getFlashDriveEv:00000040 $d
-     /tmp/cch7FvRz.s:1723   .bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 _ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
-     /tmp/cch7FvRz.s:1730   .bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 _ZZN7Storage13getFlashDriveEvE11pFlashDrive
-     /tmp/cch7FvRz.s:92     .text._ZN7Storage10getSDDriveEv:00000000 $t
-     /tmp/cch7FvRz.s:97     .text._ZN7Storage10getSDDriveEv:00000000 _ZN7Storage10getSDDriveEv
-     /tmp/cch7FvRz.s:128    .text._ZN7Storage10getSDDriveEv:00000044 $d
-     /tmp/cch7FvRz.s:1744   .bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 _ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
-     /tmp/cch7FvRz.s:1751   .bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 _ZZN7Storage10getSDDriveEvE12pSDCardDrive
-     /tmp/cch7FvRz.s:132    .text:0000003c $t
-     /tmp/cch7FvRz.s:137    .text:0000003c _Z15taskListHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:216    .text:000000dc $d
-     /tmp/cch7FvRz.s:222    .text:000000f0 $t
-     /tmp/cch7FvRz.s:227    .text:000000f0 _Z14memInfoHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:256    .text:00000118 _Z13healthHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:389    .text:0000025c $d
-     /tmp/cch7FvRz.s:1695   .bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
-     /tmp/cch7FvRz.s:1702   .bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
-     /tmp/cch7FvRz.s:1709   .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
-     /tmp/cch7FvRz.s:1716   .bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
-     /tmp/cch7FvRz.s:396    .text:00000274 $t
-     /tmp/cch7FvRz.s:401    .text:00000274 _Z11timeHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:499    .text:0000037c $d
-     /tmp/cch7FvRz.s:503    .text:00000388 $t
-     /tmp/cch7FvRz.s:508    .text:00000388 _Z9cpHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:570    .text:000003fc $d
-     /tmp/cch7FvRz.s:574    .text:00000408 $t
-     /tmp/cch7FvRz.s:579    .text:00000408 _Z10catHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:669    .text:000004e8 $d
-     /tmp/cch7FvRz.s:675    .text:000004fc $t
-     /tmp/cch7FvRz.s:680    .text:000004fc _Z9lsHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:846    .text:00000680 $d
-     /tmp/cch7FvRz.s:856    .text:000006a4 $t
-     /tmp/cch7FvRz.s:861    .text:000006a4 _Z12mkdirHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:886    .text:000006d4 $d
-     /tmp/cch7FvRz.s:890    .text:000006e0 $t
-     /tmp/cch7FvRz.s:895    .text:000006e0 _Z9rmHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:920    .text:00000710 $d
-     /tmp/cch7FvRz.s:924    .text:0000071c $t
-     /tmp/cch7FvRz.s:929    .text:0000071c _Z9mvHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:972    .text:00000768 $d
-     /tmp/cch7FvRz.s:977    .text:00000778 $t
-     /tmp/cch7FvRz.s:982    .text:00000778 _Z14newFileHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1057   .text:0000081c $d
-     /tmp/cch7FvRz.s:1062   .text:0000082c $t
-     /tmp/cch7FvRz.s:1067   .text:0000082c _Z10dcpHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1193   .text:00000948 $d
-     /tmp/cch7FvRz.s:1202   .text:00000968 $t
-     /tmp/cch7FvRz.s:1207   .text:00000968 _Z14storageHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1293   .text:00000a20 $d
-     /tmp/cch7FvRz.s:1304   .text:00000a48 $t
-     /tmp/cch7FvRz.s:1309   .text:00000a48 _Z14learnIrHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1328   .text:00000a68 $d
-     /tmp/cch7FvRz.s:1330   .text:00000a6c $t
-     /tmp/cch7FvRz.s:1335   .text:00000a6c _Z15wirelessHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1561   .text:00000c54 $d
-     /tmp/cch7FvRz.s:1584   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 $t
-     /tmp/cch7FvRz.s:1589   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 _ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
-     /tmp/cch7FvRz.s:1607   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:0000001c $d
-     /tmp/cch7FvRz.s:1737   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
-     /tmp/cch7FvRz.s:1610   .text:00000ca8 $t
-     /tmp/cch7FvRz.s:1615   .text:00000ca8 _Z13rebootHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1637   .text:00000cd8 $d
-     /tmp/cch7FvRz.s:1639   .text:00000cdc $t
-     /tmp/cch7FvRz.s:1644   .text:00000cdc _Z10logHandlerR3strR7UartDevPvi
-     /tmp/cch7FvRz.s:1684   .text:00000d30 $d
-     /tmp/cch7FvRz.s:1692   .bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:00000000 $d
-     /tmp/cch7FvRz.s:1699   .bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:00000000 $d
-     /tmp/cch7FvRz.s:1706   .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 $d
-     /tmp/cch7FvRz.s:1713   .bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:00000000 $d
-     /tmp/cch7FvRz.s:1720   .bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 $d
-     /tmp/cch7FvRz.s:1727   .bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 $d
-     /tmp/cch7FvRz.s:1734   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 $d
-     /tmp/cch7FvRz.s:1741   .bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 $d
-     /tmp/cch7FvRz.s:1748   .bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 $d
-     /tmp/cch7FvRz.s:1763   .rodata:00000005 _ZZ10logHandlerR3strR7UartDevPviE12__FUNCTION__
+     /tmp/cc91B9iC.s:17     .text:00000000 $t
+     /tmp/cc91B9iC.s:21     .text:00000000 _ZL25wirelessHandlerPrintStatsR7UartDevP12mesh_stats_th
+     /tmp/cc91B9iC.s:51     .text:00000034 $d
+     /tmp/cc91B9iC.s:55     .text._ZNK16FileSystemObject5mountEv:00000000 $t
+     /tmp/cc91B9iC.s:60     .text._ZNK16FileSystemObject5mountEv:00000000 _ZNK16FileSystemObject5mountEv
+     /tmp/cc91B9iC.s:76     .text._ZN7Storage13getFlashDriveEv:00000000 $t
+     /tmp/cc91B9iC.s:81     .text._ZN7Storage13getFlashDriveEv:00000000 _ZN7Storage13getFlashDriveEv
+     /tmp/cc91B9iC.s:110    .text._ZN7Storage13getFlashDriveEv:00000040 $d
+     /tmp/cc91B9iC.s:1745   .bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 _ZGVZN7Storage13getFlashDriveEvE11pFlashDrive
+     /tmp/cc91B9iC.s:1752   .bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 _ZZN7Storage13getFlashDriveEvE11pFlashDrive
+     /tmp/cc91B9iC.s:114    .text._ZN7Storage10getSDDriveEv:00000000 $t
+     /tmp/cc91B9iC.s:119    .text._ZN7Storage10getSDDriveEv:00000000 _ZN7Storage10getSDDriveEv
+     /tmp/cc91B9iC.s:149    .text._ZN7Storage10getSDDriveEv:00000040 $d
+     /tmp/cc91B9iC.s:1731   .bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 _ZGVZN7Storage10getSDDriveEvE12pSDCardDrive
+     /tmp/cc91B9iC.s:1738   .bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 _ZZN7Storage10getSDDriveEvE12pSDCardDrive
+     /tmp/cc91B9iC.s:153    .text:0000003c $t
+     /tmp/cc91B9iC.s:158    .text:0000003c _Z15taskListHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:237    .text:000000d8 $d
+     /tmp/cc91B9iC.s:243    .text:000000ec $t
+     /tmp/cc91B9iC.s:248    .text:000000ec _Z14memInfoHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:278    .text:00000114 _Z13healthHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:408    .text:00000258 $d
+     /tmp/cc91B9iC.s:1717   .bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE
+     /tmp/cc91B9iC.s:1696   .bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE
+     /tmp/cc91B9iC.s:1710   .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE
+     /tmp/cc91B9iC.s:1703   .bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE
+     /tmp/cc91B9iC.s:415    .text:00000270 $t
+     /tmp/cc91B9iC.s:420    .text:00000270 _Z11timeHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:518    .text:00000374 $d
+     /tmp/cc91B9iC.s:522    .text:00000380 $t
+     /tmp/cc91B9iC.s:527    .text:00000380 _Z9cpHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:590    .text:000003f4 $d
+     /tmp/cc91B9iC.s:594    .text:00000400 $t
+     /tmp/cc91B9iC.s:599    .text:00000400 _Z10catHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:685    .text:000004c8 $d
+     /tmp/cc91B9iC.s:691    .text:000004dc $t
+     /tmp/cc91B9iC.s:696    .text:000004dc _Z9lsHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:862    .text:00000664 $d
+     /tmp/cc91B9iC.s:872    .text:00000688 $t
+     /tmp/cc91B9iC.s:877    .text:00000688 _Z12mkdirHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:902    .text:000006b8 $d
+     /tmp/cc91B9iC.s:906    .text:000006c4 $t
+     /tmp/cc91B9iC.s:911    .text:000006c4 _Z9rmHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:936    .text:000006f4 $d
+     /tmp/cc91B9iC.s:940    .text:00000700 $t
+     /tmp/cc91B9iC.s:945    .text:00000700 _Z9mvHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:989    .text:0000074c $d
+     /tmp/cc91B9iC.s:994    .text:0000075c $t
+     /tmp/cc91B9iC.s:999    .text:0000075c _Z14newFileHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1071   .text:000007f4 $d
+     /tmp/cc91B9iC.s:1076   .text:00000804 $t
+     /tmp/cc91B9iC.s:1081   .text:00000804 _Z10dcpHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1205   .text:00000924 $d
+     /tmp/cc91B9iC.s:1214   .text:00000944 $t
+     /tmp/cc91B9iC.s:1219   .text:00000944 _Z14storageHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1284   .text:000009d0 $d
+     /tmp/cc91B9iC.s:1295   .text:000009f8 $t
+     /tmp/cc91B9iC.s:1300   .text:000009f8 _Z14learnIrHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1319   .text:00000a18 $d
+     /tmp/cc91B9iC.s:1321   .text:00000a1c $t
+     /tmp/cc91B9iC.s:1326   .text:00000a1c _Z15wirelessHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1560   .text:00000c14 $d
+     /tmp/cc91B9iC.s:1583   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 $t
+     /tmp/cc91B9iC.s:1588   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:00000000 _ZN17SingletonTemplateI10FileLoggerE11getInstanceEv
+     /tmp/cc91B9iC.s:1606   .text._ZN17SingletonTemplateI10FileLoggerE11getInstanceEv:0000001c $d
+     /tmp/cc91B9iC.s:1724   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 _ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE
+     /tmp/cc91B9iC.s:1609   .text:00000c68 $t
+     /tmp/cc91B9iC.s:1614   .text:00000c68 _Z10logHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1656   .text:00000cc0 $d
+     /tmp/cc91B9iC.s:1662   .text:00000cd4 $t
+     /tmp/cc91B9iC.s:1667   .text:00000cd4 _Z13rebootHandlerR3strR7UartDevPvi
+     /tmp/cc91B9iC.s:1689   .text:00000d04 $d
+     /tmp/cc91B9iC.s:1693   .bss._ZN17SingletonTemplateI17TemperatureSensorE19mpSingletonInstanceE:00000000 $d
+     /tmp/cc91B9iC.s:1700   .bss._ZN17SingletonTemplateI12Light_SensorE19mpSingletonInstanceE:00000000 $d
+     /tmp/cc91B9iC.s:1707   .bss._ZN17SingletonTemplateI4I2C2E19mpSingletonInstanceE:00000000 $d
+     /tmp/cc91B9iC.s:1714   .bss._ZN17SingletonTemplateI5Uart0E19mpSingletonInstanceE:00000000 $d
+     /tmp/cc91B9iC.s:1721   .bss._ZN17SingletonTemplateI10FileLoggerE19mpSingletonInstanceE:00000000 $d
+     /tmp/cc91B9iC.s:1728   .bss._ZGVZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 $d
+     /tmp/cc91B9iC.s:1735   .bss._ZZN7Storage10getSDDriveEvE12pSDCardDrive:00000000 $d
+     /tmp/cc91B9iC.s:1742   .bss._ZGVZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 $d
+     /tmp/cc91B9iC.s:1749   .bss._ZZN7Storage13getFlashDriveEvE11pFlashDrive:00000000 $d
+     /tmp/cc91B9iC.s:1764   .rodata:00000005 _ZZ10logHandlerR3strR7UartDevPviE12__FUNCTION__
 
 UNDEFINED SYMBOLS
 _ZN7UartDev6printfEPKcz
+disk_initialize
+f_mount
 __cxa_guard_acquire
 _Znwj
 __cxa_guard_release
 _ZNK3strcviEv
 vTaskResetRunTimeStats
 vTaskDelay
-memcpy
 uxTaskGetSystemState
 uxTaskGetNumberOfTasks
 memset
@@ -2199,8 +2201,8 @@ _ZN3str7trimEndEPKc
 _ZNK3strclEv
 f_open
 sys_get_uptime_ms
-_ZN7UartDev3putEPKcj
 f_read
+_ZN7UartDev3putEPKcj
 f_close
 atoi
 f_opendir
@@ -2212,12 +2214,10 @@ _ZNK7UartDev7getCharEPcj
 f_write
 _ZN7UartDev7putCharEcj
 _ZN3strC1EPci
-_ZN3strD1Ev
 _ZN3str6printfEPKcz
+_ZN3strD1Ev
 _ZNK3streqEPKc
 f_mkfs
-disk_initialize
-f_mount
 xQueueGenericSend
 _ZNK3str20beginsWithIgnoreCaseEPKc
 wireless_get_rx_pkt
@@ -2227,8 +2227,8 @@ mesh_get_num_routing_entries
 mesh_get_routing_entry
 mesh_get_stats
 mesh_get_node_address
-strlen
 mesh_send
+strlen
 wireless_get_ack_pkt
 _ZN10FileLoggerC1Ev
 _ZN10FileLogger5flushEv

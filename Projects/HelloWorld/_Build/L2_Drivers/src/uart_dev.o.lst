@@ -11,110 +11,110 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"uart_dev.cpp"
-  15              		.text
-  16              		.align	1
-  17              		.global	_ZNK7UartDev7getCharEPcj
-  18              		.thumb
-  19              		.thumb_func
-  21              	_ZNK7UartDev7getCharEPcj:
-  22              		@ args = 0, pretend = 0, frame = 8
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24 0000 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
-  25 0004 0746     		mov	r7, r0
-  26 0006 0E46     		mov	r6, r1
-  27 0008 1546     		mov	r5, r2
-  28 000a FFF7FEFF 		bl	xTaskGetSchedulerState
-  29 000e 0128     		cmp	r0, #1
-  30 0010 09D1     		bne	.L2
-  31 0012 0023     		movs	r3, #0
-  32 0014 7868     		ldr	r0, [r7, #4]
-  33 0016 3146     		mov	r1, r6
-  34 0018 2A46     		mov	r2, r5
-  35 001a FFF7FEFF 		bl	xQueueGenericReceive
-  36 001e 0030     		adds	r0, r0, #0
-  37 0020 18BF     		it	ne
-  38 0022 0120     		movne	r0, #1
-  39 0024 1DE0     		b	.L3
-  40              	.L2:
-  41 0026 0023     		movs	r3, #0
-  42 0028 02AC     		add	r4, sp, #8
-  43 002a 44F8043D 		str	r3, [r4, #-4]!
-  44 002e FFF7FEFF 		bl	sys_get_uptime_ms
-  45 0032 2D18     		adds	r5, r5, r0
-  46 0034 A846     		mov	r8, r5
-  47 0036 4FF00009 		mov	r9, #0
-  48 003a 07E0     		b	.L4
+  14              		.syntax unified
+  15              		.file	"uart_dev.cpp"
+  16              		.text
+  17              		.align	1
+  18              		.global	_ZNK7UartDev7getCharEPcj
+  19              		.thumb
+  20              		.thumb_func
+  22              	_ZNK7UartDev7getCharEPcj:
+  23              		@ args = 0, pretend = 0, frame = 8
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+  26 0004 8046     		mov	r8, r0
+  27 0006 8946     		mov	r9, r1
+  28 0008 1646     		mov	r6, r2
+  29 000a FFF7FEFF 		bl	xTaskGetSchedulerState
+  30 000e 0128     		cmp	r0, #1
+  31 0010 0AD1     		bne	.L2
+  32 0012 0023     		movs	r3, #0
+  33 0014 3246     		mov	r2, r6
+  34 0016 4946     		mov	r1, r9
+  35 0018 D8F80400 		ldr	r0, [r8, #4]
+  36 001c FFF7FEFF 		bl	xQueueGenericReceive
+  37 0020 0030     		adds	r0, r0, #0
+  38 0022 18BF     		it	ne
+  39 0024 0120     		movne	r0, #1
+  40 0026 19E0     		b	.L3
+  41              	.L2:
+  42 0028 0023     		movs	r3, #0
+  43 002a 02AD     		add	r5, sp, #8
+  44 002c 45F8043D 		str	r3, [r5, #-4]!
+  45 0030 FFF7FEFF 		bl	sys_get_uptime_ms
+  46 0034 3044     		add	r0, r0, r6
+  47 0036 0646     		mov	r6, r0
+  48 0038 0027     		movs	r7, #0
   49              	.L5:
-  50 003c FFF7FEFF 		bl	sys_get_uptime_ms
-  51 0040 0246     		mov	r2, r0
-  52 0042 0B46     		mov	r3, r1
-  53 0044 9045     		cmp	r8, r2
-  54 0046 79EB0301 		sbcs	r1, r9, r3
-  55 004a 09D3     		bcc	.L6
-  56              	.L4:
-  57 004c 7868     		ldr	r0, [r7, #4]
-  58 004e 3146     		mov	r1, r6
-  59 0050 2246     		mov	r2, r4
-  60 0052 FFF7FEFF 		bl	xQueueReceiveFromISR
-  61 0056 0546     		mov	r5, r0
-  62 0058 0028     		cmp	r0, #0
-  63 005a EFD0     		beq	.L5
-  64 005c 0120     		movs	r0, #1
-  65 005e 00E0     		b	.L3
-  66              	.L6:
-  67 0060 2846     		mov	r0, r5
-  68              	.L3:
-  69 0062 BDE8FE83 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}
-  71              		.align	1
-  72              		.global	_ZN7UartDev7putCharEcj
-  73              		.thumb
-  74              		.thumb_func
-  76              	_ZN7UartDev7putCharEcj:
-  77              		@ args = 0, pretend = 0, frame = 16
-  78              		@ frame_needed = 0, uses_anonymous_args = 0
-  79 0066 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
-  80 0068 0446     		mov	r4, r0
-  81 006a 1646     		mov	r6, r2
-  82 006c 8DF80710 		strb	r1, [sp, #7]
-  83 0070 FFF7FEFF 		bl	xTaskGetSchedulerState
-  84 0074 0128     		cmp	r0, #1
-  85 0076 0546     		mov	r5, r0
-  86 0078 09D0     		beq	.L8
-  87 007a 2368     		ldr	r3, [r4, #0]
-  88 007c 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
-  89 0080 1A70     		strb	r2, [r3, #0]
-  90 0082 2368     		ldr	r3, [r4, #0]
-  91              	.L9:
-  92 0084 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
-  93 0086 5206     		lsls	r2, r2, #25
-  94 0088 FCD5     		bpl	.L9
-  95 008a 0120     		movs	r0, #1
-  96 008c 17E0     		b	.L10
-  97              	.L8:
-  98 008e 0023     		movs	r3, #0
-  99 0090 A068     		ldr	r0, [r4, #8]
- 100 0092 0DF10701 		add	r1, sp, #7
- 101 0096 3246     		mov	r2, r6
- 102 0098 0393     		str	r3, [sp, #12]
- 103 009a FFF7FEFF 		bl	xQueueGenericSend
- 104 009e 70B1     		cbz	r0, .L10
- 105 00a0 2368     		ldr	r3, [r4, #0]
- 106 00a2 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 107 00a4 5B06     		lsls	r3, r3, #25
- 108 00a6 09D5     		bpl	.L12
- 109 00a8 03AA     		add	r2, sp, #12
- 110 00aa A068     		ldr	r0, [r4, #8]
- 111 00ac 0DF10701 		add	r1, sp, #7
- 112 00b0 FFF7FEFF 		bl	xQueueReceiveFromISR
- 113 00b4 2368     		ldr	r3, [r4, #0]
- 114 00b6 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
- 115 00ba 1A70     		strb	r2, [r3, #0]
- 116              	.L12:
- 117 00bc 2846     		mov	r0, r5
- 118              	.L10:
- 119 00be 04B0     		add	sp, sp, #16
- 120 00c0 70BD     		pop	{r4, r5, r6, pc}
+  50 003a 2A46     		mov	r2, r5
+  51 003c 4946     		mov	r1, r9
+  52 003e D8F80400 		ldr	r0, [r8, #4]
+  53 0042 FFF7FEFF 		bl	xQueueReceiveFromISR
+  54 0046 0446     		mov	r4, r0
+  55 0048 38B9     		cbnz	r0, .L4
+  56 004a FFF7FEFF 		bl	sys_get_uptime_ms
+  57 004e 8F42     		cmp	r7, r1
+  58 0050 08BF     		it	eq
+  59 0052 8642     		cmpeq	r6, r0
+  60 0054 F1D2     		bcs	.L5
+  61 0056 2046     		mov	r0, r4
+  62 0058 00E0     		b	.L3
+  63              	.L4:
+  64 005a 0120     		movs	r0, #1
+  65              	.L3:
+  66 005c 03B0     		add	sp, sp, #12
+  67              		@ sp needed
+  68 005e BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+  70              		.align	1
+  71              		.global	_ZN7UartDev7putCharEcj
+  72              		.thumb
+  73              		.thumb_func
+  75              	_ZN7UartDev7putCharEcj:
+  76              		@ args = 0, pretend = 0, frame = 16
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0062 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+  79 0064 0446     		mov	r4, r0
+  80 0066 1646     		mov	r6, r2
+  81 0068 8DF80710 		strb	r1, [sp, #7]
+  82 006c FFF7FEFF 		bl	xTaskGetSchedulerState
+  83 0070 0128     		cmp	r0, #1
+  84 0072 0546     		mov	r5, r0
+  85 0074 09D0     		beq	.L9
+  86 0076 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+  87 007a 2368     		ldr	r3, [r4]
+  88 007c 1A70     		strb	r2, [r3]
+  89 007e 2268     		ldr	r2, [r4]
+  90              	.L10:
+  91 0080 137D     		ldrb	r3, [r2, #20]	@ zero_extendqisi2
+  92 0082 5906     		lsls	r1, r3, #25
+  93 0084 FCD5     		bpl	.L10
+  94              	.L12:
+  95 0086 0120     		movs	r0, #1
+  96 0088 17E0     		b	.L11
+  97              	.L9:
+  98 008a 0023     		movs	r3, #0
+  99 008c 3246     		mov	r2, r6
+ 100 008e 0DF10701 		add	r1, sp, #7
+ 101 0092 A068     		ldr	r0, [r4, #8]
+ 102 0094 0393     		str	r3, [sp, #12]
+ 103 0096 FFF7FEFF 		bl	xQueueGenericSend
+ 104 009a 70B1     		cbz	r0, .L11
+ 105 009c 2368     		ldr	r3, [r4]
+ 106 009e 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 107 00a0 5B06     		lsls	r3, r3, #25
+ 108 00a2 F0D5     		bpl	.L12
+ 109 00a4 03AA     		add	r2, sp, #12
+ 110 00a6 0DF10701 		add	r1, sp, #7
+ 111 00aa A068     		ldr	r0, [r4, #8]
+ 112 00ac FFF7FEFF 		bl	xQueueReceiveFromISR
+ 113 00b0 2846     		mov	r0, r5
+ 114 00b2 2368     		ldr	r3, [r4]
+ 115 00b4 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 116 00b8 1A70     		strb	r2, [r3]
+ 117              	.L11:
+ 118 00ba 04B0     		add	sp, sp, #16
+ 119              		@ sp needed
+ 120 00bc 70BD     		pop	{r4, r5, r6, pc}
  122              		.align	1
  123              		.global	_ZN7UartDev3putEPKcj
  124              		.thumb
@@ -122,27 +122,27 @@
  127              	_ZN7UartDev3putEPKcj:
  128              		@ args = 0, pretend = 0, frame = 0
  129              		@ frame_needed = 0, uses_anonymous_args = 0
- 130 00c2 70B5     		push	{r4, r5, r6, lr}
- 131 00c4 0546     		mov	r5, r0
- 132 00c6 1646     		mov	r6, r2
- 133 00c8 61B1     		cbz	r1, .L18
- 134 00ca 0C46     		mov	r4, r1
- 135 00cc 04E0     		b	.L16
- 136              	.L17:
- 137 00ce 2846     		mov	r0, r5
- 138 00d0 3246     		mov	r2, r6
- 139 00d2 FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
- 140 00d6 30B1     		cbz	r0, .L15
- 141              	.L16:
- 142 00d8 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
- 143 00dc 0029     		cmp	r1, #0
- 144 00de F6D1     		bne	.L17
- 145 00e0 0120     		movs	r0, #1
- 146 00e2 70BD     		pop	{r4, r5, r6, pc}
- 147              	.L18:
- 148 00e4 0846     		mov	r0, r1
- 149              	.L15:
- 150 00e6 70BD     		pop	{r4, r5, r6, pc}
+ 130 00be 70B5     		push	{r4, r5, r6, lr}
+ 131 00c0 0546     		mov	r5, r0
+ 132 00c2 1646     		mov	r6, r2
+ 133 00c4 09B9     		cbnz	r1, .L20
+ 134              	.L23:
+ 135 00c6 0020     		movs	r0, #0
+ 136 00c8 70BD     		pop	{r4, r5, r6, pc}
+ 137              	.L20:
+ 138 00ca 4C1E     		subs	r4, r1, #1
+ 139              	.L22:
+ 140 00cc 14F8011F 		ldrb	r1, [r4, #1]!	@ zero_extendqisi2
+ 141 00d0 31B1     		cbz	r1, .L24
+ 142 00d2 3246     		mov	r2, r6
+ 143 00d4 2846     		mov	r0, r5
+ 144 00d6 FFF7FEFF 		bl	_ZN7UartDev7putCharEcj
+ 145 00da 0028     		cmp	r0, #0
+ 146 00dc F6D1     		bne	.L22
+ 147 00de F2E7     		b	.L23
+ 148              	.L24:
+ 149 00e0 0120     		movs	r0, #1
+ 150 00e2 70BD     		pop	{r4, r5, r6, pc}
  152              		.align	1
  153              		.global	_ZN7UartDev7putlineEPKcj
  154              		.thumb
@@ -150,19 +150,19 @@
  157              	_ZN7UartDev7putlineEPKcj:
  158              		@ args = 0, pretend = 0, frame = 0
  159              		@ frame_needed = 0, uses_anonymous_args = 0
- 160 00e8 38B5     		push	{r3, r4, r5, lr}
- 161 00ea 0546     		mov	r5, r0
- 162 00ec 1446     		mov	r4, r2
- 163 00ee FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
- 164 00f2 0349     		ldr	r1, .L21
- 165 00f4 2846     		mov	r0, r5
- 166 00f6 2246     		mov	r2, r4
- 167 00f8 BDE83840 		pop	{r3, r4, r5, lr}
- 168 00fc FEE7     		b	_ZN7UartDev3putEPKcj
- 169              	.L22:
- 170 00fe 00BF     		.align	2
- 171              	.L21:
- 172 0100 00000000 		.word	.LC0
+ 160 00e4 38B5     		push	{r3, r4, r5, lr}
+ 161 00e6 0446     		mov	r4, r0
+ 162 00e8 1546     		mov	r5, r2
+ 163 00ea FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 164 00ee 2A46     		mov	r2, r5
+ 165 00f0 2046     		mov	r0, r4
+ 166 00f2 BDE83840 		pop	{r3, r4, r5, lr}
+ 167 00f6 0149     		ldr	r1, .L27
+ 168 00f8 FFF7FEBF 		b	_ZN7UartDev3putEPKcj
+ 169              	.L28:
+ 170              		.align	2
+ 171              	.L27:
+ 172 00fc 00000000 		.word	.LC0
  174              		.align	1
  175              		.global	_ZN7UartDev4getsEPcij
  176              		.thumb
@@ -170,340 +170,340 @@
  179              	_ZN7UartDev4getsEPcij:
  180              		@ args = 0, pretend = 0, frame = 8
  181              		@ frame_needed = 0, uses_anonymous_args = 0
- 182 0104 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
- 183 0108 0027     		movs	r7, #0
- 184 010a 0DF10808 		add	r8, sp, #8
- 185 010e 0646     		mov	r6, r0
- 186 0110 0C46     		mov	r4, r1
- 187 0112 1546     		mov	r5, r2
- 188 0114 9946     		mov	r9, r3
- 189 0116 08F8017D 		strb	r7, [r8, #-1]!
- 190 011a 0EE0     		b	.L24
- 191              	.L27:
- 192 011c 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 193 0120 0D2B     		cmp	r3, #13
- 194 0122 03D0     		beq	.L25
- 195 0124 0A2B     		cmp	r3, #10
- 196 0126 18BF     		it	ne
- 197 0128 04F8013B 		strbne	r3, [r4], #1
- 198              	.L25:
- 199 012c 0137     		adds	r7, r7, #1
- 200 012e AF42     		cmp	r7, r5
- 201 0130 0BDA     		bge	.L29
- 202 0132 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 203 0136 0A2B     		cmp	r3, #10
- 204 0138 09D0     		beq	.L30
- 205              	.L24:
- 206 013a 3046     		mov	r0, r6
- 207 013c 4146     		mov	r1, r8
- 208 013e 4A46     		mov	r2, r9
- 209 0140 FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
- 210 0144 0028     		cmp	r0, #0
- 211 0146 E9D1     		bne	.L27
- 212 0148 02E0     		b	.L26
- 213              	.L29:
- 214 014a 0020     		movs	r0, #0
- 215 014c 00E0     		b	.L26
- 216              	.L30:
- 217 014e 0120     		movs	r0, #1
- 218              	.L26:
- 219 0150 002F     		cmp	r7, #0
- 220 0152 01DD     		ble	.L28
- 221 0154 0023     		movs	r3, #0
- 222 0156 2370     		strb	r3, [r4, #0]
- 223              	.L28:
- 224 0158 BDE8FE83 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}
- 226              		.align	1
- 227              		.global	_ZN7UartDev6printfEPKcz
- 228              		.thumb
- 229              		.thumb_func
- 231              	_ZN7UartDev6printfEPKcz:
- 232              		@ args = 4, pretend = 12, frame = 8
- 233              		@ frame_needed = 0, uses_anonymous_args = 1
- 234 015c 0EB4     		push	{r1, r2, r3}
- 235 015e 77B5     		push	{r0, r1, r2, r4, r5, r6, lr}
- 236 0160 079E     		ldr	r6, [sp, #28]
- 237 0162 0446     		mov	r4, r0
- 238 0164 FFF7FEFF 		bl	xTaskGetSchedulerState
- 239 0168 0128     		cmp	r0, #1
- 240 016a 06D1     		bne	.L32
- 241 016c 0021     		movs	r1, #0
- 242 016e 206A     		ldr	r0, [r4, #32]
- 243 0170 4FF0FF32 		mov	r2, #-1
- 244 0174 0B46     		mov	r3, r1
- 245 0176 FFF7FEFF 		bl	xQueueGenericReceive
- 246              	.L32:
- 247 017a 08AB     		add	r3, sp, #32
- 248 017c 0093     		str	r3, [sp, #0]
- 249              	.L34:
- 250 017e 009B     		ldr	r3, [sp, #0]
- 251 0180 A18B     		ldrh	r1, [r4, #28]
- 252 0182 A069     		ldr	r0, [r4, #24]
- 253 0184 3246     		mov	r2, r6
- 254 0186 0193     		str	r3, [sp, #4]
- 255 0188 FFF7FEFF 		bl	vsnprintf
- 256 018c A38B     		ldrh	r3, [r4, #28]
- 257 018e 0546     		mov	r5, r0
- 258 0190 9842     		cmp	r0, r3
- 259 0192 0CDB     		blt	.L33
- 260 0194 20F00F03 		bic	r3, r0, #15
- 261 0198 1033     		adds	r3, r3, #16
- 262 019a A383     		strh	r3, [r4, #28]	@ movhi
- 263 019c A069     		ldr	r0, [r4, #24]
- 264 019e FFF7FEFF 		bl	free
- 265 01a2 A08B     		ldrh	r0, [r4, #28]
- 266 01a4 FFF7FEFF 		bl	malloc
- 267 01a8 A061     		str	r0, [r4, #24]
- 268 01aa 0028     		cmp	r0, #0
- 269 01ac E7D1     		bne	.L34
- 270              	.L33:
- 271 01ae A169     		ldr	r1, [r4, #24]
- 272 01b0 4FF0FF32 		mov	r2, #-1
- 273 01b4 2046     		mov	r0, r4
- 274 01b6 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
- 275 01ba FFF7FEFF 		bl	xTaskGetSchedulerState
- 276 01be 0128     		cmp	r0, #1
- 277 01c0 05D1     		bne	.L35
- 278 01c2 0021     		movs	r1, #0
- 279 01c4 206A     		ldr	r0, [r4, #32]
- 280 01c6 0A46     		mov	r2, r1
- 281 01c8 0B46     		mov	r3, r1
- 282 01ca FFF7FEFF 		bl	xQueueGenericSend
- 283              	.L35:
- 284 01ce 2846     		mov	r0, r5
- 285 01d0 BDE87E40 		pop	{r1, r2, r3, r4, r5, r6, lr}
- 286 01d4 03B0     		add	sp, sp, #12
- 287 01d6 7047     		bx	lr
- 289              		.align	1
- 290              		.global	_ZN7UartDev5flushEv
- 291              		.thumb
- 292              		.thumb_func
- 294              	_ZN7UartDev5flushEv:
- 295              		@ args = 0, pretend = 0, frame = 0
- 296              		@ frame_needed = 0, uses_anonymous_args = 0
- 297 01d8 10B5     		push	{r4, lr}
- 298 01da 0446     		mov	r4, r0
- 299 01dc FFF7FEFF 		bl	xTaskGetSchedulerState
- 300 01e0 0128     		cmp	r0, #1
- 301 01e2 08D1     		bne	.L37
- 302 01e4 02E0     		b	.L41
- 303              	.L40:
- 304 01e6 0120     		movs	r0, #1
- 305 01e8 FFF7FEFF 		bl	vTaskDelay
- 306              	.L41:
- 307 01ec A068     		ldr	r0, [r4, #8]
- 308 01ee FFF7FEFF 		bl	uxQueueMessagesWaiting
- 309 01f2 0028     		cmp	r0, #0
- 310 01f4 F7D1     		bne	.L40
- 311              	.L37:
- 312 01f6 10BD     		pop	{r4, pc}
- 314              		.align	1
- 315              		.global	_ZN7UartDev5scanfEPKcz
- 316              		.thumb
- 317              		.thumb_func
- 319              	_ZN7UartDev5scanfEPKcz:
- 320              		@ args = 4, pretend = 12, frame = 264
- 321              		@ frame_needed = 0, uses_anonymous_args = 1
- 322 01f8 0EB4     		push	{r1, r2, r3}
- 323 01fa 30B5     		push	{r4, r5, lr}
- 324 01fc C2B0     		sub	sp, sp, #264
- 325 01fe 45AB     		add	r3, sp, #276
- 326 0200 53F8044B 		ldr	r4, [r3], #4
- 327 0204 0546     		mov	r5, r0
- 328 0206 0021     		movs	r1, #0
+ 182 0100 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+ 183 0104 0746     		mov	r7, r0
+ 184 0106 0D46     		mov	r5, r1
+ 185 0108 9046     		mov	r8, r2
+ 186 010a 9946     		mov	r9, r3
+ 187 010c 0024     		movs	r4, #0
+ 188 010e 02AE     		add	r6, sp, #8
+ 189 0110 06F8014D 		strb	r4, [r6, #-1]!
+ 190              	.L32:
+ 191 0114 4A46     		mov	r2, r9
+ 192 0116 3146     		mov	r1, r6
+ 193 0118 3846     		mov	r0, r7
+ 194 011a FFF7FEFF 		bl	_ZNK7UartDev7getCharEPcj
+ 195 011e 78B1     		cbz	r0, .L30
+ 196 0120 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 197 0124 0D2A     		cmp	r2, #13
+ 198 0126 03D0     		beq	.L31
+ 199 0128 0A2A     		cmp	r2, #10
+ 200 012a 1CBF     		itt	ne
+ 201 012c 2A70     		strbne	r2, [r5]
+ 202 012e 0135     		addne	r5, r5, #1
+ 203              	.L31:
+ 204 0130 0134     		adds	r4, r4, #1
+ 205 0132 4445     		cmp	r4, r8
+ 206 0134 03DA     		bge	.L35
+ 207 0136 0A2A     		cmp	r2, #10
+ 208 0138 ECD1     		bne	.L32
+ 209 013a 0120     		movs	r0, #1
+ 210 013c 00E0     		b	.L30
+ 211              	.L35:
+ 212 013e 0020     		movs	r0, #0
+ 213              	.L30:
+ 214 0140 002C     		cmp	r4, #0
+ 215 0142 C4BF     		itt	gt
+ 216 0144 0023     		movgt	r3, #0
+ 217 0146 2B70     		strbgt	r3, [r5]
+ 218 0148 03B0     		add	sp, sp, #12
+ 219              		@ sp needed
+ 220 014a BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 222              		.align	1
+ 223              		.global	_ZN7UartDev6printfEPKcz
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	_ZN7UartDev6printfEPKcz:
+ 228              		@ args = 4, pretend = 12, frame = 8
+ 229              		@ frame_needed = 0, uses_anonymous_args = 1
+ 230 014e 0EB4     		push	{r1, r2, r3}
+ 231 0150 33B5     		push	{r0, r1, r4, r5, lr}
+ 232 0152 0446     		mov	r4, r0
+ 233 0154 FFF7FEFF 		bl	xTaskGetSchedulerState
+ 234 0158 0128     		cmp	r0, #1
+ 235 015a 06D1     		bne	.L44
+ 236 015c 0023     		movs	r3, #0
+ 237 015e 4FF0FF32 		mov	r2, #-1
+ 238 0162 1946     		mov	r1, r3
+ 239 0164 206A     		ldr	r0, [r4, #32]
+ 240 0166 FFF7FEFF 		bl	xQueueGenericReceive
+ 241              	.L44:
+ 242 016a 06AB     		add	r3, sp, #24
+ 243 016c 0093     		str	r3, [sp]
+ 244              	.L47:
+ 245 016e 009B     		ldr	r3, [sp]
+ 246 0170 059A     		ldr	r2, [sp, #20]
+ 247 0172 A18B     		ldrh	r1, [r4, #28]
+ 248 0174 A069     		ldr	r0, [r4, #24]
+ 249 0176 0193     		str	r3, [sp, #4]
+ 250 0178 FFF7FEFF 		bl	vsnprintf
+ 251 017c A38B     		ldrh	r3, [r4, #28]
+ 252 017e 0546     		mov	r5, r0
+ 253 0180 9842     		cmp	r0, r3
+ 254 0182 0CDB     		blt	.L46
+ 255 0184 20F00F03 		bic	r3, r0, #15
+ 256 0188 1033     		adds	r3, r3, #16
+ 257 018a A383     		strh	r3, [r4, #28]	@ movhi
+ 258 018c A069     		ldr	r0, [r4, #24]
+ 259 018e FFF7FEFF 		bl	free
+ 260 0192 A08B     		ldrh	r0, [r4, #28]
+ 261 0194 FFF7FEFF 		bl	malloc
+ 262 0198 A061     		str	r0, [r4, #24]
+ 263 019a 0028     		cmp	r0, #0
+ 264 019c E7D1     		bne	.L47
+ 265              	.L46:
+ 266 019e 4FF0FF32 		mov	r2, #-1
+ 267 01a2 A169     		ldr	r1, [r4, #24]
+ 268 01a4 2046     		mov	r0, r4
+ 269 01a6 FFF7FEFF 		bl	_ZN7UartDev3putEPKcj
+ 270 01aa FFF7FEFF 		bl	xTaskGetSchedulerState
+ 271 01ae 0128     		cmp	r0, #1
+ 272 01b0 05D1     		bne	.L48
+ 273 01b2 0023     		movs	r3, #0
+ 274 01b4 1A46     		mov	r2, r3
+ 275 01b6 1946     		mov	r1, r3
+ 276 01b8 206A     		ldr	r0, [r4, #32]
+ 277 01ba FFF7FEFF 		bl	xQueueGenericSend
+ 278              	.L48:
+ 279 01be 2846     		mov	r0, r5
+ 280 01c0 02B0     		add	sp, sp, #8
+ 281              		@ sp needed
+ 282 01c2 BDE83040 		pop	{r4, r5, lr}
+ 283 01c6 03B0     		add	sp, sp, #12
+ 284 01c8 7047     		bx	lr
+ 286              		.align	1
+ 287              		.global	_ZN7UartDev5flushEv
+ 288              		.thumb
+ 289              		.thumb_func
+ 291              	_ZN7UartDev5flushEv:
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 294 01ca 10B5     		push	{r4, lr}
+ 295 01cc 0446     		mov	r4, r0
+ 296 01ce FFF7FEFF 		bl	xTaskGetSchedulerState
+ 297 01d2 0128     		cmp	r0, #1
+ 298 01d4 07D1     		bne	.L52
+ 299              	.L54:
+ 300 01d6 A068     		ldr	r0, [r4, #8]
+ 301 01d8 FFF7FEFF 		bl	uxQueueMessagesWaiting
+ 302 01dc 18B1     		cbz	r0, .L52
+ 303 01de 0120     		movs	r0, #1
+ 304 01e0 FFF7FEFF 		bl	vTaskDelay
+ 305 01e4 F7E7     		b	.L54
+ 306              	.L52:
+ 307 01e6 10BD     		pop	{r4, pc}
+ 309              		.align	1
+ 310              		.global	_ZN7UartDev5scanfEPKcz
+ 311              		.thumb
+ 312              		.thumb_func
+ 314              	_ZN7UartDev5scanfEPKcz:
+ 315              		@ args = 4, pretend = 12, frame = 264
+ 316              		@ frame_needed = 0, uses_anonymous_args = 1
+ 317 01e8 0EB4     		push	{r1, r2, r3}
+ 318 01ea 30B5     		push	{r4, r5, lr}
+ 319 01ec 0546     		mov	r5, r0
+ 320 01ee C2B0     		sub	sp, sp, #264
+ 321 01f0 45AB     		add	r3, sp, #276
+ 322 01f2 53F8044B 		ldr	r4, [r3], #4
+ 323 01f6 4FF48072 		mov	r2, #256
+ 324 01fa 0021     		movs	r1, #0
+ 325 01fc 02A8     		add	r0, sp, #8
+ 326 01fe 0193     		str	r3, [sp, #4]
+ 327 0200 FFF7FEFF 		bl	memset
+ 328 0204 4FF0FF33 		mov	r3, #-1
  329 0208 4FF48072 		mov	r2, #256
- 330 020c 01A8     		add	r0, sp, #4
- 331 020e 4193     		str	r3, [sp, #260]
- 332 0210 FFF7FEFF 		bl	memset
- 333 0214 2846     		mov	r0, r5
- 334 0216 01A9     		add	r1, sp, #4
- 335 0218 4FF48072 		mov	r2, #256
- 336 021c 4FF0FF33 		mov	r3, #-1
- 337 0220 FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
- 338 0224 20B1     		cbz	r0, .L43
- 339 0226 01A8     		add	r0, sp, #4
- 340 0228 2146     		mov	r1, r4
- 341 022a 419A     		ldr	r2, [sp, #260]
- 342 022c FFF7FEFF 		bl	vsscanf
- 343              	.L43:
- 344 0230 42B0     		add	sp, sp, #264
- 345 0232 BDE83040 		pop	{r4, r5, lr}
- 346 0236 03B0     		add	sp, sp, #12
- 347 0238 7047     		bx	lr
- 349              		.align	1
- 350              		.global	_ZNK7UartDev14recentlyActiveEj
- 351              		.thumb
- 352              		.thumb_func
- 354              	_ZNK7UartDev14recentlyActiveEj:
- 355              		@ args = 0, pretend = 0, frame = 0
- 356              		@ frame_needed = 0, uses_anonymous_args = 0
- 357 023a 38B5     		push	{r3, r4, r5, lr}
- 358 023c 0C46     		mov	r4, r1
- 359 023e 4569     		ldr	r5, [r0, #20]
- 360 0240 FFF7FEFF 		bl	xTaskGetTickCount
- 361 0244 401B     		subs	r0, r0, r5
- 362 0246 A042     		cmp	r0, r4
- 363 0248 2CBF     		ite	cs
- 364 024a 0020     		movcs	r0, #0
- 365 024c 0120     		movcc	r0, #1
- 366 024e 38BD     		pop	{r3, r4, r5, pc}
- 368              		.global	__aeabi_ui2d
- 369              		.global	__aeabi_dadd
- 370              		.global	__aeabi_d2uiz
- 371              		.align	1
- 372              		.global	_ZN7UartDev11setBaudRateEj
- 373              		.thumb
- 374              		.thumb_func
- 376              	_ZN7UartDev11setBaudRateEj:
- 377              		@ args = 0, pretend = 0, frame = 0
- 378              		@ frame_needed = 0, uses_anonymous_args = 0
- 379 0250 0368     		ldr	r3, [r0, #0]
- 380 0252 8022     		movs	r2, #128
- 381 0254 10B5     		push	{r4, lr}
- 382 0256 1A73     		strb	r2, [r3, #12]
- 383 0258 0446     		mov	r4, r0
- 384 025a C068     		ldr	r0, [r0, #12]
- 385 025c 0901     		lsls	r1, r1, #4
- 386 025e B0FBF1F0 		udiv	r0, r0, r1
- 387 0262 FFF7FEFF 		bl	__aeabi_ui2d
- 388 0266 0022     		movs	r2, #0
- 389 0268 074B     		ldr	r3, .L47
- 390 026a FFF7FEFF 		bl	__aeabi_dadd
- 391 026e FFF7FEFF 		bl	__aeabi_d2uiz
- 392 0272 2368     		ldr	r3, [r4, #0]
- 393 0274 80B2     		uxth	r0, r0
- 394 0276 020A     		lsrs	r2, r0, #8
- 395 0278 1A71     		strb	r2, [r3, #4]
- 396 027a 2368     		ldr	r3, [r4, #0]
- 397 027c C0B2     		uxtb	r0, r0
- 398 027e 1870     		strb	r0, [r3, #0]
- 399 0280 2368     		ldr	r3, [r4, #0]
- 400 0282 0322     		movs	r2, #3
- 401 0284 1A73     		strb	r2, [r3, #12]
- 402 0286 10BD     		pop	{r4, pc}
- 403              	.L48:
- 404              		.align	2
- 405              	.L47:
- 406 0288 0000E03F 		.word	1071644672
- 408              		.align	1
- 409              		.global	_ZN7UartDev15handleInterruptEv
- 410              		.thumb
- 411              		.thumb_func
- 413              	_ZN7UartDev15handleInterruptEv:
- 414              		@ args = 0, pretend = 0, frame = 8
- 415              		@ frame_needed = 0, uses_anonymous_args = 0
- 416 028c 73B5     		push	{r0, r1, r4, r5, r6, lr}
- 417 028e 0023     		movs	r3, #0
- 418 0290 0268     		ldr	r2, [r0, #0]
- 419 0292 0093     		str	r3, [sp, #0]
- 420 0294 8DF80730 		strb	r3, [sp, #7]
- 421 0298 9368     		ldr	r3, [r2, #8]
- 422 029a 0446     		mov	r4, r0
- 423 029c 03F00E03 		and	r3, r3, #14
- 424 02a0 042B     		cmp	r3, #4
- 425 02a2 22D0     		beq	.L52
- 426 02a4 0C2B     		cmp	r3, #12
- 427 02a6 20D0     		beq	.L52
- 428 02a8 022B     		cmp	r3, #2
- 429 02aa 40D1     		bne	.L64
- 430 02ac 8068     		ldr	r0, [r0, #8]
- 431 02ae FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
- 432 02b2 638A     		ldrh	r3, [r4, #18]
- 433 02b4 9842     		cmp	r0, r3
- 434 02b6 03D9     		bls	.L53
- 435 02b8 A068     		ldr	r0, [r4, #8]
- 436 02ba FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
- 437 02be 6082     		strh	r0, [r4, #18]	@ movhi
- 438              	.L53:
- 439 02c0 1026     		movs	r6, #16
- 440 02c2 0025     		movs	r5, #0
- 441              	.L54:
- 442 02c4 A068     		ldr	r0, [r4, #8]
- 443 02c6 0DF10701 		add	r1, sp, #7
- 444 02ca 6A46     		mov	r2, sp
- 445 02cc FFF7FEFF 		bl	xQueueReceiveFromISR
- 446 02d0 0028     		cmp	r0, #0
- 447 02d2 2ED0     		beq	.L60
- 448 02d4 2368     		ldr	r3, [r4, #0]
- 449 02d6 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
- 450 02da 1A70     		strb	r2, [r3, #0]
- 451 02dc 009B     		ldr	r3, [sp, #0]
- 452 02de 002B     		cmp	r3, #0
- 453 02e0 18BF     		it	ne
- 454 02e2 0125     		movne	r5, #1
- 455 02e4 013E     		subs	r6, r6, #1
- 456 02e6 24D0     		beq	.L60
- 457 02e8 ECE7     		b	.L54
- 458              	.L52:
- 459 02ea FFF7FEFF 		bl	xTaskGetTickCountFromISR
- 460 02ee 0025     		movs	r5, #0
- 461 02f0 6061     		str	r0, [r4, #20]
- 462 02f2 0DE0     		b	.L65
- 463              	.L59:
- 464 02f4 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
- 465 02f6 6068     		ldr	r0, [r4, #4]
- 466 02f8 8DF80730 		strb	r3, [sp, #7]
- 467 02fc 0DF10701 		add	r1, sp, #7
- 468 0300 0023     		movs	r3, #0
- 469 0302 6A46     		mov	r2, sp
- 470 0304 FFF7FEFF 		bl	xQueueGenericSendFromISR
- 471 0308 009B     		ldr	r3, [sp, #0]
- 472 030a 002B     		cmp	r3, #0
- 473 030c 18BF     		it	ne
- 474 030e 0125     		movne	r5, #1
- 475              	.L65:
- 476 0310 2368     		ldr	r3, [r4, #0]
- 477 0312 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
- 478 0314 D107     		lsls	r1, r2, #31
- 479 0316 EDD4     		bmi	.L59
- 480 0318 6068     		ldr	r0, [r4, #4]
- 481 031a FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
- 482 031e 238A     		ldrh	r3, [r4, #16]
- 483 0320 9842     		cmp	r0, r3
- 484 0322 06D9     		bls	.L60
- 485 0324 6068     		ldr	r0, [r4, #4]
- 486 0326 FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
- 487 032a 2082     		strh	r0, [r4, #16]	@ movhi
- 488 032c 01E0     		b	.L60
- 489              	.L64:
- 490 032e 137D     		ldrb	r3, [r2, #20]	@ zero_extendqisi2
- 491 0330 04E0     		b	.L49
- 492              	.L60:
- 493 0332 1DB1     		cbz	r5, .L49
- 494 0334 024B     		ldr	r3, .L66
- 495 0336 4FF08052 		mov	r2, #268435456
- 496 033a 1A60     		str	r2, [r3, #0]
- 497              	.L49:
- 498 033c 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
- 499              	.L67:
- 500 033e 00BF     		.align	2
- 501              	.L66:
- 502 0340 04ED00E0 		.word	-536810236
- 504              		.align	1
- 505              		.global	_ZN7UartDevC2EPj
- 506              		.thumb
- 507              		.thumb_func
- 509              	_ZN7UartDevC2EPj:
- 510              		@ args = 0, pretend = 0, frame = 0
- 511              		@ frame_needed = 0, uses_anonymous_args = 0
- 512 0344 10B5     		push	{r4, lr}
- 513 0346 0023     		movs	r3, #0
- 514 0348 0446     		mov	r4, r0
- 515 034a 0160     		str	r1, [r0, #0]
- 516 034c 4360     		str	r3, [r0, #4]
- 517 034e 8360     		str	r3, [r0, #8]
- 518 0350 C360     		str	r3, [r0, #12]
- 519 0352 0382     		strh	r3, [r0, #16]	@ movhi
- 520 0354 4382     		strh	r3, [r0, #18]	@ movhi
- 521 0356 4361     		str	r3, [r0, #20]
- 522 0358 8361     		str	r3, [r0, #24]
- 523 035a 8383     		strh	r3, [r0, #28]	@ movhi
- 524 035c 84F82430 		strb	r3, [r4, #36]
- 525 0360 0120     		movs	r0, #1
- 526 0362 FFF7FEFF 		bl	xQueueCreateMutex
- 527 0366 2062     		str	r0, [r4, #32]
- 528 0368 2046     		mov	r0, r4
- 529 036a 10BD     		pop	{r4, pc}
+ 330 020c 02A9     		add	r1, sp, #8
+ 331 020e 2846     		mov	r0, r5
+ 332 0210 FFF7FEFF 		bl	_ZN7UartDev4getsEPcij
+ 333 0214 20B1     		cbz	r0, .L59
+ 334 0216 019A     		ldr	r2, [sp, #4]
+ 335 0218 2146     		mov	r1, r4
+ 336 021a 02A8     		add	r0, sp, #8
+ 337 021c FFF7FEFF 		bl	vsscanf
+ 338              	.L59:
+ 339 0220 42B0     		add	sp, sp, #264
+ 340              		@ sp needed
+ 341 0222 BDE83040 		pop	{r4, r5, lr}
+ 342 0226 03B0     		add	sp, sp, #12
+ 343 0228 7047     		bx	lr
+ 345              		.align	1
+ 346              		.global	_ZNK7UartDev14recentlyActiveEj
+ 347              		.thumb
+ 348              		.thumb_func
+ 350              	_ZNK7UartDev14recentlyActiveEj:
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353 022a 38B5     		push	{r3, r4, r5, lr}
+ 354 022c 0D46     		mov	r5, r1
+ 355 022e 4469     		ldr	r4, [r0, #20]
+ 356 0230 FFF7FEFF 		bl	xTaskGetTickCount
+ 357 0234 001B     		subs	r0, r0, r4
+ 358 0236 A842     		cmp	r0, r5
+ 359 0238 2CBF     		ite	cs
+ 360 023a 0020     		movcs	r0, #0
+ 361 023c 0120     		movcc	r0, #1
+ 362 023e 38BD     		pop	{r3, r4, r5, pc}
+ 364              		.global	__aeabi_ui2d
+ 365              		.global	__aeabi_dadd
+ 366              		.global	__aeabi_d2uiz
+ 367              		.align	1
+ 368              		.global	_ZN7UartDev11setBaudRateEj
+ 369              		.thumb
+ 370              		.thumb_func
+ 372              	_ZN7UartDev11setBaudRateEj:
+ 373              		@ args = 0, pretend = 0, frame = 0
+ 374              		@ frame_needed = 0, uses_anonymous_args = 0
+ 375 0240 0368     		ldr	r3, [r0]
+ 376 0242 8022     		movs	r2, #128
+ 377 0244 10B5     		push	{r4, lr}
+ 378 0246 1A73     		strb	r2, [r3, #12]
+ 379 0248 0446     		mov	r4, r0
+ 380 024a C068     		ldr	r0, [r0, #12]
+ 381 024c 0901     		lsls	r1, r1, #4
+ 382 024e B0FBF1F0 		udiv	r0, r0, r1
+ 383 0252 FFF7FEFF 		bl	__aeabi_ui2d
+ 384 0256 0022     		movs	r2, #0
+ 385 0258 074B     		ldr	r3, .L63
+ 386 025a FFF7FEFF 		bl	__aeabi_dadd
+ 387 025e FFF7FEFF 		bl	__aeabi_d2uiz
+ 388 0262 2368     		ldr	r3, [r4]
+ 389 0264 80B2     		uxth	r0, r0
+ 390 0266 020A     		lsrs	r2, r0, #8
+ 391 0268 1A71     		strb	r2, [r3, #4]
+ 392 026a 2368     		ldr	r3, [r4]
+ 393 026c C0B2     		uxtb	r0, r0
+ 394 026e 1870     		strb	r0, [r3]
+ 395 0270 2368     		ldr	r3, [r4]
+ 396 0272 0322     		movs	r2, #3
+ 397 0274 1A73     		strb	r2, [r3, #12]
+ 398 0276 10BD     		pop	{r4, pc}
+ 399              	.L64:
+ 400              		.align	2
+ 401              	.L63:
+ 402 0278 0000E03F 		.word	1071644672
+ 404              		.align	1
+ 405              		.global	_ZN7UartDev15handleInterruptEv
+ 406              		.thumb
+ 407              		.thumb_func
+ 409              	_ZN7UartDev15handleInterruptEv:
+ 410              		@ args = 0, pretend = 0, frame = 8
+ 411              		@ frame_needed = 0, uses_anonymous_args = 0
+ 412 027c 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 413 027e 0268     		ldr	r2, [r0]
+ 414 0280 0023     		movs	r3, #0
+ 415 0282 0193     		str	r3, [sp, #4]
+ 416 0284 8DF80330 		strb	r3, [sp, #3]
+ 417 0288 9368     		ldr	r3, [r2, #8]
+ 418 028a 0446     		mov	r4, r0
+ 419 028c 03F00E03 		and	r3, r3, #14
+ 420 0290 042B     		cmp	r3, #4
+ 421 0292 17D0     		beq	.L67
+ 422 0294 0C2B     		cmp	r3, #12
+ 423 0296 15D0     		beq	.L67
+ 424 0298 022B     		cmp	r3, #2
+ 425 029a 35D1     		bne	.L92
+ 426 029c 8068     		ldr	r0, [r0, #8]
+ 427 029e FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
+ 428 02a2 638A     		ldrh	r3, [r4, #18]
+ 429 02a4 9842     		cmp	r0, r3
+ 430 02a6 03D9     		bls	.L69
+ 431 02a8 A068     		ldr	r0, [r4, #8]
+ 432 02aa FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
+ 433 02ae 6082     		strh	r0, [r4, #18]	@ movhi
+ 434              	.L69:
+ 435 02b0 1026     		movs	r6, #16
+ 436 02b2 0025     		movs	r5, #0
+ 437              	.L72:
+ 438 02b4 01AA     		add	r2, sp, #4
+ 439 02b6 0DF10301 		add	r1, sp, #3
+ 440 02ba A068     		ldr	r0, [r4, #8]
+ 441 02bc FFF7FEFF 		bl	xQueueReceiveFromISR
+ 442 02c0 20BB     		cbnz	r0, .L70
+ 443 02c2 2DE0     		b	.L76
+ 444              	.L67:
+ 445 02c4 FFF7FEFF 		bl	xTaskGetTickCountFromISR
+ 446 02c8 0025     		movs	r5, #0
+ 447 02ca 6061     		str	r0, [r4, #20]
+ 448              	.L73:
+ 449 02cc 2368     		ldr	r3, [r4]
+ 450 02ce 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
+ 451 02d0 D207     		lsls	r2, r2, #31
+ 452 02d2 0ED5     		bpl	.L74
+ 453 02d4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 454 02d6 01AA     		add	r2, sp, #4
+ 455 02d8 8DF80330 		strb	r3, [sp, #3]
+ 456 02dc 0DF10301 		add	r1, sp, #3
+ 457 02e0 0023     		movs	r3, #0
+ 458 02e2 6068     		ldr	r0, [r4, #4]
+ 459 02e4 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 460 02e8 019B     		ldr	r3, [sp, #4]
+ 461 02ea 002B     		cmp	r3, #0
+ 462 02ec 18BF     		it	ne
+ 463 02ee 0125     		movne	r5, #1
+ 464 02f0 ECE7     		b	.L73
+ 465              	.L74:
+ 466 02f2 6068     		ldr	r0, [r4, #4]
+ 467 02f4 FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
+ 468 02f8 238A     		ldrh	r3, [r4, #16]
+ 469 02fa 9842     		cmp	r0, r3
+ 470 02fc 10D9     		bls	.L76
+ 471 02fe 6068     		ldr	r0, [r4, #4]
+ 472 0300 FFF7FEFF 		bl	uxQueueMessagesWaitingFromISR
+ 473 0304 2082     		strh	r0, [r4, #16]	@ movhi
+ 474 0306 0BE0     		b	.L76
+ 475              	.L92:
+ 476 0308 137D     		ldrb	r3, [r2, #20]	@ zero_extendqisi2
+ 477 030a 0EE0     		b	.L65
+ 478              	.L70:
+ 479 030c 2368     		ldr	r3, [r4]
+ 480 030e 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 481 0312 1A70     		strb	r2, [r3]
+ 482 0314 019B     		ldr	r3, [sp, #4]
+ 483 0316 002B     		cmp	r3, #0
+ 484 0318 18BF     		it	ne
+ 485 031a 0125     		movne	r5, #1
+ 486 031c 013E     		subs	r6, r6, #1
+ 487 031e C9D1     		bne	.L72
+ 488              	.L76:
+ 489 0320 1DB1     		cbz	r5, .L65
+ 490 0322 034B     		ldr	r3, .L93
+ 491 0324 4FF08052 		mov	r2, #268435456
+ 492 0328 1A60     		str	r2, [r3]
+ 493              	.L65:
+ 494 032a 02B0     		add	sp, sp, #8
+ 495              		@ sp needed
+ 496 032c 70BD     		pop	{r4, r5, r6, pc}
+ 497              	.L94:
+ 498 032e 00BF     		.align	2
+ 499              	.L93:
+ 500 0330 04ED00E0 		.word	-536810236
+ 502              		.align	1
+ 503              		.global	_ZN7UartDevC2EPj
+ 504              		.thumb
+ 505              		.thumb_func
+ 507              	_ZN7UartDevC2EPj:
+ 508              		@ args = 0, pretend = 0, frame = 0
+ 509              		@ frame_needed = 0, uses_anonymous_args = 0
+ 510 0334 0023     		movs	r3, #0
+ 511 0336 10B5     		push	{r4, lr}
+ 512 0338 0446     		mov	r4, r0
+ 513 033a 0160     		str	r1, [r0]
+ 514 033c 4360     		str	r3, [r0, #4]
+ 515 033e 8360     		str	r3, [r0, #8]
+ 516 0340 C360     		str	r3, [r0, #12]
+ 517 0342 0382     		strh	r3, [r0, #16]	@ movhi
+ 518 0344 4382     		strh	r3, [r0, #18]	@ movhi
+ 519 0346 4361     		str	r3, [r0, #20]
+ 520 0348 8361     		str	r3, [r0, #24]
+ 521 034a 8383     		strh	r3, [r0, #28]	@ movhi
+ 522 034c 80F82430 		strb	r3, [r0, #36]
+ 523 0350 0120     		movs	r0, #1
+ 524 0352 FFF7FEFF 		bl	xQueueCreateMutex
+ 525 0356 2062     		str	r0, [r4, #32]
+ 526 0358 2046     		mov	r0, r4
+ 527 035a 10BD     		pop	{r4, pc}
+ 529              		.global	_ZN7UartDevC1EPj
+ 530              		.thumb_set _ZN7UartDevC1EPj,_ZN7UartDevC2EPj
  531              		.align	1
  532              		.global	_ZN7UartDevD2Ev
  533              		.thumb
@@ -511,141 +511,139 @@
  536              	_ZN7UartDevD2Ev:
  537              		@ args = 0, pretend = 0, frame = 0
  538              		@ frame_needed = 0, uses_anonymous_args = 0
- 539 036c 10B5     		push	{r4, lr}
- 540 036e 0446     		mov	r4, r0
- 541 0370 8069     		ldr	r0, [r0, #24]
- 542 0372 08B1     		cbz	r0, .L71
- 543 0374 FFF7FEFF 		bl	free
- 544              	.L71:
- 545 0378 2046     		mov	r0, r4
- 546 037a 10BD     		pop	{r4, pc}
- 548              		.align	1
- 549              		.global	_ZN7UartDev4initEjjii
- 550              		.thumb
- 551              		.thumb_func
- 553              	_ZN7UartDev4initEjjii:
- 554              		@ args = 4, pretend = 0, frame = 0
- 555              		@ frame_needed = 0, uses_anonymous_args = 0
- 556 037c 38B5     		push	{r3, r4, r5, lr}
- 557 037e 1D46     		mov	r5, r3
- 558 0380 C160     		str	r1, [r0, #12]
- 559 0382 0368     		ldr	r3, [r0, #0]
- 560 0384 2A49     		ldr	r1, .L82
- 561 0386 0446     		mov	r4, r0
- 562 0388 8B42     		cmp	r3, r1
- 563 038a 09D1     		bne	.L73
- 564 038c 01F57021 		add	r1, r1, #983040
- 565 0390 D1F8C400 		ldr	r0, [r1, #196]
- 566 0394 40F00800 		orr	r0, r0, #8
- 567 0398 C1F8C400 		str	r0, [r1, #196]
- 568 039c 2020     		movs	r0, #32
- 569 039e 19E0     		b	.L81
- 570              	.L73:
- 571 03a0 2449     		ldr	r1, .L82+4
- 572 03a2 8B42     		cmp	r3, r1
- 573 03a4 09D1     		bne	.L75
- 574 03a6 01F5C821 		add	r1, r1, #409600
- 575 03aa D1F8C400 		ldr	r0, [r1, #196]
- 576 03ae 40F08070 		orr	r0, r0, #16777216
- 577 03b2 C1F8C400 		str	r0, [r1, #196]
- 578 03b6 8020     		movs	r0, #128
- 579 03b8 0CE0     		b	.L81
- 580              	.L75:
- 581 03ba 1F49     		ldr	r1, .L82+8
- 582 03bc 8B42     		cmp	r3, r1
- 583 03be 34D1     		bne	.L79
- 584 03c0 01F5C021 		add	r1, r1, #393216
- 585 03c4 D1F8C400 		ldr	r0, [r1, #196]
- 586 03c8 40F00070 		orr	r0, r0, #33554432
- 587 03cc C1F8C400 		str	r0, [r1, #196]
- 588 03d0 4FF48070 		mov	r0, #256
- 589              	.L81:
- 590 03d4 1949     		ldr	r1, .L82+12
- 591 03d6 0860     		str	r0, [r1, #0]
- 592 03d8 4121     		movs	r1, #65
- 593 03da 1972     		strb	r1, [r3, #8]
- 594 03dc 2368     		ldr	r3, [r4, #0]
- 595 03de 2046     		mov	r0, r4
- 596 03e0 197A     		ldrb	r1, [r3, #8]	@ zero_extendqisi2
- 597 03e2 41F00601 		orr	r1, r1, #6
- 598 03e6 1972     		strb	r1, [r3, #8]
- 599 03e8 1146     		mov	r1, r2
- 600 03ea FFF7FEFF 		bl	_ZN7UartDev11setBaudRateEj
- 601 03ee 6268     		ldr	r2, [r4, #4]
- 602 03f0 3AB9     		cbnz	r2, .L77
- 603 03f2 082D     		cmp	r5, #8
- 604 03f4 ACBF     		ite	ge
- 605 03f6 2846     		movge	r0, r5
- 606 03f8 0820     		movlt	r0, #8
- 607 03fa 0121     		movs	r1, #1
- 608 03fc FFF7FEFF 		bl	xQueueGenericCreate
- 609 0400 6060     		str	r0, [r4, #4]
- 610              	.L77:
- 611 0402 A268     		ldr	r2, [r4, #8]
- 612 0404 3AB9     		cbnz	r2, .L78
- 613 0406 0498     		ldr	r0, [sp, #16]
- 614 0408 0121     		movs	r1, #1
- 615 040a 0828     		cmp	r0, #8
- 616 040c B8BF     		it	lt
- 617 040e 0820     		movlt	r0, #8
- 618 0410 FFF7FEFF 		bl	xQueueGenericCreate
- 619 0414 A060     		str	r0, [r4, #8]
- 620              	.L78:
- 621 0416 2368     		ldr	r3, [r4, #0]
- 622 0418 0722     		movs	r2, #7
- 623 041a 5A60     		str	r2, [r3, #4]
- 624 041c 6068     		ldr	r0, [r4, #4]
- 625 041e 28B1     		cbz	r0, .L76
- 626 0420 A068     		ldr	r0, [r4, #8]
- 627 0422 0030     		adds	r0, r0, #0
- 628 0424 18BF     		it	ne
- 629 0426 0120     		movne	r0, #1
- 630 0428 38BD     		pop	{r3, r4, r5, pc}
- 631              	.L79:
- 632 042a 0020     		movs	r0, #0
- 633              	.L76:
- 634 042c 38BD     		pop	{r3, r4, r5, pc}
- 635              	.L83:
- 636 042e 00BF     		.align	2
- 637              	.L82:
- 638 0430 00C00040 		.word	1073790976
- 639 0434 00800940 		.word	1074364416
- 640 0438 00C00940 		.word	1074380800
- 641 043c 00E100E0 		.word	-536813312
- 643              		.global	_ZN7UartDevC1EPj
- 644              		.thumb_set _ZN7UartDevC1EPj,_ZN7UartDevC2EPj
- 645              		.global	_ZN7UartDevD1Ev
- 646              		.thumb_set _ZN7UartDevD1Ev,_ZN7UartDevD2Ev
- 647              		.section	.rodata.str1.1,"aMS",%progbits,1
- 648              	.LC0:
- 649 0000 0D0A00   		.ascii	"\015\012\000"
- 650              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+ 539 035c 10B5     		push	{r4, lr}
+ 540 035e 0446     		mov	r4, r0
+ 541 0360 8069     		ldr	r0, [r0, #24]
+ 542 0362 08B1     		cbz	r0, .L97
+ 543 0364 FFF7FEFF 		bl	free
+ 544              	.L97:
+ 545 0368 2046     		mov	r0, r4
+ 546 036a 10BD     		pop	{r4, pc}
+ 548              		.global	_ZN7UartDevD1Ev
+ 549              		.thumb_set _ZN7UartDevD1Ev,_ZN7UartDevD2Ev
+ 550              		.align	1
+ 551              		.global	_ZN7UartDev4initEjjii
+ 552              		.thumb
+ 553              		.thumb_func
+ 555              	_ZN7UartDev4initEjjii:
+ 556              		@ args = 4, pretend = 0, frame = 0
+ 557              		@ frame_needed = 0, uses_anonymous_args = 0
+ 558 036c 38B5     		push	{r3, r4, r5, lr}
+ 559 036e 1D46     		mov	r5, r3
+ 560 0370 C160     		str	r1, [r0, #12]
+ 561 0372 2A4B     		ldr	r3, .L114
+ 562 0374 0168     		ldr	r1, [r0]
+ 563 0376 0446     		mov	r4, r0
+ 564 0378 9942     		cmp	r1, r3
+ 565 037a 08D1     		bne	.L102
+ 566 037c 2848     		ldr	r0, .L114+4
+ 567 037e D0F8C430 		ldr	r3, [r0, #196]
+ 568 0382 43F00803 		orr	r3, r3, #8
+ 569 0386 C0F8C430 		str	r3, [r0, #196]
+ 570 038a 2020     		movs	r0, #32
+ 571 038c 19E0     		b	.L113
+ 572              	.L102:
+ 573 038e 254B     		ldr	r3, .L114+8
+ 574 0390 9942     		cmp	r1, r3
+ 575 0392 09D1     		bne	.L104
+ 576 0394 03F5C823 		add	r3, r3, #409600
+ 577 0398 D3F8C400 		ldr	r0, [r3, #196]
+ 578 039c 40F08070 		orr	r0, r0, #16777216
+ 579 03a0 C3F8C400 		str	r0, [r3, #196]
+ 580 03a4 8020     		movs	r0, #128
+ 581 03a6 0CE0     		b	.L113
+ 582              	.L104:
+ 583 03a8 1F4B     		ldr	r3, .L114+12
+ 584 03aa 9942     		cmp	r1, r3
+ 585 03ac 32D1     		bne	.L105
+ 586 03ae 03F5C023 		add	r3, r3, #393216
+ 587 03b2 D3F8C400 		ldr	r0, [r3, #196]
+ 588 03b6 40F00070 		orr	r0, r0, #33554432
+ 589 03ba C3F8C400 		str	r0, [r3, #196]
+ 590 03be 4FF48070 		mov	r0, #256
+ 591              	.L113:
+ 592 03c2 1A4B     		ldr	r3, .L114+16
+ 593 03c4 1860     		str	r0, [r3]
+ 594 03c6 4123     		movs	r3, #65
+ 595 03c8 0B72     		strb	r3, [r1, #8]
+ 596 03ca 2368     		ldr	r3, [r4]
+ 597 03cc 2046     		mov	r0, r4
+ 598 03ce 197A     		ldrb	r1, [r3, #8]	@ zero_extendqisi2
+ 599 03d0 41F00601 		orr	r1, r1, #6
+ 600 03d4 1972     		strb	r1, [r3, #8]
+ 601 03d6 1146     		mov	r1, r2
+ 602 03d8 FFF7FEFF 		bl	_ZN7UartDev11setBaudRateEj
+ 603 03dc 6268     		ldr	r2, [r4, #4]
+ 604 03de 42B9     		cbnz	r2, .L106
+ 605 03e0 082D     		cmp	r5, #8
+ 606 03e2 2846     		mov	r0, r5
+ 607 03e4 4FF00101 		mov	r1, #1
+ 608 03e8 B8BF     		it	lt
+ 609 03ea 0820     		movlt	r0, #8
+ 610 03ec FFF7FEFF 		bl	xQueueGenericCreate
+ 611 03f0 6060     		str	r0, [r4, #4]
+ 612              	.L106:
+ 613 03f2 A268     		ldr	r2, [r4, #8]
+ 614 03f4 3AB9     		cbnz	r2, .L107
+ 615 03f6 0498     		ldr	r0, [sp, #16]
+ 616 03f8 0121     		movs	r1, #1
+ 617 03fa 0828     		cmp	r0, #8
+ 618 03fc B8BF     		it	lt
+ 619 03fe 0820     		movlt	r0, #8
+ 620 0400 FFF7FEFF 		bl	xQueueGenericCreate
+ 621 0404 A060     		str	r0, [r4, #8]
+ 622              	.L107:
+ 623 0406 2368     		ldr	r3, [r4]
+ 624 0408 0722     		movs	r2, #7
+ 625 040a 5A60     		str	r2, [r3, #4]
+ 626 040c 6368     		ldr	r3, [r4, #4]
+ 627 040e 0BB1     		cbz	r3, .L105
+ 628 0410 A368     		ldr	r3, [r4, #8]
+ 629 0412 0BB9     		cbnz	r3, .L109
+ 630              	.L105:
+ 631 0414 0020     		movs	r0, #0
+ 632 0416 38BD     		pop	{r3, r4, r5, pc}
+ 633              	.L109:
+ 634 0418 0120     		movs	r0, #1
+ 635 041a 38BD     		pop	{r3, r4, r5, pc}
+ 636              	.L115:
+ 637              		.align	2
+ 638              	.L114:
+ 639 041c 00C00040 		.word	1073790976
+ 640 0420 00C00F40 		.word	1074774016
+ 641 0424 00800940 		.word	1074364416
+ 642 0428 00C00940 		.word	1074380800
+ 643 042c 00E100E0 		.word	-536813312
+ 645              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 646              	.LC0:
+ 647 0000 0D0A00   		.ascii	"\015\012\000"
+ 648              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 uart_dev.cpp
-     /tmp/ccADoObk.s:16     .text:00000000 $t
-     /tmp/ccADoObk.s:21     .text:00000000 _ZNK7UartDev7getCharEPcj
-     /tmp/ccADoObk.s:76     .text:00000066 _ZN7UartDev7putCharEcj
-     /tmp/ccADoObk.s:127    .text:000000c2 _ZN7UartDev3putEPKcj
-     /tmp/ccADoObk.s:157    .text:000000e8 _ZN7UartDev7putlineEPKcj
-     /tmp/ccADoObk.s:172    .text:00000100 $d
-     /tmp/ccADoObk.s:174    .text:00000104 $t
-     /tmp/ccADoObk.s:179    .text:00000104 _ZN7UartDev4getsEPcij
-     /tmp/ccADoObk.s:231    .text:0000015c _ZN7UartDev6printfEPKcz
-     /tmp/ccADoObk.s:294    .text:000001d8 _ZN7UartDev5flushEv
-     /tmp/ccADoObk.s:319    .text:000001f8 _ZN7UartDev5scanfEPKcz
-     /tmp/ccADoObk.s:354    .text:0000023a _ZNK7UartDev14recentlyActiveEj
-     /tmp/ccADoObk.s:376    .text:00000250 _ZN7UartDev11setBaudRateEj
-     /tmp/ccADoObk.s:406    .text:00000288 $d
-     /tmp/ccADoObk.s:408    .text:0000028c $t
-     /tmp/ccADoObk.s:413    .text:0000028c _ZN7UartDev15handleInterruptEv
-     /tmp/ccADoObk.s:502    .text:00000340 $d
-     /tmp/ccADoObk.s:504    .text:00000344 $t
-     /tmp/ccADoObk.s:509    .text:00000344 _ZN7UartDevC2EPj
-     /tmp/ccADoObk.s:536    .text:0000036c _ZN7UartDevD2Ev
-     /tmp/ccADoObk.s:553    .text:0000037c _ZN7UartDev4initEjjii
-     /tmp/ccADoObk.s:638    .text:00000430 $d
-     /tmp/ccADoObk.s:509    .text:00000344 _ZN7UartDevC1EPj
-     /tmp/ccADoObk.s:536    .text:0000036c _ZN7UartDevD1Ev
+     /tmp/ccfLaOUE.s:17     .text:00000000 $t
+     /tmp/ccfLaOUE.s:22     .text:00000000 _ZNK7UartDev7getCharEPcj
+     /tmp/ccfLaOUE.s:75     .text:00000062 _ZN7UartDev7putCharEcj
+     /tmp/ccfLaOUE.s:127    .text:000000be _ZN7UartDev3putEPKcj
+     /tmp/ccfLaOUE.s:157    .text:000000e4 _ZN7UartDev7putlineEPKcj
+     /tmp/ccfLaOUE.s:172    .text:000000fc $d
+     /tmp/ccfLaOUE.s:174    .text:00000100 $t
+     /tmp/ccfLaOUE.s:179    .text:00000100 _ZN7UartDev4getsEPcij
+     /tmp/ccfLaOUE.s:227    .text:0000014e _ZN7UartDev6printfEPKcz
+     /tmp/ccfLaOUE.s:291    .text:000001ca _ZN7UartDev5flushEv
+     /tmp/ccfLaOUE.s:314    .text:000001e8 _ZN7UartDev5scanfEPKcz
+     /tmp/ccfLaOUE.s:350    .text:0000022a _ZNK7UartDev14recentlyActiveEj
+     /tmp/ccfLaOUE.s:372    .text:00000240 _ZN7UartDev11setBaudRateEj
+     /tmp/ccfLaOUE.s:402    .text:00000278 $d
+     /tmp/ccfLaOUE.s:404    .text:0000027c $t
+     /tmp/ccfLaOUE.s:409    .text:0000027c _ZN7UartDev15handleInterruptEv
+     /tmp/ccfLaOUE.s:500    .text:00000330 $d
+     /tmp/ccfLaOUE.s:502    .text:00000334 $t
+     /tmp/ccfLaOUE.s:507    .text:00000334 _ZN7UartDevC2EPj
+     /tmp/ccfLaOUE.s:507    .text:00000334 _ZN7UartDevC1EPj
+     /tmp/ccfLaOUE.s:536    .text:0000035c _ZN7UartDevD2Ev
+     /tmp/ccfLaOUE.s:536    .text:0000035c _ZN7UartDevD1Ev
+     /tmp/ccfLaOUE.s:555    .text:0000036c _ZN7UartDev4initEjjii
+     /tmp/ccfLaOUE.s:639    .text:0000041c $d
 
 UNDEFINED SYMBOLS
 xTaskGetSchedulerState
@@ -656,8 +654,8 @@ xQueueGenericSend
 vsnprintf
 free
 malloc
-vTaskDelay
 uxQueueMessagesWaiting
+vTaskDelay
 memset
 vsscanf
 xTaskGetTickCount

@@ -11,219 +11,149 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"wireless.cpp"
-  15              		.section	.text._ZN14scheduler_taskD2Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
-  16              		.align	1
-  17              		.weak	_ZN14scheduler_taskD2Ev
-  18              		.thumb
-  19              		.thumb_func
-  21              	_ZN14scheduler_taskD2Ev:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 014B     		ldr	r3, .L3
-  26 0002 0360     		str	r3, [r0, #0]
-  27 0004 7047     		bx	lr
-  28              	.L4:
-  29 0006 00BF     		.align	2
-  30              	.L3:
-  31 0008 08000000 		.word	_ZTV14scheduler_task+8
-  33              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
-  34              		.align	1
-  35              		.weak	_ZN14scheduler_task4initEv
-  36              		.thumb
-  37              		.thumb_func
-  39              	_ZN14scheduler_task4initEv:
-  40              		@ args = 0, pretend = 0, frame = 0
-  41              		@ frame_needed = 0, uses_anonymous_args = 0
-  42              		@ link register save eliminated.
-  43 0000 0120     		movs	r0, #1
-  44 0002 7047     		bx	lr
-  46              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
-  47              		.align	1
-  48              		.weak	_ZN14scheduler_task6regTlmEv
-  49              		.thumb
-  50              		.thumb_func
-  52              	_ZN14scheduler_task6regTlmEv:
-  53              		@ args = 0, pretend = 0, frame = 0
-  54              		@ frame_needed = 0, uses_anonymous_args = 0
-  55              		@ link register save eliminated.
-  56 0000 0120     		movs	r0, #1
-  57 0002 7047     		bx	lr
-  59              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
-  60              		.align	1
-  61              		.weak	_ZN14scheduler_task9taskEntryEv
-  62              		.thumb
-  63              		.thumb_func
-  65              	_ZN14scheduler_task9taskEntryEv:
-  66              		@ args = 0, pretend = 0, frame = 0
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68              		@ link register save eliminated.
-  69 0000 0120     		movs	r0, #1
-  70 0002 7047     		bx	lr
-  72              		.section	.text._ZN12wirelessTaskD2Ev,"axG",%progbits,_ZN12wirelessTaskD5Ev,comdat
-  73              		.align	1
-  74              		.weak	_ZN12wirelessTaskD2Ev
-  75              		.thumb
-  76              		.thumb_func
-  78              	_ZN12wirelessTaskD2Ev:
-  79              		@ args = 0, pretend = 0, frame = 0
-  80              		@ frame_needed = 0, uses_anonymous_args = 0
-  81              		@ link register save eliminated.
-  82 0000 014B     		ldr	r3, .L11
-  83 0002 0360     		str	r3, [r0, #0]
-  84 0004 7047     		bx	lr
-  85              	.L12:
-  86 0006 00BF     		.align	2
-  87              	.L11:
-  88 0008 08000000 		.word	_ZTV14scheduler_task+8
-  90              		.section	.text._ZN12wirelessTaskD0Ev,"axG",%progbits,_ZN12wirelessTaskD5Ev,comdat
-  91              		.align	1
-  92              		.weak	_ZN12wirelessTaskD0Ev
-  93              		.thumb
-  94              		.thumb_func
-  96              	_ZN12wirelessTaskD0Ev:
-  97              		@ args = 0, pretend = 0, frame = 0
-  98              		@ frame_needed = 0, uses_anonymous_args = 0
-  99 0000 034B     		ldr	r3, .L17
- 100 0002 10B5     		push	{r4, lr}
- 101 0004 0446     		mov	r4, r0
- 102 0006 0360     		str	r3, [r0, #0]
- 103 0008 FFF7FEFF 		bl	_ZdlPv
- 104 000c 2046     		mov	r0, r4
- 105 000e 10BD     		pop	{r4, pc}
- 106              	.L18:
- 107              		.align	2
- 108              	.L17:
- 109 0010 08000000 		.word	_ZTV14scheduler_task+8
- 111              		.section	.text._ZN14scheduler_taskD0Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
- 112              		.align	1
- 113              		.weak	_ZN14scheduler_taskD0Ev
- 114              		.thumb
- 115              		.thumb_func
- 117              	_ZN14scheduler_taskD0Ev:
- 118              		@ args = 0, pretend = 0, frame = 0
- 119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120 0000 034B     		ldr	r3, .L22
- 121 0002 10B5     		push	{r4, lr}
- 122 0004 0446     		mov	r4, r0
- 123 0006 0360     		str	r3, [r0, #0]
- 124 0008 FFF7FEFF 		bl	_ZdlPv
- 125 000c 2046     		mov	r0, r4
- 126 000e 10BD     		pop	{r4, pc}
- 127              	.L23:
- 128              		.align	2
- 129              	.L22:
- 130 0010 08000000 		.word	_ZTV14scheduler_task+8
- 132              		.text
- 133              		.align	1
- 134              		.global	_ZN12wirelessTask3runEPv
- 135              		.thumb
- 136              		.thumb_func
- 138              	_ZN12wirelessTask3runEPv:
- 139              		@ args = 0, pretend = 0, frame = 0
- 140              		@ frame_needed = 0, uses_anonymous_args = 0
- 141 0000 08B5     		push	{r3, lr}
- 142 0002 FFF7FEFF 		bl	wireless_service
- 143 0006 0120     		movs	r0, #1
- 144 0008 08BD     		pop	{r3, pc}
- 146              		.align	1
- 147              		.global	_ZN12wirelessTaskC2Eh
- 148              		.thumb
- 149              		.thumb_func
- 151              	_ZN12wirelessTaskC2Eh:
- 152              		@ args = 0, pretend = 0, frame = 0
- 153              		@ frame_needed = 0, uses_anonymous_args = 0
- 154 000a 13B5     		push	{r0, r1, r4, lr}
- 155 000c 0022     		movs	r2, #0
- 156 000e 0B46     		mov	r3, r1
- 157 0010 0092     		str	r2, [sp, #0]
- 158 0012 0549     		ldr	r1, .L27
- 159 0014 4FF40072 		mov	r2, #512
- 160 0018 0446     		mov	r4, r0
- 161 001a FFF7FEFF 		bl	_ZN14scheduler_taskC2EPKcmhPv
- 162 001e 034B     		ldr	r3, .L27+4
- 163 0020 2046     		mov	r0, r4
- 164 0022 2360     		str	r3, [r4, #0]
- 165 0024 1CBD     		pop	{r2, r3, r4, pc}
- 166              	.L28:
- 167 0026 00BF     		.align	2
- 168              	.L27:
- 169 0028 00000000 		.word	.LC0
- 170 002c 08000000 		.word	.LANCHOR0+8
- 172              		.global	_ZTV12wirelessTask
- 173              		.weak	_ZTV14scheduler_task
- 174              		.section	.rodata._ZTV14scheduler_task,"aG",%progbits,_ZTV14scheduler_task,comdat
- 175              		.align	3
- 178              	_ZTV14scheduler_task:
- 179 0000 00000000 		.word	0
- 180 0004 00000000 		.word	0
- 181 0008 00000000 		.word	_ZN14scheduler_taskD1Ev
- 182 000c 00000000 		.word	_ZN14scheduler_taskD0Ev
- 183 0010 00000000 		.word	_ZN14scheduler_task4initEv
- 184 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
- 185 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
- 186 001c 00000000 		.word	__cxa_pure_virtual
- 187              		.weak	_ZN14scheduler_taskD1Ev
- 188              		.thumb_set _ZN14scheduler_taskD1Ev,_ZN14scheduler_taskD2Ev
- 189              		.weak	_ZN12wirelessTaskD1Ev
- 190              		.thumb_set _ZN12wirelessTaskD1Ev,_ZN12wirelessTaskD2Ev
- 191              		.global	_ZN12wirelessTaskC1Eh
- 192              		.thumb_set _ZN12wirelessTaskC1Eh,_ZN12wirelessTaskC2Eh
- 193              		.section	.rodata
- 194              		.align	3
- 195              		.set	.LANCHOR0,. + 0
- 198              	_ZTV12wirelessTask:
- 199 0000 00000000 		.word	0
- 200 0004 00000000 		.word	0
- 201 0008 00000000 		.word	_ZN12wirelessTaskD1Ev
- 202 000c 00000000 		.word	_ZN12wirelessTaskD0Ev
- 203 0010 00000000 		.word	_ZN14scheduler_task4initEv
- 204 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
- 205 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
- 206 001c 00000000 		.word	_ZN12wirelessTask3runEPv
- 207              		.section	.rodata.str1.1,"aMS",%progbits,1
- 208              	.LC0:
- 209 0000 77697265 		.ascii	"wireless\000"
- 209      6C657373 
- 209      00
- 210              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"wireless.cpp"
+  16              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
+  17              		.align	1
+  18              		.weak	_ZN14scheduler_task4initEv
+  19              		.thumb
+  20              		.thumb_func
+  22              	_ZN14scheduler_task4initEv:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0120     		movs	r0, #1
+  27 0002 7047     		bx	lr
+  29              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
+  30              		.align	1
+  31              		.weak	_ZN14scheduler_task6regTlmEv
+  32              		.thumb
+  33              		.thumb_func
+  35              	_ZN14scheduler_task6regTlmEv:
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 0120     		movs	r0, #1
+  40 0002 7047     		bx	lr
+  42              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
+  43              		.align	1
+  44              		.weak	_ZN14scheduler_task9taskEntryEv
+  45              		.thumb
+  46              		.thumb_func
+  48              	_ZN14scheduler_task9taskEntryEv:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 0120     		movs	r0, #1
+  53 0002 7047     		bx	lr
+  55              		.section	.text._ZN12wirelessTaskD2Ev,"axG",%progbits,_ZN12wirelessTaskD5Ev,comdat
+  56              		.align	1
+  57              		.weak	_ZN12wirelessTaskD2Ev
+  58              		.thumb
+  59              		.thumb_func
+  61              	_ZN12wirelessTaskD2Ev:
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 7047     		bx	lr
+  67              		.weak	_ZN12wirelessTaskD1Ev
+  68              		.thumb_set _ZN12wirelessTaskD1Ev,_ZN12wirelessTaskD2Ev
+  69              		.text
+  70              		.align	1
+  71              		.global	_ZN12wirelessTask3runEPv
+  72              		.thumb
+  73              		.thumb_func
+  75              	_ZN12wirelessTask3runEPv:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 08B5     		push	{r3, lr}
+  79 0002 FFF7FEFF 		bl	wireless_service
+  80 0006 0120     		movs	r0, #1
+  81 0008 08BD     		pop	{r3, pc}
+  83              		.section	.text._ZN12wirelessTaskD0Ev,"axG",%progbits,_ZN12wirelessTaskD5Ev,comdat
+  84              		.align	1
+  85              		.weak	_ZN12wirelessTaskD0Ev
+  86              		.thumb
+  87              		.thumb_func
+  89              	_ZN12wirelessTaskD0Ev:
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92 0000 10B5     		push	{r4, lr}
+  93 0002 0446     		mov	r4, r0
+  94 0004 FFF7FEFF 		bl	_ZdlPv
+  95 0008 2046     		mov	r0, r4
+  96 000a 10BD     		pop	{r4, pc}
+  98              		.text
+  99              		.align	1
+ 100              		.global	_ZN12wirelessTaskC2Eh
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	_ZN12wirelessTaskC2Eh:
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 000a 13B5     		push	{r0, r1, r4, lr}
+ 108 000c 0446     		mov	r4, r0
+ 109 000e 0023     		movs	r3, #0
+ 110 0010 0093     		str	r3, [sp]
+ 111 0012 4FF40072 		mov	r2, #512
+ 112 0016 0B46     		mov	r3, r1
+ 113 0018 0349     		ldr	r1, .L8
+ 114 001a FFF7FEFF 		bl	_ZN14scheduler_taskC2EPKcmhPv
+ 115 001e 2046     		mov	r0, r4
+ 116 0020 024B     		ldr	r3, .L8+4
+ 117 0022 2360     		str	r3, [r4]
+ 118 0024 02B0     		add	sp, sp, #8
+ 119              		@ sp needed
+ 120 0026 10BD     		pop	{r4, pc}
+ 121              	.L9:
+ 122              		.align	2
+ 123              	.L8:
+ 124 0028 00000000 		.word	.LC0
+ 125 002c 08000000 		.word	.LANCHOR0+8
+ 127              		.global	_ZN12wirelessTaskC1Eh
+ 128              		.thumb_set _ZN12wirelessTaskC1Eh,_ZN12wirelessTaskC2Eh
+ 129              		.global	_ZTV12wirelessTask
+ 130              		.section	.rodata
+ 131              		.align	2
+ 132              		.set	.LANCHOR0,. + 0
+ 135              	_ZTV12wirelessTask:
+ 136 0000 00000000 		.word	0
+ 137 0004 00000000 		.word	0
+ 138 0008 00000000 		.word	_ZN12wirelessTaskD1Ev
+ 139 000c 00000000 		.word	_ZN12wirelessTaskD0Ev
+ 140 0010 00000000 		.word	_ZN14scheduler_task4initEv
+ 141 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
+ 142 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
+ 143 001c 00000000 		.word	_ZN12wirelessTask3runEPv
+ 144              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 145              	.LC0:
+ 146 0000 77697265 		.ascii	"wireless\000"
+ 146      6C657373 
+ 146      00
+ 147              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 wireless.cpp
-     /tmp/ccS6poTs.s:16     .text._ZN14scheduler_taskD2Ev:00000000 $t
-     /tmp/ccS6poTs.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD2Ev
-     /tmp/ccS6poTs.s:31     .text._ZN14scheduler_taskD2Ev:00000008 $d
-     /tmp/ccS6poTs.s:178    .rodata._ZTV14scheduler_task:00000000 _ZTV14scheduler_task
-     /tmp/ccS6poTs.s:34     .text._ZN14scheduler_task4initEv:00000000 $t
-     /tmp/ccS6poTs.s:39     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
-     /tmp/ccS6poTs.s:47     .text._ZN14scheduler_task6regTlmEv:00000000 $t
-     /tmp/ccS6poTs.s:52     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
-     /tmp/ccS6poTs.s:60     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
-     /tmp/ccS6poTs.s:65     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
-     /tmp/ccS6poTs.s:73     .text._ZN12wirelessTaskD2Ev:00000000 $t
-     /tmp/ccS6poTs.s:78     .text._ZN12wirelessTaskD2Ev:00000000 _ZN12wirelessTaskD2Ev
-     /tmp/ccS6poTs.s:88     .text._ZN12wirelessTaskD2Ev:00000008 $d
-     /tmp/ccS6poTs.s:91     .text._ZN12wirelessTaskD0Ev:00000000 $t
-     /tmp/ccS6poTs.s:96     .text._ZN12wirelessTaskD0Ev:00000000 _ZN12wirelessTaskD0Ev
-     /tmp/ccS6poTs.s:109    .text._ZN12wirelessTaskD0Ev:00000010 $d
-     /tmp/ccS6poTs.s:112    .text._ZN14scheduler_taskD0Ev:00000000 $t
-     /tmp/ccS6poTs.s:117    .text._ZN14scheduler_taskD0Ev:00000000 _ZN14scheduler_taskD0Ev
-     /tmp/ccS6poTs.s:130    .text._ZN14scheduler_taskD0Ev:00000010 $d
-     /tmp/ccS6poTs.s:133    .text:00000000 $t
-     /tmp/ccS6poTs.s:138    .text:00000000 _ZN12wirelessTask3runEPv
-     /tmp/ccS6poTs.s:151    .text:0000000a _ZN12wirelessTaskC2Eh
-     /tmp/ccS6poTs.s:169    .text:00000028 $d
-     /tmp/ccS6poTs.s:198    .rodata:00000000 _ZTV12wirelessTask
-     /tmp/ccS6poTs.s:175    .rodata._ZTV14scheduler_task:00000000 $d
-     /tmp/ccS6poTs.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD1Ev
-     /tmp/ccS6poTs.s:78     .text._ZN12wirelessTaskD2Ev:00000000 _ZN12wirelessTaskD1Ev
-     /tmp/ccS6poTs.s:151    .text:0000000a _ZN12wirelessTaskC1Eh
-     /tmp/ccS6poTs.s:194    .rodata:00000000 $d
-                           .group:00000000 _ZN14scheduler_taskD5Ev
+     /tmp/cct8RGRg.s:17     .text._ZN14scheduler_task4initEv:00000000 $t
+     /tmp/cct8RGRg.s:22     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
+     /tmp/cct8RGRg.s:30     .text._ZN14scheduler_task6regTlmEv:00000000 $t
+     /tmp/cct8RGRg.s:35     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
+     /tmp/cct8RGRg.s:43     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
+     /tmp/cct8RGRg.s:48     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
+     /tmp/cct8RGRg.s:56     .text._ZN12wirelessTaskD2Ev:00000000 $t
+     /tmp/cct8RGRg.s:61     .text._ZN12wirelessTaskD2Ev:00000000 _ZN12wirelessTaskD2Ev
+     /tmp/cct8RGRg.s:61     .text._ZN12wirelessTaskD2Ev:00000000 _ZN12wirelessTaskD1Ev
+     /tmp/cct8RGRg.s:70     .text:00000000 $t
+     /tmp/cct8RGRg.s:75     .text:00000000 _ZN12wirelessTask3runEPv
+     /tmp/cct8RGRg.s:84     .text._ZN12wirelessTaskD0Ev:00000000 $t
+     /tmp/cct8RGRg.s:89     .text._ZN12wirelessTaskD0Ev:00000000 _ZN12wirelessTaskD0Ev
+     /tmp/cct8RGRg.s:104    .text:0000000a _ZN12wirelessTaskC2Eh
+     /tmp/cct8RGRg.s:124    .text:00000028 $d
+     /tmp/cct8RGRg.s:104    .text:0000000a _ZN12wirelessTaskC1Eh
+     /tmp/cct8RGRg.s:135    .rodata:00000000 _ZTV12wirelessTask
+     /tmp/cct8RGRg.s:131    .rodata:00000000 $d
                            .group:00000000 _ZN12wirelessTaskD5Ev
 
 UNDEFINED SYMBOLS
-_ZdlPv
 wireless_service
+_ZdlPv
 _ZN14scheduler_taskC2EPKcmhPv
-__cxa_pure_virtual

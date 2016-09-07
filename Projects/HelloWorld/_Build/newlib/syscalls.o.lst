@@ -11,284 +11,280 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"syscalls.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	sys_set_outchar_func
-  18              		.thumb
-  19              		.thumb_func
-  21              	sys_set_outchar_func:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 014B     		ldr	r3, .L2
-  26 0002 1860     		str	r0, [r3, #0]
-  27 0004 7047     		bx	lr
-  28              	.L3:
-  29 0006 00BF     		.align	2
-  30              	.L2:
-  31 0008 00000000 		.word	.LANCHOR0
-  33              		.align	1
-  34              		.global	sys_set_inchar_func
-  35              		.thumb
-  36              		.thumb_func
-  38              	sys_set_inchar_func:
-  39              		@ args = 0, pretend = 0, frame = 0
-  40              		@ frame_needed = 0, uses_anonymous_args = 0
-  41              		@ link register save eliminated.
-  42 000c 014B     		ldr	r3, .L5
-  43 000e 5860     		str	r0, [r3, #4]
-  44 0010 7047     		bx	lr
-  45              	.L6:
-  46 0012 00BF     		.align	2
-  47              	.L5:
-  48 0014 00000000 		.word	.LANCHOR0
-  50              		.align	1
-  51              		.global	_kill
-  52              		.thumb
-  53              		.thumb_func
-  55              	_kill:
-  56              		@ Volatile: function does not return.
-  57              		@ args = 0, pretend = 0, frame = 0
-  58              		@ frame_needed = 0, uses_anonymous_args = 0
-  59 0018 08B5     		push	{r3, lr}
-  60 001a 0248     		ldr	r0, .L9
-  61 001c FFF7FEFF 		bl	puts
-  62              	.L8:
-  63 0020 FEE7     		b	.L8
-  64              	.L10:
-  65 0022 00BF     		.align	2
-  66              	.L9:
-  67 0024 00000000 		.word	.LC0
-  69              		.align	1
-  70              		.global	_exit
-  71              		.thumb
-  72              		.thumb_func
-  74              	_exit:
-  75              		@ Volatile: function does not return.
-  76              		@ args = 0, pretend = 0, frame = 0
-  77              		@ frame_needed = 0, uses_anonymous_args = 0
-  78 0028 08B5     		push	{r3, lr}
-  79 002a 0248     		ldr	r0, .L13
-  80 002c FFF7FEFF 		bl	puts
-  81              	.L12:
-  82 0030 FEE7     		b	.L12
-  83              	.L14:
-  84 0032 00BF     		.align	2
-  85              	.L13:
-  86 0034 1A000000 		.word	.LC1
-  88              		.align	1
-  89              		.global	_getpid
-  90              		.thumb
-  91              		.thumb_func
-  93              	_getpid:
-  94              		@ args = 0, pretend = 0, frame = 0
-  95              		@ frame_needed = 0, uses_anonymous_args = 0
-  96              		@ link register save eliminated.
-  97 0038 0020     		movs	r0, #0
-  98 003a 7047     		bx	lr
- 100              		.align	1
- 101              		.global	_init
- 102              		.thumb
- 103              		.thumb_func
- 105              	_init:
- 106              		@ args = 0, pretend = 0, frame = 0
- 107              		@ frame_needed = 0, uses_anonymous_args = 0
- 108              		@ link register save eliminated.
- 109 003c 0120     		movs	r0, #1
- 110 003e 7047     		bx	lr
- 112              		.align	1
- 113              		.global	_write
- 114              		.thumb
- 115              		.thumb_func
- 117              	_write:
- 118              		@ args = 0, pretend = 0, frame = 0
- 119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120 0040 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 121 0042 084F     		ldr	r7, .L22
- 122 0044 0C46     		mov	r4, r1
- 123 0046 3B68     		ldr	r3, [r7, #0]
- 124 0048 1646     		mov	r6, r2
- 125 004a 2BB9     		cbnz	r3, .L21
- 126 004c 07E0     		b	.L19
- 127              	.L20:
- 128 004e 605D     		ldrb	r0, [r4, r5]	@ zero_extendqisi2
- 129 0050 3B68     		ldr	r3, [r7, #0]
- 130 0052 9847     		blx	r3
- 131 0054 0135     		adds	r5, r5, #1
- 132 0056 00E0     		b	.L18
- 133              	.L21:
- 134 0058 0025     		movs	r5, #0
- 135              	.L18:
- 136 005a B542     		cmp	r5, r6
- 137 005c F7DB     		blt	.L20
- 138              	.L19:
- 139 005e 3046     		mov	r0, r6
- 140 0060 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 141              	.L23:
- 142 0062 00BF     		.align	2
- 143              	.L22:
- 144 0064 00000000 		.word	.LANCHOR0
- 146              		.align	1
- 147              		.global	_read
- 148              		.thumb
- 149              		.thumb_func
- 151              	_read:
- 152              		@ args = 0, pretend = 0, frame = 0
- 153              		@ frame_needed = 0, uses_anonymous_args = 0
- 154 0068 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 155 006a 094F     		ldr	r7, .L29
- 156 006c 0C46     		mov	r4, r1
- 157 006e 7868     		ldr	r0, [r7, #4]
- 158 0070 1646     		mov	r6, r2
- 159 0072 30B9     		cbnz	r0, .L28
- 160 0074 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 161              	.L27:
- 162 0076 7B68     		ldr	r3, [r7, #4]
- 163 0078 0020     		movs	r0, #0
- 164 007a 9847     		blx	r3
- 165 007c 6055     		strb	r0, [r4, r5]
- 166 007e 0135     		adds	r5, r5, #1
- 167 0080 00E0     		b	.L25
- 168              	.L28:
- 169 0082 0025     		movs	r5, #0
- 170              	.L25:
- 171 0084 B542     		cmp	r5, r6
- 172 0086 F6DB     		blt	.L27
- 173 0088 26EAE670 		bic	r0, r6, r6, asr #31
- 174 008c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 175              	.L30:
- 176 008e 00BF     		.align	2
- 177              	.L29:
- 178 0090 00000000 		.word	.LANCHOR0
- 180              		.align	1
- 181              		.global	syscalls_init
- 182              		.thumb
- 183              		.thumb_func
- 185              	syscalls_init:
- 186              		@ args = 0, pretend = 0, frame = 0
- 187              		@ frame_needed = 0, uses_anonymous_args = 0
- 188              		@ link register save eliminated.
- 189 0094 7047     		bx	lr
- 191              		.align	1
- 192              		.global	_fstat
- 193              		.thumb
- 194              		.thumb_func
- 196              	_fstat:
- 197              		@ args = 0, pretend = 0, frame = 0
- 198              		@ frame_needed = 0, uses_anonymous_args = 0
- 199              		@ link register save eliminated.
- 200 0096 0020     		movs	r0, #0
- 201 0098 7047     		bx	lr
- 203              		.align	1
- 204              		.global	_isatty
- 205              		.thumb
- 206              		.thumb_func
- 208              	_isatty:
- 209              		@ args = 0, pretend = 0, frame = 0
- 210              		@ frame_needed = 0, uses_anonymous_args = 0
- 211              		@ link register save eliminated.
- 212 009a 094B     		ldr	r3, .L37
- 213 009c 1B68     		ldr	r3, [r3, #0]
- 214 009e 9A68     		ldr	r2, [r3, #8]
- 215 00a0 8242     		cmp	r2, r0
- 216 00a2 08D0     		beq	.L35
- 217 00a4 5A68     		ldr	r2, [r3, #4]
- 218 00a6 8242     		cmp	r2, r0
- 219 00a8 07D0     		beq	.L36
- 220 00aa DB68     		ldr	r3, [r3, #12]
- 221 00ac 1B1A     		subs	r3, r3, r0
- 222 00ae 5842     		rsbs	r0, r3, #0
- 223 00b0 40EB0300 		adc	r0, r0, r3
- 224 00b4 7047     		bx	lr
- 225              	.L35:
- 226 00b6 0120     		movs	r0, #1
- 227 00b8 7047     		bx	lr
- 228              	.L36:
- 229 00ba 0120     		movs	r0, #1
- 230 00bc 7047     		bx	lr
- 231              	.L38:
- 232 00be 00BF     		.align	2
- 233              	.L37:
- 234 00c0 00000000 		.word	_impure_ptr
- 236              		.align	1
- 237              		.global	_lseek
- 238              		.thumb
- 239              		.thumb_func
- 241              	_lseek:
- 242              		@ args = 0, pretend = 0, frame = 0
- 243              		@ frame_needed = 0, uses_anonymous_args = 0
- 244              		@ link register save eliminated.
- 245 00c4 0020     		movs	r0, #0
- 246 00c6 7047     		bx	lr
- 248              		.align	1
- 249              		.global	_close
- 250              		.thumb
- 251              		.thumb_func
- 253              	_close:
- 254              		@ args = 0, pretend = 0, frame = 0
- 255              		@ frame_needed = 0, uses_anonymous_args = 0
- 256              		@ link register save eliminated.
- 257 00c8 0020     		movs	r0, #0
- 258 00ca 7047     		bx	lr
- 260              		.global	__dso_handle
- 261              		.section	.rodata.str1.1,"aMS",%progbits,1
- 262              	.LC0:
- 263 0000 556E6578 		.ascii	"Unexpected call to kill()\000"
- 263      70656374 
- 263      65642063 
- 263      616C6C20 
- 263      746F206B 
- 264              	.LC1:
- 265 001a 556E6578 		.ascii	"Unexpected call to exit()\000"
- 265      70656374 
- 265      65642063 
- 265      616C6C20 
- 265      746F2065 
- 266              		.bss
- 267              		.align	2
- 268              		.set	.LANCHOR0,. + 0
- 271              	m_output_dev_fptr:
- 272 0000 00000000 		.space	4
- 275              	m_input_dev_fptr:
- 276 0004 00000000 		.space	4
- 279              	__dso_handle:
- 280 0008 00000000 		.space	4
- 281              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"syscalls.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	sys_set_outchar_func
+  19              		.thumb
+  20              		.thumb_func
+  22              	sys_set_outchar_func:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 014B     		ldr	r3, .L2
+  27 0002 1860     		str	r0, [r3]
+  28 0004 7047     		bx	lr
+  29              	.L3:
+  30 0006 00BF     		.align	2
+  31              	.L2:
+  32 0008 00000000 		.word	.LANCHOR0
+  34              		.align	1
+  35              		.global	sys_set_inchar_func
+  36              		.thumb
+  37              		.thumb_func
+  39              	sys_set_inchar_func:
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 0, uses_anonymous_args = 0
+  42              		@ link register save eliminated.
+  43 000c 014B     		ldr	r3, .L5
+  44 000e 5860     		str	r0, [r3, #4]
+  45 0010 7047     		bx	lr
+  46              	.L6:
+  47 0012 00BF     		.align	2
+  48              	.L5:
+  49 0014 00000000 		.word	.LANCHOR0
+  51              		.align	1
+  52              		.global	_kill
+  53              		.thumb
+  54              		.thumb_func
+  56              	_kill:
+  57              		@ Volatile: function does not return.
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0018 08B5     		push	{r3, lr}
+  61 001a 0248     		ldr	r0, .L10
+  62 001c FFF7FEFF 		bl	puts
+  63              	.L8:
+  64 0020 FEE7     		b	.L8
+  65              	.L11:
+  66 0022 00BF     		.align	2
+  67              	.L10:
+  68 0024 00000000 		.word	.LC0
+  70              		.align	1
+  71              		.global	_exit
+  72              		.thumb
+  73              		.thumb_func
+  75              	_exit:
+  76              		@ Volatile: function does not return.
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0028 08B5     		push	{r3, lr}
+  80 002a 0248     		ldr	r0, .L14
+  81 002c FFF7FEFF 		bl	puts
+  82              	.L13:
+  83 0030 FEE7     		b	.L13
+  84              	.L15:
+  85 0032 00BF     		.align	2
+  86              	.L14:
+  87 0034 1A000000 		.word	.LC1
+  89              		.align	1
+  90              		.global	_getpid
+  91              		.thumb
+  92              		.thumb_func
+  94              	_getpid:
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97              		@ link register save eliminated.
+  98 0038 0020     		movs	r0, #0
+  99 003a 7047     		bx	lr
+ 101              		.align	1
+ 102              		.global	_init
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	_init:
+ 107              		@ args = 0, pretend = 0, frame = 0
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109              		@ link register save eliminated.
+ 110 003c 0120     		movs	r0, #1
+ 111 003e 7047     		bx	lr
+ 113              		.align	1
+ 114              		.global	_write
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	_write:
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0040 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 122 0042 084B     		ldr	r3, .L26
+ 123 0044 1646     		mov	r6, r2
+ 124 0046 1A68     		ldr	r2, [r3]
+ 125 0048 0F46     		mov	r7, r1
+ 126 004a 1C46     		mov	r4, r3
+ 127 004c 42B1     		cbz	r2, .L23
+ 128 004e 0D46     		mov	r5, r1
+ 129              	.L20:
+ 130 0050 EB1B     		subs	r3, r5, r7
+ 131 0052 9E42     		cmp	r6, r3
+ 132 0054 04DD     		ble	.L23
+ 133 0056 2368     		ldr	r3, [r4]
+ 134 0058 15F8010B 		ldrb	r0, [r5], #1	@ zero_extendqisi2
+ 135 005c 9847     		blx	r3
+ 136 005e F7E7     		b	.L20
+ 137              	.L23:
+ 138 0060 3046     		mov	r0, r6
+ 139 0062 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 140              	.L27:
+ 141              		.align	2
+ 142              	.L26:
+ 143 0064 00000000 		.word	.LANCHOR0
+ 145              		.align	1
+ 146              		.global	_read
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	_read:
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153 0068 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 154 006a 094B     		ldr	r3, .L34
+ 155 006c 0F46     		mov	r7, r1
+ 156 006e 5868     		ldr	r0, [r3, #4]
+ 157 0070 1646     		mov	r6, r2
+ 158 0072 1C46     		mov	r4, r3
+ 159 0074 58B1     		cbz	r0, .L29
+ 160 0076 0D46     		mov	r5, r1
+ 161              	.L30:
+ 162 0078 EB1B     		subs	r3, r5, r7
+ 163 007a 9E42     		cmp	r6, r3
+ 164 007c 05DD     		ble	.L33
+ 165 007e 6368     		ldr	r3, [r4, #4]
+ 166 0080 0020     		movs	r0, #0
+ 167 0082 9847     		blx	r3
+ 168 0084 05F8010B 		strb	r0, [r5], #1
+ 169 0088 F6E7     		b	.L30
+ 170              	.L33:
+ 171 008a 26EAE670 		bic	r0, r6, r6, asr #31
+ 172              	.L29:
+ 173 008e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 174              	.L35:
+ 175              		.align	2
+ 176              	.L34:
+ 177 0090 00000000 		.word	.LANCHOR0
+ 179              		.align	1
+ 180              		.global	syscalls_init
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	syscalls_init:
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 0094 7047     		bx	lr
+ 190              		.align	1
+ 191              		.global	_fstat
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	_fstat:
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+ 199 0096 0020     		movs	r0, #0
+ 200 0098 7047     		bx	lr
+ 202              		.align	1
+ 203              		.global	_isatty
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	_isatty:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 009a 074B     		ldr	r3, .L42
+ 212 009c 1B68     		ldr	r3, [r3]
+ 213 009e 9A68     		ldr	r2, [r3, #8]
+ 214 00a0 8242     		cmp	r2, r0
+ 215 00a2 07D0     		beq	.L41
+ 216 00a4 5A68     		ldr	r2, [r3, #4]
+ 217 00a6 8242     		cmp	r2, r0
+ 218 00a8 04D0     		beq	.L41
+ 219 00aa DB68     		ldr	r3, [r3, #12]
+ 220 00ac 1B1A     		subs	r3, r3, r0
+ 221 00ae 5842     		rsbs	r0, r3, #0
+ 222 00b0 5841     		adcs	r0, r0, r3
+ 223 00b2 7047     		bx	lr
+ 224              	.L41:
+ 225 00b4 0120     		movs	r0, #1
+ 226 00b6 7047     		bx	lr
+ 227              	.L43:
+ 228              		.align	2
+ 229              	.L42:
+ 230 00b8 00000000 		.word	_impure_ptr
+ 232              		.align	1
+ 233              		.global	_lseek
+ 234              		.thumb
+ 235              		.thumb_func
+ 237              	_lseek:
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240              		@ link register save eliminated.
+ 241 00bc 0020     		movs	r0, #0
+ 242 00be 7047     		bx	lr
+ 244              		.align	1
+ 245              		.global	_close
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	_close:
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 00c0 0020     		movs	r0, #0
+ 254 00c2 7047     		bx	lr
+ 256              		.global	__dso_handle
+ 257              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 258              	.LC0:
+ 259 0000 556E6578 		.ascii	"Unexpected call to kill()\000"
+ 259      70656374 
+ 259      65642063 
+ 259      616C6C20 
+ 259      746F206B 
+ 260              	.LC1:
+ 261 001a 556E6578 		.ascii	"Unexpected call to exit()\000"
+ 261      70656374 
+ 261      65642063 
+ 261      616C6C20 
+ 261      746F2065 
+ 262              		.bss
+ 263              		.align	2
+ 264              		.set	.LANCHOR0,. + 0
+ 267              	m_output_dev_fptr:
+ 268 0000 00000000 		.space	4
+ 271              	m_input_dev_fptr:
+ 272 0004 00000000 		.space	4
+ 275              	__dso_handle:
+ 276 0008 00000000 		.space	4
+ 277              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/ccltEE0o.s:16     .text:00000000 $t
-     /tmp/ccltEE0o.s:21     .text:00000000 sys_set_outchar_func
-     /tmp/ccltEE0o.s:31     .text:00000008 $d
-     /tmp/ccltEE0o.s:33     .text:0000000c $t
-     /tmp/ccltEE0o.s:38     .text:0000000c sys_set_inchar_func
-     /tmp/ccltEE0o.s:48     .text:00000014 $d
-     /tmp/ccltEE0o.s:50     .text:00000018 $t
-     /tmp/ccltEE0o.s:55     .text:00000018 _kill
-     /tmp/ccltEE0o.s:67     .text:00000024 $d
-     /tmp/ccltEE0o.s:69     .text:00000028 $t
-     /tmp/ccltEE0o.s:74     .text:00000028 _exit
-     /tmp/ccltEE0o.s:86     .text:00000034 $d
-     /tmp/ccltEE0o.s:88     .text:00000038 $t
-     /tmp/ccltEE0o.s:93     .text:00000038 _getpid
-     /tmp/ccltEE0o.s:105    .text:0000003c _init
-     /tmp/ccltEE0o.s:117    .text:00000040 _write
-     /tmp/ccltEE0o.s:144    .text:00000064 $d
-     /tmp/ccltEE0o.s:146    .text:00000068 $t
-     /tmp/ccltEE0o.s:151    .text:00000068 _read
-     /tmp/ccltEE0o.s:178    .text:00000090 $d
-     /tmp/ccltEE0o.s:180    .text:00000094 $t
-     /tmp/ccltEE0o.s:185    .text:00000094 syscalls_init
-     /tmp/ccltEE0o.s:196    .text:00000096 _fstat
-     /tmp/ccltEE0o.s:208    .text:0000009a _isatty
-     /tmp/ccltEE0o.s:234    .text:000000c0 $d
-     /tmp/ccltEE0o.s:236    .text:000000c4 $t
-     /tmp/ccltEE0o.s:241    .text:000000c4 _lseek
-     /tmp/ccltEE0o.s:253    .text:000000c8 _close
-     /tmp/ccltEE0o.s:279    .bss:00000008 __dso_handle
-     /tmp/ccltEE0o.s:267    .bss:00000000 $d
-     /tmp/ccltEE0o.s:271    .bss:00000000 m_output_dev_fptr
-     /tmp/ccltEE0o.s:275    .bss:00000004 m_input_dev_fptr
+     /tmp/ccHBvMlx.s:17     .text:00000000 $t
+     /tmp/ccHBvMlx.s:22     .text:00000000 sys_set_outchar_func
+     /tmp/ccHBvMlx.s:32     .text:00000008 $d
+     /tmp/ccHBvMlx.s:34     .text:0000000c $t
+     /tmp/ccHBvMlx.s:39     .text:0000000c sys_set_inchar_func
+     /tmp/ccHBvMlx.s:49     .text:00000014 $d
+     /tmp/ccHBvMlx.s:51     .text:00000018 $t
+     /tmp/ccHBvMlx.s:56     .text:00000018 _kill
+     /tmp/ccHBvMlx.s:68     .text:00000024 $d
+     /tmp/ccHBvMlx.s:70     .text:00000028 $t
+     /tmp/ccHBvMlx.s:75     .text:00000028 _exit
+     /tmp/ccHBvMlx.s:87     .text:00000034 $d
+     /tmp/ccHBvMlx.s:89     .text:00000038 $t
+     /tmp/ccHBvMlx.s:94     .text:00000038 _getpid
+     /tmp/ccHBvMlx.s:106    .text:0000003c _init
+     /tmp/ccHBvMlx.s:118    .text:00000040 _write
+     /tmp/ccHBvMlx.s:143    .text:00000064 $d
+     /tmp/ccHBvMlx.s:145    .text:00000068 $t
+     /tmp/ccHBvMlx.s:150    .text:00000068 _read
+     /tmp/ccHBvMlx.s:177    .text:00000090 $d
+     /tmp/ccHBvMlx.s:179    .text:00000094 $t
+     /tmp/ccHBvMlx.s:184    .text:00000094 syscalls_init
+     /tmp/ccHBvMlx.s:195    .text:00000096 _fstat
+     /tmp/ccHBvMlx.s:207    .text:0000009a _isatty
+     /tmp/ccHBvMlx.s:230    .text:000000b8 $d
+     /tmp/ccHBvMlx.s:232    .text:000000bc $t
+     /tmp/ccHBvMlx.s:237    .text:000000bc _lseek
+     /tmp/ccHBvMlx.s:249    .text:000000c0 _close
+     /tmp/ccHBvMlx.s:275    .bss:00000008 __dso_handle
+     /tmp/ccHBvMlx.s:263    .bss:00000000 $d
+     /tmp/ccHBvMlx.s:267    .bss:00000000 m_output_dev_fptr
+     /tmp/ccHBvMlx.s:271    .bss:00000004 m_input_dev_fptr
 
 UNDEFINED SYMBOLS
 puts

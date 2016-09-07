@@ -11,962 +11,866 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"cpp_task.cpp"
-  15              		.section	.text._ZN14scheduler_taskD2Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
-  16              		.align	1
-  17              		.weak	_ZN14scheduler_taskD2Ev
-  18              		.thumb
-  19              		.thumb_func
-  21              	_ZN14scheduler_taskD2Ev:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 014B     		ldr	r3, .L3
-  26 0002 0360     		str	r3, [r0, #0]
-  27 0004 7047     		bx	lr
-  28              	.L4:
-  29 0006 00BF     		.align	2
-  30              	.L3:
-  31 0008 08000000 		.word	_ZTV14scheduler_task+8
-  33              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
-  34              		.align	1
-  35              		.weak	_ZN14scheduler_task4initEv
-  36              		.thumb
-  37              		.thumb_func
-  39              	_ZN14scheduler_task4initEv:
-  40              		@ args = 0, pretend = 0, frame = 0
-  41              		@ frame_needed = 0, uses_anonymous_args = 0
-  42              		@ link register save eliminated.
-  43 0000 0120     		movs	r0, #1
-  44 0002 7047     		bx	lr
-  46              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
-  47              		.align	1
-  48              		.weak	_ZN14scheduler_task6regTlmEv
-  49              		.thumb
-  50              		.thumb_func
-  52              	_ZN14scheduler_task6regTlmEv:
-  53              		@ args = 0, pretend = 0, frame = 0
-  54              		@ frame_needed = 0, uses_anonymous_args = 0
-  55              		@ link register save eliminated.
-  56 0000 0120     		movs	r0, #1
-  57 0002 7047     		bx	lr
-  59              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
-  60              		.align	1
-  61              		.weak	_ZN14scheduler_task9taskEntryEv
-  62              		.thumb
-  63              		.thumb_func
-  65              	_ZN14scheduler_task9taskEntryEv:
-  66              		@ args = 0, pretend = 0, frame = 0
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68              		@ link register save eliminated.
-  69 0000 0120     		movs	r0, #1
-  70 0002 7047     		bx	lr
-  72              		.section	.text._ZN14scheduler_taskD0Ev,"axG",%progbits,_ZN14scheduler_taskD5Ev,comdat
-  73              		.align	1
-  74              		.weak	_ZN14scheduler_taskD0Ev
-  75              		.thumb
-  76              		.thumb_func
-  78              	_ZN14scheduler_taskD0Ev:
-  79              		@ args = 0, pretend = 0, frame = 0
-  80              		@ frame_needed = 0, uses_anonymous_args = 0
-  81 0000 034B     		ldr	r3, .L11
-  82 0002 10B5     		push	{r4, lr}
-  83 0004 0446     		mov	r4, r0
-  84 0006 0360     		str	r3, [r0, #0]
-  85 0008 FFF7FEFF 		bl	_ZdlPv
-  86 000c 2046     		mov	r0, r4
-  87 000e 10BD     		pop	{r4, pc}
-  88              	.L12:
-  89              		.align	2
-  90              	.L11:
-  91 0010 08000000 		.word	_ZTV14scheduler_task+8
-  93              		.text
-  94              		.align	1
-  95              		.thumb
-  96              		.thumb_func
-  98              	_ZL13print_stringsPKcS0_:
-  99              		@ args = 0, pretend = 0, frame = 0
- 100              		@ frame_needed = 0, uses_anonymous_args = 0
- 101 0000 70B5     		push	{r4, r5, r6, lr}
- 102 0002 0E46     		mov	r6, r1
- 103 0004 0446     		mov	r4, r0
- 104 0006 184D     		ldr	r5, .L22
- 105 0008 24E0     		b	.L20
- 106              	.L19:
- 107 000a 2868     		ldr	r0, [r5, #0]
- 108 000c 8268     		ldr	r2, [r0, #8]
- 109 000e 9368     		ldr	r3, [r2, #8]
- 110 0010 013B     		subs	r3, r3, #1
- 111 0012 002B     		cmp	r3, #0
- 112 0014 9360     		str	r3, [r2, #8]
- 113 0016 14DA     		bge	.L15
- 114 0018 9169     		ldr	r1, [r2, #24]
- 115 001a 8B42     		cmp	r3, r1
- 116 001c 0CDB     		blt	.L16
- 117 001e 1368     		ldr	r3, [r2, #0]
- 118 0020 14F8012C 		ldrb	r2, [r4, #-1]	@ zero_extendqisi2
- 119 0024 1A70     		strb	r2, [r3, #0]
- 120 0026 2868     		ldr	r0, [r5, #0]
- 121 0028 8268     		ldr	r2, [r0, #8]
- 122 002a 1368     		ldr	r3, [r2, #0]
- 123 002c 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
- 124 002e 0A29     		cmp	r1, #10
- 125 0030 04D0     		beq	.L21
- 126 0032 0133     		adds	r3, r3, #1
- 127 0034 1360     		str	r3, [r2, #0]
- 128 0036 0DE0     		b	.L20
- 129              	.L16:
- 130 0038 14F8011C 		ldrb	r1, [r4, #-1]	@ zero_extendqisi2
- 131              	.L21:
- 132 003c FFF7FEFF 		bl	__swbuf_r
- 133 0040 08E0     		b	.L20
- 134              	.L15:
- 135 0042 1368     		ldr	r3, [r2, #0]
- 136 0044 14F8012C 		ldrb	r2, [r4, #-1]	@ zero_extendqisi2
- 137 0048 1A70     		strb	r2, [r3, #0]
- 138 004a 2B68     		ldr	r3, [r5, #0]
- 139 004c 9B68     		ldr	r3, [r3, #8]
- 140 004e 1A68     		ldr	r2, [r3, #0]
- 141 0050 0132     		adds	r2, r2, #1
- 142 0052 1A60     		str	r2, [r3, #0]
- 143              	.L20:
- 144 0054 14F8013B 		ldrb	r3, [r4], #1	@ zero_extendqisi2
- 145 0058 002B     		cmp	r3, #0
- 146 005a D6D1     		bne	.L19
- 147 005c 3046     		mov	r0, r6
- 148 005e BDE87040 		pop	{r4, r5, r6, lr}
- 149 0062 FFF7FEBF 		b	puts
- 150              	.L23:
- 151 0066 00BF     		.align	2
- 152              	.L22:
- 153 0068 00000000 		.word	_impure_ptr
- 155              		.align	1
- 156              		.global	_ZN14scheduler_taskC2EPKcmhPv
- 157              		.thumb
- 158              		.thumb_func
- 160              	_ZN14scheduler_taskC2EPKcmhPv:
- 161              		@ args = 4, pretend = 0, frame = 0
- 162              		@ frame_needed = 0, uses_anonymous_args = 0
- 163 006c 30B5     		push	{r4, r5, lr}
- 164 006e 0A4C     		ldr	r4, .L26
- 165 0070 8162     		str	r1, [r0, #40]
- 166 0072 0399     		ldr	r1, [sp, #12]
- 167 0074 4FF47A75 		mov	r5, #1000
- 168 0078 0460     		str	r4, [r0, #0]
- 169 007a 0024     		movs	r4, #0
- 170 007c 4460     		str	r4, [r0, #4]
- 171 007e 8460     		str	r4, [r0, #8]
- 172 0080 C560     		str	r5, [r0, #12]
- 173 0082 0461     		str	r4, [r0, #16]
- 174 0084 4461     		str	r4, [r0, #20]
- 175 0086 0476     		strb	r4, [r0, #24]
- 176 0088 C461     		str	r4, [r0, #28]
- 177 008a 0462     		str	r4, [r0, #32]
- 178 008c 4562     		str	r5, [r0, #36]
- 179 008e C162     		str	r1, [r0, #44]
- 180 0090 80F83030 		strb	r3, [r0, #48]
- 181 0094 4263     		str	r2, [r0, #52]
- 182 0096 30BD     		pop	{r4, r5, pc}
- 183              	.L27:
- 184              		.align	2
- 185              	.L26:
- 186 0098 08000000 		.word	_ZTV14scheduler_task+8
- 188              		.align	1
- 189              		.global	_ZNK14scheduler_task18getInstantCpuUsageEv
- 190              		.thumb
- 191              		.thumb_func
- 193              	_ZNK14scheduler_task18getInstantCpuUsageEv:
- 194              		@ args = 0, pretend = 0, frame = 0
- 195              		@ frame_needed = 0, uses_anonymous_args = 0
- 196 009c 08B5     		push	{r3, lr}
- 197 009e 0069     		ldr	r0, [r0, #16]
- 198 00a0 FFF7FEFF 		bl	uxTaskGetCpuUsage
- 199 00a4 C0B2     		uxtb	r0, r0
- 200 00a6 08BD     		pop	{r3, pc}
- 202              		.align	1
- 203              		.global	_ZNK14scheduler_task20getCpuIdlePercentageEv
- 204              		.thumb
- 205              		.thumb_func
- 207              	_ZNK14scheduler_task20getCpuIdlePercentageEv:
- 208              		@ args = 0, pretend = 0, frame = 0
- 209              		@ frame_needed = 0, uses_anonymous_args = 0
- 210 00a8 08B5     		push	{r3, lr}
- 211 00aa FFF7FEFF 		bl	xTaskGetIdleTaskHandle
- 212 00ae FFF7FEFF 		bl	uxTaskGetCpuUsage
- 213 00b2 C0B2     		uxtb	r0, r0
- 214 00b4 08BD     		pop	{r3, pc}
- 216              		.align	1
- 217              		.global	_ZNK14scheduler_task24getTotalSysCpuPercentageEv
- 218              		.thumb
- 219              		.thumb_func
- 221              	_ZNK14scheduler_task24getTotalSysCpuPercentageEv:
- 222              		@ args = 0, pretend = 0, frame = 0
- 223              		@ frame_needed = 0, uses_anonymous_args = 0
- 224 00b6 08B5     		push	{r3, lr}
- 225 00b8 FFF7FEFF 		bl	_ZNK14scheduler_task20getCpuIdlePercentageEv
- 226 00bc C0F16400 		rsb	r0, r0, #100
- 227 00c0 C0B2     		uxtb	r0, r0
- 228 00c2 08BD     		pop	{r3, pc}
- 230              		.align	1
- 231              		.global	_ZN14scheduler_task12initQueueSetEmmz
- 232              		.thumb
- 233              		.thumb_func
- 235              	_ZN14scheduler_task12initQueueSetEmmz:
- 236              		@ args = 4, pretend = 8, frame = 8
- 237              		@ frame_needed = 0, uses_anonymous_args = 1
- 238 00c4 0CB4     		push	{r2, r3}
- 239 00c6 37B5     		push	{r0, r1, r2, r4, r5, lr}
- 240 00c8 06AB     		add	r3, sp, #24
- 241 00ca 53F8044B 		ldr	r4, [r3], #4
- 242 00ce 0546     		mov	r5, r0
- 243 00d0 0846     		mov	r0, r1
- 244 00d2 0193     		str	r3, [sp, #4]
- 245 00d4 FFF7FEFF 		bl	xQueueCreateSet
- 246 00d8 6860     		str	r0, [r5, #4]
- 247 00da 07E0     		b	.L32
- 248              	.L33:
- 249 00dc 019B     		ldr	r3, [sp, #4]
- 250 00de 6968     		ldr	r1, [r5, #4]
- 251 00e0 1A1D     		adds	r2, r3, #4
- 252 00e2 0192     		str	r2, [sp, #4]
- 253 00e4 1868     		ldr	r0, [r3, #0]
- 254 00e6 FFF7FEFF 		bl	xQueueAddToSet
- 255 00ea 013C     		subs	r4, r4, #1
- 256              	.L32:
- 257 00ec 002C     		cmp	r4, #0
- 258 00ee F5D1     		bne	.L33
- 259 00f0 BDE83E40 		pop	{r1, r2, r3, r4, r5, lr}
- 260 00f4 02B0     		add	sp, sp, #8
- 261 00f6 7047     		bx	lr
- 263              		.align	1
- 264              		.global	_ZN14scheduler_task15getSharedObjectEPKc
- 265              		.thumb
- 266              		.thumb_func
- 268              	_ZN14scheduler_task15getSharedObjectEPKc:
- 269              		@ args = 0, pretend = 0, frame = 0
- 270              		@ frame_needed = 0, uses_anonymous_args = 0
- 271 00f8 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 272 00fa 0C4B     		ldr	r3, .L40
- 273 00fc 0F46     		mov	r7, r1
- 274 00fe 1C68     		ldr	r4, [r3, #0]
- 275 0100 8CB1     		cbz	r4, .L39
- 276 0102 0025     		movs	r5, #0
- 277 0104 0AE0     		b	.L36
- 278              	.L38:
- 279 0106 E368     		ldr	r3, [r4, #12]
- 280 0108 3946     		mov	r1, r7
- 281 010a 53F82560 		ldr	r6, [r3, r5, lsl #2]
- 282 010e 7068     		ldr	r0, [r6, #4]
- 283 0110 FFF7FEFF 		bl	strcmp
- 284 0114 08B9     		cbnz	r0, .L37
- 285 0116 3068     		ldr	r0, [r6, #0]
- 286 0118 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 287              	.L37:
- 288 011a 0135     		adds	r5, r5, #1
- 289              	.L36:
- 290 011c A368     		ldr	r3, [r4, #8]
- 291 011e 9D42     		cmp	r5, r3
- 292 0120 F1D3     		bcc	.L38
- 293 0122 0020     		movs	r0, #0
- 294 0124 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 295              	.L39:
- 296 0126 2046     		mov	r0, r4
- 297 0128 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 298              	.L41:
- 299 012a 00BF     		.align	2
- 300              	.L40:
- 301 012c 00000000 		.word	.LANCHOR0
- 303              		.section	.text._ZN6VECTORIP14scheduler_taskE2atEj,"axG",%progbits,_ZN6VECTORIP14scheduler_taskE2at
- 304              		.align	1
- 305              		.weak	_ZN6VECTORIP14scheduler_taskE2atEj
- 306              		.thumb
- 307              		.thumb_func
- 309              	_ZN6VECTORIP14scheduler_taskE2atEj:
- 310              		@ args = 0, pretend = 0, frame = 0
- 311              		@ frame_needed = 0, uses_anonymous_args = 0
- 312              		@ link register save eliminated.
- 313 0000 8368     		ldr	r3, [r0, #8]
- 314 0002 9942     		cmp	r1, r3
- 315 0004 3ABF     		itte	cc
- 316 0006 C368     		ldrcc	r3, [r0, #12]
- 317 0008 53F82100 		ldrcc	r0, [r3, r1, lsl #2]
- 318 000c 1030     		addcs	r0, r0, #16
- 319 000e 7047     		bx	lr
- 321              		.text
- 322              		.align	1
- 323              		.global	_ZN14scheduler_task16getTaskPtrByNameEPKc
- 324              		.thumb
- 325              		.thumb_func
- 327              	_ZN14scheduler_task16getTaskPtrByNameEPKc:
- 328              		@ args = 0, pretend = 0, frame = 0
- 329              		@ frame_needed = 0, uses_anonymous_args = 0
- 330 0130 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 331 0132 0F46     		mov	r7, r1
- 332 0134 0024     		movs	r4, #0
- 333 0136 094E     		ldr	r6, .L49
- 334 0138 09E0     		b	.L46
- 335              	.L48:
- 336 013a 2146     		mov	r1, r4
- 337 013c FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE2atEj
- 338 0140 0568     		ldr	r5, [r0, #0]
- 339 0142 3846     		mov	r0, r7
- 340 0144 A96A     		ldr	r1, [r5, #40]
- 341 0146 FFF7FEFF 		bl	strcmp
- 342 014a 28B1     		cbz	r0, .L47
- 343 014c 0134     		adds	r4, r4, #1
- 344              	.L46:
- 345 014e 7068     		ldr	r0, [r6, #4]
- 346 0150 8368     		ldr	r3, [r0, #8]
- 347 0152 9C42     		cmp	r4, r3
- 348 0154 F1D3     		bcc	.L48
- 349 0156 0025     		movs	r5, #0
- 350              	.L47:
- 351 0158 2846     		mov	r0, r5
- 352 015a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 353              	.L50:
- 354              		.align	2
- 355              	.L49:
- 356 015c 00000000 		.word	.LANCHOR0
- 358              		.align	1
- 359              		.global	_Z18scheduler_init_allb
- 360              		.thumb
- 361              		.thumb_func
- 363              	_Z18scheduler_init_allb:
- 364              		@ args = 0, pretend = 0, frame = 0
- 365              		@ frame_needed = 0, uses_anonymous_args = 0
- 366 0160 2DE9FF47 		push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
- 367 0164 364E     		ldr	r6, .L66
- 368 0166 7368     		ldr	r3, [r6, #4]
- 369 0168 13B1     		cbz	r3, .L52
- 370 016a 9B68     		ldr	r3, [r3, #8]
- 371 016c 002B     		cmp	r3, #0
- 372 016e 60D1     		bne	.L53
- 373              	.L52:
- 374 0170 3448     		ldr	r0, .L66+4
- 375 0172 FFF7FEFF 		bl	puts
- 376 0176 0124     		movs	r4, #1
- 377 0178 57E0     		b	.L54
- 378              	.L56:
- 379 017a 2946     		mov	r1, r5
- 380 017c FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE2atEj
- 381 0180 0768     		ldr	r7, [r0, #0]
- 382 0182 3B68     		ldr	r3, [r7, #0]
- 383 0184 3846     		mov	r0, r7
- 384 0186 9B68     		ldr	r3, [r3, #8]
- 385 0188 9847     		blx	r3
- 386 018a 20B9     		cbnz	r0, .L55
- 387 018c B86A     		ldr	r0, [r7, #40]
- 388 018e 2E49     		ldr	r1, .L66+8
- 389 0190 FFF736FF 		bl	_ZL13print_stringsPKcS0_
- 390 0194 0124     		movs	r4, #1
- 391              	.L55:
- 392 0196 0135     		adds	r5, r5, #1
- 393              	.L64:
- 394 0198 7068     		ldr	r0, [r6, #4]
- 395 019a 294F     		ldr	r7, .L66
- 396 019c 8368     		ldr	r3, [r0, #8]
- 397 019e 9D42     		cmp	r5, r3
- 398 01a0 EBD3     		bcc	.L56
- 399 01a2 2A48     		ldr	r0, .L66+12
- 400 01a4 FFF7FEFF 		bl	puts
- 401 01a8 7B68     		ldr	r3, [r7, #4]
- 402 01aa 0021     		movs	r1, #0
- 403 01ac 9868     		ldr	r0, [r3, #8]
- 404 01ae FFF7FEFF 		bl	xQueueCreateCountingSemaphore
- 405 01b2 0026     		movs	r6, #0
- 406 01b4 B860     		str	r0, [r7, #8]
- 407 01b6 B846     		mov	r8, r7
- 408 01b8 0028     		cmp	r0, #0
- 409 01ba 08BF     		it	eq
- 410 01bc 0124     		moveq	r4, #1
- 411 01be 3746     		mov	r7, r6
- 412 01c0 1BE0     		b	.L58
- 413              	.L60:
- 414 01c2 3146     		mov	r1, r6
- 415 01c4 4846     		mov	r0, r9
- 416 01c6 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE2atEj
- 417 01ca 0568     		ldr	r5, [r0, #0]
- 418 01cc 2048     		ldr	r0, .L66+16
- 419 01ce 95F83030 		ldrb	r3, [r5, #48]	@ zero_extendqisi2
- 420 01d2 6A6B     		ldr	r2, [r5, #52]
- 421 01d4 0093     		str	r3, [sp, #0]
- 422 01d6 05F11003 		add	r3, r5, #16
- 423 01da 0193     		str	r3, [sp, #4]
- 424 01dc 0297     		str	r7, [sp, #8]
- 425 01de 0397     		str	r7, [sp, #12]
- 426 01e0 C2F38F02 		ubfx	r2, r2, #2, #16
- 427 01e4 A96A     		ldr	r1, [r5, #40]
- 428 01e6 2B46     		mov	r3, r5
- 429 01e8 FFF7FEFF 		bl	xTaskGenericCreate
- 430 01ec 20B9     		cbnz	r0, .L59
- 431 01ee A86A     		ldr	r0, [r5, #40]
- 432 01f0 1849     		ldr	r1, .L66+20
- 433 01f2 FFF705FF 		bl	_ZL13print_stringsPKcS0_
- 434 01f6 0124     		movs	r4, #1
- 435              	.L59:
- 436 01f8 0136     		adds	r6, r6, #1
- 437              	.L58:
- 438 01fa D8F80490 		ldr	r9, [r8, #4]
- 439 01fe D9F808A0 		ldr	sl, [r9, #8]
- 440 0202 5645     		cmp	r6, sl
- 441 0204 DDD3     		bcc	.L60
- 442 0206 0025     		movs	r5, #0
- 443 0208 2E46     		mov	r6, r5
- 444 020a 0D4F     		ldr	r7, .L66
- 445 020c 0BE0     		b	.L61
- 446              	.L63:
- 447 020e 4846     		mov	r0, r9
- 448 0210 2946     		mov	r1, r5
- 449 0212 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE2atEj
- 450 0216 0268     		ldr	r2, [r0, #0]
- 451 0218 536B     		ldr	r3, [r2, #52]
- 452 021a B342     		cmp	r3, r6
- 453 021c 02D9     		bls	.L62
- 454 021e 1269     		ldr	r2, [r2, #16]
- 455 0220 1E46     		mov	r6, r3
- 456 0222 FA60     		str	r2, [r7, #12]
- 457              	.L62:
- 458 0224 0135     		adds	r5, r5, #1
- 459              	.L61:
- 460 0226 5545     		cmp	r5, sl
- 461 0228 F1D1     		bne	.L63
- 462              	.L54:
- 463 022a 2046     		mov	r0, r4
- 464 022c 04B0     		add	sp, sp, #16
- 465 022e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
- 466              	.L53:
- 467 0232 0948     		ldr	r0, .L66+24
- 468 0234 0025     		movs	r5, #0
- 469 0236 FFF7FEFF 		bl	puts
- 470 023a 2C46     		mov	r4, r5
- 471 023c ACE7     		b	.L64
- 472              	.L67:
- 473 023e 00BF     		.align	2
- 474              	.L66:
- 475 0240 00000000 		.word	.LANCHOR0
- 476 0244 00000000 		.word	.LC0
- 477 0248 2E000000 		.word	.LC1
- 478 024c 42000000 		.word	.LC2
- 479 0250 00000000 		.word	_Z24scheduler_c_task_privatePv
- 480 0254 58000000 		.word	.LC3
- 481 0258 73000000 		.word	.LC4
- 483              		.align	1
- 484              		.global	_Z15scheduler_startb
- 485              		.thumb
- 486              		.thumb_func
- 488              	_Z15scheduler_startb:
- 489              		@ args = 0, pretend = 0, frame = 0
- 490              		@ frame_needed = 0, uses_anonymous_args = 0
- 491 025c 08B5     		push	{r3, lr}
- 492 025e FFF7FEFF 		bl	_Z18scheduler_init_allb
- 493 0262 48B9     		cbnz	r0, .L69
- 494 0264 0B48     		ldr	r0, .L70
- 495 0266 FFF7FEFF 		bl	puts
- 496 026a FFF7FEFF 		bl	vTaskStartScheduler
- 497 026e 0A48     		ldr	r0, .L70+4
- 498 0270 BDE80840 		pop	{r3, lr}
- 499 0274 FFF7FEBF 		b	puts
- 500              	.L69:
- 501 0278 0848     		ldr	r0, .L70+8
- 502 027a FFF7FEFF 		bl	puts
- 503 027e 40F6B830 		movw	r0, #3000
- 504 0282 FFF7FEFF 		bl	delay_ms
- 505 0286 4FF08043 		mov	r3, #1073741824
- 506 028a AA22     		movs	r2, #170
- 507 028c 1A72     		strb	r2, [r3, #8]
- 508 028e 0022     		movs	r2, #0
- 509 0290 1A70     		strb	r2, [r3, #0]
- 510 0292 08BD     		pop	{r3, pc}
- 511              	.L71:
- 512              		.align	2
- 513              	.L70:
- 514 0294 8D000000 		.word	.LC5
- 515 0298 A4000000 		.word	.LC6
- 516 029c C8000000 		.word	.LC7
- 518              		.align	1
- 519              		.global	_Z24scheduler_c_task_privatePv
- 520              		.thumb
- 521              		.thumb_func
- 523              	_Z24scheduler_c_task_privatePv:
- 524              		@ args = 0, pretend = 0, frame = 8
- 525              		@ frame_needed = 0, uses_anonymous_args = 0
- 526 02a0 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
- 527 02a4 394F     		ldr	r7, .L88
- 528 02a6 0369     		ldr	r3, [r0, #16]
- 529 02a8 FA68     		ldr	r2, [r7, #12]
- 530 02aa 0446     		mov	r4, r0
- 531 02ac 9A42     		cmp	r2, r3
- 532 02ae 30D1     		bne	.L73
- 533 02b0 806A     		ldr	r0, [r0, #40]
- 534 02b2 3749     		ldr	r1, .L88+4
- 535 02b4 0026     		movs	r6, #0
- 536 02b6 FFF7A3FE 		bl	_ZL13print_stringsPKcS0_
- 537 02ba 3546     		mov	r5, r6
- 538 02bc 11E0     		b	.L74
- 539              	.L76:
- 540 02be 3146     		mov	r1, r6
- 541 02c0 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE2atEj
- 542 02c4 D0F80080 		ldr	r8, [r0, #0]
- 543 02c8 D8F80030 		ldr	r3, [r8, #0]
- 544 02cc 4046     		mov	r0, r8
- 545 02ce 1B69     		ldr	r3, [r3, #16]
- 546 02d0 9847     		blx	r3
- 547 02d2 28B9     		cbnz	r0, .L75
- 548 02d4 D8F82800 		ldr	r0, [r8, #40]
- 549 02d8 2E49     		ldr	r1, .L88+8
- 550 02da FFF791FE 		bl	_ZL13print_stringsPKcS0_
- 551 02de 0125     		movs	r5, #1
- 552              	.L75:
- 553 02e0 0136     		adds	r6, r6, #1
- 554              	.L74:
- 555 02e2 7868     		ldr	r0, [r7, #4]
- 556 02e4 8368     		ldr	r3, [r0, #8]
- 557 02e6 9E42     		cmp	r6, r3
- 558 02e8 E9D3     		bcc	.L76
- 559 02ea 6DB1     		cbz	r5, .L84
- 560 02ec 2A48     		ldr	r0, .L88+12
- 561 02ee FFF7FEFF 		bl	puts
- 562 02f2 FFF7FEFF 		bl	vTaskEndScheduler
- 563 02f6 0CE0     		b	.L73
- 564              	.L78:
- 565 02f8 0021     		movs	r1, #0
- 566 02fa B068     		ldr	r0, [r6, #8]
- 567 02fc 0A46     		mov	r2, r1
- 568 02fe 0B46     		mov	r3, r1
- 569 0300 FFF7FEFF 		bl	xQueueGenericSend
- 570 0304 0135     		adds	r5, r5, #1
- 571 0306 00E0     		b	.L77
- 572              	.L84:
- 573 0308 204E     		ldr	r6, .L88
- 574              	.L77:
- 575 030a 7368     		ldr	r3, [r6, #4]
- 576 030c 9B68     		ldr	r3, [r3, #8]
- 577 030e 9D42     		cmp	r5, r3
- 578 0310 F2D3     		bcc	.L78
- 579              	.L73:
- 580 0312 1E4B     		ldr	r3, .L88
- 581 0314 0021     		movs	r1, #0
- 582 0316 9868     		ldr	r0, [r3, #8]
- 583 0318 4FF0FF32 		mov	r2, #-1
- 584 031c 0B46     		mov	r3, r1
- 585 031e FFF7FEFF 		bl	xQueueGenericReceive
- 586 0322 FFF7FEFF 		bl	xTaskGetTickCount
- 587 0326 02AD     		add	r5, sp, #8
- 588 0328 45F8040D 		str	r0, [r5, #-4]!
- 589 032c 0026     		movs	r6, #0
- 590              	.L87:
- 591 032e 6068     		ldr	r0, [r4, #4]
- 592 0330 18B1     		cbz	r0, .L80
- 593 0332 E168     		ldr	r1, [r4, #12]
- 594 0334 FFF7FEFF 		bl	xQueueSelectFromSet
- 595 0338 A060     		str	r0, [r4, #8]
- 596              	.L80:
- 597 033a 2368     		ldr	r3, [r4, #0]
- 598 033c 2046     		mov	r0, r4
- 599 033e 5B69     		ldr	r3, [r3, #20]
- 600 0340 E16A     		ldr	r1, [r4, #44]
- 601 0342 9847     		blx	r3
- 602 0344 0746     		mov	r7, r0
- 603 0346 30B9     		cbnz	r0, .L81
- 604 0348 A06A     		ldr	r0, [r4, #40]
- 605 034a 1449     		ldr	r1, .L88+16
- 606 034c FFF758FE 		bl	_ZL13print_stringsPKcS0_
- 607 0350 3846     		mov	r0, r7
- 608 0352 FFF7FEFF 		bl	vTaskSuspend
- 609              	.L81:
- 610 0356 E369     		ldr	r3, [r4, #28]
- 611 0358 0133     		adds	r3, r3, #1
- 612 035a E361     		str	r3, [r4, #28]
- 613 035c FFF7FEFF 		bl	xTaskGetTickCount
- 614 0360 B042     		cmp	r0, r6
- 615 0362 0BD9     		bls	.L82
- 616 0364 FFF7FEFF 		bl	xTaskGetTickCount
- 617 0368 636A     		ldr	r3, [r4, #36]
- 618 036a C618     		adds	r6, r0, r3
- 619 036c 2069     		ldr	r0, [r4, #16]
- 620 036e FFF7FEFF 		bl	uxTaskGetStackHighWaterMark
- 621 0372 6061     		str	r0, [r4, #20]
- 622 0374 2069     		ldr	r0, [r4, #16]
- 623 0376 FFF7FEFF 		bl	uxTaskGetCpuUsage
- 624 037a 2076     		strb	r0, [r4, #24]
- 625              	.L82:
- 626 037c 216A     		ldr	r1, [r4, #32]
- 627 037e 0029     		cmp	r1, #0
- 628 0380 D5D0     		beq	.L87
- 629 0382 2846     		mov	r0, r5
- 630 0384 FFF7FEFF 		bl	vTaskDelayUntil
- 631 0388 D1E7     		b	.L87
- 632              	.L89:
- 633 038a 00BF     		.align	2
- 634              	.L88:
- 635 038c 00000000 		.word	.LANCHOR0
- 636 0390 FE000000 		.word	.LC8
- 637 0394 2B010000 		.word	.LC9
- 638 0398 44010000 		.word	.LC10
- 639 039c 6C010000 		.word	.LC11
- 641              		.section	.text._ZN6VECTORIP14scheduler_taskE9push_backERKS1_,"axG",%progbits,_ZN6VECTORIP14schedul
- 642              		.align	1
- 643              		.weak	_ZN6VECTORIP14scheduler_taskE9push_backERKS1_
- 644              		.thumb
- 645              		.thumb_func
- 647              	_ZN6VECTORIP14scheduler_taskE9push_backERKS1_:
- 648              		@ args = 0, pretend = 0, frame = 0
- 649              		@ frame_needed = 0, uses_anonymous_args = 0
- 650 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
- 651 0004 8268     		ldr	r2, [r0, #8]
- 652 0006 4368     		ldr	r3, [r0, #4]
- 653 0008 0446     		mov	r4, r0
- 654 000a 9A42     		cmp	r2, r3
- 655 000c 0E46     		mov	r6, r1
- 656 000e 1BD3     		bcc	.L91
- 657 0010 0568     		ldr	r5, [r0, #0]
- 658 0012 5D19     		adds	r5, r3, r5
- 659 0014 18D2     		bcs	.L91
- 660 0016 A900     		lsls	r1, r5, #2
- 661 0018 C068     		ldr	r0, [r0, #12]
- 662 001a FFF7FEFF 		bl	realloc
- 663 001e A768     		ldr	r7, [r4, #8]
- 664 0020 E060     		str	r0, [r4, #12]
- 665 0022 4FEA8708 		lsl	r8, r7, #2
- 666 0026 4FF00009 		mov	r9, #0
- 667 002a 0AE0     		b	.L92
- 668              	.L93:
- 669 002c 0420     		movs	r0, #4
- 670 002e FFF7FEFF 		bl	_Znwj
- 671 0032 C0F80090 		str	r9, [r0, #0]
- 672 0036 E368     		ldr	r3, [r4, #12]
- 673 0038 0137     		adds	r7, r7, #1
- 674 003a 43F80800 		str	r0, [r3, r8]
- 675 003e 08F10408 		add	r8, r8, #4
- 676              	.L92:
- 677 0042 AF42     		cmp	r7, r5
- 678 0044 F2D3     		bcc	.L93
- 679 0046 6560     		str	r5, [r4, #4]
- 680              	.L91:
- 681 0048 A368     		ldr	r3, [r4, #8]
- 682 004a E268     		ldr	r2, [r4, #12]
- 683 004c 3168     		ldr	r1, [r6, #0]
- 684 004e 52F82320 		ldr	r2, [r2, r3, lsl #2]
- 685 0052 0133     		adds	r3, r3, #1
- 686 0054 1160     		str	r1, [r2, #0]
- 687 0056 A360     		str	r3, [r4, #8]
- 688 0058 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 690              		.text
- 691              		.align	1
- 692              		.global	_Z18scheduler_add_taskP14scheduler_task
- 693              		.thumb
- 694              		.thumb_func
- 696              	_Z18scheduler_add_taskP14scheduler_task:
- 697              		@ args = 0, pretend = 0, frame = 8
- 698              		@ frame_needed = 0, uses_anonymous_args = 0
- 699 03a0 37B5     		push	{r0, r1, r2, r4, r5, lr}
- 700 03a2 0A4D     		ldr	r5, .L98
- 701 03a4 0190     		str	r0, [sp, #4]
- 702 03a6 6C68     		ldr	r4, [r5, #4]
- 703 03a8 44B9     		cbnz	r4, .L95
- 704 03aa 1420     		movs	r0, #20
- 705 03ac FFF7FEFF 		bl	_Znwj
- 706 03b0 0423     		movs	r3, #4
- 707 03b2 80E81800 		stmia	r0, {r3, r4}
- 708 03b6 8460     		str	r4, [r0, #8]
- 709 03b8 C460     		str	r4, [r0, #12]
- 710 03ba 6860     		str	r0, [r5, #4]
- 711              	.L95:
- 712 03bc 019B     		ldr	r3, [sp, #4]
- 713 03be 23B1     		cbz	r3, .L94
- 714 03c0 024B     		ldr	r3, .L98
- 715 03c2 01A9     		add	r1, sp, #4
- 716 03c4 5868     		ldr	r0, [r3, #4]
- 717 03c6 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskE9push_backERKS1_
- 718              	.L94:
- 719 03ca 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
- 720              	.L99:
- 721              		.align	2
- 722              	.L98:
- 723 03cc 00000000 		.word	.LANCHOR0
- 725              		.section	.text._ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_,"axG",%progbits,_ZN
- 726              		.align	1
- 727              		.weak	_ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_
- 728              		.thumb
- 729              		.thumb_func
- 731              	_ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_:
- 732              		@ args = 0, pretend = 0, frame = 0
- 733              		@ frame_needed = 0, uses_anonymous_args = 0
- 734 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
- 735 0004 8268     		ldr	r2, [r0, #8]
- 736 0006 4368     		ldr	r3, [r0, #4]
- 737 0008 0446     		mov	r4, r0
- 738 000a 9A42     		cmp	r2, r3
- 739 000c 0E46     		mov	r6, r1
- 740 000e 1DD3     		bcc	.L101
- 741 0010 0568     		ldr	r5, [r0, #0]
- 742 0012 5D19     		adds	r5, r3, r5
- 743 0014 1AD2     		bcs	.L101
- 744 0016 A900     		lsls	r1, r5, #2
- 745 0018 C068     		ldr	r0, [r0, #12]
- 746 001a FFF7FEFF 		bl	realloc
- 747 001e A768     		ldr	r7, [r4, #8]
- 748 0020 E060     		str	r0, [r4, #12]
- 749 0022 4FEA8708 		lsl	r8, r7, #2
- 750 0026 4FF00009 		mov	r9, #0
- 751 002a 0CE0     		b	.L102
- 752              	.L103:
- 753 002c 0820     		movs	r0, #8
- 754 002e FFF7FEFF 		bl	_Znwj
- 755 0032 E368     		ldr	r3, [r4, #12]
- 756 0034 C0F80090 		str	r9, [r0, #0]
- 757 0038 C0F80490 		str	r9, [r0, #4]
- 758 003c 0137     		adds	r7, r7, #1
- 759 003e 43F80800 		str	r0, [r3, r8]
- 760 0042 08F10408 		add	r8, r8, #4
- 761              	.L102:
- 762 0046 AF42     		cmp	r7, r5
- 763 0048 F0D3     		bcc	.L103
- 764 004a 6560     		str	r5, [r4, #4]
- 765              	.L101:
- 766 004c A368     		ldr	r3, [r4, #8]
- 767 004e E268     		ldr	r2, [r4, #12]
- 768 0050 96E80300 		ldmia	r6, {r0, r1}
- 769 0054 52F82320 		ldr	r2, [r2, r3, lsl #2]
- 770 0058 0133     		adds	r3, r3, #1
- 771 005a 82E80300 		stmia	r2, {r0, r1}
- 772 005e A360     		str	r3, [r4, #8]
- 773 0060 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 775              		.text
- 776              		.align	1
- 777              		.global	_ZN14scheduler_task15addSharedObjectEPKcPv
- 778              		.thumb
- 779              		.thumb_func
- 781              	_ZN14scheduler_task15addSharedObjectEPKcPv:
- 782              		@ args = 0, pretend = 0, frame = 8
- 783              		@ frame_needed = 0, uses_anonymous_args = 0
- 784 03d0 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
- 785 03d4 184E     		ldr	r6, .L111
- 786 03d6 0C46     		mov	r4, r1
- 787 03d8 1746     		mov	r7, r2
- 788 03da FFF7FEFF 		bl	vPortEnterCritical
- 789 03de 3568     		ldr	r5, [r6, #0]
- 790 03e0 45B9     		cbnz	r5, .L105
- 791 03e2 1820     		movs	r0, #24
- 792 03e4 FFF7FEFF 		bl	_Znwj
- 793 03e8 0423     		movs	r3, #4
- 794 03ea 80E82800 		stmia	r0, {r3, r5}
- 795 03ee 8560     		str	r5, [r0, #8]
- 796 03f0 C560     		str	r5, [r0, #12]
- 797 03f2 3060     		str	r0, [r6, #0]
- 798              	.L105:
- 799 03f4 0025     		movs	r5, #0
- 800 03f6 DFF84080 		ldr	r8, .L111
- 801 03fa 08E0     		b	.L107
- 802              	.L109:
- 803 03fc F368     		ldr	r3, [r6, #12]
- 804 03fe 2146     		mov	r1, r4
- 805 0400 53F82530 		ldr	r3, [r3, r5, lsl #2]
- 806 0404 5868     		ldr	r0, [r3, #4]
- 807 0406 FFF7FEFF 		bl	strcmp
- 808 040a 38B1     		cbz	r0, .L110
- 809 040c 0135     		adds	r5, r5, #1
- 810              	.L107:
- 811 040e D8F80060 		ldr	r6, [r8, #0]
- 812 0412 B368     		ldr	r3, [r6, #8]
- 813 0414 9D42     		cmp	r5, r3
- 814 0416 F1D3     		bcc	.L109
- 815 0418 0025     		movs	r5, #0
- 816 041a 00E0     		b	.L108
- 817              	.L110:
- 818 041c 0125     		movs	r5, #1
- 819              	.L108:
- 820 041e 3046     		mov	r0, r6
- 821 0420 6946     		mov	r1, sp
- 822 0422 0097     		str	r7, [sp, #0]
- 823 0424 0194     		str	r4, [sp, #4]
- 824 0426 FFF7FEFF 		bl	_ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_
- 825 042a FFF7FEFF 		bl	vPortExitCritical
- 826 042e 85F00100 		eor	r0, r5, #1
- 827 0432 BDE8FC81 		pop	{r2, r3, r4, r5, r6, r7, r8, pc}
- 828              	.L112:
- 829 0436 00BF     		.align	2
- 830              	.L111:
- 831 0438 00000000 		.word	.LANCHOR0
- 833              		.global	_ZN14scheduler_task13mpNamePtrPairE
- 834              		.weak	_ZTV14scheduler_task
- 835              		.section	.rodata._ZTV14scheduler_task,"aG",%progbits,_ZTV14scheduler_task,comdat
- 836              		.align	3
- 839              	_ZTV14scheduler_task:
- 840 0000 00000000 		.word	0
- 841 0004 00000000 		.word	0
- 842 0008 00000000 		.word	_ZN14scheduler_taskD1Ev
- 843 000c 00000000 		.word	_ZN14scheduler_taskD0Ev
- 844 0010 00000000 		.word	_ZN14scheduler_task4initEv
- 845 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
- 846 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
- 847 001c 00000000 		.word	__cxa_pure_virtual
- 848              		.weak	_ZN14scheduler_taskD1Ev
- 849              		.thumb_set _ZN14scheduler_taskD1Ev,_ZN14scheduler_taskD2Ev
- 850              		.global	_ZN14scheduler_taskC1EPKcmhPv
- 851              		.thumb_set _ZN14scheduler_taskC1EPKcmhPv,_ZN14scheduler_taskC2EPKcmhPv
- 852              		.section	.rodata.str1.1,"aMS",%progbits,1
- 853              	.LC0:
- 854 0000 4552524F 		.ascii	"ERROR: NO tasks added by scheduler_add_task()\000"
- 854      523A204E 
- 854      4F207461 
- 854      736B7320 
- 854      61646465 
- 855              	.LC1:
- 856 002e 20202D2D 		.ascii	"  --> FAILED init()\000"
- 856      3E204641 
- 856      494C4544 
- 856      20696E69 
- 856      74282900 
- 857              	.LC2:
- 858 0042 2A202043 		.ascii	"*  Creating tasks ...\000"
- 858      72656174 
- 858      696E6720 
- 858      7461736B 
- 858      73202E2E 
- 859              	.LC3:
- 860 0058 20202D2D 		.ascii	"  --> FAILED xTaskCreate()\000"
- 860      3E204641 
- 860      494C4544 
- 860      20785461 
- 860      736B4372 
- 861              	.LC4:
- 862 0073 2A202049 		.ascii	"*  Initializing tasks ...\000"
- 862      6E697469 
- 862      616C697A 
- 862      696E6720 
- 862      7461736B 
- 863              	.LC5:
- 864 008d 53746172 		.ascii	"Starting scheduler ...\000"
- 864      74696E67 
- 864      20736368 
- 864      6564756C 
- 864      6572202E 
- 865              	.LC6:
- 866 00a4 4552524F 		.ascii	"ERROR: Someone killed the scheduler\000"
- 866      523A2053 
- 866      6F6D656F 
- 866      6E65206B 
- 866      696C6C65 
- 867              	.LC7:
- 868 00c8 4552524F 		.ascii	"ERROR: Refusing to start OS scheduler due to error("
- 868      523A2052 
- 868      65667573 
- 868      696E6720 
- 868      746F2073 
- 869 00fb 732900   		.ascii	"s)\000"
- 870              	.LC8:
- 871 00fe 20746173 		.ascii	" task calling taskEntry() for all tasks ... \000"
- 871      6B206361 
- 871      6C6C696E 
- 871      67207461 
- 871      736B456E 
- 872              	.LC9:
- 873 012b 20202D2D 		.ascii	"  --> FAILED taskEntry()\000"
- 873      3E204641 
- 873      494C4544 
- 873      20746173 
- 873      6B456E74 
- 874              	.LC10:
- 875 0144 4552524F 		.ascii	"ERROR: Killing FreeRTOS due to error(s)\000"
- 875      523A204B 
- 875      696C6C69 
- 875      6E672046 
- 875      72656552 
- 876              	.LC11:
- 877 016c 202D2D3E 		.ascii	" --> FAILURE detected; suspending this task ...\000"
- 877      20464149 
- 877      4C555245 
- 877      20646574 
- 877      65637465 
- 878              		.bss
- 879              		.align	2
- 880              		.set	.LANCHOR0,. + 0
- 883              	_ZN14scheduler_task13mpNamePtrPairE:
- 884 0000 00000000 		.space	4
- 887              	_ZL9gTaskList:
- 888 0004 00000000 		.space	4
- 891              	_ZL8mRunTask:
- 892 0008 00000000 		.space	4
- 895              	_ZL20mTaskEntryTaskHandle:
- 896 000c 00000000 		.space	4
- 897              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"cpp_task.cpp"
+  16              		.section	.text._ZN14scheduler_task4initEv,"axG",%progbits,_ZN14scheduler_task4initEv,comdat
+  17              		.align	1
+  18              		.weak	_ZN14scheduler_task4initEv
+  19              		.thumb
+  20              		.thumb_func
+  22              	_ZN14scheduler_task4initEv:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0120     		movs	r0, #1
+  27 0002 7047     		bx	lr
+  29              		.section	.text._ZN14scheduler_task6regTlmEv,"axG",%progbits,_ZN14scheduler_task6regTlmEv,comdat
+  30              		.align	1
+  31              		.weak	_ZN14scheduler_task6regTlmEv
+  32              		.thumb
+  33              		.thumb_func
+  35              	_ZN14scheduler_task6regTlmEv:
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 0120     		movs	r0, #1
+  40 0002 7047     		bx	lr
+  42              		.section	.text._ZN14scheduler_task9taskEntryEv,"axG",%progbits,_ZN14scheduler_task9taskEntryEv,com
+  43              		.align	1
+  44              		.weak	_ZN14scheduler_task9taskEntryEv
+  45              		.thumb
+  46              		.thumb_func
+  48              	_ZN14scheduler_task9taskEntryEv:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 0120     		movs	r0, #1
+  53 0002 7047     		bx	lr
+  55              		.text
+  56              		.align	1
+  57              		.thumb
+  58              		.thumb_func
+  60              	_ZL13print_stringsPKcS0_:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  64 0002 0D46     		mov	r5, r1
+  65 0004 0F4E     		ldr	r6, .L11
+  66 0006 441E     		subs	r4, r0, #1
+  67              	.L5:
+  68 0008 14F8011F 		ldrb	r1, [r4, #1]!	@ zero_extendqisi2
+  69 000c 61B1     		cbz	r1, .L6
+  70 000e 3068     		ldr	r0, [r6]
+  71 0010 8268     		ldr	r2, [r0, #8]
+  72 0012 9368     		ldr	r3, [r2, #8]
+  73 0014 013B     		subs	r3, r3, #1
+  74 0016 002B     		cmp	r3, #0
+  75 0018 9360     		str	r3, [r2, #8]
+  76 001a 0ADA     		bge	.L7
+  77 001c 9769     		ldr	r7, [r2, #24]
+  78 001e BB42     		cmp	r3, r7
+  79 0020 0CDB     		blt	.L8
+  80 0022 0A29     		cmp	r1, #10
+  81 0024 05D1     		bne	.L7
+  82 0026 09E0     		b	.L8
+  83              	.L6:
+  84 0028 2846     		mov	r0, r5
+  85 002a BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+  86 002e FFF7FEBF 		b	puts
+  87              	.L7:
+  88 0032 1368     		ldr	r3, [r2]
+  89 0034 581C     		adds	r0, r3, #1
+  90 0036 1060     		str	r0, [r2]
+  91 0038 1970     		strb	r1, [r3]
+  92 003a E5E7     		b	.L5
+  93              	.L8:
+  94 003c FFF7FEFF 		bl	__swbuf_r
+  95 0040 E2E7     		b	.L5
+  96              	.L12:
+  97 0042 00BF     		.align	2
+  98              	.L11:
+  99 0044 00000000 		.word	_impure_ptr
+ 101              		.align	1
+ 102              		.global	_Z18scheduler_add_taskP14scheduler_task
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	_Z18scheduler_add_taskP14scheduler_task:
+ 107              		@ args = 0, pretend = 0, frame = 0
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109 0048 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 110 004c 1E4D     		ldr	r5, .L25
+ 111 004e 0746     		mov	r7, r0
+ 112 0050 2C68     		ldr	r4, [r5]
+ 113 0052 5CB9     		cbnz	r4, .L14
+ 114 0054 1420     		movs	r0, #20
+ 115 0056 FFF7FEFF 		bl	_Znwj
+ 116 005a 0423     		movs	r3, #4
+ 117 005c 80E81800 		stmia	r0, {r3, r4}
+ 118 0060 8460     		str	r4, [r0, #8]
+ 119 0062 C460     		str	r4, [r0, #12]
+ 120 0064 2860     		str	r0, [r5]
+ 121 0066 3FB9     		cbnz	r7, .L21
+ 122 0068 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 123              	.L14:
+ 124 006c 48B3     		cbz	r0, .L13
+ 125 006e 6368     		ldr	r3, [r4, #4]
+ 126 0070 A268     		ldr	r2, [r4, #8]
+ 127 0072 9A42     		cmp	r2, r3
+ 128 0074 1ED3     		bcc	.L18
+ 129 0076 01E0     		b	.L15
+ 130              	.L21:
+ 131 0078 0446     		mov	r4, r0
+ 132 007a 0023     		movs	r3, #0
+ 133              	.L15:
+ 134 007c 2568     		ldr	r5, [r4]
+ 135 007e 5D19     		adds	r5, r3, r5
+ 136 0080 18D2     		bcs	.L18
+ 137 0082 A900     		lsls	r1, r5, #2
+ 138 0084 E068     		ldr	r0, [r4, #12]
+ 139 0086 FFF7FEFF 		bl	realloc
+ 140 008a A668     		ldr	r6, [r4, #8]
+ 141 008c E060     		str	r0, [r4, #12]
+ 142 008e 4FEA8608 		lsl	r8, r6, #2
+ 143 0092 4FF00009 		mov	r9, #0
+ 144              	.L20:
+ 145 0096 B542     		cmp	r5, r6
+ 146 0098 0BD9     		bls	.L19
+ 147 009a 0420     		movs	r0, #4
+ 148 009c FFF7FEFF 		bl	_Znwj
+ 149 00a0 C0F80090 		str	r9, [r0]
+ 150 00a4 E368     		ldr	r3, [r4, #12]
+ 151 00a6 0136     		adds	r6, r6, #1
+ 152 00a8 43F80800 		str	r0, [r3, r8]
+ 153 00ac 08F10408 		add	r8, r8, #4
+ 154 00b0 F1E7     		b	.L20
+ 155              	.L19:
+ 156 00b2 6560     		str	r5, [r4, #4]
+ 157              	.L18:
+ 158 00b4 A368     		ldr	r3, [r4, #8]
+ 159 00b6 E268     		ldr	r2, [r4, #12]
+ 160 00b8 591C     		adds	r1, r3, #1
+ 161 00ba 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 162 00be A160     		str	r1, [r4, #8]
+ 163 00c0 1F60     		str	r7, [r3]
+ 164              	.L13:
+ 165 00c2 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 166              	.L26:
+ 167 00c6 00BF     		.align	2
+ 168              	.L25:
+ 169 00c8 00000000 		.word	.LANCHOR0
+ 171              		.align	1
+ 172              		.global	_ZN14scheduler_taskC2EPKcmhPv
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	_ZN14scheduler_taskC2EPKcmhPv:
+ 177              		@ args = 4, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 00cc 70B5     		push	{r4, r5, r6, lr}
+ 180 00ce 0A4D     		ldr	r5, .L28
+ 181 00d0 8162     		str	r1, [r0, #40]
+ 182 00d2 0499     		ldr	r1, [sp, #16]
+ 183 00d4 4FF47A76 		mov	r6, #1000
+ 184 00d8 0560     		str	r5, [r0]
+ 185 00da 0025     		movs	r5, #0
+ 186 00dc 4560     		str	r5, [r0, #4]
+ 187 00de 8560     		str	r5, [r0, #8]
+ 188 00e0 C660     		str	r6, [r0, #12]
+ 189 00e2 0561     		str	r5, [r0, #16]
+ 190 00e4 4561     		str	r5, [r0, #20]
+ 191 00e6 0576     		strb	r5, [r0, #24]
+ 192 00e8 C561     		str	r5, [r0, #28]
+ 193 00ea 0562     		str	r5, [r0, #32]
+ 194 00ec 4662     		str	r6, [r0, #36]
+ 195 00ee C162     		str	r1, [r0, #44]
+ 196 00f0 80F83030 		strb	r3, [r0, #48]
+ 197 00f4 4263     		str	r2, [r0, #52]
+ 198 00f6 70BD     		pop	{r4, r5, r6, pc}
+ 199              	.L29:
+ 200              		.align	2
+ 201              	.L28:
+ 202 00f8 08000000 		.word	_ZTV14scheduler_task+8
+ 204              		.global	_ZN14scheduler_taskC1EPKcmhPv
+ 205              		.thumb_set _ZN14scheduler_taskC1EPKcmhPv,_ZN14scheduler_taskC2EPKcmhPv
+ 206              		.align	1
+ 207              		.global	_ZNK14scheduler_task18getInstantCpuUsageEv
+ 208              		.thumb
+ 209              		.thumb_func
+ 211              	_ZNK14scheduler_task18getInstantCpuUsageEv:
+ 212              		@ args = 0, pretend = 0, frame = 0
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214 00fc 08B5     		push	{r3, lr}
+ 215 00fe 0069     		ldr	r0, [r0, #16]
+ 216 0100 FFF7FEFF 		bl	uxTaskGetCpuUsage
+ 217 0104 C0B2     		uxtb	r0, r0
+ 218 0106 08BD     		pop	{r3, pc}
+ 220              		.align	1
+ 221              		.global	_ZNK14scheduler_task20getCpuIdlePercentageEv
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	_ZNK14scheduler_task20getCpuIdlePercentageEv:
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228 0108 08B5     		push	{r3, lr}
+ 229 010a FFF7FEFF 		bl	xTaskGetIdleTaskHandle
+ 230 010e FFF7FEFF 		bl	uxTaskGetCpuUsage
+ 231 0112 C0B2     		uxtb	r0, r0
+ 232 0114 08BD     		pop	{r3, pc}
+ 234              		.align	1
+ 235              		.global	_ZNK14scheduler_task24getTotalSysCpuPercentageEv
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	_ZNK14scheduler_task24getTotalSysCpuPercentageEv:
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242 0116 08B5     		push	{r3, lr}
+ 243 0118 FFF7FEFF 		bl	_ZNK14scheduler_task20getCpuIdlePercentageEv
+ 244 011c C0F16400 		rsb	r0, r0, #100
+ 245 0120 C0B2     		uxtb	r0, r0
+ 246 0122 08BD     		pop	{r3, pc}
+ 248              		.align	1
+ 249              		.global	_ZN14scheduler_task12initQueueSetEmmz
+ 250              		.thumb
+ 251              		.thumb_func
+ 253              	_ZN14scheduler_task12initQueueSetEmmz:
+ 254              		@ args = 4, pretend = 8, frame = 8
+ 255              		@ frame_needed = 0, uses_anonymous_args = 1
+ 256 0124 0CB4     		push	{r2, r3}
+ 257 0126 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 258 0128 06AB     		add	r3, sp, #24
+ 259 012a 53F8044B 		ldr	r4, [r3], #4
+ 260 012e 0546     		mov	r5, r0
+ 261 0130 0846     		mov	r0, r1
+ 262 0132 0193     		str	r3, [sp, #4]
+ 263 0134 FFF7FEFF 		bl	xQueueCreateSet
+ 264 0138 6860     		str	r0, [r5, #4]
+ 265              	.L35:
+ 266 013a 44B1     		cbz	r4, .L33
+ 267 013c 019B     		ldr	r3, [sp, #4]
+ 268 013e 6968     		ldr	r1, [r5, #4]
+ 269 0140 1A1D     		adds	r2, r3, #4
+ 270 0142 1868     		ldr	r0, [r3]
+ 271 0144 0192     		str	r2, [sp, #4]
+ 272 0146 013C     		subs	r4, r4, #1
+ 273 0148 FFF7FEFF 		bl	xQueueAddToSet
+ 274 014c F5E7     		b	.L35
+ 275              	.L33:
+ 276 014e 03B0     		add	sp, sp, #12
+ 277              		@ sp needed
+ 278 0150 BDE83040 		pop	{r4, r5, lr}
+ 279 0154 02B0     		add	sp, sp, #8
+ 280 0156 7047     		bx	lr
+ 282              		.align	1
+ 283              		.global	_ZN14scheduler_task15addSharedObjectEPKcPv
+ 284              		.thumb
+ 285              		.thumb_func
+ 287              	_ZN14scheduler_task15addSharedObjectEPKcPv:
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290 0158 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 291 015c 2A4C     		ldr	r4, .L45
+ 292 015e 0E46     		mov	r6, r1
+ 293 0160 1746     		mov	r7, r2
+ 294 0162 FFF7FEFF 		bl	vPortEnterCritical
+ 295 0166 6568     		ldr	r5, [r4, #4]
+ 296 0168 45B9     		cbnz	r5, .L37
+ 297 016a 1820     		movs	r0, #24
+ 298 016c FFF7FEFF 		bl	_Znwj
+ 299 0170 0423     		movs	r3, #4
+ 300 0172 80E82800 		stmia	r0, {r3, r5}
+ 301 0176 8560     		str	r5, [r0, #8]
+ 302 0178 C560     		str	r5, [r0, #12]
+ 303 017a 6060     		str	r0, [r4, #4]
+ 304              	.L37:
+ 305 017c 6468     		ldr	r4, [r4, #4]
+ 306 017e 0025     		movs	r5, #0
+ 307 0180 D4F80880 		ldr	r8, [r4, #8]
+ 308              	.L39:
+ 309 0184 4545     		cmp	r5, r8
+ 310 0186 09D0     		beq	.L43
+ 311 0188 E368     		ldr	r3, [r4, #12]
+ 312 018a 3146     		mov	r1, r6
+ 313 018c 53F82530 		ldr	r3, [r3, r5, lsl #2]
+ 314 0190 5868     		ldr	r0, [r3, #4]
+ 315 0192 FFF7FEFF 		bl	strcmp
+ 316 0196 20B1     		cbz	r0, .L44
+ 317 0198 0135     		adds	r5, r5, #1
+ 318 019a F3E7     		b	.L39
+ 319              	.L43:
+ 320 019c 4FF0000A 		mov	r10, #0
+ 321 01a0 01E0     		b	.L38
+ 322              	.L44:
+ 323 01a2 4FF0010A 		mov	r10, #1
+ 324              	.L38:
+ 325 01a6 6368     		ldr	r3, [r4, #4]
+ 326 01a8 9845     		cmp	r8, r3
+ 327 01aa 1FD3     		bcc	.L40
+ 328 01ac 2568     		ldr	r5, [r4]
+ 329 01ae 5D19     		adds	r5, r3, r5
+ 330 01b0 1CD2     		bcs	.L40
+ 331 01b2 A900     		lsls	r1, r5, #2
+ 332 01b4 E068     		ldr	r0, [r4, #12]
+ 333 01b6 FFF7FEFF 		bl	realloc
+ 334 01ba D4F80880 		ldr	r8, [r4, #8]
+ 335 01be E060     		str	r0, [r4, #12]
+ 336 01c0 4FEA8809 		lsl	r9, r8, #2
+ 337 01c4 4FF0000B 		mov	fp, #0
+ 338              	.L42:
+ 339 01c8 4545     		cmp	r5, r8
+ 340 01ca 0ED9     		bls	.L41
+ 341 01cc 0820     		movs	r0, #8
+ 342 01ce FFF7FEFF 		bl	_Znwj
+ 343 01d2 E368     		ldr	r3, [r4, #12]
+ 344 01d4 C0F800B0 		str	fp, [r0]
+ 345 01d8 C0F804B0 		str	fp, [r0, #4]
+ 346 01dc 08F10108 		add	r8, r8, #1
+ 347 01e0 43F80900 		str	r0, [r3, r9]
+ 348 01e4 09F10409 		add	r9, r9, #4
+ 349 01e8 EEE7     		b	.L42
+ 350              	.L41:
+ 351 01ea 6560     		str	r5, [r4, #4]
+ 352              	.L40:
+ 353 01ec A368     		ldr	r3, [r4, #8]
+ 354 01ee E268     		ldr	r2, [r4, #12]
+ 355 01f0 591C     		adds	r1, r3, #1
+ 356 01f2 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 357 01f6 A160     		str	r1, [r4, #8]
+ 358 01f8 1F60     		str	r7, [r3]
+ 359 01fa 5E60     		str	r6, [r3, #4]
+ 360 01fc FFF7FEFF 		bl	vPortExitCritical
+ 361 0200 8AF00100 		eor	r0, r10, #1
+ 362 0204 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 363              	.L46:
+ 364              		.align	2
+ 365              	.L45:
+ 366 0208 00000000 		.word	.LANCHOR0
+ 368              		.align	1
+ 369              		.global	_ZN14scheduler_task15getSharedObjectEPKc
+ 370              		.thumb
+ 371              		.thumb_func
+ 373              	_ZN14scheduler_task15getSharedObjectEPKc:
+ 374              		@ args = 0, pretend = 0, frame = 0
+ 375              		@ frame_needed = 0, uses_anonymous_args = 0
+ 376 020c 0E4B     		ldr	r3, .L53
+ 377 020e 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 378 0212 5C68     		ldr	r4, [r3, #4]
+ 379 0214 8846     		mov	r8, r1
+ 380 0216 84B1     		cbz	r4, .L51
+ 381 0218 A768     		ldr	r7, [r4, #8]
+ 382 021a 0025     		movs	r5, #0
+ 383              	.L50:
+ 384 021c BD42     		cmp	r5, r7
+ 385 021e 0FD0     		beq	.L52
+ 386 0220 E368     		ldr	r3, [r4, #12]
+ 387 0222 4146     		mov	r1, r8
+ 388 0224 53F82560 		ldr	r6, [r3, r5, lsl #2]
+ 389 0228 7068     		ldr	r0, [r6, #4]
+ 390 022a FFF7FEFF 		bl	strcmp
+ 391 022e 10B9     		cbnz	r0, .L49
+ 392 0230 3068     		ldr	r0, [r6]
+ 393 0232 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 394              	.L49:
+ 395 0236 0135     		adds	r5, r5, #1
+ 396 0238 F0E7     		b	.L50
+ 397              	.L51:
+ 398 023a 2046     		mov	r0, r4
+ 399 023c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 400              	.L52:
+ 401 0240 0020     		movs	r0, #0
+ 402 0242 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 403              	.L54:
+ 404 0246 00BF     		.align	2
+ 405              	.L53:
+ 406 0248 00000000 		.word	.LANCHOR0
+ 408              		.section	.text._ZN6VECTORIP14scheduler_taskEixEj,"axG",%progbits,_ZN6VECTORIP14scheduler_taskEixEj
+ 409              		.align	1
+ 410              		.weak	_ZN6VECTORIP14scheduler_taskEixEj
+ 411              		.thumb
+ 412              		.thumb_func
+ 414              	_ZN6VECTORIP14scheduler_taskEixEj:
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+ 418 0000 8368     		ldr	r3, [r0, #8]
+ 419 0002 8B42     		cmp	r3, r1
+ 420 0004 86BF     		itte	hi
+ 421 0006 C368     		ldrhi	r3, [r0, #12]
+ 422 0008 53F82100 		ldrhi	r0, [r3, r1, lsl #2]
+ 423 000c 1030     		addls	r0, r0, #16
+ 424 000e 7047     		bx	lr
+ 426              		.text
+ 427              		.align	1
+ 428              		.global	_Z24scheduler_c_task_privatePv
+ 429              		.thumb
+ 430              		.thumb_func
+ 432              	_Z24scheduler_c_task_privatePv:
+ 433              		@ args = 0, pretend = 0, frame = 8
+ 434              		@ frame_needed = 0, uses_anonymous_args = 0
+ 435 024c 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 436 0250 394E     		ldr	r6, .L77
+ 437 0252 0269     		ldr	r2, [r0, #16]
+ 438 0254 B368     		ldr	r3, [r6, #8]
+ 439 0256 0446     		mov	r4, r0
+ 440 0258 9A42     		cmp	r2, r3
+ 441 025a 31D1     		bne	.L65
+ 442 025c 3749     		ldr	r1, .L77+4
+ 443 025e 806A     		ldr	r0, [r0, #40]
+ 444 0260 0027     		movs	r7, #0
+ 445 0262 FFF7CDFE 		bl	_ZL13print_stringsPKcS0_
+ 446 0266 3D46     		mov	r5, r7
+ 447              	.L62:
+ 448 0268 3068     		ldr	r0, [r6]
+ 449 026a 8368     		ldr	r3, [r0, #8]
+ 450 026c 9F42     		cmp	r7, r3
+ 451 026e 12D2     		bcs	.L60
+ 452 0270 3946     		mov	r1, r7
+ 453 0272 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskEixEj
+ 454 0276 D0F80080 		ldr	r8, [r0]
+ 455 027a D8F80030 		ldr	r3, [r8]
+ 456 027e 4046     		mov	r0, r8
+ 457 0280 1B69     		ldr	r3, [r3, #16]
+ 458 0282 9847     		blx	r3
+ 459 0284 28B9     		cbnz	r0, .L61
+ 460 0286 2E49     		ldr	r1, .L77+8
+ 461 0288 D8F82800 		ldr	r0, [r8, #40]
+ 462 028c FFF7B8FE 		bl	_ZL13print_stringsPKcS0_
+ 463 0290 0125     		movs	r5, #1
+ 464              	.L61:
+ 465 0292 0137     		adds	r7, r7, #1
+ 466 0294 E8E7     		b	.L62
+ 467              	.L60:
+ 468 0296 0DB9     		cbnz	r5, .L63
+ 469 0298 274F     		ldr	r7, .L77
+ 470 029a 05E0     		b	.L64
+ 471              	.L63:
+ 472 029c 2948     		ldr	r0, .L77+12
+ 473 029e FFF7FEFF 		bl	puts
+ 474 02a2 FFF7FEFF 		bl	vTaskEndScheduler
+ 475 02a6 0BE0     		b	.L65
+ 476              	.L64:
+ 477 02a8 3368     		ldr	r3, [r6]
+ 478 02aa 9B68     		ldr	r3, [r3, #8]
+ 479 02ac 9D42     		cmp	r5, r3
+ 480 02ae 07D2     		bcs	.L65
+ 481 02b0 0023     		movs	r3, #0
+ 482 02b2 1A46     		mov	r2, r3
+ 483 02b4 1946     		mov	r1, r3
+ 484 02b6 F868     		ldr	r0, [r7, #12]
+ 485 02b8 FFF7FEFF 		bl	xQueueGenericSend
+ 486 02bc 0135     		adds	r5, r5, #1
+ 487 02be F3E7     		b	.L64
+ 488              	.L65:
+ 489 02c0 0023     		movs	r3, #0
+ 490 02c2 4FF0FF32 		mov	r2, #-1
+ 491 02c6 1946     		mov	r1, r3
+ 492 02c8 F068     		ldr	r0, [r6, #12]
+ 493 02ca FFF7FEFF 		bl	xQueueGenericReceive
+ 494 02ce FFF7FEFF 		bl	xTaskGetTickCount
+ 495 02d2 02AF     		add	r7, sp, #8
+ 496 02d4 47F8040D 		str	r0, [r7, #-4]!
+ 497 02d8 0026     		movs	r6, #0
+ 498              	.L66:
+ 499 02da 6068     		ldr	r0, [r4, #4]
+ 500 02dc 18B1     		cbz	r0, .L67
+ 501 02de E168     		ldr	r1, [r4, #12]
+ 502 02e0 FFF7FEFF 		bl	xQueueSelectFromSet
+ 503 02e4 A060     		str	r0, [r4, #8]
+ 504              	.L67:
+ 505 02e6 2368     		ldr	r3, [r4]
+ 506 02e8 E16A     		ldr	r1, [r4, #44]
+ 507 02ea 5B69     		ldr	r3, [r3, #20]
+ 508 02ec 2046     		mov	r0, r4
+ 509 02ee 9847     		blx	r3
+ 510 02f0 0546     		mov	r5, r0
+ 511 02f2 30B9     		cbnz	r0, .L68
+ 512 02f4 A06A     		ldr	r0, [r4, #40]
+ 513 02f6 1449     		ldr	r1, .L77+16
+ 514 02f8 FFF782FE 		bl	_ZL13print_stringsPKcS0_
+ 515 02fc 2846     		mov	r0, r5
+ 516 02fe FFF7FEFF 		bl	vTaskSuspend
+ 517              	.L68:
+ 518 0302 E369     		ldr	r3, [r4, #28]
+ 519 0304 0133     		adds	r3, r3, #1
+ 520 0306 E361     		str	r3, [r4, #28]
+ 521 0308 FFF7FEFF 		bl	xTaskGetTickCount
+ 522 030c 8642     		cmp	r6, r0
+ 523 030e 0BD2     		bcs	.L69
+ 524 0310 FFF7FEFF 		bl	xTaskGetTickCount
+ 525 0314 666A     		ldr	r6, [r4, #36]
+ 526 0316 0644     		add	r6, r6, r0
+ 527 0318 2069     		ldr	r0, [r4, #16]
+ 528 031a FFF7FEFF 		bl	uxTaskGetStackHighWaterMark
+ 529 031e 6061     		str	r0, [r4, #20]
+ 530 0320 2069     		ldr	r0, [r4, #16]
+ 531 0322 FFF7FEFF 		bl	uxTaskGetCpuUsage
+ 532 0326 2076     		strb	r0, [r4, #24]
+ 533              	.L69:
+ 534 0328 216A     		ldr	r1, [r4, #32]
+ 535 032a 0029     		cmp	r1, #0
+ 536 032c D5D0     		beq	.L66
+ 537 032e 3846     		mov	r0, r7
+ 538 0330 FFF7FEFF 		bl	vTaskDelayUntil
+ 539 0334 D1E7     		b	.L66
+ 540              	.L78:
+ 541 0336 00BF     		.align	2
+ 542              	.L77:
+ 543 0338 00000000 		.word	.LANCHOR0
+ 544 033c 00000000 		.word	.LC0
+ 545 0340 2D000000 		.word	.LC1
+ 546 0344 46000000 		.word	.LC2
+ 547 0348 6E000000 		.word	.LC3
+ 549              		.align	1
+ 550              		.global	_Z18scheduler_init_allb
+ 551              		.thumb
+ 552              		.thumb_func
+ 554              	_Z18scheduler_init_allb:
+ 555              		@ args = 0, pretend = 0, frame = 0
+ 556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 557 034c 2DE9FF47 		push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, lr}
+ 558 0350 374D     		ldr	r5, .L101
+ 559 0352 2B68     		ldr	r3, [r5]
+ 560 0354 002B     		cmp	r3, #0
+ 561 0356 63D0     		beq	.L80
+ 562 0358 9B68     		ldr	r3, [r3, #8]
+ 563 035a 002B     		cmp	r3, #0
+ 564 035c 60D0     		beq	.L80
+ 565 035e 3548     		ldr	r0, .L101+4
+ 566 0360 0026     		movs	r6, #0
+ 567 0362 FFF7FEFF 		bl	puts
+ 568 0366 3446     		mov	r4, r6
+ 569              	.L84:
+ 570 0368 2868     		ldr	r0, [r5]
+ 571 036a 314F     		ldr	r7, .L101
+ 572 036c 8368     		ldr	r3, [r0, #8]
+ 573 036e B342     		cmp	r3, r6
+ 574 0370 0FD9     		bls	.L82
+ 575 0372 3146     		mov	r1, r6
+ 576 0374 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskEixEj
+ 577 0378 0768     		ldr	r7, [r0]
+ 578 037a 3B68     		ldr	r3, [r7]
+ 579 037c 3846     		mov	r0, r7
+ 580 037e 9B68     		ldr	r3, [r3, #8]
+ 581 0380 9847     		blx	r3
+ 582 0382 20B9     		cbnz	r0, .L83
+ 583 0384 2C49     		ldr	r1, .L101+8
+ 584 0386 B86A     		ldr	r0, [r7, #40]
+ 585 0388 FFF73AFE 		bl	_ZL13print_stringsPKcS0_
+ 586 038c 0124     		movs	r4, #1
+ 587              	.L83:
+ 588 038e 0136     		adds	r6, r6, #1
+ 589 0390 EAE7     		b	.L84
+ 590              	.L82:
+ 591 0392 2A48     		ldr	r0, .L101+12
+ 592 0394 FFF7FEFF 		bl	puts
+ 593 0398 3B68     		ldr	r3, [r7]
+ 594 039a 0021     		movs	r1, #0
+ 595 039c 9868     		ldr	r0, [r3, #8]
+ 596 039e FFF7FEFF 		bl	xQueueCreateCountingSemaphore
+ 597 03a2 F860     		str	r0, [r7, #12]
+ 598 03a4 0027     		movs	r7, #0
+ 599 03a6 BA46     		mov	r10, r7
+ 600 03a8 0028     		cmp	r0, #0
+ 601 03aa 08BF     		it	eq
+ 602 03ac 0124     		moveq	r4, #1
+ 603              	.L89:
+ 604 03ae D5F80080 		ldr	r8, [r5]
+ 605 03b2 D8F80890 		ldr	r9, [r8, #8]
+ 606 03b6 B945     		cmp	r9, r7
+ 607 03b8 02D8     		bhi	.L86
+ 608 03ba 0026     		movs	r6, #0
+ 609 03bc 3746     		mov	r7, r6
+ 610 03be 1EE0     		b	.L87
+ 611              	.L86:
+ 612 03c0 3946     		mov	r1, r7
+ 613 03c2 4046     		mov	r0, r8
+ 614 03c4 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskEixEj
+ 615 03c8 0668     		ldr	r6, [r0]
+ 616 03ca 1D48     		ldr	r0, .L101+16
+ 617 03cc 06F11003 		add	r3, r6, #16
+ 618 03d0 726B     		ldr	r2, [r6, #52]
+ 619 03d2 CDF80CA0 		str	r10, [sp, #12]
+ 620 03d6 CDF808A0 		str	r10, [sp, #8]
+ 621 03da 0193     		str	r3, [sp, #4]
+ 622 03dc 96F83030 		ldrb	r3, [r6, #48]	@ zero_extendqisi2
+ 623 03e0 C2F38F02 		ubfx	r2, r2, #2, #16
+ 624 03e4 0093     		str	r3, [sp]
+ 625 03e6 B16A     		ldr	r1, [r6, #40]
+ 626 03e8 3346     		mov	r3, r6
+ 627 03ea FFF7FEFF 		bl	xTaskGenericCreate
+ 628 03ee 20B9     		cbnz	r0, .L88
+ 629 03f0 1449     		ldr	r1, .L101+20
+ 630 03f2 B06A     		ldr	r0, [r6, #40]
+ 631 03f4 FFF704FE 		bl	_ZL13print_stringsPKcS0_
+ 632 03f8 0124     		movs	r4, #1
+ 633              	.L88:
+ 634 03fa 0137     		adds	r7, r7, #1
+ 635 03fc D7E7     		b	.L89
+ 636              	.L87:
+ 637 03fe B145     		cmp	r9, r6
+ 638 0400 0CD0     		beq	.L92
+ 639 0402 3146     		mov	r1, r6
+ 640 0404 4046     		mov	r0, r8
+ 641 0406 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskEixEj
+ 642 040a 0268     		ldr	r2, [r0]
+ 643 040c 0136     		adds	r6, r6, #1
+ 644 040e 536B     		ldr	r3, [r2, #52]
+ 645 0410 BB42     		cmp	r3, r7
+ 646 0412 82BF     		ittt	hi
+ 647 0414 1269     		ldrhi	r2, [r2, #16]
+ 648 0416 1F46     		movhi	r7, r3
+ 649 0418 AA60     		strhi	r2, [r5, #8]
+ 650 041a F0E7     		b	.L87
+ 651              	.L92:
+ 652 041c 2046     		mov	r0, r4
+ 653 041e 03E0     		b	.L100
+ 654              	.L80:
+ 655 0420 0948     		ldr	r0, .L101+24
+ 656 0422 FFF7FEFF 		bl	puts
+ 657 0426 0120     		movs	r0, #1
+ 658              	.L100:
+ 659 0428 04B0     		add	sp, sp, #16
+ 660              		@ sp needed
+ 661 042a BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 662              	.L102:
+ 663 042e 00BF     		.align	2
+ 664              	.L101:
+ 665 0430 00000000 		.word	.LANCHOR0
+ 666 0434 E3000000 		.word	.LC7
+ 667 0438 9E000000 		.word	.LC4
+ 668 043c B2000000 		.word	.LC5
+ 669 0440 00000000 		.word	_Z24scheduler_c_task_privatePv
+ 670 0444 C8000000 		.word	.LC6
+ 671 0448 FD000000 		.word	.LC8
+ 673              		.align	1
+ 674              		.global	_Z15scheduler_startb
+ 675              		.thumb
+ 676              		.thumb_func
+ 678              	_Z15scheduler_startb:
+ 679              		@ args = 0, pretend = 0, frame = 0
+ 680              		@ frame_needed = 0, uses_anonymous_args = 0
+ 681 044c 08B5     		push	{r3, lr}
+ 682 044e FFF7FEFF 		bl	_Z18scheduler_init_allb
+ 683 0452 48B9     		cbnz	r0, .L104
+ 684 0454 0B48     		ldr	r0, .L105
+ 685 0456 FFF7FEFF 		bl	puts
+ 686 045a FFF7FEFF 		bl	vTaskStartScheduler
+ 687 045e BDE80840 		pop	{r3, lr}
+ 688 0462 0948     		ldr	r0, .L105+4
+ 689 0464 FFF7FEBF 		b	puts
+ 690              	.L104:
+ 691 0468 0848     		ldr	r0, .L105+8
+ 692 046a FFF7FEFF 		bl	puts
+ 693 046e 40F6B830 		movw	r0, #3000
+ 694 0472 FFF7FEFF 		bl	delay_ms
+ 695 0476 4FF08043 		mov	r3, #1073741824
+ 696 047a AA22     		movs	r2, #170
+ 697 047c 1A72     		strb	r2, [r3, #8]
+ 698 047e 0022     		movs	r2, #0
+ 699 0480 1A70     		strb	r2, [r3]
+ 700 0482 08BD     		pop	{r3, pc}
+ 701              	.L106:
+ 702              		.align	2
+ 703              	.L105:
+ 704 0484 2B010000 		.word	.LC9
+ 705 0488 42010000 		.word	.LC10
+ 706 048c 66010000 		.word	.LC11
+ 708              		.align	1
+ 709              		.global	_ZN14scheduler_task16getTaskPtrByNameEPKc
+ 710              		.thumb
+ 711              		.thumb_func
+ 713              	_ZN14scheduler_task16getTaskPtrByNameEPKc:
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 716 0490 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 717 0494 8846     		mov	r8, r1
+ 718 0496 0C4B     		ldr	r3, .L112
+ 719 0498 0025     		movs	r5, #0
+ 720 049a 1E68     		ldr	r6, [r3]
+ 721 049c B768     		ldr	r7, [r6, #8]
+ 722              	.L109:
+ 723 049e BD42     		cmp	r5, r7
+ 724 04a0 0BD0     		beq	.L110
+ 725 04a2 2946     		mov	r1, r5
+ 726 04a4 3046     		mov	r0, r6
+ 727 04a6 FFF7FEFF 		bl	_ZN6VECTORIP14scheduler_taskEixEj
+ 728 04aa 0468     		ldr	r4, [r0]
+ 729 04ac 4046     		mov	r0, r8
+ 730 04ae A16A     		ldr	r1, [r4, #40]
+ 731 04b0 FFF7FEFF 		bl	strcmp
+ 732 04b4 20B1     		cbz	r0, .L111
+ 733 04b6 0135     		adds	r5, r5, #1
+ 734 04b8 F1E7     		b	.L109
+ 735              	.L110:
+ 736 04ba 0020     		movs	r0, #0
+ 737 04bc BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 738              	.L111:
+ 739 04c0 2046     		mov	r0, r4
+ 740 04c2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 741              	.L113:
+ 742 04c6 00BF     		.align	2
+ 743              	.L112:
+ 744 04c8 00000000 		.word	.LANCHOR0
+ 746              		.weak	_ZTV14scheduler_task
+ 747              		.section	.rodata._ZTV14scheduler_task,"aG",%progbits,_ZTV14scheduler_task,comdat
+ 748              		.align	2
+ 751              	_ZTV14scheduler_task:
+ 752 0000 00000000 		.word	0
+ 753 0004 00000000 		.word	0
+ 754 0008 00000000 		.word	0
+ 755 000c 00000000 		.word	0
+ 756 0010 00000000 		.word	_ZN14scheduler_task4initEv
+ 757 0014 00000000 		.word	_ZN14scheduler_task6regTlmEv
+ 758 0018 00000000 		.word	_ZN14scheduler_task9taskEntryEv
+ 759 001c 00000000 		.word	__cxa_pure_virtual
+ 760              		.global	_ZN14scheduler_task13mpNamePtrPairE
+ 761              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 762              	.LC0:
+ 763 0000 20746173 		.ascii	" task calling taskEntry() for all tasks ... \000"
+ 763      6B206361 
+ 763      6C6C696E 
+ 763      67207461 
+ 763      736B456E 
+ 764              	.LC1:
+ 765 002d 20202D2D 		.ascii	"  --> FAILED taskEntry()\000"
+ 765      3E204641 
+ 765      494C4544 
+ 765      20746173 
+ 765      6B456E74 
+ 766              	.LC2:
+ 767 0046 4552524F 		.ascii	"ERROR: Killing FreeRTOS due to error(s)\000"
+ 767      523A204B 
+ 767      696C6C69 
+ 767      6E672046 
+ 767      72656552 
+ 768              	.LC3:
+ 769 006e 202D2D3E 		.ascii	" --> FAILURE detected; suspending this task ...\000"
+ 769      20464149 
+ 769      4C555245 
+ 769      20646574 
+ 769      65637465 
+ 770              	.LC4:
+ 771 009e 20202D2D 		.ascii	"  --> FAILED init()\000"
+ 771      3E204641 
+ 771      494C4544 
+ 771      20696E69 
+ 771      74282900 
+ 772              	.LC5:
+ 773 00b2 2A202043 		.ascii	"*  Creating tasks ...\000"
+ 773      72656174 
+ 773      696E6720 
+ 773      7461736B 
+ 773      73202E2E 
+ 774              	.LC6:
+ 775 00c8 20202D2D 		.ascii	"  --> FAILED xTaskCreate()\000"
+ 775      3E204641 
+ 775      494C4544 
+ 775      20785461 
+ 775      736B4372 
+ 776              	.LC7:
+ 777 00e3 2A202049 		.ascii	"*  Initializing tasks ...\000"
+ 777      6E697469 
+ 777      616C697A 
+ 777      696E6720 
+ 777      7461736B 
+ 778              	.LC8:
+ 779 00fd 4552524F 		.ascii	"ERROR: NO tasks added by scheduler_add_task()\000"
+ 779      523A204E 
+ 779      4F207461 
+ 779      736B7320 
+ 779      61646465 
+ 780              	.LC9:
+ 781 012b 53746172 		.ascii	"Starting scheduler ...\000"
+ 781      74696E67 
+ 781      20736368 
+ 781      6564756C 
+ 781      6572202E 
+ 782              	.LC10:
+ 783 0142 4552524F 		.ascii	"ERROR: Someone killed the scheduler\000"
+ 783      523A2053 
+ 783      6F6D656F 
+ 783      6E65206B 
+ 783      696C6C65 
+ 784              	.LC11:
+ 785 0166 4552524F 		.ascii	"ERROR: Refusing to start OS scheduler due to error("
+ 785      523A2052 
+ 785      65667573 
+ 785      696E6720 
+ 785      746F2073 
+ 786 0199 732900   		.ascii	"s)\000"
+ 787              		.bss
+ 788              		.align	2
+ 789              		.set	.LANCHOR0,. + 0
+ 792              	_ZL9gTaskList:
+ 793 0000 00000000 		.space	4
+ 796              	_ZN14scheduler_task13mpNamePtrPairE:
+ 797 0004 00000000 		.space	4
+ 800              	_ZL20mTaskEntryTaskHandle:
+ 801 0008 00000000 		.space	4
+ 804              	_ZL8mRunTask:
+ 805 000c 00000000 		.space	4
+ 806              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 cpp_task.cpp
-     /tmp/ccN19R6p.s:16     .text._ZN14scheduler_taskD2Ev:00000000 $t
-     /tmp/ccN19R6p.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD2Ev
-     /tmp/ccN19R6p.s:31     .text._ZN14scheduler_taskD2Ev:00000008 $d
-     /tmp/ccN19R6p.s:839    .rodata._ZTV14scheduler_task:00000000 _ZTV14scheduler_task
-     /tmp/ccN19R6p.s:34     .text._ZN14scheduler_task4initEv:00000000 $t
-     /tmp/ccN19R6p.s:39     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
-     /tmp/ccN19R6p.s:47     .text._ZN14scheduler_task6regTlmEv:00000000 $t
-     /tmp/ccN19R6p.s:52     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
-     /tmp/ccN19R6p.s:60     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
-     /tmp/ccN19R6p.s:65     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
-     /tmp/ccN19R6p.s:73     .text._ZN14scheduler_taskD0Ev:00000000 $t
-     /tmp/ccN19R6p.s:78     .text._ZN14scheduler_taskD0Ev:00000000 _ZN14scheduler_taskD0Ev
-     /tmp/ccN19R6p.s:91     .text._ZN14scheduler_taskD0Ev:00000010 $d
-     /tmp/ccN19R6p.s:94     .text:00000000 $t
-     /tmp/ccN19R6p.s:98     .text:00000000 _ZL13print_stringsPKcS0_
-     /tmp/ccN19R6p.s:153    .text:00000068 $d
-     /tmp/ccN19R6p.s:155    .text:0000006c $t
-     /tmp/ccN19R6p.s:160    .text:0000006c _ZN14scheduler_taskC2EPKcmhPv
-     /tmp/ccN19R6p.s:186    .text:00000098 $d
-     /tmp/ccN19R6p.s:188    .text:0000009c $t
-     /tmp/ccN19R6p.s:193    .text:0000009c _ZNK14scheduler_task18getInstantCpuUsageEv
-     /tmp/ccN19R6p.s:207    .text:000000a8 _ZNK14scheduler_task20getCpuIdlePercentageEv
-     /tmp/ccN19R6p.s:221    .text:000000b6 _ZNK14scheduler_task24getTotalSysCpuPercentageEv
-     /tmp/ccN19R6p.s:235    .text:000000c4 _ZN14scheduler_task12initQueueSetEmmz
-     /tmp/ccN19R6p.s:268    .text:000000f8 _ZN14scheduler_task15getSharedObjectEPKc
-     /tmp/ccN19R6p.s:301    .text:0000012c $d
-     /tmp/ccN19R6p.s:304    .text._ZN6VECTORIP14scheduler_taskE2atEj:00000000 $t
-     /tmp/ccN19R6p.s:309    .text._ZN6VECTORIP14scheduler_taskE2atEj:00000000 _ZN6VECTORIP14scheduler_taskE2atEj
-     /tmp/ccN19R6p.s:322    .text:00000130 $t
-     /tmp/ccN19R6p.s:327    .text:00000130 _ZN14scheduler_task16getTaskPtrByNameEPKc
-     /tmp/ccN19R6p.s:356    .text:0000015c $d
-     /tmp/ccN19R6p.s:358    .text:00000160 $t
-     /tmp/ccN19R6p.s:363    .text:00000160 _Z18scheduler_init_allb
-     /tmp/ccN19R6p.s:475    .text:00000240 $d
-     /tmp/ccN19R6p.s:523    .text:000002a0 _Z24scheduler_c_task_privatePv
-     /tmp/ccN19R6p.s:483    .text:0000025c $t
-     /tmp/ccN19R6p.s:488    .text:0000025c _Z15scheduler_startb
-     /tmp/ccN19R6p.s:514    .text:00000294 $d
-     /tmp/ccN19R6p.s:518    .text:000002a0 $t
-     /tmp/ccN19R6p.s:635    .text:0000038c $d
-     /tmp/ccN19R6p.s:642    .text._ZN6VECTORIP14scheduler_taskE9push_backERKS1_:00000000 $t
-     /tmp/ccN19R6p.s:647    .text._ZN6VECTORIP14scheduler_taskE9push_backERKS1_:00000000 _ZN6VECTORIP14scheduler_taskE9push_backERKS1_
-     /tmp/ccN19R6p.s:691    .text:000003a0 $t
-     /tmp/ccN19R6p.s:696    .text:000003a0 _Z18scheduler_add_taskP14scheduler_task
-     /tmp/ccN19R6p.s:723    .text:000003cc $d
-     /tmp/ccN19R6p.s:726    .text._ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_:00000000 $t
-     /tmp/ccN19R6p.s:731    .text._ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_:00000000 _ZN6VECTORIN14scheduler_task15PtrNamePairTypeEE9push_backERKS1_
-     /tmp/ccN19R6p.s:776    .text:000003d0 $t
-     /tmp/ccN19R6p.s:781    .text:000003d0 _ZN14scheduler_task15addSharedObjectEPKcPv
-     /tmp/ccN19R6p.s:831    .text:00000438 $d
-     /tmp/ccN19R6p.s:883    .bss:00000000 _ZN14scheduler_task13mpNamePtrPairE
-     /tmp/ccN19R6p.s:836    .rodata._ZTV14scheduler_task:00000000 $d
-     /tmp/ccN19R6p.s:21     .text._ZN14scheduler_taskD2Ev:00000000 _ZN14scheduler_taskD1Ev
-     /tmp/ccN19R6p.s:160    .text:0000006c _ZN14scheduler_taskC1EPKcmhPv
-     /tmp/ccN19R6p.s:879    .bss:00000000 $d
-     /tmp/ccN19R6p.s:887    .bss:00000004 _ZL9gTaskList
-     /tmp/ccN19R6p.s:891    .bss:00000008 _ZL8mRunTask
-     /tmp/ccN19R6p.s:895    .bss:0000000c _ZL20mTaskEntryTaskHandle
-                           .group:00000000 _ZN14scheduler_taskD5Ev
+     /tmp/ccGQoeNj.s:17     .text._ZN14scheduler_task4initEv:00000000 $t
+     /tmp/ccGQoeNj.s:22     .text._ZN14scheduler_task4initEv:00000000 _ZN14scheduler_task4initEv
+     /tmp/ccGQoeNj.s:30     .text._ZN14scheduler_task6regTlmEv:00000000 $t
+     /tmp/ccGQoeNj.s:35     .text._ZN14scheduler_task6regTlmEv:00000000 _ZN14scheduler_task6regTlmEv
+     /tmp/ccGQoeNj.s:43     .text._ZN14scheduler_task9taskEntryEv:00000000 $t
+     /tmp/ccGQoeNj.s:48     .text._ZN14scheduler_task9taskEntryEv:00000000 _ZN14scheduler_task9taskEntryEv
+     /tmp/ccGQoeNj.s:56     .text:00000000 $t
+     /tmp/ccGQoeNj.s:60     .text:00000000 _ZL13print_stringsPKcS0_
+     /tmp/ccGQoeNj.s:99     .text:00000044 $d
+     /tmp/ccGQoeNj.s:101    .text:00000048 $t
+     /tmp/ccGQoeNj.s:106    .text:00000048 _Z18scheduler_add_taskP14scheduler_task
+     /tmp/ccGQoeNj.s:169    .text:000000c8 $d
+     /tmp/ccGQoeNj.s:171    .text:000000cc $t
+     /tmp/ccGQoeNj.s:176    .text:000000cc _ZN14scheduler_taskC2EPKcmhPv
+     /tmp/ccGQoeNj.s:202    .text:000000f8 $d
+     /tmp/ccGQoeNj.s:751    .rodata._ZTV14scheduler_task:00000000 _ZTV14scheduler_task
+     /tmp/ccGQoeNj.s:176    .text:000000cc _ZN14scheduler_taskC1EPKcmhPv
+     /tmp/ccGQoeNj.s:206    .text:000000fc $t
+     /tmp/ccGQoeNj.s:211    .text:000000fc _ZNK14scheduler_task18getInstantCpuUsageEv
+     /tmp/ccGQoeNj.s:225    .text:00000108 _ZNK14scheduler_task20getCpuIdlePercentageEv
+     /tmp/ccGQoeNj.s:239    .text:00000116 _ZNK14scheduler_task24getTotalSysCpuPercentageEv
+     /tmp/ccGQoeNj.s:253    .text:00000124 _ZN14scheduler_task12initQueueSetEmmz
+     /tmp/ccGQoeNj.s:287    .text:00000158 _ZN14scheduler_task15addSharedObjectEPKcPv
+     /tmp/ccGQoeNj.s:366    .text:00000208 $d
+     /tmp/ccGQoeNj.s:368    .text:0000020c $t
+     /tmp/ccGQoeNj.s:373    .text:0000020c _ZN14scheduler_task15getSharedObjectEPKc
+     /tmp/ccGQoeNj.s:406    .text:00000248 $d
+     /tmp/ccGQoeNj.s:409    .text._ZN6VECTORIP14scheduler_taskEixEj:00000000 $t
+     /tmp/ccGQoeNj.s:414    .text._ZN6VECTORIP14scheduler_taskEixEj:00000000 _ZN6VECTORIP14scheduler_taskEixEj
+     /tmp/ccGQoeNj.s:427    .text:0000024c $t
+     /tmp/ccGQoeNj.s:432    .text:0000024c _Z24scheduler_c_task_privatePv
+     /tmp/ccGQoeNj.s:543    .text:00000338 $d
+     /tmp/ccGQoeNj.s:549    .text:0000034c $t
+     /tmp/ccGQoeNj.s:554    .text:0000034c _Z18scheduler_init_allb
+     /tmp/ccGQoeNj.s:665    .text:00000430 $d
+     /tmp/ccGQoeNj.s:673    .text:0000044c $t
+     /tmp/ccGQoeNj.s:678    .text:0000044c _Z15scheduler_startb
+     /tmp/ccGQoeNj.s:704    .text:00000484 $d
+     /tmp/ccGQoeNj.s:708    .text:00000490 $t
+     /tmp/ccGQoeNj.s:713    .text:00000490 _ZN14scheduler_task16getTaskPtrByNameEPKc
+     /tmp/ccGQoeNj.s:744    .text:000004c8 $d
+     /tmp/ccGQoeNj.s:748    .rodata._ZTV14scheduler_task:00000000 $d
+     /tmp/ccGQoeNj.s:796    .bss:00000004 _ZN14scheduler_task13mpNamePtrPairE
+     /tmp/ccGQoeNj.s:788    .bss:00000000 $d
+     /tmp/ccGQoeNj.s:792    .bss:00000000 _ZL9gTaskList
+     /tmp/ccGQoeNj.s:800    .bss:00000008 _ZL20mTaskEntryTaskHandle
+     /tmp/ccGQoeNj.s:804    .bss:0000000c _ZL8mRunTask
 
 UNDEFINED SYMBOLS
-_ZdlPv
-__swbuf_r
 puts
+__swbuf_r
 _impure_ptr
+_Znwj
+realloc
 uxTaskGetCpuUsage
 xTaskGetIdleTaskHandle
 xQueueCreateSet
 xQueueAddToSet
+vPortEnterCritical
 strcmp
-xQueueCreateCountingSemaphore
-xTaskGenericCreate
-vTaskStartScheduler
-delay_ms
+vPortExitCritical
 vTaskEndScheduler
 xQueueGenericSend
 xQueueGenericReceive
@@ -975,8 +879,8 @@ xQueueSelectFromSet
 vTaskSuspend
 uxTaskGetStackHighWaterMark
 vTaskDelayUntil
-realloc
-_Znwj
-vPortEnterCritical
-vPortExitCritical
+xQueueCreateCountingSemaphore
+xTaskGenericCreate
+vTaskStartScheduler
+delay_ms
 __cxa_pure_virtual

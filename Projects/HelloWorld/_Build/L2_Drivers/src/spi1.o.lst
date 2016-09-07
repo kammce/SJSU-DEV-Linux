@@ -11,79 +11,80 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"spi1.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	spi1_set_max_clock
-  18              		.thumb
-  19              		.thumb_func
-  21              	spi1_set_max_clock:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24 0000 10B5     		push	{r4, lr}
-  25 0002 0446     		mov	r4, r0
-  26 0004 FFF7FEFF 		bl	sys_get_cpu_clock
-  27 0008 074B     		ldr	r3, .L5
-  28 000a B0FBF3F0 		udiv	r0, r0, r3
-  29 000e 0223     		movs	r3, #2
-  30 0010 00E0     		b	.L2
-  31              	.L4:
-  32 0012 0233     		adds	r3, r3, #2
-  33              	.L2:
-  34 0014 B0FBF3F2 		udiv	r2, r0, r3
-  35 0018 9442     		cmp	r4, r2
-  36 001a 02D2     		bcs	.L3
-  37 001c B3F5807F 		cmp	r3, #256
-  38 0020 F7D1     		bne	.L4
+  14              		.syntax unified
+  15              		.file	"spi1.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	spi1_set_max_clock
+  19              		.thumb
+  20              		.thumb_func
+  22              	spi1_set_max_clock:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0446     		mov	r4, r0
+  27 0004 FFF7FEFF 		bl	sys_get_cpu_clock
+  28 0008 074B     		ldr	r3, .L8
+  29 000a B0FBF3F0 		udiv	r0, r0, r3
+  30 000e 0223     		movs	r3, #2
+  31              	.L2:
+  32 0010 B0FBF3F2 		udiv	r2, r0, r3
+  33 0014 A242     		cmp	r2, r4
+  34 0016 02D8     		bhi	.L3
+  35              	.L5:
+  36 0018 044A     		ldr	r2, .L8+4
+  37 001a 1361     		str	r3, [r2, #16]
+  38 001c 10BD     		pop	{r4, pc}
   39              	.L3:
-  40 0022 024A     		ldr	r2, .L5+4
-  41 0024 1361     		str	r3, [r2, #16]
-  42 0026 10BD     		pop	{r4, pc}
-  43              	.L6:
-  44              		.align	2
-  45              	.L5:
-  46 0028 40420F00 		.word	1000000
-  47 002c 00000340 		.word	1073938432
-  49              		.align	1
-  50              		.global	spi1_init
-  51              		.thumb
-  52              		.thumb_func
-  54              	spi1_init:
-  55              		@ args = 0, pretend = 0, frame = 0
-  56              		@ frame_needed = 0, uses_anonymous_args = 0
-  57 0030 08B5     		push	{r3, lr}
-  58 0032 104B     		ldr	r3, .L8
-  59 0034 0C20     		movs	r0, #12
-  60 0036 D3F8C420 		ldr	r2, [r3, #196]
-  61 003a 42F48062 		orr	r2, r2, #1024
-  62 003e C3F8C420 		str	r2, [r3, #196]
-  63 0042 D3F8A821 		ldr	r2, [r3, #424]
-  64 0046 22F44012 		bic	r2, r2, #3145728
-  65 004a C3F8A821 		str	r2, [r3, #424]
-  66 004e D3F8A821 		ldr	r2, [r3, #424]
-  67 0052 42F48012 		orr	r2, r2, #1048576
-  68 0056 C3F8A821 		str	r2, [r3, #424]
-  69 005a A3F54C23 		sub	r3, r3, #835584
-  70 005e 0722     		movs	r2, #7
-  71 0060 1A60     		str	r2, [r3, #0]
-  72 0062 0222     		movs	r2, #2
-  73 0064 5A60     		str	r2, [r3, #4]
-  74 0066 FFF7FEFF 		bl	spi1_set_max_clock
-  75 006a BDE80840 		pop	{r3, lr}
-  76 006e FFF7FEBF 		b	spiDmaInitialize
-  77              	.L9:
-  78 0072 00BF     		.align	2
-  79              	.L8:
-  80 0074 00C00F40 		.word	1074774016
-  82              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  40 001e B3F5807F 		cmp	r3, #256
+  41 0022 F9D0     		beq	.L5
+  42 0024 0233     		adds	r3, r3, #2
+  43 0026 F3E7     		b	.L2
+  44              	.L9:
+  45              		.align	2
+  46              	.L8:
+  47 0028 40420F00 		.word	1000000
+  48 002c 00000340 		.word	1073938432
+  50              		.align	1
+  51              		.global	spi1_init
+  52              		.thumb
+  53              		.thumb_func
+  55              	spi1_init:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58 0030 08B5     		push	{r3, lr}
+  59 0032 104B     		ldr	r3, .L11
+  60 0034 0C20     		movs	r0, #12
+  61 0036 D3F8C420 		ldr	r2, [r3, #196]
+  62 003a 42F48062 		orr	r2, r2, #1024
+  63 003e C3F8C420 		str	r2, [r3, #196]
+  64 0042 D3F8A821 		ldr	r2, [r3, #424]
+  65 0046 22F44012 		bic	r2, r2, #3145728
+  66 004a C3F8A821 		str	r2, [r3, #424]
+  67 004e D3F8A821 		ldr	r2, [r3, #424]
+  68 0052 42F48012 		orr	r2, r2, #1048576
+  69 0056 C3F8A821 		str	r2, [r3, #424]
+  70 005a A3F54C23 		sub	r3, r3, #835584
+  71 005e 0722     		movs	r2, #7
+  72 0060 1A60     		str	r2, [r3]
+  73 0062 0222     		movs	r2, #2
+  74 0064 5A60     		str	r2, [r3, #4]
+  75 0066 FFF7FEFF 		bl	spi1_set_max_clock
+  76 006a BDE80840 		pop	{r3, lr}
+  77 006e FFF7FEBF 		b	spiDmaInitialize
+  78              	.L12:
+  79 0072 00BF     		.align	2
+  80              	.L11:
+  81 0074 00C00F40 		.word	1074774016
+  83              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 spi1.c
-     /tmp/cce6aaWX.s:16     .text:00000000 $t
-     /tmp/cce6aaWX.s:21     .text:00000000 spi1_set_max_clock
-     /tmp/cce6aaWX.s:46     .text:00000028 $d
-     /tmp/cce6aaWX.s:49     .text:00000030 $t
-     /tmp/cce6aaWX.s:54     .text:00000030 spi1_init
-     /tmp/cce6aaWX.s:80     .text:00000074 $d
+     /tmp/ccr57nNr.s:17     .text:00000000 $t
+     /tmp/ccr57nNr.s:22     .text:00000000 spi1_set_max_clock
+     /tmp/ccr57nNr.s:47     .text:00000028 $d
+     /tmp/ccr57nNr.s:50     .text:00000030 $t
+     /tmp/ccr57nNr.s:55     .text:00000030 spi1_init
+     /tmp/ccr57nNr.s:81     .text:00000074 $d
 
 UNDEFINED SYMBOLS
 sys_get_cpu_clock

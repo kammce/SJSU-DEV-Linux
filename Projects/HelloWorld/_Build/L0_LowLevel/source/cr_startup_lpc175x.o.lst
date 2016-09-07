@@ -11,598 +11,601 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"cr_startup_lpc175x.cpp"
-  15              		.section	.after_vectors,"ax",%progbits
-  16              		.align	1
-  17              		.weak	HardFault_Handler
-  18              		.thumb
-  19              		.thumb_func
-  21              	HardFault_Handler:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25              	@ 435 "../L0_LowLevel/source/cr_startup_lpc175x.cpp" 1
-  26 0000 0420     		MOVS   R0, #4  
-  27 0002 7146     	MOV    R1, LR  
-  28 0004 0842     	TST    R0, R1  
-  29 0006 03D0     	BEQ    _MSP    
-  30 0008 EFF30980 	MRS    R0, PSP 
-  31 000c FFF7FEBF 	B      HardFault_HandlerC      
-  32              	_MSP:  
-  33 0010 EFF30880 	MRS    R0, MSP 
-  34 0014 FFF7FEBF 	B      HardFault_HandlerC      
-  35              	
-  36              	@ 0 "" 2
-  37              		.thumb
-  38 0018 7047     		bx	lr
-  40              		.align	1
-  41              		.weak	DebugMon_Handler
-  42              		.thumb
-  43              		.thumb_func
-  45              	DebugMon_Handler:
-  46              		@ args = 0, pretend = 0, frame = 0
-  47              		@ frame_needed = 0, uses_anonymous_args = 0
-  48 001a 08B5     		push	{r3, lr}
-  49 001c 0148     		ldr	r0, .L4
-  50 001e FFF7FEFF 		bl	u0_dbg_put
-  51              	.L3:
-  52 0022 FEE7     		b	.L3
-  53              	.L5:
-  54              		.align	2
-  55              	.L4:
-  56 0024 00000000 		.word	.LC0
-  58              		.align	1
-  59              		.weak	UsageFault_Handler
-  60              		.thumb
-  61              		.thumb_func
-  63              	UsageFault_Handler:
-  64              		@ args = 0, pretend = 0, frame = 0
-  65              		@ frame_needed = 0, uses_anonymous_args = 0
-  66 0028 08B5     		push	{r3, lr}
-  67 002a 0248     		ldr	r0, .L8
-  68 002c FFF7FEFF 		bl	u0_dbg_put
-  69              	.L7:
-  70 0030 FEE7     		b	.L7
-  71              	.L9:
-  72 0032 00BF     		.align	2
-  73              	.L8:
-  74 0034 10000000 		.word	.LC1
-  76              		.align	1
-  77              		.weak	BusFault_Handler
-  78              		.thumb
-  79              		.thumb_func
-  81              	BusFault_Handler:
-  82              		@ args = 0, pretend = 0, frame = 0
-  83              		@ frame_needed = 0, uses_anonymous_args = 0
-  84 0038 08B5     		push	{r3, lr}
-  85 003a 0248     		ldr	r0, .L12
-  86 003c FFF7FEFF 		bl	u0_dbg_put
-  87              	.L11:
-  88 0040 FEE7     		b	.L11
-  89              	.L13:
-  90 0042 00BF     		.align	2
-  91              	.L12:
-  92 0044 1D000000 		.word	.LC2
-  94              		.align	1
-  95              		.weak	MemManage_Handler
-  96              		.thumb
-  97              		.thumb_func
-  99              	MemManage_Handler:
- 100              		@ args = 0, pretend = 0, frame = 0
- 101              		@ frame_needed = 0, uses_anonymous_args = 0
- 102 0048 08B5     		push	{r3, lr}
- 103 004a 0248     		ldr	r0, .L16
- 104 004c FFF7FEFF 		bl	u0_dbg_put
- 105              	.L15:
- 106 0050 FEE7     		b	.L15
- 107              	.L17:
- 108 0052 00BF     		.align	2
- 109              	.L16:
- 110 0054 28000000 		.word	.LC3
- 112              		.align	1
- 113              		.weak	NMI_Handler
- 114              		.thumb
- 115              		.thumb_func
- 117              	NMI_Handler:
- 118              		@ args = 0, pretend = 0, frame = 0
- 119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120 0058 08B5     		push	{r3, lr}
- 121 005a 0248     		ldr	r0, .L20
- 122 005c FFF7FEFF 		bl	u0_dbg_put
- 123              	.L19:
- 124 0060 FEE7     		b	.L19
- 125              	.L21:
- 126 0062 00BF     		.align	2
- 127              	.L20:
- 128 0064 33000000 		.word	.LC4
- 130              		.text
- 131              		.align	1
- 132              		.global	HardFault_HandlerC
- 133              		.thumb
- 134              		.thumb_func
- 136              	HardFault_HandlerC:
- 137              		@ args = 0, pretend = 0, frame = 32
- 138              		@ frame_needed = 0, uses_anonymous_args = 0
- 139 0000 10B5     		push	{r4, lr}
- 140 0002 0368     		ldr	r3, [r0, #0]
- 141 0004 8AB0     		sub	sp, sp, #40
- 142 0006 0293     		str	r3, [sp, #8]
- 143 0008 4368     		ldr	r3, [r0, #4]
- 144 000a 0393     		str	r3, [sp, #12]
- 145 000c 8368     		ldr	r3, [r0, #8]
- 146 000e 0493     		str	r3, [sp, #16]
- 147 0010 C368     		ldr	r3, [r0, #12]
- 148 0012 0593     		str	r3, [sp, #20]
- 149 0014 0369     		ldr	r3, [r0, #16]
- 150 0016 0693     		str	r3, [sp, #24]
- 151 0018 4369     		ldr	r3, [r0, #20]
- 152 001a 0793     		str	r3, [sp, #28]
- 153 001c 8369     		ldr	r3, [r0, #24]
- 154 001e 0893     		str	r3, [sp, #32]
- 155 0020 C369     		ldr	r3, [r0, #28]
- 156 0022 1548     		ldr	r0, .L24
- 157 0024 0993     		str	r3, [sp, #36]
- 158 0026 FFF7FEFF 		bl	sys_set_outchar_func
- 159 002a 1448     		ldr	r0, .L24+4
- 160 002c FFF7FEFF 		bl	puts
- 161 0030 0299     		ldr	r1, [sp, #8]
- 162 0032 039A     		ldr	r2, [sp, #12]
- 163 0034 049B     		ldr	r3, [sp, #16]
- 164 0036 059C     		ldr	r4, [sp, #20]
- 165 0038 0698     		ldr	r0, [sp, #24]
- 166 003a 0094     		str	r4, [sp, #0]
- 167 003c 0190     		str	r0, [sp, #4]
- 168 003e 1048     		ldr	r0, .L24+8
- 169 0040 FFF7FEFF 		bl	printf
- 170 0044 0799     		ldr	r1, [sp, #28]
- 171 0046 0F48     		ldr	r0, .L24+12
- 172 0048 089A     		ldr	r2, [sp, #32]
- 173 004a 099B     		ldr	r3, [sp, #36]
- 174 004c FFF7FEFF 		bl	printf
- 175 0050 0D4B     		ldr	r3, .L24+16
- 176 0052 0E4A     		ldr	r2, .L24+20
- 177 0054 0E48     		ldr	r0, .L24+24
- 178 0056 9A64     		str	r2, [r3, #72]
- 179 0058 089A     		ldr	r2, [sp, #32]
- 180 005a DA64     		str	r2, [r3, #76]
- 181 005c 079A     		ldr	r2, [sp, #28]
- 182 005e 1A65     		str	r2, [r3, #80]
- 183 0060 099A     		ldr	r2, [sp, #36]
- 184 0062 5A65     		str	r2, [r3, #84]
- 185 0064 FFF7FEFF 		bl	delay_us
- 186 0068 4FF08043 		mov	r3, #1073741824
- 187 006c AA22     		movs	r2, #170
- 188 006e 1A72     		strb	r2, [r3, #8]
- 189 0070 0022     		movs	r2, #0
- 190 0072 1A70     		strb	r2, [r3, #0]
- 191              	.L23:
- 192 0074 FEE7     		b	.L23
- 193              	.L25:
- 194 0076 00BF     		.align	2
- 195              	.L24:
- 196 0078 00000000 		.word	uart0_putchar
- 197 007c 3E000000 		.word	.LC5
- 198 0080 4D000000 		.word	.LC6
- 199 0084 80000000 		.word	.LC7
- 200 0088 00400240 		.word	1073889280
- 201 008c EFBEADDE 		.word	-559038737
- 202 0090 80969800 		.word	10000000
- 204              		.section	.after_vectors
- 205              		.align	1
- 206              		.global	_Z9data_initjjj
- 207              		.thumb
- 208              		.thumb_func
- 210              	_Z9data_initjjj:
- 211              		@ args = 0, pretend = 0, frame = 0
- 212              		@ frame_needed = 0, uses_anonymous_args = 0
- 213 0068 10B5     		push	{r4, lr}
- 214 006a 0023     		movs	r3, #0
- 215 006c 02E0     		b	.L27
- 216              	.L28:
- 217 006e 1C58     		ldr	r4, [r3, r0]
- 218 0070 5C50     		str	r4, [r3, r1]
- 219 0072 0433     		adds	r3, r3, #4
- 220              	.L27:
- 221 0074 9342     		cmp	r3, r2
- 222 0076 FAD3     		bcc	.L28
- 223 0078 10BD     		pop	{r4, pc}
- 225              		.align	1
- 226              		.global	_Z8bss_initjj
- 227              		.thumb
- 228              		.thumb_func
- 230              	_Z8bss_initjj:
- 231              		@ args = 0, pretend = 0, frame = 0
- 232              		@ frame_needed = 0, uses_anonymous_args = 0
- 233              		@ link register save eliminated.
- 234 007a 0023     		movs	r3, #0
- 235 007c 1A46     		mov	r2, r3
- 236 007e 01E0     		b	.L30
- 237              	.L31:
- 238 0080 1A50     		str	r2, [r3, r0]
- 239 0082 0433     		adds	r3, r3, #4
- 240              	.L30:
- 241 0084 8B42     		cmp	r3, r1
- 242 0086 FBD3     		bcc	.L31
- 243 0088 7047     		bx	lr
- 245              		.align	1
- 246              		.global	ResetISR
- 247              		.thumb
- 248              		.thumb_func
- 250              	ResetISR:
- 251              		@ args = 0, pretend = 0, frame = 0
- 252              		@ frame_needed = 0, uses_anonymous_args = 0
- 253 008a 38B5     		push	{r3, r4, r5, lr}
- 254 008c 114C     		ldr	r4, .L41
- 255 008e 124D     		ldr	r5, .L41+4
- 256 0090 04E0     		b	.L33
- 257              	.L34:
- 258 0092 94E80700 		ldmia	r4, {r0, r1, r2}
- 259 0096 0C34     		adds	r4, r4, #12
- 260 0098 FFF7FEFF 		bl	_Z9data_initjjj
- 261              	.L33:
- 262 009c AC42     		cmp	r4, r5
- 263 009e F8D3     		bcc	.L34
- 264 00a0 05E0     		b	.L40
- 265              	.L36:
- 266 00a2 94E80300 		ldmia	r4, {r0, r1}
- 267 00a6 0834     		adds	r4, r4, #8
- 268 00a8 FFF7FEFF 		bl	_Z8bss_initjj
- 269 00ac 00E0     		b	.L39
- 270              	.L40:
- 271 00ae 0B4D     		ldr	r5, .L41+8
- 272              	.L39:
- 273 00b0 AC42     		cmp	r4, r5
- 274 00b2 F6D3     		bcc	.L36
- 275 00b4 FFF7FEFF 		bl	__libc_init_array
- 276 00b8 FFF7FEFF 		bl	_Z14low_level_initv
- 277 00bc FFF7FEFF 		bl	_Z15high_level_initv
- 278 00c0 FFF7FEFF 		bl	main
- 279 00c4 4FF41640 		mov	r0, #38400
- 280 00c8 FFF7FEFF 		bl	uart0_init
- 281 00cc 0448     		ldr	r0, .L41+12
- 282 00ce FFF7FEFF 		bl	u0_dbg_put
- 283              	.L37:
- 284 00d2 FEE7     		b	.L37
- 285              	.L42:
- 286              		.align	2
- 287              	.L41:
- 288 00d4 00000000 		.word	__data_section_table
- 289 00d8 00000000 		.word	__data_section_table_end
- 290 00dc 00000000 		.word	__bss_section_table_end
- 291 00e0 A5000000 		.word	.LC8
- 293              		.align	1
- 294              		.weak	SVC_Handler
- 295              		.thumb
- 296              		.thumb_func
- 298              	SVC_Handler:
- 299              		@ args = 0, pretend = 0, frame = 0
- 300              		@ frame_needed = 0, uses_anonymous_args = 0
- 301 00e4 08B5     		push	{r3, lr}
- 302 00e6 0248     		ldr	r0, .L45
- 303 00e8 FFF7FEFF 		bl	u0_dbg_put
- 304              	.L44:
- 305 00ec FEE7     		b	.L44
- 306              	.L46:
- 307 00ee 00BF     		.align	2
- 308              	.L45:
- 309 00f0 CE000000 		.word	.LC9
- 311              		.align	1
- 312              		.weak	PendSV_Handler
- 313              		.thumb
- 314              		.thumb_func
- 316              	PendSV_Handler:
- 317              		@ args = 0, pretend = 0, frame = 0
- 318              		@ frame_needed = 0, uses_anonymous_args = 0
- 319 00f4 08B5     		push	{r3, lr}
- 320 00f6 0248     		ldr	r0, .L49
- 321 00f8 FFF7FEFF 		bl	u0_dbg_put
- 322              	.L48:
- 323 00fc FEE7     		b	.L48
- 324              	.L50:
- 325 00fe 00BF     		.align	2
- 326              	.L49:
- 327 0100 D9000000 		.word	.LC10
- 329              		.align	1
- 330              		.weak	SysTick_Handler
- 331              		.thumb
- 332              		.thumb_func
- 334              	SysTick_Handler:
- 335              		@ args = 0, pretend = 0, frame = 0
- 336              		@ frame_needed = 0, uses_anonymous_args = 0
- 337 0104 08B5     		push	{r3, lr}
- 338 0106 0248     		ldr	r0, .L53
- 339 0108 FFF7FEFF 		bl	u0_dbg_put
- 340              	.L52:
- 341 010c FEE7     		b	.L52
- 342              	.L54:
- 343 010e 00BF     		.align	2
- 344              	.L53:
- 345 0110 E8000000 		.word	.LC11
- 347              		.align	1
- 348              		.weak	IntDefaultHandler
- 349              		.thumb
- 350              		.thumb_func
- 352              	IntDefaultHandler:
- 353              		@ args = 0, pretend = 0, frame = 0
- 354              		@ frame_needed = 0, uses_anonymous_args = 0
- 355 0114 08B5     		push	{r3, lr}
- 356 0116 0248     		ldr	r0, .L57
- 357 0118 FFF7FEFF 		bl	u0_dbg_put
- 358              	.L56:
- 359 011c FEE7     		b	.L56
- 360              	.L58:
- 361 011e 00BF     		.align	2
- 362              	.L57:
- 363 0120 F8000000 		.word	.LC12
- 365              		.global	g_pfnVectors
- 366              		.weak	WDT_IRQHandler
- 367              		.thumb_set WDT_IRQHandler,IntDefaultHandler
- 368              		.weak	TIMER0_IRQHandler
- 369              		.thumb_set TIMER0_IRQHandler,IntDefaultHandler
- 370              		.weak	TIMER1_IRQHandler
- 371              		.thumb_set TIMER1_IRQHandler,IntDefaultHandler
- 372              		.weak	TIMER2_IRQHandler
- 373              		.thumb_set TIMER2_IRQHandler,IntDefaultHandler
- 374              		.weak	TIMER3_IRQHandler
- 375              		.thumb_set TIMER3_IRQHandler,IntDefaultHandler
- 376              		.weak	UART0_IRQHandler
- 377              		.thumb_set UART0_IRQHandler,IntDefaultHandler
- 378              		.weak	UART1_IRQHandler
- 379              		.thumb_set UART1_IRQHandler,IntDefaultHandler
- 380              		.weak	UART2_IRQHandler
- 381              		.thumb_set UART2_IRQHandler,IntDefaultHandler
- 382              		.weak	UART3_IRQHandler
- 383              		.thumb_set UART3_IRQHandler,IntDefaultHandler
- 384              		.weak	PWM1_IRQHandler
- 385              		.thumb_set PWM1_IRQHandler,IntDefaultHandler
- 386              		.weak	I2C0_IRQHandler
- 387              		.thumb_set I2C0_IRQHandler,IntDefaultHandler
- 388              		.weak	I2C1_IRQHandler
- 389              		.thumb_set I2C1_IRQHandler,IntDefaultHandler
- 390              		.weak	I2C2_IRQHandler
- 391              		.thumb_set I2C2_IRQHandler,IntDefaultHandler
- 392              		.weak	SPI_IRQHandler
- 393              		.thumb_set SPI_IRQHandler,IntDefaultHandler
- 394              		.weak	SSP0_IRQHandler
- 395              		.thumb_set SSP0_IRQHandler,IntDefaultHandler
- 396              		.weak	SSP1_IRQHandler
- 397              		.thumb_set SSP1_IRQHandler,IntDefaultHandler
- 398              		.weak	PLL0_IRQHandler
- 399              		.thumb_set PLL0_IRQHandler,IntDefaultHandler
- 400              		.weak	RTC_IRQHandler
- 401              		.thumb_set RTC_IRQHandler,IntDefaultHandler
- 402              		.weak	EINT0_IRQHandler
- 403              		.thumb_set EINT0_IRQHandler,IntDefaultHandler
- 404              		.weak	EINT1_IRQHandler
- 405              		.thumb_set EINT1_IRQHandler,IntDefaultHandler
- 406              		.weak	EINT2_IRQHandler
- 407              		.thumb_set EINT2_IRQHandler,IntDefaultHandler
- 408              		.weak	EINT3_IRQHandler
- 409              		.thumb_set EINT3_IRQHandler,IntDefaultHandler
- 410              		.weak	ADC_IRQHandler
- 411              		.thumb_set ADC_IRQHandler,IntDefaultHandler
- 412              		.weak	BOD_IRQHandler
- 413              		.thumb_set BOD_IRQHandler,IntDefaultHandler
- 414              		.weak	USB_IRQHandler
- 415              		.thumb_set USB_IRQHandler,IntDefaultHandler
- 416              		.weak	CAN_IRQHandler
- 417              		.thumb_set CAN_IRQHandler,IntDefaultHandler
- 418              		.weak	DMA_IRQHandler
- 419              		.thumb_set DMA_IRQHandler,IntDefaultHandler
- 420              		.weak	I2S_IRQHandler
- 421              		.thumb_set I2S_IRQHandler,IntDefaultHandler
- 422              		.weak	ENET_IRQHandler
- 423              		.thumb_set ENET_IRQHandler,IntDefaultHandler
- 424              		.weak	RIT_IRQHandler
- 425              		.thumb_set RIT_IRQHandler,IntDefaultHandler
- 426              		.weak	MCPWM_IRQHandler
- 427              		.thumb_set MCPWM_IRQHandler,IntDefaultHandler
- 428              		.weak	QEI_IRQHandler
- 429              		.thumb_set QEI_IRQHandler,IntDefaultHandler
- 430              		.weak	PLL1_IRQHandler
- 431              		.thumb_set PLL1_IRQHandler,IntDefaultHandler
- 432              		.weak	USBActivity_IRQHandler
- 433              		.thumb_set USBActivity_IRQHandler,IntDefaultHandler
- 434              		.weak	CANActivity_IRQHandler
- 435              		.thumb_set CANActivity_IRQHandler,IntDefaultHandler
- 436              		.section	.isr_vector,"a",%progbits
- 437              		.align	2
- 440              	g_pfnVectors:
- 441 0000 00000000 		.word	_vStackTop
- 442 0004 00000000 		.word	ResetISR
- 443 0008 00000000 		.word	NMI_Handler
- 444 000c 00000000 		.word	HardFault_Handler
- 445 0010 00000000 		.word	MemManage_Handler
- 446 0014 00000000 		.word	BusFault_Handler
- 447 0018 00000000 		.word	UsageFault_Handler
- 448 001c 00000000 		.word	0
- 449 0020 00000000 		.word	0
- 450 0024 00000000 		.word	0
- 451 0028 00000000 		.word	0
- 452 002c 00000000 		.word	vPortSVCHandler
- 453 0030 00000000 		.word	DebugMon_Handler
- 454 0034 00000000 		.word	0
- 455 0038 00000000 		.word	xPortPendSVHandler
- 456 003c 00000000 		.word	xPortSysTickHandler
- 457 0040 00000000 		.word	WDT_IRQHandler
- 458 0044 00000000 		.word	TIMER0_IRQHandler
- 459 0048 00000000 		.word	TIMER1_IRQHandler
- 460 004c 00000000 		.word	TIMER2_IRQHandler
- 461 0050 00000000 		.word	TIMER3_IRQHandler
- 462 0054 00000000 		.word	UART0_IRQHandler
- 463 0058 00000000 		.word	UART1_IRQHandler
- 464 005c 00000000 		.word	UART2_IRQHandler
- 465 0060 00000000 		.word	UART3_IRQHandler
- 466 0064 00000000 		.word	PWM1_IRQHandler
- 467 0068 00000000 		.word	I2C0_IRQHandler
- 468 006c 00000000 		.word	I2C1_IRQHandler
- 469 0070 00000000 		.word	I2C2_IRQHandler
- 470 0074 00000000 		.word	SPI_IRQHandler
- 471 0078 00000000 		.word	SSP0_IRQHandler
- 472 007c 00000000 		.word	SSP1_IRQHandler
- 473 0080 00000000 		.word	PLL0_IRQHandler
- 474 0084 00000000 		.word	RTC_IRQHandler
- 475 0088 00000000 		.word	EINT0_IRQHandler
- 476 008c 00000000 		.word	EINT1_IRQHandler
- 477 0090 00000000 		.word	EINT2_IRQHandler
- 478 0094 00000000 		.word	EINT3_IRQHandler
- 479 0098 00000000 		.word	ADC_IRQHandler
- 480 009c 00000000 		.word	BOD_IRQHandler
- 481 00a0 00000000 		.word	USB_IRQHandler
- 482 00a4 00000000 		.word	CAN_IRQHandler
- 483 00a8 00000000 		.word	DMA_IRQHandler
- 484 00ac 00000000 		.word	I2S_IRQHandler
- 485 00b0 00000000 		.word	ENET_IRQHandler
- 486 00b4 00000000 		.word	RIT_IRQHandler
- 487 00b8 00000000 		.word	MCPWM_IRQHandler
- 488 00bc 00000000 		.word	QEI_IRQHandler
- 489 00c0 00000000 		.word	PLL1_IRQHandler
- 490 00c4 00000000 		.word	USBActivity_IRQHandler
- 491 00c8 00000000 		.word	CANActivity_IRQHandler
- 492              		.section	.rodata.str1.1,"aMS",%progbits,1
- 493              	.LC0:
- 494 0000 44656275 		.ascii	"DebugMon Fault\012\000"
- 494      674D6F6E 
- 494      20466175 
- 494      6C740A00 
- 495              	.LC1:
- 496 0010 55736167 		.ascii	"Usage Fault\012\000"
- 496      65204661 
- 496      756C740A 
- 496      00
- 497              	.LC2:
- 498 001d 42555320 		.ascii	"BUS Fault\012\000"
- 498      4661756C 
- 498      740A00
- 499              	.LC3:
- 500 0028 4D656D20 		.ascii	"Mem Fault\012\000"
- 500      4661756C 
- 500      740A00
- 501              	.LC4:
- 502 0033 4E4D4920 		.ascii	"NMI Fault\012\000"
- 502      4661756C 
- 502      740A00
- 503              	.LC5:
- 504 003e 0A537973 		.ascii	"\012System Crash!\000"
- 504      74656D20 
- 504      43726173 
- 504      682100
- 505              	.LC6:
- 506 004d 52656769 		.ascii	"Registers: 0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X\012"
- 506      73746572 
- 506      733A2030 
- 506      78253038 
- 506      582C2030 
- 507 007f 00       		.ascii	"\000"
- 508              	.LC7:
- 509 0080 4C523A20 		.ascii	"LR: 0x%08X, PC: 0x%08X, PSR: 0x%08X\012\000"
- 509      30782530 
- 509      38582C20 
- 509      50433A20 
- 509      30782530 
- 510              	.LC8:
- 511 00a5 6D61696E 		.ascii	"main() should never exit on this system\012\000"
- 511      28292073 
- 511      686F756C 
- 511      64206E65 
- 511      76657220 
- 512              	.LC9:
- 513 00ce 53564320 		.ascii	"SVC Fault\012\000"
- 513      4661756C 
- 513      740A00
- 514              	.LC10:
- 515 00d9 50656E64 		.ascii	"Pend SV Fault\012\000"
- 515      20535620 
- 515      4661756C 
- 515      740A00
- 516              	.LC11:
- 517 00e8 53797320 		.ascii	"Sys Tick Fault\012\000"
- 517      5469636B 
- 517      20466175 
- 517      6C740A00 
- 518              	.LC12:
- 519 00f8 556E6578 		.ascii	"Unexpected ISR Fault\012\000"
- 519      70656374 
- 519      65642049 
- 519      53522046 
- 519      61756C74 
- 520              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"cr_startup_lpc175x.cpp"
+  16              		.section	.after_vectors,"ax",%progbits
+  17              		.align	1
+  18              		.weak	HardFault_Handler
+  19              		.thumb
+  20              		.thumb_func
+  22              	HardFault_Handler:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26              		.syntax unified
+  27              	@ 435 "../L0_LowLevel/source/cr_startup_lpc175x.cpp" 1
+  28 0000 0420     		MOVS   R0, #4  
+  29 0002 7146     	MOV    R1, LR  
+  30 0004 0842     	TST    R0, R1  
+  31 0006 03D0     	BEQ    _MSP    
+  32 0008 EFF30980 	MRS    R0, PSP 
+  33 000c FFF7FEBF 	B      HardFault_HandlerC      
+  34              	_MSP:  
+  35 0010 EFF30880 	MRS    R0, MSP 
+  36 0014 FFF7FEBF 	B      HardFault_HandlerC      
+  37              	
+  38              	@ 0 "" 2
+  39              		.thumb
+  40              		.syntax unified
+  41 0018 7047     		bx	lr
+  43              		.align	1
+  44              		.weak	NMI_Handler
+  45              		.thumb
+  46              		.thumb_func
+  48              	NMI_Handler:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51 001a 08B5     		push	{r3, lr}
+  52 001c 0148     		ldr	r0, .L5
+  53 001e FFF7FEFF 		bl	u0_dbg_put
+  54              	.L3:
+  55 0022 FEE7     		b	.L3
+  56              	.L6:
+  57              		.align	2
+  58              	.L5:
+  59 0024 00000000 		.word	.LC0
+  61              		.align	1
+  62              		.weak	MemManage_Handler
+  63              		.thumb
+  64              		.thumb_func
+  66              	MemManage_Handler:
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69 0028 08B5     		push	{r3, lr}
+  70 002a 0248     		ldr	r0, .L9
+  71 002c FFF7FEFF 		bl	u0_dbg_put
+  72              	.L8:
+  73 0030 FEE7     		b	.L8
+  74              	.L10:
+  75 0032 00BF     		.align	2
+  76              	.L9:
+  77 0034 0B000000 		.word	.LC1
+  79              		.align	1
+  80              		.weak	BusFault_Handler
+  81              		.thumb
+  82              		.thumb_func
+  84              	BusFault_Handler:
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87 0038 08B5     		push	{r3, lr}
+  88 003a 0248     		ldr	r0, .L13
+  89 003c FFF7FEFF 		bl	u0_dbg_put
+  90              	.L12:
+  91 0040 FEE7     		b	.L12
+  92              	.L14:
+  93 0042 00BF     		.align	2
+  94              	.L13:
+  95 0044 16000000 		.word	.LC2
+  97              		.align	1
+  98              		.weak	UsageFault_Handler
+  99              		.thumb
+ 100              		.thumb_func
+ 102              	UsageFault_Handler:
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105 0048 08B5     		push	{r3, lr}
+ 106 004a 0248     		ldr	r0, .L17
+ 107 004c FFF7FEFF 		bl	u0_dbg_put
+ 108              	.L16:
+ 109 0050 FEE7     		b	.L16
+ 110              	.L18:
+ 111 0052 00BF     		.align	2
+ 112              	.L17:
+ 113 0054 21000000 		.word	.LC3
+ 115              		.align	1
+ 116              		.weak	DebugMon_Handler
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	DebugMon_Handler:
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0058 08B5     		push	{r3, lr}
+ 124 005a 0248     		ldr	r0, .L21
+ 125 005c FFF7FEFF 		bl	u0_dbg_put
+ 126              	.L20:
+ 127 0060 FEE7     		b	.L20
+ 128              	.L22:
+ 129 0062 00BF     		.align	2
+ 130              	.L21:
+ 131 0064 2E000000 		.word	.LC4
+ 133              		.align	1
+ 134              		.weak	IntDefaultHandler
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	IntDefaultHandler:
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141 0068 08B5     		push	{r3, lr}
+ 142 006a 0248     		ldr	r0, .L25
+ 143 006c FFF7FEFF 		bl	u0_dbg_put
+ 144              	.L24:
+ 145 0070 FEE7     		b	.L24
+ 146              	.L26:
+ 147 0072 00BF     		.align	2
+ 148              	.L25:
+ 149 0074 3E000000 		.word	.LC5
+ 151              		.weak	CANActivity_IRQHandler
+ 152              		.thumb_set CANActivity_IRQHandler,IntDefaultHandler
+ 153              		.weak	USBActivity_IRQHandler
+ 154              		.thumb_set USBActivity_IRQHandler,IntDefaultHandler
+ 155              		.weak	PLL1_IRQHandler
+ 156              		.thumb_set PLL1_IRQHandler,IntDefaultHandler
+ 157              		.weak	QEI_IRQHandler
+ 158              		.thumb_set QEI_IRQHandler,IntDefaultHandler
+ 159              		.weak	MCPWM_IRQHandler
+ 160              		.thumb_set MCPWM_IRQHandler,IntDefaultHandler
+ 161              		.weak	RIT_IRQHandler
+ 162              		.thumb_set RIT_IRQHandler,IntDefaultHandler
+ 163              		.weak	ENET_IRQHandler
+ 164              		.thumb_set ENET_IRQHandler,IntDefaultHandler
+ 165              		.weak	I2S_IRQHandler
+ 166              		.thumb_set I2S_IRQHandler,IntDefaultHandler
+ 167              		.weak	DMA_IRQHandler
+ 168              		.thumb_set DMA_IRQHandler,IntDefaultHandler
+ 169              		.weak	CAN_IRQHandler
+ 170              		.thumb_set CAN_IRQHandler,IntDefaultHandler
+ 171              		.weak	USB_IRQHandler
+ 172              		.thumb_set USB_IRQHandler,IntDefaultHandler
+ 173              		.weak	BOD_IRQHandler
+ 174              		.thumb_set BOD_IRQHandler,IntDefaultHandler
+ 175              		.weak	ADC_IRQHandler
+ 176              		.thumb_set ADC_IRQHandler,IntDefaultHandler
+ 177              		.weak	EINT3_IRQHandler
+ 178              		.thumb_set EINT3_IRQHandler,IntDefaultHandler
+ 179              		.weak	EINT2_IRQHandler
+ 180              		.thumb_set EINT2_IRQHandler,IntDefaultHandler
+ 181              		.weak	EINT1_IRQHandler
+ 182              		.thumb_set EINT1_IRQHandler,IntDefaultHandler
+ 183              		.weak	EINT0_IRQHandler
+ 184              		.thumb_set EINT0_IRQHandler,IntDefaultHandler
+ 185              		.weak	RTC_IRQHandler
+ 186              		.thumb_set RTC_IRQHandler,IntDefaultHandler
+ 187              		.weak	PLL0_IRQHandler
+ 188              		.thumb_set PLL0_IRQHandler,IntDefaultHandler
+ 189              		.weak	SSP1_IRQHandler
+ 190              		.thumb_set SSP1_IRQHandler,IntDefaultHandler
+ 191              		.weak	SSP0_IRQHandler
+ 192              		.thumb_set SSP0_IRQHandler,IntDefaultHandler
+ 193              		.weak	SPI_IRQHandler
+ 194              		.thumb_set SPI_IRQHandler,IntDefaultHandler
+ 195              		.weak	I2C2_IRQHandler
+ 196              		.thumb_set I2C2_IRQHandler,IntDefaultHandler
+ 197              		.weak	I2C1_IRQHandler
+ 198              		.thumb_set I2C1_IRQHandler,IntDefaultHandler
+ 199              		.weak	I2C0_IRQHandler
+ 200              		.thumb_set I2C0_IRQHandler,IntDefaultHandler
+ 201              		.weak	PWM1_IRQHandler
+ 202              		.thumb_set PWM1_IRQHandler,IntDefaultHandler
+ 203              		.weak	UART3_IRQHandler
+ 204              		.thumb_set UART3_IRQHandler,IntDefaultHandler
+ 205              		.weak	UART2_IRQHandler
+ 206              		.thumb_set UART2_IRQHandler,IntDefaultHandler
+ 207              		.weak	UART1_IRQHandler
+ 208              		.thumb_set UART1_IRQHandler,IntDefaultHandler
+ 209              		.weak	UART0_IRQHandler
+ 210              		.thumb_set UART0_IRQHandler,IntDefaultHandler
+ 211              		.weak	TIMER3_IRQHandler
+ 212              		.thumb_set TIMER3_IRQHandler,IntDefaultHandler
+ 213              		.weak	TIMER2_IRQHandler
+ 214              		.thumb_set TIMER2_IRQHandler,IntDefaultHandler
+ 215              		.weak	TIMER1_IRQHandler
+ 216              		.thumb_set TIMER1_IRQHandler,IntDefaultHandler
+ 217              		.weak	TIMER0_IRQHandler
+ 218              		.thumb_set TIMER0_IRQHandler,IntDefaultHandler
+ 219              		.weak	WDT_IRQHandler
+ 220              		.thumb_set WDT_IRQHandler,IntDefaultHandler
+ 221              		.text
+ 222              		.align	1
+ 223              		.global	HardFault_HandlerC
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	HardFault_HandlerC:
+ 228              		@ args = 0, pretend = 0, frame = 32
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230 0000 10B5     		push	{r4, lr}
+ 231 0002 0368     		ldr	r3, [r0]
+ 232 0004 8AB0     		sub	sp, sp, #40
+ 233 0006 0293     		str	r3, [sp, #8]
+ 234 0008 4368     		ldr	r3, [r0, #4]
+ 235 000a 0393     		str	r3, [sp, #12]
+ 236 000c 8368     		ldr	r3, [r0, #8]
+ 237 000e 0493     		str	r3, [sp, #16]
+ 238 0010 C368     		ldr	r3, [r0, #12]
+ 239 0012 0593     		str	r3, [sp, #20]
+ 240 0014 0369     		ldr	r3, [r0, #16]
+ 241 0016 0693     		str	r3, [sp, #24]
+ 242 0018 4369     		ldr	r3, [r0, #20]
+ 243 001a 0793     		str	r3, [sp, #28]
+ 244 001c 8369     		ldr	r3, [r0, #24]
+ 245 001e 0893     		str	r3, [sp, #32]
+ 246 0020 C369     		ldr	r3, [r0, #28]
+ 247 0022 1548     		ldr	r0, .L29
+ 248 0024 0993     		str	r3, [sp, #36]
+ 249 0026 FFF7FEFF 		bl	sys_set_outchar_func
+ 250 002a 1448     		ldr	r0, .L29+4
+ 251 002c FFF7FEFF 		bl	puts
+ 252 0030 0299     		ldr	r1, [sp, #8]
+ 253 0032 039A     		ldr	r2, [sp, #12]
+ 254 0034 049B     		ldr	r3, [sp, #16]
+ 255 0036 0598     		ldr	r0, [sp, #20]
+ 256 0038 069C     		ldr	r4, [sp, #24]
+ 257 003a 8DE81100 		stmia	sp, {r0, r4}
+ 258 003e 1048     		ldr	r0, .L29+8
+ 259 0040 FFF7FEFF 		bl	printf
+ 260 0044 0799     		ldr	r1, [sp, #28]
+ 261 0046 0F48     		ldr	r0, .L29+12
+ 262 0048 089A     		ldr	r2, [sp, #32]
+ 263 004a 099B     		ldr	r3, [sp, #36]
+ 264 004c FFF7FEFF 		bl	printf
+ 265 0050 0D4B     		ldr	r3, .L29+16
+ 266 0052 0E4A     		ldr	r2, .L29+20
+ 267 0054 0E48     		ldr	r0, .L29+24
+ 268 0056 9A64     		str	r2, [r3, #72]
+ 269 0058 089A     		ldr	r2, [sp, #32]
+ 270 005a DA64     		str	r2, [r3, #76]
+ 271 005c 079A     		ldr	r2, [sp, #28]
+ 272 005e 1A65     		str	r2, [r3, #80]
+ 273 0060 099A     		ldr	r2, [sp, #36]
+ 274 0062 5A65     		str	r2, [r3, #84]
+ 275 0064 FFF7FEFF 		bl	delay_us
+ 276 0068 4FF08043 		mov	r3, #1073741824
+ 277 006c AA22     		movs	r2, #170
+ 278 006e 1A72     		strb	r2, [r3, #8]
+ 279 0070 0022     		movs	r2, #0
+ 280 0072 1A70     		strb	r2, [r3]
+ 281              	.L28:
+ 282 0074 FEE7     		b	.L28
+ 283              	.L30:
+ 284 0076 00BF     		.align	2
+ 285              	.L29:
+ 286 0078 00000000 		.word	uart0_putchar
+ 287 007c 54000000 		.word	.LC6
+ 288 0080 63000000 		.word	.LC7
+ 289 0084 96000000 		.word	.LC8
+ 290 0088 00400240 		.word	1073889280
+ 291 008c EFBEADDE 		.word	-559038737
+ 292 0090 80969800 		.word	10000000
+ 294              		.section	.after_vectors
+ 295              		.align	1
+ 296              		.global	_Z9data_initjjj
+ 297              		.thumb
+ 298              		.thumb_func
+ 300              	_Z9data_initjjj:
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303 0078 0B46     		mov	r3, r1
+ 304 007a 10B5     		push	{r4, lr}
+ 305 007c 401A     		subs	r0, r0, r1
+ 306              	.L33:
+ 307 007e 5C1A     		subs	r4, r3, r1
+ 308 0080 A242     		cmp	r2, r4
+ 309 0082 03D9     		bls	.L31
+ 310 0084 C458     		ldr	r4, [r0, r3]
+ 311 0086 43F8044B 		str	r4, [r3], #4
+ 312 008a F8E7     		b	.L33
+ 313              	.L31:
+ 314 008c 10BD     		pop	{r4, pc}
+ 316              		.align	1
+ 317              		.global	_Z8bss_initjj
+ 318              		.thumb
+ 319              		.thumb_func
+ 321              	_Z8bss_initjj:
+ 322              		@ args = 0, pretend = 0, frame = 0
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324 008e 0346     		mov	r3, r0
+ 325 0090 10B5     		push	{r4, lr}
+ 326 0092 0022     		movs	r2, #0
+ 327              	.L36:
+ 328 0094 1C1A     		subs	r4, r3, r0
+ 329 0096 A142     		cmp	r1, r4
+ 330 0098 02D9     		bls	.L34
+ 331 009a 43F8042B 		str	r2, [r3], #4
+ 332 009e F9E7     		b	.L36
+ 333              	.L34:
+ 334 00a0 10BD     		pop	{r4, pc}
+ 336              		.align	1
+ 337              		.global	ResetISR
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	ResetISR:
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344 00a2 38B5     		push	{r3, r4, r5, lr}
+ 345 00a4 134C     		ldr	r4, .L43
+ 346 00a6 144D     		ldr	r5, .L43+4
+ 347              	.L40:
+ 348 00a8 AC42     		cmp	r4, r5
+ 349 00aa 01D3     		bcc	.L38
+ 350 00ac 134D     		ldr	r5, .L43+8
+ 351 00ae 07E0     		b	.L39
+ 352              	.L38:
+ 353 00b0 94E80300 		ldmia	r4, {r0, r1}
+ 354 00b4 0C34     		adds	r4, r4, #12
+ 355 00b6 54F8042C 		ldr	r2, [r4, #-4]
+ 356 00ba FFF7FEFF 		bl	_Z9data_initjjj
+ 357 00be F3E7     		b	.L40
+ 358              	.L39:
+ 359 00c0 AC42     		cmp	r4, r5
+ 360 00c2 06D2     		bcs	.L41
+ 361 00c4 54F8080B 		ldr	r0, [r4], #8
+ 362 00c8 54F8041C 		ldr	r1, [r4, #-4]
+ 363 00cc FFF7FEFF 		bl	_Z8bss_initjj
+ 364 00d0 F6E7     		b	.L39
+ 365              	.L41:
+ 366 00d2 FFF7FEFF 		bl	__libc_init_array
+ 367 00d6 FFF7FEFF 		bl	_Z14low_level_initv
+ 368 00da FFF7FEFF 		bl	_Z15high_level_initv
+ 369 00de FFF7FEFF 		bl	main
+ 370 00e2 4FF41640 		mov	r0, #38400
+ 371 00e6 FFF7FEFF 		bl	uart0_init
+ 372 00ea 0548     		ldr	r0, .L43+12
+ 373 00ec FFF7FEFF 		bl	u0_dbg_put
+ 374              	.L42:
+ 375 00f0 FEE7     		b	.L42
+ 376              	.L44:
+ 377 00f2 00BF     		.align	2
+ 378              	.L43:
+ 379 00f4 00000000 		.word	__data_section_table
+ 380 00f8 00000000 		.word	__data_section_table_end
+ 381 00fc 00000000 		.word	__bss_section_table_end
+ 382 0100 BB000000 		.word	.LC9
+ 384              		.align	1
+ 385              		.weak	SVC_Handler
+ 386              		.thumb
+ 387              		.thumb_func
+ 389              	SVC_Handler:
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392 0104 08B5     		push	{r3, lr}
+ 393 0106 0248     		ldr	r0, .L47
+ 394 0108 FFF7FEFF 		bl	u0_dbg_put
+ 395              	.L46:
+ 396 010c FEE7     		b	.L46
+ 397              	.L48:
+ 398 010e 00BF     		.align	2
+ 399              	.L47:
+ 400 0110 E4000000 		.word	.LC10
+ 402              		.align	1
+ 403              		.weak	PendSV_Handler
+ 404              		.thumb
+ 405              		.thumb_func
+ 407              	PendSV_Handler:
+ 408              		@ args = 0, pretend = 0, frame = 0
+ 409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 410 0114 08B5     		push	{r3, lr}
+ 411 0116 0248     		ldr	r0, .L51
+ 412 0118 FFF7FEFF 		bl	u0_dbg_put
+ 413              	.L50:
+ 414 011c FEE7     		b	.L50
+ 415              	.L52:
+ 416 011e 00BF     		.align	2
+ 417              	.L51:
+ 418 0120 EF000000 		.word	.LC11
+ 420              		.align	1
+ 421              		.weak	SysTick_Handler
+ 422              		.thumb
+ 423              		.thumb_func
+ 425              	SysTick_Handler:
+ 426              		@ args = 0, pretend = 0, frame = 0
+ 427              		@ frame_needed = 0, uses_anonymous_args = 0
+ 428 0124 08B5     		push	{r3, lr}
+ 429 0126 0248     		ldr	r0, .L55
+ 430 0128 FFF7FEFF 		bl	u0_dbg_put
+ 431              	.L54:
+ 432 012c FEE7     		b	.L54
+ 433              	.L56:
+ 434 012e 00BF     		.align	2
+ 435              	.L55:
+ 436 0130 FE000000 		.word	.LC12
+ 438              		.global	g_pfnVectors
+ 439              		.section	.isr_vector,"a",%progbits
+ 440              		.align	2
+ 443              	g_pfnVectors:
+ 444 0000 00000000 		.word	_vStackTop
+ 445 0004 00000000 		.word	ResetISR
+ 446 0008 00000000 		.word	NMI_Handler
+ 447 000c 00000000 		.word	HardFault_Handler
+ 448 0010 00000000 		.word	MemManage_Handler
+ 449 0014 00000000 		.word	BusFault_Handler
+ 450 0018 00000000 		.word	UsageFault_Handler
+ 451 001c 00000000 		.word	0
+ 452 0020 00000000 		.word	0
+ 453 0024 00000000 		.word	0
+ 454 0028 00000000 		.word	0
+ 455 002c 00000000 		.word	vPortSVCHandler
+ 456 0030 00000000 		.word	DebugMon_Handler
+ 457 0034 00000000 		.word	0
+ 458 0038 00000000 		.word	xPortPendSVHandler
+ 459 003c 00000000 		.word	xPortSysTickHandler
+ 460 0040 00000000 		.word	WDT_IRQHandler
+ 461 0044 00000000 		.word	TIMER0_IRQHandler
+ 462 0048 00000000 		.word	TIMER1_IRQHandler
+ 463 004c 00000000 		.word	TIMER2_IRQHandler
+ 464 0050 00000000 		.word	TIMER3_IRQHandler
+ 465 0054 00000000 		.word	UART0_IRQHandler
+ 466 0058 00000000 		.word	UART1_IRQHandler
+ 467 005c 00000000 		.word	UART2_IRQHandler
+ 468 0060 00000000 		.word	UART3_IRQHandler
+ 469 0064 00000000 		.word	PWM1_IRQHandler
+ 470 0068 00000000 		.word	I2C0_IRQHandler
+ 471 006c 00000000 		.word	I2C1_IRQHandler
+ 472 0070 00000000 		.word	I2C2_IRQHandler
+ 473 0074 00000000 		.word	SPI_IRQHandler
+ 474 0078 00000000 		.word	SSP0_IRQHandler
+ 475 007c 00000000 		.word	SSP1_IRQHandler
+ 476 0080 00000000 		.word	PLL0_IRQHandler
+ 477 0084 00000000 		.word	RTC_IRQHandler
+ 478 0088 00000000 		.word	EINT0_IRQHandler
+ 479 008c 00000000 		.word	EINT1_IRQHandler
+ 480 0090 00000000 		.word	EINT2_IRQHandler
+ 481 0094 00000000 		.word	EINT3_IRQHandler
+ 482 0098 00000000 		.word	ADC_IRQHandler
+ 483 009c 00000000 		.word	BOD_IRQHandler
+ 484 00a0 00000000 		.word	USB_IRQHandler
+ 485 00a4 00000000 		.word	CAN_IRQHandler
+ 486 00a8 00000000 		.word	DMA_IRQHandler
+ 487 00ac 00000000 		.word	I2S_IRQHandler
+ 488 00b0 00000000 		.word	ENET_IRQHandler
+ 489 00b4 00000000 		.word	RIT_IRQHandler
+ 490 00b8 00000000 		.word	MCPWM_IRQHandler
+ 491 00bc 00000000 		.word	QEI_IRQHandler
+ 492 00c0 00000000 		.word	PLL1_IRQHandler
+ 493 00c4 00000000 		.word	USBActivity_IRQHandler
+ 494 00c8 00000000 		.word	CANActivity_IRQHandler
+ 495              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 496              	.LC0:
+ 497 0000 4E4D4920 		.ascii	"NMI Fault\012\000"
+ 497      4661756C 
+ 497      740A00
+ 498              	.LC1:
+ 499 000b 4D656D20 		.ascii	"Mem Fault\012\000"
+ 499      4661756C 
+ 499      740A00
+ 500              	.LC2:
+ 501 0016 42555320 		.ascii	"BUS Fault\012\000"
+ 501      4661756C 
+ 501      740A00
+ 502              	.LC3:
+ 503 0021 55736167 		.ascii	"Usage Fault\012\000"
+ 503      65204661 
+ 503      756C740A 
+ 503      00
+ 504              	.LC4:
+ 505 002e 44656275 		.ascii	"DebugMon Fault\012\000"
+ 505      674D6F6E 
+ 505      20466175 
+ 505      6C740A00 
+ 506              	.LC5:
+ 507 003e 556E6578 		.ascii	"Unexpected ISR Fault\012\000"
+ 507      70656374 
+ 507      65642049 
+ 507      53522046 
+ 507      61756C74 
+ 508              	.LC6:
+ 509 0054 0A537973 		.ascii	"\012System Crash!\000"
+ 509      74656D20 
+ 509      43726173 
+ 509      682100
+ 510              	.LC7:
+ 511 0063 52656769 		.ascii	"Registers: 0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X\012"
+ 511      73746572 
+ 511      733A2030 
+ 511      78253038 
+ 511      582C2030 
+ 512 0095 00       		.ascii	"\000"
+ 513              	.LC8:
+ 514 0096 4C523A20 		.ascii	"LR: 0x%08X, PC: 0x%08X, PSR: 0x%08X\012\000"
+ 514      30782530 
+ 514      38582C20 
+ 514      50433A20 
+ 514      30782530 
+ 515              	.LC9:
+ 516 00bb 6D61696E 		.ascii	"main() should never exit on this system\012\000"
+ 516      28292073 
+ 516      686F756C 
+ 516      64206E65 
+ 516      76657220 
+ 517              	.LC10:
+ 518 00e4 53564320 		.ascii	"SVC Fault\012\000"
+ 518      4661756C 
+ 518      740A00
+ 519              	.LC11:
+ 520 00ef 50656E64 		.ascii	"Pend SV Fault\012\000"
+ 520      20535620 
+ 520      4661756C 
+ 520      740A00
+ 521              	.LC12:
+ 522 00fe 53797320 		.ascii	"Sys Tick Fault\012\000"
+ 522      5469636B 
+ 522      20466175 
+ 522      6C740A00 
+ 523              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 cr_startup_lpc175x.cpp
-     /tmp/ccmJPi9d.s:16     .after_vectors:00000000 $t
-     /tmp/ccmJPi9d.s:21     .after_vectors:00000000 HardFault_Handler
-     /tmp/ccmJPi9d.s:32     .after_vectors:00000010 _MSP
-     /tmp/ccmJPi9d.s:136    .text:00000000 HardFault_HandlerC
-     /tmp/ccmJPi9d.s:45     .after_vectors:0000001a DebugMon_Handler
-     /tmp/ccmJPi9d.s:56     .after_vectors:00000024 $d
-     /tmp/ccmJPi9d.s:58     .after_vectors:00000028 $t
-     /tmp/ccmJPi9d.s:63     .after_vectors:00000028 UsageFault_Handler
-     /tmp/ccmJPi9d.s:74     .after_vectors:00000034 $d
-     /tmp/ccmJPi9d.s:76     .after_vectors:00000038 $t
-     /tmp/ccmJPi9d.s:81     .after_vectors:00000038 BusFault_Handler
-     /tmp/ccmJPi9d.s:92     .after_vectors:00000044 $d
-     /tmp/ccmJPi9d.s:94     .after_vectors:00000048 $t
-     /tmp/ccmJPi9d.s:99     .after_vectors:00000048 MemManage_Handler
-     /tmp/ccmJPi9d.s:110    .after_vectors:00000054 $d
-     /tmp/ccmJPi9d.s:112    .after_vectors:00000058 $t
-     /tmp/ccmJPi9d.s:117    .after_vectors:00000058 NMI_Handler
-     /tmp/ccmJPi9d.s:128    .after_vectors:00000064 $d
-     /tmp/ccmJPi9d.s:131    .text:00000000 $t
-     /tmp/ccmJPi9d.s:196    .text:00000078 $d
-     /tmp/ccmJPi9d.s:205    .after_vectors:00000068 $t
-     /tmp/ccmJPi9d.s:210    .after_vectors:00000068 _Z9data_initjjj
-     /tmp/ccmJPi9d.s:230    .after_vectors:0000007a _Z8bss_initjj
-     /tmp/ccmJPi9d.s:250    .after_vectors:0000008a ResetISR
-     /tmp/ccmJPi9d.s:288    .after_vectors:000000d4 $d
-     /tmp/ccmJPi9d.s:293    .after_vectors:000000e4 $t
-     /tmp/ccmJPi9d.s:298    .after_vectors:000000e4 SVC_Handler
-     /tmp/ccmJPi9d.s:309    .after_vectors:000000f0 $d
-     /tmp/ccmJPi9d.s:311    .after_vectors:000000f4 $t
-     /tmp/ccmJPi9d.s:316    .after_vectors:000000f4 PendSV_Handler
-     /tmp/ccmJPi9d.s:327    .after_vectors:00000100 $d
-     /tmp/ccmJPi9d.s:329    .after_vectors:00000104 $t
-     /tmp/ccmJPi9d.s:334    .after_vectors:00000104 SysTick_Handler
-     /tmp/ccmJPi9d.s:345    .after_vectors:00000110 $d
-     /tmp/ccmJPi9d.s:347    .after_vectors:00000114 $t
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 IntDefaultHandler
-     /tmp/ccmJPi9d.s:363    .after_vectors:00000120 $d
-     /tmp/ccmJPi9d.s:440    .isr_vector:00000000 g_pfnVectors
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 WDT_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 TIMER0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 TIMER1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 TIMER2_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 TIMER3_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 UART0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 UART1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 UART2_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 UART3_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 PWM1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 I2C0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 I2C1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 I2C2_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 SPI_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 SSP0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 SSP1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 PLL0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 RTC_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 EINT0_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 EINT1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 EINT2_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 EINT3_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 ADC_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 BOD_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 USB_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 CAN_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 DMA_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 I2S_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 ENET_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 RIT_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 MCPWM_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 QEI_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 PLL1_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 USBActivity_IRQHandler
-     /tmp/ccmJPi9d.s:352    .after_vectors:00000114 CANActivity_IRQHandler
-     /tmp/ccmJPi9d.s:437    .isr_vector:00000000 $d
+     /tmp/ccUi5Ldo.s:17     .after_vectors:00000000 $t
+     /tmp/ccUi5Ldo.s:22     .after_vectors:00000000 HardFault_Handler
+     /tmp/ccUi5Ldo.s:34     .after_vectors:00000010 _MSP
+     /tmp/ccUi5Ldo.s:227    .text:00000000 HardFault_HandlerC
+     /tmp/ccUi5Ldo.s:48     .after_vectors:0000001a NMI_Handler
+     /tmp/ccUi5Ldo.s:59     .after_vectors:00000024 $d
+     /tmp/ccUi5Ldo.s:61     .after_vectors:00000028 $t
+     /tmp/ccUi5Ldo.s:66     .after_vectors:00000028 MemManage_Handler
+     /tmp/ccUi5Ldo.s:77     .after_vectors:00000034 $d
+     /tmp/ccUi5Ldo.s:79     .after_vectors:00000038 $t
+     /tmp/ccUi5Ldo.s:84     .after_vectors:00000038 BusFault_Handler
+     /tmp/ccUi5Ldo.s:95     .after_vectors:00000044 $d
+     /tmp/ccUi5Ldo.s:97     .after_vectors:00000048 $t
+     /tmp/ccUi5Ldo.s:102    .after_vectors:00000048 UsageFault_Handler
+     /tmp/ccUi5Ldo.s:113    .after_vectors:00000054 $d
+     /tmp/ccUi5Ldo.s:115    .after_vectors:00000058 $t
+     /tmp/ccUi5Ldo.s:120    .after_vectors:00000058 DebugMon_Handler
+     /tmp/ccUi5Ldo.s:131    .after_vectors:00000064 $d
+     /tmp/ccUi5Ldo.s:133    .after_vectors:00000068 $t
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 IntDefaultHandler
+     /tmp/ccUi5Ldo.s:149    .after_vectors:00000074 $d
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 CANActivity_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 USBActivity_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 PLL1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 QEI_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 MCPWM_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 RIT_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 ENET_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 I2S_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 DMA_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 CAN_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 USB_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 BOD_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 ADC_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 EINT3_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 EINT2_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 EINT1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 EINT0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 RTC_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 PLL0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 SSP1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 SSP0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 SPI_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 I2C2_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 I2C1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 I2C0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 PWM1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 UART3_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 UART2_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 UART1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 UART0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 TIMER3_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 TIMER2_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 TIMER1_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 TIMER0_IRQHandler
+     /tmp/ccUi5Ldo.s:138    .after_vectors:00000068 WDT_IRQHandler
+     /tmp/ccUi5Ldo.s:222    .text:00000000 $t
+     /tmp/ccUi5Ldo.s:286    .text:00000078 $d
+     /tmp/ccUi5Ldo.s:295    .after_vectors:00000078 $t
+     /tmp/ccUi5Ldo.s:300    .after_vectors:00000078 _Z9data_initjjj
+     /tmp/ccUi5Ldo.s:321    .after_vectors:0000008e _Z8bss_initjj
+     /tmp/ccUi5Ldo.s:341    .after_vectors:000000a2 ResetISR
+     /tmp/ccUi5Ldo.s:379    .after_vectors:000000f4 $d
+     /tmp/ccUi5Ldo.s:384    .after_vectors:00000104 $t
+     /tmp/ccUi5Ldo.s:389    .after_vectors:00000104 SVC_Handler
+     /tmp/ccUi5Ldo.s:400    .after_vectors:00000110 $d
+     /tmp/ccUi5Ldo.s:402    .after_vectors:00000114 $t
+     /tmp/ccUi5Ldo.s:407    .after_vectors:00000114 PendSV_Handler
+     /tmp/ccUi5Ldo.s:418    .after_vectors:00000120 $d
+     /tmp/ccUi5Ldo.s:420    .after_vectors:00000124 $t
+     /tmp/ccUi5Ldo.s:425    .after_vectors:00000124 SysTick_Handler
+     /tmp/ccUi5Ldo.s:436    .after_vectors:00000130 $d
+     /tmp/ccUi5Ldo.s:443    .isr_vector:00000000 g_pfnVectors
+     /tmp/ccUi5Ldo.s:440    .isr_vector:00000000 $d
 
 UNDEFINED SYMBOLS
 u0_dbg_put

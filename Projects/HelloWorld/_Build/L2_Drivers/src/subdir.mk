@@ -10,7 +10,8 @@ CPP_SRCS += \
 ../L2_Drivers/src/uart0.cpp \
 ../L2_Drivers/src/uart2.cpp \
 ../L2_Drivers/src/uart3.cpp \
-../L2_Drivers/src/uart_dev.cpp
+../L2_Drivers/src/uart_dev.cpp \
+../L2_Drivers/base/char_dev.hpp
 
 C_SRCS += \
 ../L2_Drivers/src/can.c \

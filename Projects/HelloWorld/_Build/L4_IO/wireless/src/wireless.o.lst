@@ -11,472 +11,465 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"wireless.c"
-  15              		.text
-  16              		.align	1
-  17              		.thumb
-  18              		.thumb_func
-  20              	nrf_driver_get_timer:
-  21              		@ args = 0, pretend = 0, frame = 0
-  22              		@ frame_needed = 0, uses_anonymous_args = 0
-  23 0000 38B5     		push	{r3, r4, r5, lr}
-  24 0002 A1F10403 		sub	r3, r1, #4
-  25 0006 5C42     		rsbs	r4, r3, #0
-  26 0008 44EB0304 		adc	r4, r4, r3
-  27 000c 0546     		mov	r5, r0
-  28 000e FFF7FEFF 		bl	sys_get_uptime_ms
-  29 0012 04B1     		cbz	r4, .L2
-  30 0014 2860     		str	r0, [r5, #0]
-  31              	.L2:
-  32 0016 2046     		mov	r0, r4
-  33 0018 38BD     		pop	{r3, r4, r5, pc}
-  35              		.align	1
-  36              		.thumb
-  37              		.thumb_func
-  39              	nrf_irq_callback:
-  40              		@ args = 0, pretend = 0, frame = 0
-  41              		@ frame_needed = 0, uses_anonymous_args = 0
-  42              		@ link register save eliminated.
-  43 001a 034B     		ldr	r3, .L4
-  44 001c 0021     		movs	r1, #0
-  45 001e 1868     		ldr	r0, [r3, #0]
-  46 0020 0A46     		mov	r2, r1
-  47 0022 0B46     		mov	r3, r1
-  48 0024 FFF7FEBF 		b	xQueueGenericSendFromISR
-  49              	.L5:
-  50              		.align	2
-  51              	.L4:
-  52 0028 00000000 		.word	.LANCHOR0
-  54              		.align	1
-  55              		.thumb
-  56              		.thumb_func
-  58              	nrf_driver_app_recv:
-  59              		@ args = 0, pretend = 0, frame = 40
-  60              		@ frame_needed = 0, uses_anonymous_args = 0
-  61 002c 70B5     		push	{r4, r5, r6, lr}
-  62 002e 0023     		movs	r3, #0
-  63 0030 8AB0     		sub	sp, sp, #40
-  64 0032 0993     		str	r3, [sp, #36]
-  65 0034 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
-  66 0036 0546     		mov	r5, r0
-  67 0038 03F0C003 		and	r3, r3, #192
-  68 003c C02B     		cmp	r3, #192
-  69 003e 104B     		ldr	r3, .L11
-  70 0040 2946     		mov	r1, r5
-  71 0042 0CBF     		ite	eq
-  72 0044 5C68     		ldreq	r4, [r3, #4]
-  73 0046 9C68     		ldrne	r4, [r3, #8]
-  74 0048 09AA     		add	r2, sp, #36
-  75 004a 2046     		mov	r0, r4
-  76 004c 0023     		movs	r3, #0
-  77 004e FFF7FEFF 		bl	xQueueGenericSendFromISR
-  78 0052 0646     		mov	r6, r0
-  79 0054 58B9     		cbnz	r0, .L9
-  80 0056 3246     		mov	r2, r6
-  81 0058 01A9     		add	r1, sp, #4
-  82 005a 2046     		mov	r0, r4
-  83 005c FFF7FEFF 		bl	xQueueReceiveFromISR
-  84 0060 3346     		mov	r3, r6
-  85 0062 2046     		mov	r0, r4
-  86 0064 2946     		mov	r1, r5
-  87 0066 09AA     		add	r2, sp, #36
-  88 0068 FFF7FEFF 		bl	xQueueGenericSendFromISR
-  89 006c 0646     		mov	r6, r0
-  90              	.L9:
-  91 006e 099B     		ldr	r3, [sp, #36]
-  92 0070 1BB1     		cbz	r3, .L10
-  93 0072 044B     		ldr	r3, .L11+4
-  94 0074 4FF08052 		mov	r2, #268435456
-  95 0078 1A60     		str	r2, [r3, #0]
-  96              	.L10:
-  97 007a 3046     		mov	r0, r6
-  98 007c 0AB0     		add	sp, sp, #40
-  99 007e 70BD     		pop	{r4, r5, r6, pc}
- 100              	.L12:
- 101              		.align	2
- 102              	.L11:
- 103 0080 00000000 		.word	.LANCHOR0
- 104 0084 04ED00E0 		.word	-536810236
- 106              		.align	1
- 107              		.thumb
- 108              		.thumb_func
- 110              	nrf_driver_init:
- 111              		@ args = 0, pretend = 0, frame = 0
- 112              		@ frame_needed = 0, uses_anonymous_args = 0
- 113 0088 38B5     		push	{r3, r4, r5, lr}
- 114 008a 1B4C     		ldr	r4, .L20
- 115 008c A268     		ldr	r2, [r4, #8]
- 116 008e 22B9     		cbnz	r2, .L14
- 117 0090 0320     		movs	r0, #3
- 118 0092 2021     		movs	r1, #32
- 119 0094 FFF7FEFF 		bl	xQueueGenericCreate
- 120 0098 A060     		str	r0, [r4, #8]
- 121              	.L14:
- 122 009a 6268     		ldr	r2, [r4, #4]
- 123 009c 2AB9     		cbnz	r2, .L15
- 124 009e 0120     		movs	r0, #1
- 125 00a0 2021     		movs	r1, #32
- 126 00a2 FFF7FEFF 		bl	xQueueGenericCreate
- 127 00a6 144B     		ldr	r3, .L20
- 128 00a8 5860     		str	r0, [r3, #4]
- 129              	.L15:
- 130 00aa 134D     		ldr	r5, .L20
- 131 00ac 2C68     		ldr	r4, [r5, #0]
- 132 00ae 5CB9     		cbnz	r4, .L16
- 133 00b0 0120     		movs	r0, #1
- 134 00b2 2146     		mov	r1, r4
- 135 00b4 0322     		movs	r2, #3
- 136 00b6 FFF7FEFF 		bl	xQueueGenericCreate
- 137 00ba 2860     		str	r0, [r5, #0]
- 138 00bc 20B1     		cbz	r0, .L16
- 139 00be 2146     		mov	r1, r4
- 140 00c0 2246     		mov	r2, r4
- 141 00c2 2346     		mov	r3, r4
- 142 00c4 FFF7FEFF 		bl	xQueueGenericSend
- 143              	.L16:
- 144 00c8 2020     		movs	r0, #32
- 145 00ca 40F6C311 		movw	r1, #2499
- 146 00ce 4FF4FA62 		mov	r2, #2000
- 147 00d2 FFF7FEFF 		bl	nordic_init
- 148 00d6 FFF7FEFF 		bl	nordic_standby1_to_rx
- 149 00da 1620     		movs	r0, #22
- 150 00dc 0121     		movs	r1, #1
- 151 00de 074A     		ldr	r2, .L20+4
- 152 00e0 FFF7FEFF 		bl	eint3_enable
- 153 00e4 044B     		ldr	r3, .L20
- 154 00e6 9868     		ldr	r0, [r3, #8]
- 155 00e8 28B1     		cbz	r0, .L17
- 156 00ea 5868     		ldr	r0, [r3, #4]
- 157 00ec 18B1     		cbz	r0, .L17
- 158 00ee 1868     		ldr	r0, [r3, #0]
- 159 00f0 0030     		adds	r0, r0, #0
- 160 00f2 18BF     		it	ne
- 161 00f4 0120     		movne	r0, #1
- 162              	.L17:
- 163 00f6 38BD     		pop	{r3, r4, r5, pc}
- 164              	.L21:
- 165              		.align	2
- 166              	.L20:
- 167 00f8 00000000 		.word	.LANCHOR0
- 168 00fc 00000000 		.word	nrf_irq_callback
- 170              		.align	1
- 171              		.thumb
- 172              		.thumb_func
- 174              	wireless_get_queued_pkt:
- 175              		@ args = 0, pretend = 0, frame = 8
- 176              		@ frame_needed = 0, uses_anonymous_args = 0
- 177 0100 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
- 178 0104 0746     		mov	r7, r0
- 179 0106 0E46     		mov	r6, r1
- 180 0108 1546     		mov	r5, r2
- 181 010a FFF7FEFF 		bl	xTaskGetSchedulerState
- 182 010e 0128     		cmp	r0, #1
- 183 0110 07D1     		bne	.L23
- 184 0112 2A46     		mov	r2, r5
- 185 0114 3846     		mov	r0, r7
- 186 0116 3146     		mov	r1, r6
- 187 0118 0023     		movs	r3, #0
- 188 011a FFF7FEFF 		bl	xQueueGenericReceive
- 189 011e C5B2     		uxtb	r5, r0
- 190 0120 1AE0     		b	.L24
- 191              	.L23:
- 192 0122 0023     		movs	r3, #0
- 193 0124 02AC     		add	r4, sp, #8
- 194 0126 44F8043D 		str	r3, [r4, #-4]!
- 195 012a FFF7FEFF 		bl	sys_get_uptime_ms
- 196 012e 10EB0508 		adds	r8, r0, r5
- 197 0132 41F10009 		adc	r9, r1, #0
- 198 0136 07E0     		b	.L25
- 199              	.L26:
- 200 0138 FFF7FEFF 		bl	sys_get_uptime_ms
- 201 013c 0246     		mov	r2, r0
- 202 013e 0B46     		mov	r3, r1
- 203 0140 9045     		cmp	r8, r2
- 204 0142 79EB0301 		sbcs	r1, r9, r3
- 205 0146 07D3     		bcc	.L24
- 206              	.L25:
- 207 0148 3846     		mov	r0, r7
- 208 014a 3146     		mov	r1, r6
- 209 014c 2246     		mov	r2, r4
- 210 014e FFF7FEFF 		bl	xQueueReceiveFromISR
- 211 0152 C5B2     		uxtb	r5, r0
- 212 0154 002D     		cmp	r5, #0
- 213 0156 EFD0     		beq	.L26
- 214              	.L24:
- 215 0158 2846     		mov	r0, r5
- 216 015a BDE8FE83 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}
- 218              		.align	1
- 219              		.thumb
- 220              		.thumb_func
- 222              	nrf_driver_send:
- 223              		@ args = 0, pretend = 0, frame = 0
- 224              		@ frame_needed = 0, uses_anonymous_args = 0
- 225 015e 38B5     		push	{r3, r4, r5, lr}
- 226 0160 0446     		mov	r4, r0
- 227 0162 0D46     		mov	r5, r1
- 228 0164 FFF7FEFF 		bl	mesh_get_node_address
- 229 0168 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
- 230 016a 8342     		cmp	r3, r0
- 231 016c 0AD0     		beq	.L28
- 232 016e E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
- 233 0170 43B9     		cbnz	r3, .L28
- 234 0172 FFF7FEFF 		bl	rand
- 235 0176 00F00300 		and	r0, r0, #3
- 236 017a 0130     		adds	r0, r0, #1
- 237 017c BD23     		movs	r3, #189
- 238 017e 5843     		muls	r0, r3, r0
- 239 0180 FFF7FEFF 		bl	delay_us
- 240              	.L28:
- 241 0184 FFF7FEFF 		bl	nordic_rx_to_Stanby1
- 242 0188 FFF7FEFF 		bl	nordic_standby1_to_tx_mode1
- 243 018c A9B2     		uxth	r1, r5
- 244 018e 2046     		mov	r0, r4
- 245 0190 FFF7FEFF 		bl	nordic_mode1_send_single_packet
- 246 0194 FFF7FEFF 		bl	nordic_clear_packet_sent_flag
- 247 0198 FFF7FEFF 		bl	nordic_standby1_to_rx
- 248 019c FFF7FEFF 		bl	xTaskGetSchedulerState
- 249 01a0 0128     		cmp	r0, #1
- 250 01a2 06D1     		bne	.L29
- 251 01a4 044B     		ldr	r3, .L30
- 252 01a6 0021     		movs	r1, #0
- 253 01a8 1868     		ldr	r0, [r3, #0]
- 254 01aa 0A46     		mov	r2, r1
- 255 01ac 0B46     		mov	r3, r1
- 256 01ae FFF7FEFF 		bl	xQueueGenericSendFromISR
- 257              	.L29:
- 258 01b2 0120     		movs	r0, #1
- 259 01b4 38BD     		pop	{r3, r4, r5, pc}
- 260              	.L31:
- 261 01b6 00BF     		.align	2
- 262              	.L30:
- 263 01b8 00000000 		.word	.LANCHOR0
- 265              		.align	1
- 266              		.thumb
- 267              		.thumb_func
- 269              	nrf_driver_receive:
- 270              		@ args = 0, pretend = 0, frame = 0
- 271              		@ frame_needed = 0, uses_anonymous_args = 0
- 272 01bc 38B5     		push	{r3, r4, r5, lr}
- 273 01be 0446     		mov	r4, r0
- 274 01c0 0D46     		mov	r5, r1
- 275 01c2 FFF7FEFF 		bl	nordic_is_packet_available
- 276 01c6 58B1     		cbz	r0, .L33
- 277 01c8 A9B2     		uxth	r1, r5
- 278 01ca 2046     		mov	r0, r4
- 279 01cc FFF7FEFF 		bl	nordic_read_rx_fifo
- 280 01d0 FFF7FEFF 		bl	nordic_is_packet_available
- 281 01d4 18B9     		cbnz	r0, .L35
- 282 01d6 FFF7FEFF 		bl	nordic_clear_packet_available_flag
- 283 01da 0120     		movs	r0, #1
- 284 01dc 38BD     		pop	{r3, r4, r5, pc}
- 285              	.L35:
- 286 01de 0120     		movs	r0, #1
- 287              	.L33:
- 288 01e0 38BD     		pop	{r3, r4, r5, pc}
- 290              		.align	1
- 291              		.global	wireless_init
- 292              		.thumb
- 293              		.thumb_func
- 295              	wireless_init:
- 296              		@ args = 0, pretend = 0, frame = 24
- 297              		@ frame_needed = 0, uses_anonymous_args = 0
- 298 01e2 10B5     		push	{r4, lr}
- 299 01e4 0C4B     		ldr	r3, .L37
- 300 01e6 8CB0     		sub	sp, sp, #48
- 301 01e8 0993     		str	r3, [sp, #36]
- 302 01ea 0C4B     		ldr	r3, .L37+4
- 303 01ec 0C4A     		ldr	r2, .L37+8
- 304 01ee 0B93     		str	r3, [sp, #44]
- 305 01f0 0C4B     		ldr	r3, .L37+12
- 306 01f2 0D4C     		ldr	r4, .L37+16
- 307 01f4 0A93     		str	r3, [sp, #40]
- 308 01f6 0CAB     		add	r3, sp, #48
- 309 01f8 43F8102D 		str	r2, [r3, #-16]!
- 310 01fc 0022     		movs	r2, #0
- 311 01fe 0492     		str	r2, [sp, #16]
- 312 0200 0FCB     		ldmia	r3, {r0, r1, r2, r3}
- 313 0202 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
- 314 0206 2346     		mov	r3, r4
- 315 0208 6A20     		movs	r0, #106
- 316 020a 0121     		movs	r1, #1
- 317 020c 074A     		ldr	r2, .L37+20
- 318 020e 0794     		str	r4, [sp, #28]
- 319 0210 FFF7FEFF 		bl	mesh_init
- 320 0214 0CB0     		add	sp, sp, #48
- 321 0216 10BD     		pop	{r4, pc}
- 322              	.L38:
- 323              		.align	2
- 324              	.L37:
- 325 0218 00000000 		.word	nrf_driver_init
- 326 021c 00000000 		.word	nrf_driver_receive
- 327 0220 00000000 		.word	nrf_driver_get_timer
- 328 0224 00000000 		.word	nrf_driver_send
- 329 0228 00000000 		.word	nrf_driver_app_recv
- 330 022c 00000000 		.word	.LC0
- 332              		.align	1
- 333              		.global	wireless_get_rx_pkt
- 334              		.thumb
- 335              		.thumb_func
- 337              	wireless_get_rx_pkt:
- 338              		@ args = 0, pretend = 0, frame = 0
- 339              		@ frame_needed = 0, uses_anonymous_args = 0
- 340              		@ link register save eliminated.
- 341 0230 0A46     		mov	r2, r1
- 342 0232 0249     		ldr	r1, .L40
- 343 0234 0346     		mov	r3, r0
- 344 0236 8868     		ldr	r0, [r1, #8]
- 345 0238 1946     		mov	r1, r3
- 346 023a 61E7     		b	wireless_get_queued_pkt
- 347              	.L41:
- 348              		.align	2
- 349              	.L40:
- 350 023c 00000000 		.word	.LANCHOR0
- 352              		.align	1
- 353              		.global	wireless_get_ack_pkt
- 354              		.thumb
- 355              		.thumb_func
- 357              	wireless_get_ack_pkt:
- 358              		@ args = 0, pretend = 0, frame = 0
- 359              		@ frame_needed = 0, uses_anonymous_args = 0
- 360              		@ link register save eliminated.
- 361 0240 0A46     		mov	r2, r1
- 362 0242 0249     		ldr	r1, .L43
- 363 0244 0346     		mov	r3, r0
- 364 0246 4868     		ldr	r0, [r1, #4]
- 365 0248 1946     		mov	r1, r3
- 366 024a 59E7     		b	wireless_get_queued_pkt
- 367              	.L44:
- 368              		.align	2
- 369              	.L43:
- 370 024c 00000000 		.word	.LANCHOR0
- 372              		.align	1
- 373              		.global	wireless_flush_rx
- 374              		.thumb
- 375              		.thumb_func
- 377              	wireless_flush_rx:
- 378              		@ args = 0, pretend = 0, frame = 32
- 379              		@ frame_needed = 0, uses_anonymous_args = 0
- 380 0250 10B5     		push	{r4, lr}
- 381 0252 0024     		movs	r4, #0
- 382 0254 88B0     		sub	sp, sp, #32
- 383 0256 00E0     		b	.L46
- 384              	.L47:
- 385 0258 0134     		adds	r4, r4, #1
- 386              	.L46:
- 387 025a 0021     		movs	r1, #0
- 388 025c 6846     		mov	r0, sp
- 389 025e FFF7FEFF 		bl	wireless_get_rx_pkt
- 390 0262 0146     		mov	r1, r0
- 391 0264 0028     		cmp	r0, #0
- 392 0266 F7D1     		bne	.L47
- 393 0268 6846     		mov	r0, sp
- 394 026a FFF7FEFF 		bl	wireless_get_ack_pkt
- 395 026e 0028     		cmp	r0, #0
- 396 0270 F2D1     		bne	.L47
- 397 0272 2046     		mov	r0, r4
- 398 0274 08B0     		add	sp, sp, #32
- 399 0276 10BD     		pop	{r4, pc}
- 401              		.align	1
- 402              		.global	wireless_service
- 403              		.thumb
- 404              		.thumb_func
- 406              	wireless_service:
- 407              		@ args = 0, pretend = 0, frame = 0
- 408              		@ frame_needed = 0, uses_anonymous_args = 0
- 409 0278 08B5     		push	{r3, lr}
- 410 027a FFF7FEFF 		bl	xTaskGetSchedulerState
- 411 027e 0F4B     		ldr	r3, .L55
- 412 0280 0128     		cmp	r0, #1
- 413 0282 5B69     		ldr	r3, [r3, #20]
- 414 0284 0FD1     		bne	.L49
- 415 0286 5902     		lsls	r1, r3, #9
- 416 0288 12D5     		bpl	.L52
- 417 028a FFF7FEFF 		bl	mesh_get_pnd_pkt_count
- 418 028e 0C4B     		ldr	r3, .L55+4
- 419 0290 0021     		movs	r1, #0
- 420 0292 0028     		cmp	r0, #0
- 421 0294 0CBF     		ite	eq
- 422 0296 4FF0FF32 		moveq	r2, #-1
- 423 029a 0122     		movne	r2, #1
- 424 029c 1868     		ldr	r0, [r3, #0]
- 425 029e 0B46     		mov	r3, r1
- 426 02a0 FFF7FEFF 		bl	xQueueGenericReceive
- 427 02a4 04E0     		b	.L52
- 428              	.L49:
- 429 02a6 5A02     		lsls	r2, r3, #9
- 430 02a8 02D5     		bpl	.L52
- 431 02aa FFF7FEFF 		bl	mesh_get_pnd_pkt_count
- 432 02ae 18B1     		cbz	r0, .L48
- 433              	.L52:
- 434 02b0 BDE80840 		pop	{r3, lr}
- 435 02b4 FFF7FEBF 		b	mesh_service
- 436              	.L48:
- 437 02b8 08BD     		pop	{r3, pc}
- 438              	.L56:
- 439 02ba 00BF     		.align	2
- 440              	.L55:
- 441 02bc 00C00920 		.word	537509888
- 442 02c0 00000000 		.word	.LANCHOR0
- 444              		.section	.rodata.str1.1,"aMS",%progbits,1
- 445              	.LC0:
- 446 0000 6E6F6465 		.ascii	"node\000"
- 446      00
- 447              		.bss
- 448              		.align	2
- 449              		.set	.LANCHOR0,. + 0
- 452              	m_nrf_activity_sem:
- 453 0000 00000000 		.space	4
- 456              	m_ack_queue:
- 457 0004 00000000 		.space	4
- 460              	m_rx_queue:
- 461 0008 00000000 		.space	4
- 462              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"wireless.c"
+  16              		.text
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	nrf_driver_get_timer:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 0B1F     		subs	r3, r1, #4
+  25 0002 70B5     		push	{r4, r5, r6, lr}
+  26 0004 5D42     		rsbs	r5, r3, #0
+  27 0006 0C46     		mov	r4, r1
+  28 0008 5D41     		adcs	r5, r5, r3
+  29 000a 0646     		mov	r6, r0
+  30 000c FFF7FEFF 		bl	sys_get_uptime_ms
+  31 0010 042C     		cmp	r4, #4
+  32 0012 08BF     		it	eq
+  33 0014 3060     		streq	r0, [r6]
+  34 0016 2846     		mov	r0, r5
+  35 0018 70BD     		pop	{r4, r5, r6, pc}
+  37              		.align	1
+  38              		.thumb
+  39              		.thumb_func
+  41              	nrf_irq_callback:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 001a 0348     		ldr	r0, .L4
+  46 001c 0023     		movs	r3, #0
+  47 001e 1A46     		mov	r2, r3
+  48 0020 1946     		mov	r1, r3
+  49 0022 0068     		ldr	r0, [r0]
+  50 0024 FFF7FEBF 		b	xQueueGenericSendFromISR
+  51              	.L5:
+  52              		.align	2
+  53              	.L4:
+  54 0028 00000000 		.word	.LANCHOR0
+  56              		.align	1
+  57              		.thumb
+  58              		.thumb_func
+  60              	nrf_driver_init:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 002c 38B5     		push	{r3, r4, r5, lr}
+  64 002e 1B4C     		ldr	r4, .L19
+  65 0030 6268     		ldr	r2, [r4, #4]
+  66 0032 22B9     		cbnz	r2, .L7
+  67 0034 2021     		movs	r1, #32
+  68 0036 0320     		movs	r0, #3
+  69 0038 FFF7FEFF 		bl	xQueueGenericCreate
+  70 003c 6060     		str	r0, [r4, #4]
+  71              	.L7:
+  72 003e A268     		ldr	r2, [r4, #8]
+  73 0040 2AB9     		cbnz	r2, .L8
+  74 0042 2021     		movs	r1, #32
+  75 0044 0120     		movs	r0, #1
+  76 0046 FFF7FEFF 		bl	xQueueGenericCreate
+  77 004a 144B     		ldr	r3, .L19
+  78 004c 9860     		str	r0, [r3, #8]
+  79              	.L8:
+  80 004e 2568     		ldr	r5, [r4]
+  81 0050 65B9     		cbnz	r5, .L10
+  82 0052 0322     		movs	r2, #3
+  83 0054 2946     		mov	r1, r5
+  84 0056 0120     		movs	r0, #1
+  85 0058 FFF7FEFF 		bl	xQueueGenericCreate
+  86 005c 0F4A     		ldr	r2, .L19
+  87 005e 1060     		str	r0, [r2]
+  88 0060 20B1     		cbz	r0, .L10
+  89 0062 2B46     		mov	r3, r5
+  90 0064 2A46     		mov	r2, r5
+  91 0066 2946     		mov	r1, r5
+  92 0068 FFF7FEFF 		bl	xQueueGenericSend
+  93              	.L10:
+  94 006c 4FF4FA62 		mov	r2, #2000
+  95 0070 40F6C311 		movw	r1, #2499
+  96 0074 2020     		movs	r0, #32
+  97 0076 FFF7FEFF 		bl	nordic_init
+  98 007a FFF7FEFF 		bl	nordic_standby1_to_rx
+  99 007e 1620     		movs	r0, #22
+ 100 0080 074A     		ldr	r2, .L19+4
+ 101 0082 0121     		movs	r1, #1
+ 102 0084 FFF7FEFF 		bl	eint3_enable
+ 103 0088 6068     		ldr	r0, [r4, #4]
+ 104 008a 044B     		ldr	r3, .L19
+ 105 008c 28B1     		cbz	r0, .L12
+ 106 008e 9868     		ldr	r0, [r3, #8]
+ 107 0090 18B1     		cbz	r0, .L12
+ 108 0092 1868     		ldr	r0, [r3]
+ 109 0094 0030     		adds	r0, r0, #0
+ 110 0096 18BF     		it	ne
+ 111 0098 0120     		movne	r0, #1
+ 112              	.L12:
+ 113 009a 38BD     		pop	{r3, r4, r5, pc}
+ 114              	.L20:
+ 115              		.align	2
+ 116              	.L19:
+ 117 009c 00000000 		.word	.LANCHOR0
+ 118 00a0 00000000 		.word	nrf_irq_callback
+ 120              		.align	1
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	nrf_driver_app_recv:
+ 125              		@ args = 0, pretend = 0, frame = 40
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 00a4 70B5     		push	{r4, r5, r6, lr}
+ 128 00a6 0023     		movs	r3, #0
+ 129 00a8 8AB0     		sub	sp, sp, #40
+ 130 00aa 0193     		str	r3, [sp, #4]
+ 131 00ac 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 132 00ae 0146     		mov	r1, r0
+ 133 00b0 03F0C003 		and	r3, r3, #192
+ 134 00b4 C02B     		cmp	r3, #192
+ 135 00b6 104B     		ldr	r3, .L29
+ 136 00b8 0646     		mov	r6, r0
+ 137 00ba 0CBF     		ite	eq
+ 138 00bc 9D68     		ldreq	r5, [r3, #8]
+ 139 00be 5D68     		ldrne	r5, [r3, #4]
+ 140 00c0 01AA     		add	r2, sp, #4
+ 141 00c2 0023     		movs	r3, #0
+ 142 00c4 2846     		mov	r0, r5
+ 143 00c6 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 144 00ca 0446     		mov	r4, r0
+ 145 00cc 58B9     		cbnz	r0, .L24
+ 146 00ce 0246     		mov	r2, r0
+ 147 00d0 02A9     		add	r1, sp, #8
+ 148 00d2 2846     		mov	r0, r5
+ 149 00d4 FFF7FEFF 		bl	xQueueReceiveFromISR
+ 150 00d8 2346     		mov	r3, r4
+ 151 00da 01AA     		add	r2, sp, #4
+ 152 00dc 3146     		mov	r1, r6
+ 153 00de 2846     		mov	r0, r5
+ 154 00e0 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 155 00e4 0446     		mov	r4, r0
+ 156              	.L24:
+ 157 00e6 019B     		ldr	r3, [sp, #4]
+ 158 00e8 1BB1     		cbz	r3, .L25
+ 159 00ea 044B     		ldr	r3, .L29+4
+ 160 00ec 4FF08052 		mov	r2, #268435456
+ 161 00f0 1A60     		str	r2, [r3]
+ 162              	.L25:
+ 163 00f2 2046     		mov	r0, r4
+ 164 00f4 0AB0     		add	sp, sp, #40
+ 165              		@ sp needed
+ 166 00f6 70BD     		pop	{r4, r5, r6, pc}
+ 167              	.L30:
+ 168              		.align	2
+ 169              	.L29:
+ 170 00f8 00000000 		.word	.LANCHOR0
+ 171 00fc 04ED00E0 		.word	-536810236
+ 173              		.align	1
+ 174              		.thumb
+ 175              		.thumb_func
+ 177              	nrf_driver_send:
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180 0100 38B5     		push	{r3, r4, r5, lr}
+ 181 0102 0446     		mov	r4, r0
+ 182 0104 0D46     		mov	r5, r1
+ 183 0106 FFF7FEFF 		bl	mesh_get_node_address
+ 184 010a 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 185 010c 8342     		cmp	r3, r0
+ 186 010e 0AD0     		beq	.L32
+ 187 0110 E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 188 0112 43B9     		cbnz	r3, .L32
+ 189 0114 FFF7FEFF 		bl	rand
+ 190 0118 BD23     		movs	r3, #189
+ 191 011a 00F00300 		and	r0, r0, #3
+ 192 011e 00FB0330 		mla	r0, r0, r3, r3
+ 193 0122 FFF7FEFF 		bl	delay_us
+ 194              	.L32:
+ 195 0126 FFF7FEFF 		bl	nordic_rx_to_Stanby1
+ 196 012a FFF7FEFF 		bl	nordic_standby1_to_tx_mode1
+ 197 012e A9B2     		uxth	r1, r5
+ 198 0130 2046     		mov	r0, r4
+ 199 0132 FFF7FEFF 		bl	nordic_mode1_send_single_packet
+ 200 0136 FFF7FEFF 		bl	nordic_clear_packet_sent_flag
+ 201 013a FFF7FEFF 		bl	nordic_standby1_to_rx
+ 202 013e FFF7FEFF 		bl	xTaskGetSchedulerState
+ 203 0142 0128     		cmp	r0, #1
+ 204 0144 06D1     		bne	.L33
+ 205 0146 0448     		ldr	r0, .L34
+ 206 0148 0023     		movs	r3, #0
+ 207 014a 1A46     		mov	r2, r3
+ 208 014c 1946     		mov	r1, r3
+ 209 014e 0068     		ldr	r0, [r0]
+ 210 0150 FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 211              	.L33:
+ 212 0154 0120     		movs	r0, #1
+ 213 0156 38BD     		pop	{r3, r4, r5, pc}
+ 214              	.L35:
+ 215              		.align	2
+ 216              	.L34:
+ 217 0158 00000000 		.word	.LANCHOR0
+ 219              		.align	1
+ 220              		.thumb
+ 221              		.thumb_func
+ 223              	nrf_driver_receive:
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 015c 38B5     		push	{r3, r4, r5, lr}
+ 227 015e 0446     		mov	r4, r0
+ 228 0160 0D46     		mov	r5, r1
+ 229 0162 FFF7FEFF 		bl	nordic_is_packet_available
+ 230 0166 48B1     		cbz	r0, .L37
+ 231 0168 A9B2     		uxth	r1, r5
+ 232 016a 2046     		mov	r0, r4
+ 233 016c FFF7FEFF 		bl	nordic_read_rx_fifo
+ 234 0170 FFF7FEFF 		bl	nordic_is_packet_available
+ 235 0174 08B9     		cbnz	r0, .L39
+ 236 0176 FFF7FEFF 		bl	nordic_clear_packet_available_flag
+ 237              	.L39:
+ 238 017a 0120     		movs	r0, #1
+ 239              	.L37:
+ 240 017c 38BD     		pop	{r3, r4, r5, pc}
+ 242              		.align	1
+ 243              		.thumb
+ 244              		.thumb_func
+ 246              	wireless_get_queued_pkt:
+ 247              		@ args = 0, pretend = 0, frame = 8
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249 017e 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+ 250 0182 0646     		mov	r6, r0
+ 251 0184 0F46     		mov	r7, r1
+ 252 0186 1446     		mov	r4, r2
+ 253 0188 FFF7FEFF 		bl	xTaskGetSchedulerState
+ 254 018c 0128     		cmp	r0, #1
+ 255 018e 07D1     		bne	.L41
+ 256 0190 2246     		mov	r2, r4
+ 257 0192 0023     		movs	r3, #0
+ 258 0194 3946     		mov	r1, r7
+ 259 0196 3046     		mov	r0, r6
+ 260 0198 FFF7FEFF 		bl	xQueueGenericReceive
+ 261 019c C4B2     		uxtb	r4, r0
+ 262 019e 16E0     		b	.L42
+ 263              	.L41:
+ 264 01a0 0023     		movs	r3, #0
+ 265 01a2 02AD     		add	r5, sp, #8
+ 266 01a4 45F8043D 		str	r3, [r5, #-4]!
+ 267 01a8 FFF7FEFF 		bl	sys_get_uptime_ms
+ 268 01ac 10EB0408 		adds	r8, r0, r4
+ 269 01b0 41F10009 		adc	r9, r1, #0
+ 270              	.L43:
+ 271 01b4 2A46     		mov	r2, r5
+ 272 01b6 3946     		mov	r1, r7
+ 273 01b8 3046     		mov	r0, r6
+ 274 01ba FFF7FEFF 		bl	xQueueReceiveFromISR
+ 275 01be C4B2     		uxtb	r4, r0
+ 276 01c0 2CB9     		cbnz	r4, .L42
+ 277 01c2 FFF7FEFF 		bl	sys_get_uptime_ms
+ 278 01c6 8945     		cmp	r9, r1
+ 279 01c8 08BF     		it	eq
+ 280 01ca 8045     		cmpeq	r8, r0
+ 281 01cc F2D2     		bcs	.L43
+ 282              	.L42:
+ 283 01ce 2046     		mov	r0, r4
+ 284 01d0 03B0     		add	sp, sp, #12
+ 285              		@ sp needed
+ 286 01d2 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 288              		.align	1
+ 289              		.global	wireless_init
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	wireless_init:
+ 294              		@ args = 0, pretend = 0, frame = 24
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296 01d6 00B5     		push	{lr}
+ 297 01d8 0C4B     		ldr	r3, .L47
+ 298 01da 8DB0     		sub	sp, sp, #52
+ 299 01dc 0993     		str	r3, [sp, #36]
+ 300 01de 0C4B     		ldr	r3, .L47+4
+ 301 01e0 0C4A     		ldr	r2, .L47+8
+ 302 01e2 0B93     		str	r3, [sp, #44]
+ 303 01e4 0C4B     		ldr	r3, .L47+12
+ 304 01e6 0A93     		str	r3, [sp, #40]
+ 305 01e8 0CAB     		add	r3, sp, #48
+ 306 01ea 43F8102D 		str	r2, [r3, #-16]!
+ 307 01ee 0022     		movs	r2, #0
+ 308 01f0 0492     		str	r2, [sp, #16]
+ 309 01f2 0FCB     		ldmia	r3, {r0, r1, r2, r3}
+ 310 01f4 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 311 01f8 084B     		ldr	r3, .L47+16
+ 312 01fa 094A     		ldr	r2, .L47+20
+ 313 01fc 0121     		movs	r1, #1
+ 314 01fe 6A20     		movs	r0, #106
+ 315 0200 FFF7FEFF 		bl	mesh_init
+ 316 0204 0DB0     		add	sp, sp, #52
+ 317              		@ sp needed
+ 318 0206 5DF804FB 		ldr	pc, [sp], #4
+ 319              	.L48:
+ 320 020a 00BF     		.align	2
+ 321              	.L47:
+ 322 020c 00000000 		.word	nrf_driver_init
+ 323 0210 00000000 		.word	nrf_driver_receive
+ 324 0214 00000000 		.word	nrf_driver_get_timer
+ 325 0218 00000000 		.word	nrf_driver_send
+ 326 021c 00000000 		.word	nrf_driver_app_recv
+ 327 0220 00000000 		.word	.LC0
+ 329              		.align	1
+ 330              		.global	wireless_get_rx_pkt
+ 331              		.thumb
+ 332              		.thumb_func
+ 334              	wireless_get_rx_pkt:
+ 335              		@ args = 0, pretend = 0, frame = 0
+ 336              		@ frame_needed = 0, uses_anonymous_args = 0
+ 337              		@ link register save eliminated.
+ 338 0224 024B     		ldr	r3, .L50
+ 339 0226 0A46     		mov	r2, r1
+ 340 0228 0146     		mov	r1, r0
+ 341 022a 5868     		ldr	r0, [r3, #4]
+ 342 022c A7E7     		b	wireless_get_queued_pkt
+ 343              	.L51:
+ 344 022e 00BF     		.align	2
+ 345              	.L50:
+ 346 0230 00000000 		.word	.LANCHOR0
+ 348              		.align	1
+ 349              		.global	wireless_get_ack_pkt
+ 350              		.thumb
+ 351              		.thumb_func
+ 353              	wireless_get_ack_pkt:
+ 354              		@ args = 0, pretend = 0, frame = 0
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356              		@ link register save eliminated.
+ 357 0234 024B     		ldr	r3, .L53
+ 358 0236 0A46     		mov	r2, r1
+ 359 0238 0146     		mov	r1, r0
+ 360 023a 9868     		ldr	r0, [r3, #8]
+ 361 023c 9FE7     		b	wireless_get_queued_pkt
+ 362              	.L54:
+ 363 023e 00BF     		.align	2
+ 364              	.L53:
+ 365 0240 00000000 		.word	.LANCHOR0
+ 367              		.align	1
+ 368              		.global	wireless_flush_rx
+ 369              		.thumb
+ 370              		.thumb_func
+ 372              	wireless_flush_rx:
+ 373              		@ args = 0, pretend = 0, frame = 32
+ 374              		@ frame_needed = 0, uses_anonymous_args = 0
+ 375 0244 10B5     		push	{r4, lr}
+ 376 0246 0024     		movs	r4, #0
+ 377 0248 88B0     		sub	sp, sp, #32
+ 378              	.L56:
+ 379 024a 0021     		movs	r1, #0
+ 380 024c 6846     		mov	r0, sp
+ 381 024e FFF7FEFF 		bl	wireless_get_rx_pkt
+ 382 0252 0146     		mov	r1, r0
+ 383 0254 08B1     		cbz	r0, .L58
+ 384              	.L57:
+ 385 0256 0134     		adds	r4, r4, #1
+ 386 0258 F7E7     		b	.L56
+ 387              	.L58:
+ 388 025a 6846     		mov	r0, sp
+ 389 025c FFF7FEFF 		bl	wireless_get_ack_pkt
+ 390 0260 0028     		cmp	r0, #0
+ 391 0262 F8D1     		bne	.L57
+ 392 0264 2046     		mov	r0, r4
+ 393 0266 08B0     		add	sp, sp, #32
+ 394              		@ sp needed
+ 395 0268 10BD     		pop	{r4, pc}
+ 397              		.align	1
+ 398              		.global	wireless_service
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	wireless_service:
+ 403              		@ args = 0, pretend = 0, frame = 0
+ 404              		@ frame_needed = 0, uses_anonymous_args = 0
+ 405 026a 08B5     		push	{r3, lr}
+ 406 026c FFF7FEFF 		bl	xTaskGetSchedulerState
+ 407 0270 0F4B     		ldr	r3, .L69
+ 408 0272 0128     		cmp	r0, #1
+ 409 0274 5B69     		ldr	r3, [r3, #20]
+ 410 0276 13D1     		bne	.L60
+ 411 0278 5A02     		lsls	r2, r3, #9
+ 412 027a 0DD5     		bpl	.L62
+ 413 027c FFF7FEFF 		bl	mesh_get_pnd_pkt_count
+ 414 0280 0028     		cmp	r0, #0
+ 415 0282 0C48     		ldr	r0, .L69+4
+ 416 0284 4FF00003 		mov	r3, #0
+ 417 0288 14BF     		ite	ne
+ 418 028a 0122     		movne	r2, #1
+ 419 028c 4FF0FF32 		moveq	r2, #-1
+ 420 0290 1946     		mov	r1, r3
+ 421 0292 0068     		ldr	r0, [r0]
+ 422 0294 FFF7FEFF 		bl	xQueueGenericReceive
+ 423              	.L62:
+ 424 0298 BDE80840 		pop	{r3, lr}
+ 425 029c FFF7FEBF 		b	mesh_service
+ 426              	.L60:
+ 427 02a0 5B02     		lsls	r3, r3, #9
+ 428 02a2 F9D5     		bpl	.L62
+ 429 02a4 FFF7FEFF 		bl	mesh_get_pnd_pkt_count
+ 430 02a8 0028     		cmp	r0, #0
+ 431 02aa F5D1     		bne	.L62
+ 432 02ac 08BD     		pop	{r3, pc}
+ 433              	.L70:
+ 434 02ae 00BF     		.align	2
+ 435              	.L69:
+ 436 02b0 00C00920 		.word	537509888
+ 437 02b4 00000000 		.word	.LANCHOR0
+ 439              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 440              	.LC0:
+ 441 0000 6E6F6465 		.ascii	"node\000"
+ 441      00
+ 442              		.bss
+ 443              		.align	2
+ 444              		.set	.LANCHOR0,. + 0
+ 447              	m_nrf_activity_sem:
+ 448 0000 00000000 		.space	4
+ 451              	m_rx_queue:
+ 452 0004 00000000 		.space	4
+ 455              	m_ack_queue:
+ 456 0008 00000000 		.space	4
+ 457              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 wireless.c
-     /tmp/ccTf1kwu.s:16     .text:00000000 $t
-     /tmp/ccTf1kwu.s:20     .text:00000000 nrf_driver_get_timer
-     /tmp/ccTf1kwu.s:39     .text:0000001a nrf_irq_callback
-     /tmp/ccTf1kwu.s:52     .text:00000028 $d
-     /tmp/ccTf1kwu.s:54     .text:0000002c $t
-     /tmp/ccTf1kwu.s:58     .text:0000002c nrf_driver_app_recv
-     /tmp/ccTf1kwu.s:103    .text:00000080 $d
-     /tmp/ccTf1kwu.s:106    .text:00000088 $t
-     /tmp/ccTf1kwu.s:110    .text:00000088 nrf_driver_init
-     /tmp/ccTf1kwu.s:167    .text:000000f8 $d
-     /tmp/ccTf1kwu.s:170    .text:00000100 $t
-     /tmp/ccTf1kwu.s:174    .text:00000100 wireless_get_queued_pkt
-     /tmp/ccTf1kwu.s:222    .text:0000015e nrf_driver_send
-     /tmp/ccTf1kwu.s:263    .text:000001b8 $d
-     /tmp/ccTf1kwu.s:265    .text:000001bc $t
-     /tmp/ccTf1kwu.s:269    .text:000001bc nrf_driver_receive
-     /tmp/ccTf1kwu.s:295    .text:000001e2 wireless_init
-     /tmp/ccTf1kwu.s:325    .text:00000218 $d
-     /tmp/ccTf1kwu.s:332    .text:00000230 $t
-     /tmp/ccTf1kwu.s:337    .text:00000230 wireless_get_rx_pkt
-     /tmp/ccTf1kwu.s:350    .text:0000023c $d
-     /tmp/ccTf1kwu.s:352    .text:00000240 $t
-     /tmp/ccTf1kwu.s:357    .text:00000240 wireless_get_ack_pkt
-     /tmp/ccTf1kwu.s:370    .text:0000024c $d
-     /tmp/ccTf1kwu.s:372    .text:00000250 $t
-     /tmp/ccTf1kwu.s:377    .text:00000250 wireless_flush_rx
-     /tmp/ccTf1kwu.s:406    .text:00000278 wireless_service
-     /tmp/ccTf1kwu.s:441    .text:000002bc $d
-     /tmp/ccTf1kwu.s:448    .bss:00000000 $d
-     /tmp/ccTf1kwu.s:452    .bss:00000000 m_nrf_activity_sem
-     /tmp/ccTf1kwu.s:456    .bss:00000004 m_ack_queue
-     /tmp/ccTf1kwu.s:460    .bss:00000008 m_rx_queue
+     /tmp/ccCH3mP3.s:17     .text:00000000 $t
+     /tmp/ccCH3mP3.s:21     .text:00000000 nrf_driver_get_timer
+     /tmp/ccCH3mP3.s:41     .text:0000001a nrf_irq_callback
+     /tmp/ccCH3mP3.s:54     .text:00000028 $d
+     /tmp/ccCH3mP3.s:56     .text:0000002c $t
+     /tmp/ccCH3mP3.s:60     .text:0000002c nrf_driver_init
+     /tmp/ccCH3mP3.s:117    .text:0000009c $d
+     /tmp/ccCH3mP3.s:120    .text:000000a4 $t
+     /tmp/ccCH3mP3.s:124    .text:000000a4 nrf_driver_app_recv
+     /tmp/ccCH3mP3.s:170    .text:000000f8 $d
+     /tmp/ccCH3mP3.s:173    .text:00000100 $t
+     /tmp/ccCH3mP3.s:177    .text:00000100 nrf_driver_send
+     /tmp/ccCH3mP3.s:217    .text:00000158 $d
+     /tmp/ccCH3mP3.s:219    .text:0000015c $t
+     /tmp/ccCH3mP3.s:223    .text:0000015c nrf_driver_receive
+     /tmp/ccCH3mP3.s:246    .text:0000017e wireless_get_queued_pkt
+     /tmp/ccCH3mP3.s:293    .text:000001d6 wireless_init
+     /tmp/ccCH3mP3.s:322    .text:0000020c $d
+     /tmp/ccCH3mP3.s:329    .text:00000224 $t
+     /tmp/ccCH3mP3.s:334    .text:00000224 wireless_get_rx_pkt
+     /tmp/ccCH3mP3.s:346    .text:00000230 $d
+     /tmp/ccCH3mP3.s:348    .text:00000234 $t
+     /tmp/ccCH3mP3.s:353    .text:00000234 wireless_get_ack_pkt
+     /tmp/ccCH3mP3.s:365    .text:00000240 $d
+     /tmp/ccCH3mP3.s:367    .text:00000244 $t
+     /tmp/ccCH3mP3.s:372    .text:00000244 wireless_flush_rx
+     /tmp/ccCH3mP3.s:402    .text:0000026a wireless_service
+     /tmp/ccCH3mP3.s:436    .text:000002b0 $d
+     /tmp/ccCH3mP3.s:443    .bss:00000000 $d
+     /tmp/ccCH3mP3.s:447    .bss:00000000 m_nrf_activity_sem
+     /tmp/ccCH3mP3.s:451    .bss:00000004 m_rx_queue
+     /tmp/ccCH3mP3.s:455    .bss:00000008 m_ack_queue
 
 UNDEFINED SYMBOLS
 sys_get_uptime_ms
 xQueueGenericSendFromISR
-xQueueReceiveFromISR
 xQueueGenericCreate
 xQueueGenericSend
 nordic_init
 nordic_standby1_to_rx
 eint3_enable
-xTaskGetSchedulerState
-xQueueGenericReceive
+xQueueReceiveFromISR
 mesh_get_node_address
 rand
 delay_us
@@ -484,9 +477,11 @@ nordic_rx_to_Stanby1
 nordic_standby1_to_tx_mode1
 nordic_mode1_send_single_packet
 nordic_clear_packet_sent_flag
+xTaskGetSchedulerState
 nordic_is_packet_available
 nordic_read_rx_fifo
 nordic_clear_packet_available_flag
+xQueueGenericReceive
 mesh_init
 mesh_get_pnd_pkt_count
 mesh_service

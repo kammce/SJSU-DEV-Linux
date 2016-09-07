@@ -3,7 +3,9 @@
 #include "io.hpp"       // Board sensors
 #include "utilities.h"  // delay_ms()
 
-void * ctoba(char * arr, char num) {
+#define CHECK_BIT(var,pos) ((var) & (1<<(pos)))
+
+void ctoba(char * arr, char num) {
 	arr[4] = 0;
 	for(int i = 3; i >= 0; i--) {
 		if(num & (8 >> i)) {
@@ -13,24 +15,34 @@ void * ctoba(char * arr, char num) {
 		}
 	}
 }
+
 int main (void)
 {
-	char str[200] = {0};
 	char buff[5] = {0};
-	while(1) {
-		for(int i = 0; i < 16; i++) {
-			ctoba(buff, (char)i);
-			printf("Akash i = 0b%s\n", buff);
-			for(int j = 4; j >= 1; j--) {
-				if(i & (8 >> j-1)) {
-					LE.on(j);
-				} else {
-					LE.off(j);
-				}
-			}
-			LD.setNumber(i);
-			delay_ms(1500);
-		}
+	//void (*LED[2])( void ) = { &LE.on, &LE.off };
+	while(1)
+	{
+		printf("Hello World\n");
+		// for(int i = 0; i < 16; i++)
+		// {
+		// 	ctoba(buff, (char)i);
+		// 	printf("Hello Preet i = 0b%s\n", buff);
+		// 	for(int j = 4; j >= 1; j--)
+		// 	{
+		// 		//LED[CHECK_BIT(i,j)]();
+		// 		if(CHECK_BIT(i,j))
+		// 		{
+		// 			LE.on(j);
+		// 		}
+		// 		else
+		// 		{
+		// 			LE.off(j);
+		// 		}
+		// 	}
+		// 	LD.setNumber(i);
+		// 	delay_ms(1500);
+		// }
+		delay_ms(1500);
 	}
 	return 0;
 }

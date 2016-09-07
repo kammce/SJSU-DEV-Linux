@@ -11,909 +11,903 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"queue.c"
-  15              		.text
-  16              		.align	1
-  17              		.thumb
-  18              		.thumb_func
-  20              	prvCopyDataFromQueue:
-  21              		@ args = 0, pretend = 0, frame = 0
-  22              		@ frame_needed = 0, uses_anonymous_args = 0
-  23 0000 30B5     		push	{r4, r5, lr}
-  24 0002 0468     		ldr	r4, [r0, #0]
-  25 0004 0346     		mov	r3, r0
-  26 0006 74B1     		cbz	r4, .L1
-  27 0008 C568     		ldr	r5, [r0, #12]
-  28 000a 026C     		ldr	r2, [r0, #64]
-  29 000c AD18     		adds	r5, r5, r2
-  30 000e C560     		str	r5, [r0, #12]
-  31 0010 4068     		ldr	r0, [r0, #4]
-  32 0012 8542     		cmp	r5, r0
-  33 0014 28BF     		it	cs
-  34 0016 DC60     		strcs	r4, [r3, #12]
-  35 0018 DB68     		ldr	r3, [r3, #12]
-  36 001a 0846     		mov	r0, r1
-  37 001c 1946     		mov	r1, r3
-  38 001e BDE83040 		pop	{r4, r5, lr}
-  39 0022 FFF7FEBF 		b	memcpy
-  40              	.L1:
-  41 0026 30BD     		pop	{r4, r5, pc}
-  43              		.align	1
-  44              		.thumb
-  45              		.thumb_func
-  47              	prvCopyDataToQueue:
-  48              		@ args = 0, pretend = 0, frame = 0
-  49              		@ frame_needed = 0, uses_anonymous_args = 0
-  50 0028 38B5     		push	{r3, r4, r5, lr}
-  51 002a 1546     		mov	r5, r2
-  52 002c 026C     		ldr	r2, [r0, #64]
-  53 002e 0446     		mov	r4, r0
-  54 0030 3AB9     		cbnz	r2, .L5
-  55 0032 0568     		ldr	r5, [r0, #0]
-  56 0034 002D     		cmp	r5, #0
-  57 0036 27D1     		bne	.L6
-  58 0038 4068     		ldr	r0, [r0, #4]
-  59 003a FFF7FEFF 		bl	vTaskPriorityDisinherit
-  60 003e 6560     		str	r5, [r4, #4]
-  61 0040 22E0     		b	.L6
-  62              	.L5:
-  63 0042 65B9     		cbnz	r5, .L7
-  64 0044 8068     		ldr	r0, [r0, #8]
-  65 0046 FFF7FEFF 		bl	memcpy
-  66 004a A268     		ldr	r2, [r4, #8]
-  67 004c 236C     		ldr	r3, [r4, #64]
-  68 004e D318     		adds	r3, r2, r3
-  69 0050 6268     		ldr	r2, [r4, #4]
-  70 0052 A360     		str	r3, [r4, #8]
-  71 0054 9342     		cmp	r3, r2
-  72 0056 17D3     		bcc	.L6
-  73 0058 2368     		ldr	r3, [r4, #0]
-  74 005a A360     		str	r3, [r4, #8]
-  75 005c 14E0     		b	.L6
-  76              	.L7:
-  77 005e C068     		ldr	r0, [r0, #12]
-  78 0060 FFF7FEFF 		bl	memcpy
-  79 0064 236C     		ldr	r3, [r4, #64]
-  80 0066 E268     		ldr	r2, [r4, #12]
-  81 0068 5B42     		negs	r3, r3
-  82 006a 2168     		ldr	r1, [r4, #0]
-  83 006c D218     		adds	r2, r2, r3
-  84 006e 8A42     		cmp	r2, r1
-  85 0070 E260     		str	r2, [r4, #12]
-  86 0072 02D2     		bcs	.L8
-  87 0074 6268     		ldr	r2, [r4, #4]
-  88 0076 D318     		adds	r3, r2, r3
-  89 0078 E360     		str	r3, [r4, #12]
-  90              	.L8:
-  91 007a 022D     		cmp	r5, #2
-  92 007c 04D1     		bne	.L6
-  93 007e A36B     		ldr	r3, [r4, #56]
-  94 0080 13B1     		cbz	r3, .L6
-  95 0082 A36B     		ldr	r3, [r4, #56]
-  96 0084 013B     		subs	r3, r3, #1
-  97 0086 A363     		str	r3, [r4, #56]
-  98              	.L6:
-  99 0088 A36B     		ldr	r3, [r4, #56]
- 100 008a 0133     		adds	r3, r3, #1
- 101 008c A363     		str	r3, [r4, #56]
- 102 008e 38BD     		pop	{r3, r4, r5, pc}
- 104              		.align	1
- 105              		.thumb
- 106              		.thumb_func
- 108              	prvNotifyQueueSetContainer:
- 109              		@ args = 0, pretend = 0, frame = 8
- 110              		@ frame_needed = 0, uses_anonymous_args = 0
- 111 0090 13B5     		push	{r0, r1, r4, lr}
- 112 0092 046D     		ldr	r4, [r0, #80]
- 113 0094 0190     		str	r0, [sp, #4]
- 114 0096 0A46     		mov	r2, r1
- 115 0098 E36B     		ldr	r3, [r4, #60]
- 116 009a A16B     		ldr	r1, [r4, #56]
- 117 009c 9942     		cmp	r1, r3
- 118 009e 0DD2     		bcs	.L11
- 119 00a0 2046     		mov	r0, r4
- 120 00a2 01A9     		add	r1, sp, #4
- 121 00a4 FFF7C0FF 		bl	prvCopyDataToQueue
- 122 00a8 606A     		ldr	r0, [r4, #36]
- 123 00aa 40B1     		cbz	r0, .L10
- 124 00ac 04F12400 		add	r0, r4, #36
- 125 00b0 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 126 00b4 0030     		adds	r0, r0, #0
- 127 00b6 18BF     		it	ne
- 128 00b8 0120     		movne	r0, #1
- 129 00ba 00E0     		b	.L10
- 130              	.L11:
- 131 00bc 0020     		movs	r0, #0
- 132              	.L10:
- 133 00be 1CBD     		pop	{r2, r3, r4, pc}
- 135              		.align	1
- 136              		.thumb
- 137              		.thumb_func
- 139              	prvUnlockQueue:
- 140              		@ args = 0, pretend = 0, frame = 0
- 141              		@ frame_needed = 0, uses_anonymous_args = 0
- 142 00c0 38B5     		push	{r3, r4, r5, lr}
- 143 00c2 0446     		mov	r4, r0
- 144 00c4 04F12405 		add	r5, r4, #36
- 145 00c8 FFF7FEFF 		bl	vPortEnterCritical
- 146 00cc 13E0     		b	.L14
- 147              	.L18:
- 148 00ce 236D     		ldr	r3, [r4, #80]
- 149 00d0 33B1     		cbz	r3, .L15
- 150 00d2 0021     		movs	r1, #0
- 151 00d4 2046     		mov	r0, r4
- 152 00d6 FFF7DBFF 		bl	prvNotifyQueueSetContainer
- 153 00da 0128     		cmp	r0, #1
- 154 00dc 08D1     		bne	.L16
- 155 00de 05E0     		b	.L23
- 156              	.L15:
- 157 00e0 636A     		ldr	r3, [r4, #36]
- 158 00e2 5BB1     		cbz	r3, .L17
- 159 00e4 2846     		mov	r0, r5
- 160 00e6 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 161 00ea 08B1     		cbz	r0, .L16
- 162              	.L23:
- 163 00ec FFF7FEFF 		bl	vTaskMissedYield
- 164              	.L16:
- 165 00f0 A36C     		ldr	r3, [r4, #72]
- 166 00f2 013B     		subs	r3, r3, #1
- 167 00f4 A364     		str	r3, [r4, #72]
- 168              	.L14:
- 169 00f6 A36C     		ldr	r3, [r4, #72]
- 170 00f8 002B     		cmp	r3, #0
- 171 00fa E8DC     		bgt	.L18
- 172              	.L17:
- 173 00fc 4FF0FF33 		mov	r3, #-1
- 174 0100 A364     		str	r3, [r4, #72]
- 175 0102 FFF7FEFF 		bl	vPortExitCritical
- 176 0106 04F11005 		add	r5, r4, #16
- 177 010a FFF7FEFF 		bl	vPortEnterCritical
- 178 010e 0AE0     		b	.L19
- 179              	.L22:
- 180 0110 2369     		ldr	r3, [r4, #16]
- 181 0112 5BB1     		cbz	r3, .L20
- 182 0114 2846     		mov	r0, r5
- 183 0116 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 184 011a 08B1     		cbz	r0, .L21
- 185 011c FFF7FEFF 		bl	vTaskMissedYield
- 186              	.L21:
- 187 0120 636C     		ldr	r3, [r4, #68]
- 188 0122 013B     		subs	r3, r3, #1
- 189 0124 6364     		str	r3, [r4, #68]
- 190              	.L19:
- 191 0126 636C     		ldr	r3, [r4, #68]
- 192 0128 002B     		cmp	r3, #0
- 193 012a F1DC     		bgt	.L22
- 194              	.L20:
- 195 012c 4FF0FF33 		mov	r3, #-1
- 196 0130 6364     		str	r3, [r4, #68]
- 197 0132 BDE83840 		pop	{r3, r4, r5, lr}
- 198 0136 FFF7FEBF 		b	vPortExitCritical
- 200              		.align	1
- 201              		.global	xQueueGenericReset
- 202              		.thumb
- 203              		.thumb_func
- 205              	xQueueGenericReset:
- 206              		@ args = 0, pretend = 0, frame = 0
- 207              		@ frame_needed = 0, uses_anonymous_args = 0
- 208 013a 38B5     		push	{r3, r4, r5, lr}
- 209 013c 0446     		mov	r4, r0
- 210 013e 0D46     		mov	r5, r1
- 211 0140 FFF7FEFF 		bl	vPortEnterCritical
- 212 0144 2368     		ldr	r3, [r4, #0]
- 213 0146 E16B     		ldr	r1, [r4, #60]
- 214 0148 226C     		ldr	r2, [r4, #64]
- 215 014a A360     		str	r3, [r4, #8]
- 216 014c 01FB0230 		mla	r0, r1, r2, r3
- 217 0150 0139     		subs	r1, r1, #1
- 218 0152 02FB0133 		mla	r3, r2, r1, r3
- 219 0156 6060     		str	r0, [r4, #4]
- 220 0158 E360     		str	r3, [r4, #12]
- 221 015a 0020     		movs	r0, #0
- 222 015c 4FF0FF33 		mov	r3, #-1
- 223 0160 A063     		str	r0, [r4, #56]
- 224 0162 6364     		str	r3, [r4, #68]
- 225 0164 A364     		str	r3, [r4, #72]
- 226 0166 55B9     		cbnz	r5, .L25
- 227 0168 2369     		ldr	r3, [r4, #16]
- 228 016a 83B1     		cbz	r3, .L26
- 229 016c 04F11000 		add	r0, r4, #16
- 230 0170 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 231 0174 0128     		cmp	r0, #1
- 232 0176 0AD1     		bne	.L26
- 233 0178 FFF7FEFF 		bl	vPortYield
- 234 017c 07E0     		b	.L26
- 235              	.L25:
- 236 017e 04F11000 		add	r0, r4, #16
- 237 0182 FFF7FEFF 		bl	vListInitialise
- 238 0186 04F12400 		add	r0, r4, #36
- 239 018a FFF7FEFF 		bl	vListInitialise
- 240              	.L26:
- 241 018e FFF7FEFF 		bl	vPortExitCritical
- 242 0192 0120     		movs	r0, #1
- 243 0194 38BD     		pop	{r3, r4, r5, pc}
- 245              		.align	1
- 246              		.global	xQueueGenericCreate
- 247              		.thumb
- 248              		.thumb_func
- 250              	xQueueGenericCreate:
- 251              		@ args = 0, pretend = 0, frame = 0
- 252              		@ frame_needed = 0, uses_anonymous_args = 0
- 253 0196 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 254 019a 0446     		mov	r4, r0
- 255 019c 0E46     		mov	r6, r1
- 256 019e 1746     		mov	r7, r2
- 257 01a0 E0B1     		cbz	r0, .L30
- 258 01a2 5420     		movs	r0, #84
- 259 01a4 FFF7FEFF 		bl	pvPortMalloc
- 260 01a8 0546     		mov	r5, r0
- 261 01aa C0B1     		cbz	r0, .L28
- 262 01ac 04FB06F0 		mul	r0, r4, r6
- 263 01b0 0130     		adds	r0, r0, #1
- 264 01b2 FFF7FEFF 		bl	pvPortMalloc
- 265 01b6 8046     		mov	r8, r0
- 266 01b8 2860     		str	r0, [r5, #0]
- 267 01ba 50B1     		cbz	r0, .L29
- 268 01bc EC63     		str	r4, [r5, #60]
- 269 01be 2E64     		str	r6, [r5, #64]
- 270 01c0 2846     		mov	r0, r5
- 271 01c2 0121     		movs	r1, #1
- 272 01c4 FFF7FEFF 		bl	xQueueGenericReset
- 273 01c8 0023     		movs	r3, #0
- 274 01ca 85F84D70 		strb	r7, [r5, #77]
- 275 01ce 2B65     		str	r3, [r5, #80]
- 276 01d0 05E0     		b	.L28
- 277              	.L29:
- 278 01d2 2846     		mov	r0, r5
- 279 01d4 FFF7FEFF 		bl	vPortFree
- 280 01d8 4546     		mov	r5, r8
- 281 01da 00E0     		b	.L28
- 282              	.L30:
- 283 01dc 0546     		mov	r5, r0
- 284              	.L28:
- 285 01de 2846     		mov	r0, r5
- 286 01e0 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 288              		.align	1
- 289              		.global	xQueueCreateCountingSemaphore
- 290              		.thumb
- 291              		.thumb_func
- 293              	xQueueCreateCountingSemaphore:
- 294              		@ args = 0, pretend = 0, frame = 0
- 295              		@ frame_needed = 0, uses_anonymous_args = 0
- 296 01e4 10B5     		push	{r4, lr}
- 297 01e6 0222     		movs	r2, #2
- 298 01e8 0C46     		mov	r4, r1
- 299 01ea 0021     		movs	r1, #0
- 300 01ec FFF7FEFF 		bl	xQueueGenericCreate
- 301 01f0 00B1     		cbz	r0, .L33
- 302 01f2 8463     		str	r4, [r0, #56]
- 303              	.L33:
- 304 01f4 10BD     		pop	{r4, pc}
- 306              		.align	1
- 307              		.global	xQueueGenericSend
- 308              		.thumb
- 309              		.thumb_func
- 311              	xQueueGenericSend:
- 312              		@ args = 0, pretend = 0, frame = 16
- 313              		@ frame_needed = 0, uses_anonymous_args = 0
- 314 01f6 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
- 315 01fa 4FF00008 		mov	r8, #0
- 316 01fe 85B0     		sub	sp, sp, #20
- 317 0200 0446     		mov	r4, r0
- 318 0202 0D46     		mov	r5, r1
- 319 0204 0192     		str	r2, [sp, #4]
- 320 0206 1E46     		mov	r6, r3
- 321 0208 4746     		mov	r7, r8
- 322 020a 01E0     		b	.L35
- 323              	.L47:
- 324 020c 4FF00108 		mov	r8, #1
- 325              	.L35:
- 326 0210 FFF7FEFF 		bl	vPortEnterCritical
- 327 0214 A26B     		ldr	r2, [r4, #56]
- 328 0216 E36B     		ldr	r3, [r4, #60]
- 329 0218 9A42     		cmp	r2, r3
- 330 021a 01D3     		bcc	.L36
- 331 021c 022E     		cmp	r6, #2
- 332 021e 19D1     		bne	.L37
- 333              	.L36:
- 334 0220 2046     		mov	r0, r4
- 335 0222 2946     		mov	r1, r5
- 336 0224 3246     		mov	r2, r6
- 337 0226 FFF7FFFE 		bl	prvCopyDataToQueue
- 338 022a 236D     		ldr	r3, [r4, #80]
- 339 022c 23B1     		cbz	r3, .L38
- 340 022e 2046     		mov	r0, r4
- 341 0230 3146     		mov	r1, r6
- 342 0232 FFF72DFF 		bl	prvNotifyQueueSetContainer
- 343 0236 05E0     		b	.L50
- 344              	.L38:
- 345 0238 636A     		ldr	r3, [r4, #36]
- 346 023a 3BB1     		cbz	r3, .L39
- 347 023c 04F12400 		add	r0, r4, #36
- 348 0240 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 349              	.L50:
- 350 0244 0128     		cmp	r0, #1
- 351 0246 01D1     		bne	.L39
- 352 0248 FFF7FEFF 		bl	vPortYield
- 353              	.L39:
- 354 024c FFF7FEFF 		bl	vPortExitCritical
- 355 0250 0120     		movs	r0, #1
- 356 0252 48E0     		b	.L40
- 357              	.L37:
- 358 0254 DDF80490 		ldr	r9, [sp, #4]
- 359 0258 B9F1000F 		cmp	r9, #0
- 360 025c 03D1     		bne	.L41
- 361 025e FFF7FEFF 		bl	vPortExitCritical
- 362 0262 4846     		mov	r0, r9
- 363 0264 3FE0     		b	.L40
- 364              	.L41:
- 365 0266 B8F1000F 		cmp	r8, #0
- 366 026a 02D1     		bne	.L42
- 367 026c 02A8     		add	r0, sp, #8
- 368 026e FFF7FEFF 		bl	vTaskSetTimeOutState
- 369              	.L42:
- 370 0272 FFF7FEFF 		bl	vPortExitCritical
- 371 0276 FFF7FEFF 		bl	vTaskSuspendAll
- 372 027a FFF7FEFF 		bl	vPortEnterCritical
- 373 027e 636C     		ldr	r3, [r4, #68]
- 374 0280 0133     		adds	r3, r3, #1
- 375 0282 08BF     		it	eq
- 376 0284 6764     		streq	r7, [r4, #68]
- 377 0286 A36C     		ldr	r3, [r4, #72]
- 378 0288 0133     		adds	r3, r3, #1
- 379 028a 08BF     		it	eq
- 380 028c A764     		streq	r7, [r4, #72]
- 381 028e FFF7FEFF 		bl	vPortExitCritical
- 382 0292 02A8     		add	r0, sp, #8
- 383 0294 01A9     		add	r1, sp, #4
- 384 0296 FFF7FEFF 		bl	xTaskCheckForTimeOut
- 385 029a F0B9     		cbnz	r0, .L45
- 386 029c FFF7FEFF 		bl	vPortEnterCritical
- 387 02a0 D4F83890 		ldr	r9, [r4, #56]
- 388 02a4 D4F83C80 		ldr	r8, [r4, #60]
- 389 02a8 FFF7FEFF 		bl	vPortExitCritical
- 390 02ac C145     		cmp	r9, r8
- 391 02ae 0ED1     		bne	.L46
- 392 02b0 04F11000 		add	r0, r4, #16
- 393 02b4 0199     		ldr	r1, [sp, #4]
- 394 02b6 FFF7FEFF 		bl	vTaskPlaceOnEventList
- 395 02ba 2046     		mov	r0, r4
- 396 02bc FFF700FF 		bl	prvUnlockQueue
- 397 02c0 FFF7FEFF 		bl	xTaskResumeAll
- 398 02c4 0028     		cmp	r0, #0
- 399 02c6 A1D1     		bne	.L47
- 400 02c8 FFF7FEFF 		bl	vPortYield
- 401 02cc 9EE7     		b	.L47
- 402              	.L46:
- 403 02ce 2046     		mov	r0, r4
- 404 02d0 FFF7F6FE 		bl	prvUnlockQueue
- 405 02d4 FFF7FEFF 		bl	xTaskResumeAll
- 406 02d8 98E7     		b	.L47
- 407              	.L45:
- 408 02da 2046     		mov	r0, r4
- 409 02dc FFF7F0FE 		bl	prvUnlockQueue
- 410 02e0 FFF7FEFF 		bl	xTaskResumeAll
- 411 02e4 0020     		movs	r0, #0
- 412              	.L40:
- 413 02e6 05B0     		add	sp, sp, #20
- 414 02e8 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 416              		.align	1
- 417              		.global	xQueueCreateMutex
- 418              		.thumb
- 419              		.thumb_func
- 421              	xQueueCreateMutex:
- 422              		@ args = 0, pretend = 0, frame = 0
- 423              		@ frame_needed = 0, uses_anonymous_args = 0
- 424 02ec 70B5     		push	{r4, r5, r6, lr}
- 425 02ee 0646     		mov	r6, r0
- 426 02f0 5420     		movs	r0, #84
- 427 02f2 FFF7FEFF 		bl	pvPortMalloc
- 428 02f6 0446     		mov	r4, r0
- 429 02f8 E8B1     		cbz	r0, .L52
- 430 02fa 0123     		movs	r3, #1
- 431 02fc 0025     		movs	r5, #0
- 432 02fe C363     		str	r3, [r0, #60]
- 433 0300 4FF0FF33 		mov	r3, #-1
- 434 0304 8563     		str	r5, [r0, #56]
- 435 0306 4560     		str	r5, [r0, #4]
- 436 0308 4364     		str	r3, [r0, #68]
- 437 030a 0560     		str	r5, [r0, #0]
- 438 030c 8364     		str	r3, [r0, #72]
- 439 030e 8560     		str	r5, [r0, #8]
- 440 0310 C560     		str	r5, [r0, #12]
- 441 0312 0564     		str	r5, [r0, #64]
- 442 0314 80F84D60 		strb	r6, [r0, #77]
- 443 0318 0565     		str	r5, [r0, #80]
- 444 031a 00F11000 		add	r0, r0, #16
- 445 031e FFF7FEFF 		bl	vListInitialise
- 446 0322 04F12400 		add	r0, r4, #36
- 447 0326 FFF7FEFF 		bl	vListInitialise
- 448 032a 2046     		mov	r0, r4
- 449 032c 2946     		mov	r1, r5
- 450 032e 2A46     		mov	r2, r5
- 451 0330 2B46     		mov	r3, r5
- 452 0332 FFF7FEFF 		bl	xQueueGenericSend
- 453              	.L52:
- 454 0336 2046     		mov	r0, r4
- 455 0338 70BD     		pop	{r4, r5, r6, pc}
- 457              		.align	1
- 458              		.global	xQueueGenericSendFromISR
- 459              		.thumb
- 460              		.thumb_func
- 462              	xQueueGenericSendFromISR:
- 463              		@ args = 0, pretend = 0, frame = 0
- 464              		@ frame_needed = 0, uses_anonymous_args = 0
- 465 033a 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 466 033e 0446     		mov	r4, r0
- 467 0340 1546     		mov	r5, r2
- 468 0342 1E46     		mov	r6, r3
- 469 0344 8846     		mov	r8, r1
- 470 0346 FFF7FEFF 		bl	ulPortSetInterruptMask
- 471 034a A26B     		ldr	r2, [r4, #56]
- 472 034c E36B     		ldr	r3, [r4, #60]
- 473 034e 0746     		mov	r7, r0
- 474 0350 9A42     		cmp	r2, r3
- 475 0352 01D3     		bcc	.L54
- 476 0354 022E     		cmp	r6, #2
- 477 0356 21D1     		bne	.L58
- 478              	.L54:
- 479 0358 2046     		mov	r0, r4
- 480 035a 4146     		mov	r1, r8
- 481 035c 3246     		mov	r2, r6
- 482 035e FFF763FE 		bl	prvCopyDataToQueue
- 483 0362 A36C     		ldr	r3, [r4, #72]
- 484 0364 0133     		adds	r3, r3, #1
- 485 0366 15D1     		bne	.L56
- 486 0368 236D     		ldr	r3, [r4, #80]
- 487 036a 43B1     		cbz	r3, .L57
- 488 036c 2046     		mov	r0, r4
- 489 036e 3146     		mov	r1, r6
- 490 0370 FFF78EFE 		bl	prvNotifyQueueSetContainer
- 491 0374 0128     		cmp	r0, #1
- 492 0376 15D1     		bne	.L61
- 493 0378 95B1     		cbz	r5, .L60
- 494 037a 2860     		str	r0, [r5, #0]
- 495 037c 10E0     		b	.L60
- 496              	.L57:
- 497 037e 636A     		ldr	r3, [r4, #36]
- 498 0380 83B1     		cbz	r3, .L61
- 499 0382 04F12400 		add	r0, r4, #36
- 500 0386 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 501 038a 0124     		movs	r4, #1
- 502 038c 58B1     		cbz	r0, .L55
- 503 038e 55B1     		cbz	r5, .L55
- 504 0390 2C60     		str	r4, [r5, #0]
- 505 0392 08E0     		b	.L55
- 506              	.L56:
- 507 0394 A36C     		ldr	r3, [r4, #72]
- 508 0396 0133     		adds	r3, r3, #1
- 509 0398 A364     		str	r3, [r4, #72]
- 510 039a 03E0     		b	.L61
- 511              	.L58:
- 512 039c 0024     		movs	r4, #0
- 513 039e 02E0     		b	.L55
- 514              	.L60:
- 515 03a0 0446     		mov	r4, r0
- 516 03a2 00E0     		b	.L55
- 517              	.L61:
- 518 03a4 0124     		movs	r4, #1
- 519              	.L55:
- 520 03a6 3846     		mov	r0, r7
- 521 03a8 FFF7FEFF 		bl	vPortClearInterruptMask
- 522 03ac 2046     		mov	r0, r4
- 523 03ae BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 525              		.align	1
- 526              		.global	xQueueGenericReceive
- 527              		.thumb
- 528              		.thumb_func
- 530              	xQueueGenericReceive:
- 531              		@ args = 0, pretend = 0, frame = 16
- 532              		@ frame_needed = 0, uses_anonymous_args = 0
- 533 03b2 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
- 534 03b6 4FF00008 		mov	r8, #0
- 535 03ba 85B0     		sub	sp, sp, #20
- 536 03bc 0446     		mov	r4, r0
- 537 03be 0D46     		mov	r5, r1
- 538 03c0 0192     		str	r2, [sp, #4]
- 539 03c2 1F46     		mov	r7, r3
- 540 03c4 4646     		mov	r6, r8
- 541 03c6 01E0     		b	.L65
- 542              	.L78:
- 543 03c8 4FF00108 		mov	r8, #1
- 544              	.L65:
- 545 03cc FFF7FEFF 		bl	vPortEnterCritical
- 546 03d0 A36B     		ldr	r3, [r4, #56]
- 547 03d2 23B3     		cbz	r3, .L66
- 548 03d4 2046     		mov	r0, r4
- 549 03d6 2946     		mov	r1, r5
- 550 03d8 E668     		ldr	r6, [r4, #12]
- 551 03da FFF711FE 		bl	prvCopyDataFromQueue
- 552 03de 87B9     		cbnz	r7, .L67
- 553 03e0 A36B     		ldr	r3, [r4, #56]
- 554 03e2 013B     		subs	r3, r3, #1
- 555 03e4 A363     		str	r3, [r4, #56]
- 556 03e6 2368     		ldr	r3, [r4, #0]
- 557 03e8 13B9     		cbnz	r3, .L68
- 558 03ea FFF7FEFF 		bl	xTaskGetCurrentTaskHandle
- 559 03ee 6060     		str	r0, [r4, #4]
- 560              	.L68:
- 561 03f0 2369     		ldr	r3, [r4, #16]
- 562 03f2 83B1     		cbz	r3, .L69
- 563 03f4 04F11000 		add	r0, r4, #16
- 564 03f8 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 565 03fc 0128     		cmp	r0, #1
- 566 03fe 0AD1     		bne	.L69
- 567 0400 07E0     		b	.L79
- 568              	.L67:
- 569 0402 636A     		ldr	r3, [r4, #36]
- 570 0404 E660     		str	r6, [r4, #12]
- 571 0406 33B1     		cbz	r3, .L69
- 572 0408 04F12400 		add	r0, r4, #36
- 573 040c FFF7FEFF 		bl	xTaskRemoveFromEventList
- 574 0410 08B1     		cbz	r0, .L69
- 575              	.L79:
- 576 0412 FFF7FEFF 		bl	vPortYield
- 577              	.L69:
- 578 0416 FFF7FEFF 		bl	vPortExitCritical
- 579 041a 0120     		movs	r0, #1
- 580 041c 50E0     		b	.L70
- 581              	.L66:
- 582 041e DDF80490 		ldr	r9, [sp, #4]
- 583 0422 B9F1000F 		cmp	r9, #0
- 584 0426 03D1     		bne	.L71
- 585 0428 FFF7FEFF 		bl	vPortExitCritical
- 586 042c 4846     		mov	r0, r9
- 587 042e 47E0     		b	.L70
- 588              	.L71:
- 589 0430 B8F1000F 		cmp	r8, #0
- 590 0434 02D1     		bne	.L72
- 591 0436 02A8     		add	r0, sp, #8
- 592 0438 FFF7FEFF 		bl	vTaskSetTimeOutState
- 593              	.L72:
- 594 043c FFF7FEFF 		bl	vPortExitCritical
- 595 0440 FFF7FEFF 		bl	vTaskSuspendAll
- 596 0444 FFF7FEFF 		bl	vPortEnterCritical
- 597 0448 636C     		ldr	r3, [r4, #68]
- 598 044a 0133     		adds	r3, r3, #1
- 599 044c 08BF     		it	eq
- 600 044e 6664     		streq	r6, [r4, #68]
- 601 0450 A36C     		ldr	r3, [r4, #72]
- 602 0452 0133     		adds	r3, r3, #1
- 603 0454 08BF     		it	eq
- 604 0456 A664     		streq	r6, [r4, #72]
- 605 0458 FFF7FEFF 		bl	vPortExitCritical
- 606 045c 02A8     		add	r0, sp, #8
- 607 045e 01A9     		add	r1, sp, #4
- 608 0460 FFF7FEFF 		bl	xTaskCheckForTimeOut
- 609 0464 30BB     		cbnz	r0, .L75
- 610 0466 FFF7FEFF 		bl	vPortEnterCritical
- 611 046a D4F83880 		ldr	r8, [r4, #56]
- 612 046e FFF7FEFF 		bl	vPortExitCritical
- 613 0472 B8F1000F 		cmp	r8, #0
- 614 0476 17D1     		bne	.L76
- 615 0478 2368     		ldr	r3, [r4, #0]
- 616 047a 33B9     		cbnz	r3, .L77
- 617 047c FFF7FEFF 		bl	vPortEnterCritical
- 618 0480 6068     		ldr	r0, [r4, #4]
- 619 0482 FFF7FEFF 		bl	vTaskPriorityInherit
- 620 0486 FFF7FEFF 		bl	vPortExitCritical
- 621              	.L77:
- 622 048a 04F12400 		add	r0, r4, #36
- 623 048e 0199     		ldr	r1, [sp, #4]
- 624 0490 FFF7FEFF 		bl	vTaskPlaceOnEventList
- 625 0494 2046     		mov	r0, r4
- 626 0496 FFF713FE 		bl	prvUnlockQueue
- 627 049a FFF7FEFF 		bl	xTaskResumeAll
- 628 049e 0028     		cmp	r0, #0
- 629 04a0 92D1     		bne	.L78
- 630 04a2 FFF7FEFF 		bl	vPortYield
- 631 04a6 8FE7     		b	.L78
- 632              	.L76:
- 633 04a8 2046     		mov	r0, r4
- 634 04aa FFF709FE 		bl	prvUnlockQueue
- 635 04ae FFF7FEFF 		bl	xTaskResumeAll
- 636 04b2 89E7     		b	.L78
- 637              	.L75:
- 638 04b4 2046     		mov	r0, r4
- 639 04b6 FFF703FE 		bl	prvUnlockQueue
- 640 04ba FFF7FEFF 		bl	xTaskResumeAll
- 641 04be 0020     		movs	r0, #0
- 642              	.L70:
- 643 04c0 05B0     		add	sp, sp, #20
- 644 04c2 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 646              		.align	1
- 647              		.global	xQueueReceiveFromISR
- 648              		.thumb
- 649              		.thumb_func
- 651              	xQueueReceiveFromISR:
- 652              		@ args = 0, pretend = 0, frame = 0
- 653              		@ frame_needed = 0, uses_anonymous_args = 0
- 654 04c6 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 655 04c8 0446     		mov	r4, r0
- 656 04ca 0F46     		mov	r7, r1
- 657 04cc 1546     		mov	r5, r2
- 658 04ce FFF7FEFF 		bl	ulPortSetInterruptMask
- 659 04d2 A36B     		ldr	r3, [r4, #56]
- 660 04d4 0646     		mov	r6, r0
- 661 04d6 C3B1     		cbz	r3, .L83
- 662 04d8 2046     		mov	r0, r4
- 663 04da 3946     		mov	r1, r7
- 664 04dc FFF790FD 		bl	prvCopyDataFromQueue
- 665 04e0 A36B     		ldr	r3, [r4, #56]
- 666 04e2 013B     		subs	r3, r3, #1
- 667 04e4 A363     		str	r3, [r4, #56]
- 668 04e6 636C     		ldr	r3, [r4, #68]
- 669 04e8 0133     		adds	r3, r3, #1
- 670 04ea 0AD1     		bne	.L82
- 671 04ec 2369     		ldr	r3, [r4, #16]
- 672 04ee 73B1     		cbz	r3, .L84
- 673 04f0 04F11000 		add	r0, r4, #16
- 674 04f4 FFF7FEFF 		bl	xTaskRemoveFromEventList
- 675 04f8 0124     		movs	r4, #1
- 676 04fa 48B1     		cbz	r0, .L81
- 677 04fc 45B1     		cbz	r5, .L81
- 678 04fe 2C60     		str	r4, [r5, #0]
- 679 0500 06E0     		b	.L81
- 680              	.L82:
- 681 0502 636C     		ldr	r3, [r4, #68]
- 682 0504 0133     		adds	r3, r3, #1
- 683 0506 6364     		str	r3, [r4, #68]
- 684 0508 01E0     		b	.L84
- 685              	.L83:
- 686 050a 1C46     		mov	r4, r3
- 687 050c 00E0     		b	.L81
- 688              	.L84:
- 689 050e 0124     		movs	r4, #1
- 690              	.L81:
- 691 0510 3046     		mov	r0, r6
- 692 0512 FFF7FEFF 		bl	vPortClearInterruptMask
- 693 0516 2046     		mov	r0, r4
- 694 0518 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 696              		.align	1
- 697              		.global	xQueuePeekFromISR
- 698              		.thumb
- 699              		.thumb_func
- 701              	xQueuePeekFromISR:
- 702              		@ args = 0, pretend = 0, frame = 0
- 703              		@ frame_needed = 0, uses_anonymous_args = 0
- 704 051a F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 705 051c 0446     		mov	r4, r0
- 706 051e 0F46     		mov	r7, r1
- 707 0520 FFF7FEFF 		bl	ulPortSetInterruptMask
- 708 0524 A36B     		ldr	r3, [r4, #56]
- 709 0526 0546     		mov	r5, r0
- 710 0528 3BB1     		cbz	r3, .L89
- 711 052a E668     		ldr	r6, [r4, #12]
- 712 052c 2046     		mov	r0, r4
- 713 052e 3946     		mov	r1, r7
- 714 0530 FFF766FD 		bl	prvCopyDataFromQueue
- 715 0534 E660     		str	r6, [r4, #12]
- 716 0536 0124     		movs	r4, #1
- 717 0538 00E0     		b	.L88
- 718              	.L89:
- 719 053a 1C46     		mov	r4, r3
- 720              	.L88:
- 721 053c 2846     		mov	r0, r5
- 722 053e FFF7FEFF 		bl	vPortClearInterruptMask
- 723 0542 2046     		mov	r0, r4
- 724 0544 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 726              		.align	1
- 727              		.global	uxQueueMessagesWaiting
- 728              		.thumb
- 729              		.thumb_func
- 731              	uxQueueMessagesWaiting:
- 732              		@ args = 0, pretend = 0, frame = 0
- 733              		@ frame_needed = 0, uses_anonymous_args = 0
- 734 0546 10B5     		push	{r4, lr}
- 735 0548 0446     		mov	r4, r0
- 736 054a FFF7FEFF 		bl	vPortEnterCritical
- 737 054e A46B     		ldr	r4, [r4, #56]
- 738 0550 FFF7FEFF 		bl	vPortExitCritical
- 739 0554 2046     		mov	r0, r4
- 740 0556 10BD     		pop	{r4, pc}
- 742              		.align	1
- 743              		.global	uxQueueMessagesWaitingFromISR
- 744              		.thumb
- 745              		.thumb_func
- 747              	uxQueueMessagesWaitingFromISR:
- 748              		@ args = 0, pretend = 0, frame = 0
- 749              		@ frame_needed = 0, uses_anonymous_args = 0
- 750              		@ link register save eliminated.
- 751 0558 806B     		ldr	r0, [r0, #56]
- 752 055a 7047     		bx	lr
- 754              		.align	1
- 755              		.global	vQueueDelete
- 756              		.thumb
- 757              		.thumb_func
- 759              	vQueueDelete:
- 760              		@ args = 0, pretend = 0, frame = 0
- 761              		@ frame_needed = 0, uses_anonymous_args = 0
- 762 055c 10B5     		push	{r4, lr}
- 763 055e 0446     		mov	r4, r0
- 764 0560 0068     		ldr	r0, [r0, #0]
- 765 0562 FFF7FEFF 		bl	vPortFree
- 766 0566 2046     		mov	r0, r4
- 767 0568 BDE81040 		pop	{r4, lr}
- 768 056c FFF7FEBF 		b	vPortFree
- 770              		.align	1
- 771              		.global	ucQueueGetQueueNumber
- 772              		.thumb
- 773              		.thumb_func
- 775              	ucQueueGetQueueNumber:
- 776              		@ args = 0, pretend = 0, frame = 0
- 777              		@ frame_needed = 0, uses_anonymous_args = 0
- 778              		@ link register save eliminated.
- 779 0570 90F84C00 		ldrb	r0, [r0, #76]	@ zero_extendqisi2
- 780 0574 7047     		bx	lr
- 782              		.align	1
- 783              		.global	vQueueSetQueueNumber
- 784              		.thumb
- 785              		.thumb_func
- 787              	vQueueSetQueueNumber:
- 788              		@ args = 0, pretend = 0, frame = 0
- 789              		@ frame_needed = 0, uses_anonymous_args = 0
- 790              		@ link register save eliminated.
- 791 0576 80F84C10 		strb	r1, [r0, #76]
- 792 057a 7047     		bx	lr
- 794              		.align	1
- 795              		.global	ucQueueGetQueueType
- 796              		.thumb
- 797              		.thumb_func
- 799              	ucQueueGetQueueType:
- 800              		@ args = 0, pretend = 0, frame = 0
- 801              		@ frame_needed = 0, uses_anonymous_args = 0
- 802              		@ link register save eliminated.
- 803 057c 90F84D00 		ldrb	r0, [r0, #77]	@ zero_extendqisi2
- 804 0580 7047     		bx	lr
- 806              		.align	1
- 807              		.global	xQueueIsQueueEmptyFromISR
- 808              		.thumb
- 809              		.thumb_func
- 811              	xQueueIsQueueEmptyFromISR:
- 812              		@ args = 0, pretend = 0, frame = 0
- 813              		@ frame_needed = 0, uses_anonymous_args = 0
- 814              		@ link register save eliminated.
- 815 0582 806B     		ldr	r0, [r0, #56]
- 816 0584 D0F10100 		rsbs	r0, r0, #1
- 817 0588 38BF     		it	cc
- 818 058a 0020     		movcc	r0, #0
- 819 058c 7047     		bx	lr
- 821              		.align	1
- 822              		.global	xQueueIsQueueFullFromISR
- 823              		.thumb
- 824              		.thumb_func
- 826              	xQueueIsQueueFullFromISR:
- 827              		@ args = 0, pretend = 0, frame = 0
- 828              		@ frame_needed = 0, uses_anonymous_args = 0
- 829              		@ link register save eliminated.
- 830 058e 826B     		ldr	r2, [r0, #56]
- 831 0590 C36B     		ldr	r3, [r0, #60]
- 832 0592 D31A     		subs	r3, r2, r3
- 833 0594 5842     		rsbs	r0, r3, #0
- 834 0596 40EB0300 		adc	r0, r0, r3
- 835 059a 7047     		bx	lr
- 837              		.align	1
- 838              		.global	xQueueCreateSet
- 839              		.thumb
- 840              		.thumb_func
- 842              	xQueueCreateSet:
- 843              		@ args = 0, pretend = 0, frame = 0
- 844              		@ frame_needed = 0, uses_anonymous_args = 0
- 845              		@ link register save eliminated.
- 846 059c 0421     		movs	r1, #4
- 847 059e 0022     		movs	r2, #0
- 848 05a0 FEE7     		b	xQueueGenericCreate
- 850              		.align	1
- 851              		.global	xQueueAddToSet
- 852              		.thumb
- 853              		.thumb_func
- 855              	xQueueAddToSet:
- 856              		@ args = 0, pretend = 0, frame = 0
- 857              		@ frame_needed = 0, uses_anonymous_args = 0
- 858 05a2 38B5     		push	{r3, r4, r5, lr}
- 859 05a4 0446     		mov	r4, r0
- 860 05a6 006D     		ldr	r0, [r0, #80]
- 861 05a8 0D46     		mov	r5, r1
- 862 05aa 40B9     		cbnz	r0, .L101
- 863 05ac A36B     		ldr	r3, [r4, #56]
- 864 05ae 3BB9     		cbnz	r3, .L100
- 865 05b0 FFF7FEFF 		bl	vPortEnterCritical
- 866 05b4 2565     		str	r5, [r4, #80]
- 867 05b6 FFF7FEFF 		bl	vPortExitCritical
- 868 05ba 0120     		movs	r0, #1
- 869 05bc 38BD     		pop	{r3, r4, r5, pc}
- 870              	.L101:
- 871 05be 0020     		movs	r0, #0
- 872              	.L100:
- 873 05c0 38BD     		pop	{r3, r4, r5, pc}
- 875              		.align	1
- 876              		.global	xQueueRemoveFromSet
- 877              		.thumb
- 878              		.thumb_func
- 880              	xQueueRemoveFromSet:
- 881              		@ args = 0, pretend = 0, frame = 0
- 882              		@ frame_needed = 0, uses_anonymous_args = 0
- 883 05c2 38B5     		push	{r3, r4, r5, lr}
- 884 05c4 036D     		ldr	r3, [r0, #80]
- 885 05c6 0446     		mov	r4, r0
- 886 05c8 8B42     		cmp	r3, r1
- 887 05ca 08D1     		bne	.L105
- 888 05cc 856B     		ldr	r5, [r0, #56]
- 889 05ce 45B9     		cbnz	r5, .L106
- 890 05d0 FFF7FEFF 		bl	vPortEnterCritical
- 891 05d4 2565     		str	r5, [r4, #80]
- 892 05d6 FFF7FEFF 		bl	vPortExitCritical
- 893 05da 0120     		movs	r0, #1
- 894 05dc 38BD     		pop	{r3, r4, r5, pc}
- 895              	.L105:
- 896 05de 0020     		movs	r0, #0
- 897 05e0 38BD     		pop	{r3, r4, r5, pc}
- 898              	.L106:
- 899 05e2 0020     		movs	r0, #0
- 900 05e4 38BD     		pop	{r3, r4, r5, pc}
- 902              		.align	1
- 903              		.global	xQueueSelectFromSet
- 904              		.thumb
- 905              		.thumb_func
- 907              	xQueueSelectFromSet:
- 908              		@ args = 0, pretend = 0, frame = 8
- 909              		@ frame_needed = 0, uses_anonymous_args = 0
- 910 05e6 07B5     		push	{r0, r1, r2, lr}
- 911 05e8 0023     		movs	r3, #0
- 912 05ea 0A46     		mov	r2, r1
- 913 05ec 02A9     		add	r1, sp, #8
- 914 05ee 41F8043D 		str	r3, [r1, #-4]!
- 915 05f2 FFF7FEFF 		bl	xQueueGenericReceive
- 916 05f6 0198     		ldr	r0, [sp, #4]
- 917 05f8 0EBD     		pop	{r1, r2, r3, pc}
- 919              		.align	1
- 920              		.global	xQueueSelectFromSetFromISR
- 921              		.thumb
- 922              		.thumb_func
- 924              	xQueueSelectFromSetFromISR:
- 925              		@ args = 0, pretend = 0, frame = 8
- 926              		@ frame_needed = 0, uses_anonymous_args = 0
- 927 05fa 07B5     		push	{r0, r1, r2, lr}
- 928 05fc 0022     		movs	r2, #0
- 929 05fe 02A9     		add	r1, sp, #8
- 930 0600 41F8042D 		str	r2, [r1, #-4]!
- 931 0604 FFF7FEFF 		bl	xQueueReceiveFromISR
- 932 0608 0198     		ldr	r0, [sp, #4]
- 933 060a 0EBD     		pop	{r1, r2, r3, pc}
- 935              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"queue.c"
+  16              		.text
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	prvCopyDataToQueue:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 38B5     		push	{r3, r4, r5, lr}
+  25 0002 1546     		mov	r5, r2
+  26 0004 026C     		ldr	r2, [r0, #64]
+  27 0006 0446     		mov	r4, r0
+  28 0008 32B9     		cbnz	r2, .L2
+  29 000a 0568     		ldr	r5, [r0]
+  30 000c 3DBB     		cbnz	r5, .L4
+  31 000e 4068     		ldr	r0, [r0, #4]
+  32 0010 FFF7FEFF 		bl	vTaskPriorityDisinherit
+  33 0014 6560     		str	r5, [r4, #4]
+  34 0016 22E0     		b	.L4
+  35              	.L2:
+  36 0018 65B9     		cbnz	r5, .L5
+  37 001a 8068     		ldr	r0, [r0, #8]
+  38 001c FFF7FEFF 		bl	memcpy
+  39 0020 A268     		ldr	r2, [r4, #8]
+  40 0022 236C     		ldr	r3, [r4, #64]
+  41 0024 1344     		add	r3, r3, r2
+  42 0026 6268     		ldr	r2, [r4, #4]
+  43 0028 A360     		str	r3, [r4, #8]
+  44 002a 9342     		cmp	r3, r2
+  45 002c 17D3     		bcc	.L4
+  46 002e 2368     		ldr	r3, [r4]
+  47 0030 A360     		str	r3, [r4, #8]
+  48 0032 14E0     		b	.L4
+  49              	.L5:
+  50 0034 C068     		ldr	r0, [r0, #12]
+  51 0036 FFF7FEFF 		bl	memcpy
+  52 003a 236C     		ldr	r3, [r4, #64]
+  53 003c E268     		ldr	r2, [r4, #12]
+  54 003e 5B42     		negs	r3, r3
+  55 0040 2168     		ldr	r1, [r4]
+  56 0042 1A44     		add	r2, r2, r3
+  57 0044 8A42     		cmp	r2, r1
+  58 0046 E260     		str	r2, [r4, #12]
+  59 0048 3EBF     		ittt	cc
+  60 004a 6268     		ldrcc	r2, [r4, #4]
+  61 004c 9B18     		addcc	r3, r3, r2
+  62 004e E360     		strcc	r3, [r4, #12]
+  63 0050 022D     		cmp	r5, #2
+  64 0052 04D1     		bne	.L4
+  65 0054 A36B     		ldr	r3, [r4, #56]
+  66 0056 13B1     		cbz	r3, .L4
+  67 0058 A36B     		ldr	r3, [r4, #56]
+  68 005a 013B     		subs	r3, r3, #1
+  69 005c A363     		str	r3, [r4, #56]
+  70              	.L4:
+  71 005e A36B     		ldr	r3, [r4, #56]
+  72 0060 0133     		adds	r3, r3, #1
+  73 0062 A363     		str	r3, [r4, #56]
+  74 0064 38BD     		pop	{r3, r4, r5, pc}
+  76              		.align	1
+  77              		.thumb
+  78              		.thumb_func
+  80              	prvNotifyQueueSetContainer:
+  81              		@ args = 0, pretend = 0, frame = 8
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0066 13B5     		push	{r0, r1, r4, lr}
+  84 0068 046D     		ldr	r4, [r0, #80]
+  85 006a 0A46     		mov	r2, r1
+  86 006c E36B     		ldr	r3, [r4, #60]
+  87 006e A16B     		ldr	r1, [r4, #56]
+  88 0070 0190     		str	r0, [sp, #4]
+  89 0072 9942     		cmp	r1, r3
+  90 0074 01D3     		bcc	.L13
+  91              	.L15:
+  92 0076 0020     		movs	r0, #0
+  93 0078 0DE0     		b	.L14
+  94              	.L13:
+  95 007a 01A9     		add	r1, sp, #4
+  96 007c 2046     		mov	r0, r4
+  97 007e FFF7BFFF 		bl	prvCopyDataToQueue
+  98 0082 636A     		ldr	r3, [r4, #36]
+  99 0084 002B     		cmp	r3, #0
+ 100 0086 F6D0     		beq	.L15
+ 101 0088 04F12400 		add	r0, r4, #36
+ 102 008c FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 103 0090 0030     		adds	r0, r0, #0
+ 104 0092 18BF     		it	ne
+ 105 0094 0120     		movne	r0, #1
+ 106              	.L14:
+ 107 0096 02B0     		add	sp, sp, #8
+ 108              		@ sp needed
+ 109 0098 10BD     		pop	{r4, pc}
+ 111              		.align	1
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	prvCopyDataFromQueue:
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		@ link register save eliminated.
+ 119 009a 0346     		mov	r3, r0
+ 120 009c 30B4     		push	{r4, r5}
+ 121 009e 1C68     		ldr	r4, [r3]
+ 122 00a0 0846     		mov	r0, r1
+ 123 00a2 5CB1     		cbz	r4, .L19
+ 124 00a4 D968     		ldr	r1, [r3, #12]
+ 125 00a6 1A6C     		ldr	r2, [r3, #64]
+ 126 00a8 5D68     		ldr	r5, [r3, #4]
+ 127 00aa 1144     		add	r1, r1, r2
+ 128 00ac A942     		cmp	r1, r5
+ 129 00ae D960     		str	r1, [r3, #12]
+ 130 00b0 28BF     		it	cs
+ 131 00b2 DC60     		strcs	r4, [r3, #12]
+ 132 00b4 D968     		ldr	r1, [r3, #12]
+ 133 00b6 30BC     		pop	{r4, r5}
+ 134 00b8 FFF7FEBF 		b	memcpy
+ 135              	.L19:
+ 136 00bc 30BC     		pop	{r4, r5}
+ 137 00be 7047     		bx	lr
+ 139              		.align	1
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	prvUnlockQueue:
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146 00c0 38B5     		push	{r3, r4, r5, lr}
+ 147 00c2 0446     		mov	r4, r0
+ 148 00c4 FFF7FEFF 		bl	vPortEnterCritical
+ 149 00c8 04F12405 		add	r5, r4, #36
+ 150              	.L23:
+ 151 00cc A36C     		ldr	r3, [r4, #72]
+ 152 00ce 002B     		cmp	r3, #0
+ 153 00d0 15DD     		ble	.L27
+ 154 00d2 236D     		ldr	r3, [r4, #80]
+ 155 00d4 43B1     		cbz	r3, .L24
+ 156 00d6 0021     		movs	r1, #0
+ 157 00d8 2046     		mov	r0, r4
+ 158 00da FFF7C4FF 		bl	prvNotifyQueueSetContainer
+ 159 00de 0128     		cmp	r0, #1
+ 160 00e0 09D1     		bne	.L26
+ 161              	.L25:
+ 162 00e2 FFF7FEFF 		bl	vTaskMissedYield
+ 163 00e6 06E0     		b	.L26
+ 164              	.L24:
+ 165 00e8 636A     		ldr	r3, [r4, #36]
+ 166 00ea 43B1     		cbz	r3, .L27
+ 167 00ec 2846     		mov	r0, r5
+ 168 00ee FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 169 00f2 0028     		cmp	r0, #0
+ 170 00f4 F5D1     		bne	.L25
+ 171              	.L26:
+ 172 00f6 A36C     		ldr	r3, [r4, #72]
+ 173 00f8 013B     		subs	r3, r3, #1
+ 174 00fa A364     		str	r3, [r4, #72]
+ 175 00fc E6E7     		b	.L23
+ 176              	.L27:
+ 177 00fe 4FF0FF33 		mov	r3, #-1
+ 178 0102 A364     		str	r3, [r4, #72]
+ 179 0104 FFF7FEFF 		bl	vPortExitCritical
+ 180 0108 FFF7FEFF 		bl	vPortEnterCritical
+ 181 010c 04F11005 		add	r5, r4, #16
+ 182              	.L30:
+ 183 0110 636C     		ldr	r3, [r4, #68]
+ 184 0112 002B     		cmp	r3, #0
+ 185 0114 0BDD     		ble	.L31
+ 186 0116 2369     		ldr	r3, [r4, #16]
+ 187 0118 4BB1     		cbz	r3, .L31
+ 188 011a 2846     		mov	r0, r5
+ 189 011c FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 190 0120 08B1     		cbz	r0, .L32
+ 191 0122 FFF7FEFF 		bl	vTaskMissedYield
+ 192              	.L32:
+ 193 0126 636C     		ldr	r3, [r4, #68]
+ 194 0128 013B     		subs	r3, r3, #1
+ 195 012a 6364     		str	r3, [r4, #68]
+ 196 012c F0E7     		b	.L30
+ 197              	.L31:
+ 198 012e 4FF0FF33 		mov	r3, #-1
+ 199 0132 6364     		str	r3, [r4, #68]
+ 200 0134 BDE83840 		pop	{r3, r4, r5, lr}
+ 201 0138 FFF7FEBF 		b	vPortExitCritical
+ 203              		.align	1
+ 204              		.global	xQueueGenericReset
+ 205              		.thumb
+ 206              		.thumb_func
+ 208              	xQueueGenericReset:
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211 013c 38B5     		push	{r3, r4, r5, lr}
+ 212 013e 0446     		mov	r4, r0
+ 213 0140 0D46     		mov	r5, r1
+ 214 0142 FFF7FEFF 		bl	vPortEnterCritical
+ 215 0146 206C     		ldr	r0, [r4, #64]
+ 216 0148 E36B     		ldr	r3, [r4, #60]
+ 217 014a 2268     		ldr	r2, [r4]
+ 218 014c 4343     		muls	r3, r0, r3
+ 219 014e D118     		adds	r1, r2, r3
+ 220 0150 1B1A     		subs	r3, r3, r0
+ 221 0152 1344     		add	r3, r3, r2
+ 222 0154 6160     		str	r1, [r4, #4]
+ 223 0156 E360     		str	r3, [r4, #12]
+ 224 0158 0021     		movs	r1, #0
+ 225 015a 4FF0FF33 		mov	r3, #-1
+ 226 015e A163     		str	r1, [r4, #56]
+ 227 0160 A260     		str	r2, [r4, #8]
+ 228 0162 6364     		str	r3, [r4, #68]
+ 229 0164 A364     		str	r3, [r4, #72]
+ 230 0166 55B9     		cbnz	r5, .L47
+ 231 0168 2369     		ldr	r3, [r4, #16]
+ 232 016a 83B1     		cbz	r3, .L49
+ 233 016c 04F11000 		add	r0, r4, #16
+ 234 0170 FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 235 0174 0128     		cmp	r0, #1
+ 236 0176 0AD1     		bne	.L49
+ 237 0178 FFF7FEFF 		bl	vPortYield
+ 238 017c 07E0     		b	.L49
+ 239              	.L47:
+ 240 017e 04F11000 		add	r0, r4, #16
+ 241 0182 FFF7FEFF 		bl	vListInitialise
+ 242 0186 04F12400 		add	r0, r4, #36
+ 243 018a FFF7FEFF 		bl	vListInitialise
+ 244              	.L49:
+ 245 018e FFF7FEFF 		bl	vPortExitCritical
+ 246 0192 0120     		movs	r0, #1
+ 247 0194 38BD     		pop	{r3, r4, r5, pc}
+ 249              		.align	1
+ 250              		.global	xQueueGenericCreate
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	xQueueGenericCreate:
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257 0196 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 258 019a 0F46     		mov	r7, r1
+ 259 019c 9046     		mov	r8, r2
+ 260 019e 0646     		mov	r6, r0
+ 261 01a0 08B9     		cbnz	r0, .L52
+ 262              	.L54:
+ 263 01a2 0024     		movs	r4, #0
+ 264 01a4 1CE0     		b	.L53
+ 265              	.L52:
+ 266 01a6 5420     		movs	r0, #84
+ 267 01a8 FFF7FEFF 		bl	pvPortMalloc
+ 268 01ac 0446     		mov	r4, r0
+ 269 01ae 0028     		cmp	r0, #0
+ 270 01b0 F7D0     		beq	.L54
+ 271 01b2 07FB06F0 		mul	r0, r7, r6
+ 272 01b6 0130     		adds	r0, r0, #1
+ 273 01b8 FFF7FEFF 		bl	pvPortMalloc
+ 274 01bc 0546     		mov	r5, r0
+ 275 01be 2060     		str	r0, [r4]
+ 276 01c0 50B1     		cbz	r0, .L55
+ 277 01c2 E663     		str	r6, [r4, #60]
+ 278 01c4 2764     		str	r7, [r4, #64]
+ 279 01c6 0121     		movs	r1, #1
+ 280 01c8 2046     		mov	r0, r4
+ 281 01ca FFF7FEFF 		bl	xQueueGenericReset
+ 282 01ce 0023     		movs	r3, #0
+ 283 01d0 84F84D80 		strb	r8, [r4, #77]
+ 284 01d4 2365     		str	r3, [r4, #80]
+ 285 01d6 03E0     		b	.L53
+ 286              	.L55:
+ 287 01d8 2046     		mov	r0, r4
+ 288 01da FFF7FEFF 		bl	vPortFree
+ 289 01de 2C46     		mov	r4, r5
+ 290              	.L53:
+ 291 01e0 2046     		mov	r0, r4
+ 292 01e2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 294              		.align	1
+ 295              		.global	xQueueCreateCountingSemaphore
+ 296              		.thumb
+ 297              		.thumb_func
+ 299              	xQueueCreateCountingSemaphore:
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302 01e6 10B5     		push	{r4, lr}
+ 303 01e8 0222     		movs	r2, #2
+ 304 01ea 0C46     		mov	r4, r1
+ 305 01ec 0021     		movs	r1, #0
+ 306 01ee FFF7FEFF 		bl	xQueueGenericCreate
+ 307 01f2 00B1     		cbz	r0, .L60
+ 308 01f4 8463     		str	r4, [r0, #56]
+ 309              	.L60:
+ 310 01f6 10BD     		pop	{r4, pc}
+ 312              		.align	1
+ 313              		.global	xQueueGenericSend
+ 314              		.thumb
+ 315              		.thumb_func
+ 317              	xQueueGenericSend:
+ 318              		@ args = 0, pretend = 0, frame = 16
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320 01f8 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 321 01fc 0027     		movs	r7, #0
+ 322 01fe 0446     		mov	r4, r0
+ 323 0200 8946     		mov	r9, r1
+ 324 0202 1E46     		mov	r6, r3
+ 325 0204 B846     		mov	r8, r7
+ 326 0206 85B0     		sub	sp, sp, #20
+ 327 0208 0192     		str	r2, [sp, #4]
+ 328              	.L65:
+ 329 020a FFF7FEFF 		bl	vPortEnterCritical
+ 330 020e A26B     		ldr	r2, [r4, #56]
+ 331 0210 E36B     		ldr	r3, [r4, #60]
+ 332 0212 9A42     		cmp	r2, r3
+ 333 0214 01D3     		bcc	.L66
+ 334 0216 022E     		cmp	r6, #2
+ 335 0218 1AD1     		bne	.L67
+ 336              	.L66:
+ 337 021a 3246     		mov	r2, r6
+ 338 021c 4946     		mov	r1, r9
+ 339 021e 2046     		mov	r0, r4
+ 340 0220 FFF7EEFE 		bl	prvCopyDataToQueue
+ 341 0224 236D     		ldr	r3, [r4, #80]
+ 342 0226 43B1     		cbz	r3, .L68
+ 343 0228 3146     		mov	r1, r6
+ 344 022a 2046     		mov	r0, r4
+ 345 022c FFF71BFF 		bl	prvNotifyQueueSetContainer
+ 346              	.L89:
+ 347 0230 0128     		cmp	r0, #1
+ 348 0232 09D1     		bne	.L70
+ 349 0234 FFF7FEFF 		bl	vPortYield
+ 350 0238 06E0     		b	.L70
+ 351              	.L68:
+ 352 023a 636A     		ldr	r3, [r4, #36]
+ 353 023c 23B1     		cbz	r3, .L70
+ 354 023e 04F12400 		add	r0, r4, #36
+ 355 0242 FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 356 0246 F3E7     		b	.L89
+ 357              	.L70:
+ 358 0248 FFF7FEFF 		bl	vPortExitCritical
+ 359 024c 0120     		movs	r0, #1
+ 360 024e 44E0     		b	.L72
+ 361              	.L67:
+ 362 0250 019D     		ldr	r5, [sp, #4]
+ 363 0252 1DB9     		cbnz	r5, .L73
+ 364 0254 FFF7FEFF 		bl	vPortExitCritical
+ 365 0258 2846     		mov	r0, r5
+ 366 025a 3EE0     		b	.L72
+ 367              	.L73:
+ 368 025c 17B9     		cbnz	r7, .L74
+ 369 025e 02A8     		add	r0, sp, #8
+ 370 0260 FFF7FEFF 		bl	vTaskSetTimeOutState
+ 371              	.L74:
+ 372 0264 FFF7FEFF 		bl	vPortExitCritical
+ 373 0268 FFF7FEFF 		bl	vTaskSuspendAll
+ 374 026c FFF7FEFF 		bl	vPortEnterCritical
+ 375 0270 636C     		ldr	r3, [r4, #68]
+ 376 0272 0133     		adds	r3, r3, #1
+ 377 0274 08BF     		it	eq
+ 378 0276 C4F84480 		streq	r8, [r4, #68]
+ 379 027a A36C     		ldr	r3, [r4, #72]
+ 380 027c 0133     		adds	r3, r3, #1
+ 381 027e 08BF     		it	eq
+ 382 0280 C4F84880 		streq	r8, [r4, #72]
+ 383 0284 FFF7FEFF 		bl	vPortExitCritical
+ 384 0288 01A9     		add	r1, sp, #4
+ 385 028a 02A8     		add	r0, sp, #8
+ 386 028c FFF7FEFF 		bl	xTaskCheckForTimeOut
+ 387 0290 E8B9     		cbnz	r0, .L77
+ 388 0292 FFF7FEFF 		bl	vPortEnterCritical
+ 389 0296 A76B     		ldr	r7, [r4, #56]
+ 390 0298 E56B     		ldr	r5, [r4, #60]
+ 391 029a FFF7FEFF 		bl	vPortExitCritical
+ 392 029e AF42     		cmp	r7, r5
+ 393 02a0 0FD1     		bne	.L78
+ 394 02a2 0199     		ldr	r1, [sp, #4]
+ 395 02a4 04F11000 		add	r0, r4, #16
+ 396 02a8 FFF7FEFF 		bl	vTaskPlaceOnEventList
+ 397 02ac 2046     		mov	r0, r4
+ 398 02ae FFF707FF 		bl	prvUnlockQueue
+ 399 02b2 FFF7FEFF 		bl	xTaskResumeAll
+ 400 02b6 08B1     		cbz	r0, .L90
+ 401              	.L79:
+ 402 02b8 0127     		movs	r7, #1
+ 403 02ba A6E7     		b	.L65
+ 404              	.L90:
+ 405 02bc FFF7FEFF 		bl	vPortYield
+ 406 02c0 FAE7     		b	.L79
+ 407              	.L78:
+ 408 02c2 2046     		mov	r0, r4
+ 409 02c4 FFF7FCFE 		bl	prvUnlockQueue
+ 410 02c8 FFF7FEFF 		bl	xTaskResumeAll
+ 411 02cc F4E7     		b	.L79
+ 412              	.L77:
+ 413 02ce 2046     		mov	r0, r4
+ 414 02d0 FFF7F6FE 		bl	prvUnlockQueue
+ 415 02d4 FFF7FEFF 		bl	xTaskResumeAll
+ 416 02d8 0020     		movs	r0, #0
+ 417              	.L72:
+ 418 02da 05B0     		add	sp, sp, #20
+ 419              		@ sp needed
+ 420 02dc BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 422              		.align	1
+ 423              		.global	xQueueCreateMutex
+ 424              		.thumb
+ 425              		.thumb_func
+ 427              	xQueueCreateMutex:
+ 428              		@ args = 0, pretend = 0, frame = 0
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430 02e0 70B5     		push	{r4, r5, r6, lr}
+ 431 02e2 0646     		mov	r6, r0
+ 432 02e4 5420     		movs	r0, #84
+ 433 02e6 FFF7FEFF 		bl	pvPortMalloc
+ 434 02ea 0446     		mov	r4, r0
+ 435 02ec E0B1     		cbz	r0, .L92
+ 436 02ee 0123     		movs	r3, #1
+ 437 02f0 0025     		movs	r5, #0
+ 438 02f2 C363     		str	r3, [r0, #60]
+ 439 02f4 4FF0FF33 		mov	r3, #-1
+ 440 02f8 8563     		str	r5, [r0, #56]
+ 441 02fa 4560     		str	r5, [r0, #4]
+ 442 02fc 4364     		str	r3, [r0, #68]
+ 443 02fe 0560     		str	r5, [r0]
+ 444 0300 8364     		str	r3, [r0, #72]
+ 445 0302 8560     		str	r5, [r0, #8]
+ 446 0304 C560     		str	r5, [r0, #12]
+ 447 0306 0564     		str	r5, [r0, #64]
+ 448 0308 80F84D60 		strb	r6, [r0, #77]
+ 449 030c 0565     		str	r5, [r0, #80]
+ 450 030e 1030     		adds	r0, r0, #16
+ 451 0310 FFF7FEFF 		bl	vListInitialise
+ 452 0314 04F12400 		add	r0, r4, #36
+ 453 0318 FFF7FEFF 		bl	vListInitialise
+ 454 031c 2B46     		mov	r3, r5
+ 455 031e 2A46     		mov	r2, r5
+ 456 0320 2946     		mov	r1, r5
+ 457 0322 2046     		mov	r0, r4
+ 458 0324 FFF7FEFF 		bl	xQueueGenericSend
+ 459              	.L92:
+ 460 0328 2046     		mov	r0, r4
+ 461 032a 70BD     		pop	{r4, r5, r6, pc}
+ 463              		.align	1
+ 464              		.global	xQueueGenericSendFromISR
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	xQueueGenericSendFromISR:
+ 469              		@ args = 0, pretend = 0, frame = 0
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471 032c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 472 0330 0446     		mov	r4, r0
+ 473 0332 1646     		mov	r6, r2
+ 474 0334 1D46     		mov	r5, r3
+ 475 0336 8846     		mov	r8, r1
+ 476 0338 FFF7FEFF 		bl	ulPortSetInterruptMask
+ 477 033c A26B     		ldr	r2, [r4, #56]
+ 478 033e E36B     		ldr	r3, [r4, #60]
+ 479 0340 0746     		mov	r7, r0
+ 480 0342 9A42     		cmp	r2, r3
+ 481 0344 01D3     		bcc	.L97
+ 482 0346 022D     		cmp	r5, #2
+ 483 0348 20D1     		bne	.L103
+ 484              	.L97:
+ 485 034a 2A46     		mov	r2, r5
+ 486 034c 4146     		mov	r1, r8
+ 487 034e 2046     		mov	r0, r4
+ 488 0350 FFF756FE 		bl	prvCopyDataToQueue
+ 489 0354 A36C     		ldr	r3, [r4, #72]
+ 490 0356 0133     		adds	r3, r3, #1
+ 491 0358 13D1     		bne	.L99
+ 492 035a 236D     		ldr	r3, [r4, #80]
+ 493 035c 33B1     		cbz	r3, .L100
+ 494 035e 2946     		mov	r1, r5
+ 495 0360 2046     		mov	r0, r4
+ 496 0362 FFF780FE 		bl	prvNotifyQueueSetContainer
+ 497 0366 0128     		cmp	r0, #1
+ 498 0368 0ED1     		bne	.L113
+ 499 036a 06E0     		b	.L101
+ 500              	.L100:
+ 501 036c 636A     		ldr	r3, [r4, #36]
+ 502 036e 5BB1     		cbz	r3, .L113
+ 503 0370 04F12400 		add	r0, r4, #36
+ 504 0374 FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 505 0378 30B1     		cbz	r0, .L113
+ 506              	.L101:
+ 507 037a 2EB1     		cbz	r6, .L113
+ 508 037c 0124     		movs	r4, #1
+ 509 037e 3460     		str	r4, [r6]
+ 510 0380 05E0     		b	.L98
+ 511              	.L99:
+ 512 0382 A36C     		ldr	r3, [r4, #72]
+ 513 0384 0133     		adds	r3, r3, #1
+ 514 0386 A364     		str	r3, [r4, #72]
+ 515              	.L113:
+ 516 0388 0124     		movs	r4, #1
+ 517 038a 00E0     		b	.L98
+ 518              	.L103:
+ 519 038c 0024     		movs	r4, #0
+ 520              	.L98:
+ 521 038e 3846     		mov	r0, r7
+ 522 0390 FFF7FEFF 		bl	vPortClearInterruptMask
+ 523 0394 2046     		mov	r0, r4
+ 524 0396 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 526              		.align	1
+ 527              		.global	xQueueGenericReceive
+ 528              		.thumb
+ 529              		.thumb_func
+ 531              	xQueueGenericReceive:
+ 532              		@ args = 0, pretend = 0, frame = 16
+ 533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 534 039a 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 535 039e 0026     		movs	r6, #0
+ 536 03a0 0446     		mov	r4, r0
+ 537 03a2 8846     		mov	r8, r1
+ 538 03a4 9946     		mov	r9, r3
+ 539 03a6 3746     		mov	r7, r6
+ 540 03a8 85B0     		sub	sp, sp, #20
+ 541 03aa 0192     		str	r2, [sp, #4]
+ 542              	.L115:
+ 543 03ac FFF7FEFF 		bl	vPortEnterCritical
+ 544 03b0 A36B     		ldr	r3, [r4, #56]
+ 545 03b2 3BB3     		cbz	r3, .L116
+ 546 03b4 4146     		mov	r1, r8
+ 547 03b6 2046     		mov	r0, r4
+ 548 03b8 E568     		ldr	r5, [r4, #12]
+ 549 03ba FFF76EFE 		bl	prvCopyDataFromQueue
+ 550 03be B9F1000F 		cmp	r9, #0
+ 551 03c2 12D1     		bne	.L117
+ 552 03c4 A36B     		ldr	r3, [r4, #56]
+ 553 03c6 013B     		subs	r3, r3, #1
+ 554 03c8 A363     		str	r3, [r4, #56]
+ 555 03ca 2368     		ldr	r3, [r4]
+ 556 03cc 13B9     		cbnz	r3, .L118
+ 557 03ce FFF7FEFF 		bl	xTaskGetCurrentTaskHandle
+ 558 03d2 6060     		str	r0, [r4, #4]
+ 559              	.L118:
+ 560 03d4 2369     		ldr	r3, [r4, #16]
+ 561 03d6 8BB1     		cbz	r3, .L120
+ 562 03d8 04F11000 		add	r0, r4, #16
+ 563 03dc FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 564 03e0 0128     		cmp	r0, #1
+ 565 03e2 0BD1     		bne	.L120
+ 566              	.L122:
+ 567 03e4 FFF7FEFF 		bl	vPortYield
+ 568 03e8 08E0     		b	.L120
+ 569              	.L117:
+ 570 03ea 636A     		ldr	r3, [r4, #36]
+ 571 03ec E560     		str	r5, [r4, #12]
+ 572 03ee 2BB1     		cbz	r3, .L120
+ 573 03f0 04F12400 		add	r0, r4, #36
+ 574 03f4 FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 575 03f8 0028     		cmp	r0, #0
+ 576 03fa F3D1     		bne	.L122
+ 577              	.L120:
+ 578 03fc FFF7FEFF 		bl	vPortExitCritical
+ 579 0400 0120     		movs	r0, #1
+ 580 0402 49E0     		b	.L123
+ 581              	.L116:
+ 582 0404 019D     		ldr	r5, [sp, #4]
+ 583 0406 1DB9     		cbnz	r5, .L124
+ 584 0408 FFF7FEFF 		bl	vPortExitCritical
+ 585 040c 2846     		mov	r0, r5
+ 586 040e 43E0     		b	.L123
+ 587              	.L124:
+ 588 0410 16B9     		cbnz	r6, .L125
+ 589 0412 02A8     		add	r0, sp, #8
+ 590 0414 FFF7FEFF 		bl	vTaskSetTimeOutState
+ 591              	.L125:
+ 592 0418 FFF7FEFF 		bl	vPortExitCritical
+ 593 041c FFF7FEFF 		bl	vTaskSuspendAll
+ 594 0420 FFF7FEFF 		bl	vPortEnterCritical
+ 595 0424 636C     		ldr	r3, [r4, #68]
+ 596 0426 0133     		adds	r3, r3, #1
+ 597 0428 08BF     		it	eq
+ 598 042a 6764     		streq	r7, [r4, #68]
+ 599 042c A36C     		ldr	r3, [r4, #72]
+ 600 042e 0133     		adds	r3, r3, #1
+ 601 0430 08BF     		it	eq
+ 602 0432 A764     		streq	r7, [r4, #72]
+ 603 0434 FFF7FEFF 		bl	vPortExitCritical
+ 604 0438 01A9     		add	r1, sp, #4
+ 605 043a 02A8     		add	r0, sp, #8
+ 606 043c FFF7FEFF 		bl	xTaskCheckForTimeOut
+ 607 0440 20BB     		cbnz	r0, .L128
+ 608 0442 FFF7FEFF 		bl	vPortEnterCritical
+ 609 0446 A56B     		ldr	r5, [r4, #56]
+ 610 0448 FFF7FEFF 		bl	vPortExitCritical
+ 611 044c C5B9     		cbnz	r5, .L129
+ 612 044e 2368     		ldr	r3, [r4]
+ 613 0450 33B9     		cbnz	r3, .L130
+ 614 0452 FFF7FEFF 		bl	vPortEnterCritical
+ 615 0456 6068     		ldr	r0, [r4, #4]
+ 616 0458 FFF7FEFF 		bl	vTaskPriorityInherit
+ 617 045c FFF7FEFF 		bl	vPortExitCritical
+ 618              	.L130:
+ 619 0460 0199     		ldr	r1, [sp, #4]
+ 620 0462 04F12400 		add	r0, r4, #36
+ 621 0466 FFF7FEFF 		bl	vTaskPlaceOnEventList
+ 622 046a 2046     		mov	r0, r4
+ 623 046c FFF728FE 		bl	prvUnlockQueue
+ 624 0470 FFF7FEFF 		bl	xTaskResumeAll
+ 625 0474 08B1     		cbz	r0, .L135
+ 626              	.L131:
+ 627 0476 0126     		movs	r6, #1
+ 628 0478 98E7     		b	.L115
+ 629              	.L135:
+ 630 047a FFF7FEFF 		bl	vPortYield
+ 631 047e FAE7     		b	.L131
+ 632              	.L129:
+ 633 0480 2046     		mov	r0, r4
+ 634 0482 FFF71DFE 		bl	prvUnlockQueue
+ 635 0486 FFF7FEFF 		bl	xTaskResumeAll
+ 636 048a F4E7     		b	.L131
+ 637              	.L128:
+ 638 048c 2046     		mov	r0, r4
+ 639 048e FFF717FE 		bl	prvUnlockQueue
+ 640 0492 FFF7FEFF 		bl	xTaskResumeAll
+ 641 0496 0020     		movs	r0, #0
+ 642              	.L123:
+ 643 0498 05B0     		add	sp, sp, #20
+ 644              		@ sp needed
+ 645 049a BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 647              		.align	1
+ 648              		.global	xQueueReceiveFromISR
+ 649              		.thumb
+ 650              		.thumb_func
+ 652              	xQueueReceiveFromISR:
+ 653              		@ args = 0, pretend = 0, frame = 0
+ 654              		@ frame_needed = 0, uses_anonymous_args = 0
+ 655 049e 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 656 04a2 0546     		mov	r5, r0
+ 657 04a4 8846     		mov	r8, r1
+ 658 04a6 1746     		mov	r7, r2
+ 659 04a8 FFF7FEFF 		bl	ulPortSetInterruptMask
+ 660 04ac AC6B     		ldr	r4, [r5, #56]
+ 661 04ae 0646     		mov	r6, r0
+ 662 04b0 C4B1     		cbz	r4, .L137
+ 663 04b2 4146     		mov	r1, r8
+ 664 04b4 2846     		mov	r0, r5
+ 665 04b6 FFF7F0FD 		bl	prvCopyDataFromQueue
+ 666 04ba AB6B     		ldr	r3, [r5, #56]
+ 667 04bc 013B     		subs	r3, r3, #1
+ 668 04be AB63     		str	r3, [r5, #56]
+ 669 04c0 6B6C     		ldr	r3, [r5, #68]
+ 670 04c2 0133     		adds	r3, r3, #1
+ 671 04c4 0AD1     		bne	.L138
+ 672 04c6 2B69     		ldr	r3, [r5, #16]
+ 673 04c8 5BB1     		cbz	r3, .L148
+ 674 04ca 05F11000 		add	r0, r5, #16
+ 675 04ce FFF7FEFF 		bl	xTaskRemoveFromEventList
+ 676 04d2 30B1     		cbz	r0, .L148
+ 677 04d4 2FB1     		cbz	r7, .L148
+ 678 04d6 0124     		movs	r4, #1
+ 679 04d8 3C60     		str	r4, [r7]
+ 680 04da 03E0     		b	.L137
+ 681              	.L138:
+ 682 04dc 6B6C     		ldr	r3, [r5, #68]
+ 683 04de 0133     		adds	r3, r3, #1
+ 684 04e0 6B64     		str	r3, [r5, #68]
+ 685              	.L148:
+ 686 04e2 0124     		movs	r4, #1
+ 687              	.L137:
+ 688 04e4 3046     		mov	r0, r6
+ 689 04e6 FFF7FEFF 		bl	vPortClearInterruptMask
+ 690 04ea 2046     		mov	r0, r4
+ 691 04ec BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 693              		.align	1
+ 694              		.global	xQueuePeekFromISR
+ 695              		.thumb
+ 696              		.thumb_func
+ 698              	xQueuePeekFromISR:
+ 699              		@ args = 0, pretend = 0, frame = 0
+ 700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 701 04f0 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 702 04f2 0546     		mov	r5, r0
+ 703 04f4 0F46     		mov	r7, r1
+ 704 04f6 FFF7FEFF 		bl	ulPortSetInterruptMask
+ 705 04fa AC6B     		ldr	r4, [r5, #56]
+ 706 04fc 0646     		mov	r6, r0
+ 707 04fe 34B1     		cbz	r4, .L150
+ 708 0500 EC68     		ldr	r4, [r5, #12]
+ 709 0502 3946     		mov	r1, r7
+ 710 0504 2846     		mov	r0, r5
+ 711 0506 FFF7C8FD 		bl	prvCopyDataFromQueue
+ 712 050a EC60     		str	r4, [r5, #12]
+ 713 050c 0124     		movs	r4, #1
+ 714              	.L150:
+ 715 050e 3046     		mov	r0, r6
+ 716 0510 FFF7FEFF 		bl	vPortClearInterruptMask
+ 717 0514 2046     		mov	r0, r4
+ 718 0516 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 720              		.align	1
+ 721              		.global	uxQueueMessagesWaiting
+ 722              		.thumb
+ 723              		.thumb_func
+ 725              	uxQueueMessagesWaiting:
+ 726              		@ args = 0, pretend = 0, frame = 0
+ 727              		@ frame_needed = 0, uses_anonymous_args = 0
+ 728 0518 10B5     		push	{r4, lr}
+ 729 051a 0446     		mov	r4, r0
+ 730 051c FFF7FEFF 		bl	vPortEnterCritical
+ 731 0520 A46B     		ldr	r4, [r4, #56]
+ 732 0522 FFF7FEFF 		bl	vPortExitCritical
+ 733 0526 2046     		mov	r0, r4
+ 734 0528 10BD     		pop	{r4, pc}
+ 736              		.align	1
+ 737              		.global	uxQueueMessagesWaitingFromISR
+ 738              		.thumb
+ 739              		.thumb_func
+ 741              	uxQueueMessagesWaitingFromISR:
+ 742              		@ args = 0, pretend = 0, frame = 0
+ 743              		@ frame_needed = 0, uses_anonymous_args = 0
+ 744              		@ link register save eliminated.
+ 745 052a 806B     		ldr	r0, [r0, #56]
+ 746 052c 7047     		bx	lr
+ 748              		.align	1
+ 749              		.global	vQueueDelete
+ 750              		.thumb
+ 751              		.thumb_func
+ 753              	vQueueDelete:
+ 754              		@ args = 0, pretend = 0, frame = 0
+ 755              		@ frame_needed = 0, uses_anonymous_args = 0
+ 756 052e 10B5     		push	{r4, lr}
+ 757 0530 0446     		mov	r4, r0
+ 758 0532 0068     		ldr	r0, [r0]
+ 759 0534 FFF7FEFF 		bl	vPortFree
+ 760 0538 2046     		mov	r0, r4
+ 761 053a BDE81040 		pop	{r4, lr}
+ 762 053e FFF7FEBF 		b	vPortFree
+ 764              		.align	1
+ 765              		.global	ucQueueGetQueueNumber
+ 766              		.thumb
+ 767              		.thumb_func
+ 769              	ucQueueGetQueueNumber:
+ 770              		@ args = 0, pretend = 0, frame = 0
+ 771              		@ frame_needed = 0, uses_anonymous_args = 0
+ 772              		@ link register save eliminated.
+ 773 0542 90F84C00 		ldrb	r0, [r0, #76]	@ zero_extendqisi2
+ 774 0546 7047     		bx	lr
+ 776              		.align	1
+ 777              		.global	vQueueSetQueueNumber
+ 778              		.thumb
+ 779              		.thumb_func
+ 781              	vQueueSetQueueNumber:
+ 782              		@ args = 0, pretend = 0, frame = 0
+ 783              		@ frame_needed = 0, uses_anonymous_args = 0
+ 784              		@ link register save eliminated.
+ 785 0548 80F84C10 		strb	r1, [r0, #76]
+ 786 054c 7047     		bx	lr
+ 788              		.align	1
+ 789              		.global	ucQueueGetQueueType
+ 790              		.thumb
+ 791              		.thumb_func
+ 793              	ucQueueGetQueueType:
+ 794              		@ args = 0, pretend = 0, frame = 0
+ 795              		@ frame_needed = 0, uses_anonymous_args = 0
+ 796              		@ link register save eliminated.
+ 797 054e 90F84D00 		ldrb	r0, [r0, #77]	@ zero_extendqisi2
+ 798 0552 7047     		bx	lr
+ 800              		.align	1
+ 801              		.global	xQueueIsQueueEmptyFromISR
+ 802              		.thumb
+ 803              		.thumb_func
+ 805              	xQueueIsQueueEmptyFromISR:
+ 806              		@ args = 0, pretend = 0, frame = 0
+ 807              		@ frame_needed = 0, uses_anonymous_args = 0
+ 808              		@ link register save eliminated.
+ 809 0554 806B     		ldr	r0, [r0, #56]
+ 810 0556 B0FA80F0 		clz	r0, r0
+ 811 055a 4009     		lsrs	r0, r0, #5
+ 812 055c 7047     		bx	lr
+ 814              		.align	1
+ 815              		.global	xQueueIsQueueFullFromISR
+ 816              		.thumb
+ 817              		.thumb_func
+ 819              	xQueueIsQueueFullFromISR:
+ 820              		@ args = 0, pretend = 0, frame = 0
+ 821              		@ frame_needed = 0, uses_anonymous_args = 0
+ 822              		@ link register save eliminated.
+ 823 055e 836B     		ldr	r3, [r0, #56]
+ 824 0560 C06B     		ldr	r0, [r0, #60]
+ 825 0562 C31A     		subs	r3, r0, r3
+ 826 0564 5842     		rsbs	r0, r3, #0
+ 827 0566 5841     		adcs	r0, r0, r3
+ 828 0568 7047     		bx	lr
+ 830              		.align	1
+ 831              		.global	xQueueCreateSet
+ 832              		.thumb
+ 833              		.thumb_func
+ 835              	xQueueCreateSet:
+ 836              		@ args = 0, pretend = 0, frame = 0
+ 837              		@ frame_needed = 0, uses_anonymous_args = 0
+ 838              		@ link register save eliminated.
+ 839 056a 0022     		movs	r2, #0
+ 840 056c 0421     		movs	r1, #4
+ 841 056e FFF7FEBF 		b	xQueueGenericCreate
+ 843              		.align	1
+ 844              		.global	xQueueAddToSet
+ 845              		.thumb
+ 846              		.thumb_func
+ 848              	xQueueAddToSet:
+ 849              		@ args = 0, pretend = 0, frame = 0
+ 850              		@ frame_needed = 0, uses_anonymous_args = 0
+ 851 0572 38B5     		push	{r3, r4, r5, lr}
+ 852 0574 036D     		ldr	r3, [r0, #80]
+ 853 0576 0446     		mov	r4, r0
+ 854 0578 0D46     		mov	r5, r1
+ 855 057a 43B9     		cbnz	r3, .L163
+ 856 057c 826B     		ldr	r2, [r0, #56]
+ 857 057e 32B9     		cbnz	r2, .L163
+ 858 0580 FFF7FEFF 		bl	vPortEnterCritical
+ 859 0584 2565     		str	r5, [r4, #80]
+ 860 0586 FFF7FEFF 		bl	vPortExitCritical
+ 861 058a 0120     		movs	r0, #1
+ 862 058c 38BD     		pop	{r3, r4, r5, pc}
+ 863              	.L163:
+ 864 058e 0020     		movs	r0, #0
+ 865 0590 38BD     		pop	{r3, r4, r5, pc}
+ 867              		.align	1
+ 868              		.global	xQueueRemoveFromSet
+ 869              		.thumb
+ 870              		.thumb_func
+ 872              	xQueueRemoveFromSet:
+ 873              		@ args = 0, pretend = 0, frame = 0
+ 874              		@ frame_needed = 0, uses_anonymous_args = 0
+ 875 0592 38B5     		push	{r3, r4, r5, lr}
+ 876 0594 036D     		ldr	r3, [r0, #80]
+ 877 0596 0446     		mov	r4, r0
+ 878 0598 8B42     		cmp	r3, r1
+ 879 059a 08D1     		bne	.L168
+ 880 059c 856B     		ldr	r5, [r0, #56]
+ 881 059e 35B9     		cbnz	r5, .L168
+ 882 05a0 FFF7FEFF 		bl	vPortEnterCritical
+ 883 05a4 2565     		str	r5, [r4, #80]
+ 884 05a6 FFF7FEFF 		bl	vPortExitCritical
+ 885 05aa 0120     		movs	r0, #1
+ 886 05ac 38BD     		pop	{r3, r4, r5, pc}
+ 887              	.L168:
+ 888 05ae 0020     		movs	r0, #0
+ 889 05b0 38BD     		pop	{r3, r4, r5, pc}
+ 891              		.align	1
+ 892              		.global	xQueueSelectFromSet
+ 893              		.thumb
+ 894              		.thumb_func
+ 896              	xQueueSelectFromSet:
+ 897              		@ args = 0, pretend = 0, frame = 8
+ 898              		@ frame_needed = 0, uses_anonymous_args = 0
+ 899 05b2 13B5     		push	{r0, r1, r4, lr}
+ 900 05b4 0023     		movs	r3, #0
+ 901 05b6 02AC     		add	r4, sp, #8
+ 902 05b8 44F8043D 		str	r3, [r4, #-4]!
+ 903 05bc 0A46     		mov	r2, r1
+ 904 05be 2146     		mov	r1, r4
+ 905 05c0 FFF7FEFF 		bl	xQueueGenericReceive
+ 906 05c4 0198     		ldr	r0, [sp, #4]
+ 907 05c6 02B0     		add	sp, sp, #8
+ 908              		@ sp needed
+ 909 05c8 10BD     		pop	{r4, pc}
+ 911              		.align	1
+ 912              		.global	xQueueSelectFromSetFromISR
+ 913              		.thumb
+ 914              		.thumb_func
+ 916              	xQueueSelectFromSetFromISR:
+ 917              		@ args = 0, pretend = 0, frame = 8
+ 918              		@ frame_needed = 0, uses_anonymous_args = 0
+ 919 05ca 07B5     		push	{r0, r1, r2, lr}
+ 920 05cc 0022     		movs	r2, #0
+ 921 05ce 02A9     		add	r1, sp, #8
+ 922 05d0 41F8042D 		str	r2, [r1, #-4]!
+ 923 05d4 FFF7FEFF 		bl	xQueueReceiveFromISR
+ 924 05d8 0198     		ldr	r0, [sp, #4]
+ 925 05da 03B0     		add	sp, sp, #12
+ 926              		@ sp needed
+ 927 05dc 5DF804FB 		ldr	pc, [sp], #4
+ 929              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 queue.c
-     /tmp/ccjTF3yq.s:16     .text:00000000 $t
-     /tmp/ccjTF3yq.s:20     .text:00000000 prvCopyDataFromQueue
-     /tmp/ccjTF3yq.s:47     .text:00000028 prvCopyDataToQueue
-     /tmp/ccjTF3yq.s:108    .text:00000090 prvNotifyQueueSetContainer
-     /tmp/ccjTF3yq.s:139    .text:000000c0 prvUnlockQueue
-     /tmp/ccjTF3yq.s:205    .text:0000013a xQueueGenericReset
-     /tmp/ccjTF3yq.s:250    .text:00000196 xQueueGenericCreate
-     /tmp/ccjTF3yq.s:293    .text:000001e4 xQueueCreateCountingSemaphore
-     /tmp/ccjTF3yq.s:311    .text:000001f6 xQueueGenericSend
-     /tmp/ccjTF3yq.s:421    .text:000002ec xQueueCreateMutex
-     /tmp/ccjTF3yq.s:462    .text:0000033a xQueueGenericSendFromISR
-     /tmp/ccjTF3yq.s:530    .text:000003b2 xQueueGenericReceive
-     /tmp/ccjTF3yq.s:651    .text:000004c6 xQueueReceiveFromISR
-     /tmp/ccjTF3yq.s:701    .text:0000051a xQueuePeekFromISR
-     /tmp/ccjTF3yq.s:731    .text:00000546 uxQueueMessagesWaiting
-     /tmp/ccjTF3yq.s:747    .text:00000558 uxQueueMessagesWaitingFromISR
-     /tmp/ccjTF3yq.s:759    .text:0000055c vQueueDelete
-     /tmp/ccjTF3yq.s:775    .text:00000570 ucQueueGetQueueNumber
-     /tmp/ccjTF3yq.s:787    .text:00000576 vQueueSetQueueNumber
-     /tmp/ccjTF3yq.s:799    .text:0000057c ucQueueGetQueueType
-     /tmp/ccjTF3yq.s:811    .text:00000582 xQueueIsQueueEmptyFromISR
-     /tmp/ccjTF3yq.s:826    .text:0000058e xQueueIsQueueFullFromISR
-     /tmp/ccjTF3yq.s:842    .text:0000059c xQueueCreateSet
-     /tmp/ccjTF3yq.s:855    .text:000005a2 xQueueAddToSet
-     /tmp/ccjTF3yq.s:880    .text:000005c2 xQueueRemoveFromSet
-     /tmp/ccjTF3yq.s:907    .text:000005e6 xQueueSelectFromSet
-     /tmp/ccjTF3yq.s:924    .text:000005fa xQueueSelectFromSetFromISR
+     /tmp/ccbDPP9Q.s:17     .text:00000000 $t
+     /tmp/ccbDPP9Q.s:21     .text:00000000 prvCopyDataToQueue
+     /tmp/ccbDPP9Q.s:80     .text:00000066 prvNotifyQueueSetContainer
+     /tmp/ccbDPP9Q.s:115    .text:0000009a prvCopyDataFromQueue
+     /tmp/ccbDPP9Q.s:143    .text:000000c0 prvUnlockQueue
+     /tmp/ccbDPP9Q.s:208    .text:0000013c xQueueGenericReset
+     /tmp/ccbDPP9Q.s:254    .text:00000196 xQueueGenericCreate
+     /tmp/ccbDPP9Q.s:299    .text:000001e6 xQueueCreateCountingSemaphore
+     /tmp/ccbDPP9Q.s:317    .text:000001f8 xQueueGenericSend
+     /tmp/ccbDPP9Q.s:427    .text:000002e0 xQueueCreateMutex
+     /tmp/ccbDPP9Q.s:468    .text:0000032c xQueueGenericSendFromISR
+     /tmp/ccbDPP9Q.s:531    .text:0000039a xQueueGenericReceive
+     /tmp/ccbDPP9Q.s:652    .text:0000049e xQueueReceiveFromISR
+     /tmp/ccbDPP9Q.s:698    .text:000004f0 xQueuePeekFromISR
+     /tmp/ccbDPP9Q.s:725    .text:00000518 uxQueueMessagesWaiting
+     /tmp/ccbDPP9Q.s:741    .text:0000052a uxQueueMessagesWaitingFromISR
+     /tmp/ccbDPP9Q.s:753    .text:0000052e vQueueDelete
+     /tmp/ccbDPP9Q.s:769    .text:00000542 ucQueueGetQueueNumber
+     /tmp/ccbDPP9Q.s:781    .text:00000548 vQueueSetQueueNumber
+     /tmp/ccbDPP9Q.s:793    .text:0000054e ucQueueGetQueueType
+     /tmp/ccbDPP9Q.s:805    .text:00000554 xQueueIsQueueEmptyFromISR
+     /tmp/ccbDPP9Q.s:819    .text:0000055e xQueueIsQueueFullFromISR
+     /tmp/ccbDPP9Q.s:835    .text:0000056a xQueueCreateSet
+     /tmp/ccbDPP9Q.s:848    .text:00000572 xQueueAddToSet
+     /tmp/ccbDPP9Q.s:872    .text:00000592 xQueueRemoveFromSet
+     /tmp/ccbDPP9Q.s:896    .text:000005b2 xQueueSelectFromSet
+     /tmp/ccbDPP9Q.s:916    .text:000005ca xQueueSelectFromSetFromISR
 
 UNDEFINED SYMBOLS
-memcpy
 vTaskPriorityDisinherit
+memcpy
 xTaskRemoveFromEventList
 vPortEnterCritical
 vTaskMissedYield

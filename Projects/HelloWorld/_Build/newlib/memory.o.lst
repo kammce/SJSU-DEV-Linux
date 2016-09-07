@@ -11,53 +11,53 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"memory.cpp"
-  15              		.text
-  16              		.align	1
-  17              		.global	_sbrk
-  18              		.thumb
-  19              		.thumb_func
-  21              	_sbrk:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24              		@ link register save eliminated.
-  25 0000 0D4B     		ldr	r3, .L5
-  26 0002 0246     		mov	r2, r0
-  27 0004 1968     		ldr	r1, [r3, #0]
-  28 0006 11B9     		cbnz	r1, .L2
-  29 0008 4FF08051 		mov	r1, #268435456
-  30 000c 1960     		str	r1, [r3, #0]
-  31              	.L2:
-  32 000e 1868     		ldr	r0, [r3, #0]
-  33 0010 8118     		adds	r1, r0, r2
-  34 0012 1960     		str	r1, [r3, #0]
-  35 0014 094B     		ldr	r3, .L5+4
-  36 0016 CB18     		adds	r3, r1, r3
-  37 0018 0949     		ldr	r1, .L5+8
-  38 001a 8B42     		cmp	r3, r1
-  39 001c 04D8     		bhi	.L3
-  40 001e 094B     		ldr	r3, .L5+12
-  41 0020 0549     		ldr	r1, .L5
-  42 0022 D218     		adds	r2, r2, r3
-  43 0024 0A60     		str	r2, [r1, #0]
-  44 0026 1846     		mov	r0, r3
-  45              	.L3:
-  46 0028 034B     		ldr	r3, .L5
-  47 002a 074A     		ldr	r2, .L5+16
-  48 002c 1968     		ldr	r1, [r3, #0]
-  49 002e 9142     		cmp	r1, r2
-  50 0030 84BF     		itt	hi
-  51 0032 1A60     		strhi	r2, [r3, #0]
-  52 0034 0020     		movhi	r0, #0
-  53 0036 7047     		bx	lr
-  54              	.L6:
-  55              		.align	2
-  56              	.L5:
-  57 0038 00000000 		.word	.LANCHOR0
-  58 003c FF7FFFEF 		.word	-268468225
-  59 0040 FE3F0710 		.word	268910590
-  60 0044 00000000 		.word	_pvHeapStart
-  61 0048 00400820 		.word	537411584
+  14              		.syntax unified
+  15              		.file	"memory.cpp"
+  16              		.text
+  17              		.align	1
+  18              		.global	_sbrk
+  19              		.thumb
+  20              		.thumb_func
+  22              	_sbrk:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 0E4B     		ldr	r3, .L6
+  26 0002 10B5     		push	{r4, lr}
+  27 0004 1A68     		ldr	r2, [r3]
+  28 0006 0146     		mov	r1, r0
+  29 0008 12B9     		cbnz	r2, .L2
+  30 000a 4FF08052 		mov	r2, #268435456
+  31 000e 1A60     		str	r2, [r3]
+  32              	.L2:
+  33 0010 1868     		ldr	r0, [r3]
+  34 0012 5C68     		ldr	r4, [r3, #4]
+  35 0014 4218     		adds	r2, r0, r1
+  36 0016 9442     		cmp	r4, r2
+  37 0018 1A60     		str	r2, [r3]
+  38 001a 07D2     		bcs	.L3
+  39 001c 084C     		ldr	r4, .L6+4
+  40 001e A242     		cmp	r2, r4
+  41 0020 04D8     		bhi	.L3
+  42 0022 084A     		ldr	r2, .L6+8
+  43 0024 0548     		ldr	r0, .L6
+  44 0026 1144     		add	r1, r1, r2
+  45 0028 0160     		str	r1, [r0]
+  46 002a 1046     		mov	r0, r2
+  47              	.L3:
+  48 002c 9A68     		ldr	r2, [r3, #8]
+  49 002e 1B68     		ldr	r3, [r3]
+  50 0030 9342     		cmp	r3, r2
+  51 0032 82BF     		ittt	hi
+  52 0034 014B     		ldrhi	r3, .L6
+  53 0036 0020     		movhi	r0, #0
+  54 0038 1A60     		strhi	r2, [r3]
+  55 003a 10BD     		pop	{r4, pc}
+  56              	.L7:
+  57              		.align	2
+  58              	.L6:
+  59 003c 00000000 		.word	.LANCHOR0
+  60 0040 FFBF0720 		.word	537378815
+  61 0044 00000000 		.word	_pvHeapStart
   63              		.align	1
   64              		.global	_Znwj
   65              		.thumb
@@ -66,7 +66,7 @@
   69              		@ args = 0, pretend = 0, frame = 0
   70              		@ frame_needed = 0, uses_anonymous_args = 0
   71              		@ link register save eliminated.
-  72 004c FFF7FEBF 		b	malloc
+  72 0048 FFF7FEBF 		b	malloc
   74              		.align	1
   75              		.global	_Znaj
   76              		.thumb
@@ -75,7 +75,7 @@
   80              		@ args = 0, pretend = 0, frame = 0
   81              		@ frame_needed = 0, uses_anonymous_args = 0
   82              		@ link register save eliminated.
-  83 0050 FFF7FEBF 		b	malloc
+  83 004c FFF7FEBF 		b	malloc
   85              		.align	1
   86              		.global	_ZdlPv
   87              		.thumb
@@ -84,7 +84,7 @@
   91              		@ args = 0, pretend = 0, frame = 0
   92              		@ frame_needed = 0, uses_anonymous_args = 0
   93              		@ link register save eliminated.
-  94 0054 FFF7FEBF 		b	free
+  94 0050 FFF7FEBF 		b	free
   96              		.align	1
   97              		.global	_ZdaPv
   98              		.thumb
@@ -93,7 +93,7 @@
  102              		@ args = 0, pretend = 0, frame = 0
  103              		@ frame_needed = 0, uses_anonymous_args = 0
  104              		@ link register save eliminated.
- 105 0058 FFF7FEBF 		b	free
+ 105 0054 FFF7FEBF 		b	free
  107              		.align	1
  108              		.global	sys_get_mem_info
  109              		.thumb
@@ -101,103 +101,135 @@
  112              	sys_get_mem_info:
  113              		@ args = 0, pretend = 0, frame = 40
  114              		@ frame_needed = 0, uses_anonymous_args = 0
- 115 005c 30B5     		push	{r4, r5, lr}
- 116 005e 8BB0     		sub	sp, sp, #44
- 117 0060 0446     		mov	r4, r0
- 118 0062 6846     		mov	r0, sp
- 119 0064 FFF7FEFF 		bl	mallinfo
- 120 0068 079A     		ldr	r2, [sp, #28]
- 121 006a 134D     		ldr	r5, .L16
- 122 006c 089B     		ldr	r3, [sp, #32]
- 123 006e B2F5803F 		cmp	r2, #65536
- 124 0072 2560     		str	r5, [r4, #0]
- 125 0074 A360     		str	r3, [r4, #8]
- 126 0076 6260     		str	r2, [r4, #4]
- 127 0078 02D9     		bls	.L12
- 128 007a 104B     		ldr	r3, .L16+4
- 129 007c D318     		adds	r3, r2, r3
- 130 007e 6360     		str	r3, [r4, #4]
- 131              	.L12:
- 132 0080 0023     		movs	r3, #0
- 133 0082 E360     		str	r3, [r4, #12]
- 134 0084 0E4B     		ldr	r3, .L16+8
- 135 0086 0F4A     		ldr	r2, .L16+12
- 136 0088 1B68     		ldr	r3, [r3, #0]
- 137 008a 9342     		cmp	r3, r2
- 138 008c 05D8     		bhi	.L13
- 139 008e EB18     		adds	r3, r5, r3
- 140 0090 C3F18053 		rsb	r3, r3, #268435456
- 141 0094 03F58033 		add	r3, r3, #65536
- 142 0098 0AE0     		b	.L15
- 143              	.L13:
- 144 009a 0B4A     		ldr	r2, .L16+16
- 145 009c 9342     		cmp	r3, r2
- 146 009e 08D8     		bhi	.L11
- 147 00a0 0A4D     		ldr	r5, .L16+20
- 148 00a2 C5F18045 		rsb	r5, r5, #1073741824
- 149 00a6 05F58015 		add	r5, r5, #1048576
- 150 00aa EB1A     		subs	r3, r5, r3
- 151 00ac 002B     		cmp	r3, #0
- 152 00ae 00DD     		ble	.L11
- 153              	.L15:
- 154 00b0 E360     		str	r3, [r4, #12]
- 155              	.L11:
- 156 00b2 2046     		mov	r0, r4
- 157 00b4 0BB0     		add	sp, sp, #44
- 158 00b6 30BD     		pop	{r4, r5, pc}
- 159              	.L17:
- 160              		.align	2
- 161              	.L16:
- 162 00b8 0040F8DF 		.word	_pvHeapStart-537378816
- 163 00bc 00C0F8EF 		.word	-268910592
- 164 00c0 00000000 		.word	.LANCHOR0
- 165 00c4 00800010 		.word	268468224
- 166 00c8 FF3F0820 		.word	537411583
- 167 00cc 00000000 		.word	_pvHeapStart
- 169              		.align	1
- 170              		.global	__aeabi_atexit
- 171              		.thumb
- 172              		.thumb_func
- 174              	__aeabi_atexit:
- 175              		@ args = 0, pretend = 0, frame = 0
- 176              		@ frame_needed = 0, uses_anonymous_args = 0
- 177              		@ link register save eliminated.
- 178 00d0 0020     		movs	r0, #0
- 179 00d2 7047     		bx	lr
- 181              		.align	1
- 182              		.global	_ZN9__gnu_cxx27__verbose_terminate_handlerEv
- 183              		.thumb
- 184              		.thumb_func
- 186              	_ZN9__gnu_cxx27__verbose_terminate_handlerEv:
- 187              		@ Volatile: function does not return.
- 188              		@ args = 0, pretend = 0, frame = 0
- 189              		@ frame_needed = 0, uses_anonymous_args = 0
- 190              		@ link register save eliminated.
- 191              	.L20:
- 192 00d4 FEE7     		b	.L20
- 194 00d6 00BF     		.bss
- 195              		.align	2
- 196              		.set	.LANCHOR0,. + 0
- 199              	_ZL13next_heap_ptr:
- 200 0000 00000000 		.space	4
- 201              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+ 115 0058 30B5     		push	{r4, r5, lr}
+ 116 005a 0546     		mov	r5, r0
+ 117 005c 8BB0     		sub	sp, sp, #44
+ 118 005e 6846     		mov	r0, sp
+ 119 0060 FFF7FEFF 		bl	mallinfo
+ 120 0064 079A     		ldr	r2, [sp, #28]
+ 121 0066 154B     		ldr	r3, .L19
+ 122 0068 B2F5803F 		cmp	r2, #65536
+ 123 006c 2B60     		str	r3, [r5]
+ 124 006e 089B     		ldr	r3, [sp, #32]
+ 125 0070 88BF     		it	hi
+ 126 0072 02F17042 		addhi	r2, r2, #-268435456
+ 127 0076 1249     		ldr	r1, .L19+4
+ 128 0078 88BF     		it	hi
+ 129 007a A2F5E822 		subhi	r2, r2, #475136
+ 130 007e AB60     		str	r3, [r5, #8]
+ 131 0080 0023     		movs	r3, #0
+ 132 0082 6A60     		str	r2, [r5, #4]
+ 133 0084 EB60     		str	r3, [r5, #12]
+ 134 0086 4A68     		ldr	r2, [r1, #4]
+ 135 0088 0B68     		ldr	r3, [r1]
+ 136 008a 0E4C     		ldr	r4, .L19+8
+ 137 008c 9A42     		cmp	r2, r3
+ 138 008e 06D3     		bcc	.L15
+ 139 0090 D21A     		subs	r2, r2, r3
+ 140 0092 C4F10053 		rsb	r3, r4, #536870912
+ 141 0096 03F50423 		add	r3, r3, #540672
+ 142 009a 1344     		add	r3, r3, r2
+ 143 009c 0AE0     		b	.L18
+ 144              	.L15:
+ 145 009e 8A68     		ldr	r2, [r1, #8]
+ 146 00a0 9A42     		cmp	r2, r3
+ 147 00a2 08D9     		bls	.L12
+ 148 00a4 D21A     		subs	r2, r2, r3
+ 149 00a6 C4F10053 		rsb	r3, r4, #536870912
+ 150 00aa 03F5F823 		add	r3, r3, #507904
+ 151 00ae 1344     		add	r3, r3, r2
+ 152 00b0 002B     		cmp	r3, #0
+ 153 00b2 00DD     		ble	.L12
+ 154              	.L18:
+ 155 00b4 EB60     		str	r3, [r5, #12]
+ 156              	.L12:
+ 157 00b6 2846     		mov	r0, r5
+ 158 00b8 0BB0     		add	sp, sp, #44
+ 159              		@ sp needed
+ 160 00ba 30BD     		pop	{r4, r5, pc}
+ 161              	.L20:
+ 162              		.align	2
+ 163              	.L19:
+ 164 00bc 0040F8DF 		.word	_pvHeapStart-537378816
+ 165 00c0 00000000 		.word	.LANCHOR0
+ 166 00c4 00000000 		.word	_pvHeapStart
+ 168              		.align	1
+ 169              		.global	__aeabi_atexit
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	__aeabi_atexit:
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176              		@ link register save eliminated.
+ 177 00c8 0020     		movs	r0, #0
+ 178 00ca 7047     		bx	lr
+ 180              		.align	1
+ 181              		.global	_ZN9__gnu_cxx27__verbose_terminate_handlerEv
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	_ZN9__gnu_cxx27__verbose_terminate_handlerEv:
+ 186              		@ Volatile: function does not return.
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189              		@ link register save eliminated.
+ 190              	.L23:
+ 191 00cc FEE7     		b	.L23
+ 193 00ce 00BF     		.section	.text.startup,"ax",%progbits
+ 194              		.align	1
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	_GLOBAL__sub_I__sbrk:
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 202 0000 024B     		ldr	r3, .L25
+ 203 0002 034A     		ldr	r2, .L25+4
+ 204 0004 5A60     		str	r2, [r3, #4]
+ 205 0006 034A     		ldr	r2, .L25+8
+ 206 0008 9A60     		str	r2, [r3, #8]
+ 207 000a 7047     		bx	lr
+ 208              	.L26:
+ 209              		.align	2
+ 210              	.L25:
+ 211 000c 00000000 		.word	.LANCHOR0
+ 212 0010 00800010 		.word	268468224
+ 213 0014 00400820 		.word	537411584
+ 215              		.section	.init_array,"aw",%init_array
+ 216              		.align	2
+ 217 0000 00000000 		.word	_GLOBAL__sub_I__sbrk(target1)
+ 218              		.bss
+ 219              		.align	2
+ 220              		.set	.LANCHOR0,. + 0
+ 223              	_ZL13next_heap_ptr:
+ 224 0000 00000000 		.space	4
+ 227              	_ZL16ram_region_1_end:
+ 228 0004 00000000 		.space	4
+ 231              	_ZL16ram_region_2_end:
+ 232 0008 00000000 		.space	4
+ 233              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 memory.cpp
-     /tmp/ccM8dXed.s:16     .text:00000000 $t
-     /tmp/ccM8dXed.s:21     .text:00000000 _sbrk
-     /tmp/ccM8dXed.s:57     .text:00000038 $d
-     /tmp/ccM8dXed.s:63     .text:0000004c $t
-     /tmp/ccM8dXed.s:68     .text:0000004c _Znwj
-     /tmp/ccM8dXed.s:79     .text:00000050 _Znaj
-     /tmp/ccM8dXed.s:90     .text:00000054 _ZdlPv
-     /tmp/ccM8dXed.s:101    .text:00000058 _ZdaPv
-     /tmp/ccM8dXed.s:112    .text:0000005c sys_get_mem_info
-     /tmp/ccM8dXed.s:162    .text:000000b8 $d
-     /tmp/ccM8dXed.s:169    .text:000000d0 $t
-     /tmp/ccM8dXed.s:174    .text:000000d0 __aeabi_atexit
-     /tmp/ccM8dXed.s:186    .text:000000d4 _ZN9__gnu_cxx27__verbose_terminate_handlerEv
-     /tmp/ccM8dXed.s:195    .bss:00000000 $d
-     /tmp/ccM8dXed.s:199    .bss:00000000 _ZL13next_heap_ptr
+     /tmp/cc9M0Otm.s:17     .text:00000000 $t
+     /tmp/cc9M0Otm.s:22     .text:00000000 _sbrk
+     /tmp/cc9M0Otm.s:59     .text:0000003c $d
+     /tmp/cc9M0Otm.s:63     .text:00000048 $t
+     /tmp/cc9M0Otm.s:68     .text:00000048 _Znwj
+     /tmp/cc9M0Otm.s:79     .text:0000004c _Znaj
+     /tmp/cc9M0Otm.s:90     .text:00000050 _ZdlPv
+     /tmp/cc9M0Otm.s:101    .text:00000054 _ZdaPv
+     /tmp/cc9M0Otm.s:112    .text:00000058 sys_get_mem_info
+     /tmp/cc9M0Otm.s:164    .text:000000bc $d
+     /tmp/cc9M0Otm.s:168    .text:000000c8 $t
+     /tmp/cc9M0Otm.s:173    .text:000000c8 __aeabi_atexit
+     /tmp/cc9M0Otm.s:185    .text:000000cc _ZN9__gnu_cxx27__verbose_terminate_handlerEv
+     /tmp/cc9M0Otm.s:194    .text.startup:00000000 $t
+     /tmp/cc9M0Otm.s:198    .text.startup:00000000 _GLOBAL__sub_I__sbrk
+     /tmp/cc9M0Otm.s:211    .text.startup:0000000c $d
+     /tmp/cc9M0Otm.s:216    .init_array:00000000 $d
+     /tmp/cc9M0Otm.s:219    .bss:00000000 $d
+     /tmp/cc9M0Otm.s:223    .bss:00000000 _ZL13next_heap_ptr
+     /tmp/cc9M0Otm.s:227    .bss:00000004 _ZL16ram_region_1_end
+     /tmp/cc9M0Otm.s:231    .bss:00000008 _ZL16ram_region_2_end
 
 UNDEFINED SYMBOLS
 _pvHeapStart

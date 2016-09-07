@@ -1,7 +1,3 @@
-################################################################################
-# Automatically-generated file. But you can edit!!!
-################################################################################
-
 -include ../makefile.init
 
 RM := rm -rf
@@ -29,7 +25,7 @@ PROJECT = Executables/sjsud_exec
 -include L1_FreeRTOS/hooks/subdir.mk
 -include L1_FreeRTOS/MemMang/subdir.mk
 -include L0_LowLevel/source/subdir.mk
--include subdir.mk
+# -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -74,7 +70,6 @@ $(PROJECT).siz \
 
 # All Target
 all: $(PROJECT).elf secondary-outputs
-	
 
 # Tool invocations
 $(PROJECT).elf: $(OBJS) $(USER_OBJS)

@@ -11,182 +11,186 @@
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
-  14              		.file	"lpc_sys.c"
-  15              		.text
-  16              		.align	1
-  17              		.global	RIT_IRQHandler
-  18              		.thumb
-  19              		.thumb_func
-  21              	RIT_IRQHandler:
-  22              		@ args = 0, pretend = 0, frame = 0
-  23              		@ frame_needed = 0, uses_anonymous_args = 0
-  24 0000 08B5     		push	{r3, lr}
-  25 0002 044B     		ldr	r3, .L2
-  26 0004 1B68     		ldr	r3, [r3, #0]
-  27 0006 9847     		blx	r3
-  28 0008 034B     		ldr	r3, .L2+4
-  29 000a 1A7A     		ldrb	r2, [r3, #8]	@ zero_extendqisi2
-  30 000c 42F00102 		orr	r2, r2, #1
-  31 0010 1A72     		strb	r2, [r3, #8]
-  32 0012 08BD     		pop	{r3, pc}
-  33              	.L3:
-  34              		.align	2
-  35              	.L2:
-  36 0014 00000000 		.word	.LANCHOR0
-  37 0018 00000B40 		.word	1074462720
-  39              		.align	1
-  40              		.global	sys_get_mem_info_str
-  41              		.thumb
-  42              		.thumb_func
-  44              	sys_get_mem_info_str:
-  45              		@ args = 0, pretend = 0, frame = 16
-  46              		@ frame_needed = 0, uses_anonymous_args = 0
-  47 001c 10B5     		push	{r4, lr}
-  48 001e 86B0     		sub	sp, sp, #24
-  49 0020 0446     		mov	r4, r0
-  50 0022 02A8     		add	r0, sp, #8
-  51 0024 FFF7FEFF 		bl	sys_get_mem_info
-  52 0028 049B     		ldr	r3, [sp, #16]
-  53 002a 2046     		mov	r0, r4
-  54 002c 0093     		str	r3, [sp, #0]
-  55 002e 059B     		ldr	r3, [sp, #20]
-  56 0030 0349     		ldr	r1, .L5
-  57 0032 0193     		str	r3, [sp, #4]
-  58 0034 029A     		ldr	r2, [sp, #8]
-  59 0036 039B     		ldr	r3, [sp, #12]
-  60 0038 FFF7FEFF 		bl	sprintf
-  61 003c 06B0     		add	sp, sp, #24
-  62 003e 10BD     		pop	{r4, pc}
-  63              	.L6:
-  64              		.align	2
-  65              	.L5:
-  66 0040 00000000 		.word	.LC0
-  68              		.align	1
-  69              		.global	sys_rit_setup
-  70              		.thumb
-  71              		.thumb_func
-  73              	sys_rit_setup:
-  74              		@ args = 0, pretend = 0, frame = 0
-  75              		@ frame_needed = 0, uses_anonymous_args = 0
-  76 0044 70B5     		push	{r4, r5, r6, lr}
-  77 0046 0446     		mov	r4, r0
-  78 0048 0E46     		mov	r6, r1
-  79 004a 58B3     		cbz	r0, .L7
-  80 004c 164B     		ldr	r3, .L11
-  81 004e 174D     		ldr	r5, .L11+4
-  82 0050 D3F8C420 		ldr	r2, [r3, #196]
-  83 0054 0029     		cmp	r1, #0
-  84 0056 08BF     		it	eq
-  85 0058 0126     		moveq	r6, #1
-  86 005a 42F48032 		orr	r2, r2, #65536
-  87 005e C3F8C420 		str	r2, [r3, #196]
-  88 0062 D3F8AC21 		ldr	r2, [r3, #428]
-  89 0066 22F04062 		bic	r2, r2, #201326592
-  90 006a C3F8AC21 		str	r2, [r3, #428]
-  91 006e D3F8AC21 		ldr	r2, [r3, #428]
-  92 0072 42F08062 		orr	r2, r2, #67108864
-  93 0076 C3F8AC21 		str	r2, [r3, #428]
-  94 007a 0023     		movs	r3, #0
-  95 007c 2B72     		strb	r3, [r5, #8]
-  96 007e EB60     		str	r3, [r5, #12]
-  97 0080 6B60     		str	r3, [r5, #4]
-  98 0082 FFF7FEFF 		bl	sys_get_cpu_clock
-  99 0086 4FF47A73 		mov	r3, #1000
- 100 008a B3FBF6F6 		udiv	r6, r3, r6
- 101 008e B0FBF6F6 		udiv	r6, r0, r6
- 102 0092 0B23     		movs	r3, #11
- 103 0094 2E60     		str	r6, [r5, #0]
- 104 0096 2B72     		strb	r3, [r5, #8]
- 105 0098 054B     		ldr	r3, .L11+8
- 106 009a 4FF00052 		mov	r2, #536870912
- 107 009e 1C60     		str	r4, [r3, #0]
- 108 00a0 044B     		ldr	r3, .L11+12
- 109 00a2 1A60     		str	r2, [r3, #0]
- 110              	.L7:
- 111 00a4 70BD     		pop	{r4, r5, r6, pc}
- 112              	.L12:
- 113 00a6 00BF     		.align	2
- 114              	.L11:
- 115 00a8 00C00F40 		.word	1074774016
- 116 00ac 00000B40 		.word	1074462720
- 117 00b0 00000000 		.word	.LANCHOR0
- 118 00b4 00E100E0 		.word	-536813312
- 120              		.align	1
- 121              		.global	sys_rit_disable
- 122              		.thumb
- 123              		.thumb_func
- 125              	sys_rit_disable:
- 126              		@ args = 0, pretend = 0, frame = 0
- 127              		@ frame_needed = 0, uses_anonymous_args = 0
- 128              		@ link register save eliminated.
- 129 00b8 044B     		ldr	r3, .L14
- 130 00ba 0022     		movs	r2, #0
- 131 00bc 1A72     		strb	r2, [r3, #8]
- 132 00be 044B     		ldr	r3, .L14+4
- 133 00c0 4FF00052 		mov	r2, #536870912
- 134 00c4 C3F88020 		str	r2, [r3, #128]
- 135 00c8 7047     		bx	lr
- 136              	.L15:
- 137 00ca 00BF     		.align	2
- 138              	.L14:
- 139 00cc 00000B40 		.word	1074462720
- 140 00d0 00E100E0 		.word	-536813312
- 142              		.align	1
- 143              		.global	sys_rit_running
- 144              		.thumb
- 145              		.thumb_func
- 147              	sys_rit_running:
- 148              		@ args = 0, pretend = 0, frame = 0
- 149              		@ frame_needed = 0, uses_anonymous_args = 0
- 150              		@ link register save eliminated.
- 151 00d4 024B     		ldr	r3, .L17
- 152 00d6 187A     		ldrb	r0, [r3, #8]	@ zero_extendqisi2
- 153 00d8 C0F3C000 		ubfx	r0, r0, #3, #1
- 154 00dc 7047     		bx	lr
- 155              	.L18:
- 156 00de 00BF     		.align	2
- 157              	.L17:
- 158 00e0 00000B40 		.word	1074462720
- 160              		.section	.rodata.str1.1,"aMS",%progbits,1
- 161              	.LC0:
- 162 0000 4D656D6F 		.ascii	"Memory Information:\012Global Used   : %5d\012Heap "
- 162      72792049 
- 162      6E666F72 
- 162      6D617469 
- 162      6F6E3A0A 
- 163 002d 20205573 		.ascii	"  Used   : %5d\012Heap Avail.   : %5d\012System Ava"
- 163      65642020 
- 163      203A2025 
- 163      35640A48 
- 163      65617020 
- 164 005a 696C2E20 		.ascii	"il. : %5d\012\000"
- 164      3A202535 
- 164      640A00
- 165              		.bss
- 166              		.align	2
- 167              		.set	.LANCHOR0,. + 0
- 170              	m_rit_callback:
- 171 0000 00000000 		.space	4
- 172              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.6.2 20120613 (release) [ARM/embedded-4_6-br
+  14              		.syntax unified
+  15              		.file	"lpc_sys.c"
+  16              		.text
+  17              		.align	1
+  18              		.global	RIT_IRQHandler
+  19              		.thumb
+  20              		.thumb_func
+  22              	RIT_IRQHandler:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 08B5     		push	{r3, lr}
+  26 0002 044B     		ldr	r3, .L2
+  27 0004 1B68     		ldr	r3, [r3]
+  28 0006 9847     		blx	r3
+  29 0008 034A     		ldr	r2, .L2+4
+  30 000a 137A     		ldrb	r3, [r2, #8]	@ zero_extendqisi2
+  31 000c 43F00103 		orr	r3, r3, #1
+  32 0010 1372     		strb	r3, [r2, #8]
+  33 0012 08BD     		pop	{r3, pc}
+  34              	.L3:
+  35              		.align	2
+  36              	.L2:
+  37 0014 00000000 		.word	.LANCHOR0
+  38 0018 00000B40 		.word	1074462720
+  40              		.align	1
+  41              		.global	sys_get_mem_info_str
+  42              		.thumb
+  43              		.thumb_func
+  45              	sys_get_mem_info_str:
+  46              		@ args = 0, pretend = 0, frame = 16
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 001c 10B5     		push	{r4, lr}
+  49 001e 0446     		mov	r4, r0
+  50 0020 86B0     		sub	sp, sp, #24
+  51 0022 02A8     		add	r0, sp, #8
+  52 0024 FFF7FEFF 		bl	sys_get_mem_info
+  53 0028 059B     		ldr	r3, [sp, #20]
+  54 002a 029A     		ldr	r2, [sp, #8]
+  55 002c 0193     		str	r3, [sp, #4]
+  56 002e 049B     		ldr	r3, [sp, #16]
+  57 0030 0349     		ldr	r1, .L5
+  58 0032 0093     		str	r3, [sp]
+  59 0034 2046     		mov	r0, r4
+  60 0036 039B     		ldr	r3, [sp, #12]
+  61 0038 FFF7FEFF 		bl	sprintf
+  62 003c 06B0     		add	sp, sp, #24
+  63              		@ sp needed
+  64 003e 10BD     		pop	{r4, pc}
+  65              	.L6:
+  66              		.align	2
+  67              	.L5:
+  68 0040 00000000 		.word	.LC0
+  70              		.align	1
+  71              		.global	sys_rit_setup
+  72              		.thumb
+  73              		.thumb_func
+  75              	sys_rit_setup:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0044 70B5     		push	{r4, r5, r6, lr}
+  79 0046 0D46     		mov	r5, r1
+  80 0048 0646     		mov	r6, r0
+  81 004a 68B3     		cbz	r0, .L7
+  82 004c 0029     		cmp	r1, #0
+  83 004e 18BF     		it	ne
+  84 0050 0D46     		movne	r5, r1
+  85 0052 164B     		ldr	r3, .L14
+  86 0054 164C     		ldr	r4, .L14+4
+  87 0056 D3F8C420 		ldr	r2, [r3, #196]
+  88 005a 08BF     		it	eq
+  89 005c 0125     		moveq	r5, #1
+  90 005e 42F48032 		orr	r2, r2, #65536
+  91 0062 C3F8C420 		str	r2, [r3, #196]
+  92 0066 D3F8AC21 		ldr	r2, [r3, #428]
+  93 006a 22F04062 		bic	r2, r2, #201326592
+  94 006e C3F8AC21 		str	r2, [r3, #428]
+  95 0072 D3F8AC21 		ldr	r2, [r3, #428]
+  96 0076 42F08062 		orr	r2, r2, #67108864
+  97 007a C3F8AC21 		str	r2, [r3, #428]
+  98 007e 0023     		movs	r3, #0
+  99 0080 2372     		strb	r3, [r4, #8]
+ 100 0082 E360     		str	r3, [r4, #12]
+ 101 0084 6360     		str	r3, [r4, #4]
+ 102 0086 FFF7FEFF 		bl	sys_get_cpu_clock
+ 103 008a 4FF47A73 		mov	r3, #1000
+ 104 008e B3FBF5F1 		udiv	r1, r3, r5
+ 105 0092 B0FBF1F0 		udiv	r0, r0, r1
+ 106 0096 0B23     		movs	r3, #11
+ 107 0098 2060     		str	r0, [r4]
+ 108 009a 2372     		strb	r3, [r4, #8]
+ 109 009c 054B     		ldr	r3, .L14+8
+ 110 009e 4FF00052 		mov	r2, #536870912
+ 111 00a2 1E60     		str	r6, [r3]
+ 112 00a4 044B     		ldr	r3, .L14+12
+ 113 00a6 1A60     		str	r2, [r3]
+ 114              	.L7:
+ 115 00a8 70BD     		pop	{r4, r5, r6, pc}
+ 116              	.L15:
+ 117 00aa 00BF     		.align	2
+ 118              	.L14:
+ 119 00ac 00C00F40 		.word	1074774016
+ 120 00b0 00000B40 		.word	1074462720
+ 121 00b4 00000000 		.word	.LANCHOR0
+ 122 00b8 00E100E0 		.word	-536813312
+ 124              		.align	1
+ 125              		.global	sys_rit_disable
+ 126              		.thumb
+ 127              		.thumb_func
+ 129              	sys_rit_disable:
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 133 00bc 044B     		ldr	r3, .L17
+ 134 00be 0022     		movs	r2, #0
+ 135 00c0 1A72     		strb	r2, [r3, #8]
+ 136 00c2 044B     		ldr	r3, .L17+4
+ 137 00c4 4FF00052 		mov	r2, #536870912
+ 138 00c8 C3F88020 		str	r2, [r3, #128]
+ 139 00cc 7047     		bx	lr
+ 140              	.L18:
+ 141 00ce 00BF     		.align	2
+ 142              	.L17:
+ 143 00d0 00000B40 		.word	1074462720
+ 144 00d4 00E100E0 		.word	-536813312
+ 146              		.align	1
+ 147              		.global	sys_rit_running
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	sys_rit_running:
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 00d8 024B     		ldr	r3, .L20
+ 156 00da 187A     		ldrb	r0, [r3, #8]	@ zero_extendqisi2
+ 157 00dc C0F3C000 		ubfx	r0, r0, #3, #1
+ 158 00e0 7047     		bx	lr
+ 159              	.L21:
+ 160 00e2 00BF     		.align	2
+ 161              	.L20:
+ 162 00e4 00000B40 		.word	1074462720
+ 164              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 165              	.LC0:
+ 166 0000 4D656D6F 		.ascii	"Memory Information:\012Global Used   : %5d\012Heap "
+ 166      72792049 
+ 166      6E666F72 
+ 166      6D617469 
+ 166      6F6E3A0A 
+ 167 002d 20205573 		.ascii	"  Used   : %5d\012Heap Avail.   : %5d\012System Ava"
+ 167      65642020 
+ 167      203A2025 
+ 167      35640A48 
+ 167      65617020 
+ 168 005a 696C2E20 		.ascii	"il. : %5d\012\000"
+ 168      3A202535 
+ 168      640A00
+ 169              		.bss
+ 170              		.align	2
+ 171              		.set	.LANCHOR0,. + 0
+ 174              	m_rit_callback:
+ 175 0000 00000000 		.space	4
+ 176              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
 DEFINED SYMBOLS
                             *ABS*:00000000 lpc_sys.c
-     /tmp/ccIQRpdl.s:16     .text:00000000 $t
-     /tmp/ccIQRpdl.s:21     .text:00000000 RIT_IRQHandler
-     /tmp/ccIQRpdl.s:36     .text:00000014 $d
-     /tmp/ccIQRpdl.s:39     .text:0000001c $t
-     /tmp/ccIQRpdl.s:44     .text:0000001c sys_get_mem_info_str
-     /tmp/ccIQRpdl.s:66     .text:00000040 $d
-     /tmp/ccIQRpdl.s:68     .text:00000044 $t
-     /tmp/ccIQRpdl.s:73     .text:00000044 sys_rit_setup
-     /tmp/ccIQRpdl.s:115    .text:000000a8 $d
-     /tmp/ccIQRpdl.s:120    .text:000000b8 $t
-     /tmp/ccIQRpdl.s:125    .text:000000b8 sys_rit_disable
-     /tmp/ccIQRpdl.s:139    .text:000000cc $d
-     /tmp/ccIQRpdl.s:142    .text:000000d4 $t
-     /tmp/ccIQRpdl.s:147    .text:000000d4 sys_rit_running
-     /tmp/ccIQRpdl.s:158    .text:000000e0 $d
-     /tmp/ccIQRpdl.s:166    .bss:00000000 $d
-     /tmp/ccIQRpdl.s:170    .bss:00000000 m_rit_callback
+     /tmp/ccAukbOs.s:17     .text:00000000 $t
+     /tmp/ccAukbOs.s:22     .text:00000000 RIT_IRQHandler
+     /tmp/ccAukbOs.s:37     .text:00000014 $d
+     /tmp/ccAukbOs.s:40     .text:0000001c $t
+     /tmp/ccAukbOs.s:45     .text:0000001c sys_get_mem_info_str
+     /tmp/ccAukbOs.s:68     .text:00000040 $d
+     /tmp/ccAukbOs.s:70     .text:00000044 $t
+     /tmp/ccAukbOs.s:75     .text:00000044 sys_rit_setup
+     /tmp/ccAukbOs.s:119    .text:000000ac $d
+     /tmp/ccAukbOs.s:124    .text:000000bc $t
+     /tmp/ccAukbOs.s:129    .text:000000bc sys_rit_disable
+     /tmp/ccAukbOs.s:143    .text:000000d0 $d
+     /tmp/ccAukbOs.s:146    .text:000000d8 $t
+     /tmp/ccAukbOs.s:151    .text:000000d8 sys_rit_running
+     /tmp/ccAukbOs.s:162    .text:000000e4 $d
+     /tmp/ccAukbOs.s:170    .bss:00000000 $d
+     /tmp/ccAukbOs.s:174    .bss:00000000 m_rit_callback
 
 UNDEFINED SYMBOLS
 sys_get_mem_info
