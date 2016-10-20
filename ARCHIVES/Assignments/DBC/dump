@@ -1,0 +1,293 @@
+Building file: L0_LowLevel/source/core_cm3.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L0_LowLevel/source/core_cm3.d" -MT"L0_LowLevel/source/core_cm3.o" -c -o "L0_LowLevel/source/core_cm3.o" "L0_LowLevel/source/core_cm3.c"
+Finished building: L0_LowLevel/source/core_cm3.c
+ 
+Building file: L0_LowLevel/source/lpc_peripherals.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L0_LowLevel/source/lpc_peripherals.d" -MT"L0_LowLevel/source/lpc_peripherals.o" -c -o "L0_LowLevel/source/lpc_peripherals.o" "L0_LowLevel/source/lpc_peripherals.c"
+Finished building: L0_LowLevel/source/lpc_peripherals.c
+ 
+Building file: L0_LowLevel/source/uart0_min.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L0_LowLevel/source/uart0_min.d" -MT"L0_LowLevel/source/uart0_min.o" -c -o "L0_LowLevel/source/uart0_min.o" "L0_LowLevel/source/uart0_min.c"
+Finished building: L0_LowLevel/source/uart0_min.c
+ 
+Building file: L1_FreeRTOS/hooks/hooks.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/hooks/hooks.d" -MT"L1_FreeRTOS/hooks/hooks.o" -c -o "L1_FreeRTOS/hooks/hooks.o" "L1_FreeRTOS/hooks/hooks.c"
+Finished building: L1_FreeRTOS/hooks/hooks.c
+ 
+Building file: L1_FreeRTOS/portable/run_time_stats.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/portable/run_time_stats.d" -MT"L1_FreeRTOS/portable/run_time_stats.o" -c -o "L1_FreeRTOS/portable/run_time_stats.o" "L1_FreeRTOS/portable/run_time_stats.c"
+Finished building: L1_FreeRTOS/portable/run_time_stats.c
+ 
+Building file: L1_FreeRTOS/src/croutine.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/croutine.d" -MT"L1_FreeRTOS/src/croutine.o" -c -o "L1_FreeRTOS/src/croutine.o" "L1_FreeRTOS/src/croutine.c"
+Finished building: L1_FreeRTOS/src/croutine.c
+ 
+Building file: L1_FreeRTOS/src/event_groups.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/event_groups.d" -MT"L1_FreeRTOS/src/event_groups.o" -c -o "L1_FreeRTOS/src/event_groups.o" "L1_FreeRTOS/src/event_groups.c"
+Finished building: L1_FreeRTOS/src/event_groups.c
+ 
+Building file: L1_FreeRTOS/src/list.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/list.d" -MT"L1_FreeRTOS/src/list.o" -c -o "L1_FreeRTOS/src/list.o" "L1_FreeRTOS/src/list.c"
+Finished building: L1_FreeRTOS/src/list.c
+ 
+Building file: L1_FreeRTOS/src/queue.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/queue.d" -MT"L1_FreeRTOS/src/queue.o" -c -o "L1_FreeRTOS/src/queue.o" "L1_FreeRTOS/src/queue.c"
+Finished building: L1_FreeRTOS/src/queue.c
+ 
+Building file: L1_FreeRTOS/src/tasks.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/tasks.d" -MT"L1_FreeRTOS/src/tasks.o" -c -o "L1_FreeRTOS/src/tasks.o" "L1_FreeRTOS/src/tasks.c"
+Finished building: L1_FreeRTOS/src/tasks.c
+ 
+Building file: L1_FreeRTOS/src/timers.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L1_FreeRTOS/src/timers.d" -MT"L1_FreeRTOS/src/timers.o" -c -o "L1_FreeRTOS/src/timers.o" "L1_FreeRTOS/src/timers.c"
+Finished building: L1_FreeRTOS/src/timers.c
+ 
+Building file: L2_Drivers/src/adc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/adc.d" -MT"L2_Drivers/src/adc.o" -c -o "L2_Drivers/src/adc.o" "L2_Drivers/src/adc.c"
+Finished building: L2_Drivers/src/adc.c
+ 
+Building file: L2_Drivers/src/can.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/can.d" -MT"L2_Drivers/src/can.o" -c -o "L2_Drivers/src/can.o" "L2_Drivers/src/can.c"
+Finished building: L2_Drivers/src/can.c
+ 
+Building file: L2_Drivers/src/eint.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/eint.d" -MT"L2_Drivers/src/eint.o" -c -o "L2_Drivers/src/eint.o" "L2_Drivers/src/eint.c"
+Finished building: L2_Drivers/src/eint.c
+ 
+Building file: L2_Drivers/src/lpc_rit.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/lpc_rit.d" -MT"L2_Drivers/src/lpc_rit.o" -c -o "L2_Drivers/src/lpc_rit.o" "L2_Drivers/src/lpc_rit.c"
+Finished building: L2_Drivers/src/lpc_rit.c
+ 
+Building file: L2_Drivers/src/lpc_timers.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/lpc_timers.d" -MT"L2_Drivers/src/lpc_timers.o" -c -o "L2_Drivers/src/lpc_timers.o" "L2_Drivers/src/lpc_timers.c"
+Finished building: L2_Drivers/src/lpc_timers.c
+ 
+Building file: L2_Drivers/src/rtc.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/rtc.d" -MT"L2_Drivers/src/rtc.o" -c -o "L2_Drivers/src/rtc.o" "L2_Drivers/src/rtc.c"
+Finished building: L2_Drivers/src/rtc.c
+ 
+Building file: L2_Drivers/src/spi_dma.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/spi_dma.d" -MT"L2_Drivers/src/spi_dma.o" -c -o "L2_Drivers/src/spi_dma.o" "L2_Drivers/src/spi_dma.c"
+Finished building: L2_Drivers/src/spi_dma.c
+ 
+Building file: L2_Drivers/src/spi_sem.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L2_Drivers/src/spi_sem.d" -MT"L2_Drivers/src/spi_sem.o" -c -o "L2_Drivers/src/spi_sem.o" "L2_Drivers/src/spi_sem.c"
+Finished building: L2_Drivers/src/spi_sem.c
+ 
+Building file: L3_Utils/src/c_list.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L3_Utils/src/c_list.d" -MT"L3_Utils/src/c_list.o" -c -o "L3_Utils/src/c_list.o" "L3_Utils/src/c_list.c"
+Finished building: L3_Utils/src/c_list.c
+ 
+Building file: L3_Utils/src/file_logger.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L3_Utils/src/file_logger.d" -MT"L3_Utils/src/file_logger.o" -c -o "L3_Utils/src/file_logger.o" "L3_Utils/src/file_logger.c"
+Finished building: L3_Utils/src/file_logger.c
+ 
+Building file: L3_Utils/src/printf_lib.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L3_Utils/src/printf_lib.d" -MT"L3_Utils/src/printf_lib.o" -c -o "L3_Utils/src/printf_lib.o" "L3_Utils/src/printf_lib.c"
+Finished building: L3_Utils/src/printf_lib.c
+ 
+Building file: L3_Utils/src/rtc_alarm.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L3_Utils/src/rtc_alarm.d" -MT"L3_Utils/src/rtc_alarm.o" -c -o "L3_Utils/src/rtc_alarm.o" "L3_Utils/src/rtc_alarm.c"
+Finished building: L3_Utils/src/rtc_alarm.c
+ 
+Building file: L3_Utils/src/utilities.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L3_Utils/src/utilities.d" -MT"L3_Utils/src/utilities.o" -c -o "L3_Utils/src/utilities.o" "L3_Utils/src/utilities.c"
+Finished building: L3_Utils/src/utilities.c
+ 
+Building file: L4_IO/fat/fatfs_time.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L4_IO/fat/fatfs_time.d" -MT"L4_IO/fat/fatfs_time.o" -c -o "L4_IO/fat/fatfs_time.o" "L4_IO/fat/fatfs_time.c"
+Finished building: L4_IO/fat/fatfs_time.c
+ 
+Building file: L4_IO/fat/ff.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"L4_IO/fat/ff.d" -MT"L4_IO/fat/ff.o" -c -o "L4_IO/fat/ff.o" "L4_IO/fat/ff.c"
+Finished building: L4_IO/fat/ff.c
+ 
+Building file: newlib/malloc_lock.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"newlib/malloc_lock.d" -MT"newlib/malloc_lock.o" -c -o "newlib/malloc_lock.o" "newlib/malloc_lock.c"
+Finished building: newlib/malloc_lock.c
+ 
+Building file: newlib/newlib_syscalls.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"newlib/newlib_syscalls.d" -MT"newlib/newlib_syscalls.o" -c -o "newlib/newlib_syscalls.o" "newlib/newlib_syscalls.c"
+Finished building: newlib/newlib_syscalls.c
+ 
+Building file: newlib/newlib_time.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu11 -MMD -MP -MF"newlib/newlib_time.d" -MT"newlib/newlib_time.o" -c -o "newlib/newlib_time.o" "newlib/newlib_time.c"
+Finished building: newlib/newlib_time.c
+ 
+Building file: L0_LowLevel/source/low_level_init.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L0_LowLevel/source/low_level_init.d" -MT"L0_LowLevel/source/low_level_init.o" -c -o "L0_LowLevel/source/low_level_init.o" "L0_LowLevel/source/low_level_init.cpp"
+Finished building: L0_LowLevel/source/low_level_init.cpp
+ 
+Building file: L0_LowLevel/source/lpc_sys.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L0_LowLevel/source/lpc_sys.d" -MT"L0_LowLevel/source/lpc_sys.o" -c -o "L0_LowLevel/source/lpc_sys.o" "L0_LowLevel/source/lpc_sys.cpp"
+Finished building: L0_LowLevel/source/lpc_sys.cpp
+ 
+Building file: L0_LowLevel/source/startup.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L0_LowLevel/source/startup.d" -MT"L0_LowLevel/source/startup.o" -c -o "L0_LowLevel/source/startup.o" "L0_LowLevel/source/startup.cpp"
+Finished building: L0_LowLevel/source/startup.cpp
+ 
+Building file: L0_LowLevel/source/sys_clock.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L0_LowLevel/source/sys_clock.d" -MT"L0_LowLevel/source/sys_clock.o" -c -o "L0_LowLevel/source/sys_clock.o" "L0_LowLevel/source/sys_clock.cpp"
+Finished building: L0_LowLevel/source/sys_clock.cpp
+ 
+Building file: L2_Drivers/base/char_dev.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/base/char_dev.d" -MT"L2_Drivers/base/char_dev.o" -c -o "L2_Drivers/base/char_dev.o" "L2_Drivers/base/char_dev.cpp"
+Finished building: L2_Drivers/base/char_dev.cpp
+ 
+Building file: L2_Drivers/base/i2c_base.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/base/i2c_base.d" -MT"L2_Drivers/base/i2c_base.o" -c -o "L2_Drivers/base/i2c_base.o" "L2_Drivers/base/i2c_base.cpp"
+Finished building: L2_Drivers/base/i2c_base.cpp
+ 
+Building file: L2_Drivers/base/uart_dev.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/base/uart_dev.d" -MT"L2_Drivers/base/uart_dev.o" -c -o "L2_Drivers/base/uart_dev.o" "L2_Drivers/base/uart_dev.cpp"
+Finished building: L2_Drivers/base/uart_dev.cpp
+ 
+Building file: L2_Drivers/src/i2c2.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/i2c2.d" -MT"L2_Drivers/src/i2c2.o" -c -o "L2_Drivers/src/i2c2.o" "L2_Drivers/src/i2c2.cpp"
+Finished building: L2_Drivers/src/i2c2.cpp
+ 
+Building file: L2_Drivers/src/lpc_pwm.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/lpc_pwm.d" -MT"L2_Drivers/src/lpc_pwm.o" -c -o "L2_Drivers/src/lpc_pwm.o" "L2_Drivers/src/lpc_pwm.cpp"
+Finished building: L2_Drivers/src/lpc_pwm.cpp
+ 
+Building file: L2_Drivers/src/nrf_stream.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/nrf_stream.d" -MT"L2_Drivers/src/nrf_stream.o" -c -o "L2_Drivers/src/nrf_stream.o" "L2_Drivers/src/nrf_stream.cpp"
+Finished building: L2_Drivers/src/nrf_stream.cpp
+ 
+Building file: L2_Drivers/src/uart0.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/uart0.d" -MT"L2_Drivers/src/uart0.o" -c -o "L2_Drivers/src/uart0.o" "L2_Drivers/src/uart0.cpp"
+Finished building: L2_Drivers/src/uart0.cpp
+ 
+Building file: L2_Drivers/src/uart2.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/uart2.d" -MT"L2_Drivers/src/uart2.o" -c -o "L2_Drivers/src/uart2.o" "L2_Drivers/src/uart2.cpp"
+Finished building: L2_Drivers/src/uart2.cpp
+ 
+Building file: L2_Drivers/src/uart3.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L2_Drivers/src/uart3.d" -MT"L2_Drivers/src/uart3.o" -c -o "L2_Drivers/src/uart3.o" "L2_Drivers/src/uart3.cpp"
+Finished building: L2_Drivers/src/uart3.cpp
+ 
+Building file: L3_Utils/src/command_handler.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L3_Utils/src/command_handler.d" -MT"L3_Utils/src/command_handler.o" -c -o "L3_Utils/src/command_handler.o" "L3_Utils/src/command_handler.cpp"
+Finished building: L3_Utils/src/command_handler.cpp
+ 
+Building file: L3_Utils/src/freertos_timer.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L3_Utils/src/freertos_timer.d" -MT"L3_Utils/src/freertos_timer.o" -c -o "L3_Utils/src/freertos_timer.o" "L3_Utils/src/freertos_timer.cpp"
+Finished building: L3_Utils/src/freertos_timer.cpp
+ 
+Building file: L3_Utils/src/scheduler_task.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L3_Utils/src/scheduler_task.d" -MT"L3_Utils/src/scheduler_task.o" -c -o "L3_Utils/src/scheduler_task.o" "L3_Utils/src/scheduler_task.cpp"
+Finished building: L3_Utils/src/scheduler_task.cpp
+ 
+Building file: L3_Utils/src/str.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L3_Utils/src/str.d" -MT"L3_Utils/src/str.o" -c -o "L3_Utils/src/str.o" "L3_Utils/src/str.cpp"
+Finished building: L3_Utils/src/str.cpp
+ 
+Building file: L4_IO/src/gpio.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L4_IO/src/gpio.d" -MT"L4_IO/src/gpio.o" -c -o "L4_IO/src/gpio.o" "L4_IO/src/gpio.cpp"
+Finished building: L4_IO/src/gpio.cpp
+ 
+Building file: L4_IO/src/io_source.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L4_IO/src/io_source.d" -MT"L4_IO/src/io_source.o" -c -o "L4_IO/src/io_source.o" "L4_IO/src/io_source.cpp"
+Finished building: L4_IO/src/io_source.cpp
+ 
+Building file: L4_IO/src/storage.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L4_IO/src/storage.d" -MT"L4_IO/src/storage.o" -c -o "L4_IO/src/storage.o" "L4_IO/src/storage.cpp"
+Finished building: L4_IO/src/storage.cpp
+ 
+Building file: L5_Application/examples/examples.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/examples/examples.d" -MT"L5_Application/examples/examples.o" -c -o "L5_Application/examples/examples.o" "L5_Application/examples/examples.cpp"
+Finished building: L5_Application/examples/examples.cpp
+ 
+Building file: L5_Application/examples/rn_xv_task.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/examples/rn_xv_task.d" -MT"L5_Application/examples/rn_xv_task.o" -c -o "L5_Application/examples/rn_xv_task.o" "L5_Application/examples/rn_xv_task.cpp"
+Finished building: L5_Application/examples/rn_xv_task.cpp
+ 
+Building file: L5_Application/periodic_scheduler/period_callbacks.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/periodic_scheduler/period_callbacks.d" -MT"L5_Application/periodic_scheduler/period_callbacks.o" -c -o "L5_Application/periodic_scheduler/period_callbacks.o" "L5_Application/periodic_scheduler/period_callbacks.cpp"
+Finished building: L5_Application/periodic_scheduler/period_callbacks.cpp
+ 
+Building file: L5_Application/periodic_scheduler/prd_dispatcher.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/periodic_scheduler/prd_dispatcher.d" -MT"L5_Application/periodic_scheduler/prd_dispatcher.o" -c -o "L5_Application/periodic_scheduler/prd_dispatcher.o" "L5_Application/periodic_scheduler/prd_dispatcher.cpp"
+Finished building: L5_Application/periodic_scheduler/prd_dispatcher.cpp
+ 
+Building file: L5_Application/source/high_level_init.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/source/high_level_init.d" -MT"L5_Application/source/high_level_init.o" -c -o "L5_Application/source/high_level_init.o" "L5_Application/source/high_level_init.cpp"
+Finished building: L5_Application/source/high_level_init.cpp
+ 
+Building file: L5_Application/source/remote.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/source/remote.d" -MT"L5_Application/source/remote.o" -c -o "L5_Application/source/remote.o" "L5_Application/source/remote.cpp"
+Finished building: L5_Application/source/remote.cpp
+ 
+Building file: L5_Application/source/terminal.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/source/terminal.d" -MT"L5_Application/source/terminal.o" -c -o "L5_Application/source/terminal.o" "L5_Application/source/terminal.cpp"
+Finished building: L5_Application/source/terminal.cpp
+ 
+Building file: newlib/memory.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"newlib/memory.d" -MT"newlib/memory.o" -c -o "newlib/memory.o" "newlib/memory.cpp"
+Finished building: newlib/memory.cpp
+ 
+Building file: L5_Application/main.cpp
+Invoking: Cross ARM C++ Compiler
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -DBUILD_CFG_MPU=0 -I"./" -I"./newlib" -I"./L0_LowLevel" -I"./L1_FreeRTOS" -I"./L1_FreeRTOS/include" -I"./L1_FreeRTOS/portable" -I"./L2_Drivers" -I"./L2_Drivers/base" -I"./L3_Utils" -I"./L3_Utils/tlm" -I"./L4_IO" -I"./L4_IO/fat" -I"./L4_IO/wireless" -I"./L5_Application" -std=gnu++11 -fabi-version=0 -fno-exceptions -MMD -MP -MF"L5_Application/main.d" -MT"L5_Application/main.o" -c -o "L5_Application/main.o" "L5_Application/main.cpp"
+Finished building: L5_Application/main.cpp
+ 
+Building target: lpc1758_freertos.elf
+Invoking: Cross ARM C++ Linker
+arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"lpc1758_freertos.map" -specs=nano.specs -o "lpc1758_freertos.elf" L0_LowLevel/source/core_cm3.o L0_LowLevel/source/lpc_peripherals.o L0_LowLevel/source/uart0_min.o L1_FreeRTOS/hooks/hooks.o L1_FreeRTOS/portable/run_time_stats.o L1_FreeRTOS/src/croutine.o L1_FreeRTOS/src/event_groups.o L1_FreeRTOS/src/list.o L1_FreeRTOS/src/queue.o L1_FreeRTOS/src/tasks.o L1_FreeRTOS/src/timers.o L2_Drivers/src/adc.o L2_Drivers/src/can.o L2_Drivers/src/eint.o L2_Drivers/src/lpc_rit.o L2_Drivers/src/lpc_timers.o L2_Drivers/src/rtc.o L2_Drivers/src/spi_dma.o L2_Drivers/src/spi_sem.o L3_Utils/src/c_list.o L3_Utils/src/file_logger.o L3_Utils/src/printf_lib.o L3_Utils/src/rtc_alarm.o L3_Utils/src/utilities.o L4_IO/fat/fatfs_time.o L4_IO/fat/ff.o newlib/malloc_lock.o newlib/newlib_syscalls.o newlib/newlib_time.o L0_LowLevel/source/low_level_init.o L0_LowLevel/source/lpc_sys.o L0_LowLevel/source/startup.o L0_LowLevel/source/sys_clock.o L2_Drivers/base/char_dev.o L2_Drivers/base/i2c_base.o L2_Drivers/base/uart_dev.o L2_Drivers/src/i2c2.o L2_Drivers/src/lpc_pwm.o L2_Drivers/src/nrf_stream.o L2_Drivers/src/uart0.o L2_Drivers/src/uart2.o L2_Drivers/src/uart3.o L3_Utils/src/command_handler.o L3_Utils/src/freertos_timer.o L3_Utils/src/scheduler_task.o L3_Utils/src/str.o L4_IO/src/gpio.o L4_IO/src/io_source.o L4_IO/src/storage.o L5_Application/examples/examples.o L5_Application/examples/rn_xv_task.o L5_Application/periodic_scheduler/period_callbacks.o L5_Application/periodic_scheduler/prd_dispatcher.o L5_Application/source/high_level_init.o L5_Application/source/remote.o L5_Application/source/terminal.o newlib/memory.o L5_Application/main.o 
