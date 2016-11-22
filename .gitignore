@@ -1,0 +1,5 @@
+Firmware/bin/*
+Firmware/obj/*
+Firmware/projects/*
+!Firmware/projects/HelloWorld
+!Firmware/projects/FreeRTOS
