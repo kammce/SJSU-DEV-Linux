@@ -22,8 +22,8 @@
  *
  * 20131010 : Removed read vs. write mode variable
  */
-#ifndef i2c2.hpp_
-#define i2c2.hpp_
+#ifndef i2c2hpp_
+#define i2c2hpp_
 
 #include "singleton_template.hpp"
 #include "i2c_base.hpp"

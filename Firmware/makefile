@@ -1,8 +1,11 @@
 ENTITY 			?= DRIVER
 PROJ 			?= HelloWorld
 
-CC 				= arm-none-eabi-gcc
-CPPC 			= arm-none-eabi-g++
+CC                      = ./compiler/linux/bin/arm-none-eabi-gcc
+CPPC                    = ./compiler/linux/bin/arm-none-eabi-g++
+OBJDUMP                 = ./compiler/linux/bin/arm-none-eabi-objdump
+SIZEC                   = ./compiler/linux/bin/arm-none-eabi-size
+OBJCOPY                 = ./compiler/linux/bin/arm-none-eabi-objcopy
 
 OBJ_DIR			= obj
 PROJ_DIR		= projects
@@ -55,30 +58,30 @@ MAP					= $(EXECUTABLE:.elf=.map)
 
 .PHONY: all clean
 
-all: $(OBJ_DIR) $(BIN_DIR) $(PREBUILD) $(SIZE) $(LIST) $(HEX)
+all: $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
 
 $(HEX): $(EXECUTABLE)
 	@echo 'Invoking: Cross ARM GNU Create Flash Image'
-	arm-none-eabi-objcopy -O ihex "$<" "$@"
+	$(OBJCOPY) -O ihex "$<" "$@"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 $(SIZE): $(EXECUTABLE)
 	@echo 'Invoking: Cross ARM GNU Print Size'
-	arm-none-eabi-size --format=berkeley "$<"
+	$(SIZEC) --format=berkeley "$<"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 $(LIST): $(EXECUTABLE)
 	@echo 'Invoking: Cross ARM GNU Create Listing'
-	arm-none-eabi-objdump --source --all-headers --demangle --line-numbers --wide "$<" > "$@"
+	$(OBJDUMP) --source --all-headers --demangle --line-numbers --wide "$<" > "$@"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-$(EXECUTABLE): $(OBJECT_FILES)
+$(EXECUTABLE): $(PREBUILD) $(OBJECT_FILES)
 	@echo 'Invoking: Cross ARM C++ Linker'
 	mkdir -p "$(dir $@)"
-	arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T $(LIB_DIR)/loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(MAP)" -specs=nano.specs -o "$@" $(OBJECT_FILES)
+	$(CPPC) -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T $(LIB_DIR)/loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(MAP)" -specs=nano.specs -o "$@" $(OBJECT_FILES)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
