@@ -1,11 +1,11 @@
-ENTITY 			?= DRIVER
+ENTITY 			?= DBG
 PROJ 			?= HelloWorld
 
-CC                      = ./compiler/linux/bin/arm-none-eabi-gcc
-CPPC                    = ./compiler/linux/bin/arm-none-eabi-g++
-OBJDUMP                 = ./compiler/linux/bin/arm-none-eabi-objdump
-SIZEC                   = ./compiler/linux/bin/arm-none-eabi-size
-OBJCOPY                 = ./compiler/linux/bin/arm-none-eabi-objcopy
+CC              = arm-none-eabi-gcc
+CPPC            = arm-none-eabi-g++
+OBJDUMP         = arm-none-eabi-objdump
+SIZEC           = arm-none-eabi-size
+OBJCOPY         = arm-none-eabi-objcopy
 
 OBJ_DIR			= obj
 PROJ_DIR		= projects
