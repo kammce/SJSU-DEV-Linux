@@ -34,11 +34,11 @@
 
 ## Compiling and Loading HelloWorld Project ##
 The **HelloWorld** project is a plainly C++ project without FreeRTOS.
- 1. From the root of the project `cd Firmware`
+ 1. From the root of the repository `cd Firmware`
  2. Edit the **build.sh** file and change the variable **PROJECT_NAME** to `PROJECT_NAME=HelloWorld`
  3. To build the project run `./build.sh` in the terminal.
  4. A HEX file `bin/HelloWorld/HelloWorld.hex` and subsequent folders should have been created.
- 5. Change directory to the root of the project and run `mono Hyperload.exe`, to open the Hyperload SJOne code loader.
+ 5. Change directory to the root of the repository and run `mono Hyperload.exe`, to open the Hyperload SJOne code loader.
     1. On the top right side, click the open button and find the `bin/HelloWorld/HelloWorld.hex`
     2. In the lower middle section of the window, click the set button to set the speed (bps) to 50000.
     3. Plug in (or Unplug then plug in) SJOne board into computer. The messages on the right hand side of the window should update.
