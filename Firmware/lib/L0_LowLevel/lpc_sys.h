@@ -183,7 +183,11 @@ static inline void sys_watchdog_enable()
      * Enable Watchdog and Watchdog reset enable
      * Once enabled, this cannot be cleared
      */
-    LPC_WDT->WDMOD = 3;
+    #if(DEBUG)
+        LPC_WDT->WDMOD = 2;
+    #else
+        LPC_WDT->WDMOD = 3;
+    #endif
     sys_watchdog_feed();
 }
 

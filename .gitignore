@@ -3,3 +3,6 @@ Firmware/obj/*
 Firmware/projects/*
 !Firmware/projects/HelloWorld
 !Firmware/projects/FreeRTOS
+cmpe146
+cmpe146.zip
+Firmware/.gdb_history

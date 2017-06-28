@@ -1,5 +1,6 @@
 ENTITY 			?= DBG
 PROJ 			?= HelloWorld
+DEBUG 			?= 0
 
 CC              = arm-none-eabi-gcc
 CPPC            = arm-none-eabi-g++
@@ -12,11 +13,15 @@ PROJ_DIR		= projects
 LIB_DIR			= lib
 BIN_DIR			= bin
 
+# -Os
+
 CFLAGS = -mcpu=cortex-m3 \
-    -mthumb -Os -fmessage-length=0 \
+    -mthumb -fmessage-length=0 \
     -ffunction-sections -fdata-sections \
     -Wall -Wshadow -Wlogical-op \
+    -g \
     -Wfloat-equal -DBUILD_CFG_MPU=0 \
+    -D DEBUG=$(DEBUG) \
     -fabi-version=0 \
     -fno-exceptions \
     -I"$(LIB_DIR)/" \

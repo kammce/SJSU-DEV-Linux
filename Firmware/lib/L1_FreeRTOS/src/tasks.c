@@ -1397,7 +1397,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 #endif /* INCLUDE_uxTaskPriorityGet */
 /*-----------------------------------------------------------*/
 
-#if ( INCLUDE_vTaskPrioritySet == 1 )
+// #if ( INCLUDE_vTaskPrioritySet == 1 )
 
 	void vTaskPrioritySet( TaskHandle_t xTask, UBaseType_t uxNewPriority )
 	{
@@ -1558,7 +1558,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		taskEXIT_CRITICAL();
 	}
 
-#endif /* INCLUDE_vTaskPrioritySet */
+// #endif /* INCLUDE_vTaskPrioritySet */
 /*-----------------------------------------------------------*/
 
 #if ( INCLUDE_vTaskSuspend == 1 )
