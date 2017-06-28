@@ -1,3 +1,6 @@
 [submodule "ref_and_datasheets/OpenOCD"]
 	path = ref_and_datasheets/OpenOCD
 	url = https://github.com/kammce/OpenOCD-SJOne.git
+[submodule "ref_and_datasheets/gdb"]
+	path = ref_and_datasheets/gdb
+	url = https://github.com/cyrus-and/gdb-dashboard.git
