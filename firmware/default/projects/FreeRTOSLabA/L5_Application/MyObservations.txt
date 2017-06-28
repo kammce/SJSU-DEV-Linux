@@ -1,0 +1,13 @@
+Hello @everyone,
+
+*MID SPRINT REVIEW MEETING SCHEDULE*
+======
+If you have ANY IMMEDIATE problems with the schedule below, please message me in *YOUR* channel.
+
+Robotics team midway sprint meeting scheduling:
+   1) Intelligent Systems          11am - 11:30pm
+   2) Science and PODS         11:30pm - 12:00pm
+   3) Power Systems               12:00pm - 12:30pm
+   4) Arm and End Effector      12:30pm - 1:00pm
+   5) Drive System                   1:00pm - 1:30pm
+   6) Tracker                            1:30pm - 2:00pm
