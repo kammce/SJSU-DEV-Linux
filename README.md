@@ -1,13 +1,15 @@
 # SJSU-DEV-Linux
 
 [![SJSU-Dev-Linux Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
+[![GNU General Public License v2.0 Badge](https://img.shields.io/badge/license-GNUv2.0-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
 [![Documentation Status](https://readthedocs.org/projects/sjsu-dev-linux/badge/?version=latest)](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/kammce/SJSU-DEV-Linux.svg?branch=enhancement)](https://travis-ci.org/kammce/SJSU-DEV-Linux)
 
 See **[documentation](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)** for a full tutorial and details.
 
 ## Operating System
-SJSU Dev Linux was built to work on Ubuntu and Debian based systems. It should have no problems working on other Linux Distros but the **setup** script is built around using apt-get.
+Built for **Ubuntu** and **Debian** based systems (**setup** script is built around using apt-get).
+Will work on other Linux Distros if *dependancies* are manually installed.
 
 ## Dependencies
  - **Mono**: C# runtime environment used to run C# applications
