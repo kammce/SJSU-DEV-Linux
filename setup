@@ -29,7 +29,6 @@ echo "  Starting SJSU-DEV-Linux Environment Setup Script  "
 echo "└────────────────────────────────────────────────── "
 sleep 1
 
-
 echo " ──────────────────────────────────────────────────┐"
 echo "                   Updating PPAs                    "
 echo "└────────────────────────────────────────────────── "
@@ -53,16 +52,15 @@ echo "      Adding current user to 'dialout' group        "
 echo "└────────────────────────────────────────────────── "
 sudo adduser $USER dialout
 
-echo " ─────────────────────s─────────────────────────────┐"
+echo " ───────────────────────────────────────────────────┐"
 echo "              Installing Mono-Complete              "
 echo "└────────────────────────────────────────────────── "
 sudo apt-get -y install mono-complete
 
-echo " ──────────────────────────────────────────────────┐"
-echo "                   Setup complete!"
-echo "└────────────────────────────────────────────────── "
 echo
-echo " ────────────────────────────────────────────────────────────┐"
-echo " PLEASE LOGOUT AND BACK IN to load code into your SJOne Board "
-echo "└──────────────────────────────────────────────────────────── "
+echo " ──────────────────────────────────────────────────────────────┐"
+echo "                      Setup complete!                           "
+echo "                                                                "
+echo "  PLEASE LOGOUT AND BACK IN to load code into your SJOne Board  "
+echo "└────────────────────────────────────────────────────────────── "
 echo
