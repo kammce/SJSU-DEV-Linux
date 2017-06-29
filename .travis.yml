@@ -7,5 +7,5 @@ install:
 script:
   - cd ./firmware/default/
   - ./build HelloWorld
-  - ls ./bin/HelloWorld/HelloWorld.elf
+  - ls ./bin/HelloWorld/HelloWorld.elf.fail.travis.ci
 # after_success:
