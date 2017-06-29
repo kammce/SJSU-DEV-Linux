@@ -1,10 +1,10 @@
-Firmware/*
-!Firmware/default/
-Firmware/default/bin/*
-Firmware/default/obj/*
-Firmware/default/projects/*
-!Firmware/default/projects/HelloWorld
-!Firmware/default/projects/FreeRTOS
+firmware/*
+!firmware/default/
+firmware/default/bin/*
+firmware/default/obj/*
+firmware/default/applications/*
+!firmware/default/applications/HelloWorld
+!firmware/default/applications/FreeRTOS
 
 cmpe146
 **/.gdb_history
