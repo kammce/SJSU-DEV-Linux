@@ -9,7 +9,7 @@ SIZEC           = arm-none-eabi-size
 OBJCOPY         = arm-none-eabi-objcopy
 
 OBJ_DIR			= obj
-PROJ_DIR		= projects
+PROJ_DIR		= applications
 LIB_DIR			= lib
 BIN_DIR			= bin
 
