@@ -7,5 +7,8 @@ install:
 script:
   - cd ./firmware/default/
   - ./build HelloWorld
-  - ls ./bin/HelloWorld/HelloWorld.elf.fail.travis.ci
+  - ls ./bin/HelloWorld/HelloWorld.elf
+  - ls ./bin/HelloWorld/HelloWorld.hex
+  - ls ./bin/HelloWorld/HelloWorld.lst
+  - ls ./bin/HelloWorld/HelloWorld.map
 # after_success:
