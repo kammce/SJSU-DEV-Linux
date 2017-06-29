@@ -1,0 +1,11 @@
+language: C
+sudo: true
+dist: trusty
+group: edge
+install:
+  - ./setup
+script:
+  - cd ./firmware/default/
+  - ./build HelloWorld
+  - ls ./bin/HelloWorld/HelloWorld.elf
+# after_success:
