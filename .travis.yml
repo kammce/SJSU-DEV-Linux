@@ -11,4 +11,5 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.hex
   - ls ./bin/HelloWorld/HelloWorld.lst
   - ls ./bin/HelloWorld/HelloWorld.map
+  - mono tools/HyperLoad.exe
 # after_success:
