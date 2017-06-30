@@ -22,12 +22,10 @@ Welcome to SJSU-Dev-Linux's documentation!
 	:maxdepth: 2
 
 	rst/getting-started
-	rst/starting-a-new-application
-	rst/starting-a-new-project
+	rst/understanding-the-framework-layout
 	rst/debugging-with-openocd-gdb
 	rst/unit-testing-with-unity
 	rst/copyrights
-	rst/references
 	rst/about
 
 Press Next To Get Started
