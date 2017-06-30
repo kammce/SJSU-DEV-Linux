@@ -1,6 +1,6 @@
 # SJSU-DEV-Linux
 
-[![SJSU-Dev-Linux Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
+[![SJSU-Dev-Linux Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
 [![GNU General Public License v2.0 Badge](https://img.shields.io/badge/license-GNUv2.0-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
 [![Documentation Status](https://readthedocs.org/projects/sjsu-dev-linux/badge/?version=latest)](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/kammce/SJSU-DEV-Linux.svg?branch=enhancement)](https://travis-ci.org/kammce/SJSU-DEV-Linux)
