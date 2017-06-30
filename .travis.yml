@@ -12,6 +12,5 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.lst
   - ls ./bin/HelloWorld/HelloWorld.map
   - cd ../../
-  - groups | grep dialout
   - mono tools/HyperLoad.exe
 # after_success:
