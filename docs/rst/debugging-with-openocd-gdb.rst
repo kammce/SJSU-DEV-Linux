@@ -1,112 +1,127 @@
 Debugging with OpenOCD and GDB
 =================================
 
-Unit Testing Tools
--------------------
-RoverCore-S uses the following the libraries:
+This tutorial will use **HelloWorld** as an example. But this will work for any application you build.
 
-#. `Mocha <https://mochajs.org/>`_ as a unit testing framework
-#. `Chai <http://chaijs.com/>`_ as an assertion library
-#. `Sinon <http://sinonjs.org/>`_ as a stubs library.
-#. `JSHint <http://jshint.com/>`_ as a JS linter
-#. `Istanbul <https://istanbul.js.org/>`_ as the test coverage library.
-#. `Grunt <https://gruntjs.com/>`_ to run the tests, linter, and coverage
 
-These libraries are installed when you run the ``./install.sh`` file.
-
-Creating a Unit Test
-----------------------
-
-To create a new unit test, copy the ``Example.js`` file in ``/test/modules/`` into another file and name it the same name as your lobe. The following is the contents of the example unit test.
-
-.. code-block:: JavaScript
-
-	"use strict";
-
-	var INSERT_LOBE_NAME_HERE = require("Protolobe/Protolobe");
-
-	describe("Testing INSERT_LOBE_NAME_HERE Class", function()
-	{
-		var util = require("test_lobe_utilities");
-
-		var test_unit = new INSERT_LOBE_NAME_HERE(util);
-
-		describe("Testing Lobe Methods", function()
-		{
-			it("#react() test here", function()
-			{
-				test_unit.react();
-				expect(true).to.be.true;
-			});
-			it("#halt() test here", function()
-			{
-				test_unit.halt();
-				expect(true).to.be.true;
-			});
-			it("#resume() test here", function()
-			{
-				test_unit.resume();
-				expect(true).to.be.true;
-			});
-			it("#idle() test here", function()
-			{
-				test_unit.idle();
-				expect(true).to.be.true;
-			});
-			it("#additionalMethod() test here", function()
-			{
-				expect(true).to.be.true;
-			});
-		});
-	});
-
-Sinon, Chai, and Mocha are all global when you test your program. The folders ``core``, ``modules``, ``utilities``, and ``test`` have all been added to the require path. So requiring them does not require the whole relative path to the files.
-
-.. important::
-	Make sure to always include tests for the ``react``, ``halt``, ``resume``, and ``idle`` methods of your lobe.
-
-For more information for on unit testing using mocha, chai and sinon see the following:
-
-* https://mochajs.org/
-* http://sinonjs.org/
-* http://chaijs.com/guide/styles/#expect
-
-Testing Commands
-------------------
-
-To run a single and specific unit test is the following command
+Step 0: Rebuild Application with Debug flag
+---------------------------------------------
+Run:
 
 .. code-block:: bash
 
-	mocha test/modules/<unit test file>.js
+	./build spotless
+	./build -d HelloWorld
 
-To run all unit tests (but not the linter)
+.. note::
 
-.. code-block:: bash
+	:code:`./build spotless` will delete all of the files in the :code:`obj` and :code:`bin` folder. This is necessary because some files in the lib folder need to be updated with the new -d (debug) flag.
 
-	grunt unittest
-
-To run just the linter
-
-.. code-block:: bash
-
-	grunt lint
-
-Run everything except for istanbul code coverage
+Step 1: Install OpenOCD
+-------------------------
+The OpenOCD repo can be found in folder :code:`tools/OpenOCD`. You can install OpenOCD by using the following commands in the root of the OpenOCD folder.
 
 .. code-block:: bash
 
-	grunt --force
+	./boostrap
+	./configure
+	make
+	[optional] sudo make install
 
-To run everything, just use
+Step 2: Solder JTAG Headers to SJOne
+--------------------------------------
+Do as the title says if you haven't already.
+
+Step 3: Connecting BusBlasterv3 to SJOne
+------------------------------------------
+Connect jumpers from the :code:`GND`, :code:`TRST`, :code:`TDI`, :code:`TMS`, :code:`TCK`, and :code:`TDO` pins on the **BusBlasterv3** to the SJOne's JTAG headers.
+
+.. danger::
+	DOUBLE AND TRIPLE CHECK THAT YOUR CONNECTIONS! The SJOne costs $80 and the BusBaster costs $35! Thats $115 down the drain if your burn them out!
+
+Step 4: Run OpenOCD
+---------------------
+Run:
 
 .. code-block:: bash
 
-	npm test
+	# If you did not use make install
+	./src/openocd -s ./tcl -f sjone.cfg
 
-To generate a code coverage report, run this in the root of the project
+	# If you used make install
+	openocd -s ./tcl -f sjone.cfg
+
+.. tip::
+
+	Successful output is the following:
+
+	.. code-block:: bash
+
+		Info : clock speed 100 kHz
+		Info : JTAG tap: lpc17xx.cpu tap/device found: 0x4ba00477 (mfg: 0x23b (ARM Ltd.), part: 0xba00, ver: 0x4)
+		Info : lpc17xx.cpu: hardware has 6 breakpoints, 4 watchpoints
+
+.. error::
+
+	If you see the following message:
+
+	.. code-block:: bash
+
+		Error: JTAG-DP STICKY ERROR
+		Info : DAP transaction stalled (WAIT) - slowing down
+		Error: Timeout during WAIT recovery
+		Error: Debug regions are unpowered, an unexpected reset might have happened
+
+	Then the SJOne board is being held in a RESET state. To fix this, either by power cycling the SJOne board or by deassert the RTS and DTR signals through GTKTerm.
+
+.. error::
+
+	If you see your terminal get spammed with this:
+
+	.. code-block:: bash
+
+		Error: JTAG-DP STICKY ERROR
+		Error: Invalid ACK (7) in DAP response
+		Error: JTAG-DP STICKY ERROR
+		Error: Could not initialize the debug port
+
+	Then its a good chance that one of your pins is not connected.
+
+Step 5: Run GDB
+---------------------
+Open another terminal and run the following command in the :code:`firmware/default/` folder.
 
 .. code-block:: bash
 
-	bash <(curl -s https://codecov.io/bash)
+	arm-none-eabi-gdb -ex "target remote :3333" bin/HelloWorld/HelloWorld.elf
 
+.. tip::
+
+	You can run arm-none-eabi-gdb without arguments and use the following gdb commands
+	:code:`file bin/HelloWorld/HelloWorld.elf`
+	then
+	:code:`target remote :3333`
+	in the gdb command line interface to get the same effect as the above command.
+
+At this point the SJOne board has been halted. You should be able to add breakpoints to the program at this point and step through the code.
+
+At this point you will not see any source code. Do the following in the gdb command line interface:
+
+.. code-block:: bash
+
+	>>> break main
+	>>> continue
+
+.. tip::
+
+	Don't use the typical run command to "start" the code. It is already... kinda started. Also, run does not exist when using :code:`target remote :3333` to OpenOCD. It exists with :code:`target extended-remote :3333`, but causes issues... just don't use it OK.
+
+At this point you should see the source code of your :code:`main.cpp` show up. Now you can step through your code and set breakpoints using :code:`step`, :code:`next`, :code:`finish` and :code:`continue`, :code:`break`, etc.
+
+For a gdb cheat sheet, see this PDF:
+
+	http://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+
+.. error::
+
+	If your board keeps restarting, this is due to the Watchdog not getting fed. Although, this shouldn't happen if you ran step 0 correctly. If you do a build spotless and build your project again with the -d flag, and this still does not work, then as a last resort, go into the lpc_sys.c file and comment out the :code:`enable_watch_dog()` function call.

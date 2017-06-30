@@ -36,7 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="SJSU-Dev-Linux 0.0.1 documentation" href="../index.html"/>
-        <link rel="next" title="Starting a New Application" href="starting-a-new-application.html"/>
+        <link rel="next" title="Understanding The Framework Layout" href="understanding-the-framework-layout.html"/>
         <link rel="prev" title="Welcome to SJSU-Dev-Linux’s documentation!" href="../index.html"/> 
 
   
@@ -94,15 +94,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#running-rovercore-s">Running RoverCore-S</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connecting-to-rovercore-s-using-rovercore-mc">Connecting to RoverCore-S using RoverCore-MC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-loading-hello-world-application">Building and Loading Hello World Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-loading-freertos-project">Building and Loading FreeRTOS Project</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="starting-a-new-application.html">Starting a New Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="starting-a-new-project.html">Starting a new Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="understanding-the-framework-layout.html">Understanding The Framework Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging-with-openocd-gdb.html">Debugging with OpenOCD and GDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit-testing-with-unity.html">Unit Testing with Unity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copyrights.html">Copyrights</a></li>
@@ -175,10 +172,10 @@
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>RoverCore was built to run on Ubuntu and on Embedded Linux Platforms. Your best option is to run the most recent LTS (L.ong T.erm S.ervice) Ubuntu on your machine or install it on a virtual machine.</p>
+<p>Need a running version of Ubuntu 14.04 LTS or above. Ubuntu in a virtual machine such as VirtualBox or VMPlayer will work as well.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The main features of RoverCore will work on Windows and Mac OSX but the install.sh will not work. You will need to manually install all of the necessary components in the installer script.</p>
+<p class="last">The it is possible to get SJSU-Dev-Linux to work completely on Windows and Mac OSX if you have all of the necessary PATH dependencies installed, but that is not covered here. You will need to manually install all of the necessary components in the installer script.</p>
 </div>
 </div>
 <div class="section" id="installation">
@@ -186,19 +183,19 @@
 <dl class="docutils">
 <dt><strong>Step 1</strong></dt>
 <dd><p class="first">Clone the repository</p>
-<div class="last highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/kammce/RoverCore-S.git
+<div class="last highlight-bash"><div class="highlight"><pre><span></span>git clone --recursive https://github.com/kammce/SJSU-DEV-Linux.git
 </pre></div>
 </div>
 </dd>
 <dt><strong>Step 2</strong></dt>
-<dd><p class="first">Change directory into <strong>RoverCore-S</strong></p>
-<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> RoverCore-s
+<dd><p class="first">Change directory into <strong>SJSU-Dev-Linux</strong></p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> SJSU-DEV-Linux
 </pre></div>
 </div>
 </dd>
 <dt><strong>Step 3</strong></dt>
-<dd><p class="first">Install  RoverCore-S using <cite>install.sh</cite> script. The script will install the latest <cite>node.js&#64;6.x.x</cite>, <cite>npm</cite>, node dependencies and development tools according to <em>package.json</em>.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>./install.sh
+<dd><p class="first">Run <code class="code docutils literal"><span class="pre">setup</span></code> script.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./setup
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -207,81 +204,72 @@
 </div>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is currently planned to add an –production flag to keep from installing the development tools.</p>
+<p class="last">This will install gtkterm, mono-complete, and gcc-arm-embedded packages</p>
 </div>
 </dd>
 </dl>
-<div class="section" id="running-rovercore-s">
-<h3>Running RoverCore-S<a class="headerlink" href="#running-rovercore-s" title="Permalink to this headline">¶</a></h3>
-<p>To run RoverCore-S use the following command:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">node</span> <span class="n">RoverCore</span>
+</div>
+<div class="section" id="building-and-loading-hello-world-application">
+<h2>Building and Loading Hello World Application<a class="headerlink" href="#building-and-loading-hello-world-application" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Step 1</strong></dt>
+<dd><p class="first">From the root of the repository</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> firmware/default
 </pre></div>
 </div>
-<div class="admonition note">
+</dd>
+<dt><strong>Step 2</strong></dt>
+<dd><p class="first">Run <code class="code docutils literal"><span class="pre">build</span></code> script. A HEX file <code class="code docutils literal"><span class="pre">bin/HelloWorld/HelloWorld.hex</span></code> and subsequent folders should have been created after this script finishes.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./build HelloWorld
+</pre></div>
+</div>
+<div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Use <cite>sudo</cite> if you are using I2C or Bluetooth or anything else that requires root permissions.</p>
+<p class="last">use the <code class="code docutils literal"><span class="pre">--help</span></code> argument to get additional information on how to use the build script.</p>
 </div>
-<p>To get more information about the command line arguments run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="n">RoverCore</span> <span class="o">-</span><span class="n">h</span>
+</dd>
+<dt><strong>Step 3</strong></dt>
+<dd><p class="first">Change back to the root of the repository and enter the <strong>tools</strong> directory and run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../../
+<span class="nb">cd</span> tools/
+mono Hyperload.exe
 </pre></div>
 </div>
-<p>RoverCore-S manual output:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">NAME</span>
-        <span class="n">RoverCore</span> <span class="o">-</span> <span class="n">Start</span> <span class="n">RoverCore</span>
-
-<span class="n">SYNOPSIS</span>
-        <span class="n">node</span> <span class="n">RoverCore</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
-        <span class="n">node</span> <span class="n">RoverCore</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">address</span><span class="p">:</span><span class="n">port</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span>
-
-<span class="n">OPTIONS</span>
-        <span class="o">-</span><span class="n">h</span>
-                <span class="n">this</span> <span class="n">parameter</span> <span class="n">returns</span> <span class="n">manual</span> <span class="n">information</span>
-
-        <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">target</span>    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">address</span><span class="p">:</span><span class="n">port</span>
-                <span class="n">This</span> <span class="n">parameter</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Primus</span><span class="o">.</span><span class="n">js</span> <span class="n">server</span> <span class="n">that</span>
-                <span class="n">RoverCore</span> <span class="n">will</span> <span class="n">communicate</span> <span class="k">with</span><span class="o">.</span>
-                <span class="n">Defaults</span> <span class="n">to</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mf">9000.</span>
-
-        <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">simulate</span>
-                <span class="n">This</span> <span class="n">parameter</span> <span class="n">will</span> <span class="n">replace</span> <span class="n">every</span> <span class="n">module</span> <span class="k">with</span> <span class="n">empty</span> <span class="n">version</span>
-                <span class="ow">in</span> <span class="n">the</span> <span class="n">modules</span> <span class="n">folder</span> <span class="k">with</span> <span class="n">a</span> <span class="n">Protolobe</span> <span class="n">module</span><span class="o">.</span> <span class="n">The</span> <span class="n">Protolobe</span>
-                <span class="n">will</span> <span class="n">have</span> <span class="n">the</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">idle</span> <span class="n">charateristics</span> <span class="n">of</span> <span class="n">the</span> <span class="n">module</span> <span class="n">it</span>
-                <span class="ow">is</span> <span class="n">replacing</span><span class="o">.</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">useful</span> <span class="k">for</span> <span class="n">testing</span> <span class="n">communication</span>
-                <span class="n">between</span> <span class="n">interface</span> <span class="ow">and</span> <span class="n">modules</span><span class="o">.</span> <span class="n">Data</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">protolobe</span> <span class="n">will</span>
-                <span class="n">be</span> <span class="n">echoed</span> <span class="n">back</span> <span class="n">to</span> <span class="n">the</span> <span class="n">server</span> <span class="ow">and</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">stdout</span> <span class="p">(</span><span class="n">console</span><span class="p">)</span><span class="o">.</span>
-
-        <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">isolate</span> <span class="s2">&quot;module&quot;</span> <span class="o">|</span> <span class="s2">&quot;module1,moduel2,...&quot;</span>
-                <span class="n">Isolate</span> <span class="n">a</span> <span class="n">particular</span> <span class="n">lobe</span><span class="o">.</span> <span class="n">For</span> <span class="n">a</span> <span class="n">single</span> <span class="n">module</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span>
-                <span class="n">only</span> <span class="n">put</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">name</span><span class="o">.</span> <span class="n">List</span> <span class="n">of</span> <span class="n">lobes</span> <span class="n">must</span> <span class="n">be</span> <span class="n">comma</span>
-                <span class="n">seperated</span> <span class="nb">list</span> <span class="n">without</span> <span class="n">spaces</span><span class="o">.</span>
-
-        <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">color</span>
-                <span class="n">Disable</span> <span class="n">log</span> <span class="n">coloring</span> <span class="ow">in</span> <span class="n">RoverCore</span><span class="o">.</span>
-
-        <span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">-</span><span class="n">vv</span><span class="p">,</span> <span class="o">-</span><span class="n">vvv</span>
-                <span class="n">Verbose</span> <span class="n">output</span><span class="o">.</span>
-                <span class="o">-</span><span class="n">v</span> <span class="n">will</span> <span class="n">show</span> <span class="n">debug</span> <span class="n">level</span> <span class="mi">1</span> <span class="n">messages</span><span class="o">.</span>
-                <span class="o">-</span><span class="n">vv</span> <span class="n">will</span> <span class="n">show</span> <span class="n">debug</span> <span class="n">level</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">2</span> <span class="n">messages</span><span class="o">.</span>
-                <span class="o">-</span><span class="n">vvv</span> <span class="n">will</span> <span class="n">show</span> <span class="n">debug</span> <span class="n">levels</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="ow">and</span> <span class="mi">3</span> <span class="n">messages</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="connecting-to-rovercore-s-using-rovercore-mc">
-<h3>Connecting to RoverCore-S using RoverCore-MC<a class="headerlink" href="#connecting-to-rovercore-s-using-rovercore-mc" title="Permalink to this headline">¶</a></h3>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you do not have RoverCore-MC setup on your machine, follow this guide for setting up</p>
-</div>
-<ol class="arabic simple">
-<li>Open RoverCore-MC. The page should default to the “Test” interface.</li>
-<li>Click the Server combo box on the lower right side of the interface and select <strong>localhost / 127.0.0.1:9000</strong></li>
-<li>The Server Combobox and Test Navigation bar should turn green, indicating that you are connected.</li>
+<dl class="last docutils">
+<dt><em>How to use HyperLoad</em></dt>
+<dd><ol class="first last arabic simple">
+<li>On the top right side, click the open button and find the <code class="code docutils literal"><span class="pre">bin/HelloWorld/HelloWorld.hex</span></code></li>
+<li>In the lower middle section of the window, click the set button to set the speed (bps) to 50000.</li>
+<li>Plug in (or Unplug then plug in) SJOne board into computer. The messages on the right hand side of the window should update.</li>
+<li>On the bottom left side of the window, click the PORT pull down menu and select <code class="code docutils literal"><span class="pre">/tty/devUSB0</span></code> (The number at the end can be any number). The code should start loading onto the SJOne board immediately. If it does not, press the send reset button.</li>
 </ol>
-<p>At this point, you can send JSON to Protolobe using the interface.</p>
-<p>Protolobe loop back the data and send it to STDOUT as well as to the mission control test interface.</p>
-<p>At this point, you have the stack setup.
-The next thing you want to do is start creating your own Lobes.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Step 4</strong></dt>
+<dd>Unplug and reconnect the SJOne Board from USB.</dd>
+<dt><strong>Step 5</strong></dt>
+<dd><p class="first">To view serial output, run GTKTerm by using the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>gtkterm -p /dev/ttyUSB0 -s <span class="m">38400</span>
+</pre></div>
 </div>
+<dl class="last docutils">
+<dt><em>How to use GTKTerm</em></dt>
+<dd><ol class="first last arabic simple">
+<li>Set <em>CR LF Auto</em> to true by going to the <code class="code docutils literal"><span class="pre">Main</span> <span class="pre">Menu</span> <span class="pre">&gt;</span> <span class="pre">Configuration</span> <span class="pre">&gt;</span> <span class="pre">CR</span> <span class="pre">LF</span> <span class="pre">Auto</span></code> and click on it.</li>
+<li>Press <code class="code docutils literal"><span class="pre">F8</span></code> (Clears RTS signal), then press <code class="code docutils literal"><span class="pre">F7</span></code> (Clears DTR signal) to start SJOne.</li>
+<li>You should see the board counting up on the 7-Segment display and in binary on the LEDs.</li>
+</ol>
+</dd>
+</dl>
+</dd>
+<dt><strong>Step 6</strong></dt>
+<dd>Done!!</dd>
+</dl>
+</div>
+<div class="section" id="building-and-loading-freertos-project">
+<h2>Building and Loading FreeRTOS Project<a class="headerlink" href="#building-and-loading-freertos-project" title="Permalink to this headline">¶</a></h2>
+<p>Instructions are the same as HelloWorld, but you need to change the run the build script’s last argument to <em>FreeRTOS</em> rather than HelloWorld.</p>
 </div>
 </div>
 
@@ -295,7 +283,7 @@ The next thing you want to do is start creating your own Lobes.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="starting-a-new-application.html" class="btn btn-neutral float-right" title="Starting a New Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="understanding-the-framework-layout.html" class="btn btn-neutral float-right" title="Understanding The Framework Layout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index.html" class="btn btn-neutral" title="Welcome to SJSU-Dev-Linux’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

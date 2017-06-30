@@ -3,10 +3,11 @@ Getting Started
 
 Prerequisites
 ---------------
-RoverCore was built to run on Ubuntu and on Embedded Linux Platforms. Your best option is to run the most recent LTS (L.ong T.erm S.ervice) Ubuntu on your machine or install it on a virtual machine.
+Need a running version of Ubuntu 14.04 LTS or above. Ubuntu in a virtual machine such as VirtualBox or VMPlayer will work as well.
 
 .. note::
-	The main features of RoverCore will work on Windows and Mac OSX but the install.sh will not work. You will need to manually install all of the necessary components in the installer script.
+
+	The it is possible to get SJSU-Dev-Linux to work completely on Windows and Mac OSX if you have all of the necessary PATH dependencies installed, but that is not covered here. You will need to manually install all of the necessary components in the installer script.
 
 Installation
 -------------
@@ -16,94 +17,82 @@ Installation
 
 	.. code-block:: bash
 
-		git clone https://github.com/kammce/RoverCore-S.git
+		git clone --recursive https://github.com/kammce/SJSU-DEV-Linux.git
 
 **Step 2**
-	Change directory into **RoverCore-S**
+	Change directory into **SJSU-Dev-Linux**
 
 	.. code-block:: bash
 
-		cd RoverCore-s
+		cd SJSU-DEV-Linux
 
 **Step 3**
-	Install  RoverCore-S using `install.sh` script. The script will install the latest `node.js@6.x.x`, `npm`, node dependencies and development tools according to *package.json*.
+	Run :code:`setup` script.
 
 	.. code-block:: bash
 
-		./install.sh
+		./setup
 
 	.. warning::
 
 		Do not run this script using **SUDO**. The script will ask you for **sudo** permissions once it runs.
 
 	.. note::
-		It is currently planned to add an --production flag to keep from installing the development tools.
+		This will install gtkterm, mono-complete, and gcc-arm-embedded packages
 
-Running RoverCore-S
-:::::::::::::::::::::
-To run RoverCore-S use the following command::
+Building and Loading Hello World Application
+----------------------------------------------
 
-	[sudo] node RoverCore
+**Step 1**
+	From the root of the repository
 
-.. note::
-	Use `sudo` if you are using I2C or Bluetooth or anything else that requires root permissions.
+	.. code-block:: bash
 
-To get more information about the command line arguments run::
+		cd firmware/default
 
-	node RoverCore -h
+**Step 2**
+	Run :code:`build` script. A HEX file :code:`bin/HelloWorld/HelloWorld.hex` and subsequent folders should have been created after this script finishes.
 
-RoverCore-S manual output::
+	.. code-block:: bash
 
-	NAME
-		RoverCore - Start RoverCore
+		./build HelloWorld
 
-	SYNOPSIS
-		node RoverCore [-h]
-		node RoverCore [-t http://address:port] [-s]
+	.. note::
+		use the :code:`--help` argument to get additional information on how to use the build script.
 
-	OPTIONS
-		-h
-			this parameter returns manual information
+**Step 3**
+	Change back to the root of the repository and enter the **tools** directory and run:
 
-		-t, --target    http://address:port
-			This parameter sets the address of the Primus.js server that
-			RoverCore will communicate with.
-			Defaults to http://localhost:9000.
+	.. code-block:: bash
 
-		-s, --simulate
-			This parameter will replace every module with empty version
-			in the modules folder with a Protolobe module. The Protolobe
-			will have the name and idle charateristics of the module it
-			is replacing. This is useful for testing communication
-			between interface and modules. Data sent to protolobe will
-			be echoed back to the server and sent to stdout (console).
+		cd ../../
+		cd tools/
+		mono Hyperload.exe
 
-		-i, --isolate "module" | "module1,moduel2,..."
-			Isolate a particular lobe. For a single module, you need
-			only put in the name. List of lobes must be comma
-			seperated list without spaces.
+	*How to use HyperLoad*
+	    1. On the top right side, click the open button and find the :code:`bin/HelloWorld/HelloWorld.hex`
+	    2. In the lower middle section of the window, click the set button to set the speed (bps) to 50000.
+	    3. Plug in (or Unplug then plug in) SJOne board into computer. The messages on the right hand side of the window should update.
+	    4. On the bottom left side of the window, click the PORT pull down menu and select :code:`/tty/devUSB0` (The number at the end can be any number). The code should start loading onto the SJOne board immediately. If it does not, press the send reset button.
 
-		--no-color
-			Disable log coloring in RoverCore.
+**Step 4**
+	Unplug and reconnect the SJOne Board from USB.
 
-		-v, -vv, -vvv
-			Verbose output.
-			-v will show debug level 1 messages.
-			-vv will show debug level 1 and 2 messages.
-			-vvv will show debug levels 1, 2 and 3 messages.
+**Step 5**
+	To view serial output, run GTKTerm by using the following command:
 
-Connecting to RoverCore-S using RoverCore-MC
-::::::::::::::::::::::::::::::::::::::::::::::
-.. note::
-	If you do not have RoverCore-MC setup on your machine, follow this guide for setting up
+	.. code-block:: bash
 
-#. Open RoverCore-MC. The page should default to the "Test" interface.
-#. Click the Server combo box on the lower right side of the interface and select **localhost / 127.0.0.1:9000**
-#. The Server Combobox and Test Navigation bar should turn green, indicating that you are connected.
+		gtkterm -p /dev/ttyUSB0 -s 38400
 
-At this point, you can send JSON to Protolobe using the interface.
+	*How to use GTKTerm*
+		1. Set *CR LF Auto* to true by going to the :code:`Main Menu > Configuration > CR LF Auto` and click on it.
+		2. Press :code:`F8` (Clears RTS signal), then press :code:`F7` (Clears DTR signal) to start SJOne.
+		3. You should see the board counting up on the 7-Segment display and in binary on the LEDs.
 
-Protolobe loop back the data and send it to STDOUT as well as to the mission control test interface.
+**Step 6**
+	Done!!
 
-At this point, you have the stack setup.
-The next thing you want to do is start creating your own Lobes.
+Building and Loading FreeRTOS Project
+---------------------------------------
+Instructions are the same as HelloWorld, but you need to change the run the build script's last argument to *FreeRTOS* rather than HelloWorld.

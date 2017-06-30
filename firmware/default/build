@@ -1,15 +1,21 @@
 #!/bin/bash
 
+function HelpMenu()
+{
+	echo -e "Usage: ./build [-e|--entity][-t|--threads][-d|--debug] name_of_project"
+	echo -e "       ./build --help"
+	echo -e "       ./build spotless"
+	echo -e "       ./build clean name_of_project"
+}
+
 if [ "$#" -lt 1 ]
 then
-  echo -e "Usage: ./build [-e|--entity][-t|--threads][-d|--debug] name_of_project"
-  echo -e "       ./build spotless"
-  echo -e "       ./build clean name_of_project"
-  exit 1
+	HelpMenu
+	exit 1
 fi
 
 # Setup Project Target
-PROJECT_NAME="HelloWorld"
+APPLICATION="HelloWorld"
 THREADS="-j1"
 ENTITY_NAME=DBG
 DEBUG=0
@@ -34,11 +40,23 @@ do
 
 	case $key in
 		-e|--entity)
-			ENTITY_NAME="$2"
+			if [[ ! -z "$2" ]] && [[ "$2" =~ ^[a-zA-Z0-9]+ ]]
+			then
+				ENTITY_NAME="$2"
+			else
+				echo "Illegal entity: $2"
+				exit 1
+			fi
 			shift # past argument
 		;;
 		-t|--threads)
-			THREADS="-j$2"
+			if [[ ! -z "$2" ]] && [[ "$2" =~ ^[0-9]+ ]]
+			then
+				THREADS="-j$2"
+			else
+				echo "Illegal thread count: $2"
+				exit 1
+			fi
 			shift # past argument
 		;;
 		-d|--debug)
@@ -47,6 +65,10 @@ do
 		-v|--verbose)
 			SILENT=""
 		;;
+		-h|--help)
+			HelpMenu
+			exit 0
+		;;
 		*)
 		        # unknown option
 		;;
@@ -54,12 +76,26 @@ do
 	shift # past argument or value
 done
 
-if [ ! -z "$1" ]
+if [[ -z "$SILENT" ]]
 then
-	PROJECT_NAME=$1
+	echo
+	echo "==========VERBOSE INFORMATION=============="
+	echo "    APPLICATION=$APPLICATION"
+	echo "    THREADS=$THREADS"
+	echo "    ENTITY_NAME=$ENTITY_NAME"
+	echo "    DEBUG=$DEBUG"
+	echo "==========================================="
+	echo
 fi
 
-echo "PROJECT_NAME=$PROJECT_NAME THREADS=$THREADS ENTITY_NAME=$ENTITY_NAME DEBUG=$DEBUG"
+if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-.* ]]
+then
+	APPLICATION=$1
+else
+	echo -e "\nInvalid Application name: $1\nlast argument must be application name"
+	exit 0
+fi
 
-make $SILENT PROJ=$PROJECT_NAME ENTITY=$ENTITY_NAME $THREADS DEBUG=$DEBUG
+
+make $SILENT PROJ=$APPLICATION ENTITY=$ENTITY_NAME $THREADS DEBUG=$DEBUG
 
