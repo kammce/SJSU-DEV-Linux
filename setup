@@ -1,0 +1,66 @@
+#!/bin/bash
+
+function SystemExit()
+{
+    echo "Exiting Script" 1>&2
+    exit 1
+}
+
+# Make sure only non-root users can run our script
+if [[ $EUID -eq 0 ]]; then
+   echo -n "SJSU-DEV-Linux installer script must NOT be run as root! " 1>&2
+   echo -n "." 1>&2
+   sleep 1
+   echo -n "." 1>&2
+   sleep 1
+   echo -n "." 1>&2
+   sleep 1
+   echo " So try again!" 1>&2
+   exit 1
+fi
+
+echo " ──────────────────────────────────────────────────┐"
+echo "            Acquiring sudo privileges               "
+echo "└────────────────────────────────────────────────── "
+sudo echo "" || SystemExit
+
+echo " ──────────────────────────────────────────────────┐"
+echo "  Starting SJSU-DEV-Linux Environment Setup Script  "
+echo "└────────────────────────────────────────────────── "
+sleep 1
+
+echo " ──────────────────────────────────────────────────┐"
+echo "                   Updating PPAs                    "
+echo "└────────────────────────────────────────────────── "
+sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+sudo apt-get update
+
+echo " ──────────────────────────────────────────────────┐"
+echo "           Installing gcc-arm-embedded              "
+echo "└────────────────────────────────────────────────── "
+sudo apt-get -y install gcc-arm-embedded
+
+echo " ──────────────────────────────────────────────────┐"
+echo "                Installing gtkterm                  "
+echo "└────────────────────────────────────────────────── "
+sudo apt-get -y install gtkterm
+
+echo " ──────────────────────────────────────────────────┐"
+echo "      Adding current user to 'dialout' group        "
+echo "└────────────────────────────────────────────────── "
+sudo adduser $USER dialout
+
+echo " ───────────────────────────────────────────────────┐"
+echo "              Installing Mono-Complete              "
+echo "└────────────────────────────────────────────────── "
+sudo apt-get -y install mono-complete
+
+echo
+echo " ──────────────────────────────────────────────────────────────┐"
+echo "                      Setup complete!                           "
+echo "                                                                "
+echo "  PLEASE LOGOUT AND BACK IN to load code into your SJOne Board  "
+echo "└────────────────────────────────────────────────────────────── "
+echo

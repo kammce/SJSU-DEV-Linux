@@ -1,0 +1,16 @@
+language: C
+sudo: true
+dist: trusty
+group: edge
+install:
+  - ./setup
+script:
+  - cd ./firmware/default/
+  - ./build HelloWorld
+  - ls ./bin/HelloWorld/HelloWorld.elf
+  - ls ./bin/HelloWorld/HelloWorld.hex
+  - ls ./bin/HelloWorld/HelloWorld.lst
+  - ls ./bin/HelloWorld/HelloWorld.map
+  - cd ../../
+  - mono tools/HyperLoad.exe
+# after_success:
