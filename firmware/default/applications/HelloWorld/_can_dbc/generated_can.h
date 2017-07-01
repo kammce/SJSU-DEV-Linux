@@ -1,4 +1,4 @@
-/// DBC file: lib/_can_dbc/243.dbc    Self node: 'DRIVER'  (ALL = 0)
+/// DBC file: lib/_can_dbc/243.dbc    Self node: 'DBG'  (ALL = 0)
 /// This file can be included by a source file, for example: #include "generated.h"
 #ifndef __GENEARTED_DBC_PARSER
 #define __GENERATED_DBC_PARSER
@@ -23,57 +23,92 @@ typedef struct {
     uint8_t  dlc; ///< Data length of the message
 } dbc_msg_hdr_t; 
 
-// static const dbc_msg_hdr_t MASTER_DEBUG_COMMAND_HDR =             {  100, 1 };
-// static const dbc_msg_hdr_t MASTER_DEBUG_SIGNALS_HDR =             {  101, 2 };
-// static const dbc_msg_hdr_t MASTER_MOTOR_CMD_HDR =                 {  256, 2 };
-// static const dbc_msg_hdr_t SENSOR_DATA_HDR =                      {  512, 8 };
-// static const dbc_msg_hdr_t GPS_SENSOR_HDR =                       {  768, 2 };
-// static const dbc_msg_hdr_t BLUETOOTH_TX_GPS_TARGET_HDR =          {  770, 8 };
-// static const dbc_msg_hdr_t GPS_TX_BLUETOOTH_HEADING_HDR =         {  771, 8 };
-// static const dbc_msg_hdr_t MOTOR_FEEDBACK_HDR =                   { 1024, 1 };
-// static const dbc_msg_hdr_t BLUETOOTH_COMMAND_HDR =                { 1280, 4 };
+static const dbc_msg_hdr_t COMMAND_HDR =                          {  100, 1 };
 
 
+
+
+/// Message: COMMAND from 'DBG', DLC: 1 byte(s), MID: 100
+typedef struct {
+    uint8_t ENABLE : 1;                       ///< B0:0  Min: 0 Max: 1   Destination: DBG
+
+    // No dbc_mia_info_t for a message that we will send
+} COMMAND_t;
 
 
 /// @{ These 'externs' need to be defined in a source file of your project
+extern const uint32_t                             COMMAND__MIA_MS;
+extern const COMMAND_t                            COMMAND__MIA_MSG;
 /// @}
 
 
-/// Not generating code for dbc_encode_MASTER_DEBUG_COMMAND() since the sender is DBG and we are DRIVER
+/// Encode DBG's 'COMMAND' message
+/// @returns the message header of this message
+static inline dbc_msg_hdr_t dbc_encode_COMMAND(uint8_t bytes[8], COMMAND_t *from)
+{
+    uint32_t raw;
+    bytes[0]=bytes[1]=bytes[2]=bytes[3]=bytes[4]=bytes[5]=bytes[6]=bytes[7]=0;
 
-/// Not generating code for dbc_encode_MASTER_DEBUG_SIGNALS() since the sender is MASTER and we are DRIVER
+    // Not doing min value check since the signal is unsigned already
+    if(from->ENABLE > 1) { from->ENABLE = 1; } // Max value: 1
+    raw = ((uint32_t)(((from->ENABLE)))) & 0x01;
+    bytes[0] |= (((uint8_t)(raw) & 0x01)); ///< 1 bit(s) starting from B0
 
-/// Not generating code for dbc_encode_MASTER_MOTOR_CMD() since the sender is MASTER and we are DRIVER
+    return COMMAND_HDR;
+}
 
-/// Not generating code for dbc_encode_SENSOR_DATA() since the sender is SENSOR and we are DRIVER
+/// Encode and send for dbc_encode_COMMAND() message
+static inline bool dbc_encode_and_send_COMMAND(COMMAND_t *from)
+{
+    uint8_t bytes[8];
+    const dbc_msg_hdr_t hdr = dbc_encode_COMMAND(bytes, from);
+    return dbc_app_send_can_msg(hdr.mid, hdr.dlc, bytes);
+}
 
-/// Not generating code for dbc_encode_GPS_SENSOR() since the sender is GPS and we are DRIVER
 
-/// Not generating code for dbc_encode_BLUETOOTH_TX_GPS_TARGET() since the sender is BLUETOOTH and we are DRIVER
 
-/// Not generating code for dbc_encode_GPS_TX_BLUETOOTH_HEADING() since the sender is GPS and we are DRIVER
+/// Decode DBG's 'COMMAND' message
+/// @param hdr  The header of the message to validate its DLC and MID; this can be NULL to skip this check
+static inline bool dbc_decode_COMMAND(COMMAND_t *to, const uint8_t bytes[8], const dbc_msg_hdr_t *hdr)
+{
+    const bool success = true;
+    // If msg header is provided, check if the DLC and the MID match
+    if (NULL != hdr && (hdr->dlc != COMMAND_HDR.dlc || hdr->mid != COMMAND_HDR.mid)) {
+        return !success;
+    }
 
-/// Not generating code for dbc_encode_MOTOR_FEEDBACK() since the sender is MOTOR and we are DRIVER
+    uint32_t raw;
+    raw  = ((uint32_t)((bytes[0]) & 0x01)); ///< 1 bit(s) from B0
+    to->ENABLE = ((raw));
 
-/// Not generating code for dbc_encode_BLUETOOTH_COMMAND() since the sender is BLUETOOTH and we are DRIVER
+    to->mia_info.mia_counter_ms = 0; ///< Reset the MIA counter
 
-/// Not generating code for dbc_decode_MASTER_DEBUG_COMMAND() since 'DRIVER' is not the recipient of any of the signals
+    return success;
+}
 
-/// Not generating code for dbc_decode_MASTER_DEBUG_SIGNALS() since 'DRIVER' is not the recipient of any of the signals
 
-/// Not generating code for dbc_decode_MASTER_MOTOR_CMD() since 'DRIVER' is not the recipient of any of the signals
+/// Handle the MIA for DBG's COMMAND message
+/// @param   time_incr_ms  The time to increment the MIA counter with
+/// @returns true if the MIA just occurred
+/// @post    If the MIA counter reaches the MIA threshold, MIA struct will be copied to *msg
+static inline bool dbc_handle_mia_COMMAND(COMMAND_t *msg, uint32_t time_incr_ms)
+{
+    bool mia_occurred = false;
+    const dbc_mia_info_t old_mia = msg->mia_info;
+    msg->mia_info.is_mia = (msg->mia_info.mia_counter_ms >= COMMAND__MIA_MS);
 
-/// Not generating code for dbc_decode_SENSOR_DATA() since 'DRIVER' is not the recipient of any of the signals
+    if (!msg->mia_info.is_mia) { // Not MIA yet, so keep incrementing the MIA counter
+        msg->mia_info.mia_counter_ms += time_incr_ms;
+    }
+    else if(!old_mia.is_mia)   { // Previously not MIA, but it is MIA now
+        // Copy MIA struct, then re-write the MIA counter and is_mia that is overwriten
+        *msg = COMMAND__MIA_MSG;
+        msg->mia_info.mia_counter_ms = COMMAND__MIA_MS;
+        msg->mia_info.is_mia = true;
+        mia_occurred = true;
+    }
 
-/// Not generating code for dbc_decode_GPS_SENSOR() since 'DRIVER' is not the recipient of any of the signals
-
-/// Not generating code for dbc_decode_BLUETOOTH_TX_GPS_TARGET() since 'DRIVER' is not the recipient of any of the signals
-
-/// Not generating code for dbc_decode_GPS_TX_BLUETOOTH_HEADING() since 'DRIVER' is not the recipient of any of the signals
-
-/// Not generating code for dbc_decode_MOTOR_FEEDBACK() since 'DRIVER' is not the recipient of any of the signals
-
-/// Not generating code for dbc_decode_BLUETOOTH_COMMAND() since 'DRIVER' is not the recipient of any of the signals
+    return mia_occurred;
+}
 
 #endif

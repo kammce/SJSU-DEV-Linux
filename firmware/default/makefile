@@ -13,14 +13,18 @@ PROJ_DIR		= applications
 LIB_DIR			= lib
 BIN_DIR			= bin
 
-# -Os
+ifeq ($(DEBUG),1)
+	DEBUG_FLAG = -g
+else
+	DEBUG_FLAG = -Os
+endif
 
 CFLAGS = -mcpu=cortex-m3 \
     -mthumb -fmessage-length=0 \
     -ffunction-sections -fdata-sections \
     -Wall -Wshadow -Wlogical-op \
-    -g \
-    -Wfloat-equal -DBUILD_CFG_MPU=0 \
+    $(DEBUG_FLAG) \
+    -Wfloat-equal -D BUILD_CFG_MPU=0 \
     -D DEBUG=$(DEBUG) \
     -fabi-version=0 \
     -fno-exceptions \
@@ -43,27 +47,30 @@ CFLAGS = -mcpu=cortex-m3 \
     -I"$(PROJ_DIR)/$(PROJ)/L3_Utils" \
     -I"$(PROJ_DIR)/$(PROJ)/L4_IO" \
     -I"$(PROJ_DIR)/$(PROJ)/L5_Application" \
-    -I"$(PROJ_DIR)/$(PROJ)/_can_dbc"
+    -I"$(PROJ_DIR)/$(PROJ)/"
 
 PREBUILD        	= $(PROJ_DIR)/$(PROJ)/_can_dbc/generated_can.h
 LIBRARIES			= $(shell find $(LIB_DIR) -name '*.c' -o -name '*.cpp')
 SOURCES				= $(shell find $(PROJ_DIR)/$(PROJ) -name '*.c' -o -name '*.cpp')
 COMPILABLES 		= $(LIBRARIES) $(SOURCES)
 
-# $(patsubst %.cpp,%.o, LIST) 		: Replace .cpp -> .o
-# $(patsubst %.c,%.o, LIST)			: Replace .c -> .o
-# $(patsubst src/%,%, LIST) 		: Replace src/path/file.o -> path/file.o
-# $(addprefix $(OBJ_DIR)/, LIST) 	: Add OBJ DIR to path (path/file.o -> obj/path/file.o)
 OBJECT_FILES 		= $(addprefix $(OBJ_DIR)/, $(patsubst $(PROJ_DIR)/%,%, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o, $(COMPILABLES)))))
+# THIS IS A BREAKDOWN OF WHAT IS HAPPENING IN THE LINE ABOVE!
+#
+#    $(patsubst %.cpp,%.o, LIST)        : Replace .cpp -> .o
+#    $(patsubst %.c,%.o, LIST)          : Replace .c -> .o
+#    $(patsubst src/%,%, LIST)          : Replace src/path/file.o -> path/file.o
+#    $(addprefix $(OBJ_DIR)/, LIST)     : Add OBJ DIR to path (path/file.o -> obj/path/file.o)
+#
 EXECUTABLE			= $(BIN_DIR)/$(PROJ)/$(PROJ).elf
 HEX					= $(EXECUTABLE:.elf=.hex)
 LIST				= $(EXECUTABLE:.elf=.lst)
 SIZE				= $(EXECUTABLE:.elf=.siz)
 MAP					= $(EXECUTABLE:.elf=.map)
 
-.PHONY: all clean
+.PHONY: all clean precheck
 
-all: $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
+all: precheck prebuild $(OBJ_DIR) $(BIN_DIR) $(HEX) $(SIZE) $(LIST)
 
 $(HEX): $(EXECUTABLE)
 	@echo 'Invoking: Cross ARM GNU Create Flash Image'
@@ -83,7 +90,7 @@ $(LIST): $(EXECUTABLE)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-$(EXECUTABLE): $(PREBUILD) $(OBJECT_FILES)
+$(EXECUTABLE): $(OBJECT_FILES)
 	@echo 'Invoking: Cross ARM C++ Linker'
 	mkdir -p "$(dir $@)"
 	$(CPPC) -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T $(LIB_DIR)/loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(MAP)" -specs=nano.specs -o "$@" $(OBJECT_FILES)
@@ -122,7 +129,7 @@ $(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-$(PREBUILD):
+prebuild: $(LIB_DIR)/_can_dbc/243.dbc $(LIB_DIR)/_can_dbc/dbc_parse.py
 	mkdir -p $(PROJ_DIR)/$(PROJ)/_can_dbc
 	python $(LIB_DIR)/_can_dbc/dbc_parse.py -i $(LIB_DIR)/_can_dbc/243.dbc -s $(ENTITY) > $(PROJ_DIR)/$(PROJ)/_can_dbc/generated_can.h
 
@@ -134,8 +141,13 @@ $(BIN_DIR):
 	@echo 'Creating Binary Folder: $<'
 	mkdir $(BIN_DIR)
 
+precheck:
+	# If this fails to find the directory then it exits
+	# with a return code of 2 which will cause make to stop
+	ls "$(PROJ_DIR)/$(PROJ)"
+
 clean:
 	rm -fR $(OBJ_DIR)/$(PROJ) $(BIN_DIR)/$(PROJ) $(PREBUILD)
 
 spotless:
-	rm -fR $(OBJ_DIR)/* $(BIN_DIR)/*
+	rm -fR $(OBJ_DIR)/* $(BIN_DIR)/* $(PROJ_DIR)/*/_can_dbc/generated_can.h
