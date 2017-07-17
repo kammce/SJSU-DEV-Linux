@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" href="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Khalil A. Estell">
+	<meta name="description" content="Web Interface to display and modify firmware variables within the SJOne Development board.">
+	<title>SJOne Telemetry {{ version }} </title>
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/css/bootstrap.min.css') }}">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='dashboard.css') }}">
+</head>
+
+<body>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+		<button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="#">Telemetry <sup>{{ version }}<sup></a>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto"></ul>
+			<div class="form-inline mt-2 mt-md-0">
+				<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="frequency-select">
+					<option value="1" selected>1 Hz</option>
+					<option value="2">2 Hz</option>
+					<option value="4">4 Hz</option>
+					<option value="5">5 Hz</option>
+				</select>
+				<button class="btn btn-outline-info my-2 my-sm-0" style="margin-right: 10px;" id="refresh" type="submit">Refresh Devices</button>
+				<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="device-select">
+					<option value="-1" selected>Select Serial Device ...</option>
+				</select>
+				<button class="btn btn-outline-success my-2 my-sm-0" id="connect">Connect</button>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid pt-4" style="height: 100%">
+		<div class="row" style="height: 100%">
+			<main class="col-sm-5 col-md-5">
+				<h2>Serial Output</h2>
+				<hr>
+				<div class="input-group" style="margin-bottom: 10px">
+				    <input type="text" class="form-control" placeholder="Write Serial Data Here ..." name="serial-input">
+				    <span class="input-group-btn">
+					    <button id="serial-send" class="btn btn-secondary btn-outline-info" type="button">Send</button>
+				    </span>
+				    <!--
+				    <span class="input-group-addon">
+				    	<span>NL</span>
+				    	<input type="checkbox" aria-label="Checkbox for following text input">
+				    </span>
+				    <span class="input-group-addon">
+				    	<span>CR</span>
+				    	<input type="checkbox" aria-label="Checkbox for following text input">
+				    </span>
+				    -->
+			    </div>
+				<textarea id="serial-output" class="form-control fill"></textarea>
+				<br>
+			</main>
+			<main class="col-sm-7 col-md-7">
+				<h2>Telemetry Feedback</h2>
+				<hr>
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#table" role="tab">Table</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#raw" role="tab">Raw</a>
+					</li>
+				</ul>
+				<br>
+				<div class="tab-content" style="height: 0%; flex-grow: 1;">
+					<div class="tab-pane active" id="table" role="tabpanel" style="height:96%">
+						<div class="table-responsive" style="height:100%">
+							<table id="telemetry-table" class="table table-striped">
+								<thead>
+									<tr>
+										<th>Bucket</th>
+										<th>Variable Name</th>
+										<th>Type</th>
+										<th>Value</th>
+										<th>Set</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane" id="raw" style="height:96%" role="tabpanel">
+						<textarea id="telemetry-raw" style="height: 100%" class="form-control"></textarea>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/tether.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/bootstrap.min.js') }}"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/ie10-viewport-bug-workaround.js') }}"></script>
+	<script src="{{ url_for('static',filename='main.js') }}"></script>
+</body>
+
+</html>

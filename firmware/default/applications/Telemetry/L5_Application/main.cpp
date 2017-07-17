@@ -32,6 +32,7 @@
 #include "uart3.hpp"
 #include "utilities.h"
 #include "tlm/c_tlm_var.h"
+#include "io.hpp"
 
 class vChangerTask : public scheduler_task
 {
@@ -39,17 +40,30 @@ class vChangerTask : public scheduler_task
         vChangerTask(uint8_t priority) : scheduler_task("vChangerTask", 2048, priority) {}
         uint32_t x;
         float y;
+        int32_t z;
+        uint32_t inc;
         bool init(void)
         {
-            tlm_component * bucket = tlm_component_add("you");
+            x = 0;
+            y = 0;
+            z = 0;
+            inc = 1;
+            tlm_component * bucket = tlm_component_add("App");
             TLM_REG_VAR(bucket, x, tlm_uint);
             TLM_REG_VAR(bucket, y, tlm_float);
+            TLM_REG_VAR(bucket, z, tlm_int);
             return true;
         }
         bool run(void *p)
         {
             x++;
             y += 0.1;
+
+            inc = (z < 0 || z > 99) ? -inc : inc;
+            z += inc;
+
+            LD.setNumber(z);
+
             vTaskDelay(100);
             return true;
         }

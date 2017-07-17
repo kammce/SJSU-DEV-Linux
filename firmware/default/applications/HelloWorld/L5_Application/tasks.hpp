@@ -87,7 +87,7 @@ class remoteTask : public scheduler_task
     private:
         /** This function is called when a 2-digit number is decoded */
         void handleUserEntry(int num);
-        
+
         /**
          * @param code  The IR code
          * @param num   The matched number 0-9 that mapped the IR code.
