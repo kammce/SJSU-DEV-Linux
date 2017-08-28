@@ -82,17 +82,6 @@ LPC:
 
 ================================================================
 
-START:disk:0
-END:disk
-START:debug:2
-mCommandCount:2:1:2:uint16:11
-mDiskTlmSize:2:1:2:uint16:0
-END:debug
-START:you:2
-x:4:1:2:uint32:47
-y:4:1:4:float:4.699998
-END:you
-
 LPC: telemetry ascii
 START:disk:0
 END:disk
@@ -105,14 +94,27 @@ x:4:1:2:uint32:25
 y:4:1:4:float:FFFFF
 END:you
    Finished in 1883 us
+
+LPC: telemetry ascii
+START:disk:0
+END:disk
+START:debug:2
+mCommandCount:2:1:2:uint16:1
+mDiskTlmSize:2:1:2:uint16:0
+END:debug
 """
 
-p = re.compile('(?s)LPC: telemetry ascii\n(.*?)\n\x03\x03\x04\x04[ ]{3}Finished in [0-9]+ us\n')
+p = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us')
+p2 = re.compile('(?s)LPC: telemetry ascii(.*)')
 
 arr = p.findall(test)
 clean = p.sub('', test)
+clean2 = p2.sub('', clean)
 
 print(arr)
-print("\n")
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 print(clean)
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+print(clean2)
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 print(arr[-1])

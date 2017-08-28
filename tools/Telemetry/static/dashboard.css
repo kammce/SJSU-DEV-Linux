@@ -113,3 +113,5 @@ hr
 .supsub {position: absolute}
 .subscript {display:block; position:relative; left:5px; top: 23px}
 .superscript {display:block; position:relative; left:5px; top: 7px}
+
+textarea[disabled="disabled"], textarea[disabled] { background-color:white !important;   }

@@ -7,7 +7,11 @@ import glob
 import json
 import re
 import os
+import logging
 from enum import Enum
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 class State(Enum):
     OFFLINE = 0
@@ -15,39 +19,40 @@ class State(Enum):
     ONLINE_SYS_PROMPT = 2
 
 # INITIAL STATE
-state = State.OFFLINE
-previous_prompt = -1
-
+state                           = State.OFFLINE
+previous_prompt                 = -1
 # CONSTANTS
-SERIAL_READ_CONSTANT_LENGTH = 100000
-MILLIS_RATIO = (1/1000)
-SUCCESS = "SUCCESS"
-FAILURE = "FAILURE"
-COMPILED_PATTERN = re.compile('(?s)LPC: telemetry ascii\n(.*?)\n\x03\x03\x04\x04[ ]{3}Finished in [0-9]+ us\n')
+SERIAL_READ_CONSTANT_LENGTH     = 100000
+MILLIS_RATIO                    = (1/1000)
+SUCCESS                         = "SUCCESS"
+FAILURE                         = "FAILURE"
+PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)LPC: telemetry ascii(.*)')
+FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us\n')
+
 
 # SETUP FLASK APPLICATION
-app = Flask(__name__)
-app.debug = True
+app                             = Flask(__name__)
+app.debug                       = True
 
 # SETUP SERIAL PORT
-ser = serial.Serial()
-ser.baudrate = 38400
-ser.rts = False
-ser.dtr = False
-ser.timeout = 0
+ser                             = serial.Serial()
+ser.baudrate                    = 38400
+ser.rts                         = False
+ser.dtr                         = False
+ser.timeout                     = 0
 
 # SERIAL DATA STORAGE
-serial_output = ""
-telemetry = ""
-new_serial = ""
+serial_output                   = ""
+telemetry                       = ""
+new_serial                      = ""
 
 # THREAD VARIABLES
 lock = threading.Lock()
 
-
 def read_serial():
     global MILLIS_RATIO
-    global COMPILED_PATTERN
+    global PARTIAL_TELEMETETRY_PATTERN
+    global FULL_TELEMETRY_PATTERN
     global telemetry
     global serial_output
     global new_serial
@@ -61,8 +66,6 @@ def read_serial():
         ser.rts = False
         ser.dtr = False
 
-        print(state)
-
         if state == State.OFFLINE:
             found_prompt = serial_output.rfind("LPC:")
             if found_prompt > previous_prompt:
@@ -70,51 +73,34 @@ def read_serial():
                 state = State.ONLINE_SYS_PROMPT
 
         if ser.is_open == True:
-            serial_output += ser.read(4096)
-            # Find a last LPC telemetry request
-            start = serial_output.rfind("LPC: telemetry ascii")
-            # Find a single End of output substring
-            end_array = re.findall(r"[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us", serial_output)
-            end = -1
 
-            if len(end_array) != 0:
-                last_occurance = end_array[-1]
-                end = serial_output.rfind(last_occurance)
+            global serial_output
+            global telemetry
+            global MILLIS_RATIO
 
-            if start < end:
-                arr = COMPILED_PATTERN.findall(serial_output)
-                # print(start, end, serial_output, arr)
-                if len(arr) != 0:
-                    telemetry = arr[-1]
-                serial_output = COMPILED_PATTERN.sub('', serial_output)
-                # serial_output = ""
-            elif start == -1 and end == -1:
-                pass
-                #serial_output += serial_output
-                # serial_output = ""
+            if ser.is_open == False:
+                break
+
+            ser.baudrate    = 38400
+            ser.rts         = False
+            ser.dtr         = False
+
+            ser.write("telemetry ascii\n")
+            time.sleep(100 * MILLIS_RATIO)
+
+            serial_output   += ser.read(4095)
+            end_array       = FULL_TELEMETRY_PATTERN.findall(serial_output)
+
+            if len(end_array) > 0:
+                telemetry = end_array[-1]
+                # If telemetry is found, trim it from the serial_output
+                serial_tmp = FULL_TELEMETRY_PATTERN.sub('', serial_output)
+                serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
+                serial_output = serial_tmp
 
 thread = threading.Thread(target=read_serial)
 thread.daemon = True
 thread.start()
-
-# UTILITY FUNCTIONS
-def request_telemetry():
-    global serial_output
-    global telemetry
-    global MILLIS_RATIO
-
-    if ser.is_open == False:
-        return
-
-    lock.acquire()
-
-    ser.baudrate = 38400
-    ser.rts = False
-    ser.dtr = False
-
-    ser.write("telemetry ascii\n")
-
-    lock.release()
 
 # SERVER ROUTES
 @app.route('/js/<path:path>')
@@ -142,7 +128,6 @@ def return_telemetry():
     payload = ""
 
     if state == State.ONLINE_SYS_PROMPT:
-        request_telemetry()
         payload = telemetry
 
     return payload
@@ -173,13 +158,16 @@ def disconnect():
 @app.route('/serial')
 def serial():
     # print(serial_output)
-    return serial_output
+    serial_return   = serial_output
+    serial_return   = FULL_TELEMETRY_PATTERN.sub('', serial_return)
+    serial_return   = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_return)
+    return serial_return
 
 @app.route('/write/<string:payload>')
 def write(payload=""):
     lock.acquire()
     payload += "\n"
-    print(payload)
+    # print(payload)
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS

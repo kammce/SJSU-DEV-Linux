@@ -1,13 +1,14 @@
-const SUCCESS = "SUCCESS";
-const URL = "http://127.0.0.1:5000";
-const DEFAULT_PERIOD = 1000;
-var serial = "";
-var telemetry_raw = "";
-var telemetry = { };
-var device_connected = false;
-var server_connected = false;
-var list = [];
-var period = DEFAULT_PERIOD;
+const DEFAULT_PERIOD 	= 1000;
+const SUCCESS 			= "SUCCESS";
+const URL 				= "http://127.0.0.1:5000";
+var serial 				= "";
+var telemetry_raw 		= "";
+var telemetry 			= { };
+var device_connected 	= false;
+var server_connected 	= false;
+var list 				= [];
+var serial_period 		= DEFAULT_PERIOD;
+var telemetry_period 	= DEFAULT_PERIOD;
 
 function generateDropDownList(new_list)
 {
@@ -77,6 +78,14 @@ $("#connect").on("click", () =>
 	}
 });
 
+$("input[name='serial-input']").on('keyup', (e) =>
+{
+	if(e.keyCode === 13)
+	{
+		$("#serial-send").click();
+	}
+});
+
 $("#serial-send").on("click", () =>
 {
 	if(device_connected)
@@ -97,10 +106,16 @@ $("#serial-send").on("click", () =>
 	}
 });
 
-$("#frequency-select").on("change", () =>
+$("#serial-frequency-select").on("change", () =>
 {
-	var frequency = parseInt($("#frequency-select").val());
-	period = (frequency === -1) ? DEFAULT_PERIOD : 1000/frequency;
+	var frequency = parseInt($("#serial-frequency-select").val());
+	serial_period = (frequency === -1) ? DEFAULT_PERIOD : 1000/frequency;
+});
+
+$("#telemetry-frequency-select").on("change", () =>
+{
+	var frequency = parseInt($("#telemetry-frequency-select").val());
+	telemetry_period = (frequency === -1) ? DEFAULT_PERIOD : 1000/frequency;
 });
 
 var serial_output = $("#serial-output");
@@ -135,7 +150,7 @@ function getSerial()
 			}
 		});
 	}
-	setTimeout(getSerial, 500);
+	setTimeout(getSerial, serial_period);
 }
 
 function parseTelemetry()
@@ -252,7 +267,7 @@ function getTelemetry()
 			}
 		});
 	}
-	setTimeout(getTelemetry, period);
+	setTimeout(getTelemetry, telemetry_period);
 }
 
 function checkConnection()
@@ -263,7 +278,7 @@ function checkConnection()
 		success: () =>
 		{
 			server_connected = true;
-			setTimeout(checkConnection, period);
+			setTimeout(checkConnection, serial_period);
 		},
 		error: () =>
 		{
