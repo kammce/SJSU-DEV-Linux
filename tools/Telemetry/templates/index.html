@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="Khalil A. Estell">
 	<meta name="description" content="Web Interface to display and modify firmware variables within the SJOne Development board.">
-	<title>SJOne Telemetry {{ version }} </title>
+	<title>SJOne Telemetry</title>
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/css/bootstrap.min.css') }}">
 	<!-- Custom styles for this template -->
@@ -19,7 +19,13 @@
 		<button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<a class="navbar-brand" href="#">Telemetry <sup>{{ version }}<sup></a>
+		<a class="navbar-brand" href="#">
+			Telemetry
+			<span class='supsub'>
+				<sup class='superscript'>{{ version }}</sup>
+				<sub class="subscript connected-text"></sub>
+			</span>
+		</a>
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto"></ul>
 			<div class="form-inline mt-2 mt-md-0">
@@ -39,7 +45,7 @@
 	</nav>
 	<div class="container-fluid pt-4" style="height: 100%">
 		<div class="row" style="height: 100%">
-			<main class="col-sm-5 col-md-5">
+			<main class="col-sm-12 col-md-12 col-lg-5">
 				<h2>Serial Output</h2>
 				<hr>
 				<div class="input-group" style="margin-bottom: 10px">
@@ -61,12 +67,15 @@
 				<textarea id="serial-output" class="form-control fill"></textarea>
 				<br>
 			</main>
-			<main class="col-sm-7 col-md-7">
+			<main class="col-sm-12 col-md-12 col-lg-7">
 				<h2>Telemetry Feedback</h2>
 				<hr>
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#table" role="tab">Table</a>
+						<a class="nav-link active" data-toggle="tab" href="#graph" role="tab">Graph</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#table" role="tab">Table</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#raw" role="tab">Raw</a>
@@ -74,6 +83,9 @@
 				</ul>
 				<br>
 				<div class="tab-content" style="height: 0%; flex-grow: 1;">
+					<div class="tab-pane" id="graph" style="height:96%" role="tabpanel">
+						<div id="chartContainer" style="height: 100px; width: 100%;"></div>
+					</div>
 					<div class="tab-pane active" id="table" role="tabpanel" style="height:96%">
 						<div class="table-responsive" style="height:100%">
 							<table id="telemetry-table" class="table table-striped">
@@ -103,9 +115,9 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/jquery.min.js') }}"></script>
-	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/tether.min.js') }}"></script>
 	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='lib/canvasjs-1.9.10/jquery.canvasjs.min.js') }}"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/ie10-viewport-bug-workaround.js') }}"></script>
 	<script src="{{ url_for('static',filename='main.js') }}"></script>

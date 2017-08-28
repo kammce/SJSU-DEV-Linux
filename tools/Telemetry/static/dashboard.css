@@ -99,3 +99,17 @@ hr
   height: 85%;
   margin-bottom: 10px;
 }
+
+.connected-text:after
+{
+  color: lime;
+  content: "connected";
+}
+.disconnected-text:after
+{
+  color: red;
+  content: "disconnected";
+}
+.supsub {position: absolute}
+.subscript {display:block; position:relative; left:5px; top: 23px}
+.superscript {display:block; position:relative; left:5px; top: 7px}

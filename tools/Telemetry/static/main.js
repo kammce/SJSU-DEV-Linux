@@ -1,10 +1,11 @@
 const SUCCESS = "SUCCESS";
-const URL = "http://localhost:5000";
+const URL = "http://127.0.0.1:5000";
 const DEFAULT_PERIOD = 1000;
 var serial = "";
 var telemetry_raw = "";
 var telemetry = { };
-var connected = false;
+var device_connected = false;
+var server_connected = false;
 var list = [];
 var period = DEFAULT_PERIOD;
 
@@ -44,7 +45,7 @@ $("#refresh").on("click", () =>
 
 $("#connect").on("click", () =>
 {
-	if(!connected)
+	if(!device_connected)
 	{
 		var device_number = parseInt($("#device-select").val());
 		var dev_str = (device_number === -1) ? '' : `/${device_number}`;
@@ -52,7 +53,7 @@ $("#connect").on("click", () =>
 		{
 			if(data === SUCCESS)
 			{
-				connected = true;
+				device_connected = true;
 				$("#connect")
 					.removeClass("btn-outline-success")
 					.addClass("btn-outline-danger")
@@ -66,7 +67,7 @@ $("#connect").on("click", () =>
 		{
 			if(data === SUCCESS)
 			{
-				connected = false;
+				device_connected = false;
 				$("#connect")
 					.addClass("btn-outline-success")
 					.removeClass("btn-outline-danger")
@@ -78,7 +79,7 @@ $("#connect").on("click", () =>
 
 $("#serial-send").on("click", () =>
 {
-	if(connected)
+	if(device_connected)
 	{
 		var payload = $("input[name='serial-input']").val();
 
@@ -122,8 +123,7 @@ serial_output.on('scroll', function()
 
 function getSerial()
 {
-	// console.info("get serial");
-	if(connected)
+	if(device_connected && server_connected)
 	{
 		$.get(`${URL}/serial`, function( data )
 		{
@@ -228,7 +228,7 @@ function updateTable()
 
 function getTelemetry()
 {
-	if(connected)
+	if(device_connected && server_connected)
 	{
 		$.get(`${URL}/telemetry`, function (data)
 		{
@@ -255,10 +255,58 @@ function getTelemetry()
 	setTimeout(getTelemetry, period);
 }
 
+function checkConnection()
+{
+	$.ajax({
+		url: `${URL}/server-is-alive`,
+		type: 'GET',
+		success: () =>
+		{
+			server_connected = true;
+			setTimeout(checkConnection, period);
+		},
+		error: () =>
+		{
+			server_connected = false;
+			alert("You are no longer connected to Telemetry Server");
+		}
+	});
+}
+
 window.onload = function()
 {
 	console.log("testing");
+	checkConnection();
 	getSerial();
 	getTelemetry();
 	$("#refresh").click();
 };
+
+
+$(function () {
+	//Better to construct options first and then pass it as a parameter
+	var options = {
+		title: {
+			text: "Spline Chart using jQuery Plugin"
+		},
+                animationEnabled: true,
+		data: [
+		{
+			type: "spline", //change it to line, area, column, pie, etc
+			dataPoints: [
+				{ x: 10, y: 10 },
+				{ x: 20, y: 12 },
+				{ x: 30, y: 8 },
+				{ x: 40, y: 14 },
+				{ x: 50, y: 6 },
+				{ x: 60, y: 24 },
+				{ x: 70, y: -4 },
+				{ x: 80, y: 10 }
+			]
+		}
+		]
+	};
+
+	$("#chartContainer").CanvasJSChart(options);
+
+});

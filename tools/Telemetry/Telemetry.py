@@ -7,6 +7,23 @@ import glob
 import json
 import re
 import os
+from enum import Enum
+
+class State(Enum):
+    OFFLINE = 0
+    SYSTEM_BOOTING = 1
+    ONLINE_SYS_PROMPT = 2
+
+# INITIAL STATE
+state = State.OFFLINE
+previous_prompt = -1
+
+# CONSTANTS
+SERIAL_READ_CONSTANT_LENGTH = 100000
+MILLIS_RATIO = (1/1000)
+SUCCESS = "SUCCESS"
+FAILURE = "FAILURE"
+COMPILED_PATTERN = re.compile('(?s)LPC: telemetry ascii\n(.*?)\n\x03\x03\x04\x04[ ]{3}Finished in [0-9]+ us\n')
 
 # SETUP FLASK APPLICATION
 app = Flask(__name__)
@@ -19,44 +36,69 @@ ser.rts = False
 ser.dtr = False
 ser.timeout = 0
 
-# CONSTANTS
-SERIAL_READ_CONSTANT_LENGTH = 100000
-MILLIS_RATIO = (1/1000)
-SUCCESS = "SUCCESS"
-FAILURE = "FAILURE"
-
 # SERIAL DATA STORAGE
 serial_output = ""
 telemetry = ""
+new_serial = ""
 
 # THREAD VARIABLES
 lock = threading.Lock()
 
+
 def read_serial():
     global MILLIS_RATIO
+    global COMPILED_PATTERN
+    global telemetry
+    global serial_output
+    global new_serial
+    global previous_prompt
+    global state
 
     while True:
         time.sleep(100 * MILLIS_RATIO)
-        lock.acquire()
 
         ser.baudrate = 38400
         ser.rts = False
         ser.dtr = False
-        if ser.is_open == True:
-            store_serial_output()
 
-        lock.release()
+        print(state)
+
+        if state == State.OFFLINE:
+            found_prompt = serial_output.rfind("LPC:")
+            if found_prompt > previous_prompt:
+                previous_prompt = found_prompt
+                state = State.ONLINE_SYS_PROMPT
+
+        if ser.is_open == True:
+            serial_output += ser.read(4096)
+            # Find a last LPC telemetry request
+            start = serial_output.rfind("LPC: telemetry ascii")
+            # Find a single End of output substring
+            end_array = re.findall(r"[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us", serial_output)
+            end = -1
+
+            if len(end_array) != 0:
+                last_occurance = end_array[-1]
+                end = serial_output.rfind(last_occurance)
+
+            if start < end:
+                arr = COMPILED_PATTERN.findall(serial_output)
+                # print(start, end, serial_output, arr)
+                if len(arr) != 0:
+                    telemetry = arr[-1]
+                serial_output = COMPILED_PATTERN.sub('', serial_output)
+                # serial_output = ""
+            elif start == -1 and end == -1:
+                pass
+                #serial_output += serial_output
+                # serial_output = ""
 
 thread = threading.Thread(target=read_serial)
 thread.daemon = True
 thread.start()
 
 # UTILITY FUNCTIONS
-def store_serial_output():
-    global serial_output
-    serial_output += ser.read(SERIAL_READ_CONSTANT_LENGTH)
-
-def parse_telemetry():
+def request_telemetry():
     global serial_output
     global telemetry
     global MILLIS_RATIO
@@ -71,47 +113,6 @@ def parse_telemetry():
     ser.dtr = False
 
     ser.write("telemetry ascii\n")
-    wait = 100 * MILLIS_RATIO
-    time.sleep(wait)
-    data = ser.read(SERIAL_READ_CONSTANT_LENGTH)
-
-    # print(
-    #     "=====================\n"
-    #     + data +
-    #     "=====================\n"
-    # )
-
-    start = data.find("START:")
-    end = data.find("\x03\x03\x04\x04")
-
-    if start != -1 and end != -1:
-        telemetry = data[start:end]
-        # TODO: get rid of the SJ Dev message "Finished in 1883 us" at the end
-        # Remove the output from telemetry from the serial_output
-        end_deliminator = "us\n"
-        sanatized_output = data[:start] + data[end:]
-        sanatized_output = re.sub(r'telemetry ascii\n', '', sanatized_output)
-        sanatized_output = re.sub(r'LPC: ', '', sanatized_output)
-        sanatized_output = re.sub(r'[\x03][\x03][\x04][\x04]   Finished in .*\n', '', sanatized_output)
-        serial_output += sanatized_output
-
-        # print(
-        #     "===========TELEMETRY==========\n"
-        #     + telemetry +
-        #     "=====================\n"
-        # )
-        # print("===========SANATIZED==========\n"
-        #     +sanatized_output+
-        #     "=====================\n"
-        # )
-
-    elif start == -1 and end == -1:
-        serial_output += data
-    elif start != -1 and end == -1:
-        serial_output += data[:start]
-    # NOTE: This case should not be possible!
-    elif start == -1 and end != -1:
-        serial_output += data
 
     lock.release()
 
@@ -132,32 +133,46 @@ def send_lib(path):
 def index():
     return render_template("index.html", version="version 0.0.1")
 
+@app.route('/server-is-alive')
+def server_is_alive():
+    return SUCCESS
+
 @app.route('/telemetry')
 def return_telemetry():
-    parse_telemetry()
-    return telemetry
+    payload = ""
+
+    if state == State.ONLINE_SYS_PROMPT:
+        request_telemetry()
+        payload = telemetry
+
+    return payload
 
 @app.route('/list')
 def list():
-    serial_devices_list = glob.glob("/dev/ttyUSB*")
-    sorted_list = sorted(serial_devices_list)
-    return json.dumps(sorted_list)
+    ttyUSB_list = glob.glob("/dev/ttyUSB*")
+    ttyACM_list = glob.glob("/dev/ttyACM*")
+    tty_list = ttyUSB_list + ttyACM_list
+    sorted_tty_list = sorted(tty_list)
+    return json.dumps(sorted_tty_list)
 
 @app.route('/connect')
 @app.route('/connect/<int:device>')
 def connect(device=0):
     ser.close()
     ser.port = "/dev/ttyUSB%d" % (device)
+    state = State.OFFLINE
     ser.open()
     return SUCCESS
 
 @app.route('/disconnect', methods=['GET'])
 def disconnect():
     ser.close()
+    state = State.OFFLINE
     return SUCCESS
 
 @app.route('/serial')
 def serial():
+    # print(serial_output)
     return serial_output
 
 @app.route('/write/<string:payload>')
