@@ -14,3 +14,4 @@ Will work on other Linux Distros if *dependancies* are manually installed.
 
 ## Contrib
 SJSU DEV Linux brought to you by [Khalil Estell](http://kammce.io) Based on SJDev from [Preet Kang](http://www.socialledge.com/sjsu/index.php?title=Main_Page)
+
