@@ -67,7 +67,7 @@ Building and Loading Hello World Application
 
 		cd ../../
 		cd tools/
-		mono Hyperload.exe
+		mono HyperLoad.exe
 
 	*How to use HyperLoad*
 	    1. On the top right side, click the open button and find the :code:`bin/HelloWorld/HelloWorld.hex`
