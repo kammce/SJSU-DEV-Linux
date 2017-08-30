@@ -117,7 +117,7 @@ def send_lib(path):
 
 @app.route('/')
 def index():
-    return render_template("index.html", version="version 0.0.1")
+    return render_template("index.html", version="version 0.0.2")
 
 @app.route('/server-is-alive')
 def server_is_alive():
