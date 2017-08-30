@@ -1,33 +1,37 @@
-.. RoverCore-S documentation master file, created by
-   sphinx-quickstart on Tue Jun 13 22:03:27 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to SJSU-Dev-Linux's documentation!
-============================================
+===========================================
 
-.. +------------------+------------------+------------------+
-.. | |Get Started|_   | |API Reference|_ | |H/W Reference|_ |
-.. +------------------+------------------+------------------+
-.. | `Get Started`_   | `API Reference`_ | `H/W Reference`_ |
-.. +------------------+------------------+------------------+
-.. | |API Guides|_    | |Contribute|_    | |Resources|_     |
-.. +------------------+------------------+------------------+
-.. | `API Guides`_    | `Contribute`_    | `Resources`_     |
-.. +------------------+------------------+------------------+
+Quick Links
+--------------
+
++------------------------+------------------+------------------------+------------------------+
+| |Get Started|_         | |Guides|_        | |API Reference|_       | |Hardware Reference|_  |
++------------------------+------------------+------------------------+------------------------+
+| `Get Started`_         | `Guides`_        | `API Reference`_       | `Hardware Reference`_  |
++------------------------+------------------+------------------------+------------------------+
+
+.. |Get Started| image:: _static/getting-started.png
+.. _Get Started: rst/getting-started-toc.html
+
+.. |API Reference| image:: _static/api.png
+.. _API Reference: doxygen/html/index.html
+
+.. |Hardware Reference| image:: _static/hw-reference.png
+.. _Hardware Reference: http://www.socialledge.com/sjsu/index.php?title=SJ_One_Board
+
+.. |Guides| image:: _static/guides.png
+.. _Guides: rst/guides-toc.html
 
 .. toctree::
-	:caption: Table of Contents
-	:name: mastertoc2
-	:maxdepth: 2
+    :hidden:
+    :numbered:
+    :maxdepth: 5
 
-	rst/getting-started
-	rst/understanding-the-framework-layout
-	rst/debugging-with-openocd-gdb
-	rst/unit-testing
-	rst/telemetry-runtime-monitoring-and-tuning.rst
-	rst/copyrights
-	rst/about
+    Home            <self>
+    Getting Started <rst/getting-started-toc>
+    Guides          <rst/guides-toc>
+    About           <about>
+    Copyright       <copyrights>
 
 Press Next To Get Started
 ---------------------------
