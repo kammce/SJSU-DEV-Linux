@@ -24,7 +24,8 @@ Welcome to SJSU-Dev-Linux's documentation!
 	rst/getting-started
 	rst/understanding-the-framework-layout
 	rst/debugging-with-openocd-gdb
-	rst/unit-testing-with-unity
+	rst/unit-testing
+	rst/telemetry-runtime-monitoring-and-tuning.rst
 	rst/copyrights
 	rst/about
 

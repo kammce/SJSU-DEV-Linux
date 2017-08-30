@@ -23,7 +23,7 @@
             Telemetry
             <span class='supsub'>
                 <sup class='superscript'>{{ version }}</sup>
-                <sub class="subscript connected-text"></sub>
+                <sub class="subscript connected-text" id="server-connection-indicator"></sub>
             </span>
         </a>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -83,17 +83,11 @@
                         <a class="nav-link active" data-toggle="tab" href="#table" role="tab">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#graph" role="tab">Graph</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#raw" role="tab">Raw</a>
                     </li>
                 </ul>
                 <br>
                 <div class="tab-content" style="height: 0%; flex-grow: 1;">
-                    <div class="tab-pane" id="graph" style="height:96%" role="tabpanel">
-                        <div id="chartContainer" style="height: 100px; width: 100%;"></div>
-                    </div>
                     <div class="tab-pane active" id="table" role="tabpanel" style="height:96%">
                         <div class="table-responsive" style="height:100%">
                             <table id="telemetry-table" class="table table-striped">
@@ -122,10 +116,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/tether.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='lib/canvasjs-1.9.10/jquery.canvasjs.min.js') }}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/ie10-viewport-bug-workaround.js') }}"></script>
     <script src="{{ url_for('static',filename='main.js') }}"></script>

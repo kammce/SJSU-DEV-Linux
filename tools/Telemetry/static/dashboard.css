@@ -103,12 +103,12 @@ hr
 .connected-text:after
 {
   color: lime;
-  content: "connected";
+  content: "server connected";
 }
 .disconnected-text:after
 {
   color: red;
-  content: "disconnected";
+  content: "server disconnected";
 }
 .supsub {position: absolute}
 .subscript {display:block; position:relative; left:5px; top: 23px}
