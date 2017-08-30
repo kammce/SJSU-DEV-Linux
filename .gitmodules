@@ -1,6 +1,7 @@
 [submodule "tools/OpenOCD"]
 	path = tools/OpenOCD
 	url = https://github.com/kammce/OpenOCD-SJOne.git
+	ignore = dirty
 [submodule "tools/gdb"]
 	path = tools/gdb
 	url = https://github.com/cyrus-and/gdb-dashboard.git
