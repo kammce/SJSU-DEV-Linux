@@ -136,6 +136,7 @@ $("#serial-send").on("click", () =>
     if(device_connected)
     {
         var payload = $("input[name='serial-input']").val();
+        $("input[name='serial-input']").val("");
 
         $.get(`${URL}/write/${payload}`, function( data )
         {
@@ -342,7 +343,8 @@ function checkConnection()
         {
             server_connected = false;
             $("#server-connection-indicator").removeClass("connected-text").addClass("disconnected-text");
-            // alert("You are no longer connected to Telemetry Server.\nRestart Telemetry server and reload page.");
+            $('#myModal').modal('show');
+            // setTimeout(checkConnection, serial_period);
         }
     });
 }

@@ -12,7 +12,7 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.lst
   - ls ./bin/HelloWorld/HelloWorld.map
   - cd ../../
-  - gdbgui &
+  - gdbgui -g arm-none-eabi-gdb &
   - sleep 2
   - wget http://127.0.0.1:5000
   - cd tools/Telemetry
