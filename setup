@@ -60,7 +60,7 @@ sudo adduser $USER dialout
 echo " ───────────────────────────────────────────────────┐"
 echo "                Installing OpenOCD                   "
 echo "└─────────────────────────────────────────────────── "
-sudo apt install openocd
+sudo apt -y install openocd
 
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'PIP' Python package installer     "
