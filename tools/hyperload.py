@@ -211,12 +211,12 @@ def getChecksum(blocks):
 
 ### Main Program ###
 
-if (len(sys.argv) != 3 and len(sys.argv) != 1):
-   print(helpMessage)
-   sys.exit()
-else:
+if (len(sys.argv) == 3):
    sDeviceFile  = sys.argv[1]
    sHexFilePath = sys.argv[2]
+elif(len(sys.argv) != 1):
+   print(helpMessage)
+   sys.exit()
 
 printIntroMessage()
 
@@ -243,19 +243,23 @@ sPort = serial.Serial(
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS)
 
+# sPort.rts = True
+# sPort.dtr = True
+# time.sleep(2)
+
+# Put device into reset state
+sPort.rts = True
+sPort.dtr = True
+time.sleep(0.5)
+# Remove reset signal to allow device to boot up
+sPort.rts = False
+sPort.dtr = False
+
 sPort.reset_input_buffer()
 sPort.reset_output_buffer()
 sPort.flush()
 
-# Setting Initial State of RTS Bit to False
-sPort.rts = False
-
-# Reseting the board by toggling DTR
-sPort.dtr = False
-
-# time.sleep(1)
-
-# Reading a Byte from SJOne
+# Read first byte from SJOne buffer
 msg = sPort.read(1)
 
 if msg is ByteReference[0]:
