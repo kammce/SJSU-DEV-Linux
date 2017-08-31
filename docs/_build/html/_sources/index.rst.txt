@@ -14,7 +14,7 @@ Quick Links
 .. _Get Started: rst/getting-started-toc.html
 
 .. |API Reference| image:: _static/api.png
-.. _API Reference: doxygen/html/index.html
+.. _API Reference: https://kammce.github.io/SJSU-DEV-Linux/docs/api/html/index.html
 
 .. |Hardware Reference| image:: _static/hw-reference.png
 .. _Hardware Reference: http://www.socialledge.com/sjsu/index.php?title=SJ_One_Board

@@ -4,7 +4,11 @@ Debugging with OpenOCD and GDB
 This tutorial will use **HelloWorld** as an example. But this will work for any application you build.
 
 
-Step 0: Rebuild Application with Debug flag
+Step 0: Installing OpenOCD
+----------------------------
+OpenOCD was installed when you ran the initial :code:`./setup` script.
+
+Step 1: Rebuild Application with Debug flag
 ---------------------------------------------
 Run:
 
@@ -16,17 +20,6 @@ Run:
 .. note::
 
 	:code:`./build spotless` will delete all of the files in the :code:`obj` and :code:`bin` folder. This is necessary because some files in the lib folder need to be updated with the new -d (debug) flag.
-
-Step 1: Install OpenOCD
--------------------------
-The OpenOCD repo can be found in folder :code:`tools/OpenOCD`. You can install OpenOCD by using the following commands in the root of the OpenOCD folder.
-
-.. code-block:: bash
-
-	./boostrap
-	./configure
-	make
-	[optional] sudo make install
 
 Step 2: Solder JTAG Headers to SJOne
 --------------------------------------
@@ -45,11 +38,8 @@ Run:
 
 .. code-block:: bash
 
-	# If you did not use make install
-	./src/openocd -s ./tcl -f sjone.cfg
-
 	# If you used make install
-	openocd -s ./tcl -f sjone.cfg
+	openocd -f ./tools/OpenOCD/sjone.cfg
 
 .. tip::
 

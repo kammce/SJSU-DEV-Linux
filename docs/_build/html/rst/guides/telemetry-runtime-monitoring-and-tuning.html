@@ -182,38 +182,23 @@
 <p>Telemetry is another means of testing your firmware. Unit test are useful for testing your code’s logic and making sure the behavior of your code operates as intended. A debugger allows you step through your code one line at a time, inspecting variables to see when adverse behavior arises in your firmware. Telemetry, more or less, is a means of feeding back information to the user about the current state of the firmware during runtime.</p>
 <div class="section" id="setting-up-telemetry">
 <h2>2.3.1. Setting up Telemetry<a class="headerlink" href="#setting-up-telemetry" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt><strong>Step 1</strong></dt>
-<dd><p class="first">From the root of the project. Change into tools/Telemetry folder.</p>
-<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> tools/Telemetry
-</pre></div>
-</div>
-</dd>
-<dt><strong>Step 2</strong></dt>
-<dd><p class="first">Run PIP install of the requirements file.</p>
-<div class="last highlight-bash"><div class="highlight"><pre><span></span>pip install -r requirements.txt
-</pre></div>
-</div>
-</dd>
-</dl>
+<p>Telemetry was setup when you ran the initial <code class="code docutils literal"><span class="pre">./setup</span></code> script.</p>
 </div>
 <div class="section" id="using-telemetry">
 <h2>2.3.2. Using Telemetry<a class="headerlink" href="#using-telemetry" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Step 1</strong></dt>
-<dd>Run <code class="code docutils literal"><span class="pre">./start</span></code> script.</dd>
-<dt><strong>Step 2</strong></dt>
-<dd><p class="first">Open <code class="code docutils literal"><span class="pre">http://localhost:5000</span></code> on your browser.</p>
+<dd><p class="first">Run <code class="code docutils literal"><span class="pre">./start</span></code> script. It should open up a webpage in your browser.</p>
 <p>You should see the following:</p>
 <blockquote class="last">
 <div><img alt="../../_images/telemetry-default.png" src="../../_images/telemetry-default.png" />
 </div></blockquote>
 </dd>
-<dt><strong>Step 3</strong></dt>
+<dt><strong>Step 2</strong></dt>
 <dd>Connect your SJOne Board to your computer.</dd>
-<dt><strong>Step 4</strong></dt>
+<dt><strong>Step 3</strong></dt>
 <dd>Press the <strong>Refresh Devices</strong> button to check your system for serial devices.</dd>
-<dt><strong>Step 5</strong></dt>
+<dt><strong>Step 4</strong></dt>
 <dd><p class="first">Press the <strong>Connect</strong> button to connect to the serial device.
 At this point, you should see the serial output of the SJOne board being written to the Serial Output textarea.
 If Telemetry is running on the SJOne, then a table will be generated in the Telemetry Feedback area.</p>

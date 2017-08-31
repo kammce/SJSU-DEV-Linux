@@ -61,24 +61,15 @@ Building and Loading Hello World Application
 		use the :code:`--help` argument to get additional information on how to use the build script.
 
 **Step 3**
-	Change back to the root of the repository and enter the **tools** directory and run:
+	To load the hex file into your SJOne file you will use the :code:`hyperload.py` file. Run the following:
 
 	.. code-block:: bash
 
-		cd ../../
-		cd tools/
-		mono HyperLoad.exe
+		./hyperload.py /dev/ttyUSB0 bin/HelloWorld/HelloWorld.hex
 
-	*How to use HyperLoad*
-	    1. On the top right side, click the open button and find the :code:`bin/HelloWorld/HelloWorld.hex`
-	    2. In the lower middle section of the window, click the set button to set the speed (bps) to 50000.
-	    3. Plug in (or Unplug then plug in) SJOne board into computer. The messages on the right hand side of the window should update.
-	    4. On the bottom left side of the window, click the PORT pull down menu and select :code:`/tty/devUSB0` (The number at the end can be any number). The code should start loading onto the SJOne board immediately. If it does not, press the send reset button.
+	The first argument is the path to the serial device. The second argument is the hexfile to load into the SJOne board.
 
 **Step 4**
-	Unplug and reconnect the SJOne Board from USB.
-
-**Step 5**
 	To view serial output, run GTKTerm by using the following command:
 
 	.. code-block:: bash
@@ -90,7 +81,7 @@ Building and Loading Hello World Application
 		2. Press :code:`F8` (Clears RTS signal), then press :code:`F7` (Clears DTR signal) to start SJOne.
 		3. You should see the board counting up on the 7-Segment display and in binary on the LEDs.
 
-**Step 6**
+**Step 5**
 	Done!!
 
 Building and Loading FreeRTOS Project

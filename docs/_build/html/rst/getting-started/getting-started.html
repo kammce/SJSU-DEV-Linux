@@ -235,26 +235,13 @@
 </div>
 </dd>
 <dt><strong>Step 3</strong></dt>
-<dd><p class="first">Change back to the root of the repository and enter the <strong>tools</strong> directory and run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../../
-<span class="nb">cd</span> tools/
-mono HyperLoad.exe
+<dd><p class="first">To load the hex file into your SJOne file you will use the <code class="code docutils literal"><span class="pre">hyperload.py</span></code> file. Run the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./hyperload.py /dev/ttyUSB0 bin/HelloWorld/HelloWorld.hex
 </pre></div>
 </div>
-<dl class="last docutils">
-<dt><em>How to use HyperLoad</em></dt>
-<dd><ol class="first last arabic simple">
-<li>On the top right side, click the open button and find the <code class="code docutils literal"><span class="pre">bin/HelloWorld/HelloWorld.hex</span></code></li>
-<li>In the lower middle section of the window, click the set button to set the speed (bps) to 50000.</li>
-<li>Plug in (or Unplug then plug in) SJOne board into computer. The messages on the right hand side of the window should update.</li>
-<li>On the bottom left side of the window, click the PORT pull down menu and select <code class="code docutils literal"><span class="pre">/tty/devUSB0</span></code> (The number at the end can be any number). The code should start loading onto the SJOne board immediately. If it does not, press the send reset button.</li>
-</ol>
-</dd>
-</dl>
+<p class="last">The first argument is the path to the serial device. The second argument is the hexfile to load into the SJOne board.</p>
 </dd>
 <dt><strong>Step 4</strong></dt>
-<dd>Unplug and reconnect the SJOne Board from USB.</dd>
-<dt><strong>Step 5</strong></dt>
 <dd><p class="first">To view serial output, run GTKTerm by using the following command:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>gtkterm -p /dev/ttyUSB0 -s <span class="m">38400</span>
 </pre></div>
@@ -269,7 +256,7 @@ mono HyperLoad.exe
 </dd>
 </dl>
 </dd>
-<dt><strong>Step 6</strong></dt>
+<dt><strong>Step 5</strong></dt>
 <dd>Done!!</dd>
 </dl>
 </div>

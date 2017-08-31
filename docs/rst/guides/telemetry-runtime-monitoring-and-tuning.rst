@@ -9,41 +9,24 @@ Telemetry is another means of testing your firmware. Unit test are useful for te
 
 Setting up Telemetry
 ----------------------
-
-**Step 1**
-	From the root of the project. Change into tools/Telemetry folder.
-
-	.. code-block:: bash
-
-		cd tools/Telemetry
-
-**Step 2**
-	Run PIP install of the requirements file.
-
-	.. code-block:: bash
-
-		pip install -r requirements.txt
+Telemetry was setup when you ran the initial :code:`./setup` script.
 
 Using Telemetry
 -----------------
-
 **Step 1**
-	Run :code:`./start` script.
-
-**Step 2**
-	Open :code:`http://localhost:5000` on your browser.
+	Run :code:`./start` script. It should open up a webpage in your browser.
 
 	You should see the following:
 
 		.. image:: ../../_static/telemetry-default.png
 
-**Step 3**
+**Step 2**
 	Connect your SJOne Board to your computer.
 
-**Step 4**
+**Step 3**
 	Press the **Refresh Devices** button to check your system for serial devices.
 
-**Step 5**
+**Step 4**
 	Press the **Connect** button to connect to the serial device.
 	At this point, you should see the serial output of the SJOne board being written to the Serial Output textarea.
 	If Telemetry is running on the SJOne, then a table will be generated in the Telemetry Feedback area.

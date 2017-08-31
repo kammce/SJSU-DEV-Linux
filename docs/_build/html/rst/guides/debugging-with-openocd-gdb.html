@@ -98,8 +98,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started-toc.html">1. Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../guides-toc.html">2. Guides</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Debugging with OpenOCD and GDB</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#step-0-rebuild-application-with-debug-flag">2.1.1. Step 0: Rebuild Application with Debug flag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-install-openocd">2.1.2. Step 1: Install OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-0-installing-openocd">2.1.1. Step 0: Installing OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-rebuild-application-with-debug-flag">2.1.2. Step 1: Rebuild Application with Debug flag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-solder-jtag-headers-to-sjone">2.1.3. Step 2: Solder JTAG Headers to SJOne</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-3-connecting-busblasterv3-to-sjone">2.1.4. Step 3: Connecting BusBlasterv3 to SJOne</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-4-run-openocd">2.1.5. Step 4: Run OpenOCD</a></li>
@@ -181,8 +181,12 @@
   <div class="section" id="debugging-with-openocd-and-gdb">
 <h1>2.1. Debugging with OpenOCD and GDB<a class="headerlink" href="#debugging-with-openocd-and-gdb" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial will use <strong>HelloWorld</strong> as an example. But this will work for any application you build.</p>
-<div class="section" id="step-0-rebuild-application-with-debug-flag">
-<h2>2.1.1. Step 0: Rebuild Application with Debug flag<a class="headerlink" href="#step-0-rebuild-application-with-debug-flag" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-0-installing-openocd">
+<h2>2.1.1. Step 0: Installing OpenOCD<a class="headerlink" href="#step-0-installing-openocd" title="Permalink to this headline">¶</a></h2>
+<p>OpenOCD was installed when you ran the initial <code class="code docutils literal"><span class="pre">./setup</span></code> script.</p>
+</div>
+<div class="section" id="step-1-rebuild-application-with-debug-flag">
+<h2>2.1.2. Step 1: Rebuild Application with Debug flag<a class="headerlink" href="#step-1-rebuild-application-with-debug-flag" title="Permalink to this headline">¶</a></h2>
 <p>Run:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>./build spotless
 ./build -d HelloWorld
@@ -191,16 +195,6 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><code class="code docutils literal"><span class="pre">./build</span> <span class="pre">spotless</span></code> will delete all of the files in the <code class="code docutils literal"><span class="pre">obj</span></code> and <code class="code docutils literal"><span class="pre">bin</span></code> folder. This is necessary because some files in the lib folder need to be updated with the new -d (debug) flag.</p>
-</div>
-</div>
-<div class="section" id="step-1-install-openocd">
-<h2>2.1.2. Step 1: Install OpenOCD<a class="headerlink" href="#step-1-install-openocd" title="Permalink to this headline">¶</a></h2>
-<p>The OpenOCD repo can be found in folder <code class="code docutils literal"><span class="pre">tools/OpenOCD</span></code>. You can install OpenOCD by using the following commands in the root of the OpenOCD folder.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>./boostrap
-./configure
-make
-<span class="o">[</span>optional<span class="o">]</span> sudo make install
-</pre></div>
 </div>
 </div>
 <div class="section" id="step-2-solder-jtag-headers-to-sjone">
@@ -218,11 +212,8 @@ make
 <div class="section" id="step-4-run-openocd">
 <h2>2.1.5. Step 4: Run OpenOCD<a class="headerlink" href="#step-4-run-openocd" title="Permalink to this headline">¶</a></h2>
 <p>Run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># If you did not use make install</span>
-./src/openocd -s ./tcl -f sjone.cfg
-
-<span class="c1"># If you used make install</span>
-openocd -s ./tcl -f sjone.cfg
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># If you used make install</span>
+openocd -f ./tools/OpenOCD/sjone.cfg
 </pre></div>
 </div>
 <div class="admonition tip">
