@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # SJSU - AV #
 
 ########
@@ -12,22 +14,48 @@ import time
 import struct
 import binascii
 import math
-import serial.serialutil 
+import serial.serialutil
 import logging
 import sys
 from intelhex import IntelHex
 
+
+helpMessage = """
+NAME
+    hyperload - firmware flashing tool for SJOne board written in python
+
+SYNOPSIS
+    ./hyperload
+    ./hyperload [ -h | --help ]
+    ./hyperload <serial-device-path> <hex-file-path>
+
+DESCRIPTION
+    Running hyperload without arguments will use the default values embedded
+    in the software.
+
+    -h, --help
+        Report this usage message here.
+
+    serial-device-path
+        Path to serial device. You can find the serial devices in the "/dev" folder
+        Example in Mac OSX => /dev/tty.cuserial
+        Example in Linux   => /dev/ttyUSB0
+
+    hex-file-path
+        Relative (or absolute) path to hex file in system to load into SJOne board.
+"""
+
 ###############################################################################
 ################# CONFIGURATION FOR pyFlash - Hyperload ######################
 ###############################################################################
-sDeviceFile = "/dev/tty.usbserial-A103IK4P"   # Device File Path
+sDeviceFile = "/dev/ttyUSB0"   # Device File Path
 sDeviceBaud = 1000000          # Suitable Device Baud Rate
-sHexFilePath = "/Users/ming/Desktop/SJSU_Dev_Mac/projects/lpc1758_freertos/_build/lpc1758_freertos.hex"
-sGenerateBinary = "y" # "y" - Yes | "n" - No
+sGenerateBinary = "y"  # "y" - Yes | "n" - No
+sHexFilePath = "./bin/HelloWorld/HelloWorld.hex"
 ###############################################################################
 
 #### LOGGING OPTIONS ####
-PYFLASH_DEBUG_LOG = "no" # "yes" - Debug Version. "no" - Release Version
+PYFLASH_DEBUG_LOG = "no"  # "yes" - Debug Version. "no" - Release Version
 #########################
 
 
@@ -40,7 +68,7 @@ if PYFLASH_BUILD_LEVEL == "DEBUG":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 else:
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-    
+
 
 # Things to Do:
 # 1. Display Platform Information                               [DONE]
@@ -53,7 +81,8 @@ else:
 
 # Issues Faced
 # 1. Handling Bytes were hard - Use bytearray for most of the IO related functions. Difference between bytes and bytearray is that the latter is mutable.
-#    Bytes are types that are not mutable. Any changes done on them will cause a new alloc + concat and reassigning.
+# Bytes are types that are not mutable. Any changes done on them will
+# cause a new alloc + concat and reassigning.
 
 # Global Defines
 
@@ -62,13 +91,14 @@ ToolName = "pyFLASH - HYPERLOAD"
 ToolInfo = "Flashing Tool for SJOne"
 BaudList = [4800, 9600, 19200, 38400]
 ControlWordList = b'\x80\xf8\xfe\xff'
-SpecialChar = {'Dollar' : '$', 'OK' : '!', 'NextLine' : '\n', 'STAR' : '*'}
+SpecialChar = {'Dollar': '$', 'OK': '!', 'NextLine': '\n', 'STAR': '*'}
 sCPUSpeed = 48000000
 sInitialDeviceBaud = 38400
-    
+
 ByteReference = b'\xff\x55\xaa'
 
 # Common Util Functions
+
 def printIntroMessage():
     print "#######################"
     print " ", ToolName
@@ -77,11 +107,10 @@ def printIntroMessage():
     print "Version    : ", ApplicationVersion
     print "Build Type : ", PYFLASH_BUILD_LEVEL
     print "#######################"
-    
+
     return
 
-
-def printBytes(mymsg): 
+def printBytes(mymsg):
 
     print "Type info = " + (str)(type(mymsg))
 
@@ -93,19 +122,20 @@ def printBytes(mymsg):
         print "Total Elements = " + (str)(len(mymsg))
 
     elif (type(mymsg) == str):
-    	printBytes(bytearray(mymsg))
+        printBytes(bytearray(mymsg))
 
     elif type(mymsg) == int:
-        
+
         print "0x" + '{:x}'.format(mymsg),
-        
+
     else:
         print mymsg
 
     return
 
 def getBoardParameters(descString):
-    boardParametersDict = {'Board' : '', 'BlockSize' : '', 'BootloaderSize' : '', 'FlashSize' : ''}
+    boardParametersDict = {'Board': '', 'BlockSize': '',
+                           'BootloaderSize': '', 'FlashSize': ''}
 
     # Parsing String to obtain required Board Parameters
     boardParametersList = descString.split(':')
@@ -127,8 +157,8 @@ def getBoardParameters(descString):
 def printContent(lContent):
 
     logging.debug("--------------------")
-    count = 0;
-    totalCount = 0;
+    count = 0
+    totalCount = 0
     for x in lContent:
         print '{:2x}'.format(x),
         if count >= 10:
@@ -147,50 +177,46 @@ def printContent(lContent):
 def getControlWord(baudRate, cpuSpeed):
     # TODO : Currently using known values. Replace with actual formula
     logging.debug("Retrieving Control Word")
-   
+
     controlWord = ((cpuSpeed / (baudRate * 16)) - 1)
 
     return controlWord
 
 def getPageContent(bArray, blkCount, pageSize):
-	
+
     startOffset = blkCount * pageSize
     endOffset = (startOffset + pageSize - 1)
 
-    #print "Page Start = ", startOffset, " | Page End = ", str(endOffset)
+    # print "Page Start = ", startOffset, " | Page End = ", str(endOffset)
 
     lPageContent = bytearray(pageSize)
     for x in range(0, pageSize):
         lPageContent[x] = bArray[x + (blkCount * pageSize)]
-		
-    #print "Length of x = ", x
+
+    # print "Length of x = ", x
 
     if x != pageSize - 1:
         raw_input()
-        
+
     return lPageContent
-                    	
 
 def getChecksum(blocks):
 
     # Try older method - Add and Pack into integer.
-    lChecksum = bytearray(1);
+    lChecksum = bytearray(1)
     for x in blocks:
-	lChecksum[0] = (lChecksum[0] + x) % 256
+        lChecksum[0] = (lChecksum[0] + x) % 256
 
     return lChecksum[0]
 
-# Class 
-    
 ### Main Program ###
 
-
-#if (len(sys.argv) != 3):
-#    print 'Not enough arguments!'
-#    sys.exit()
-#else:
-#    sDeviceFile  = sys.argv[1]
-#    sHexFilePath = sys.argv[2]
+if (len(sys.argv) != 3 and len(sys.argv) != 1):
+   print(helpMessage)
+   sys.exit()
+else:
+   sDeviceFile  = sys.argv[1]
+   sHexFilePath = sys.argv[2]
 
 printIntroMessage()
 
@@ -211,36 +237,39 @@ if sGenerateBinary == "y":
 binArray = hexFile.tobinarray()
 
 sPort = serial.Serial(
-            port = sDeviceFile, 
-            baudrate = sInitialDeviceBaud,
-            parity = serial.PARITY_NONE,
-            stopbits = serial.STOPBITS_ONE,
-            bytesize = serial.EIGHTBITS)
+    port=sDeviceFile,
+    baudrate=sInitialDeviceBaud,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS)
 
 sPort.reset_input_buffer()
 sPort.reset_output_buffer()
 sPort.flush()
 
 # Setting Initial State of RTS Bit to False
-sPort.rts = False;
+sPort.rts = False
 
-# Reseting the board by toggling DTR 
-sPort.dtr = False; 
+# Reseting the board by toggling DTR
+sPort.dtr = False
+
+# time.sleep(1)
 
 # Reading a Byte from SJOne
-msg = sPort.read(1) 
+msg = sPort.read(1)
 
 if msg is ByteReference[0]:
 
     sPort.write(ByteReference[1])
-    
+
     logging.debug("Initial Handshake Initiated! - Received ")
 
     msg = sPort.read(1)
 
     if msg is ByteReference[2]:
-        logging.debug("Received " + (str)(repr(msg)) + ", Sending Control Word..")
-             
+        logging.debug("Received " + (str)(repr(msg)) +
+                      ", Sending Control Word..")
+
         lControlWordInteger = getControlWord(sDeviceBaud, sCPUSpeed)
         lControlWordPacked = struct.pack('<i', lControlWordInteger)
 
@@ -260,10 +289,11 @@ if msg is ByteReference[0]:
 
                 if sDeviceBaud != sInitialDeviceBaud:
                     # Switch to new BaudRate here.
-                    logging.debug("Requested Baudrate different from Default. Changing Baudrate..")
+                    logging.debug(
+                        "Requested Baudrate different from Default. Changing Baudrate..")
 
                     sPort.baudrate = sDeviceBaud
-                    
+
                 else:
                     logging.debug("BaudRate same as Default")
 
@@ -286,7 +316,7 @@ if msg is ByteReference[0]:
 
                     logging.debug("CPU Description String = %s", CPUDescString)
 
-                    boardParameters = getBoardParameters(CPUDescString) 
+                    boardParameters = getBoardParameters(CPUDescString)
 
                     # Receive OK from SJOne
                     msg = sPort.read(1)
@@ -299,17 +329,18 @@ if msg is ByteReference[0]:
                     # Send Dummy Blocks -
                     # Update : We can send the actual blocks itself.
 
-
                     # Sending Blocks of Binary File
-                    totalBlocks = (len(binArray) * 1.0 / int(boardParameters['BlockSize']))
+                    totalBlocks = (len(binArray) * 1.0 /
+                                   int(boardParameters['BlockSize']))
                     logging.debug("Total Blocks = %f", totalBlocks)
 
-                    paddingCount = len(binArray) - ((len(binArray)) % int(boardParameters['BlockSize']))
+                    paddingCount = len(binArray) - ((len(binArray)) %
+                                                    int(boardParameters['BlockSize']))
                     logging.debug("Total Padding Count = %d", paddingCount)
-    
-                    totalBlocks = math.ceil(totalBlocks)    
+
+                    totalBlocks = math.ceil(totalBlocks)
                     print "Total # of Blocks to be Flashed = ", totalBlocks
-                    
+
                     # Pad 0's to binArray if required.
                     binArray = bytearray(binArray)
                     binArray += (b'\x00' * paddingCount)
@@ -318,61 +349,67 @@ if msg is ByteReference[0]:
                     sendDummy = False
                     #sendDummy = True
                     blockContent = bytearray(int(boardParameters['BlockSize']))
-		
+
                     if sendDummy == True:
                         logging.debug("FLASHING EMPTY BLOCKS")
-#
-                    while blockCount < totalBlocks:
-                    	print "--------------------"
 
-                    	blockCountPacked = struct.pack('<H', blockCount)
-			
-		        msg = sPort.write(blockCountPacked[1])
+                    while blockCount < totalBlocks:
+                        print "--------------------"
+
+                        blockCountPacked = struct.pack('<H', blockCount)
+
+                        msg = sPort.write(blockCountPacked[1])
                         if msg != 1:
                             logging.error("Error in Sending BlockCountLowAddr")
 
                         msg = sPort.write(blockCountPacked[0])
                         if msg != 1:
                             logging.error("Error in Sending BlockCountHiAddr")
-                        
+
                         logging.debug("BlockCounts = %d", blockCount)
-			
+
                         if sendDummy == False:
-                            blockContent = getPageContent(binArray, blockCount, int(boardParameters['BlockSize']))
-                        
+                            blockContent = getPageContent(
+                                binArray, blockCount, int(boardParameters['BlockSize']))
+
                         msg = sPort.write(blockContent)
                         if msg != len(blockContent):
-                            logging.error("Error - Failed to sending Data Block Content")
+                            logging.error(
+                                "Error - Failed to sending Data Block Content")
                             break
-                        
-                        #printContent(blockContent)
+
+                        # printContent(blockContent)
 
                         checksum = bytearray(1)
-                        
+
                         checksum[0] = getChecksum(blockContent)
 
-                        logging.debug("Checksum = %d[0x%x]", checksum[0], checksum[0])
+                        logging.debug("Checksum = %d[0x%x]", checksum[
+                                      0], checksum[0])
 
                         msg = sPort.write(checksum)
                         logging.debug("Size of Block Written = %d", msg)
 
                         if msg != 1:
-                            logging.error("Error - Failed to send Entire Data Block")
+                            logging.error(
+                                "Error - Failed to send Entire Data Block")
 
                         msg = sPort.read(1)
                         if msg != SpecialChar['OK']:
-                        	logging.error("Failed to Receive Ack.. Retrying #" + str(blockCount))
+                            logging.error(
+                                "Failed to Receive Ack.. Retrying #" + str(blockCount))
                         else:
-                        	print "Block # " + str(blockCount) + " flashed!"
-                        	blockCount = blockCount + 1
-                    	
-                    	print "--------------------"
-                    
+                            print "Block # " + str(blockCount) + " flashed!"
+                            blockCount = blockCount + 1
+
+                        print "--------------------"
+
                     if blockCount != totalBlocks:
                         logging.error("Error - All Blocks not Flashed")
                         logging.error("Total = " + str(totalBlocks))
-                        logging.error("# of Blocks Flashed = " + str(blockCount))
-		    else:
+                        logging.error(
+                            "# of Blocks Flashed = " + str(blockCount))
+                    else:
                         print "Flashing Successful!"
                         endTxPacked = bytearray(2)
                         endTxPacked[0] = 0xFF
@@ -381,7 +418,8 @@ if msg is ByteReference[0]:
                         msg = sPort.write(bytearray(endTxPacked))
 
                         if msg != 2:
-                            logging.error("Error in Sending End Of Transaction Signal")
+                            logging.error(
+                                "Error in Sending End Of Transaction Signal")
 
                         msg = sPort.read(1)
                         logging.debug("Received Ack = " + str(msg))
@@ -389,12 +427,9 @@ if msg is ByteReference[0]:
                         if msg != SpecialChar['STAR']:
                             logging.error("Error - Final Ack Not Received")
 
-else :
+else:
     logging.error("Timed Out!")
 
 sPort.baudrate = sInitialDeviceBaud
 
 sPort.close()
-
-
-
