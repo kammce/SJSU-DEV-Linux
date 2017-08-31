@@ -29,20 +29,14 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto"></ul>
             <div class="form-inline mt-2 mt-md-0">
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="serial-frequency-select">
-                    <option selected value="1">Serial 1 Hz</option>
-                    <option          value="2">Serial 2 Hz</option>
-                    <option          value="4">Serial 4 Hz</option>
-                    <option          value="5">Serial 5 Hz</option>
-                    <option         value="10">Serial 10 Hz</option>
-                </select>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="telemetry-frequency-select">
-                    <option selected value="1">Telem 1 Hz</option>
-                    <option          value="2">Telem 2 Hz</option>
-                    <option          value="4">Telem 4 Hz</option>
-                    <option          value="5">Telem 5 Hz</option>
-                    <option          value="100">Telem 100 Hz</option>
-                </select>
+                <label class="form-check-label" style="margin-right: 15px; color: white;">
+                    <input class="form-check-input" type="checkbox" value="telemetry" id="telemetry-on" checked>
+                    Turn On Telemetry
+                </label>
+                <label class="form-check-label" style="margin-right: 15px; color: white;">
+                    <input class="form-check-input" type="checkbox" value="reset" id="reset-on-connect" checked>
+                    Reset On Connect
+                </label>
                 <button class="btn btn-outline-info my-2 my-sm-0" style="margin-right: 10px;" id="refresh" type="submit">Refresh Devices</button>
                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="device-select">
                     <option value="-1" selected>Select Serial Device ...</option>
@@ -54,29 +48,36 @@
     <div class="container-fluid pt-4" style="height: 100%">
         <div class="row" style="height: 100%">
             <main class="col-sm-12 col-md-12 col-lg-5">
-                <h2>Serial Output</h2>
+                <div style="display: inherit;">
+                    <h2>Serial Output</h2>
+                    <select style="margin-left: 15px" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="serial-frequency-select">
+                        <option selected value="1">Serial 1 Hz</option>
+                        <option          value="2">Serial 2 Hz</option>
+                        <option          value="4">Serial 4 Hz</option>
+                        <option          value="5">Serial 5 Hz</option>
+                        <option         value="10">Serial 10 Hz</option>
+                    </select>
+                </div>
                 <hr>
                 <div class="input-group" style="margin-bottom: 10px">
                     <input type="text" class="form-control" placeholder="Write Serial Data Here ..." name="serial-input">
                     <span class="input-group-btn">
                         <button id="serial-send" class="btn btn-secondary btn-outline-info" type="button">Send</button>
                     </span>
-                    <!--
-                    <span class="input-group-addon">
-                        <span>NL</span>
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </span>
-                    <span class="input-group-addon">
-                        <span>CR</span>
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </span>
-                    -->
                 </div>
                 <textarea disabled id="serial-output" class="form-control fill"></textarea>
                 <br>
             </main>
             <main class="col-sm-12 col-md-12 col-lg-7">
-                <h2>Telemetry Feedback</h2>
+                <div style="display: inherit;">
+                    <h2>Telemetry Feedback</h2>
+                    <select style="margin-left: 15px" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="telemetry-frequency-select">
+                        <option selected value="1">Telem 1 Hz</option>
+                        <option          value="2">Telem 2 Hz</option>
+                        <option          value="4">Telem 4 Hz</option>
+                        <option          value="5">Telem 5 Hz</option>
+                    </select>
+                </div>
                 <hr>
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">

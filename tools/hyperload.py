@@ -6,7 +6,7 @@
 # CHANGELOG:
 # 2016-02-15 : Working Skeleton for Flashing a Hex file to SJOne comeplete!
 #
-
+from __future__ import division
 import serial
 import string
 import os
@@ -96,6 +96,14 @@ sCPUSpeed = 48000000
 sInitialDeviceBaud = 38400
 
 ByteReference = b'\xff\x55\xaa'
+
+## Animation stuff
+circles            = [0x25D0, 0x25D3, 0x25D1, 0x25D2]
+quadrants          = [0x259F, 0x2599, 0x259B, 0x259C]
+trigrams           = [0x2630, 0x2631, 0x2632, 0x2634]
+squarefills        = [0x25E7, 0x25E9, 0x25E8, 0x25EA]
+spaces             = [0x2008, 0x2008, 0x2008, 0x2008]
+selected_animation = circles
 
 # Common Util Functions
 
@@ -358,7 +366,7 @@ if msg is ByteReference[0]:
                         logging.debug("FLASHING EMPTY BLOCKS")
 
                     while blockCount < totalBlocks:
-                        print "--------------------"
+                        # print "--------------------"
 
                         blockCountPacked = struct.pack('<H', blockCount)
 
@@ -401,12 +409,21 @@ if msg is ByteReference[0]:
                         msg = sPort.read(1)
                         if msg != SpecialChar['OK']:
                             logging.error(
-                                "Failed to Receive Ack.. Retrying #" + str(blockCount))
+                                "Failed to Receive Ack.. Retrying #%d\n" % int(blockCount))
                         else:
-                            print "Block # " + str(blockCount) + " flashed!"
+                            bar_len = 25
+                            filled_len = int(round(bar_len * (blockCount+1) / float(totalBlocks)))
+                            #unichr(0x25FE)
+                            percents = round(100.0 * (blockCount+1) / float(totalBlocks), 1)
+                            bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x1F784) * (bar_len - filled_len)
+                            suffix = "Block # {0}/{1} flashed!".format(blockCount+1, int(totalBlocks))
+
+                            sys.stdout.write('[%s] %s%s %s ... %s\r' % (bar, percents, '%', unichr(selected_animation[blockCount % 4]), suffix))
+                            sys.stdout.flush()
+
                             blockCount = blockCount + 1
 
-                        print "--------------------"
+                            # print "--------------------"
 
                     if blockCount != totalBlocks:
                         logging.error("Error - All Blocks not Flashed")
@@ -414,7 +431,7 @@ if msg is ByteReference[0]:
                         logging.error(
                             "# of Blocks Flashed = " + str(blockCount))
                     else:
-                        print "Flashing Successful!"
+                        print "\n\nFlashing Successful!"
                         endTxPacked = bytearray(2)
                         endTxPacked[0] = 0xFF
                         endTxPacked[1] = 0xFF

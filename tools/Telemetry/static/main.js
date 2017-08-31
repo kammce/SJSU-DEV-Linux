@@ -10,10 +10,50 @@ var server_connected    = false;
 var list                = [];
 var serial_period       = DEFAULT_PERIOD;
 var telemetry_period    = DEFAULT_PERIOD;
+var telemetry_flag      = true;
 
 var serial_output = $("#serial-output");
 var telemetery_raw_field = $("#telemetry-raw");
 var scrolled = false;
+
+function setCookie(cname, cvalue, exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++)
+    {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+        {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0)
+        {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie()
+{
+    var user = getCookie("username");
+    var result = false;
+    if (user != "")
+    {
+        result = true;
+    }
+    return result;
+}
 
 function generateDropDownList(new_list)
 {
@@ -113,15 +153,48 @@ $("#serial-send").on("click", () =>
 
 $("#serial-frequency-select").on("change", () =>
 {
-    var frequency = parseInt($("#serial-frequency-select").val());
+    var val = $("#serial-frequency-select").val();
+    var frequency = parseInt(val);
     serial_period = (frequency === -1) ? DEFAULT_PERIOD : 1000/frequency;
+    setCookie("serial-frequency-select", val, 30);
 });
 
 $("#telemetry-frequency-select").on("change", () =>
 {
-    var frequency = parseInt($("#telemetry-frequency-select").val());
+    var val = $("#telemetry-frequency-select").val();
+    var frequency = parseInt(val);
     telemetry_period = (frequency === -1) ? DEFAULT_PERIOD : 1000/frequency;
+    setCookie("telemetry-frequency-select", val, 30);
 });
+
+$('#telemetry-on').on('change', function()
+{
+    telemetry_flag = $(this).is(":checked");
+    setCookie("telemetry-on", telemetry_flag, 30);
+});
+
+$('#reset-on-connect').on('change', function()
+{
+    reset_on_connect_flag = $(this).is(":checked");
+    setCookie("reset-on-connect", reset_on_connect_flag, 30);
+});
+
+if(checkCookie('telemetry-on'))
+{
+    $('#telemetry-on').prop('checked', getCookie('telemetry-on') === 'true');
+}
+if(checkCookie('reset-on-connect'))
+{
+    $('#reset-on-connect').prop('checked', getCookie('reset-on-connect') === 'true');
+}
+if(checkCookie('serial-frequency-select'))
+{
+    $("#serial-frequency-select").val(getCookie('serial-frequency-select'));
+}
+if(checkCookie('telemetry-frequency-select'))
+{
+    $("#telemetry-frequency-select").val(getCookie('telemetry-frequency-select'));
+}
 
 function updateScroll()
 {
@@ -244,7 +317,7 @@ function updateTable()
 
 function getTelemetry()
 {
-    if(device_connected && server_connected)
+    if(device_connected && server_connected && telemetry_flag)
     {
         $.get(`${URL}/telemetry`, function (data)
         {
@@ -262,7 +335,6 @@ function getTelemetry()
                 else
                 {
                     updateTable();
-                    updateGraphs();
                 }
                 //console.log();
                 //updateScroll();

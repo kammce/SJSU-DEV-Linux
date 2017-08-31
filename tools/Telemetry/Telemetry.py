@@ -23,12 +23,13 @@ state                           = State.OFFLINE
 previous_prompt                 = -1
 # CONSTANTS
 SERIAL_READ_CONSTANT_LENGTH     = 100000
+BAUDRATE                        = 38400
+# BAUDRATE                        = 115200
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
 PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)LPC: telemetry ascii(.*)')
 FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us\n')
-
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
@@ -62,7 +63,7 @@ def read_serial():
     while True:
         time.sleep(100 * MILLIS_RATIO)
 
-        ser.baudrate = 38400
+        ser.baudrate = BAUDRATE
         ser.rts = False
         ser.dtr = False
 
@@ -81,14 +82,10 @@ def read_serial():
             if ser.is_open == False:
                 break
 
-            ser.baudrate    = 38400
-            ser.rts         = False
-            ser.dtr         = False
-
             ser.write("telemetry ascii\n")
             time.sleep(100 * MILLIS_RATIO)
 
-            serial_output   += ser.read(4095)
+            serial_output   += ser.read(SERIAL_READ_CONSTANT_LENGTH)
             end_array       = FULL_TELEMETRY_PATTERN.findall(serial_output)
 
             if len(end_array) > 0:
