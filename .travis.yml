@@ -13,8 +13,10 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.map
   - cd ../../
   - gdbgui &
+  - sleep 2
   - wget http://127.0.0.1:5000
   - cd tools/Telemetry
   - ./telemetry &
+  - sleep 2
   - wget http://127.0.0.1:5001
 # after_success:
