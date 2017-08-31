@@ -8,6 +8,7 @@ import json
 import re
 import os
 import logging
+import webbrowser
 from enum import Enum
 
 log = logging.getLogger('werkzeug')
@@ -23,12 +24,13 @@ state                           = State.OFFLINE
 previous_prompt                 = -1
 # CONSTANTS
 SERIAL_READ_CONSTANT_LENGTH     = 100000
+BAUDRATE                        = 38400
+# BAUDRATE                        = 115200
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
 PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)LPC: telemetry ascii(.*)')
 FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us\n')
-
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
@@ -62,7 +64,7 @@ def read_serial():
     while True:
         time.sleep(100 * MILLIS_RATIO)
 
-        ser.baudrate = 38400
+        ser.baudrate = BAUDRATE
         ser.rts = False
         ser.dtr = False
 
@@ -81,14 +83,10 @@ def read_serial():
             if ser.is_open == False:
                 break
 
-            ser.baudrate    = 38400
-            ser.rts         = False
-            ser.dtr         = False
-
             ser.write("telemetry ascii\n")
             time.sleep(100 * MILLIS_RATIO)
 
-            serial_output   += ser.read(4095)
+            serial_output   += ser.read(SERIAL_READ_CONSTANT_LENGTH)
             end_array       = FULL_TELEMETRY_PATTERN.findall(serial_output)
 
             if len(end_array) > 0:
@@ -97,10 +95,6 @@ def read_serial():
                 serial_tmp = FULL_TELEMETRY_PATTERN.sub('', serial_output)
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
                 serial_output = serial_tmp
-
-thread = threading.Thread(target=read_serial)
-thread.daemon = True
-thread.start()
 
 # SERVER ROUTES
 @app.route('/js/<path:path>')
@@ -117,7 +111,7 @@ def send_lib(path):
 
 @app.route('/')
 def index():
-    return render_template("index.html", version="version 0.0.1")
+    return render_template("index.html", version="version 0.0.2")
 
 @app.route('/server-is-alive')
 def server_is_alive():
@@ -180,3 +174,9 @@ def set(component_name, variable_name, value):
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
+
+
+webbrowser.open('http://localhost:5001')
+thread = threading.Thread(target=read_serial)
+thread.daemon = True
+thread.start()

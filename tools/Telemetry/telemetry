@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export FLASK_APP=Telemetry.py
+flask run -p 5001
