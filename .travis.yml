@@ -12,5 +12,9 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.lst
   - ls ./bin/HelloWorld/HelloWorld.map
   - cd ../../
-  - mono tools/HyperLoad.exe
+  - gdbgui &
+  - wget http://127.0.0.1:5000
+  - cd tools/Telemetry
+  - ./telemetry &
+  - wget http://127.0.0.1:5001
 # after_success:
