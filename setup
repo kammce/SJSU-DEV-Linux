@@ -65,7 +65,7 @@ sudo apt -y install openocd
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'PIP' Python package installer     "
 echo "└─────────────────────────────────────────────────── "
-sudo apt install python-pip python-dev build-essential
+sudo apt -y install python-pip python-dev build-essential
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 
