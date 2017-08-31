@@ -1,6 +1,6 @@
 const DEFAULT_PERIOD    = 1000;
 const SUCCESS           = "SUCCESS";
-const URL               = "http://127.0.0.1:5000";
+const URL               = "http://localhost:5001";
 //Better to construct options first and then pass it as a parameter
 var serial              = "";
 var telemetry_raw       = "";
@@ -179,23 +179,6 @@ $('#reset-on-connect').on('change', function()
     setCookie("reset-on-connect", reset_on_connect_flag, 30);
 });
 
-if(checkCookie('telemetry-on'))
-{
-    $('#telemetry-on').prop('checked', getCookie('telemetry-on') === 'true');
-}
-if(checkCookie('reset-on-connect'))
-{
-    $('#reset-on-connect').prop('checked', getCookie('reset-on-connect') === 'true');
-}
-if(checkCookie('serial-frequency-select'))
-{
-    $("#serial-frequency-select").val(getCookie('serial-frequency-select'));
-}
-if(checkCookie('telemetry-frequency-select'))
-{
-    $("#telemetry-frequency-select").val(getCookie('telemetry-frequency-select'));
-}
-
 function updateScroll()
 {
     if(!scrolled)
@@ -359,16 +342,36 @@ function checkConnection()
         {
             server_connected = false;
             $("#server-connection-indicator").removeClass("connected-text").addClass("disconnected-text");
-            alert("You are no longer connected to Telemetry Server.\nRestart Telemetry server and reload page.");
+            // alert("You are no longer connected to Telemetry Server.\nRestart Telemetry server and reload page.");
         }
     });
 }
 
 window.onload = function()
 {
-    console.log("testing");
-    checkConnection();
-    getSerial();
-    getTelemetry();
-    $("#refresh").click();
+    setTimeout(function()
+    {
+        console.log("testing");
+        checkConnection();
+        getSerial();
+        getTelemetry();
+        $("#refresh").click();
+
+        if(checkCookie('telemetry-on'))
+        {
+            $('#telemetry-on').prop('checked', getCookie('telemetry-on') === 'true');
+        }
+        if(checkCookie('reset-on-connect'))
+        {
+            $('#reset-on-connect').prop('checked', getCookie('reset-on-connect') === 'true');
+        }
+        if(checkCookie('serial-frequency-select'))
+        {
+            $("#serial-frequency-select").val(getCookie('serial-frequency-select'));
+        }
+        if(checkCookie('telemetry-frequency-select'))
+        {
+            $("#telemetry-frequency-select").val(getCookie('telemetry-frequency-select'));
+        }
+    }, 1000);
 };

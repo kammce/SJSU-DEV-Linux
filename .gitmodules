@@ -1,9 +1,0 @@
-[submodule "tools/OpenOCD"]
-	path = tools/OpenOCD
-	url = https://github.com/kammce/OpenOCD-SJOne.git
-[submodule "tools/gdb"]
-	path = tools/gdb
-	url = https://github.com/cyrus-and/gdb-dashboard.git
-[submodule "tools/gdbgui"]
-	path = tools/gdbgui
-	url = https://github.com/cs01/gdbgui.git

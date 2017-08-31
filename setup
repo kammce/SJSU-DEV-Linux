@@ -52,10 +52,34 @@ echo "      Adding current user to 'dialout' group        "
 echo "└────────────────────────────────────────────────── "
 sudo adduser $USER dialout
 
+# echo " ───────────────────────────────────────────────────┐"
+# echo "              Installing Mono-Complete               "
+# echo "└─────────────────────────────────────────────────── "
+# sudo apt-get -y install mono-complete
+
 echo " ───────────────────────────────────────────────────┐"
-echo "              Installing Mono-Complete              "
-echo "└────────────────────────────────────────────────── "
-sudo apt-get -y install mono-complete
+echo "                Installing OpenOCD                   "
+echo "└─────────────────────────────────────────────────── "
+sudo apt-get install openocd
+
+echo " ───────────────────────────────────────────────────┐"
+echo "       Installing 'PIP' Python package installer     "
+echo "└─────────────────────────────────────────────────── "
+sudo apt-get install python-pip python-dev build-essential
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
+
+echo " ───────────────────────────────────────────────────┐"
+echo "                 Installing GDBGUI                   "
+echo "└─────────────────────────────────────────────────── "
+# Not tested in Travis CI
+sudo pip install gdbgui --upgrade
+
+echo " ───────────────────────────────────────────────────┐"
+echo "       Installing 'hyperload.py' Dependencies        "
+echo "└─────────────────────────────────────────────────── "
+# Not tested in Travis CI
+sudo pip install -r tools/Hyperload/requirements.txt
 
 echo
 echo " ──────────────────────────────────────────────────────────────┐"

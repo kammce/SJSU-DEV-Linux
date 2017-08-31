@@ -8,6 +8,7 @@ import json
 import re
 import os
 import logging
+import webbrowser
 from enum import Enum
 
 log = logging.getLogger('werkzeug')
@@ -95,10 +96,6 @@ def read_serial():
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
                 serial_output = serial_tmp
 
-thread = threading.Thread(target=read_serial)
-thread.daemon = True
-thread.start()
-
 # SERVER ROUTES
 @app.route('/js/<path:path>')
 def send_js(path):
@@ -177,3 +174,9 @@ def set(component_name, variable_name, value):
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
+
+
+webbrowser.open('http://localhost:5001')
+thread = threading.Thread(target=read_serial)
+thread.daemon = True
+thread.start()
