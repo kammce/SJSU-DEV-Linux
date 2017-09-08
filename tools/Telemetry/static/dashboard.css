@@ -82,6 +82,20 @@ textarea {
   font-family: monospace;
 }
 
+.form-control:disabled {
+  cursor: text;
+}
+
+.input-group-addon {
+  line-height: .8;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
 main
 {
   height: 100%;

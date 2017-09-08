@@ -103,7 +103,8 @@ quadrants          = [0x259F, 0x2599, 0x259B, 0x259C]
 trigrams           = [0x2630, 0x2631, 0x2632, 0x2634]
 squarefills        = [0x25E7, 0x25E9, 0x25E8, 0x25EA]
 spaces             = [0x2008, 0x2008, 0x2008, 0x2008]
-selected_animation = circles
+clocks             = [0x1F55B, 0x1F550, 0x1F551, 0x1F552, 0x1F553, 0x1F554, 0x1F555, 0x1F556, 0x1F557, 0x1F558, 0x1F559, 0x1F55A]
+selected_animation = clocks
 
 # Common Util Functions
 
@@ -260,12 +261,12 @@ sPort.rts = True
 sPort.dtr = True
 time.sleep(0.5)
 # Remove reset signal to allow device to boot up
-sPort.rts = False
-sPort.dtr = False
-
 sPort.reset_input_buffer()
 sPort.reset_output_buffer()
 sPort.flush()
+sPort.rts = False
+sPort.dtr = False
+
 
 # Read first byte from SJOne buffer
 msg = sPort.read(1)
@@ -366,7 +367,6 @@ if msg is ByteReference[0]:
                         logging.debug("FLASHING EMPTY BLOCKS")
 
                     while blockCount < totalBlocks:
-                        # print "--------------------"
 
                         blockCountPacked = struct.pack('<H', blockCount)
 
@@ -390,8 +390,6 @@ if msg is ByteReference[0]:
                                 "Error - Failed to sending Data Block Content")
                             break
 
-                        # printContent(blockContent)
-
                         checksum = bytearray(1)
 
                         checksum[0] = getChecksum(blockContent)
@@ -403,8 +401,7 @@ if msg is ByteReference[0]:
                         logging.debug("Size of Block Written = %d", msg)
 
                         if msg != 1:
-                            logging.error(
-                                "Error - Failed to send Entire Data Block")
+                            logging.error("Error - Failed to send Entire Data Block")
 
                         msg = sPort.read(1)
                         if msg != SpecialChar['OK']:
@@ -415,15 +412,13 @@ if msg is ByteReference[0]:
                             filled_len = int(round(bar_len * (blockCount+1) / float(totalBlocks)))
                             #unichr(0x25FE)
                             percents = round(100.0 * (blockCount+1) / float(totalBlocks), 1)
-                            bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x1F784) * (bar_len - filled_len)
+                            bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x2219) * (bar_len - filled_len)
                             suffix = "Block # {0}/{1} flashed!".format(blockCount+1, int(totalBlocks))
 
-                            sys.stdout.write('[%s] %s%s %s ... %s\r' % (bar, percents, '%', unichr(selected_animation[blockCount % 4]), suffix))
+                            sys.stdout.write('[%s] %s%% %s  ... %s\r' % (bar, percents, unichr(selected_animation[blockCount % len(selected_animation)]), suffix))
                             sys.stdout.flush()
 
                             blockCount = blockCount + 1
-
-                            # print "--------------------"
 
                     if blockCount != totalBlocks:
                         logging.error("Error - All Blocks not Flashed")

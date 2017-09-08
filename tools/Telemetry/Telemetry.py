@@ -11,6 +11,7 @@ import logging
 import webbrowser
 from enum import Enum
 
+# Disable Flask Logging
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
@@ -21,73 +22,84 @@ class State(Enum):
 
 # INITIAL STATE
 state                           = State.OFFLINE
-previous_prompt                 = -1
 # CONSTANTS
 SERIAL_READ_CONSTANT_LENGTH     = 100000
-BAUDRATE                        = 38400
 # BAUDRATE                        = 115200
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
 PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)LPC: telemetry ascii(.*)')
-FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us\n')
+FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
 app.debug                       = True
 
+# SERIAL DATA STORAGE
+serial_output                   = ""
+baudrate                        = 38400
+
 # SETUP SERIAL PORT
 ser                             = serial.Serial()
-ser.baudrate                    = 38400
+ser.baudrate                    = baudrate
 ser.rts                         = False
 ser.dtr                         = False
 ser.timeout                     = 0
-
-# SERIAL DATA STORAGE
-serial_output                   = ""
-telemetry                       = ""
-new_serial                      = ""
 
 # THREAD VARIABLES
 lock = threading.Lock()
 
 def read_serial():
-    global MILLIS_RATIO
-    global PARTIAL_TELEMETETRY_PATTERN
-    global FULL_TELEMETRY_PATTERN
-    global telemetry
     global serial_output
-    global new_serial
-    global previous_prompt
     global state
 
     while True:
-        time.sleep(100 * MILLIS_RATIO)
-
-        ser.baudrate = BAUDRATE
-        ser.rts = False
-        ser.dtr = False
-
-        if state == State.OFFLINE:
-            found_prompt = serial_output.rfind("LPC:")
-            if found_prompt > previous_prompt:
-                previous_prompt = found_prompt
-                state = State.ONLINE_SYS_PROMPT
-
+        time.sleep(10 * MILLIS_RATIO)
+        # If we are
         if ser.is_open == True:
+            # Check if system is booting
+            if state == State.SYSTEM_BOOTING:
+                # If we find a LPC: prompt, then we change state to ONLINE_SYS_PROMPT
+                if serial_output.rfind("LPC:") != -1:
+                    state = State.ONLINE_SYS_PROMPT
+            # Lock control of serial device
+            lock.acquire()
+            try:
+                # Read from serial device
+                serial_output += ser.read(SERIAL_READ_CONSTANT_LENGTH)
+            except Exception, e:
+                print("Serial read exception" + str(e))
+                continue
+            # Release serial lock
+            lock.release()
 
-            global serial_output
-            global telemetry
-            global MILLIS_RATIO
+def get_telemetry():
+    global serial_output
+    lock.acquire()
+    DELAY_PERIOD  = 10 # ms
+    TIMEOUT_LIMIT = 1000 # ms
+    # Define telemetry variable
+    ''' The default and "invalid" telemetry value is an empty string '''
+    telemetry     = ""
+    done          = False
+    timeout_time  = 0
+    if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
 
-            if ser.is_open == False:
-                break
+        ser.write("telemetry ascii\n")
 
-            ser.write("telemetry ascii\n")
-            time.sleep(100 * MILLIS_RATIO)
+        while(not done):
+            time.sleep(10 * MILLIS_RATIO)
 
-            serial_output   += ser.read(SERIAL_READ_CONSTANT_LENGTH)
-            end_array       = FULL_TELEMETRY_PATTERN.findall(serial_output)
+            try:
+                serial_output += ser.read(SERIAL_READ_CONSTANT_LENGTH)
+            except Exception, e:
+                print("Serial read exception" + str(e))
+                continue
+
+            end_array = FULL_TELEMETRY_PATTERN.findall(serial_output)
+
+            # print(serial_output)
+            # print(end_array)
 
             if len(end_array) > 0:
                 telemetry = end_array[-1]
@@ -95,37 +107,45 @@ def read_serial():
                 serial_tmp = FULL_TELEMETRY_PATTERN.sub('', serial_output)
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
                 serial_output = serial_tmp
+                done = True
 
-# SERVER ROUTES
+            timeout_time += DELAY_PERIOD
+            if(timeout_time > TIMEOUT_LIMIT):
+                break
+
+    lock.release()
+    return telemetry
+
+## SERVER FILE ROUTES
+# Serve up JavaScript files
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('js', path)
-
+# Serve up CSS files
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path)
-
+# Serve files within lib (library) folder
 @app.route('/lib/<path:path>')
 def send_lib(path):
     return send_from_directory('lib', path)
-
+# Serve up index.html file when GET / request is received
 @app.route('/')
 def index():
     return render_template("index.html", version="version 0.0.2")
-
+# Respond to requester with SUCCESS
+'''
+The purpose of this function is to determine if the server is alive and can respond to this request.
+The requester's XHR will return error if the server does not resolve or has a timeout.
+'''
 @app.route('/server-is-alive')
 def server_is_alive():
     return SUCCESS
-
+# Returns results of get_telemetry()
 @app.route('/telemetry')
-def return_telemetry():
-    payload = ""
-
-    if state == State.ONLINE_SYS_PROMPT:
-        payload = telemetry
-
-    return payload
-
+def telemetry():
+    return get_telemetry()
+# Return the list of serial devices on system
 @app.route('/list')
 def list():
     ttyUSB_list = glob.glob("/dev/ttyUSB*")
@@ -133,50 +153,69 @@ def list():
     tty_list = ttyUSB_list + ttyACM_list
     sorted_tty_list = sorted(tty_list)
     return json.dumps(sorted_tty_list)
-
+# Connect serial to device and return success
 @app.route('/connect')
 @app.route('/connect/<int:device>')
 def connect(device=0):
+    global serial_output
+    global state
     ser.close()
+    serial_output = ""
     ser.port = "/dev/ttyUSB%d" % (device)
-    state = State.OFFLINE
+    state = State.SYSTEM_BOOTING
     ser.open()
     return SUCCESS
-
+# Change baud rate of serial device
+@app.route('/baudrate/<int:baud>')
+def devicebaud(baud):
+    ser.baudrate = baud
+    return SUCCESS
+# Disconnect from serial device
 @app.route('/disconnect', methods=['GET'])
 def disconnect():
+    global state
     ser.close()
     state = State.OFFLINE
     return SUCCESS
-
+# Return serial_output
 @app.route('/serial')
 def serial():
-    # print(serial_output)
-    serial_return   = serial_output
-    serial_return   = FULL_TELEMETRY_PATTERN.sub('', serial_return)
-    serial_return   = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_return)
-    return serial_return
-
-@app.route('/write/<string:payload>')
-def write(payload=""):
+    return serial_output
+# Serial write string (payload) to serial device
+@app.route('/write/<string:payload>/<int:carriage_return>/<int:newline>')
+def write(payload="", carriage_return=0, newline=0):
     lock.acquire()
-    payload += "\n"
+
+    cr = ""
+    nl = ""
+
+    if carriage_return == 1:
+        cr = "\r"
+    if newline == 1:
+        nl = "\n"
+
+    payload = payload+cr+nl
+
     # print(payload)
+    # print("===================")
+
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
-
-
-@app.route('/set/<string:component_name>/<string:variable_name>/<value>')
+# Perform a telemetry set variable operation
+@app.route('/set/<string:component_name>/<string:variable_name>/<string:value>')
 def set(component_name, variable_name, value):
     lock.acquire()
-    payload = "telemetry %s %s %g\n" % (component_name, variable_name, float(value))
+    payload = "telemetry %s %s %s\n" % (component_name, variable_name, value)
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
 
-
+# Open This application's web URL in default browser
 webbrowser.open('http://localhost:5001')
+# Turn on read serial thread
 thread = threading.Thread(target=read_serial)
+# Allow it to work in the background, but also die when main thread is killed
 thread.daemon = True
+# Start the thread
 thread.start()

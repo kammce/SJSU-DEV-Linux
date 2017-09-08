@@ -24,6 +24,8 @@
  *
  */
 #include <stdint.h>
+#include <math.h>
+#define PI 3.14159265
 
 #include "tasks.hpp"
 #include "examples/examples.hpp"
@@ -40,21 +42,45 @@ class vChangerTask : public scheduler_task
         vChangerTask(uint8_t priority) : scheduler_task("vChangerTask", 2048, priority) {}
         uint32_t x;
         float y;
+        float cosine;
         int32_t z;
         uint32_t inc;
+
+        int32_t acc_x;
+        int32_t acc_y;
+        int32_t acc_z;
+
+        uint32_t light;
+        uint32_t temp;
+
         bool init(void)
         {
             // Clear variables
             x = 0;
             y = 0;
-            z = 0;
+            z = 1;
+            cosine = 0;
             inc = 1;
+            acc_x = 0;
+            acc_y = 0;
+            acc_z = 0;
+            light = 0;
+            temp = 0;
             // Get pointer to telemetry bucket
-            tlm_component * bucket = tlm_component_add("App");
-            // Add variables to bucket
-            TLM_REG_VAR(bucket, x, tlm_uint);
-            TLM_REG_VAR(bucket, y, tlm_float);
-            TLM_REG_VAR(bucket, z, tlm_int);
+            tlm_component * app_tlm = tlm_component_add("App");
+            tlm_component * sensors_tlm = tlm_component_add("Sensors");
+            // Add variables to app_tlm
+            TLM_REG_VAR(app_tlm, x, tlm_uint);
+            TLM_REG_VAR(app_tlm, y, tlm_float);
+            TLM_REG_VAR(app_tlm, z, tlm_int);
+            TLM_REG_VAR(app_tlm, cosine, tlm_float);
+
+            TLM_REG_VAR(sensors_tlm, acc_x, tlm_int);
+            TLM_REG_VAR(sensors_tlm, acc_y, tlm_int);
+            TLM_REG_VAR(sensors_tlm, acc_z, tlm_int);
+            TLM_REG_VAR(sensors_tlm, light, tlm_int);
+            TLM_REG_VAR(sensors_tlm, temp, tlm_int);
+
             return true;
         }
         bool run(void *p)
@@ -62,10 +88,20 @@ class vChangerTask : public scheduler_task
             x++;
             y += 0.1;
 
-            inc = (z < 0 || z > 99) ? -inc : inc;
+            inc = (1 <= z && z <= 98) ? inc : -inc;
             z += inc;
 
+            cosine = cos((x * PI)/180.0);
+
             LD.setNumber(z);
+
+            light = LS.getRawValue();
+
+            acc_x = AS.getX();
+            acc_y = AS.getY();
+            acc_z = AS.getZ();
+
+            temp = TS.getFarenheit();
 
             vTaskDelay(100);
             return true;

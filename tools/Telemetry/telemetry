@@ -1,4 +1,7 @@
 #!/bin/bash
 
-export FLASK_APP=Telemetry.py
+REALPATH=$(readlink -f -- "${0}")
+REALDIR=${REALPATH%/*}
+
+export FLASK_APP="${REALDIR}/Telemetry.py"
 flask run -p 5001

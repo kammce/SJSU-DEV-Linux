@@ -30,11 +30,15 @@
             <ul class="navbar-nav mr-auto"></ul>
             <div class="form-inline mt-2 mt-md-0">
                 <label class="form-check-label" style="margin-right: 15px; color: white;">
-                    <input class="form-check-input" type="checkbox" value="telemetry" id="telemetry-on" checked>
-                    Turn On Telemetry
+                    <input class="form-check-input" type="checkbox" value="telemetry" id="graph-switch" checked>
+                    Graph
                 </label>
                 <label class="form-check-label" style="margin-right: 15px; color: white;">
-                    <input class="form-check-input" type="checkbox" value="reset" id="reset-on-connect" checked>
+                    <input class="form-check-input" type="checkbox" value="telemetry" id="telemetry-on" checked>
+                    Telemetry
+                </label>
+                <label class="form-check-label" style="margin-right: 15px; color: white;">
+                    <input class="form-check-input" disabled type="checkbox" value="reset" id="reset-on-connect" checked>
                     Reset On Connect
                 </label>
                 <button class="btn btn-outline-info my-2 my-sm-0" style="margin-right: 10px;" id="refresh" type="submit">Refresh Devices</button>
@@ -46,7 +50,7 @@
         </div>
     </nav>
     <div class="container-fluid pt-4" style="height: 100%">
-        <div class="row" style="height: 100%">
+        <div class="row" style="height: 97.5%">
             <main class="col-sm-12 col-md-12 col-lg-5">
                 <div style="display: inherit;">
                     <h2>Serial Output</h2>
@@ -57,23 +61,37 @@
                         <option          value="5">Serial 5 Hz</option>
                         <option         value="10">Serial 10 Hz</option>
                     </select>
-                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="serial-baud-select" disabled>
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="serial-baud-select">
+                        <option            value="110">110 baud</option>
+                        <option            value="150">150 baud</option>
+                        <option            value="300">300 baud</option>
+                        <option           value="1200">1200 baud</option>
+                        <option           value="2400">2400 baud</option>
+                        <option           value="4800">4800 baud</option>
                         <option           value="9600">9600 baud</option>
                         <option          value="19200">19200 baud</option>
                         <option selected value="38400">38400 baud</option>
                         <option          value="57600">57600 baud</option>
                         <option         value="115200">115200 baud</option>
+                        <option         value="230400">230400 baud</option>
+                        <option         value="460800">460800 baud</option>
+                        <option         value="921600">921600 baud</option>
                     </select>
                 </div>
                 <hr>
                 <div class="input-group" style="margin-bottom: 10px">
                     <input type="text" class="form-control" placeholder="Write Serial Data Here ..." name="serial-input">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="carriage-return-select"> <span>&nbsp;CR</span>
+                    </span>
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="newline-select" checked><span>&nbsp;NL</span>
+                    </span>
                     <span class="input-group-btn">
                         <button id="serial-send" class="btn btn-secondary btn-outline-info" type="button">Send</button>
                     </span>
                 </div>
                 <textarea disabled id="serial-output" class="form-control fill"></textarea>
-                <br>
             </main>
             <main class="col-sm-12 col-md-12 col-lg-7">
                 <div style="display: inherit;">
@@ -83,6 +101,13 @@
                         <option          value="2">Telem 2 Hz</option>
                         <option          value="4">Telem 4 Hz</option>
                         <option          value="5">Telem 5 Hz</option>
+                        <option          value="5">Telem 10 Hz</option>
+                    </select>
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="graph-frequency-select">
+                        <option selected value="1">Graph 1 Hz</option>
+                        <option          value="2">Graph 2 Hz</option>
+                        <option          value="4">Graph 4 Hz</option>
+                        <option          value="5">Graph 5 Hz</option>
                     </select>
                 </div>
                 <hr>
@@ -91,12 +116,15 @@
                         <a class="nav-link active" data-toggle="tab" href="#table" role="tab">Table</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#graph" role="tab">Graph</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#raw" role="tab">Raw</a>
                     </li>
                 </ul>
                 <br>
-                <div class="tab-content" style="height: 0%; flex-grow: 1;">
-                    <div class="tab-pane active" id="table" role="tabpanel" style="height:96%">
+                <div class="tab-content" style="height: 0%; flex-grow: 0.95; overflow-y: auto;">
+                    <div class="tab-pane active" id="table" role="tabpanel" style="height:96%;">
                         <div class="table-responsive" style="height:100%">
                             <table id="telemetry-table" class="table table-striped">
                                 <thead>
@@ -113,6 +141,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="tab-pane" id="graph" style="height:96%; width: 97.5%;" role="tabpanel">
+                        <div class="row" id="graph-holder"></div>
                     </div>
                     <div class="tab-pane" id="raw" style="height:96%" role="tabpanel">
                         <textarea disabled id="telemetry-raw" style="height: 100%" class="form-control"></textarea>
@@ -147,6 +178,9 @@
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/bootstrap.min.js') }}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ url_for('static',filename='lib/bootstrap-4.0.0-alpha.6/js/ie10-viewport-bug-workaround.js') }}"></script>
+    <script src="{{ url_for('static',filename='lib/highcharts/highstock.js') }}"></script>
+    <script src="{{ url_for('static',filename='lib/highcharts/exporting.js') }}"></script>
+    <script src="{{ url_for('static',filename='lib/export-csv-master/export-csv.js') }}"></script>
     <script src="{{ url_for('static',filename='main.js') }}"></script>
 </body>
 
