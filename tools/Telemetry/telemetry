@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# If you are a link, get the original script path
 REALPATH=$(readlink -f -- "${0}")
+# Remove name from path
 REALDIR=${REALPATH%/*}
-
+# Activate the python virtual environment
+# source modules/bin/activate
+# Set flask application python script target
 export FLASK_APP="${REALDIR}/Telemetry.py"
+# Start flask on port 5001
 flask run -p 5001

@@ -104,8 +104,8 @@ mDiskTlmSize:2:1:2:uint16:0
 END:debug
 """
 
-p = re.compile('(?s)LPC: telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us')
-p2 = re.compile('(?s)LPC: telemetry ascii(.*)')
+p = re.compile('(?s)(?:LPC:|CLI:) telemetry ascii(.*?)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us')
+p2 = re.compile('(?s)(?:LPC:|CLI:) telemetry ascii(.*)')
 
 arr = p.findall(test)
 clean = p.sub('', test)
