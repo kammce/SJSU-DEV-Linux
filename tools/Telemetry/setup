@@ -1,0 +1,24 @@
+#!/bin/bash
+
+sudo apt install -y pip
+sudo apt install -y virtualenv
+
+function SystemExit()
+{
+    echo "Exiting Script" 1>&2
+    exit 1
+}
+
+# Make sure only non-root users can run our script
+if [[ $EUID -eq 0 ]]; then
+   echo -n "SJSU-DEV-Linux installer script must NOT be run as root! " 1>&2
+   exit 1
+fi
+
+sudo echo "" || SystemExit
+
+rm -R modules
+virtualenv modules
+source modules/bin/activate
+pip install -r ./requirements.txt
+deactivate

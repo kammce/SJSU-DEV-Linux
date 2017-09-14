@@ -598,30 +598,37 @@ function parseTelemetry()
 {
     var json = {};
 
-    buckets = telemetry_raw.split("START:");
-    for(bucket of buckets)
+    if(telemetry_raw.indexOf("START:") == -1)
     {
-        components = bucket.split("\n");
-        var current_bucket = components[0].split(":")[0];
-        json[current_bucket] = { };
-
-        for(component of components)
+        json = false;
+    }
+    else
+    {
+        var buckets = telemetry_raw.split("START:");
+        for(bucket of buckets)
         {
-            sections = component.split(":");
-            switch(sections.length)
+            components = bucket.split("\n");
+            var current_bucket = components[0].split(":")[0];
+            json[current_bucket] = { };
+
+            for(component of components)
             {
-                case 0:
-                    break;
-                case 2:
-                    break;
-                case 6:
-                    json[current_bucket][sections[0]] = {
-                        type: sections[4],
-                        value: sections[5]
-                    };
-                    break;
-                default:
-                    break;
+                sections = component.split(":");
+                switch(sections.length)
+                {
+                    case 0:
+                        break;
+                    case 2:
+                        break;
+                    case 6:
+                        json[current_bucket][sections[0]] = {
+                            type: sections[4],
+                            value: sections[5]
+                        };
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -751,10 +758,18 @@ function getTelemetry()
             {
                 telemetry_raw = data;
                 telemetery_raw_field.val(data);
-                telemetry = parseTelemetry(data);
+                var temp = parseTelemetry(data);
+                if(temp != false)
+                {
+                    telemetry = temp;
+                }
+                else
+                {
+                    return;
+                }
                 if(!table_init)
                 {
-                    console.log("Initialize telemetry feedback", telemetry);
+                    console.log("Initialize telemetry feedback", telemetry, telemetry_raw);
                     var table_html = generateTable(telemetry);
                     $("#telemetry-table tbody").html(table_html);
                     var graph_html = generateGraph(telemetry);

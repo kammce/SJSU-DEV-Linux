@@ -28,8 +28,10 @@ SERIAL_READ_CONSTANT_LENGTH     = 100000
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
-PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)LPC: telemetry ascii(.*)')
-FULL_TELEMETRY_PATTERN          = re.compile('(?s)LPC: telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
+POSSIBLE_PROMPTS                = ("LPC:","CLI>")
+PROMPT_CAPTURE_GROUP            = "("+("|".join(POSSIBLE_PROMPTS))+")"
+FULL_TELEMETRY_PATTERN          = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
+PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)')
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
@@ -60,15 +62,17 @@ def read_serial():
             # Check if system is booting
             if state == State.SYSTEM_BOOTING:
                 # If we find a LPC: prompt, then we change state to ONLINE_SYS_PROMPT
-                if serial_output.rfind("LPC:") != -1:
-                    state = State.ONLINE_SYS_PROMPT
+                for prompt in POSSIBLE_PROMPTS:
+                    if serial_output.rfind(prompt) != -1:
+                        state = State.ONLINE_SYS_PROMPT
             # Lock control of serial device
             lock.acquire()
             try:
                 # Read from serial device
                 serial_output += ser.read(SERIAL_READ_CONSTANT_LENGTH)
+                serial_output = serial_output.replace('\r', '')
             except Exception, e:
-                print("Serial read exception" + str(e))
+                print("Serial read exception: " + str(e))
                 continue
             # Release serial lock
             lock.release()
@@ -102,10 +106,11 @@ def get_telemetry():
             # print(end_array)
 
             if len(end_array) > 0:
-                telemetry = end_array[-1]
+                telemetry  = end_array[-1][-1]
                 # If telemetry is found, trim it from the serial_output
                 serial_tmp = FULL_TELEMETRY_PATTERN.sub('', serial_output)
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
+                serial_tmp = serial_tmp.replace('\r', '')
                 serial_output = serial_tmp
                 done = True
 
