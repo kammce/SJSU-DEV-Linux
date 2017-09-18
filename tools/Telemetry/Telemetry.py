@@ -12,8 +12,8 @@ import webbrowser
 from enum import Enum
 
 # Disable Flask Logging
-#log = logging.getLogger('werkzeug')
-#log.setLevel(logging.ERROR)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 class State(Enum):
     OFFLINE = 0
