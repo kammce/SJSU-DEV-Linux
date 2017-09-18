@@ -155,7 +155,8 @@ def telemetry():
 def list():
     ttyUSB_list = glob.glob("/dev/ttyUSB*")
     ttyACM_list = glob.glob("/dev/ttyACM*")
-    tty_list = ttyUSB_list + ttyACM_list
+    ttyMAC_list = glob.glob("/dev/tty.usbserial-*")
+    tty_list = ttyUSB_list + ttyACM_list + ttyMAC_list
     sorted_tty_list = sorted(tty_list)
     return json.dumps(sorted_tty_list)
 # Connect serial to device and return success

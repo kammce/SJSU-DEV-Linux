@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo apt install -y pip
-sudo apt install -y virtualenv
+#sudo apt install -y pip
+#sudo apt install -y virtualenv
 
 function SystemExit()
 {
@@ -15,7 +15,7 @@ if [[ $EUID -eq 0 ]]; then
    exit 1
 fi
 
-sudo echo "" || SystemExit
+#sudo echo "" || SystemExit
 
 rm -R modules
 virtualenv modules

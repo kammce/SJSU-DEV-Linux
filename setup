@@ -30,6 +30,35 @@ echo "└───────────────────────�
 sleep 1
 
 echo " ──────────────────────────────────────────────────┐"
+echo "              Detecting your platform               "
+echo "└────────────────────────────────────────────────── "
+ARCH=$(uname -m)
+SYS=$(uname -s)
+SYSREL=$(uname -r)
+if [[ "$ARCH" != 'x86_64' || "$ARCH" == "amd64" ]]; then
+	echo 'Your system is not supported! Only 64-bit Linux and OSX systems are supported.'
+	SystemExit
+fi
+
+GCC_ARM=""
+TERM=""
+OPENOCD=""
+
+if [[ "$SYS" != "Darwin" || "$SYS" != "Linux" ]]; then
+	echo "I have determined you are running $SYS."
+	echo ""
+	echo "There are no pre-compiled packages available for your system. Would"
+	echo "you like to compile them from source? (This will take extra time.)"
+	echo ""
+	echo -n "[y/n]: "
+	read DECIDE
+	DECIDE=$(echo $DECIDE | tr '[:upper:]' '[:lower:]')
+	if [ $DECIDE == 'yes' || $DECIDE == 'y' ]; then
+		BUILD_SRC='yes'
+	fi
+
+
+echo " ──────────────────────────────────────────────────┐"
 echo "                   Updating PPAs                    "
 echo "└────────────────────────────────────────────────── "
 sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
@@ -40,12 +69,12 @@ sudo apt update
 echo " ──────────────────────────────────────────────────┐"
 echo "           Installing gcc-arm-embedded              "
 echo "└────────────────────────────────────────────────── "
-sudo apt -y install gcc-arm-embedded
+#sudo apt -y install gcc-arm-embedded
 
 echo " ──────────────────────────────────────────────────┐"
 echo "                Installing gtkterm                  "
 echo "└────────────────────────────────────────────────── "
-sudo apt -y install gtkterm
+#sudo apt -y install gtkterm
 
 echo " ──────────────────────────────────────────────────┐"
 echo "      Adding current user to 'dialout' group        "
@@ -65,15 +94,15 @@ sudo apt -y install openocd
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'PIP' Python package installer     "
 echo "└─────────────────────────────────────────────────── "
-sudo apt -y install python-pip python-dev build-essential
-sudo pip install --upgrade pip
-sudo pip install --upgrade virtualenv
+#sudo apt -y install python-pip python-dev build-essential
+sudo -H pip install --upgrade pip
+sudo -H pip install --upgrade virtualenv
 
 echo " ───────────────────────────────────────────────────┐"
 echo "                 Installing GDBGUI                   "
 echo "└─────────────────────────────────────────────────── "
 # Not tested in Travis CI
-sudo pip install gdbgui --upgrade
+sudo -H pip install --upgrade gdbgui
 
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'hyperload.py' Dependencies        "
