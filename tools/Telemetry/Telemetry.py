@@ -12,8 +12,8 @@ import webbrowser
 from enum import Enum
 
 # Disable Flask Logging
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+#log = logging.getLogger('werkzeug')
+#log.setLevel(logging.ERROR)
 
 class State(Enum):
     OFFLINE = 0
@@ -160,14 +160,14 @@ def list():
     sorted_tty_list = sorted(tty_list)
     return json.dumps(sorted_tty_list)
 # Connect serial to device and return success
-@app.route('/connect')
-@app.route('/connect/<int:device>')
+@app.route('/connect', methods=['POST'])
+#@app.route('/connect/<int:device>')
 def connect(device=0):
     global serial_output
     global state
     ser.close()
     serial_output = ""
-    ser.port = "/dev/ttyUSB%d" % (device)
+    ser.port = request.form['device']
     state = State.SYSTEM_BOOTING
     ser.open()
     return SUCCESS

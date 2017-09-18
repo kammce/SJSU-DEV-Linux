@@ -407,9 +407,8 @@ $("#connect").on("click", () =>
 {
     if(!device_connected)
     {
-        var device_number = parseInt($("#device-select").val());
-        var dev_str = (device_number === -1) ? '' : `/${device_number}`;
-        $.get(`${URL}/connect${dev_str}`, function( data )
+		var device = $("#device-select").val();
+        $.post(`${URL}/connect`, {"device": device}, function( data )
         {
             if(data === SUCCESS)
             {
