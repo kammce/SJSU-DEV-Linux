@@ -1,31 +1,30 @@
-ENTITY 			?= DBG
-PROJ 			?= HelloWorld
-DEBUG 			?= 0
+# Allow settiing a project name from the environment, default to firmware.
+# Only affects the name of the generated binary.
+# TODO: Set this from the directory this makefile is stored in
+PROJ 			?= firmware
 
+# Points where the SJSUOne librarie sources are located
+LIB_DIR			?= lib
+# Affects what DBC is generated for SJSUOne board
+ENTITY 			?= DBG
+
+# IMPORTANT: Must be accessible via the PATH variable!!!
 CC              = arm-none-eabi-gcc
 CPPC            = arm-none-eabi-g++
 OBJDUMP         = arm-none-eabi-objdump
 SIZEC           = arm-none-eabi-size
 OBJCOPY         = arm-none-eabi-objcopy
 
+# Internal build directories
 OBJ_DIR			= obj
-PROJ_DIR		= applications
-LIB_DIR			= lib
 BIN_DIR			= bin
-
-ifeq ($(DEBUG),1)
-	DEBUG_FLAG = -g
-else
-	DEBUG_FLAG = -Os
-endif
+DBC_DIR			= _can_dbc
 
 CFLAGS = -mcpu=cortex-m3 \
-    -mthumb -fmessage-length=0 \
+    -mthumb -Os -fmessage-length=0 \
     -ffunction-sections -fdata-sections \
     -Wall -Wshadow -Wlogical-op \
-    $(DEBUG_FLAG) \
-    -Wfloat-equal -D BUILD_CFG_MPU=0 \
-    -D DEBUG=$(DEBUG) \
+    -Wfloat-equal -DBUILD_CFG_MPU=0 \
     -fabi-version=0 \
     -fno-exceptions \
     -I"$(LIB_DIR)/" \
@@ -43,34 +42,35 @@ CFLAGS = -mcpu=cortex-m3 \
     -I"$(LIB_DIR)/L4_IO/fat" \
     -I"$(LIB_DIR)/L4_IO/wireless" \
     -I"$(LIB_DIR)/L5_Application" \
-    -I"$(PROJ_DIR)/$(PROJ)/L2_Drivers" \
-    -I"$(PROJ_DIR)/$(PROJ)/L3_Utils" \
-    -I"$(PROJ_DIR)/$(PROJ)/L4_IO" \
-    -I"$(PROJ_DIR)/$(PROJ)/L5_Application" \
-    -I"$(PROJ_DIR)/$(PROJ)/"
+    -I"L2_Drivers" \
+    -I"L3_Utils" \
+    -I"L4_IO" \
+    -I"L5_Application" \
+    -I"$(DBC_DIR)"
 
-PREBUILD        	= $(PROJ_DIR)/$(PROJ)/_can_dbc/generated_can.h
-LIBRARIES			= $(shell find $(LIB_DIR) -name '*.c' -o -name '*.cpp')
-SOURCES				= $(shell find $(PROJ_DIR)/$(PROJ) -name '*.c' -o -name '*.cpp')
+DBCBUILD        	= $(DBC_DIR)/generated_can.h
+LIBRARIES			= $(shell find "$(LIB_DIR)" -name '*.c' -o -name '*.cpp')
+SOURCES				= $(shell find . -name '*.c' -o -name '*.cpp')
 COMPILABLES 		= $(LIBRARIES) $(SOURCES)
 
-OBJECT_FILES 		= $(addprefix $(OBJ_DIR)/, $(patsubst $(PROJ_DIR)/%,%, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o, $(COMPILABLES)))))
-# THIS IS A BREAKDOWN OF WHAT IS HAPPENING IN THE LINE ABOVE!
-#
-#    $(patsubst %.cpp,%.o, LIST)        : Replace .cpp -> .o
-#    $(patsubst %.c,%.o, LIST)          : Replace .c -> .o
-#    $(patsubst src/%,%, LIST)          : Replace src/path/file.o -> path/file.o
-#    $(addprefix $(OBJ_DIR)/, LIST)     : Add OBJ DIR to path (path/file.o -> obj/path/file.o)
-#
-EXECUTABLE			= $(BIN_DIR)/$(PROJ)/$(PROJ).elf
+# $(patsubst %.cpp,%.o, LIST) 		: Replace .cpp -> .o
+# $(patsubst %.c,%.o, LIST)			: Replace .c -> .o
+# $(patsubst src/%,%, LIST) 		: Replace src/path/file.o -> path/file.o
+# $(addprefix $(OBJ_DIR)/, LIST) 	: Add OBJ DIR to path (path/file.o -> obj/path/file.o)
+OBJECT_FILES 		= $(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o, $(COMPILABLES))))
+EXECUTABLE			= $(BIN_DIR)/$(PROJ).elf
 HEX					= $(EXECUTABLE:.elf=.hex)
 LIST				= $(EXECUTABLE:.elf=.lst)
 SIZE				= $(EXECUTABLE:.elf=.siz)
 MAP					= $(EXECUTABLE:.elf=.map)
 
-.PHONY: all clean precheck
+.PHONY: all clean
 
-all: precheck prebuild $(OBJ_DIR) $(BIN_DIR) $(HEX) $(SIZE) $(LIST)
+all: $(DBC_DIR) $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
+
+cleaninstall: clean all install
+
+print-%  : ; @echo $* = $($*)
 
 $(HEX): $(EXECUTABLE)
 	@echo 'Invoking: Cross ARM GNU Create Flash Image'
@@ -90,14 +90,14 @@ $(LIST): $(EXECUTABLE)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-$(EXECUTABLE): $(OBJECT_FILES)
+$(EXECUTABLE): $(DBCBUILD) $(OBJECT_FILES)
 	@echo 'Invoking: Cross ARM C++ Linker'
 	mkdir -p "$(dir $@)"
 	$(CPPC) -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T $(LIB_DIR)/loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(MAP)" -specs=nano.specs -o "$@" $(OBJECT_FILES)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-$(OBJ_DIR)/$(PROJ)/%.o: $(PROJ_DIR)/$(PROJ)/%.cpp
+$(OBJ_DIR)/%.o: %.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C++ Compiler'
 	mkdir -p "$(dir $@)"
@@ -105,7 +105,7 @@ $(OBJ_DIR)/$(PROJ)/%.o: $(PROJ_DIR)/$(PROJ)/%.cpp
 	@echo 'Finished building: $<'
 	@echo ' '
 
-$(OBJ_DIR)/$(PROJ)/%.o: $(PROJ_DIR)/$(PROJ)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
 	mkdir -p "$(dir $@)"
@@ -113,7 +113,7 @@ $(OBJ_DIR)/$(PROJ)/%.o: $(PROJ_DIR)/$(PROJ)/%.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-$(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.cpp
+$(OBJ_DIR)/%.o: $(LIB_DIR)/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C++ Compiler'
 	mkdir -p "$(dir $@)"
@@ -121,7 +121,7 @@ $(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.cpp
 	@echo 'Finished building: $<'
 	@echo ' '
 
-$(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.c
+$(OBJ_DIR)/%.o: $(LIB_DIR)/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
 	mkdir -p "$(dir $@)"
@@ -129,9 +129,11 @@ $(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-prebuild: $(LIB_DIR)/_can_dbc/243.dbc $(LIB_DIR)/_can_dbc/dbc_parse.py
-	mkdir -p $(PROJ_DIR)/$(PROJ)/_can_dbc
-	python $(LIB_DIR)/_can_dbc/dbc_parse.py -i $(LIB_DIR)/_can_dbc/243.dbc -s $(ENTITY) > $(PROJ_DIR)/$(PROJ)/_can_dbc/generated_can.h
+$(DBCBUILD):
+	python "$(LIB_DIR)/_can_dbc/dbc_parse.py" -i "$(LIB_DIR)/_can_dbc/243.dbc" -s $(ENTITY) > $(DBCBUILD)
+
+$(DBC_DIR):
+	mkdir -p $(DBC_DIR)
 
 $(OBJ_DIR):
 	@echo 'Creating Objects Folder: $<'
@@ -141,13 +143,9 @@ $(BIN_DIR):
 	@echo 'Creating Binary Folder: $<'
 	mkdir $(BIN_DIR)
 
-precheck:
-	# If this fails to find the directory then it exits
-	# with a return code of 2 which will cause make to stop
-	ls "$(PROJ_DIR)/$(PROJ)"
-
 clean:
-	rm -fR $(OBJ_DIR)/$(PROJ) $(BIN_DIR)/$(PROJ) $(PREBUILD)
+	rm -fR $(OBJ_DIR) $(BIN_DIR) $(DBC_DIR)
 
-spotless:
-	rm -fR $(OBJ_DIR)/* $(BIN_DIR)/* $(PROJ_DIR)/*/_can_dbc/generated_can.h
+install: all
+	# pyFlash uses environment variable HEXFILE to make the magic happen
+	pyFlash-Hyperload.py $(HEX) 

@@ -1,13 +1,10 @@
 #!/bin/bash
+# Find the directory that contains the physical script file
+REALDIR=$(readlink "$0" | dirname $REALPATH)
 
-# If you are a link, get the original script path
-#REALPATH=$(readlink -f -- "${0}")
-# Remove name from path
-#REALDIR=${REALPATH%/*}
-REALDIR=$(pwd $0)
 # Activate the python virtual environment
-# source modules/bin/activate
-# Set flask application python script target
-export FLASK_APP="${REALDIR}/Telemetry.py"
-# Start flask on port 5001
-./modules/bin/flask run -p 5001
+source $REALDIR/modules/bin/activate
+
+# Set flask application python script target and start on 5001
+export FLASK_APP="$REALDIR/Telemetry.py"
+$REALDIR/modules/bin/flask run -p 5001
