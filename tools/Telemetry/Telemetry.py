@@ -28,10 +28,10 @@ SERIAL_READ_CONSTANT_LENGTH     = 100000
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
-POSSIBLE_PROMPTS                = ("LPC:","CLI>")
+POSSIBLE_PROMPTS                = ("LPC: ","CLI> ")
 PROMPT_CAPTURE_GROUP            = "("+("|".join(POSSIBLE_PROMPTS))+")"
-FULL_TELEMETRY_PATTERN          = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
-PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)')
+FULL_TELEMETRY_PATTERN          = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+'telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
+PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+'telemetry ascii(.*)')
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
@@ -87,9 +87,13 @@ def get_telemetry():
     telemetry     = ""
     done          = False
     timeout_time  = 0
-    if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
+    telemetry_msg = "telemetry ascii\n"
 
-        ser.write("telemetry ascii\n")
+    if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
+        if serial_output.endswith(POSSIBLE_PROMPTS):
+            ser.write(telemetry_msg)
+        else:
+            ser.write("\n"+telemetry_msg)
 
         while(not done):
             time.sleep(10 * MILLIS_RATIO)
@@ -155,18 +159,19 @@ def telemetry():
 def list():
     ttyUSB_list = glob.glob("/dev/ttyUSB*")
     ttyACM_list = glob.glob("/dev/ttyACM*")
-    tty_list = ttyUSB_list + ttyACM_list
+    ttyMAC_list = glob.glob("/dev/tty.*")
+    tty_list = ttyUSB_list + ttyACM_list + ttyMAC_list
     sorted_tty_list = sorted(tty_list)
     return json.dumps(sorted_tty_list)
 # Connect serial to device and return success
 @app.route('/connect')
-@app.route('/connect/<int:device>')
-def connect(device=0):
+@app.route('/connect/<string:device>')
+def connect(device):
     global serial_output
     global state
     ser.close()
     serial_output = ""
-    ser.port = "/dev/ttyUSB%d" % (device)
+    ser.port = "/dev/" + device
     state = State.SYSTEM_BOOTING
     ser.open()
     return SUCCESS

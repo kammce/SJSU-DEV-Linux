@@ -319,6 +319,7 @@ var graph_update_active = true;
 var redraw_counter      = 0;
 var graph_telem_update_ratio = 1;
 var serial_period       = DEFAULT_PERIOD;
+var server_period       = DEFAULT_PERIOD;
 var telemetry_period    = DEFAULT_PERIOD;
 var graph_period        = DEFAULT_PERIOD;
 var telemetry_flag      = true;
@@ -374,12 +375,11 @@ function generateDropDownList(new_list)
     var html = `<option value="-1">Select Serial Device ...</option>`;
     for(var i = 0; i < new_list.length; i++)
     {
-        item_number = new_list[i].replace("/dev/ttyUSB", "");
         html += `
             <option
-                value="${item_number}"
+                value="${new_list[i]}"
                 ${(i === 0) ? "selected" : ""}>
-                /dev/ttyUSB${item_number}
+                ${new_list[i]}
             </option>`;
     }
     return html;
@@ -407,9 +407,14 @@ $("#connect").on("click", () =>
 {
     if(!device_connected)
     {
-        var device_number = parseInt($("#device-select").val());
-        var dev_str = (device_number === -1) ? '' : `/${device_number}`;
-        $.get(`${URL}/connect${dev_str}`, function( data )
+        var device_select = $("#device-select").val();
+        if(device_select == "-1")
+        {
+            return;
+        }
+        device = device_select.substr(5);
+        // var dev_str = (device_number === -1) ? '' : `/${device_number}`;
+        $.get(`${URL}/connect/${device}`, function( data )
         {
             if(data === SUCCESS)
             {
@@ -809,14 +814,14 @@ function checkConnection()
         {
             server_connected = true;
             $("#server-connection-indicator").removeClass("disconnected-text").addClass("connected-text");
-            setTimeout(checkConnection, serial_period);
+            setTimeout(checkConnection, server_period);
         },
         error: () =>
         {
             server_connected = false;
             $("#server-connection-indicator").removeClass("connected-text").addClass("disconnected-text");
             $('#myModal').modal('show');
-            // setTimeout(checkConnection, serial_period);
+            // setTimeout(checkConnection, server_period);
         }
     });
 }
