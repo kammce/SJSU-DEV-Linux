@@ -4,7 +4,7 @@
 REALDIR=$(readlink "$0" | xargs dirname)
 
 # Activate the python virtual environment
-source $REALDIR/modules/bin/activate
+#source $REALDIR/modules/bin/activate
 
 # Set flask application python script target and start on 5001
 export FLASK_APP="$REALDIR/Telemetry.py"
