@@ -2,6 +2,7 @@ from __future__ import division
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import threading
 import serial
+import serial.tools.list_ports
 import time
 import glob
 import json
@@ -11,7 +12,6 @@ import logging
 import webbrowser
 from enum import Enum
 
-# Disable Flask Logging
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
@@ -42,6 +42,7 @@ serial_output                   = ""
 baudrate                        = 38400
 
 # SETUP SERIAL PORT
+list_ports                      = serial.tools.list_ports
 ser                             = serial.Serial()
 ser.baudrate                    = baudrate
 ser.rts                         = False
@@ -164,12 +165,19 @@ def telemetry():
 # Return the list of serial devices on system
 @app.route('/list')
 def list():
-    ttyUSB_list = glob.glob("/dev/ttyUSB*")
-    ttyACM_list = glob.glob("/dev/ttyACM*")
-    ttyMAC_list = glob.glob("/dev/tty.*")
-    tty_list = ttyUSB_list + ttyACM_list + ttyMAC_list
-    sorted_tty_list = sorted(tty_list)
-    return json.dumps(sorted_tty_list)
+    # Get COM port iterator list
+    port_iterator = list_ports.comports()
+    # Empty list to fill with COM port paths
+    ports         = []
+    # Iterate through port_iterator elements
+    # and push to ports list
+    for element in port_iterator:
+        ports.append(element.device)
+    # Sort the ports
+    ports = sorted(ports)
+    # Return JSON (array) back to client
+    return json.dumps(ports)
+
 # Connect serial to device and return success
 @app.route('/connect')
 @app.route('/connect/<string:device>')
@@ -213,9 +221,6 @@ def write(payload="", carriage_return=0, newline=0):
 
     payload = payload+cr+nl
 
-    # print(payload)
-    # print("===================")
-
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
@@ -236,3 +241,4 @@ thread = threading.Thread(target=read_serial)
 thread.daemon = True
 # Start the thread
 thread.start()
+

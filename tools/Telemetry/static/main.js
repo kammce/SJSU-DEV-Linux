@@ -328,7 +328,7 @@ var graph_period        = DEFAULT_PERIOD;
 var telemetry_flag      = false;
 var table_init          = false;
 var carriage_return_active = false;
-var newline_select      = true;
+var newline_active      = true;
 var serial_output       = $("#serial-output");
 var telemetery_raw_field = $("#telemetry-raw");
 var scrolled_to_bottom  = true;
@@ -494,7 +494,7 @@ $("#serial-send").on("click", () =>
         history_position = 0;
 
         var cr = (carriage_return_active) ? "1" : "0";
-        var nl = (newline_select) ? "1" : "0";
+        var nl = (newline_active) ? "1" : "0";
 
         $.get(`${URL}/write/${payload}/${cr}/${nl}`, function( data )
         {
@@ -583,8 +583,8 @@ $('#carriage-return-select').on('change', function()
 
 $('#newline-select').on('change', function()
 {
-    newline_select = $(this).is(":checked");
-    setCookie("newline-select", newline_select, 30);
+    newline_active = $(this).is(":checked");
+    setCookie("newline-active", newline_active, 30);
 });
 
 function updateScroll()
@@ -852,8 +852,7 @@ function checkConnection()
         {
             server_connected = false;
             $("#server-connection-indicator").removeClass("connected-text").addClass("disconnected-text");
-            $('#myModal').modal('show');
-            // setTimeout(checkConnection, server_period);
+            $('#server-disconnect-modal').modal('show');
         }
     });
 }
@@ -866,7 +865,7 @@ window.onload = function()
         getSerial();
         getTelemetry();
         $("#refresh").click();
-
+        //// TODO: Convert the items below into a for loop
         if(checkCookie('telemetry-on'))
         {
             $("#telemetry-on").prop("checked", getCookie("telemetry-on") === "true");
@@ -876,6 +875,16 @@ window.onload = function()
         {
             $("#reset-on-connect").prop("checked", getCookie("reset-on-connect") === "true");
             $("#reset-on-connect").change();
+        }
+        if(checkCookie("carriage-return-active"))
+        {
+            $("#carriage-return-select").prop("checked", getCookie("carriage-return-active") === "true");
+            $("#carriage-return-select").change();
+        }
+        if(checkCookie("newline-active"))
+        {
+            $("#newline-select").prop("checked", getCookie("newline-active") === "true");
+            $("#newline-select").change();
         }
         if(checkCookie("serial-frequency-select"))
         {
@@ -901,16 +910,6 @@ window.onload = function()
         {
             $("#serial-baud-select").val(getCookie("serial-baud-select"));
             $("#serial-baud-select").change();
-        }
-        if(checkCookie("carriage-return-select"))
-        {
-            $("#carriage-return-select").val(getCookie("carriage-return-select"));
-            $("#carriage-return-select").change();
-        }
-        if(checkCookie("newline-select"))
-        {
-            $("#newline-select").val(getCookie("newline-select"));
-            $("#newline-select").change();
         }
     }, 100);
 };
