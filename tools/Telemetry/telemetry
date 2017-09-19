@@ -8,4 +8,5 @@ REALDIR=$(readlink "$0" | xargs dirname)
 
 # Set flask application python script target and start on 5001
 export FLASK_APP="$REALDIR/Telemetry.py"
-$REALDIR/modules/bin/flask run -p 5001
+# $REALDIR/modules/bin/flask run -p 5001
+flask run -p 5001
