@@ -47,6 +47,7 @@ ser.baudrate                    = baudrate
 ser.rts                         = False
 ser.dtr                         = False
 ser.timeout                     = 0
+current_prompt                  = ""
 
 # THREAD VARIABLES
 lock = threading.Lock()
@@ -54,6 +55,7 @@ lock = threading.Lock()
 def read_serial():
     global serial_output
     global state
+    global current_prompt
 
     while True:
         time.sleep(10 * MILLIS_RATIO)
@@ -65,6 +67,8 @@ def read_serial():
                 for prompt in POSSIBLE_PROMPTS:
                     if serial_output.rfind(prompt) != -1:
                         state = State.ONLINE_SYS_PROMPT
+                        current_prompt = prompt
+
             # Lock control of serial device
             lock.acquire()
             try:
@@ -90,10 +94,11 @@ def get_telemetry():
     telemetry_msg = "telemetry ascii\n"
 
     if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
-        if serial_output.endswith(POSSIBLE_PROMPTS):
-            ser.write(telemetry_msg)
-        else:
-            ser.write("\n"+telemetry_msg)
+        # if serial_output.endswith(POSSIBLE_PROMPTS):
+        #     ser.write(telemetry_msg)
+        # else:
+        #     ser.write("\n"+telemetry_msg)
+        ser.write(telemetry_msg)
 
         while(not done):
             time.sleep(10 * MILLIS_RATIO)
@@ -116,6 +121,8 @@ def get_telemetry():
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
                 serial_tmp = serial_tmp.replace('\r', '')
                 serial_output = serial_tmp
+                # if not serial_output.endswith(current_prompt):
+                #     serial_output += current_prompt
                 done = True
 
             timeout_time += DELAY_PERIOD

@@ -412,7 +412,7 @@ if msg is ByteReference[0]:
                             percents = round(100.0 * (blockCount+1) / float(totalBlocks), 1)
 
                             # bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x2219) * (bar_len - filled_len)
-                            bar = ' ' * (filled_len-1) + unichr(0x15E7) + ' ' * (bar_len - filled_len)
+                            bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x2219) * (bar_len - filled_len)
 
                             suffix = "Block # {0}/{1} flashed!".format(blockCount+1, int(totalBlocks))
 
