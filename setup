@@ -114,6 +114,8 @@ echo " ────────────────────────�
 echo "       Installing 'Telemetry.py' Dependencies        "
 echo "└─────────────────────────────────────────────────── "
 # Not tested in Travis CI
+# ./tools/Telemetry/setup
+# Tested with Travis CI
 sudo pip install -r tools/Telemetry/requirements.txt
 
 echo

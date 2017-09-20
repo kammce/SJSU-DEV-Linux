@@ -2,6 +2,7 @@ from __future__ import division
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import threading
 import serial
+import serial.tools.list_ports
 import time
 import glob
 import json
@@ -11,7 +12,6 @@ import logging
 import webbrowser
 from enum import Enum
 
-# Disable Flask Logging
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
@@ -28,10 +28,10 @@ SERIAL_READ_CONSTANT_LENGTH     = 100000
 MILLIS_RATIO                    = (1/1000)
 SUCCESS                         = "SUCCESS"
 FAILURE                         = "FAILURE"
-POSSIBLE_PROMPTS                = ("LPC:","CLI>")
+POSSIBLE_PROMPTS                = ("LPC: ","CLI> ")
 PROMPT_CAPTURE_GROUP            = "("+("|".join(POSSIBLE_PROMPTS))+")"
-FULL_TELEMETRY_PATTERN          = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
-PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+' telemetry ascii(.*)')
+FULL_TELEMETRY_PATTERN          = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+'telemetry ascii(.*)[\x03][\x03][\x04][\x04][ ]{3}Finished in [0-9]+ us[\r]*\n')
+PARTIAL_TELEMETETRY_PATTERN     = re.compile('(?s)'+PROMPT_CAPTURE_GROUP+'telemetry ascii(.*)')
 
 # SETUP FLASK APPLICATION
 app                             = Flask(__name__)
@@ -42,11 +42,13 @@ serial_output                   = ""
 baudrate                        = 38400
 
 # SETUP SERIAL PORT
+list_ports                      = serial.tools.list_ports
 ser                             = serial.Serial()
 ser.baudrate                    = baudrate
 ser.rts                         = False
 ser.dtr                         = False
 ser.timeout                     = 0
+current_prompt                  = ""
 
 # THREAD VARIABLES
 lock = threading.Lock()
@@ -54,6 +56,7 @@ lock = threading.Lock()
 def read_serial():
     global serial_output
     global state
+    global current_prompt
 
     while True:
         time.sleep(10 * MILLIS_RATIO)
@@ -65,6 +68,8 @@ def read_serial():
                 for prompt in POSSIBLE_PROMPTS:
                     if serial_output.rfind(prompt) != -1:
                         state = State.ONLINE_SYS_PROMPT
+                        current_prompt = prompt
+
             # Lock control of serial device
             lock.acquire()
             try:
@@ -87,9 +92,14 @@ def get_telemetry():
     telemetry     = ""
     done          = False
     timeout_time  = 0
-    if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
+    telemetry_msg = "telemetry ascii\n"
 
-        ser.write("telemetry ascii\n")
+    if ser.is_open == True and state == State.ONLINE_SYS_PROMPT:
+        # if serial_output.endswith(POSSIBLE_PROMPTS):
+        #     ser.write(telemetry_msg)
+        # else:
+        #     ser.write("\n"+telemetry_msg)
+        ser.write(telemetry_msg)
 
         while(not done):
             time.sleep(10 * MILLIS_RATIO)
@@ -112,6 +122,8 @@ def get_telemetry():
                 serial_tmp = PARTIAL_TELEMETETRY_PATTERN.sub('', serial_tmp)
                 serial_tmp = serial_tmp.replace('\r', '')
                 serial_output = serial_tmp
+                # if not serial_output.endswith(current_prompt):
+                #     serial_output += current_prompt
                 done = True
 
             timeout_time += DELAY_PERIOD
@@ -153,21 +165,28 @@ def telemetry():
 # Return the list of serial devices on system
 @app.route('/list')
 def list():
-    ttyUSB_list = glob.glob("/dev/ttyUSB*")
-    ttyACM_list = glob.glob("/dev/ttyACM*")
-    ttyMAC_list = glob.glob("/dev/tty.usbserial-*")
-    tty_list = ttyUSB_list + ttyACM_list + ttyMAC_list
-    sorted_tty_list = sorted(tty_list)
-    return json.dumps(sorted_tty_list)
+    # Get COM port iterator list
+    port_iterator = list_ports.comports()
+    # Empty list to fill with COM port paths
+    ports         = []
+    # Iterate through port_iterator elements
+    # and push to ports list
+    for element in port_iterator:
+        ports.append(element.device)
+    # Sort the ports
+    ports = sorted(ports)
+    # Return JSON (array) back to client
+    return json.dumps(ports)
+
 # Connect serial to device and return success
-@app.route('/connect', methods=['POST'])
-#@app.route('/connect/<int:device>')
-def connect(device=0):
+@app.route('/connect')
+@app.route('/connect/<string:device>')
+def connect(device):
     global serial_output
     global state
     ser.close()
     serial_output = ""
-    ser.port = request.form['device']
+    ser.port = "/dev/" + device
     state = State.SYSTEM_BOOTING
     ser.open()
     return SUCCESS
@@ -202,9 +221,6 @@ def write(payload="", carriage_return=0, newline=0):
 
     payload = payload+cr+nl
 
-    # print(payload)
-    # print("===================")
-
     ser.write(payload.encode('utf-8'))
     lock.release()
     return SUCCESS
@@ -225,3 +241,4 @@ thread = threading.Thread(target=read_serial)
 thread.daemon = True
 # Start the thread
 thread.start()
+

@@ -306,7 +306,10 @@ const GRAPHING_OPTIONS = {
 const DEFAULT_PERIOD    = 1000;
 const SUCCESS           = "SUCCESS";
 const URL               = "http://localhost:5001";
-//Better to construct options first and then pass it as a parameter
+const DOWN_ARROW        = 38;
+const UP_ARROW          = 40;
+const ENTER_KEY         = 13;
+
 var serial              = "";
 var telemetry_raw       = "";
 var telemetry           = { };
@@ -315,20 +318,22 @@ var server_connected    = false;
 var list                = [ ];
 var graph_options       = { };
 var graphs              = { };
-var graph_update_active = true;
+var graph_update_active = false;
 var redraw_counter      = 0;
 var graph_telem_update_ratio = 1;
 var serial_period       = DEFAULT_PERIOD;
+var server_period       = DEFAULT_PERIOD;
 var telemetry_period    = DEFAULT_PERIOD;
 var graph_period        = DEFAULT_PERIOD;
-var telemetry_flag      = true;
+var telemetry_flag      = false;
 var table_init          = false;
 var carriage_return_active = false;
-var newline_select      = true;
-
+var newline_active      = true;
 var serial_output       = $("#serial-output");
 var telemetery_raw_field = $("#telemetry-raw");
 var scrolled_to_bottom  = true;
+var command_history     = [];
+var history_position    = 0;
 
 function setCookie(cname, cvalue, exdays)
 {
@@ -374,12 +379,11 @@ function generateDropDownList(new_list)
     var html = `<option value="-1">Select Serial Device ...</option>`;
     for(var i = 0; i < new_list.length; i++)
     {
-        item_number = new_list[i].replace("/dev/ttyUSB", "");
         html += `
             <option
-                value="${item_number}"
+                value="${new_list[i]}"
                 ${(i === 0) ? "selected" : ""}>
-                /dev/ttyUSB${item_number}
+                ${new_list[i]}
             </option>`;
     }
     return html;
@@ -407,8 +411,14 @@ $("#connect").on("click", () =>
 {
     if(!device_connected)
     {
-		var device = $("#device-select").val();
-        $.post(`${URL}/connect`, {"device": device}, function( data )
+        var device_select = $("#device-select").val();
+        if(device_select == "-1")
+        {
+            return;
+        }
+        device = device_select.substr(5);
+        // var dev_str = (device_number === -1) ? '' : `/${device_number}`;
+        $.get(`${URL}/connect/${device}`, function( data )
         {
             if(data === SUCCESS)
             {
@@ -442,10 +452,32 @@ $("#connect").on("click", () =>
 
 $("input[name='serial-input']").on('keyup', (e) =>
 {
-    if(e.keyCode === 13)
-    {
-        $("#serial-send").click();
-    }
+        var count_change_flag = true;
+        // console.log(command_history);
+        switch(event.which)
+        {
+            case UP_ARROW:
+                if(history_position > 0)
+                {
+                    history_position--;
+                }
+                break;
+            case DOWN_ARROW:
+                if(history_position < command_history.length)
+                {
+                    history_position++;
+                }
+                break;
+            case ENTER_KEY:
+                $("#serial-send").click();
+            default:
+                count_change_flag = false;
+                break;
+        }
+        if(count_change_flag)
+        {
+            $("input[name='serial-input']").val(command_history[command_history.length-history_position]);
+        }
 });
 
 $("#serial-send").on("click", () =>
@@ -455,8 +487,14 @@ $("#serial-send").on("click", () =>
         var payload = $("input[name='serial-input']").val();
         $("input[name='serial-input']").val("");
 
+        if(payload !== command_history[command_history.length-1])
+        {
+            command_history.push(payload);
+        }
+        history_position = 0;
+
         var cr = (carriage_return_active) ? "1" : "0";
-        var nl = (newline_select) ? "1" : "0";
+        var nl = (newline_active) ? "1" : "0";
 
         $.get(`${URL}/write/${payload}/${cr}/${nl}`, function( data )
         {
@@ -545,8 +583,8 @@ $('#carriage-return-select').on('change', function()
 
 $('#newline-select').on('change', function()
 {
-    newline_select = $(this).is(":checked");
-    setCookie("newline-select", newline_select, 30);
+    newline_active = $(this).is(":checked");
+    setCookie("newline-active", newline_active, 30);
 });
 
 function updateScroll()
@@ -808,14 +846,13 @@ function checkConnection()
         {
             server_connected = true;
             $("#server-connection-indicator").removeClass("disconnected-text").addClass("connected-text");
-            setTimeout(checkConnection, serial_period);
+            setTimeout(checkConnection, server_period);
         },
         error: () =>
         {
             server_connected = false;
             $("#server-connection-indicator").removeClass("connected-text").addClass("disconnected-text");
-            $('#myModal').modal('show');
-            // setTimeout(checkConnection, serial_period);
+            $('#server-disconnect-modal').modal('show');
         }
     });
 }
@@ -828,7 +865,7 @@ window.onload = function()
         getSerial();
         getTelemetry();
         $("#refresh").click();
-
+        //// TODO: Convert the items below into a for loop
         if(checkCookie('telemetry-on'))
         {
             $("#telemetry-on").prop("checked", getCookie("telemetry-on") === "true");
@@ -838,6 +875,16 @@ window.onload = function()
         {
             $("#reset-on-connect").prop("checked", getCookie("reset-on-connect") === "true");
             $("#reset-on-connect").change();
+        }
+        if(checkCookie("carriage-return-active"))
+        {
+            $("#carriage-return-select").prop("checked", getCookie("carriage-return-active") === "true");
+            $("#carriage-return-select").change();
+        }
+        if(checkCookie("newline-active"))
+        {
+            $("#newline-select").prop("checked", getCookie("newline-active") === "true");
+            $("#newline-select").change();
         }
         if(checkCookie("serial-frequency-select"))
         {
@@ -863,16 +910,6 @@ window.onload = function()
         {
             $("#serial-baud-select").val(getCookie("serial-baud-select"));
             $("#serial-baud-select").change();
-        }
-        if(checkCookie("carriage-return-select"))
-        {
-            $("#carriage-return-select").val(getCookie("carriage-return-select"));
-            $("#carriage-return-select").change();
-        }
-        if(checkCookie("newline-select"))
-        {
-            $("#newline-select").val(getCookie("newline-select"));
-            $("#newline-select").change();
         }
     }, 100);
 };
