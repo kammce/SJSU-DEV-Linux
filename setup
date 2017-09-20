@@ -34,28 +34,19 @@ echo "              Detecting your platform               "
 echo "└────────────────────────────────────────────────── "
 ARCH=$(uname -m)
 SYS=$(uname -s)
-SYSREL=$(uname -r)
+#SYSREL=$(uname -r) # Probably don't need this, but maybe
 if [[ "$ARCH" != 'x86_64' || "$ARCH" == "amd64" ]]; then
 	echo 'Your system is not supported! Only 64-bit Linux and OSX systems are supported.'
 	SystemExit
 fi
 
-GCC_ARM=""
-TERM=""
-OPENOCD=""
-
-if [[ "$SYS" != "Darwin" || "$SYS" != "Linux" ]]; then
-	echo "I have determined you are running $SYS."
-	echo ""
-	echo "There are no pre-compiled packages available for your system. Would"
-	echo "you like to compile them from source? (This will take extra time.)"
-	echo ""
-	echo -n "[y/n]: "
-	read DECIDE
-	DECIDE=$(echo $DECIDE | tr '[:upper:]' '[:lower:]')
-	if [ $DECIDE == 'yes' || $DECIDE == 'y' ]; then
-		BUILD_SRC='yes'
-	fi
+if [ "$SYSREL" == "Darwin" ]; then
+	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+else
+	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+fi
 
 
 echo " ──────────────────────────────────────────────────┐"
@@ -76,15 +67,13 @@ echo "                Installing gtkterm                  "
 echo "└────────────────────────────────────────────────── "
 #sudo apt -y install gtkterm
 
-echo " ──────────────────────────────────────────────────┐"
-echo "      Adding current user to 'dialout' group        "
-echo "└────────────────────────────────────────────────── "
-sudo adduser $USER dialout
-
-# echo " ───────────────────────────────────────────────────┐"
-# echo "              Installing Mono-Complete               "
-# echo "└─────────────────────────────────────────────────── "
-# sudo apt -y install mono-complete
+if which getent > /dev/null; then
+	THE_GROUP=$(getent group | grep 'dial' | cut -d: -f1)
+	echo " ──────────────────────────────────────────────────┐"
+	echo "      Adding current user to '$GROUP' group"
+	echo "└────────────────────────────────────────────────── "
+	sudo adduser $USER $THE_GROUP
+fi
 
 echo " ───────────────────────────────────────────────────┐"
 echo "                Installing OpenOCD                   "
@@ -114,8 +103,6 @@ echo " ────────────────────────�
 echo "       Installing 'Telemetry.py' Dependencies        "
 echo "└─────────────────────────────────────────────────── "
 # Not tested in Travis CI
-# ./tools/Telemetry/setup
-# Tested with Travis CI
 sudo pip install -r tools/Telemetry/requirements.txt
 
 echo
