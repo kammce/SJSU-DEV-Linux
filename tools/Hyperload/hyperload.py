@@ -19,7 +19,6 @@ import logging
 import sys
 from intelhex import IntelHex
 
-
 helpMessage = """
 NAME
     hyperload - firmware flashing tool for SJOne board written in python
@@ -58,7 +57,6 @@ sHexFilePath = "./bin/HelloWorld/HelloWorld.hex"
 PYFLASH_DEBUG_LOG = "no"  # "yes" - Debug Version. "no" - Release Version
 #########################
 
-
 if PYFLASH_DEBUG_LOG == "yes":
     PYFLASH_BUILD_LEVEL = "DEBUG"
 else:
@@ -68,7 +66,6 @@ if PYFLASH_BUILD_LEVEL == "DEBUG":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 else:
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-
 
 # Things to Do:
 # 1. Display Platform Information                               [DONE]
@@ -104,6 +101,7 @@ trigrams           = [0x2630, 0x2631, 0x2632, 0x2634]
 squarefills        = [0x25E7, 0x25E9, 0x25E8, 0x25EA]
 spaces             = [0x2008, 0x2008, 0x2008, 0x2008]
 clocks             = [0x1F55B, 0x1F550, 0x1F551, 0x1F552, 0x1F553, 0x1F554, 0x1F555, 0x1F556, 0x1F557, 0x1F558, 0x1F559, 0x1F55A]
+braille            = [0x2840, 0x2844, 0x2846, 0x2847, 0x2840, 0x28c7, 0x28e7, 0x28f7, 0x28fF]
 selected_animation = clocks
 
 # Common Util Functions
@@ -412,7 +410,10 @@ if msg is ByteReference[0]:
                             filled_len = int(round(bar_len * (blockCount+1) / float(totalBlocks)))
                             #unichr(0x25FE)
                             percents = round(100.0 * (blockCount+1) / float(totalBlocks), 1)
+
+                            # bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x2219) * (bar_len - filled_len)
                             bar = ' ' * (filled_len-1) + unichr(0x15E7) + unichr(0x2219) * (bar_len - filled_len)
+
                             suffix = "Block # {0}/{1} flashed!".format(blockCount+1, int(totalBlocks))
 
                             sys.stdout.write('[%s] %s%% %s  ... %s\r' % (bar, percents, unichr(selected_animation[blockCount % len(selected_animation)]), suffix))
