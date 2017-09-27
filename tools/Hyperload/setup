@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Remove modules (virtual environment folder)
-rm -R modules
+rm -rf modules
 # Initialize modules folder as a "virtual environment"
 virtualenv modules
 # Activate virtual environment
