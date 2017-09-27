@@ -24,6 +24,9 @@ echo "            Acquiring sudo privileges               "
 echo "└────────────────────────────────────────────────── "
 sudo echo "" || SystemExit
 
+# Stash the tool directory
+TOOLDIR=$(dirname "$0")/tools
+
 echo " ──────────────────────────────────────────────────┐"
 echo "  Starting SJSU-DEV-Linux Environment Setup Script  "
 echo "└────────────────────────────────────────────────── "
@@ -40,31 +43,31 @@ if [[ "$ARCH" != 'x86_64' || "$ARCH" == "amd64" ]]; then
 	SystemExit
 fi
 
-if [ "$SYSREL" == "Darwin" ]; then
-	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
-	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
-else
-	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
-	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
-fi
-
-
-echo " ──────────────────────────────────────────────────┐"
-echo "                   Updating PPAs                    "
-echo "└────────────────────────────────────────────────── "
-sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
-sudo apt update
+#echo " ──────────────────────────────────────────────────┐"
+#echo "                   Updating PPAs                    "
+#echo "└────────────────────────────────────────────────── "
+#sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+#echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+#sudo apt update
 
 echo " ──────────────────────────────────────────────────┐"
 echo "           Installing gcc-arm-embedded              "
 echo "└────────────────────────────────────────────────── "
 #sudo apt -y install gcc-arm-embedded
+cd $TOOLDIR
+if [ "$SYSREL" == "Darwin" ]; then
+	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+else
+	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+fi
+tar xvjf $GCC_PKG
 
-echo " ──────────────────────────────────────────────────┐"
-echo "                Installing gtkterm                  "
-echo "└────────────────────────────────────────────────── "
+#echo " ──────────────────────────────────────────────────┐"
+#echo "                Installing gtkterm                  "
+#echo "└────────────────────────────────────────────────── "
 #sudo apt -y install gtkterm
 
 if which getent > /dev/null; then
@@ -75,10 +78,12 @@ if which getent > /dev/null; then
 	sudo adduser $USER $THE_GROUP
 fi
 
-echo " ───────────────────────────────────────────────────┐"
-echo "                Installing OpenOCD                   "
-echo "└─────────────────────────────────────────────────── "
-sudo apt -y install openocd
+if which apt > /dev/null; then
+	echo " ───────────────────────────────────────────────────┐"
+	echo "                Installing OpenOCD                   "
+	echo "└─────────────────────────────────────────────────── "
+	sudo apt -y install openocd
+fi
 
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'PIP' Python package installer     "
@@ -97,13 +102,53 @@ echo " ────────────────────────�
 echo "       Installing 'hyperload.py' Dependencies        "
 echo "└─────────────────────────────────────────────────── "
 # Not tested in Travis CI
-sudo pip install -r tools/Hyperload/requirements.txt
+#sudo pip install -r tools/Hyperload/requirements.txt
+$TOOLDIR/Hyperload/setup
 
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'Telemetry.py' Dependencies        "
 echo "└─────────────────────────────────────────────────── "
 # Not tested in Travis CI
-sudo pip install -r tools/Telemetry/requirements.txt
+#sudo pip install -r tools/Telemetry/requirements.txt
+$TOOLDIR/Telemetry/setup
+
+echo <<END
+#!/bin/bash
+# Setup a base directory:
+BASE=`dirname $TOOLDIR/../`
+
+# SJSUOne Board Settings:
+SJSUONEDEV=/dev/tty.usbserial-A503JOLS # Set this to your board ID
+SJSUONEBAUD=38400
+
+# Project Target Settings:
+# Sets the binary name, defaults to "firmware" (Optional)
+PROJ=firmware
+# Sets which DBC to generate, defaults to "DBG"
+ENTITY=DBG
+
+# Compiler and library settings:
+# Selects compiler version to use
+CC=gcc-arm-none-eabi-5_4-2016q3
+# Generates a system-arch string (f.eks.: Linux-x86_64)
+OS=\`uname -sm | tr ' ' '-'\` 
+PATH=\$PATH:$BASE/tools/\$CC-\$OS/bin:$BASE/tools/Hyperload/bin
+LIB_DIR="$BASE/lib"
+
+# Make system settings:
+# Number of jobs = 8
+# Tune this to nthreads (f.eks. my system has a quad core with two threads per core = 8 threads)
+MAKEFLAGS=" -j 8"
+
+# Export everything to the environment
+export PATH
+export PROJ
+export ENTITY
+export LIB_DIR
+export SJSUONEDEV
+export SJSUONEBAUD
+export MAKEFLAGS
+END
 
 echo
 echo " ──────────────────────────────────────────────────────────────┐"
