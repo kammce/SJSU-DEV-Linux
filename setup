@@ -60,7 +60,7 @@ else
 	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
 	SJSUONEDEV=/dev/ttyUSB0
 fi
-# tar xvjf $GCC_PKG
+tar xvjf $GCC_PKG
 cd ..
 # Exited Tools Directory
 
