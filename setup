@@ -66,9 +66,9 @@ if [[ ! -d "bin" && -f "$GCC_PKG" ]]; then
 	tar --extract \
 		--verbose \
 		--bzip2 \
-		--strip-components=1 \
 		--file=$GCC_PKG \
-		gcc-arm-none-eabi-6-2017-q2-update/bin/ 2> /dev/null
+		gcc-arm-none-eabi-6-2017-q2-update/bin/
+		gcc-arm-none-eabi-6-2017-q2-update/lib/ 2> /dev/null
 fi
 
 cd ..
@@ -135,7 +135,7 @@ ENTITY=DBG
 
 # Compiler and library settings:
 # Selects compiler version to use
-PATH=\$PATH:\$BASE/tools/bin:\$BASE/tools/Hyperload:\$BASE/tools/Telemetry
+PATH=\$PATH:\$BASE/tools/$ARM_GCC/bin:\$BASE/tools/Hyperload:\$BASE/tools/Telemetry
 LIB_DIR="\$BASE/firmware/lib"
 
 # Make system settings:
