@@ -1,7 +1,6 @@
 firmware/*
 firmware/**/bin
 firmware/**/obj
-firmware/**/env.sh
 firmware/**/makefile
 
 !firmware/lib
@@ -11,10 +10,9 @@ firmware/**/makefile
 
 tools/Hyperload
 tools/Telemetry
-
 tools/gcc-arm-none-eabi-*
 
-cmpe146
 **/.gdb_history
 **/.DS_Store
 **/flash.txt
+**/env.sh
