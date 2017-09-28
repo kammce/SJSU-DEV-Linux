@@ -10,6 +10,7 @@ firmware/**/makefile
 
 tools/Hyperload
 tools/Telemetry
+tools/bin
 tools/gcc-arm-none-eabi-*
 
 **/.gdb_history
