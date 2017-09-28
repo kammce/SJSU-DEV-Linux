@@ -1,2 +1,0 @@
-intelhex==2.1
-pyserial==3.4

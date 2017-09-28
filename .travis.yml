@@ -1,9 +1,25 @@
-language: C
-sudo: true
-dist: trusty
-group: edge
-install:
-  - ./setup
+matrix:
+    include:
+        - os: linux
+          sudo: true
+          dist: trusty
+          group: edge
+          install:
+            - sudo apt install python-pip
+            - pip install virtualenv
+            - ./setup
+        - os: linux
+          sudo: true
+          dist: trusty
+          group: edge
+          install:
+            - sudo apt install python-pip
+            - pip install virtualenv
+            - ./setup-py3
+        - os: osx
+          before_install:
+            - pip install virtualenv
+            - ./setup
 script:
   - cd ./firmware/default/
   - ./build HelloWorld
@@ -11,12 +27,3 @@ script:
   - ls ./bin/HelloWorld/HelloWorld.hex
   - ls ./bin/HelloWorld/HelloWorld.lst
   - ls ./bin/HelloWorld/HelloWorld.map
-  - cd ../../
-  - gdbgui -g arm-none-eabi-gdb &
-  - sleep 2
-  - wget http://127.0.0.1:5000
-  - cd tools/Telemetry
-  - ./telemetry &
-  - sleep 2
-  - wget http://localhost:5001
-# after_success:

@@ -1,11 +1,8 @@
 firmware/*
-!firmware/default/
-firmware/default/bin/*
-firmware/default/obj/*
-firmware/default/applications/*
-!firmware/default/applications/HelloWorld
-!firmware/default/applications/FreeRTOS
-!firmware/default/applications/Telemetry
+!firmware/lib
+!firmware/HelloWorld
+!firmware/FreeRTOS
+!firmware/Telemetry
 
 cmpe146
 **/.gdb_history

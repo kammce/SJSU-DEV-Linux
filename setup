@@ -8,15 +8,16 @@ function SystemExit()
 
 # Make sure only non-root users can run our script
 if [[ $EUID -eq 0 ]]; then
-   echo -n "SJSU-DEV-Linux installer script must NOT be run as root! " 1>&2
-   echo -n "." 1>&2
-   sleep 1
-   echo -n "." 1>&2
-   sleep 1
-   echo -n "." 1>&2
-   sleep 1
-   echo " So try again!" 1>&2
+   echo "SJSU-DEV-Linux installer script must NOT be run as root! " 1>&2
    exit 1
+fi
+
+# Check if git exists
+if which git > /dev/null; then
+	echo " ───────────────────────────────────────────────────┐"
+	echo "         GIT NOT FOUND: Please install GIT           "
+	echo "└─────────────────────────────────────────────────── "
+	SystemExit
 fi
 
 echo " ──────────────────────────────────────────────────┐"
@@ -54,21 +55,21 @@ fi
 echo " ──────────────────────────────────────────────────┐"
 echo "           Installing gcc-arm-embedded              "
 echo "└────────────────────────────────────────────────── "
-#sudo apt -y install gcc-arm-embedded
+
+# Enter Tools directory
 cd $TOOLDIR
 if [ "$SYSREL" == "Darwin" ]; then
 	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
 	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+	SJSUONEDEV=/dev/tty.usbserial-A503JOLS
 else
 	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
 	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+	SJSUONEDEV=/dev/ttyUSB0
 fi
 tar xvjf $GCC_PKG
-
-#echo " ──────────────────────────────────────────────────┐"
-#echo "                Installing gtkterm                  "
-#echo "└────────────────────────────────────────────────── "
-#sudo apt -y install gtkterm
+cd ..
+# Exited Tools Directory
 
 if which getent > /dev/null; then
 	THE_GROUP=$(getent group | grep 'dial' | cut -d: -f1)
@@ -88,39 +89,33 @@ fi
 echo " ───────────────────────────────────────────────────┐"
 echo "       Installing 'PIP' Python package installer     "
 echo "└─────────────────────────────────────────────────── "
-#sudo apt -y install python-pip python-dev build-essential
 sudo -H pip install --upgrade pip
 sudo -H pip install --upgrade virtualenv
 
 echo " ───────────────────────────────────────────────────┐"
 echo "                 Installing GDBGUI                   "
 echo "└─────────────────────────────────────────────────── "
-# Not tested in Travis CI
 sudo -H pip install --upgrade gdbgui
 
 echo " ───────────────────────────────────────────────────┐"
-echo "       Installing 'hyperload.py' Dependencies        "
+echo "                Installing Hyperload                 "
 echo "└─────────────────────────────────────────────────── "
-# Not tested in Travis CI
-#sudo pip install -r tools/Hyperload/requirements.txt
+git clone --depth=1 https://github.com/kammce/Hyperload.git $TOOLDIR/Hyperload/
 $TOOLDIR/Hyperload/setup
 
 echo " ───────────────────────────────────────────────────┐"
-echo "       Installing 'Telemetry.py' Dependencies        "
+echo "                Installing Telemetry                 "
 echo "└─────────────────────────────────────────────────── "
-# Not tested in Travis CI
-#sudo pip install -r tools/Telemetry/requirements.txt
+git clone --depth=1 https://github.com/kammce/Telemetry.git $TOOLDIR/Telemetry
 $TOOLDIR/Telemetry/setup
 
-cd $TOOLDIR
-cd ..
 echo > env.sh <<END
 #!/bin/bash
 # Setup a base directory:
 BASE=`dirname $TOOLDIR/../`
 
 # SJSUOne Board Settings:
-SJSUONEDEV=/dev/tty.usbserial-A503JOLS # Set this to your board ID
+SJSUONEDEV="$SJSUONEDEV" # Set this to your board ID
 SJSUONEBAUD=38400
 
 # Project Target Settings:
@@ -131,10 +126,8 @@ ENTITY=DBG
 
 # Compiler and library settings:
 # Selects compiler version to use
-CC=gcc-arm-none-eabi-5_4-2016q3
-# Generates a system-arch string (f.eks.: Linux-x86_64)
-OS=\`uname -sm | tr ' ' '-'\` 
-PATH=\$PATH:$BASE/tools/\$CC-\$OS/bin:$BASE/tools/Hyperload/bin
+CC=gcc-arm-none-eabi-6-2017-q2-update
+PATH=\$PATH:$BASE/tools/\$CC/bin:$BASE/tools/Hyperload/:$BASE/tools/Telemetry/
 LIB_DIR="$BASE/lib"
 
 # Make system settings:
