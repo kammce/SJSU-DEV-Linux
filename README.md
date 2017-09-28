@@ -4,18 +4,38 @@
 [![GNU General Public License v2.0 Badge](https://img.shields.io/badge/license-GNUv2.0-blue.svg)](https://github.com/kammce/SJSU-DEV-Linux)
 [![Documentation Status](https://readthedocs.org/projects/sjsu-dev-linux/badge/?version=latest)](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/kammce/SJSU-DEV-Linux.svg?branch=master)](https://travis-ci.org/kammce/SJSU-DEV-Linux)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/eed4f7e9b3bc40d2a836c3a1d591a2b4)](https://www.codacy.com/app/kammce/SJSU-DEV-Linux?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kammce/SJSU-DEV-Linux&amp;utm_campaign=Badge_Grade)
 
 See **[documentation](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)** for a full tutorial.
-
-## Operating System
-Built for **Ubuntu** and **Debian** based systems (**setup** script is built around using apt-get).
-Will work on other Linux Distros if *dependancies* are manually installed.
+<table align="center">
+<tr>
+<td><img src="http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png" height="100px"/></td>
+<td><img src="http://cdn.osxdaily.com/wp-content/uploads/2010/10/giant-apple-logo-bw.png" height="100px" /></td>
+<td><img src="https://cdn.worldvectorlogo.com/logos/microsoft-windows-22.svg" height="100px" /></td>
+</tr>
+</table>
+## Operating System Supported
+Built for **Debian** based systems, **Mac OSX** (beta), and **Windows 10** using the latest Windows Linux Subsystem (WLS) Insider Builds. The instructions to install on Windows BASH are the same as in Linux.
 
 ## Contrib
-SJSU DEV Linux brought to you by [Khalil Estell](http://kammce.io) Based on SJDev from [Preet Kang](http://www.socialledge.com/sjsu/index.php?title=Main_Page)
+* [Preet Kang](http://www.socialledge.com/sjsu/index.php?title=Main_Page): Original creator of the SJDev development framework.
+* [Khalil Estell](http://kammce.io): Creator of the Linux port of SJDev and maintainer of this repo.
+* [Kai Wetlesen](https://github.com/kaiwetlesen): Contributed Mac OS X port and development environment improvements.
+
+### Special Credits
+* **Mikko Bayabo**: Windows surface destructive testing
+* **WSL testing**: Sameer Azer, Aaron Moffit, Ryan Lucus
 
 ## Change Log
+
+### Update 09.28.2017
+
+* Added support for Windows 10 WLS and Mac OS X (beta)
+* Setup script no longer pollutes global space (except for gdbgui)
+* Setup script now generates an environment script to set environment variables
+* Massive change to file hierarchy
+	* Firmware folders can be moved to any other location as long as it has a link to the development
+	* Default firmware folders come with a symbolic link to `env.sh` and `makefile`.
+	* There is no longer a defaults folder, application folders were moved to firmware folder.
 
 ### Update 09.11.2017
 
