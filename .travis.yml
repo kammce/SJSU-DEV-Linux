@@ -4,7 +4,7 @@ matrix:
           sudo: true
           dist: trusty
           group: edge
-        # - os: osx
+        - os: osx
 install:
   - ./setup
 script:
