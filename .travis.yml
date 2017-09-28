@@ -8,10 +8,10 @@ matrix:
 install:
   - ./setup
 script:
-  - source env.sh
   - cd ./firmware/FreeRTOS/
+  - source env.sh
   - make build
-  - ls ./bin/HelloWorld.elf
-  - ls ./bin/HelloWorld.hex
-  - ls ./bin/HelloWorld.lst
-  - ls ./bin/HelloWorld.map
+  - ls ./bin/firmware.elf
+  - ls ./bin/firmware.hex
+  - ls ./bin/firmware.lst
+  - ls ./bin/firmware.map
