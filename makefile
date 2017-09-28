@@ -63,7 +63,7 @@ LIST				= $(EXECUTABLE:.elf=.lst)
 SIZE				= $(EXECUTABLE:.elf=.siz)
 MAP					= $(EXECUTABLE:.elf=.map)
 
-.PHONY: build clean flash
+.PHONY: build clean flash telemetry monitor
 
 build: $(DBC_DIR) $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
 
@@ -146,5 +146,10 @@ clean:
 	rm -fR $(OBJ_DIR) $(BIN_DIR) $(DBC_DIR)
 
 flash: build
-	# pyFlash uses environment variable HEXFILE to make the magic happen
-	hyperload.py $(SJSUONEDEV) $(HEX)
+	hyperload $(SJSUONEDEV) $(HEX)
+
+telemetry:
+	telemetry
+
+monitor:
+	telemetry
