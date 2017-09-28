@@ -6,14 +6,17 @@
 [![Build Status](https://travis-ci.org/kammce/SJSU-DEV-Linux.svg?branch=master)](https://travis-ci.org/kammce/SJSU-DEV-Linux)
 
 See **[documentation](http://sjsu-dev-linux.readthedocs.io/en/latest/?badge=latest)** for a full tutorial.
-<table align="center">
-<tr>
-<td><img src="http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png" height="100px"/></td>
-<td><img src="http://cdn.osxdaily.com/wp-content/uploads/2010/10/giant-apple-logo-bw.png" height="100px" /></td>
-<td><img src="https://cdn.worldvectorlogo.com/logos/microsoft-windows-22.svg" height="100px" /></td>
-</tr>
-</table>
+
 ## Operating System Supported
+
+<p align="center">
+<img src="http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png" height="100px"/>
+&nbsp;&nbsp;
+<img src="http://cdn.osxdaily.com/wp-content/uploads/2010/10/giant-apple-logo-bw.png" height="100px" />
+&nbsp;&nbsp;
+<img src="https://cdn.worldvectorlogo.com/logos/microsoft-windows-22.svg" height="100px" />
+</p>
+
 Built for **Debian** based systems, **Mac OSX** (beta), and **Windows 10** using the latest Windows Linux Subsystem (WLS) Insider Builds. The instructions to install on Windows BASH are the same as in Linux.
 
 ## Contrib
