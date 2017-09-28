@@ -13,12 +13,12 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # Check if git exists
-if ! which git > /dev/null; then
-	echo " ───────────────────────────────────────────────────┐"
-	echo "         GIT NOT FOUND: Please install GIT           "
-	echo "└─────────────────────────────────────────────────── "
-	SystemExit
-fi
+# if ! which git > /dev/null; then
+# 	echo " ───────────────────────────────────────────────────┐"
+# 	echo "         GIT NOT FOUND: Please install GIT           "
+# 	echo "└─────────────────────────────────────────────────── "
+# 	SystemExit
+# fi
 
 echo " ──────────────────────────────────────────────────┐"
 echo "            Acquiring sudo privileges               "
