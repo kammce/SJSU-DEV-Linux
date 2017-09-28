@@ -2,8 +2,7 @@
 # Only affects the name of the generated binary.
 # TODO: Set this from the directory this makefile is stored in
 PROJ 			?= firmware
-
-# Points where the SJSUOne librarie sources are located
+# Points where the SJSUOne libraries sources are located
 LIB_DIR			?= lib
 # Affects what DBC is generated for SJSUOne board
 ENTITY 			?= DBG
@@ -64,11 +63,11 @@ LIST				= $(EXECUTABLE:.elf=.lst)
 SIZE				= $(EXECUTABLE:.elf=.siz)
 MAP					= $(EXECUTABLE:.elf=.map)
 
-.PHONY: all clean
+.PHONY: build cleaninstall clean
 
-all: $(DBC_DIR) $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
+build: $(DBC_DIR) $(OBJ_DIR) $(BIN_DIR) $(SIZE) $(LIST) $(HEX)
 
-cleaninstall: clean all install
+cleaninstall: clean build install
 
 print-%  : ; @echo $* = $($*)
 
@@ -146,6 +145,6 @@ $(BIN_DIR):
 clean:
 	rm -fR $(OBJ_DIR) $(BIN_DIR) $(DBC_DIR)
 
-install: all
+install: build
 	# pyFlash uses environment variable HEXFILE to make the magic happen
-	pyFlash-Hyperload.py $(HEX) 
+	hyperload.py $(SJSUONEDEV) $(HEX)
