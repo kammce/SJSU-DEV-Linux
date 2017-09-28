@@ -1,6 +1,9 @@
 firmware/*
-**/bin/*
-**/obj/*
+firmware/**/bin
+firmware/**/obj
+firmware/**/env.sh
+firmware/**/makefile
+
 !firmware/lib
 !firmware/HelloWorld
 !firmware/FreeRTOS

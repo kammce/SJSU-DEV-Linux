@@ -61,7 +61,7 @@ else
 	SJSUONEDEV=/dev/ttyUSB0
 fi
 
-if [ ! -d "$GCC_PKG" ]; then
+if [ ! -d "gcc-arm-none-eabi-6-2017-q2-update" ]; then
 	tar xvjf $GCC_PKG
 fi
 
