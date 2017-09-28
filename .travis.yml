@@ -4,23 +4,11 @@ matrix:
           sudo: true
           dist: trusty
           group: edge
-          install:
-            - sudo apt install python-pip
-            - pip install virtualenv
-            - ./setup
-        - os: linux
-          sudo: true
-          dist: trusty
-          group: edge
-          install:
-            - sudo apt install python-pip
-            - pip install virtualenv
-            - ./setup-py3
         - os: osx
-          before_install:
-            - pip install virtualenv
-            - ./setup
+install:
+  - ./setup
 script:
+  - source env.sh
   - cd ./firmware/FreeRTOS/
   - make build
   - ls ./bin/HelloWorld.elf
