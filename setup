@@ -66,9 +66,7 @@ if [[ ! -d "bin" && -f "$GCC_PKG" ]]; then
 	tar --extract \
 		--verbose \
 		--bzip2 \
-		--file=$GCC_PKG \
-		gcc-arm-none-eabi-6-2017-q2-update/bin/ \
-		gcc-arm-none-eabi-6-2017-q2-update/lib/ 2> /dev/null
+		--file=$GCC_PKG 2> /dev/null
 fi
 
 cd ..
