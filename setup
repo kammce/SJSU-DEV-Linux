@@ -38,6 +38,7 @@ echo "              Detecting your platform               "
 echo "└────────────────────────────────────────────────── "
 ARCH=$(uname -m)
 SYS=$(uname -s)
+BASE=`pwd`
 #SYSREL=$(uname -r) # Probably don't need this, but maybe
 if [[ "$ARCH" != 'x86_64' || "$ARCH" == "amd64" ]]; then
 	echo 'Your system is not supported! Only 64-bit Linux and OSX systems are supported.'
@@ -51,15 +52,15 @@ echo "└───────────────────────�
 # Enter Tools directory
 cd $TOOLDIR
 if [ "$SYSREL" == "Darwin" ]; then
-	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
+	curl -C - -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
 	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-mac.tar.bz2
 	SJSUONEDEV=/dev/tty.usbserial-A503JOLS
 else
-	curl -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
+	curl -C - -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
 	GCC_PKG=gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
 	SJSUONEDEV=/dev/ttyUSB0
 fi
-tar xvjf $GCC_PKG
+# tar xvjf $GCC_PKG
 cd ..
 # Exited Tools Directory
 
@@ -93,22 +94,24 @@ echo " ────────────────────────�
 echo "                Installing Hyperload                 "
 echo "└─────────────────────────────────────────────────── "
 git clone --depth=1 https://github.com/kammce/Hyperload.git $TOOLDIR/Hyperload/
-cd $TOOLDIR/Hyperload/
-$TOOLDIR/Hyperload/setup
+cd $TOOLDIR/Hyperload/ && ./setup
 cd ../../
 
 echo " ───────────────────────────────────────────────────┐"
 echo "                Installing Telemetry                 "
 echo "└─────────────────────────────────────────────────── "
 git clone --depth=1 https://github.com/kammce/Telemetry.git $TOOLDIR/Telemetry
-cd $TOOLDIR/Hyperload/
-$TOOLDIR/Telemetry/setup
+cd $TOOLDIR/Telemetry/ && ./setup
 cd ../../
 
-echo > env.sh <<END
+echo " ───────────────────────────────────────────────────┐"
+echo "          Generating Environment Variables           "
+echo "└─────────────────────────────────────────────────── "
+
+cat > env.sh <<EOL
 #!/bin/bash
 # Setup a base directory:
-BASE=`dirname $TOOLDIR/../`
+BASE=$BASE
 
 # SJSUOne Board Settings:
 SJSUONEDEV="$SJSUONEDEV" # Set this to your board ID
@@ -123,13 +126,13 @@ ENTITY=DBG
 # Compiler and library settings:
 # Selects compiler version to use
 CC=gcc-arm-none-eabi-6-2017-q2-update
-PATH=\$PATH:$BASE/tools/\$CC/bin:$BASE/tools/Hyperload/:$BASE/tools/Telemetry/
-LIB_DIR="$BASE/lib"
+PATH=\$PATH:\$BASE/tools/\$CC/bin:\$BASE/tools/Hyperload/:\$BASE/tools/Telemetry/
+LIB_DIR="\$BASE/firmware/lib"
 
 # Make system settings:
-# Number of jobs = 8
-# Tune this to nthreads (f.eks. my system has a quad core with two threads per core = 8 threads)
-MAKEFLAGS=" -j 8"
+# Number of jobs = 4
+# Tune this to nthreads (f.eks. my system has a quad core with two threads per core = 4 threads)
+MAKEFLAGS=" -j 4"
 
 # Export everything to the environment
 export PATH
@@ -139,9 +142,19 @@ export LIB_DIR
 export SJSUONEDEV
 export SJSUONEBAUD
 export MAKEFLAGS
-END
+EOL
 
-cat env.sh
+echo " ──────────────────────────────────────────────────────────────────┐"
+echo "   Linking Makefile and Environment Scripts into Firmware projects  "
+echo "└────────────────────────────────────────────────────────────────── "
+
+ln -s -f $BASE/env.sh firmware/FreeRTOS/env.sh
+ln -s -f $BASE/env.sh firmware/HelloWorld/env.sh
+ln -s -f $BASE/env.sh firmware/Telemetry/env.sh
+
+ln -s -f $BASE/makefile firmware/FreeRTOS/makefile
+ln -s -f $BASE/makefile firmware/HelloWorld/makefile
+ln -s -f $BASE/makefile firmware/Telemetry/makefile
 
 echo
 echo " ──────────────────────────────────────────────────────────────┐"

@@ -4,6 +4,11 @@ firmware/*
 !firmware/FreeRTOS
 !firmware/Telemetry
 
+tools/Hyperload
+tools/Telemetry
+
+tools/gcc-arm-none-eabi-*
+
 cmpe146
 **/.gdb_history
 **/.DS_Store
