@@ -3,7 +3,7 @@
 # TODO: Set this from the directory this makefile is stored in
 PROJ 			?= firmware
 # Points where the SJSUOne libraries sources are located
-LIB_DIR			?= lib
+SJDEV_LIB_DIR 	?= lib
 # Affects what DBC is generated for SJSUOne board
 ENTITY 			?= DBG
 
@@ -45,11 +45,22 @@ CFLAGS = -mcpu=cortex-m3 \
     -I"L3_Utils" \
     -I"L4_IO" \
     -I"L5_Application" \
-    -I"$(DBC_DIR)"
+    -I"$(DBC_DIR)" \
+    -MMD -MP -c
+
+LINKFLAGS = -mcpu=cortex-m3 \
+	-Os -mthumb \
+	-fmessage-length=0 -ffunction-sections -fdata-sections \
+	-Wall -Wshadow -Wlogical-op -Wfloat-equal \
+	-T $(LIB_DIR)/loader.ld \
+	-nostartfiles \
+	-Xlinker \
+	--gc-sections -Wl,-Map,"$(MAP)" \
+	-specs=nano.specs
 
 DBCBUILD        	= $(DBC_DIR)/generated_can.h
 LIBRARIES			= $(shell find "$(LIB_DIR)" -name '*.c' -o -name '*.cpp')
-SOURCES				= $(shell find . -name '*.c' -o -name '*.cpp')
+SOURCES				= $(shell find . -name '*.c' -o -name '*.cpp' -not -path './test/*')
 COMPILABLES 		= $(LIBRARIES) $(SOURCES)
 
 # $(patsubst %.cpp,%.o, LIST) 		: Replace .cpp -> .o
@@ -92,7 +103,7 @@ $(LIST): $(EXECUTABLE)
 $(EXECUTABLE): $(DBCBUILD) $(OBJECT_FILES)
 	@echo 'Invoking: Cross ARM C++ Linker'
 	@mkdir -p "$(dir $@)"
-	@$(CPPC) -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -ffunction-sections -fdata-sections -Wall -Wshadow -Wlogical-op -Wfloat-equal -T $(LIB_DIR)/loader.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(MAP)" -specs=nano.specs -o "$@" $(OBJECT_FILES)
+	@$(CPPC) $(LINKFLAGS) -o "$@" $(OBJECT_FILES)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -100,7 +111,7 @@ $(OBJ_DIR)/%.o: %.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C++ Compiler'
 	@mkdir -p "$(dir $@)"
-	@$(CPPC) $(CFLAGS) -std=gnu++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@$(CPPC) $(CFLAGS) -std=gnu++17 -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -108,7 +119,7 @@ $(OBJ_DIR)/%.o: %.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
 	@mkdir -p "$(dir $@)"
-	@$(CC) $(CFLAGS) -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@$(CC) $(CFLAGS) -std=gnu11 -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -116,7 +127,7 @@ $(OBJ_DIR)/%.o: $(LIB_DIR)/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C++ Compiler'
 	@mkdir -p "$(dir $@)"
-	@$(CPPC) $(CFLAGS) -std=gnu++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@$(CPPC) $(CFLAGS) -std=gnu++17 -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -124,7 +135,7 @@ $(OBJ_DIR)/%.o: $(LIB_DIR)/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
 	@mkdir -p "$(dir $@)"
-	@$(CC) $(CFLAGS) -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@$(CC) $(CFLAGS) -std=gnu11 -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
