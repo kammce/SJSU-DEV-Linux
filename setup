@@ -63,10 +63,10 @@ if [[ ! -d "bin" && -f "$GCC_PKG" ]]; then
 	echo " ──────────────────────────────────────────────────┐"
 	echo "            Extracting gcc-arm-embedded             "
 	echo "└────────────────────────────────────────────────── "
-	# tar --extract \
-	# 	--verbose \
-	# 	--bzip2 \
-	# 	--file=$GCC_PKG 2> /dev/null
+	tar --extract \
+		--verbose \
+		--bzip2 \
+		--file=$GCC_PKG 2> /dev/null
 fi
 
 cd ..
