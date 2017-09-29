@@ -36,7 +36,6 @@ echo " ────────────────────────�
 echo "              Detecting your platform               "
 echo "└────────────────────────────────────────────────── "
 
-#SYSREL=$(uname -r) # Probably don't need this, but maybe
 if [[ "$ARCH" != 'x86_64' || "$ARCH" == "amd64" ]]; then
 	echo 'Your system is not supported! Only 64-bit Linux and OSX systems are supported.'
 	SystemExit
@@ -49,7 +48,8 @@ echo "└───────────────────────�
 # Enter Tools directory
 cd $TOOLDIR
 
-if [ "$SYSREL" == "Darwin" ]; then
+if [ "$SYS" == "Darwin" ]; then
+	echo "Downloading "
 	curl -C - -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/$ARM_GCC-mac.tar.bz2
 	GCC_PKG=$ARM_GCC-mac.tar.bz2
 	SJSUONEDEV=/dev/tty.usbserial-A503JOLS
