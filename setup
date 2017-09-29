@@ -49,11 +49,12 @@ echo "└───────────────────────�
 cd $TOOLDIR
 
 if [ "$SYS" == "Darwin" ]; then
-	echo "Downloading "
+	echo "Downloading MAC OSX ARM-GCC Files"
 	curl -C - -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/$ARM_GCC-mac.tar.bz2
 	GCC_PKG=$ARM_GCC-mac.tar.bz2
 	SJSUONEDEV=/dev/tty.usbserial-A503JOLS
 else
+	echo "Downloading Linux ARM-GCC Files"
 	curl -C - -LO https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/$ARM_GCC-linux.tar.bz2
 	GCC_PKG=$ARM_GCC-linux.tar.bz2
 	SJSUONEDEV=/dev/ttyUSB0
